@@ -11,6 +11,7 @@
     "test:remote:browser": "node scripts/remote-browser-test.mjs"
   },
   "dependencies": {
+    "@hpke/core": "1.9.0",
     "@supabase/supabase-js": "2.116.0",
     "jose": "6.2.12"
   },

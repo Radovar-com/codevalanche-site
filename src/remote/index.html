@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="robots" content="noindex" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'"
+    />
+    <title>Remote computers | Codevalanche</title>
+    <link rel="icon" href="/assets/favicon.svg" />
+    <link rel="stylesheet" href="/remote/remote.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to workspace</a>
+    <main class="remote-shell">
+      <header class="remote-header">
+        <a class="wordmark" href="/"
+          ><img
+            src="/assets/codevalanche-mark.svg"
+            alt=""
+            width="28"
+          />Codevalanche</a
+        ><span class="surface-name">Remote computers</span
+        ><button class="quiet" id="remote-logout" type="button" hidden>
+          Sign out
+        </button>
+      </header>
+      <section class="entry" id="remote-entry">
+        <h1>Your work, on your computer.</h1>
+        <p id="entry-description">
+          Remote access is not enabled yet. Your local projects remain available
+          on your computer.
+        </p>
+        <button id="remote-login" type="button" hidden>
+          Sign in for remote access</button
+        ><button class="secondary" id="remote-retry" type="button">
+          Check availability
+        </button>
+      </section>
+      <p id="remote-status" class="status" role="status" aria-live="polite"></p>
+      <section id="workspace" class="workspace" hidden>
+        <aside class="host-rail" aria-labelledby="hosts-heading">
+          <div class="rail-heading">
+            <h2 id="hosts-heading">Your computers</h2>
+            <button id="refresh-hosts" class="quiet" type="button">
+              Refresh
+            </button>
+          </div>
+          <p class="hint">Choose the computer where your project lives.</p>
+          <ul id="hosts" class="host-list"></ul>
+          <p id="hosts-empty" class="hint" hidden>
+            No remote computers are available for this account. Enable remote on
+            your computer, then approve this browser there.
+          </p>
+        </aside>
+        <div class="project-pane">
+          <div class="target-heading">
+            <div>
+              <h1 id="target-name">Choose a computer</h1>
+              <p id="target-state" class="hint">
+                A computer being online does not approve this browser.
+              </p>
+            </div>
+            <button
+              id="request-approval"
+              class="secondary"
+              type="button"
+              hidden
+            >
+              Request browser approval
+            </button>
+          </div>
+          <section id="pairing-entry" hidden>
+            <h2>Approve this browser</h2>
+            <p class="hint">
+              Use the one-time pairing information shown on your selected
+              computer. Approval is required for each browser key.
+            </p>
+            <form id="pairing-form">
+              <label for="pairing-data">Pairing information</label
+              ><textarea
+                id="pairing-data"
+                maxlength="8192"
+                required
+                autocomplete="off"
+                spellcheck="false"
+              ></textarea
+              ><button type="submit" class="secondary">Request approval</button>
+            </form>
+          </section>
+          <div class="project-picker">
+            <label for="projects">Project</label
+            ><select id="projects" disabled>
+              <option value="">Choose a project</option>
+            </select>
+          </div>
+          <div class="conversation-layout">
+            <aside class="conversation-rail">
+              <h2>Conversations</h2>
+              <ul id="conversations"></ul>
+              <p id="conversation-empty" class="hint">
+                Select an approved project to see its conversations.
+              </p>
+            </aside>
+            <section
+              class="conversation-view"
+              aria-labelledby="conversation-heading"
+            >
+              <div class="conversation-heading">
+                <h2 id="conversation-heading">Conversation</h2>
+                <button id="remote-stop" class="stop" type="button" disabled>
+                  Stop agent
+                </button>
+              </div>
+              <div id="messages" class="messages">
+                <p class="hint">
+                  Conversations stay on the selected computer and appear through
+                  an approved secure connection.
+                </p>
+              </div>
+              <p class="result" id="command-result" role="status"></p>
+            </section>
+          </div>
+          <div class="run-availability">
+            <span>Start and approve agent runs</span
+            ><span>Start and approvals are not available yet</span>
+          </div>
+        </div>
+      </section>
+      <section aria-label="Manual browser approval">
+        <button id="manual-approval" type="button" class="secondary">
+          Request approval on selected computer
+        </button>
+        <p id="manual-comparison" role="status"></p>
+      </section>
+      <footer>
+        <span>Projects and conversations stay on your computer.</span
+        ><a href="/privacy.html">Privacy</a>
+      </footer>
+    </main>
+    <script src="/remote/config.js"></script>
+    <script type="module" src="/remote/app.js"></script>
+  </body>
+</html>
