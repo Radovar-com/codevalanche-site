@@ -36,6 +36,16 @@ async function fixture() {
     "insert into public.codevalanche_account_state(user_id,analytics_consent,consent_generation) values($1,true,2)",
     [uid],
   );
+  // Valid new ingest requires account metadata in addition to the manual source fixture.
+  // This does not create a physical/native execution proof or auto-qualify the producer.
+  await db.query(
+    "insert into auth.mfa_amr_claims(session_id,authentication_method) values($1,'password')",
+    [sid],
+  );
+  const project = (await db.query(
+    "select * from public.codevalanche_project_register($1,$2,1,'cws_synthetic')",
+    [uid, sid],
+  )).rows[0];
   await db.query(
     "insert into public.codevalanche_native_ledger_producers(issuer,subject,key_fingerprint,native_generation,qualified) values($1,$2,$3,4,true)",
     [configuration.issuer, configuration.subject, fingerprint],
@@ -78,7 +88,7 @@ async function fixture() {
     userId: uid,
     sessionId: sid,
     runId: "run_synthetic",
-    projectId: "cws_synthetic",
+    projectId: project.project_id,
     outcome: "success",
     occurredAt: new Date(Date.now() - 1000).toISOString(),
     consentGeneration: 2,
