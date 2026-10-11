@@ -5,6 +5,8 @@ import { createScopedWorkerService } from "../_shared/workerDatabase.ts";
 import { AccountError } from "../_shared/accountContract.ts";
 import { createNotificationChannel } from "../_shared/notificationChannel.ts";
 import { createBoundedServiceFetch } from "../_shared/serviceFetch.ts";
+import { remoteErasureFromEnvironment } from "../_shared/remoteErasureClient.ts";
+import { importJWK, SignJWT } from "npm:jose@6.2.12";
 Deno.serve(async (req) => {
   try {
     assertMaintenance(req, Deno.env.get("ACCOUNT_DISPATCHER_TOKEN"));
@@ -24,7 +26,17 @@ Deno.serve(async (req) => {
       workerService: async (queue: string) =>
         createScopedWorkerService(
           queue === "expiry" ? "operation" : queue,
-          options,
+          queue === "erasure"
+            ? {
+              ...options,
+              remoteErase: remoteErasureFromEnvironment({
+                ...options,
+                signToken: async (payload: any, key: any) =>
+                  new SignJWT(payload).setProtectedHeader({ alg: "EdDSA" })
+                    .sign(await importJWK(key, "EdDSA")),
+              }),
+            }
+            : options,
         ),
       enabled: true,
       channel: createNotificationChannel(

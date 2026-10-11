@@ -30,10 +30,14 @@ const capabilities: Record<
     role: "codevalanche_dispatcher_reader",
     databaseToken: "ACCOUNT_DISPATCHER_DATABASE_TOKEN",
   },
+  remoteErasureAuthority: {
+    role: "codevalanche_remote_erasure_authority",
+    databaseToken: "ACCOUNT_REMOTE_ERASURE_AUTHORITY_DATABASE_TOKEN",
+  },
 };
 export function createScopedWorkerService(
   kind: string,
-  { env, createClient, remainingMs, fetcher }: any,
+  { env, createClient, remainingMs, fetcher, remoteErase }: any,
 ) {
   const capability = capabilities[kind];
   if (!capability) throw new AccountError("worker_not_configured", 503);
@@ -71,6 +75,7 @@ export function createScopedWorkerService(
     },
     from: (table: string) => database.from(table),
   };
+  if (kind === "erasure" && remoteErase) service.remoteErase = remoteErase;
   if (capability.authKey) {
     const key = env(capability.authKey);
     if (!key) throw new AccountError("worker_not_configured", 503);
