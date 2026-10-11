@@ -16,6 +16,7 @@ const recoveryRedirect = new URL(redirectTo); recoveryRedirect.searchParams.set(
 let mode = 'signin', user = null, recovery = new URL(location.href).searchParams.get('flow') === 'recovery', busy = false
 let accountStatus = 'signed-out', renderGeneration = 0, currentSession = null
 let deletionSchedule = null
+let deletionPhase = 'unknown', deletionCanCancel = null
 let cleanupPromise = null, cleanupPending = false, ownedSignin = false
 const security = createAccountSecurity(client, { isRecovery: () => recovery, assertRemoval: () => apiV2('security.mfa.remove-authorize') })
 function notice(message = '', error = false) { $('status').textContent = message; $('status').dataset.error = String(error) }
@@ -35,12 +36,12 @@ function setAccountStatus(next) {
   $('account-state').hidden = !gated
   $('consent').hidden = true
   if ($('mfa-section')) $('mfa-section').hidden = !user || recovery || !['ready', 'deletion-pending'].includes(next)
-  if ($('account-state-cancel')) $('account-state-cancel').hidden = next !== 'deletion-pending'
+  if ($('account-state-cancel')) $('account-state-cancel').hidden = next !== 'deletion-pending' || deletionCanCancel === false
   $('stage').classList.toggle('signed-in', Boolean(user) && !recovery)
   const content = next === 'signing-out' ? ['Signing out', 'Finishing local session cleanup…']
     : next === 'logout-failed' ? ['Sign-out incomplete', 'Your account view is closed. Try again to finish signing out, or sign in explicitly.']
       : next === 'suspended' ? ['Account suspended', 'Your account access is blocked. Contact support. You can still sign out.']
-      : next === 'deletion-pending' ? ['Account deletion pending', `${deletionSchedule ? `Scheduled for ${new Date(deletionSchedule).toLocaleString()}. ` : ''}Sign in again and verify any enrolled authenticator to cancel before deletion starts. Local projects are preserved.`]
+      : next === 'deletion-pending' ? ['Account deletion pending', `${deletionSchedule ? `Scheduled for ${new Date(deletionSchedule).toLocaleString()}. ` : ''}${deletionCanCancel === false ? (deletionPhase === 'failed' ? 'Deletion could not be completed. Contact support. It can no longer be cancelled. ' : 'Deletion has started and is in progress. It can no longer be cancelled. ') : (deletionPhase === 'queued' ? 'Waiting for deletion to start. ' : '') + 'Sign in again and verify any enrolled authenticator to cancel before deletion starts. '}Local projects are preserved.`]
     : next === 'loading' ? ['Opening your account', 'Checking account access…']
       : ['Account temporarily unavailable', 'Your saved session is preserved. Try again or sign out.']
   $('account-state-title').textContent = content[0]; $('account-state-description').textContent = content[1]
@@ -50,6 +51,7 @@ function invalidateAccountView() {
   security.clear()
   renderGeneration++
   deletionSchedule = null
+  deletionPhase = 'unknown'; deletionCanCancel = null
   currentSession = null; user = null
   setAccountStatus('signed-out'); setMode('signin')
 }
@@ -179,7 +181,7 @@ function renderSessions(sessions, generation, expectedSession) {
   }))
 }
 async function render(session) {
-  if (currentSession?.user?.id !== session?.user?.id) { deletionSchedule = null; security.clear(); if ($('mfa-secret')) { $('mfa-secret').textContent = ''; $('mfa-challenge').hidden = true } }
+  if (currentSession?.user?.id !== session?.user?.id) { deletionSchedule = null; deletionPhase = 'unknown'; deletionCanCancel = null; security.clear(); if ($('mfa-secret')) { $('mfa-secret').textContent = ''; $('mfa-challenge').hidden = true } }
   const generation = ++renderGeneration
   currentSession = session || null
   user = session?.user || null
@@ -190,6 +192,8 @@ async function render(session) {
     if (generation !== renderGeneration || !user || user.id !== session.user.id) return
     setAccountStatus('ready')
     deletionSchedule = typeof account.deletion?.scheduledFor === 'string' && Number.isFinite(Date.parse(account.deletion.scheduledFor)) ? account.deletion.scheduledFor : null
+    deletionPhase = ['queued', 'purging', 'authentication', 'remote-access', 'failed'].includes(account.deletion?.phase) ? account.deletion.phase : 'unknown'
+    deletionCanCancel = typeof account.deletion?.canCancel === 'boolean' ? account.deletion.canCancel : null
     if (account.policy?.status === 'deletion_pending' && !recovery) { setAccountStatus('deletion-pending'); return }
     if (authorizationId && !recovery) { await showConsent(generation); return }
     if (recovery) { setMode('update'); return }
@@ -248,6 +252,7 @@ $('delete-form').addEventListener('submit', event => { event.preventDefault(); i
   const result = await api('request-deletion', { confirmation: 'DELETE' })
   if (result.ok !== true || result.deletion?.status !== 'pending' || typeof result.deletion.scheduledFor !== 'string' || !Number.isFinite(Date.parse(result.deletion.scheduledFor))) throw { code: 'account_service_unavailable' }
   deletionSchedule = result.deletion.scheduledFor
+  deletionPhase = 'queued'; deletionCanCancel = null
   $('delete-confirm').value = ''; setAccountStatus('deletion-pending')
   notice('Your account deletion request has been recorded.')
 }) })
@@ -286,6 +291,7 @@ try {
 } catch (error) { if (initialGeneration === renderGeneration) { if(error?.code==='recovery_invalid_or_expired'){setAccountStatus('signed-out');notice(safeError(error),true)}else{handleAccountRefusal(sdkSessionError(error)); notice(safeError(sdkSessionError(error)), true)} } }
 
 async function cancelDeletion() {
+  if (deletionCanCancel === false) throw { code: 'account_deletion_pending' }
   const expectedUserId = user?.id
   const result = await api('cancel-deletion')
   if (result.ok !== true) throw { code: 'account_deletion_pending' }

@@ -30,6 +30,7 @@ import { accountReadout } from "../_shared/accountReadouts.ts";
 import { recordAccountRefusal } from "../_shared/securityEvent.ts";
 import { reconcileSuspensionExpiry } from "../_shared/suspensionExpiry.ts";
 import { projectBinding } from "../_shared/projectBindings.ts";
+import { readSelfErasureStatus } from "../_shared/selfErasureStatus.ts";
 
 const url = Deno.env.get("SUPABASE_URL")!;
 const service = createClient(url, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
@@ -408,9 +409,7 @@ Deno.serve(async (req) => {
             userAgent: s.user_agent || "Unknown device",
             current: s.id === claims.session_id,
           })),
-          deletion: state?.deletion_scheduled_for
-            ? { scheduledFor: state.deletion_scheduled_for, status: "pending" }
-            : null,
+          deletion: await readSelfErasureStatus(principal, policy, state, service),
           analyticsConsent: state?.analytics_consent || false,
           consentGeneration: state?.consent_generation || 1,
           policy,

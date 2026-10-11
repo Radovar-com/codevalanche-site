@@ -144,6 +144,18 @@ test('deletion pending exposes restricted cancellation and closes profile mutati
   assert.equal(await f.page.locator('#mfa-enroll').isEnabled(), false)
 })
 
+test('canonical erasure purge progress closes cancellation in the hosted account view', async t => {
+  const f = await fixture(t)
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ user: { displayName: 'A', bio: '' }, sessions: [], policy: { status: 'deletion_pending' }, deletion: { scheduledFor: '2026-11-10T00:00:00Z', phase: 'purging', canCancel: false } }) })
+  })
+  await f.load(); await until(f.page, () => document.getElementById('account-state-title').textContent === 'Account deletion pending')
+  assert.equal(await f.page.locator('#account-state-cancel').isVisible(), false)
+  assert.match(await f.page.locator('#account-state-description').textContent(), /in progress|started/i)
+  assert.match(await f.page.locator('#account-state-description').textContent(), /cannot|no longer/i)
+  assert.equal(await f.page.locator('#profile').isVisible(), false)
+})
+
 test('successful self-deletion immediately closes ready controls before an unavailable overview refresh', async t => {
   const f = await fixture(t)
   let requested = false
