@@ -41,7 +41,7 @@ export function mapDirectoryUser(row: any) {
     policy: policyFromState(row),
     sessionSummary: { activeCount: Number(row.session_count || 0) },
     deletion: row.deletion_scheduled_for
-      ? { scheduledFor: row.deletion_scheduled_for, status: "pending" }
+      ? { jobId:row.erasure_job_id??null,scheduledFor: row.deletion_scheduled_for, status: "pending" }
       : null,
   };
 }
