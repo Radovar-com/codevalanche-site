@@ -34,6 +34,10 @@ const capabilities: Record<
     role: "codevalanche_remote_erasure_authority",
     databaseToken: "ACCOUNT_REMOTE_ERASURE_AUTHORITY_DATABASE_TOKEN",
   },
+  nativeLedger: {
+    role: "codevalanche_native_ledger_ingest_worker",
+    databaseToken: "ACCOUNT_NATIVE_LEDGER_DATABASE_TOKEN",
+  },
 };
 export function createScopedWorkerService(
   kind: string,
