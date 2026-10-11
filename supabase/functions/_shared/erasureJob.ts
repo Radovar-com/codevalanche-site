@@ -94,7 +94,27 @@ export async function processErasure(
       (confirmation.error && confirmation.error.status !== 404 &&
         confirmation.error.code !== "user_not_found")
     ) throw new Error("auth_delete_unconfirmed");
-    await advance("auth_deleted");
+    const deleted = await advance("auth_deleted");
+    if (!deleted.remote_receipt_id) {
+      if (typeof service.remoteErase !== "function") {
+        throw new Error("remote_erasure_unconfigured");
+      }
+      await advance("heartbeat");
+      const binding = {
+        operationId: deleted.operation_id,
+        jobId: deleted.job_id,
+        userId: deleted.user_id,
+        generation: deleted.remote_generation,
+        policyVersion: deleted.erasure_policy_version,
+      };
+      const receipt = await service.remoteErase(binding);
+      await advance("heartbeat");
+      await operationRpc(service, "codevalanche_record_remote_erasure", {
+        p_job_id: jobId,
+        p_lease_id: leaseId,
+        p_receipt: receipt,
+      });
+    }
     const finished = await advance("completed");
     return { jobId, state: finished.state };
   } catch {
