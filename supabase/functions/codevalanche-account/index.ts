@@ -1,91 +1,527 @@
-import { createClient } from 'npm:@supabase/supabase-js@2.57.4';
-import { allowedOrigin, normalizeProfile, readClaims } from './validation.mjs';
+import { createClient } from "npm:@supabase/supabase-js@2.57.4";
+import { allowedOrigin, normalizeProfile } from "./validation.mjs";
+import { authenticateAccountContext } from "../_shared/accountPrincipal.ts";
+import {
+  assertAccountOperation,
+  policyFromState,
+} from "../_shared/accountPolicy.ts";
+import {
+  AccountError,
+  checked,
+  resultEnvelope,
+  uuid,
+} from "../_shared/accountContract.ts";
+import { readCredentialStamp } from "../_shared/credentialStamp.ts";
+import {
+  assertAssurance,
+  assertRecentAuthentication,
+} from "../_shared/assurancePolicy.ts";
+import {
+  authorizeAdmin,
+  isAdminMutation,
+} from "../_shared/adminAuthorization.ts";
+import {
+  readAdminDirectory,
+  readAdminUserDetail,
+} from "../_shared/adminDirectory.ts";
+import { requestAccountOperation } from "../_shared/accountLifecycle.ts";
+import { cancelErasure, requestErasure } from "../_shared/erasureJob.ts";
+import { accountReadout } from "../_shared/accountReadouts.ts";
+import { recordAccountRefusal } from "../_shared/securityEvent.ts";
+import { reconcileSuspensionExpiry } from "../_shared/suspensionExpiry.ts";
 
-const url = Deno.env.get('SUPABASE_URL')!;
-const service = createClient(url, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!, {auth:{persistSession:false,autoRefreshToken:false}});
-const uuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-function checked<T>(result: {data:T,error:unknown}):T { if(result.error) throw new Error('Storage operation failed'); return result.data; }
+const url = Deno.env.get("SUPABASE_URL")!;
+const service = createClient(url, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
+  auth: { persistSession: false, autoRefreshToken: false },
+});
 Deno.serve(async (req) => {
- const origin = req.headers.get('origin');
- const headers: Record<string,string> = {'Content-Type':'application/json','Cache-Control':'no-store','Vary':'Origin','Access-Control-Allow-Headers':'authorization, apikey, content-type, x-client-info','Access-Control-Allow-Methods':'POST, GET, OPTIONS'};
- if (!allowedOrigin(origin)) return new Response(JSON.stringify({error:'Origin not allowed'}),{status:403,headers});
- if(origin) headers['Access-Control-Allow-Origin']=origin;
- const respond=(body:unknown,status=200)=>new Response(JSON.stringify(body),{status,headers});
- if(req.method==='OPTIONS') return new Response(null,{status:204,headers});
- if(!['POST','GET'].includes(req.method)) return respond({error:'Method not allowed'},405);
- try {
-  const token = req.headers.get('authorization')?.match(/^Bearer (\S+)$/i)?.[1];
-  if(!token || token.length>12000) return respond({error:'Authentication required'},401);
-  const {data:{user},error} = await service.auth.getUser(token);
-  if(error || !user) return respond({error:'Invalid authentication'},401);
-  const claims=readClaims(token);
-  if(claims.sub!==user.id || !uuid.test(claims.session_id || '')) return respond({error:'Invalid session'},401);
-  const sessions=checked(await service.rpc('codevalanche_sessions',{p_user_id:user.id})) as any[];
-  if(!sessions.some(s=>s.id===claims.session_id)) return respond({error:'Session revoked'},401);
-  const state=checked(await service.from('codevalanche_account_state').select('*').eq('user_id',user.id).maybeSingle());
-  if(state?.blocked || ((user as typeof user & {banned_until?:string}).banned_until && new Date((user as typeof user & {banned_until?:string}).banned_until || 0)>new Date())) return respond({error:'Account blocked'},403);
-  if(!checked(await service.rpc('codevalanche_rate_limit',{p_bucket:`account:${user.id}`,p_limit:60}))) return respond({error:'Too many requests'},429);
-  let body:any={action:'get-account'};
-  if(req.method==='POST') {
-   if(!req.headers.get('content-type')?.startsWith('application/json')) return respond({error:'JSON required'},415);
-   const reader=req.body?.getReader(); let size=0; const chunks:Uint8Array[]=[];
-   if(reader) { while(true) {const {value,done}=await reader.read();if(done)break;size+=value.length;if(size>16384){await reader.cancel();return respond({error:'Request too large'},413);} chunks.push(value);} }
-   const bytes=new Uint8Array(size);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.length;}
-   try{body=JSON.parse(new TextDecoder().decode(bytes));}catch{return respond({error:'Invalid JSON'},400);}
-   if(!body || typeof body!=='object' || Array.isArray(body)) return respond({error:'Invalid body'},400);
+  const origin = req.headers.get("origin");
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    "Cache-Control": "no-store",
+    "Vary": "Origin",
+    "Access-Control-Allow-Headers":
+      "authorization, apikey, content-type, x-client-info",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+  };
+  if (!allowedOrigin(origin)) {
+    return new Response(JSON.stringify({ error: "Origin not allowed" }), {
+      status: 403,
+      headers,
+    });
   }
-  const saveState=async (patch:Record<string,unknown>, targetId=user.id)=>{ checked(await service.from('codevalanche_account_state').upsert({user_id:targetId},{onConflict:'user_id',ignoreDuplicates:true})); checked(await service.from('codevalanche_account_state').update({...patch,updated_at:new Date().toISOString()}).eq('user_id',targetId)); };
-  switch(body.action) {
-   case 'get-account': {
-    const name=user.user_metadata?.display_name || user.user_metadata?.full_name || '';
-    return respond({id:user.id,userId:user.id,sub:user.id,session_id:claims.session_id,email:user.email,email_verified:!!user.email_confirmed_at,display_name:name,name,
-     user:{id:user.id,email:user.email,displayName:name,bio:user.user_metadata?.bio||'',emailVerified:!!user.email_confirmed_at},
-     signInMethods:(user.identities||[]).map(i=>({id:i.identity_id,provider:i.provider,createdAt:i.created_at})),
-     sessions:sessions.map(s=>({id:s.id,createdAt:s.created_at,lastSeenAt:s.updated_at,userAgent:s.user_agent||'Unknown device',current:s.id===claims.session_id})),
-     deletion:state?.deletion_scheduled_for?{scheduledFor:state.deletion_scheduled_for,status:'pending'}:null,
-     analyticsConsent:state?.analytics_consent||false});
-   }
-   case 'update-profile': {
-    let patch;try{patch=normalizeProfile(body);}catch{return respond({error:'Invalid profile'},400);}
-    const result=await service.auth.admin.updateUserById(user.id,{user_metadata:{...user.user_metadata,...patch}});if(result.error)throw new Error('Profile update failed');return respond({ok:true});
-   }
-   case 'sign-out-current': case 'sign-out-others': {
-    const result=await service.auth.admin.signOut(token,body.action==='sign-out-current'?'local':'others');if(result.error)throw new Error('Sign out failed');return respond({ok:true});
-   }
-   case 'revoke-session': {
-    if(!uuid.test(body.sessionId||'') || !sessions.some(s=>s.id===body.sessionId)) return respond({error:'Session not found'},404);
-    checked(await service.from('codevalanche_revoked_sessions').upsert({session_id:body.sessionId,user_id:user.id}));return respond({ok:true});
-   }
-   case 'request-deletion': {
-    if(body.confirmation!=='DELETE')return respond({error:'Type DELETE to confirm'},400);
-    const scheduledFor=state?.deletion_scheduled_for||new Date(Date.now()+30*86400000).toISOString();
-    await saveState({deletion_requested_at:state?.deletion_requested_at||new Date().toISOString(),deletion_scheduled_for:scheduledFor});return respond({ok:true,deletion:{scheduledFor,status:'pending'}});
-   }
-   case 'cancel-deletion': await saveState({deletion_requested_at:null,deletion_scheduled_for:null});return respond({ok:true});
-   case 'consent': if(typeof body.analytics!=='boolean')return respond({error:'Invalid consent'},400);await saveState({analytics_consent:body.analytics});return respond({ok:true});
-   case 'feedback': {
-    if(!['bug','idea','general'].includes(body.category)||typeof body.message!=='string'||!body.message.trim()||body.message.length>4000)return respond({error:'Invalid feedback'},400);
-    if(!checked(await service.rpc('codevalanche_rate_limit',{p_bucket:`feedback:${user.id}`,p_limit:3})))return respond({error:'Too many requests'},429);
-    checked(await service.from('codevalanche_feedback').insert({user_id:user.id,category:body.category,message:body.message.trim()}));return respond({ok:true});
-   }
-   case 'event': {
-    if(body.consent!==true || state?.analytics_consent!==true)return respond({error:'Consent required'},403);
-    if(!uuid.test(body.eventId||'')||!['website_view','download_clicked','app_opened'].includes(body.eventName)||!['web','windows','macos','linux','ios','android'].includes(body.platform))return respond({error:'Invalid event'},400);
-    checked(await service.from('codevalanche_events').upsert({id:body.eventId,user_id:user.id,event_name:body.eventName,platform:body.platform},{onConflict:'id',ignoreDuplicates:true}));return respond({ok:true});
-   }
-   case 'admin-list-users': case 'admin-block-user': case 'admin-unblock-user': case 'admin-feedback': case 'admin-analytics': {
-    if(user.app_metadata?.codevalanche_admin!==true)return respond({error:'Administrator required'},403);
-    if(body.action==='admin-list-users') {const page=Number.isInteger(body.page)&&body.page>=1&&body.page<=10000?body.page:1;const result=await service.auth.admin.listUsers({page,perPage:50});if(result.error)throw new Error('User list failed');return respond({users:result.data.users.map(u=>({id:u.id,email:u.email,createdAt:u.created_at,lastSignInAt:u.last_sign_in_at,bannedUntil:(u as typeof u & {banned_until?:string}).banned_until})),page});}
-    if(body.action==='admin-feedback')return respond({feedback:checked(await service.from('codevalanche_feedback').select('*').order('created_at',{ascending:false}).limit(100))});
-    if(body.action==='admin-analytics')return respond({events:checked(await service.from('codevalanche_events').select('event_name,platform,created_at').order('created_at',{ascending:false}).limit(1000)),limit:1000});
-    if(!uuid.test(body.userId||'') || body.userId===user.id)return respond({error:'Invalid target user'},400);
-    const blocked=body.action==='admin-block-user';
-    // App state rejects already-issued JWTs; Auth ban also prevents future sign-ins.
-    if(blocked)await saveState({blocked:true},body.userId);
-    const result=await service.auth.admin.updateUserById(body.userId,{ban_duration:blocked?'876000h':'none'});if(result.error)throw new Error('Block update failed');
-    if(!blocked)await saveState({blocked:false},body.userId);return respond({ok:true});
-   }
-   default: return respond({error:'Unknown action'},400);
+  if (origin) headers["Access-Control-Allow-Origin"] = origin;
+  let v2 = false, requestId = crypto.randomUUID();
+  let verifiedPrincipal: any = null;
+  const respond = (body: unknown, status = 200) =>
+    new Response(
+      JSON.stringify(v2 ? resultEnvelope(body, requestId, status) : body),
+      { status, headers },
+    );
+  if (req.method === "OPTIONS") {
+    return new Response(null, { status: 204, headers });
   }
- } catch { return respond({error:'Account service unavailable'},503); }
+  if (!["POST", "GET"].includes(req.method)) {
+    return respond({ error: "Method not allowed" }, 405);
+  }
+  try {
+    let body: any = { action: "get-account" };
+    if (req.method === "POST") {
+      if (!req.headers.get("content-type")?.startsWith("application/json")) {
+        return respond({ error: "JSON required" }, 415);
+      }
+      const reader = req.body?.getReader();
+      let size = 0;
+      const chunks: Uint8Array[] = [];
+      if (reader) {
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          size += value.length;
+          if (size > 16384) {
+            await reader.cancel();
+            return respond({ error: "Request too large" }, 413);
+          }
+          chunks.push(value);
+        }
+      }
+      const bytes = new Uint8Array(size);
+      let offset = 0;
+      for (const chunk of chunks) {
+        bytes.set(chunk, offset);
+        offset += chunk.length;
+      }
+      try {
+        body = JSON.parse(new TextDecoder().decode(bytes));
+      } catch {
+        return respond({ error: "Invalid JSON" }, 400);
+      }
+      if (!body || typeof body !== "object" || Array.isArray(body)) {
+        return respond({ error: "Invalid body" }, 400);
+      }
+    }
+    v2 = body.apiVersion === 2;
+    if (body.requestId !== undefined) {
+      if (
+        typeof body.requestId !== "string" || body.requestId.length < 1 ||
+        body.requestId.length > 128 || !/^[a-zA-Z0-9_-]+$/.test(body.requestId)
+      ) return respond({ code: "invalid_fields" }, 400);
+      requestId = body.requestId;
+    }
+    if (body.apiVersion !== undefined && !v2) {
+      return respond({ error: "Unsupported API version" }, 400);
+    }
+    if (typeof body.action !== "string") {
+      return respond({ code: "invalid_fields" }, 400);
+    }
+    if (
+      body.action === "remote.policy.evidence" &&
+      Object.keys(body).some((key) =>
+        !["apiVersion", "action", "requestId"].includes(key)
+      )
+    ) throw new AccountError("invalid_fields", 400);
+    if (!v2 && body.action.includes(".")) {
+      return respond({
+        code: "invalid_fields",
+        message: "Canonical operations require API v2",
+      }, 400);
+    }
+    const { principal, user, sessions, claims, token, recovery } =
+      await authenticateAccountContext(req, {
+        service,
+        issuer: `${url.replace(/\/$/, "")}/auth/v1`,
+        clientIds: (Deno.env.get("ACCOUNT_OAUTH_CLIENT_IDS") || "").split(",")
+          .filter(Boolean),
+      });
+    verifiedPrincipal = principal;
+    let state = checked(
+      await service.from("codevalanche_account_state").select("*").eq(
+        "user_id",
+        user.id,
+      ).maybeSingle(),
+    );
+    if (
+      state?.status === "suspended" && state.suspended_until &&
+      Date.parse(state.suspended_until) <= Date.now()
+    ) {
+      await reconcileSuspensionExpiry(user.id, service);
+      state = checked(
+        await service.from("codevalanche_account_state").select("*").eq(
+          "user_id",
+          user.id,
+        ).maybeSingle(),
+      );
+    }
+    const policy = policyFromState(state);
+    assertAccountOperation(principal, policy, body.action, { recovery });
+    const restrictedCancellation = state?.status === "deletion_pending" &&
+      ["account.deletion.cancel", "cancel-deletion"].includes(body.action);
+    if (
+      user.banned_until && new Date(user.banned_until) > new Date() &&
+      !restrictedCancellation
+    ) throw new AccountError("account_suspended", 403);
+    if (body.action === "remote.policy.evidence") {
+      const evidence = await readCredentialStamp(service, principal);
+      if (
+        !evidence.qualified || !evidence.sessionActive ||
+        !Number.isSafeInteger(evidence.policyVersion) ||
+        evidence.policyVersion < 1 ||
+        !Number.isSafeInteger(evidence.verifiedFactorCount) ||
+        evidence.verifiedFactorCount < 0
+      ) throw new AccountError("account_service_unavailable", 503);
+      if (evidence.currentStatus === "deletion_pending") {
+        throw new AccountError("account_deletion_pending", 403);
+      }
+      if (evidence.currentStatus !== "active" || evidence.blocked) {
+        throw new AccountError("account_suspended", 403);
+      }
+      return respond({
+        userId: principal.userId,
+        sessionId: principal.sessionId,
+        policyVersion: evidence.policyVersion,
+        qualified: true,
+        verifiedFactorCount: evidence.verifiedFactorCount,
+        credentialChangedAt: evidence.credentialChangedAt,
+        recoveryOnly: evidence.recoveryOnly,
+        sessionActive: true,
+      });
+    }
+    if (
+      body.userId !== undefined && !body.action.startsWith("admin") &&
+      body.userId !== user.id
+    ) return respond({ code: "account_forbidden" }, 403);
+    if (
+      !checked(
+        await service.rpc("codevalanche_rate_limit", {
+          p_bucket: `account:${user.id}`,
+          p_limit: 60,
+        }),
+      )
+    ) return respond({ code: "rate_limited" }, 429);
+    const aliases: Record<string, string> = {
+      "account.overview": "get-account",
+      "profile.update": "update-profile",
+      "sessions.revoke": "revoke-session",
+      "sessions.revoke-others": "sign-out-others",
+      "account.deletion.request": "request-deletion",
+      "account.deletion.cancel": "cancel-deletion",
+      "feedback.submit": "feedback",
+    };
+    if (v2) body.action = aliases[body.action] || body.action;
+    if (
+      v2 && body.action === "update-profile" &&
+      Object.keys(body).some((k) =>
+        !["action", "apiVersion", "requestId", "displayName", "bio"].includes(k)
+      )
+    ) return respond({ code: "invalid_fields" }, 400);
+    const saveState = async (
+      patch: Record<string, unknown>,
+      targetId = user.id,
+    ) => {
+      checked(
+        await service.from("codevalanche_account_state").upsert({
+          user_id: targetId,
+        }, { onConflict: "user_id", ignoreDuplicates: true }),
+      );
+      checked(
+        await service.from("codevalanche_account_state").update({
+          ...patch,
+          updated_at: new Date().toISOString(),
+        }).eq("user_id", targetId),
+      );
+    };
+    const adminAliases: Record<string, string> = {
+      "admin-list-users": "admin.users.list",
+      "admin-block-user": "admin.account.suspend",
+      "admin-unblock-user": "admin.account.reactivate",
+      "admin-feedback": "admin.feedback.list",
+      "admin-analytics": "admin.analytics.summary",
+    };
+    const operation = adminAliases[body.action] || body.action;
+    if (operation.startsWith("admin.")) {
+      const membership = checked(
+        await service.from("codevalanche_admin_memberships").select(
+          "role,active",
+        ).eq("user_id", user.id).maybeSingle(),
+      ) as any;
+      if (
+        !membership?.active ||
+        !["owner", "accounts_admin", "support_readonly"].includes(
+          membership.role,
+        )
+      ) throw new AccountError("administrator_required", 403);
+      const evidence = await readCredentialStamp(service, principal);
+      const admin = await authorizeAdmin(
+        principal,
+        operation,
+        body.userId || null,
+        { service, evidence },
+      );
+      if (
+        isAdminMutation(operation) &&
+        !checked(
+          await service.rpc("codevalanche_rate_limit", {
+            p_bucket: `admin:${principal.userId}`,
+            p_limit: 30,
+          }),
+        )
+      ) throw new AccountError("rate_limited", 429);
+      if (operation === "admin.operator.session") {
+        return respond({ principal, role: admin.role });
+      }
+      if (operation === "admin.deletion.get") {
+        if (!uuid.test(body.jobId || "")) {
+          throw new AccountError("invalid_fields", 400);
+        }
+        const job = checked(
+          await service.from("codevalanche_account_erasure_jobs").select(
+            "job_id,operation_id,user_id,state,due_at,purge_started_at,storage_cleaned_at,auth_delete_started_at,auth_deleted_at,completed_at,attempts",
+          ).eq("job_id", body.jobId).maybeSingle(),
+        );
+        if (!job) throw new AccountError("not_found", 404);
+        if (body.userId && body.userId !== job.user_id) {
+          throw new AccountError("account_forbidden", 403);
+        }
+        return respond({
+          jobId: job.job_id,
+          operationId: job.operation_id,
+          userId: job.user_id,
+          state: job.state,
+          dueAt: job.due_at,
+          purgeStartedAt: job.purge_started_at,
+          storageCleanedAt: job.storage_cleaned_at,
+          authDeleteStartedAt: job.auth_delete_started_at,
+          authDeletedAt: job.auth_deleted_at,
+          completedAt: job.completed_at,
+          attempts: job.attempts,
+          localFilesTouched: false,
+        });
+      }
+      const readout = await accountReadout(operation, body, {
+        principal,
+        service,
+        admin,
+      });
+      if (readout !== null) return respond(readout);
+      if (operation === "admin.users.list") {
+        return respond(await readAdminDirectory(service, body));
+      }
+      if (operation === "admin.users.detail") {
+        return respond(await readAdminUserDetail(service, body.userId));
+      }
+      if (operation === "admin.deletion.request") {
+        return respond(
+          await requestErasure({
+            userId: body.userId,
+            actorId: principal.userId,
+            operationId: body.operationId,
+            confirmation: body.confirmation,
+          }, service),
+          202,
+        );
+      }
+      if (
+        [
+          "admin.account.suspend",
+          "admin.account.reactivate",
+          "admin.limits.update",
+          "admin.sessions.revoke",
+        ].includes(operation)
+      ) {
+        const result = await requestAccountOperation({
+          ...body,
+          actorId: principal.userId,
+          action: operation,
+        }, service);
+        return respond(result, result.state === "completed" ? 200 : 202);
+      }
+      if (operation === "admin.operations.get") {
+        if (!uuid.test(body.operationId || "")) {
+          throw new AccountError("invalid_fields", 400);
+        }
+        const row = checked(
+          await service.from("codevalanche_operation_jobs").select(
+            "operation_id,state,action,user_id,attempts,updated_at,error_code",
+          ).eq("operation_id", body.operationId).maybeSingle(),
+        );
+        if (!row) throw new AccountError("not_found", 404);
+        return respond({
+          operationId: row.operation_id,
+          state: row.state,
+          action: row.action,
+          userId: row.user_id,
+          attempts: row.attempts,
+          updatedAt: row.updated_at,
+          errorCode: row.error_code,
+        });
+      }
+      return respond({ code: "operation_not_available" }, 503);
+    }
+    if (operation === "security.mfa.remove-authorize") {
+      const evidence = await readCredentialStamp(service, principal);
+      assertAssurance(principal, { purpose: "mfa.remove", evidence });
+      return respond({ ok: true });
+    }
+    const readout = await accountReadout(operation, body, {
+      principal,
+      service,
+    });
+    if (readout !== null) return respond(readout);
+    switch (body.action) {
+      case "get-account": {
+        const name = user.user_metadata?.display_name ||
+          user.user_metadata?.full_name || "";
+        return respond({
+          id: user.id,
+          userId: user.id,
+          sub: user.id,
+          session_id: claims.session_id,
+          email: user.email,
+          email_verified: !!user.email_confirmed_at,
+          display_name: name,
+          name,
+          user: {
+            id: user.id,
+            email: user.email,
+            displayName: name,
+            bio: user.user_metadata?.bio || "",
+            emailVerified: !!user.email_confirmed_at,
+          },
+          signInMethods: (user.identities || []).map((
+            i: { identity_id?: string; provider: string; created_at?: string },
+          ) => ({
+            id: i.identity_id,
+            provider: i.provider,
+            createdAt: i.created_at,
+          })),
+          sessions: sessions.map((s) => ({
+            id: s.id,
+            createdAt: s.created_at,
+            lastSeenAt: s.updated_at,
+            userAgent: s.user_agent || "Unknown device",
+            current: s.id === claims.session_id,
+          })),
+          deletion: state?.deletion_scheduled_for
+            ? { scheduledFor: state.deletion_scheduled_for, status: "pending" }
+            : null,
+          analyticsConsent: state?.analytics_consent || false,
+          consentGeneration: state?.consent_generation || 1,
+          policy,
+          ...(v2 ? { principal } : {}),
+        });
+      }
+      case "update-profile": {
+        let patch;
+        try {
+          patch = normalizeProfile(body);
+        } catch {
+          return respond({ error: "Invalid profile" }, 400);
+        }
+        const result = await service.auth.admin.updateUserById(user.id, {
+          user_metadata: { ...user.user_metadata, ...patch },
+        });
+        if (result.error) throw new Error("Profile update failed");
+        return respond({ ok: true });
+      }
+      case "sign-out-current":
+      case "sign-out-others": {
+        const result = await service.auth.admin.signOut(
+          token,
+          body.action === "sign-out-current" ? "local" : "others",
+        );
+        if (result.error) throw new Error("Sign out failed");
+        return respond({ ok: true });
+      }
+      case "revoke-session": {
+        if (
+          !uuid.test(body.sessionId || "") ||
+          !sessions.some((s) => s.id === body.sessionId)
+        ) return respond({ error: "Session not found" }, 404);
+        checked(
+          await service.from("codevalanche_revoked_sessions").upsert({
+            session_id: body.sessionId,
+            user_id: user.id,
+          }),
+        );
+        return respond({ ok: true });
+      }
+      case "request-deletion": {
+        if (body.confirmation !== "DELETE") {
+          return respond({ error: "Type DELETE to confirm" }, 400);
+        }
+        assertRecentAuthentication(principal, {
+          claims,
+          evidence: await readCredentialStamp(service, principal),
+        });
+        const job = await requestErasure({
+          userId: user.id,
+          actorId: user.id,
+          operationId: body.operationId || crypto.randomUUID(),
+          confirmation: body.confirmation,
+        }, service);
+        return respond({
+          ok: true,
+          ...job,
+          deletion: { scheduledFor: job.dueAt, status: "pending" },
+        }, 202);
+      }
+      case "cancel-deletion": {
+        assertRecentAuthentication(principal, {
+          claims,
+          evidence: await readCredentialStamp(service, principal),
+        });
+        return respond({
+          ok: true,
+          ...await cancelErasure(principal, service),
+        });
+      }
+      case "consent":
+        return respond({
+          code: "invalid_fields",
+          message:
+            "Accept account-attributed analytics through analytics.consent v2",
+        }, 400);
+      case "feedback": {
+        if (
+          !["bug", "idea", "general"].includes(body.category) ||
+          typeof body.message !== "string" || !body.message.trim() ||
+          body.message.length > 4000
+        ) return respond({ error: "Invalid feedback" }, 400);
+        if (
+          !checked(
+            await service.rpc("codevalanche_rate_limit", {
+              p_bucket: `feedback:${user.id}`,
+              p_limit: 3,
+            }),
+          )
+        ) return respond({ error: "Too many requests" }, 429);
+        checked(
+          await service.from("codevalanche_feedback").insert({
+            user_id: user.id,
+            category: body.category,
+            message: body.message.trim(),
+          }),
+        );
+        return respond({ ok: true });
+      }
+      case "event": {
+        return respond({
+          code: "invalid_fields",
+          message:
+            "Identified activity requires event.submit API v2 and the current consent generation",
+        }, 400);
+      }
+      default:
+        return respond({ error: "Unknown action" }, 400);
+    }
+  } catch (error) {
+    if (error instanceof AccountError) {
+      if (verifiedPrincipal) {
+        await recordAccountRefusal(service, verifiedPrincipal, error.code)
+          .catch(() => undefined);
+      }
+      return respond({ code: error.code, error: error.message }, error.status);
+    }
+    return respond({ error: "Account service unavailable" }, 503);
+  }
 });

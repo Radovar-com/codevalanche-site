@@ -1,0 +1,5 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {createAccountCaptcha} from '../src/account/captcha.js';
+test('configured CAPTCHA returns the provider token and renews each public attempt',async()=>{let count=0;const widget={render(container,options){count++;queueMicrotask(()=>options.callback(`synthetic-${count}`));return count},remove(){}};const captcha=createAccountCaptcha({siteKey:'public-test',container:{},loadWidget:async()=>widget});assert.equal(await captcha.challenge(),'synthetic-1');assert.equal(await captcha.challenge(),'synthetic-2')});
+test('unconfigured CAPTCHA does not pretend to have verified a challenge',async()=>assert.equal(await createAccountCaptcha({siteKey:'',container:{},loadWidget:async()=>{throw new Error('unexpected')}}).challenge(),undefined));
+test('failed CAPTCHA refuses the auth request',async()=>{const widget={render(container,options){queueMicrotask(()=>options['error-callback']());return 1},remove(){}};await assert.rejects(()=>createAccountCaptcha({siteKey:'public-test',container:{},loadWidget:async()=>widget}).challenge(),/captcha_required/)});

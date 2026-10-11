@@ -5,15 +5,22 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "test": "node --test scripts/*.test.mjs",
+    "test": "node --test --test-concurrency=1 scripts/*.test.mjs supabase/tests/*.test.mjs",
     "test:browser": "node scripts/account-browser-test.mjs",
-    "test:marketing": "node scripts/marketing-browser-test.mjs"
+    "test:marketing": "node scripts/marketing-browser-test.mjs",
+    "test:remote:browser": "node scripts/remote-browser-test.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.116.0"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.5.8",
     "esbuild": "0.28.2",
     "playwright": "1.62.0"
-  }
+  },
+  "engines": {
+    "node": "24.18.1",
+    "npm": "11.16.0"
+  },
+  "packageManager": "npm@11.16.0"
 }

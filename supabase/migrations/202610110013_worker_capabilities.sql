@@ -1,0 +1,22 @@
+begin;
+create role codevalanche_operation_worker nologin;
+create role codevalanche_erasure_worker nologin;
+create role codevalanche_notification_worker nologin;
+create role codevalanche_security_import_worker nologin;
+create role codevalanche_retention_worker nologin;
+create role codevalanche_dispatcher_reader nologin;
+grant usage on schema public to codevalanche_operation_worker,codevalanche_erasure_worker,codevalanche_notification_worker,codevalanche_security_import_worker,codevalanche_retention_worker,codevalanche_dispatcher_reader;
+-- PostgREST requires the authenticator to be able to SET ROLE after JWT validation.
+grant codevalanche_operation_worker,codevalanche_erasure_worker,codevalanche_notification_worker,codevalanche_security_import_worker,codevalanche_retention_worker,codevalanche_dispatcher_reader to authenticator;
+create function public.codevalanche_worker_capability() returns text language sql stable security invoker set search_path='' as $$ select current_user::text $$;
+revoke all on function public.codevalanche_worker_capability() from public,anon,authenticated,service_role;
+grant execute on function public.codevalanche_worker_capability() to codevalanche_operation_worker,codevalanche_erasure_worker,codevalanche_notification_worker,codevalanche_security_import_worker,codevalanche_retention_worker,codevalanche_dispatcher_reader;
+grant execute on function public.codevalanche_claim_operation(uuid,uuid),public.codevalanche_settle_operation(uuid,uuid,boolean),public.codevalanche_claim_suspension_expiry(uuid,uuid),public.codevalanche_settle_suspension_expiry(uuid,uuid,boolean) to codevalanche_operation_worker;
+grant execute on function public.codevalanche_erasure_claim(uuid,uuid),public.codevalanche_erasure_advance(uuid,uuid,text),public.codevalanche_erasure_storage(uuid),public.codevalanche_erasure_inspect(uuid) to codevalanche_erasure_worker;
+grant execute on function public.codevalanche_notification_claim(uuid,uuid),public.codevalanche_notification_settle(uuid,uuid,text,text,integer) to codevalanche_notification_worker;
+grant select on public.codevalanche_provider_event_cursor to codevalanche_security_import_worker;
+create policy codevalanche_import_cursor_read on public.codevalanche_provider_event_cursor for select to codevalanche_security_import_worker using(true);
+grant execute on function public.codevalanche_read_provider_audit(timestamptz,uuid,integer),public.codevalanche_import_security_events(jsonb,text) to codevalanche_security_import_worker;
+grant execute on function public.codevalanche_retention_sweep(),public.codevalanche_analytics_retention() to codevalanche_retention_worker;
+grant execute on function public.codevalanche_due_maintenance(integer) to codevalanche_dispatcher_reader;
+commit;

@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {assertAccountOperation,policyFromState} from '../functions/_shared/accountPolicy.ts';
+test('deletion pending keeps a narrow cancellation route even with a separate suspension',()=>{const policy=policyFromState({status:'deletion_pending',blocked:true,policy_version:4});assert.equal(policy.status,'deletion_pending');assert.doesNotThrow(()=>assertAccountOperation({userId:'verified'},policy,'account.deletion.cancel'));assert.throws(()=>assertAccountOperation({userId:'verified'},policy,'profile.update'),/account_deletion_pending/);assert.throws(()=>assertAccountOperation({userId:'verified'},policy,'remote.enroll'),/account_deletion_pending/)});

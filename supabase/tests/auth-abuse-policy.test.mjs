@@ -1,0 +1,10 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {validateAuthPolicy,publicAuthError} from '../scripts/verify-auth-policy.mjs';
+const desired={captchaEnabled:true,passwordMinLength:15,recoveryExpirySeconds:900,customSmtpConfigured:true,leakedPasswordProtection:true,rateLimits:{emailSent:30,tokenVerify:30,signIn:30,tokenRefresh:150},redirectAllowlist:['https://codevalanche.com/account/'],oauthClients:['ios','android','desktop'],trustedIngress:true};
+test('provider CAPTCHA absence is a gate even with frontend CAPTCHA',()=>{const r=validateAuthPolicy({...desired,captchaEnabled:false,frontendCaptcha:true});assert.equal(r.ok,false);assert.ok(r.missingControls.includes('provider_captcha'))});
+test('OTP lifetime cannot exceed fifteen minutes',()=>assert.equal(validateAuthPolicy({...desired,recoveryExpirySeconds:3600}).ok,false));
+test('refresh quota cannot be reduced to simulate password protection',()=>assert.equal(validateAuthPolicy({...desired,rateLimits:{...desired.rateLimits,tokenRefresh:5}}).ok,false));
+test('wildcard/external callback origins fail qualification',()=>assert.equal(validateAuthPolicy({...desired,redirectAllowlist:['https://evil.test/**']}).ok,false));
+test('qualified snapshot passes without returning secrets',()=>{const r=validateAuthPolicy({...desired,smtpPassword:'secret',serviceRole:'secret'});assert.equal(r.ok,true);assert.equal(JSON.stringify(r).includes('secret'),false)});
+test('unknown email and wrong password remain indistinguishable',()=>assert.deepEqual(publicAuthError({code:'user_not_found'}),publicAuthError({code:'invalid_credentials'})));
+test('retry-after survives generic auth refusal',()=>assert.deepEqual(publicAuthError({status:429,retryAfterSeconds:60}),{code:'rate_limited',retryAfterSeconds:60}));

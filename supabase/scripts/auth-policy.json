@@ -1,0 +1,13 @@
+{
+  "desiredPolicyOnly": true,
+  "captchaEnabled": true,
+  "passwordMinLength": 15,
+  "recoveryExpirySeconds": 900,
+  "customSmtpConfigured": true,
+  "leakedPasswordProtection": true,
+  "rateLimits": {"emailSent": 30, "tokenVerify": 30, "signIn": 30, "tokenRefresh": 150},
+  "redirectAllowlist": ["https://codevalanche.com/account/", "https://account.codevalanche.com/account/"],
+  "oauthClients": [],
+  "trustedIngress": false,
+  "note": "Owner supplies actual approved IDs and sanitized configuration receipts. Desired controls are not evidence of deployed provider enforcement. No credentials here."
+}

@@ -1,0 +1,11 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {authorizeAdmin} from '../functions/_shared/adminAuthorization.ts';
+import {fixture,loadHandler,request,validClaims} from './handlerHarness.mjs';
+const now=Date.now(),p={userId:'11111111-1111-4111-8111-111111111111',sessionId:'22222222-2222-4222-8222-222222222222',aal:'aal2',mfaVerifiedAt:new Date(now-1000).toISOString(),emailVerified:true};
+const evidence={qualified:true,recoveryOnly:false,verifiedFactorCount:1};
+const service=role=>({from:()=>({select(){return this},eq(){return this},maybeSingle:async()=>({data:role?{role,active:true}:null,error:null})})});
+test('normal users cannot acquire roles from metadata',async()=>await assert.rejects(()=>authorizeAdmin(p,'admin.users.list',null,{service:service(null),evidence,now}),/administrator_required/));
+test('support can read but cannot mutate',async()=>{assert.equal((await authorizeAdmin(p,'admin.users.list',null,{service:service('support_readonly'),evidence,now})).role,'support_readonly');await assert.rejects(()=>authorizeAdmin(p,'admin.account.suspend','other',{service:service('support_readonly'),evidence,now}),/administrator_required/)});
+test('aal1 membership cannot read administrative data',async()=>await assert.rejects(()=>authorizeAdmin({...p,aal:'aal1'},'admin.users.list',null,{service:service('owner'),evidence,now}),/mfa_required/));
+test('self role and lifecycle mutation denied',async()=>await assert.rejects(()=>authorizeAdmin(p,'admin.account.suspend',p.userId,{service:service('owner'),evidence,now}),/account_forbidden/));
+test('legacy admin aliases also reject old app metadata authority',async()=>{const f=fixture();f.user.app_metadata.codevalanche_admin=true;f.db.auth.admin.listUsers=async()=>({data:{users:[]},error:null});const h=await loadHandler(f.db);assert.equal((await h(request('admin-list-users',{},validClaims()))).status,403)});

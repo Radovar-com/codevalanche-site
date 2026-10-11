@@ -113,7 +113,35 @@ test('actual SDK password recovery preserves validated authorization context acr
   await until(f.page, () => document.getElementById('status').textContent.includes('Password updated'))
   assert.equal(new URL(f.page.url()).searchParams.get('authorization_id'), 'fixture-consent')
   assert.equal(new URL(f.page.url()).searchParams.get('flow'), null)
-  await f.page.reload(); await until(f.page, () => !document.getElementById('consent').hidden)
+  await f.page.reload(); await until(f.page, () => !document.getElementById('auth').hidden && document.getElementById('auth-submit').textContent === 'Sign in')
+  assert.equal(await f.page.locator('#consent').isVisible(), false)
+})
+
+test('actual SDK MFA verification uses its public credential lock without nesting a second lock', async t => {
+  const f = await fixture(t)
+  await f.page.route('https://account.fixture.invalid/auth/v1/factors**', async route => {
+    const url = route.request().url()
+    const data = url.endsWith('/verify') ? sessionFor(USER_A) : url.endsWith('/challenge') ? { id: 'fixture-challenge' } : { id: 'fixture-factor', totp: { secret: 'synthetic-setup-secret' } }
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(data) })
+  })
+  await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
+  await f.page.locator('#mfa-enroll').click(); await until(f.page, () => !document.getElementById('mfa-challenge').hidden)
+  await f.page.locator('#mfa-code').fill('123456'); await f.page.locator('#mfa-form button[type=submit]').click()
+  await until(f.page, () => document.getElementById('status').textContent.includes('Authenticator verified'))
+  assert.equal(await f.page.locator('#mfa-secret').textContent(), '')
+})
+
+test('deletion pending exposes restricted cancellation and closes profile mutations', async t => {
+  const f = await fixture(t)
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    const body = route.request().postDataJSON()
+    const result = body.action === 'cancel-deletion' ? { ok: true } : { user: { displayName: 'A', bio: '' }, sessions: [], policy: { status: 'deletion_pending' }, deletion: { scheduledFor: '2026-11-10T00:00:00Z' } }
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(result) })
+  })
+  await f.load(); await until(f.page, () => document.getElementById('account-state-title').textContent === 'Account deletion pending')
+  assert.equal(await f.page.locator('#profile').isVisible(), false)
+  assert.equal(await f.page.locator('#account-state-cancel').isVisible(), true)
+  assert.equal(await f.page.locator('#mfa-enroll').isEnabled(), false)
 })
 
 test('actual SDK stale peer snapshot cannot replace the currently stored session view', async t => {

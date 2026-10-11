@@ -1,0 +1,3 @@
+import {readFile} from 'node:fs/promises';
+import {uuid} from '../functions/_shared/accountContract.ts';
+const file=process.argv[2];if(!file){console.error('Usage: erasure-dry-run.mjs SANITIZED_JOB_METADATA.json');process.exitCode=2}else{const s=JSON.parse(await readFile(file,'utf8'));if(!uuid.test(s.jobId||'')||!uuid.test(s.userId||'')||!Number.isFinite(Date.parse(s.dueAt)))throw new Error('Invalid job metadata');console.log(JSON.stringify({execute:false,jobId:s.jobId,dueAt:s.dueAt,canonicalBindingVerified:s.canonicalBindingVerified===true,storageCount:Number.isInteger(s.storageCount)?s.storageCount:null,localFilesTouched:false,ready:s.canonicalBindingVerified===true&&Date.parse(s.dueAt)<=Date.now()&&s.state==='deletion_pending'}));}

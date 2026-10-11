@@ -1,0 +1,14 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {assertAssurance,assertRecentAuthentication} from '../functions/_shared/assurancePolicy.ts';
+const now=Date.parse('2026-10-11T10:00:00Z');
+const p={userId:'11111111-1111-4111-8111-111111111111',sessionId:'22222222-2222-4222-8222-222222222222',clientId:null,emailVerified:true,aal:'aal2',mfaVerifiedAt:new Date(now-299000).toISOString()};
+const evidence={verifiedFactorCount:1,credentialChangedAt:new Date(now-86400000).toISOString(),recoveryOnly:false,qualified:true};
+test('Google aal1 does not authorize remote',()=>assert.throws(()=>assertAssurance({...p,aal:'aal1'},{purpose:'remote.enroll',now,evidence}),/mfa_required/));
+test('recent authoritative MFA succeeds within five minutes',()=>assert.doesNotThrow(()=>assertAssurance(p,{purpose:'remote.enroll',now,evidence})));
+test('refreshed iat cannot renew old MFA',()=>assert.throws(()=>assertAssurance({...p,mfaVerifiedAt:new Date(now-301000).toISOString(),iat:now/1000},{purpose:'admin.account.suspend',now,evidence}),/reauthentication_required/));
+test('future MFA timestamp rejected',()=>assert.throws(()=>assertAssurance({...p,mfaVerifiedAt:new Date(now+1000).toISOString()},{purpose:'remote.enroll',now,evidence}),/reauthentication_required/));
+test('removed factor invalidates old aal2',()=>assert.throws(()=>assertAssurance(p,{purpose:'remote.enroll',now,evidence:{...evidence,verifiedFactorCount:0}}),/mfa_required/));
+test('replacement credential stamp invalidates old MFA',()=>assert.throws(()=>assertAssurance(p,{purpose:'remote.enroll',now,evidence:{...evidence,credentialChangedAt:new Date(now-1000).toISOString()}}),/reauthentication_required/));
+test('recovery cannot gain remote or disable MFA',()=>{for(const purpose of ['remote.enroll','mfa.remove'])assert.throws(()=>assertAssurance(p,{purpose,now,evidence:{...evidence,recoveryOnly:true}}),/recovery_restricted/)});
+test('provider evidence failure does not become an authorization',()=>assert.throws(()=>assertAssurance(p,{purpose:'remote.enroll',now,evidence:{...evidence,qualified:false}}),/account_service_unavailable/));
+test('deletion without enrolled MFA requires real recent primary authentication',()=>{assert.doesNotThrow(()=>assertRecentAuthentication({...p,aal:'aal1'},{now,claims:{iat:now/1000,amr:[{method:'password',timestamp:now/1000-299}]},evidence:{...evidence,verifiedFactorCount:0}}));assert.throws(()=>assertRecentAuthentication({...p,aal:'aal1'},{now,claims:{iat:now/1000,amr:[{method:'password',timestamp:now/1000-301}]},evidence:{...evidence,verifiedFactorCount:0}}),/reauthentication_required/)});
