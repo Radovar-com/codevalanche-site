@@ -79,6 +79,10 @@ export function createScopedWorkerService(
     },
     from: (table: string) => database.from(table),
   };
+  if (kind === "operation") {
+    service.authCorrelationQualified =
+      env("ACCOUNT_AUTH_CORRELATION_QUALIFIED") === "true";
+  }
   if (kind === "erasure" && remoteErase) service.remoteErase = remoteErase;
   if (capability.authKey) {
     const key = env(capability.authKey);

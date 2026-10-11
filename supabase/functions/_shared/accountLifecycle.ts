@@ -62,7 +62,9 @@ export async function reconcileOperation(operationId: string, service: any) {
   }
   const preparation = await operationRpc(
     service,
-    "codevalanche_prepare_operation_provider",
+    service.authCorrelationQualified || job.provider_receipt_required
+      ? "codevalanche_prepare_correlated_operation"
+      : "codevalanche_prepare_operation_provider",
     { p_operation_id: operationId, p_lease_id: leaseId },
   );
   if (preparation?.decision === "superseded") {
@@ -75,46 +77,101 @@ export async function reconcileOperation(operationId: string, service: any) {
       errorCode: "provider_result_unknown",
     };
   }
-  let success = false;
+  const correlated = Boolean(
+    preparation?.binding || job.provider_receipt_required,
+  );
+  let success = false, providerError: any = null;
   try {
-    if (preparation?.allowed && job.action === "admin.account.suspend") {
-      const until = job.parameters?.until;
-      if (!until || Date.parse(until) > Date.now()) {
-        const seconds = until
-          ? Math.ceil((Date.parse(until) - Date.now()) / 1000)
-          : 876000 * 3600;
-        const r = await service.auth.admin.updateUserById(job.user_id, {
-          ban_duration: `${seconds}s`,
+    if (preparation?.allowed) {
+      const until = correlated
+        ? preparation.binding.banUntil
+        : job.parameters?.until;
+      const seconds = until
+        ? Math.ceil((Date.parse(until) - Date.now()) / 1000)
+        : 876000 * 3600;
+      if (job.action === "admin.account.suspend" && seconds <= 0) {
+        await operationRpc(service, "codevalanche_abort_unissued_operation", {
+          p_operation_id: operationId,
+          p_lease_id: leaseId,
         });
-        if (r.error) throw r.error;
+        const settled = await operationRpc(
+          service,
+          "codevalanche_settle_operation",
+          { p_operation_id: operationId, p_lease_id: leaseId, p_success: true },
+        );
+        if (settled?.state === "completed") {
+          await reconcileSuspensionExpiry(job.user_id, service);
+        }
+        return { operationId, state: settled?.state || "pending" };
       }
-    } else if (
-      preparation?.allowed && job.action === "admin.account.reactivate"
-    ) {
-      const r = await service.auth.admin.updateUserById(job.user_id, {
-        ban_duration: "none",
-      });
-      if (r.error) throw r.error;
-    }
-    if (preparation?.allowed) {
-      await operationRpc(service, "codevalanche_record_operation_provider", {
-        p_operation_id: operationId,
-        p_attempt_id: leaseId,
-        p_confirmed: true,
-        p_rejected: false,
-      });
-    }
-    success = true;
+      const patch: any = {
+        ban_duration: job.action === "admin.account.reactivate"
+          ? "none"
+          : `${seconds}s`,
+      };
+      if (correlated) {
+        patch.app_metadata = { codevalanche_operation_v1: preparation.binding };
+      }
+      const started = Date.now();
+      const result = await service.auth.admin.updateUserById(
+        job.user_id,
+        patch,
+      );
+      if (result.error) throw result.error;
+      if (!correlated) {
+        const user = result.data?.user, deadline = user?.banned_until;
+        if (
+          user?.id !== job.user_id ||
+          (job.action === "admin.account.reactivate"
+            ? deadline !== null && deadline !== undefined
+            : typeof deadline !== "string" ||
+              !Number.isFinite(Date.parse(deadline)) ||
+              Date.parse(deadline) < started + seconds * 1000 - 1000)
+        ) throw new Error("provider_response_uncorrelated");
+        await operationRpc(service, "codevalanche_record_operation_provider", {
+          p_operation_id: operationId,
+          p_attempt_id: leaseId,
+          p_confirmed: true,
+          p_rejected: false,
+        });
+        success = true;
+      }
+    } else success = true;
   } catch (error: any) {
-    if (preparation?.allowed) {
+    providerError = error;
+  }
+  if (preparation?.allowed && correlated) {
+    // The response (even HTTP200) is not the authority for the marked transaction.
+    // A commit receipt can be read after timeout/crash; a user/status GET cannot replace it.
+    const receipt = await operationRpc(
+      service,
+      "codevalanche_read_operation_receipt",
+      { p_operation_id: operationId, p_attempt_id: leaseId },
+    );
+    if (!receipt) {
+      return {
+        operationId,
+        state: "pending",
+        errorCode: "provider_attempt_superseded",
+      };
+    }
+    success = receipt?.decision === "committed" &&
+      receipt.current_binding === true;
+    if (!success) {
       await operationRpc(service, "codevalanche_record_operation_provider", {
         p_operation_id: operationId,
         p_attempt_id: leaseId,
         p_confirmed: false,
-        p_rejected: [400, 401, 403, 404, 422].includes(error?.status),
+        p_rejected: false,
       });
     }
-    success = false;
+  } else if (preparation?.allowed && providerError) {
+    await operationRpc(service, "codevalanche_record_operation_provider", {
+      p_operation_id: operationId,
+      p_attempt_id: leaseId,
+      p_confirmed: false,
+      p_rejected: [400, 401, 403, 404, 422].includes(providerError?.status),
+    });
   }
   const settled = await operationRpc(service, "codevalanche_settle_operation", {
     p_operation_id: operationId,
