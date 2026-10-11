@@ -144,6 +144,138 @@ test('deletion pending exposes restricted cancellation and closes profile mutati
   assert.equal(await f.page.locator('#mfa-enroll').isEnabled(), false)
 })
 
+test('successful self-deletion immediately closes ready controls before an unavailable overview refresh', async t => {
+  const f = await fixture(t)
+  let requested = false
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    const body = route.request().postDataJSON()
+    if (body.action === 'request-deletion') {
+      requested = true
+      await route.fulfill({ status: 202, contentType: 'application/json', body: JSON.stringify({ ok: true, jobId: '44444444-4444-4444-8444-444444444444', dueAt: '2026-11-10T00:00:00Z', deletion: { scheduledFor: '2026-11-10T00:00:00Z', status: 'pending' } }) })
+    } else await route.fulfill({ status: requested ? 503 : 200, contentType: 'application/json', body: JSON.stringify(requested ? { error: 'Account service unavailable' } : { user: { displayName: 'A', bio: '' }, sessions: [], deletion: null }) })
+  })
+  await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
+  await f.page.locator('#delete-form').evaluate(form => form.closest('details').open = true)
+  await f.page.locator('#delete-confirm').fill('DELETE'); await f.page.locator('#delete-form button[type=submit]').click()
+  await until(f.page, () => document.getElementById('delete-confirm').value === '')
+  assert.equal(await f.page.locator('#profile').isVisible(), false, 'accepted deletion cannot leave profile writable')
+  assert.equal(await f.page.locator('#account-state-title').textContent(), 'Account deletion pending')
+  assert.equal(await f.page.locator('#account-state-cancel').isVisible(), true)
+  assert.match(await f.page.locator('#account-state-description').textContent(), /2026|Nov|11/)
+  assert.equal(await f.page.locator('#display-name').isEnabled(), false)
+})
+
+test('hosted session revoke sends the exact selected UUID and refreshes only the bound account', async t => {
+  const f = await fixture(t), own = '33333333-3333-4333-8333-333333333333', other = '44444444-4444-4444-8444-444444444444'
+  const revoked = []
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    const body = route.request().postDataJSON()
+    if (body.action === 'revoke-session') { revoked.push(body.sessionId); await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' }); return }
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ user: { displayName: 'A', bio: '' }, sessions: [{ id: own, current: true }, ...(!revoked.length ? [{ id: other, current: false, userAgent: '<img src=x onerror=alert(1)>' }] : [])], deletion: null }) })
+  })
+  f.page.on('dialog', dialog => dialog.accept())
+  await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
+  assert.equal(await f.page.locator('#sessions img').count(), 0)
+  assert.equal(await f.page.locator('#sessions button').count(), 2, 'each valid owned session exposes its own control')
+  await f.page.locator(`#sessions button[data-session-id="${other}"]`).click()
+  await until(f.page, () => document.querySelectorAll('#sessions button').length === 1)
+  assert.deepEqual(revoked, [other])
+  assert.equal(await f.page.locator('#profile').isVisible(), true)
+  assert.equal(await f.page.locator('#sessions button').getAttribute('data-session-id'), own)
+})
+
+test('hosted current-session revoke completes local cleanup and cannot reopen on reload', async t => {
+  const f = await fixture(t), own = '33333333-3333-4333-8333-333333333333'
+  let revoked = false
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    const body = route.request().postDataJSON()
+    if (body.action === 'revoke-session') { assert.equal(body.sessionId, own); revoked = true; await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' }); return }
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ user: { displayName: 'A', bio: '' }, sessions: [{ id: own, current: true }], deletion: null }) })
+  })
+  f.page.on('dialog', dialog => dialog.accept())
+  await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
+  assert.equal(await f.page.locator('#sessions button').count(), 1)
+  await f.page.locator('#sessions button').click()
+  await until(f.page, () => !document.getElementById('auth').hidden)
+  assert.equal(revoked, true)
+  assert.equal(await f.page.evaluate(() => localStorage.getItem('sb-account-auth-token')), null)
+  await f.page.reload(); await until(f.page, () => window.__sdkClient != null)
+  assert.equal(await f.page.locator('#profile').isVisible(), false)
+})
+
+test('late current-session revoke cannot clean up the newer signed-in account', async t => {
+  const f = await fixture(t), own = '33333333-3333-4333-8333-333333333333'
+  let release, reached
+  const held = new Promise(resolve => { release = resolve }), started = new Promise(resolve => { reached = resolve })
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    const request = route.request(), body = request.postDataJSON()
+    if (body.action === 'revoke-session') { reached(); await held; await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' }); return }
+    const who = request.headers().authorization?.includes(USER_B.id) ? USER_B : USER_A
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ user: { displayName: who.user_metadata.display_name, bio: '' }, sessions: [{ id: own, current: true }], deletion: null }) })
+  })
+  f.page.on('dialog', dialog => dialog.accept())
+  await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
+  await f.page.locator('#sessions button').click(); await started
+  await f.page.evaluate(async () => { await window.__sdkClient.auth.signInWithPassword({ email: 'b@example.test', password: 'fixture-password' }) })
+  await until(f.page, () => document.getElementById('profile-email').textContent === 'b@example.test')
+  release(); for (let i = 0; i < 4; i++) { await f.page.clock.runFor(0); await new Promise(resolve => setTimeout(resolve, 10)) }
+  assert.equal(await f.page.locator('#profile').isVisible(), true)
+  assert.equal(await f.page.locator('#profile-email').textContent(), USER_B.email)
+  assert.equal(await f.page.evaluate(() => JSON.parse(localStorage.getItem('sb-account-auth-token')).user.id), USER_B.id)
+  assert.equal(f.calls.filter(call => call.path.endsWith('/logout')).length, 0)
+})
+
+test('malformed current-session marker cannot expose a destructive revoke action', async t => {
+  const f = await fixture(t), sid = '33333333-3333-4333-8333-333333333333'
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ user: { displayName: 'A', bio: '' }, sessions: [{ id: sid, current: 'false' }], deletion: null }) })
+  })
+  await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
+  assert.equal(await f.page.locator('#sessions button').count(), 0)
+  assert.equal(await f.page.evaluate(() => JSON.parse(localStorage.getItem('sb-account-auth-token')).user.id), USER_A.id)
+  assert.equal(f.calls.filter(call => call.path.endsWith('/logout')).length, 0)
+})
+
+test('array-shaped session UUID is not coerced into a destructive action target', async t => {
+  const f = await fixture(t), sid = '33333333-3333-4333-8333-333333333333'
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ user: { displayName: 'A', bio: '' }, sessions: [{ id: [sid], current: true }], deletion: null }) })
+  })
+  await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
+  assert.equal(await f.page.locator('#sessions button').count(), 0)
+  assert.equal(await f.page.evaluate(() => JSON.parse(localStorage.getItem('sb-account-auth-token')).user.id), USER_A.id)
+  assert.equal(f.calls.filter(call => call.path.endsWith('/logout')).length, 0)
+})
+
+test('refused deletion cancellation stays pending and never announces completion', async t => {
+  const f = await fixture(t)
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    const body = route.request().postDataJSON()
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(body.action === 'cancel-deletion' ? { ok: false, error: 'cancellation_refused' } : { user: { displayName: 'A', bio: '' }, sessions: [], policy: { status: 'deletion_pending' }, deletion: { scheduledFor: '2026-11-10T00:00:00Z' } }) })
+  })
+  await f.load(); await until(f.page, () => document.getElementById('account-state-title').textContent === 'Account deletion pending')
+  await f.page.locator('#account-state-cancel').click()
+  await until(f.page, () => document.getElementById('status').dataset.error === 'true')
+  assert.equal(await f.page.locator('#account-state-title').textContent(), 'Account deletion pending')
+  assert.doesNotMatch(await f.page.locator('#status').textContent(), /cancelled/i)
+  assert.equal(await f.page.locator('#profile').isVisible(), false)
+})
+
+test('accepted cancellation announces completion only after current account returns active', async t => {
+  const f = await fixture(t)
+  let cancelled = false
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    const body = route.request().postDataJSON()
+    if (body.action === 'cancel-deletion') { cancelled = true; await route.fulfill({ status: 200, contentType: 'application/json', body: '{"ok":true}' }); return }
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ user: { displayName: 'A', bio: '' }, sessions: [], policy: { status: cancelled ? 'active' : 'deletion_pending' }, deletion: cancelled ? null : { scheduledFor: '2026-11-10T00:00:00Z' } }) })
+  })
+  await f.load(); await until(f.page, () => document.getElementById('account-state-title').textContent === 'Account deletion pending')
+  await f.page.locator('#account-state-cancel').click()
+  await until(f.page, () => document.getElementById('status').textContent.includes('Account deletion cancelled.'))
+  assert.equal(await f.page.locator('#profile').isVisible(), true)
+  assert.equal(await f.page.locator('#status').getAttribute('data-error'), 'false')
+})
+
 test('actual SDK stale peer snapshot cannot replace the currently stored session view', async t => {
   const f = await fixture(t); await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
   await f.page.evaluate(async () => { await window.__sdkClient.auth.signInWithPassword({ email: 'b@example.test', password: 'fixture-password' }) })

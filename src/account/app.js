@@ -15,6 +15,7 @@ const authorizationId = redirectTo.searchParams.get('authorization_id')
 const recoveryRedirect = new URL(redirectTo); recoveryRedirect.searchParams.set('flow', 'recovery')
 let mode = 'signin', user = null, recovery = new URL(location.href).searchParams.get('flow') === 'recovery', busy = false
 let accountStatus = 'signed-out', renderGeneration = 0, currentSession = null
+let deletionSchedule = null
 let cleanupPromise = null, cleanupPending = false, ownedSignin = false
 const security = createAccountSecurity(client, { isRecovery: () => recovery, assertRemoval: () => apiV2('security.mfa.remove-authorize') })
 function notice(message = '', error = false) { $('status').textContent = message; $('status').dataset.error = String(error) }
@@ -39,7 +40,7 @@ function setAccountStatus(next) {
   const content = next === 'signing-out' ? ['Signing out', 'Finishing local session cleanup…']
     : next === 'logout-failed' ? ['Sign-out incomplete', 'Your account view is closed. Try again to finish signing out, or sign in explicitly.']
       : next === 'suspended' ? ['Account suspended', 'Your account access is blocked. Contact support. You can still sign out.']
-      : next === 'deletion-pending' ? ['Account deletion pending', 'Sign in again and verify any enrolled authenticator to cancel before deletion starts. Local projects are preserved.']
+      : next === 'deletion-pending' ? ['Account deletion pending', `${deletionSchedule ? `Scheduled for ${new Date(deletionSchedule).toLocaleString()}. ` : ''}Sign in again and verify any enrolled authenticator to cancel before deletion starts. Local projects are preserved.`]
     : next === 'loading' ? ['Opening your account', 'Checking account access…']
       : ['Account temporarily unavailable', 'Your saved session is preserved. Try again or sign out.']
   $('account-state-title').textContent = content[0]; $('account-state-description').textContent = content[1]
@@ -48,6 +49,7 @@ function setAccountStatus(next) {
 function invalidateAccountView() {
   security.clear()
   renderGeneration++
+  deletionSchedule = null
   currentSession = null; user = null
   setAccountStatus('signed-out'); setMode('signin')
 }
@@ -146,8 +148,38 @@ async function action(work) {
   finally { busy = false; applyControls() }
 }
 function list(id, values) { $(id).replaceChildren(...values.map(value => { const li = document.createElement('li'); li.textContent = value; return li })) }
+function renderSessions(sessions, generation, expectedSession) {
+  const rows = Array.isArray(sessions) ? sessions : []
+  if (!rows.length) { list('sessions', ['No session details available.']); return }
+  $('sessions').replaceChildren(...rows.map(session => {
+    const li = document.createElement('li'), label = document.createElement('span')
+    label.textContent = `${session.current === true ? 'This session' : session.label || 'Signed-in session'}${session.userAgent ? ` · ${session.userAgent}` : ''}${session.createdAt ? ` · Started ${new Date(session.createdAt).toLocaleDateString()}` : ''}`
+    li.append(label)
+    if (typeof session.current !== 'boolean' || typeof session.id !== 'string' || !/^[a-f0-9]{8}-[a-f0-9]{4}-[1-8][a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/i.test(session.id)) return li
+    const button = document.createElement('button')
+    button.type = 'button'; button.className = 'quiet'; button.textContent = session.current ? 'Revoke this session' : 'Revoke session'; button.dataset.sessionId = session.id
+    button.addEventListener('click', () => {
+      const isCurrentView = () => generation === renderGeneration && accountStatus === 'ready' && currentSession === expectedSession
+      if (busy || cleanupPending || !isCurrentView() || !window.confirm(session.current ? 'Revoke this session? You will need to sign in again.' : 'Revoke this session?')) return
+      void action(async () => {
+        if (!isCurrentView()) throw { code: 'account_request_superseded' }
+        const result = await api('revoke-session', { sessionId: session.id })
+        if (result.ok !== true) throw { code: 'account_service_unavailable' }
+        if (!isCurrentView()) throw { code: 'account_request_superseded' }
+        if (session.current) { await cleanUpLocalSession(); notice('Session revoked. Sign in again to continue.') }
+        else {
+          await render(expectedSession)
+          if (currentSession !== expectedSession || accountStatus !== 'ready') throw { code: 'account_request_superseded' }
+          notice('Session revoked.')
+        }
+      })
+    })
+    li.append(document.createTextNode(' '), button)
+    return li
+  }))
+}
 async function render(session) {
-  if (currentSession?.user?.id !== session?.user?.id) { security.clear(); if ($('mfa-secret')) { $('mfa-secret').textContent = ''; $('mfa-challenge').hidden = true } }
+  if (currentSession?.user?.id !== session?.user?.id) { deletionSchedule = null; security.clear(); if ($('mfa-secret')) { $('mfa-secret').textContent = ''; $('mfa-challenge').hidden = true } }
   const generation = ++renderGeneration
   currentSession = session || null
   user = session?.user || null
@@ -157,6 +189,7 @@ async function render(session) {
     const account = await api('get-account')
     if (generation !== renderGeneration || !user || user.id !== session.user.id) return
     setAccountStatus('ready')
+    deletionSchedule = typeof account.deletion?.scheduledFor === 'string' && Number.isFinite(Date.parse(account.deletion.scheduledFor)) ? account.deletion.scheduledFor : null
     if (account.policy?.status === 'deletion_pending' && !recovery) { setAccountStatus('deletion-pending'); return }
     if (authorizationId && !recovery) { await showConsent(generation); return }
     if (recovery) { setMode('update'); return }
@@ -164,7 +197,7 @@ async function render(session) {
     list('methods', identityLabels(user.identities))
     $('display-name').value = account.user?.displayName || ''; $('bio').value = account.user?.bio || ''; $('cancel-deletion').hidden = !account.deletion
     if ($('analytics-consent')) $('analytics-consent').checked = account.analyticsConsent === true
-    list('sessions', account.sessions?.length ? account.sessions.map(s => `${s.current ? 'This session' : s.label || 'Signed-in session'}${s.userAgent ? ` · ${s.userAgent}` : ''}${s.createdAt ? ` · Started ${new Date(s.createdAt).toLocaleDateString()}` : ''}`) : ['No session details available.'])
+    renderSessions(account.sessions, generation, session)
     if (account.deletion?.scheduledFor) notice(`Account deletion requested for ${new Date(account.deletion.scheduledFor).toLocaleDateString()}.`)
   } catch (error) {
     if (generation !== renderGeneration) return
@@ -211,7 +244,13 @@ $('account-state-logout').addEventListener('click', () => void action(signOut))
 $('account-state-retry').addEventListener('click', () => void action(async () => { if (lifecycle.logoutIntent() === 'pending') await cleanUpLocalSession(); else await readCurrentSession() }))
 $('logout-others').addEventListener('click', () => void action(async () => { await api('sign-out-others'); await render((await client.auth.getSession()).data.session); notice('Other sessions signed out. Existing access tokens may remain valid until they expire.') }))
 $('change-password').addEventListener('click', () => void action(async () => { const { error } = await client.auth.resetPasswordForEmail(user.email, { redirectTo: recoveryRedirect.href }); if (error) throw error; notice('Check your email for a password reset link. Open it in this browser.') }))
-$('delete-form').addEventListener('submit', event => { event.preventDefault(); if ($('delete-confirm').value !== 'DELETE') return; void action(async () => { await api('request-deletion', { confirmation: 'DELETE' }); $('delete-confirm').value = ''; $('cancel-deletion').hidden = false; notice('Your account deletion request has been recorded.') }) })
+$('delete-form').addEventListener('submit', event => { event.preventDefault(); if ($('delete-confirm').value !== 'DELETE') return; void action(async () => {
+  const result = await api('request-deletion', { confirmation: 'DELETE' })
+  if (result.ok !== true || result.deletion?.status !== 'pending' || typeof result.deletion.scheduledFor !== 'string' || !Number.isFinite(Date.parse(result.deletion.scheduledFor))) throw { code: 'account_service_unavailable' }
+  deletionSchedule = result.deletion.scheduledFor
+  $('delete-confirm').value = ''; setAccountStatus('deletion-pending')
+  notice('Your account deletion request has been recorded.')
+}) })
 window.addEventListener('storage', () => {
   if (!cleanupPending && lifecycle.logoutIntent()) void readCurrentSession()
 })
@@ -246,7 +285,16 @@ try {
   if (new URL(location.href).searchParams.has('error')) notice('This email link is invalid or expired. Request a new link.', true)
 } catch (error) { if (initialGeneration === renderGeneration) { if(error?.code==='recovery_invalid_or_expired'){setAccountStatus('signed-out');notice(safeError(error),true)}else{handleAccountRefusal(sdkSessionError(error)); notice(safeError(sdkSessionError(error)), true)} } }
 
-$('cancel-deletion').addEventListener('click', () => void action(async () => { await api('cancel-deletion'); $('cancel-deletion').hidden = true; notice('Account deletion cancelled.') }))
+async function cancelDeletion() {
+  const expectedUserId = user?.id
+  const result = await api('cancel-deletion')
+  if (result.ok !== true) throw { code: 'account_deletion_pending' }
+  await readCurrentSession()
+  if (user?.id !== expectedUserId) throw { code: 'account_request_superseded' }
+  if (accountStatus !== 'ready') throw { code: accountStatus === 'deletion-pending' ? 'account_deletion_pending' : 'account_service_unavailable' }
+  notice('Account deletion cancelled. Earlier remote approvals stay withdrawn.')
+}
+$('cancel-deletion').addEventListener('click', () => void action(cancelDeletion))
 async function showConsent(generation) {
   try { const { data, error } = await client.auth.oauth.getAuthorizationDetails(authorizationId); if (error) throw error
     if (generation !== renderGeneration || accountStatus !== 'ready') return
@@ -289,4 +337,4 @@ $('mfa-cancel')?.addEventListener('click', () => void action(async () => { await
 $('mfa-remove')?.addEventListener('click', () => void action(async () => { const factors = await security.factors(); if (!factors.length) { notice('No verified authenticator is enrolled.'); return }; await security.remove(factors[0].id); notice('Authenticator removed. Earlier remote approvals have been withdrawn.'); await readCurrentSession() }))
 $('analytics-save')?.addEventListener('click', () => void action(async () => { const result = await apiV2('analytics.consent', { analytics: $('analytics-consent').checked }); notice(result.analyticsConsent ? 'Account activity analytics accepted.' : 'Account activity analytics stopped. Queued events from earlier consent are refused.'); }))
 $('activity-load')?.addEventListener('click', () => void action(async () => { const result = await apiV2('security.activity', { limit: 20 }); list('security-activity', result.events.map(e => `${new Date(e.occurredAt).toLocaleString()} · ${e.eventName} · ${e.outcome} · ${e.source}`)); $('activity-coverage').textContent = result.coverage.status === 'qualified' ? 'Configured sources are current.' : 'Some provider sources are missing or delayed. An empty list does not establish zero attempts.' }))
-$('account-state-cancel')?.addEventListener('click', () => void action(async () => { await api('cancel-deletion'); await readCurrentSession(); notice('Account deletion cancelled. Earlier remote approvals stay withdrawn.') }))
+$('account-state-cancel')?.addEventListener('click', () => void action(cancelDeletion))
