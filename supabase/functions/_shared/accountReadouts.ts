@@ -8,6 +8,35 @@ export async function accountReadout(
   body: any,
   { principal, service, admin }: any,
 ) {
+  if (operation === "admin.notifications.ack") {
+    if (!admin || !["owner", "accounts_admin"].includes(admin.role)) {
+      throw new AccountError("administrator_required", 403);
+    }
+    if (
+      body.apiVersion !== 2 ||
+      Object.keys(body).some((key) =>
+        !["apiVersion", "action", "requestId", "notificationId", "operationId"].includes(key)
+      ) || typeof body.notificationId !== "string" || typeof body.operationId !== "string" ||
+      !uuid.test(body.notificationId) || !uuid.test(body.operationId)
+    ) throw new AccountError("invalid_fields", 400);
+    const row = await operationRpc(service, "codevalanche_acknowledge_notification", {
+      p_actor_id: principal.userId,
+      p_session_id: principal.sessionId,
+      p_mfa_verified_at: principal.mfaVerifiedAt,
+      p_notification_id: body.notificationId,
+      p_operation_id: body.operationId,
+    });
+    if (
+      row?.operation_id !== body.operationId || row.notification_id !== body.notificationId ||
+      row.state !== "completed" || row.inbox_state !== "acknowledged"
+    ) throw new AccountError("account_service_unavailable", 503);
+    return {
+      operationId: row.operation_id,
+      notificationId: row.notification_id,
+      state: row.state,
+      inboxState: row.inbox_state,
+    };
+  }
   if (operation === "admin.deletion.cancel") {
     if (
       !uuid.test(body.userId || "") || !uuid.test(body.jobId || "") ||
