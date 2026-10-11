@@ -1,0 +1,48 @@
+{
+  "productionEnabled": false,
+  "runEnabled": false,
+  "status": "Local qualification; physical platforms and independent review remain required",
+  "library": "@hpke/core 1.9.0 RFC9180 Auth P256/HKDF-SHA256/AES256GCM",
+  "sourceRepo": "users-remote-service-20261011",
+  "baseCommit": "75980589c8af7237ec307cc1dcbca2f8b42eeeb5",
+  "sourceFiles": [
+    {
+      "path": "src/channel/standardChannel.ts",
+      "sha256": "13b8560be1eeeae4305f18e93d1b6e6077f998c51f353e83e87ba0175bb4a056"
+    },
+    {
+      "path": "src/channel/deliveryClient.ts",
+      "sha256": "18d7e60724024c35a7a386d474ab127d1f484dc680adce92ac56f0d6198d5bdd"
+    },
+    {
+      "path": "src/channel/sessionDescriptor.ts",
+      "sha256": "ede233a90a58ee23ebc7344ac02dd32c250d3f82f08c0d2013b6a332b2e257ca"
+    },
+    {
+      "path": "src/channel/packet.ts",
+      "sha256": "0a80e1481e9eb7be4744d2a98794aff32c9c272d8d7f0943c0ef3f1eac5b8b6b"
+    },
+    {
+      "path": "src/contracts.ts",
+      "sha256": "e6616cf66be9c408a82dcf925db6d72ba69d608c2f92123814dfc1f7ed8776dc"
+    },
+    {
+      "path": "contracts/remote-control-v1.schema.json",
+      "sha256": "40e4d072344d94a374c467315bfcb7aa5c935a61354e087d41f72dce257b93e5"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "914f436143af461e034952ec8bff7f349e844eea02c9293c67fc4d3672282a47"
+    }
+  ],
+  "schemaValidation": "AJV maintained standalone generated at build time; no runtime code compilation",
+  "sdkSha256": "ab7e9d09f19cdc3caad882f01f8868c32bbff3ca63a2ca6fc079a60fc62a62af",
+  "exports": [
+    "createBoundQualificationChannel",
+    "ChannelDeliveryClient",
+    "validateSessionDescriptor",
+    "packetBindingBytes",
+    "grantBindingBytes",
+    "validateContract"
+  ]
+}

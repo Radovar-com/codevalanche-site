@@ -24,6 +24,7 @@ for (const page of ["index.html", "changelog.html", "privacy.html", "terms.html"
 }
 
 await build({ entryPoints: [path.join(source, "account/app.js")], outfile: path.join(destination, "account/app.js"), bundle: true, format: "esm", minify: true, target: ["es2022"], legalComments: "eof" })
+await build({ entryPoints: [path.join(source, "remote/app.js")], outfile: path.join(destination, "remote/app.js"), bundle: true, format: "esm", minify: true, target: ["es2022"], legalComments: "eof" })
 // Version the completed bundle, styles and public configuration so a new page
 // cannot reuse an older cached account implementation after deployment.
 const assets = ["/account/app.js", "/account/account.css", "/config.js"]
@@ -37,4 +38,11 @@ for (const page of ["account/index.html", "account/authorize/index.html"]) {
   for (const [asset, version] of versions) html = html.replaceAll(`"${asset}"`, `"${asset}?v=${version}"`)
   await writeFile(output, html)
 }
+const remoteOutput = path.join(destination, "remote/index.html")
+let remoteHtml = await readFile(remoteOutput, "utf8")
+for (const asset of ["/remote/app.js", "/remote/remote.css", "/remote/config.js"]) {
+  const hash = createHash("sha256").update(await readFile(path.join(destination, asset))).digest("hex").slice(0, 16)
+  remoteHtml = remoteHtml.replaceAll(`"${asset}"`, `"${asset}?v=${hash}"`)
+}
+await writeFile(remoteOutput, remoteHtml)
 console.log(`Built static site to ${destination}`)

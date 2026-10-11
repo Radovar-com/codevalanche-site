@@ -1,0 +1,3 @@
+# Preserve generated SDK bytes for provenance verification on Windows checkouts.
+channelSdk.js -text
+CHANNEL-SDK-PROVENANCE.json -text
