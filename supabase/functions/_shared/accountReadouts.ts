@@ -3,10 +3,11 @@ import { operationRpc } from "./operationJobs.ts";
 import { acceptAnalyticsEvent, summarizeUserActivity } from "./analytics.ts";
 import { securityCoverage } from "./securityEvent.ts";
 import { readReadoutPage } from "./readoutCursor.ts";
+import { readSourceInsights, sourceInsightsEnabled as configuredSourceInsights, validateSourceWindow } from "./sourceInsights.ts";
 export async function accountReadout(
   operation: string,
   body: any,
-  { principal, service, admin }: any,
+  { principal, service, admin, sourceInsightsEnabled = configuredSourceInsights() }: any,
 ) {
   if (operation === "admin.notifications.ack") {
     if (!admin || !["owner", "accounts_admin"].includes(admin.role)) {
@@ -87,13 +88,29 @@ export async function accountReadout(
   if (
     operation === "analytics.summary" || operation === "admin.analytics.summary"
   ) {
-    return summarizeUserActivity({
+    if (body.includeSources !== undefined && typeof body.includeSources !== "boolean") {
+      throw new AccountError("invalid_fields", 400);
+    }
+    if (body.includeSources === true) {
+      if (!admin || !["owner", "accounts_admin", "support_readonly"].includes(admin.role)) {
+        throw new AccountError("account_forbidden", 403);
+      }
+      validateSourceWindow(body);
+    }
+    const summary = await summarizeUserActivity({
       actor: admin ? { userId: principal.userId, role: admin.role } : principal,
       userId: admin ? body.userId : principal.userId,
       from: body.from,
       to: body.to,
       timeZone: body.timeZone,
     }, service);
+    if (body.includeSources !== true) return summary;
+    return {
+      ...summary,
+      sourceInsights: sourceInsightsEnabled === true
+        ? await readSourceInsights(body, service, summary)
+        : { status: "disabled" },
+    };
   }
   if (
     operation === "security.activity" || operation === "admin.security.list"

@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Account insights · Codevalanche</title><link rel="stylesheet" href="/insights/insights.css"></head>
+<body><main id="insights" aria-live="polite"></main><script type="module">
+import { mountSourceInsights } from './sourceInsights.js';
+// A configured operator host injects its existing request adapter and selection.
+// Without that explicit opt-in, this page performs no requests.
+const settings = window.CODEVALANCHE_SOURCE_INSIGHTS || {};
+await mountSourceInsights({host:document.getElementById('insights'),...settings});
+</script></body></html>
