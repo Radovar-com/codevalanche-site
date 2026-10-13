@@ -1,0 +1,35 @@
+/* Account data is dense; align the directory and recorded policy as two reading columns. */
+.ca-admin { --ca-bg:#121315; --ca-surface:#191a1d; --ca-border:#414449; --ca-text:#eeefea; --ca-muted:#a5a8ac; --ca-accent:#b4d3c9; background:var(--ca-bg); color:var(--ca-text); font:14px/1.55 "Geist","Segoe UI",sans-serif; padding:28px; max-width:1180px; margin:auto; }
+.ca-admin, .ca-admin * { box-sizing:border-box; }
+.ca-admin h1 { margin:0 0 8px; font-size:28px; font-weight:550; letter-spacing:-.5px; }
+.ca-admin h2 { margin:0 0 12px; font-size:21px; font-weight:550; }
+.ca-admin h3 { margin:22px 0 8px; font-size:16px; font-weight:600; }
+.ca-admin p { margin:8px 0 16px; max-width:75ch; }
+.ca-admin .ca-intro, .ca-admin .ca-secondary { color:var(--ca-muted); }
+.ca-admin .ca-secondary { font-size:12px; overflow-wrap:anywhere; }
+.ca-admin .ca-tools { display:flex; gap:16px; justify-content:space-between; align-items:center; padding:16px 0; border-bottom:1px solid var(--ca-border); }
+.ca-admin .ca-layout { display:grid; grid-template-columns:minmax(220px, .75fr) minmax(0, 1.7fr); gap:32px; margin-top:24px; }
+.ca-admin .ca-directory, .ca-admin .ca-detail { min-width:0; }
+.ca-admin label { display:grid; gap:5px; margin-bottom:12px; font-size:12px; }
+.ca-admin input, .ca-admin select, .ca-admin button { font:inherit; color:inherit; background:var(--ca-surface); border:1px solid var(--ca-border); border-radius:6px; min-height:40px; padding:8px 12px; max-width:100%; }
+.ca-admin input, .ca-admin select { width:100%; }
+.ca-admin input[type=checkbox] { width:18px; height:18px; min-height:18px; accent-color:var(--ca-accent); }
+.ca-admin button { cursor:pointer; text-align:start; }
+.ca-admin button:hover:not(:disabled) { border-color:var(--ca-accent); }
+.ca-admin button:disabled { opacity:.5; cursor:default; }
+.ca-admin :focus-visible { outline:2px solid var(--ca-accent); outline-offset:3px; }
+.ca-admin .ca-users { list-style:none; margin:20px 0; padding:0; }
+.ca-admin .ca-users li { padding:12px 0; border-bottom:1px solid var(--ca-border); }
+.ca-admin .ca-users button { display:block; width:100%; border:0; padding:6px 0; background:none; }
+.ca-admin .ca-users button[aria-pressed=true] { color:var(--ca-accent); font-weight:600; }
+.ca-admin .ca-users span { display:block; }
+.ca-admin .ca-id { overflow-wrap:anywhere; font-family:Consolas,monospace; font-size:12px; color:var(--ca-muted); }
+.ca-admin .ca-facts { margin:20px 0; }
+.ca-admin .ca-facts div { display:flex; justify-content:space-between; gap:18px; padding:8px 0; border-bottom:1px solid var(--ca-border); }
+.ca-admin dt { color:var(--ca-muted); }
+.ca-admin dd { margin:0; overflow-wrap:anywhere; text-align:end; }
+.ca-admin .ca-command { margin-top:16px; max-width:520px; }
+.ca-admin .ca-status { margin:20px 0; padding:16px; border-inline-start:3px solid #d8c49c; background:var(--ca-surface); overflow-wrap:anywhere; }
+.ca-admin .ca-status h3 { margin-top:0; }
+.ca-admin pre { font:12px/1.6 Consolas,monospace; white-space:pre-wrap; overflow-wrap:anywhere; }
+@media(max-width:650px) { .ca-admin { padding:20px; } .ca-admin .ca-layout { grid-template-columns:minmax(0,1fr); gap:24px; } .ca-admin .ca-tools { align-items:flex-start; flex-direction:column; } .ca-admin .ca-directory { padding-bottom:12px; border-bottom:1px solid var(--ca-border); } }
