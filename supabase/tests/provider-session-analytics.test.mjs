@@ -20,7 +20,7 @@ test('prospective trusted password sessions deduplicate, exclude recovery and ke
   await db.query('insert into auth.sessions(id,user_id,created_at) values($1,$2,clock_timestamp()-$3::interval)',[id,user,age]);
   await db.query('insert into auth.mfa_amr_claims(session_id,authentication_method) values($1,$2)',[id,method]);await db.exec('commit');
  };
- await insert(sid);await insert(crypto.randomUUID(),'recovery');await insert(crypto.randomUUID(),'oauth');await insert(crypto.randomUUID(),'password','1 day');await insert(crypto.randomUUID(),'password','0 seconds',false);
+ await insert(sid);await insert(crypto.randomUUID(),'recovery');await insert(crypto.randomUUID(),'oauth_provider');await insert(crypto.randomUUID(),'password','1 day');await insert(crypto.randomUUID(),'password','0 seconds',false);
  assert.equal((await db.query('select count(*)::int n from wa_provider_session_receipts')).rows[0].n,1);
  // Duplicate provider notification and refresh/MFA updates cannot mint another login.
  await db.exec('begin;set local role supabase_auth_admin');await db.query("insert into auth.mfa_amr_claims(session_id,authentication_method) values($1,'password'),($1,'totp')",[sid]);await db.query('update auth.sessions set updated_at=clock_timestamp() where id=$1',[sid]);await db.exec('commit');
