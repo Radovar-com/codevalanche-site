@@ -28,6 +28,7 @@ async function fixture(mode='hosted') {
    }
    await db.exec(await readFile(new URL(file,root),'utf8'));
   }
+  await db.exec(await readFile(new URL('202610150006_auth_correlation_trigger_qualification.sql',root),'utf8'));
   return db;
  }catch(error){await db.exec('rollback');await db.close();throw error;}
 }
@@ -49,6 +50,10 @@ test('owner installation preserves ALWAYS triggers and explicit qualification ga
   assert.deepEqual((await db.query("select tgenabled from pg_trigger where tgrelid='auth.users'::regclass and tgname like 'codevalanche_auth_operation_%' order by tgname")).rows.map(r=>r.tgenabled),['A','A']);
   assert.equal(await qualified(db),false);
   await db.exec('update public.codevalanche_auth_correlation_config set qualified=true');
+  assert.equal(await qualified(db),true);
+  await db.exec('create or replace trigger codevalanche_auth_operation_guard before update of email on auth.users for each row execute function public.codevalanche_auth_operation_guard();alter table auth.users enable always trigger codevalanche_auth_operation_guard;');
+  assert.equal(await qualified(db),false,'column-specific ALWAYS trigger must not qualify');
+  await db.exec('create or replace trigger codevalanche_auth_operation_guard before update on auth.users for each row execute function public.codevalanche_auth_operation_guard();alter table auth.users enable always trigger codevalanche_auth_operation_guard;');
   assert.equal(await qualified(db),true);
  }finally{await db.close();}
 });
@@ -73,6 +78,7 @@ test('hosted qualification rejects dangerous role privileges, defaults, trigger 
    ["alter role authenticator rename to hidden_authenticator","alter role hidden_authenticator rename to authenticator"],
    ["create or replace trigger codevalanche_auth_operation_guard before update on auth.users for each row execute function public.codevalanche_auth_operation_commit()","create or replace trigger codevalanche_auth_operation_guard before update on auth.users for each row execute function public.codevalanche_auth_operation_guard()"],
    ["create or replace trigger codevalanche_auth_operation_guard before update on auth.users for each row when (false) execute function public.codevalanche_auth_operation_guard()","create or replace trigger codevalanche_auth_operation_guard before update on auth.users for each row execute function public.codevalanche_auth_operation_guard()"],
+   ["create or replace trigger codevalanche_auth_operation_guard before update of email on auth.users for each row execute function public.codevalanche_auth_operation_guard()","create or replace trigger codevalanche_auth_operation_guard before update on auth.users for each row execute function public.codevalanche_auth_operation_guard()"],
   ];
   for(const [breakIt,restore] of cases){
    await mutateAsFixtureSuper(db,breakIt);
