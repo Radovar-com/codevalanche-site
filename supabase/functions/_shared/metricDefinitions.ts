@@ -23,3 +23,11 @@ export const METRIC_DEFINITIONS = Object.freeze({
  account_page_views:{label:'Account profile views',unit:'count',method:'observed_account_profile_pages'},profile_edit_starts:{label:'Profile edit starts',unit:'count',method:'observed_profile_edit_actions'},profile_save_submissions:{label:'Profile save submissions',unit:'count',method:'observed_profile_submit_actions'},logout_clicks:{label:'Logout clicks',unit:'count',method:'observed_logout_actions'},account_active_ms:{label:'Account active time estimate',unit:'ms',method:'account_revision_differences',estimate:true}
 });
 export const VIEW_METRICS = Object.freeze({overview:['page_views','sessions','browser_ids','repeat_browser_ids','active_ms'],acquisition:['sessions'],pages:['page_views','active_ms'],sections:['section_exposed_views','section_cta_after_exposure_views','section_reach'],journeys:['download_click_session_rate','signup_completion_rate','retention_d7'],downloads:['download_clicks','download_redirects','provider_count_delta','transfer_served','first_observed_opens','activations'],accounts:['account_page_views','profile_edit_starts','profile_save_submissions','logout_clicks','account_active_ms'],quality:['LCP_p75','INP_p75','CLS_p75','javascript_errors'],health:['accepted_events']});
+
+/** Scope verified against C/src/index.html and R/app page/DocPage/SiteFooter
+ * markup. Add page-section applicability here when instrumentation changes.
+ * A registry entry alone does not imply that section exists on every page. */
+export const PAGE_SECTION_SCOPE:Readonly<Record<string,Readonly<Record<string,readonly string[]>>>>=Object.freeze({
+ codevalanche:{home:['hero','product_principle','product','accounts','parallel','workflow','details','showcase','companion','privacy_principles','download','proof','faq','footer']},
+ radovar:{home:['intro','codevalanche','company','resources','footer'],docs:['intro','resources','footer'],security:['intro','resources','footer'],privacy:['intro','resources','footer'],terms:['intro','resources','footer'],press:['intro','resources','footer'],releases_archive:['intro','resources','footer'],changelog_archive:['intro','resources','footer'],not_found:['intro','footer']}
+});

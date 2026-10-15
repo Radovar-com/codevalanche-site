@@ -1,5 +1,11 @@
 begin;
 -- No dependency on later004/005 objects at definition time.
+-- Derived facts belong to the SAME raw row and expire with it at90d. They
+-- preserve a known contribution when its preceding raw baseline is removed;
+-- no page/session/event identity is copied into the13month aggregate archive.
+alter table public.wa_events add column active_ms_delta numeric check(active_ms_delta between 0 and 9007199254740991),add column visible_ms_delta numeric check(visible_ms_delta between 0 and 9007199254740991),add column page_view_canonical boolean;
+comment on column public.wa_events.active_ms_delta is 'Derived cumulative revision contribution cached on its90d raw row; preserve after preceding raw revision expires.';
+comment on column public.wa_events.page_view_canonical is 'Earliest retained canonical observation decision; false duplicate never becomes true merely because its earlier canonical raw row expired.';
 create table public.wa_report_state(site_id text not null check(site_id in ('radovar','codevalanche')),event_source text not null check(event_source in ('W','A')),observed_from timestamptz,watermark timestamptz,retained_from timestamptz,primary key(site_id,event_source));
 alter table public.wa_report_state enable row level security;
 revoke all on public.wa_report_state from public,anon,authenticated;
@@ -21,6 +27,40 @@ begin
  if p_now is null or not isfinite(p_now) then raise exception 'invalid_fields';end if;
  perform pg_advisory_xact_lock(hashtextextended('wa_retention_rollups',0));
  select min(retained_from) into v_floor from public.wa_report_state where event_source='W';
+ -- Materialize derived contributions BEFORE either rebuilding daily sums or
+ -- deleting raw rows. Recompute when a predecessor still exists (late/out-of-
+ -- order revisions); otherwise recover the lost prefix from the earliest
+ -- cached revision, including old copies of a replaced revision. This also
+ -- gives a newly arrived earlier revision the baseline that already expired.
+ with revisions as (
+  select distinct on(site_id,page_instance_id,(properties->>'revision')::bigint) * from public.wa_events
+  where event_source='W' and event_name='page_engagement_reported'
+  order by site_id,page_instance_id,(properties->>'revision')::bigint,event_at desc,event_id desc
+ ), preceding as (
+  select r.*,lag((properties->>'active_ms_total')::numeric) over(partition by site_id,page_instance_id order by (properties->>'revision')::bigint) previous_active,
+  lag((properties->>'visible_ms_total')::numeric) over(partition by site_id,page_instance_id order by (properties->>'revision')::bigint) previous_visible from revisions r
+ ), calculated as (
+  select p.site_id,p.event_id,
+   case when p.previous_active is not null then greatest(0,(p.properties->>'active_ms_total')::numeric-p.previous_active)
+    when p.active_ms_delta is not null then p.active_ms_delta
+    else greatest(0,(p.properties->>'active_ms_total')::numeric-coalesce(old.active_baseline,0)) end active_delta,
+   case when p.previous_visible is not null then greatest(0,(p.properties->>'visible_ms_total')::numeric-p.previous_visible)
+    when p.visible_ms_delta is not null then p.visible_ms_delta
+    else greatest(0,(p.properties->>'visible_ms_total')::numeric-coalesce(old.visible_baseline,0)) end visible_delta
+  from preceding p left join lateral (
+   select (e.properties->>'active_ms_total')::numeric-e.active_ms_delta active_baseline,(e.properties->>'visible_ms_total')::numeric-e.visible_ms_delta visible_baseline
+   from public.wa_events e where e.site_id=p.site_id and e.page_instance_id=p.page_instance_id and e.event_source='W' and e.event_name='page_engagement_reported' and e.active_ms_delta is not null
+   order by (e.properties->>'revision')::bigint,e.event_at desc,e.event_id desc limit 1
+  ) old on true
+ )
+ update public.wa_events e set active_ms_delta=c.active_delta,visible_ms_delta=c.visible_delta from calculated c where e.site_id=c.site_id and e.event_id=c.event_id;
+ with ranked as (
+  select site_id,event_id,row_number() over(partition by site_id,page_instance_id order by event_at,event_id) ordinal,
+   bool_or(page_view_canonical is true) over(partition by site_id,page_instance_id) has_live_canonical,
+   bool_and(page_view_canonical is null) over(partition by site_id,page_instance_id) never_canonicalized
+  from public.wa_events where event_source='W' and event_name='page_viewed'
+ )
+ update public.wa_events e set page_view_canonical=r.ordinal=1 and (r.has_live_canonical or r.never_canonicalized) from ranked r where e.site_id=r.site_id and e.event_id=r.event_id;
  foreach v_zone in array array['UTC','Europe/Bucharest'] loop
  -- Once a boundary day has lost raw rows, it is sealed. Never overwrite it
  -- with a smaller, incomplete set on the next job. Late data is <=24h old.
@@ -33,12 +73,11 @@ begin
  select e.*,jsonb_build_object('pageId',e.page_id,'pageVersion',e.page_version,'sectionId',coalesce(e.properties->>'section_id','unknown'),'ctaId',coalesce(e.properties->>'cta_id','unknown'),'acquisitionSource',coalesce(s.context->>'acquisition_source','unknown'),'campaign',coalesce(s.context->>'campaign','unknown'),'deviceClass',coalesce(e.context->>'device_class','unknown'),'osFamily',coalesce(e.context->>'os_family','unknown'),'browserFamily',coalesce(e.context->>'browser_family','unknown'),'platform',coalesce(e.properties->>'platform','unknown'),'releaseId',coalesce(e.properties->>'release_id','unknown'),'trafficClass',e.traffic_class) dims
  from public.wa_events e left join starts s using(site_id,session_id) where e.event_source='W'
  ), pageviews as (
- select distinct on(site_id,page_instance_id) * from source where event_name='page_viewed' order by site_id,page_instance_id,event_at,event_id
+ select distinct on(site_id,page_instance_id) * from source where event_name='page_viewed' and page_view_canonical is true order by site_id,page_instance_id,event_at,event_id
  ), revisions as (
  select distinct on(site_id,page_instance_id,(properties->>'revision')::bigint) * from source where event_name='page_engagement_reported' order by site_id,page_instance_id,(properties->>'revision')::bigint,event_at desc,event_id desc
  ), deltas as (
- select *,greatest(0,(properties->>'active_ms_total')::numeric-coalesce(lag((properties->>'active_ms_total')::numeric) over(partition by site_id,page_instance_id order by (properties->>'revision')::bigint),0)) active_delta,
- greatest(0,(properties->>'visible_ms_total')::numeric-coalesce(lag((properties->>'visible_ms_total')::numeric) over(partition by site_id,page_instance_id order by (properties->>'revision')::bigint),0)) visible_delta from revisions
+ select *,active_ms_delta active_delta,visible_ms_delta visible_delta from revisions
  ), observations as (
  select site_id,event_at,received_at,dims,'page_views' metric,1::numeric val,'exact' exactness from pageviews
  union all select site_id,event_at,received_at,dims,'active_ms',active_delta,'estimate' from deltas
