@@ -13706,6 +13706,7 @@
                 "enum": [
                   "auth_users",
                   "provider_audit",
+                  "provider_session_metadata",
                   "password_hook",
                   "account_operation",
                   "lifecycle_job",

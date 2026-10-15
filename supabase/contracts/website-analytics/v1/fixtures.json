@@ -939,6 +939,77 @@
           "Synthetic contract fixture; not production data."
         ]
       }
+    },
+    {
+      "name": "independent provider session metadata coverage",
+      "schema": "AccountOutcomeReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "operational_accounts",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "operational_accounts",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "concept",
+            "rows": [
+              {
+                "concept": "login_succeeded",
+                "count": null,
+                "attributedCount": null,
+                "unattributedCount": null,
+                "coverage": "unmeasured",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "accounts",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "providerCoverage": [
+            {
+              "concept": "login_succeeded",
+              "source": "provider_session_metadata",
+              "status": "partial",
+              "watermark": "2026-10-15T00:00:00.000Z"
+            }
+          ]
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
     }
   ],
   "invalid": [

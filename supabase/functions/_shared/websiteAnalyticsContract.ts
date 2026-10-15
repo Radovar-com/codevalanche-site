@@ -28,7 +28,7 @@ export type Source = 'browser'|'account_v2'|'provider_audit'|'release_provider'|
 export type CoverageStatus = 'measured'|'partial'|'unknown'|'not_configured'|'unavailable';
 export type SourceCoverage = {source:Source;status:CoverageStatus;watermark:string|null;observedFrom:string|null;observedTo:string|null};
 export type AccountConcept = 'account_created'|'email_verified'|'login_succeeded'|'login_failed'|'password_valid'|'password_invalid'|'token_refreshed'|'session_revoked'|'logout_completed'|'profile_update_succeeded'|'profile_update_failed'|'password_reset_completed'|'password_changed'|'mfa_completed'|'app_admitted'|'account_deletion_requested'|'account_deletion_completed';
-export type ProviderCoverage = {concept:AccountConcept;status:'measured'|'partial'|'unmeasured'|'not_configured';source:'auth_users'|'provider_audit'|'password_hook'|'account_operation'|'lifecycle_job'|'unavailable';watermark:string|null};
+export type ProviderCoverage = {concept:AccountConcept;status:'measured'|'partial'|'unmeasured'|'not_configured';source:'auth_users'|'provider_audit'|'provider_session_metadata'|'password_hook'|'account_operation'|'lifecycle_job'|'unavailable';watermark:string|null};
 type QualityBase = {sources:SourceCoverage[];botFiltering:'known_bots_only'|'not_configured';rawWindowStart:string|null;rollupWindowStart:string|null};
 export type SourceQualityByView = {
  overview:QualityBase & {view:'overview';identity:'consented_browser_ids_only'};

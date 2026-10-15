@@ -72,7 +72,7 @@ const qualityExtras={
   sections:{exposure:en('continuous_1000ms_min_half_section_or_viewport')},
   journeys:{ordering:en('same_session','attributed_7_day','unmeasured')},
   downloads:{releaseCounterSemantics:en('provider_count_only','not_configured'),transferServed:en('measured','not_configured'),guestActivation:en('unmeasured')},
-  accounts:{providerCoverage:arr(obj({concept:en('account_created','email_verified','login_succeeded','login_failed','password_valid','password_invalid','token_refreshed','session_revoked','logout_completed','profile_update_succeeded','profile_update_failed','password_reset_completed','password_changed','mfa_completed','app_admitted','account_deletion_requested','account_deletion_completed'),status:en('measured','partial','unmeasured','not_configured'),source:en('auth_users','provider_audit','password_hook','account_operation','lifecycle_job','unavailable'),watermark:nullable(iso)}))},
+  accounts:{providerCoverage:arr(obj({concept:en('account_created','email_verified','login_succeeded','login_failed','password_valid','password_invalid','token_refreshed','session_revoked','logout_completed','profile_update_succeeded','profile_update_failed','password_reset_completed','password_changed','mfa_completed','app_admitted','account_deletion_requested','account_deletion_completed'),status:en('measured','partial','unmeasured','not_configured'),source:en('auth_users','provider_audit','provider_session_metadata','password_hook','account_operation','lifecycle_job','unavailable'),watermark:nullable(iso)}))},
   quality:{vitals:en('latest_revision_per_metric','not_configured')},
   health:{rawRetentionDays:{const:90},rollupRetentionMonths:{const:13}},
 };
@@ -163,4 +163,5 @@ valid.push({name:'accounts activity query',schema:'ReportQuery',value:{...dtoFix
 invalid.push({name:'invalid account selector',schema:'ReportQuery',value:{...dtoFixtures.ReportQuery,accountMode:'all'}});
 const activityReport=structuredClone(dtoFixtures.AccountOutcomeReport);activityReport.population='consented_account_activity';activityReport.metrics[0].population='consented_account_activity';activityReport.breakdowns[0].rows[0].concept='account_page_viewed';activityReport.sourceQuality.providerCoverage=[];
 valid.push({name:'private account activity report',schema:'AccountOutcomeReport',value:activityReport});
+const sessionReport=structuredClone(dtoFixtures.AccountOutcomeReport);sessionReport.sourceQuality.providerCoverage=[{concept:'login_succeeded',source:'provider_session_metadata',status:'partial',watermark:at}];valid.push({name:'independent provider session metadata coverage',schema:'AccountOutcomeReport',value:sessionReport});
 await writeFile(new URL('fixtures.json',import.meta.url),JSON.stringify({schemaVersion:1,valid,invalid},null,2)+'\n');
