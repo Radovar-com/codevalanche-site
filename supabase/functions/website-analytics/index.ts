@@ -3,7 +3,7 @@ import {issueConsentReceipt,revokeConsentReceipt} from '../_shared/websiteAnalyt
 import {AnalyticsError,analyticsRpc,ingestWebsiteBatch,siteForOrigin} from '../_shared/websiteAnalyticsIngestion.ts';
 import {authorizeWebsiteReport} from '../_shared/websiteAnalyticsAuthorization.ts';
 import {confirmWebsiteAccount} from '../_shared/websiteAccountContext.ts';
-import {readAccountOutcomeReport} from '../_shared/accountOutcomeReports.ts';
+import {readWebsiteReport} from '../_shared/websiteAnalyticsReports.ts';
 import {validateReportQuery,validateContractDto} from '../_shared/websiteAnalyticsContract.ts';
 import type {BuildRegistry,ReportView} from '../_shared/websiteAnalyticsContract.ts';
 
@@ -37,8 +37,7 @@ export function createWebsiteAnalyticsHandler(options:Options){
     let query;try{if([...url.searchParams.keys()].some(k=>k!=='query')||url.searchParams.getAll('query').length!==1)throw 0;query=JSON.parse(url.searchParams.get('query')??'');}catch{throw new AnalyticsError('unsupported_query');}
     const view=report[1] as ReportView,result=validateReportQuery(query,view,options.registry);
     if(!result.accepted)throw new AnalyticsError('unsupported_query');
-    if(!options.readReport&&view!=='accounts')throw new AnalyticsError('source_unavailable');
-    const data=options.readReport?await options.readReport(actor,result.query,view):await readAccountOutcomeReport(actor,result.query,options.service);
+    const data=options.readReport?await options.readReport(actor,result.query,view):await readWebsiteReport(actor,result.query,view,options.service);
     if(!validateContractDto('WebsiteReport',data)||(data as any)?.sourceQuality?.view!==view)throw new AnalyticsError('source_unavailable');
     return respond(data);
    }

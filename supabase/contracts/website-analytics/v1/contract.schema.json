@@ -6736,6 +6736,13 @@
     "ReportQuery": {
       "type": "object",
       "properties": {
+        "accountMode": {
+          "type": "string",
+          "enum": [
+            "outcomes",
+            "activity"
+          ]
+        },
         "siteId": {
           "type": "string",
           "enum": [
@@ -13358,7 +13365,12 @@
                 "mfa_completed",
                 "app_admitted",
                 "account_deletion_requested",
-                "account_deletion_completed"
+                "account_deletion_completed",
+                "account_page_viewed",
+                "profile_edit_started",
+                "profile_save_submitted",
+                "logout_clicked",
+                "page_engagement_reported"
               ]
             },
             "count": {
@@ -13446,7 +13458,12 @@
                 "mfa_completed",
                 "app_admitted",
                 "account_deletion_requested",
-                "account_deletion_completed"
+                "account_deletion_completed",
+                "account_page_viewed",
+                "profile_edit_started",
+                "profile_save_submitted",
+                "logout_clicked",
+                "page_engagement_reported"
               ]
             },
             "count": {

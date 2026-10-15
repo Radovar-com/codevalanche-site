@@ -20,7 +20,7 @@ export type ValidationResult = {accepted:true;event:ValidatedWebsiteEvent}|{acce
 export type BatchValidationResult = {accepted:true;results:ValidationResult[]}|{accepted:false;reason:ErrorCode};
 export type ReportFilter = 'pageId'|'sectionId'|'ctaId'|'acquisitionSource'|'campaign'|'deviceClass'|'osFamily'|'browserFamily'|'country'|'platform'|'releaseId'|'appVersion'|'channel'|'trafficClass';
 export type ReportFilters = Partial<Record<ReportFilter,string[]>>;
-export type ReportQuery = {siteId:SiteId|'all';from:string;to:string;timeZone:string;granularity:'day'|'week';filters:ReportFilters;comparison?:{from:string;to:string}|null;limit?:number;cursor?:string|null;groupBy?:ReportFilter[]};
+export type ReportQuery = {accountMode?:'outcomes'|'activity';siteId:SiteId|'all';from:string;to:string;timeZone:string;granularity:'day'|'week';filters:ReportFilters;comparison?:{from:string;to:string}|null;limit?:number;cursor?:string|null;groupBy?:ReportFilter[]};
 export type Population = 'consented_website_observations'|'operational_accounts'|'consented_account_activity';
 export type MetricValue = {id:string;value:number|null;unit:'count'|'ratio'|'ms'|'score';population:Population;numerator:number|null;denominator:number|null;status:'measured'|'partial'|'unmeasured'|'unsupported_window';exactness:'exact'|'estimate'|'not_applicable'};
 export type ReportStatus = 'ready'|'partial'|'insufficient_data'|'not_configured'|'unavailable';
@@ -53,7 +53,7 @@ type RowFieldsByView = {
  sections:{pageId:string;pageVersion:string;sectionId:string;eligibleViews:number;exposedViews:number;reach:number|null;activeMs:number|null;ctaAfterExposureViews:number};
  journeys:{journeyId:string;stepId:string;stepOrder:number;eligibleSessions:number;window:'same_session'|'7_day';attribution:'same_session'|'server_correlated'|'unattributed'|'unmeasured'} & JourneyOutcome;
  downloads:{platform:Platform;architecture:'x64'|'arm64'|'x86'|'universal'|'unknown';releaseId:string;artifactId:string;clicks:number|null;redirects:number|null;providerCountDelta:number|null;transferServed:number|null;firstObservedOpens:number|null;activations:number|null;counterStatus:'measured'|'baseline'|'reset'|'asset_removed'|'not_configured'};
- accounts:{concept:AccountConcept} & AccountOutcomeCounts;
+ accounts:{concept:AccountConcept|'account_page_viewed'|'profile_edit_started'|'profile_save_submitted'|'logout_clicked'|'page_engagement_reported'} & AccountOutcomeCounts;
  quality:{pageId:string;buildSha:string;metric:'LCP'|'INP'|'CLS'|'javascript_error'|'resource_load_failed'|'interaction_failed';value:number|null;unit:'ms'|'score'|'count';sampleSize:number;statistic:'p75'|'count';normalizedCode:string|null};
  health:{source:Source;status:CoverageStatus;lastEventAt:string|null;watermark:string|null;lagMs:number|null;accepted:number;rejectedSchema:number;rejectedConsent:number;duplicate:number;rateLimited:number;botSuspected:number;queueExpired:number;lateArrival:number;clockAdjusted:number};
 };
@@ -170,6 +170,9 @@ export function validateContractDto(name:string,value:unknown):boolean {
      if(row.conversion!==null&&(row.reachedSessions===null||row.eligibleSessions<=0||Math.abs(row.conversion-row.reachedSessions/row.eligibleSessions)>1e-9))return false;
     }
     if(v.sourceQuality.view==='accounts') {
+     const activityConcepts=new Set(['account_page_viewed','profile_edit_started','profile_save_submitted','logout_clicked','page_engagement_reported']);
+     if(activityConcepts.has(row.concept)!==(v.population==='consented_account_activity'))return false;
+     if(v.population==='consented_account_activity'&&v.sourceQuality.providerCoverage.length)return false;
      if(['unmeasured','not_configured'].includes(row.coverage)&&(row.count!==null||row.attributedCount!==null||row.unattributedCount!==null))return false;
      if(row.attributedCount!==null&&row.unattributedCount!==null&&(row.count===null||row.count!==row.attributedCount+row.unattributedCount))return false;
      if(row.count!==null&&((row.attributedCount!==null&&row.attributedCount>row.count)||(row.unattributedCount!==null&&row.unattributedCount>row.count)))return false;
@@ -251,6 +254,7 @@ export function validateReportQuery(input:unknown,view:ReportView,registry?:Buil
  const reject={accepted:false,reason:'unsupported_query'} as const;
  if(!own(REPORT_VIEW_FILTERS,view)||!validateContractDto('ReportQuery',input))return reject;
  const query=input as ReportQuery;
+ if(query.accountMode!==undefined&&view!=='accounts')return reject;
  if([...Object.keys(query.filters),...(query.groupBy??[])].some(k=>!REPORT_VIEW_FILTERS[view].includes(k as ReportFilter)))return reject;
  for(const [key,values] of Object.entries(query.filters))for(const value of values??[]) {
   if(unsafeText.test(value))return reject;
