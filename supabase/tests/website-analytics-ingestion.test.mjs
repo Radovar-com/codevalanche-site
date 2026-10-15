@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {AuthSessionMissingError} from '@supabase/supabase-js';
 import {createServer} from 'node:http';
 import {createSqlFixture} from './sqlHarness.mjs';
 import {validWebsiteEvent,reportQuery} from './fixtures/websiteAnalytics.mjs';
@@ -125,4 +126,19 @@ test('reports reuse authoritative Auth session, current membership and factor ev
  evidence={...evidence,verified_factor_count:0};assert.equal((await read(claims)).status,403);
  evidence={...evidence,verified_factor_count:1};f.active=false;assert.equal((await read(claims)).status,401);
  f.active=true;f.db.auth.getUser=async()=>({data:null,error:{status:401}});assert.equal((await read(claims)).status,401);
+});
+for(const [name,error,status,code] of [
+ ['SDK missing session after provider sign-out',new AuthSessionMissingError(),401,'unauthenticated'],
+ ['provider unauthorized',{status:401},401,'unauthenticated'],
+ ['provider forbidden',{status:403},401,'unauthenticated'],
+ ['unrecognized provider bad request',{status:400,name:'AuthApiError'},503,'source_unavailable'],
+ ['provider server error',{status:500,name:'AuthApiError'},503,'source_unavailable'],
+ ['missing-session name with server failure',{status:500,name:'AuthSessionMissingError'},503,'source_unavailable'],
+ ['network failure without HTTP status',new TypeError('fetch failed'),503,'source_unavailable'],
+]) test(`${name} propagates through the private website report API`,async()=>{
+ const f=fixture();f.db.auth.getUser=async()=>({data:{user:null},error});
+ const handler=createWebsiteAnalyticsHandler({service:f.db,issuer,networkSecret:'test'});
+ const claims=validClaims(),query=encodeURIComponent(JSON.stringify(reportQuery()));
+ const response=await handler(new Request(`https://api.test/functions/v1/website-analytics/v1/reports/overview?query=${query}`,{headers:{authorization:`Bearer e30.${Buffer.from(JSON.stringify(claims)).toString('base64url')}.signature`}}));
+ assert.equal(response.status,status);assert.equal((await response.json()).error.code,code);
 });

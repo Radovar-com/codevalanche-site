@@ -24,7 +24,11 @@ export async function authenticateAccountContext(
     if (error.code === "user_banned") {
       throw new AccountError("account_suspended", 403);
     }
-    if ([401, 403].includes(error.status)) {
+    // The Auth SDK reports a missing/revoked provider session as this named 400.
+    if (
+      [401, 403].includes(error.status) ||
+      (error.status === 400 && error.name === "AuthSessionMissingError")
+    ) {
       throw new AccountError("sign_in_required", 401);
     }
     throw new AccountError("account_service_unavailable", 503);

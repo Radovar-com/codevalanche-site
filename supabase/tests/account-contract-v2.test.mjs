@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {AuthSessionMissingError} from '@supabase/supabase-js';
 import {fixture,loadHandler,request,validClaims,userId,sessionId} from './handlerHarness.mjs';
 const f=fixture(),handler=await loadHandler(f.db);
 const v2=(action,fields={},claims=validClaims())=>handler(request(action,{apiVersion:2,requestId:'test-request',...fields},claims));
@@ -11,5 +12,17 @@ test('profile update rejects privilege metadata',async()=>{f.writes=[];assert.eq
 test('v1 GET retains flat desktop identity',async()=>{const r=await handler(request('get-account',{},validClaims(),'GET')),b=await r.json();assert.equal(r.status,200);assert.deepEqual([b.id,b.sub,b.email,b.email_verified,b.session_id,b.display_name],[userId,userId,'test@example.test',true,sessionId,'Test']);assert.equal(b.apiVersion,undefined)});
 test('unknown version fails without writes',async()=>{f.writes=[];assert.equal((await handler(request('update-profile',{apiVersion:3,displayName:'x'}))).status,400);assert.equal(f.writes.length,0)});
 test('provider network error is unavailable rather than revoked authentication',async()=>{const get=f.db.auth.getUser;f.db.auth.getUser=async()=>({data:{user:null},error:{status:503,name:'AuthRetryableFetchError'}});try{const r=await v2('account.overview');assert.equal(r.status,503);assert.equal((await r.json()).error.code,'account_service_unavailable')}finally{f.db.auth.getUser=get}});
+for(const [name,error,status,code] of [
+ ['SDK missing session after provider sign-out',new AuthSessionMissingError(),401,'sign_in_required'],
+ ['provider unauthorized',{status:401},401,'sign_in_required'],
+ ['provider forbidden',{status:403},401,'sign_in_required'],
+ ['unrecognized provider bad request',{status:400,name:'AuthApiError'},503,'account_service_unavailable'],
+ ['provider server error',{status:500,name:'AuthApiError'},503,'account_service_unavailable'],
+ ['missing-session name with server failure',{status:500,name:'AuthSessionMissingError'},503,'account_service_unavailable'],
+ ['network failure without HTTP status',new TypeError('fetch failed'),503,'account_service_unavailable'],
+]) test(`${name} preserves account authentication classification`,async()=>{
+ const get=f.db.auth.getUser;f.db.auth.getUser=async()=>({data:{user:null},error});
+ try{const r=await v2('account.overview');assert.equal(r.status,status);assert.equal((await r.json()).error.code,code)}finally{f.db.auth.getUser=get}
+});
 test('provider-confirmed ban is suspension rather than a sign-out loop',async()=>{const get=f.db.auth.getUser;f.db.auth.getUser=async()=>({data:{user:null},error:{status:403,code:'user_banned'}});try{const r=await v2('account.overview');assert.equal(r.status,403);assert.equal((await r.json()).error.code,'account_suspended')}finally{f.db.auth.getUser=get}});
 test('token expiration while getUser is pending is rejected after the provider await',async t=>{const base=Date.now(),get=f.db.auth.getUser;t.mock.timers.enable({apis:['Date'],now:base});const c={...validClaims(),exp:Math.floor(base/1000)+1};f.db.auth.getUser=async()=>{t.mock.timers.setTime(base+2000);return {data:{user:f.user},error:null}};try{assert.equal((await v2('account.overview',{},c)).status,401)}finally{f.db.auth.getUser=get;t.mock.timers.reset()}});
