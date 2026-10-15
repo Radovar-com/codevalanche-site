@@ -42,14 +42,18 @@ export type SourceQualityByView = {
  health:QualityBase & {view:'health';rawRetentionDays:90;rollupRetentionMonths:13};
 };
 export type Platform = 'web'|'windows'|'macos'|'linux'|'ios'|'android'|'unknown';
+export type JourneyOutcome = {reachedSessions:number;conversion:number}|{reachedSessions:number|null;conversion:null};
+// Both known attribution parts must sum to a known total. Any known part is at
+// most a known total; an unknown part stays null and is never inferred as zero.
+export type AccountOutcomeCounts = {coverage:'unmeasured'|'not_configured';count:null;attributedCount:null;unattributedCount:null}|{coverage:'measured'|'partial';count:number|null;attributedCount:number|null;unattributedCount:number|null};
 type RowFieldsByView = {
  overview:{siteId:SiteId;bucketStart:string;sessionStarts:number;pageViews:number;dailyAnonymousIds:number|null};
  acquisition:{acquisitionSource:string;acquisitionMedium:string;campaign:string;landingPageId:string;sessions:number;attribution:'campaign'|'referrer'|'unknown'};
  pages:{pageId:string;pageVersion:string;pageViews:number;eligibleViews:number;activeMs:number|null;visibleMs:number|null;maxScrollPct:number|null};
  sections:{pageId:string;pageVersion:string;sectionId:string;eligibleViews:number;exposedViews:number;reach:number|null;activeMs:number|null;ctaAfterExposureViews:number};
- journeys:{journeyId:string;stepId:string;stepOrder:number;eligibleSessions:number;reachedSessions:number|null;conversion:number|null;window:'same_session'|'7_day';attribution:'same_session'|'server_correlated'|'unattributed'|'unmeasured'};
+ journeys:{journeyId:string;stepId:string;stepOrder:number;eligibleSessions:number;window:'same_session'|'7_day';attribution:'same_session'|'server_correlated'|'unattributed'|'unmeasured'} & JourneyOutcome;
  downloads:{platform:Platform;architecture:'x64'|'arm64'|'x86'|'universal'|'unknown';releaseId:string;artifactId:string;clicks:number|null;redirects:number|null;providerCountDelta:number|null;transferServed:number|null;firstObservedOpens:number|null;activations:number|null;counterStatus:'measured'|'baseline'|'reset'|'asset_removed'|'not_configured'};
- accounts:{concept:AccountConcept;count:number|null;attributedCount:number|null;unattributedCount:number|null;coverage:'measured'|'partial'|'unmeasured'|'not_configured'};
+ accounts:{concept:AccountConcept} & AccountOutcomeCounts;
  quality:{pageId:string;buildSha:string;metric:'LCP'|'INP'|'CLS'|'javascript_error'|'resource_load_failed'|'interaction_failed';value:number|null;unit:'ms'|'score'|'count';sampleSize:number;statistic:'p75'|'count';normalizedCode:string|null};
  health:{source:Source;status:CoverageStatus;lastEventAt:string|null;watermark:string|null;lagMs:number|null;accepted:number;rejectedSchema:number;rejectedConsent:number;duplicate:number;rateLimited:number;botSuspected:number;queueExpired:number;lateArrival:number;clockAdjusted:number};
 };
@@ -161,7 +165,15 @@ export function validateContractDto(name:string,value:unknown):boolean {
    if(v.consentCoverage.status==='measured'&&(v.consentCoverage.numerator===null||v.consentCoverage.denominator===null||v.consentCoverage.denominator<=0||v.consentCoverage.numerator>v.consentCoverage.denominator))return false;
    for(const breakdown of v.breakdowns)for(const row of breakdown.rows) {
     if(v.sourceQuality.view==='sections'&&(row.exposedViews>row.eligibleViews||row.ctaAfterExposureViews>row.exposedViews||(row.reach!==null&&(row.eligibleViews===0||Math.abs(row.reach-row.exposedViews/row.eligibleViews)>1e-9))))return false;
-    if(v.sourceQuality.view==='journeys'&&row.reachedSessions!==null&&(row.reachedSessions>row.eligibleSessions||(row.conversion!==null&&(row.eligibleSessions===0||Math.abs(row.conversion-row.reachedSessions/row.eligibleSessions)>1e-9))))return false;
+    if(v.sourceQuality.view==='journeys') {
+     if(row.reachedSessions!==null&&row.reachedSessions>row.eligibleSessions)return false;
+     if(row.conversion!==null&&(row.reachedSessions===null||row.eligibleSessions<=0||Math.abs(row.conversion-row.reachedSessions/row.eligibleSessions)>1e-9))return false;
+    }
+    if(v.sourceQuality.view==='accounts') {
+     if(['unmeasured','not_configured'].includes(row.coverage)&&(row.count!==null||row.attributedCount!==null||row.unattributedCount!==null))return false;
+     if(row.attributedCount!==null&&row.unattributedCount!==null&&(row.count===null||row.count!==row.attributedCount+row.unattributedCount))return false;
+     if(row.count!==null&&((row.attributedCount!==null&&row.attributedCount>row.count)||(row.unattributedCount!==null&&row.unattributedCount>row.count)))return false;
+    }
    }
   }
   return true;

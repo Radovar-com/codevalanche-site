@@ -2189,6 +2189,586 @@
       }
     },
     {
+      "name": "journey conversion without numerator and denominator",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "journeyId": "download",
+                "stepId": "clicked",
+                "stepOrder": 1,
+                "eligibleSessions": 0,
+                "reachedSessions": null,
+                "conversion": 0.5,
+                "window": "same_session",
+                "attribution": "unmeasured",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "journeys",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "ordering": "unmeasured"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "journey conversion without numerator despite positive denominator",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "journeyId": "download",
+                "stepId": "clicked",
+                "stepOrder": 1,
+                "eligibleSessions": 2,
+                "reachedSessions": null,
+                "conversion": 0.5,
+                "window": "same_session",
+                "attribution": "same_session",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "journeys",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "ordering": "unmeasured"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "journey conversion does not match measured fraction",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "journeyId": "download",
+                "stepId": "clicked",
+                "stepOrder": 1,
+                "eligibleSessions": 2,
+                "reachedSessions": 1,
+                "conversion": 0.75,
+                "window": "same_session",
+                "attribution": "same_session",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "journeys",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "ordering": "unmeasured"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "unmeasured account counts cannot be numeric",
+      "schema": "AccountOutcomeReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "operational_accounts",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "operational_accounts",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "concept",
+            "rows": [
+              {
+                "concept": "login_succeeded",
+                "count": 12,
+                "attributedCount": 9,
+                "unattributedCount": 8,
+                "coverage": "unmeasured",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "accounts",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "providerCoverage": [
+            {
+              "concept": "login_succeeded",
+              "status": "unmeasured",
+              "source": "unavailable",
+              "watermark": null
+            }
+          ]
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "unconfigured account counts cannot be measured zero",
+      "schema": "AccountOutcomeReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "operational_accounts",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "operational_accounts",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "concept",
+            "rows": [
+              {
+                "concept": "login_succeeded",
+                "count": 0,
+                "attributedCount": null,
+                "unattributedCount": null,
+                "coverage": "not_configured",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "accounts",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "providerCoverage": [
+            {
+              "concept": "login_succeeded",
+              "status": "unmeasured",
+              "source": "unavailable",
+              "watermark": null
+            }
+          ]
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "known account attribution parts must reconcile",
+      "schema": "AccountOutcomeReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "operational_accounts",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "operational_accounts",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "concept",
+            "rows": [
+              {
+                "concept": "login_succeeded",
+                "count": 12,
+                "attributedCount": 9,
+                "unattributedCount": 8,
+                "coverage": "measured",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "accounts",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "providerCoverage": [
+            {
+              "concept": "login_succeeded",
+              "status": "unmeasured",
+              "source": "unavailable",
+              "watermark": null
+            }
+          ]
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "known account attribution parts require known total",
+      "schema": "AccountOutcomeReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "operational_accounts",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "operational_accounts",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "concept",
+            "rows": [
+              {
+                "concept": "login_succeeded",
+                "count": null,
+                "attributedCount": 9,
+                "unattributedCount": 3,
+                "coverage": "partial",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "accounts",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "providerCoverage": [
+            {
+              "concept": "login_succeeded",
+              "status": "unmeasured",
+              "source": "unavailable",
+              "watermark": null
+            }
+          ]
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "known account attribution part cannot exceed total",
+      "schema": "AccountOutcomeReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "operational_accounts",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "operational_accounts",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "concept",
+            "rows": [
+              {
+                "concept": "login_succeeded",
+                "count": 8,
+                "attributedCount": 9,
+                "unattributedCount": null,
+                "coverage": "partial",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "accounts",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "providerCoverage": [
+            {
+              "concept": "login_succeeded",
+              "status": "unmeasured",
+              "source": "unavailable",
+              "watermark": null
+            }
+          ]
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
       "name": "WebsiteEventV1 rejects extra properties",
       "schema": "WebsiteEventV1",
       "value": {

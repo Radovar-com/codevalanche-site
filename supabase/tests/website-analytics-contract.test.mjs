@@ -177,6 +177,51 @@ test('grouped report rows carry at most two view-allowed dimensions without raw 
   row.dimensions={platform:'windows'};assert.equal(validateContractDto('WebsiteReport',report),false);
 });
 
+test('journey conversion independently requires known reached sessions and a qualified denominator',async()=>{
+  const fixtures=JSON.parse(await readFile(new URL('../contracts/website-analytics/v1/fixtures.json',import.meta.url),'utf8'));
+  const original=fixtures.valid.find(f=>f.schema==='WebsiteReport'&&f.value.sourceQuality.view==='journeys').value;
+  const cases=[
+    {eligibleSessions:0,reachedSessions:null,conversion:0.5,want:false},
+    {eligibleSessions:2,reachedSessions:null,conversion:0.5,want:false},
+    {eligibleSessions:0,reachedSessions:0,conversion:0,want:false},
+    {eligibleSessions:2,reachedSessions:1,conversion:0.75,want:false},
+    {eligibleSessions:2,reachedSessions:1,conversion:0.5,want:true},
+    {eligibleSessions:2,reachedSessions:0,conversion:0,want:true},
+    {eligibleSessions:0,reachedSessions:null,conversion:null,want:true},
+  ];
+  for(const {want,...values} of cases) {
+    const report=structuredClone(original);Object.assign(report.breakdowns[0].rows[0],values);
+    assert.equal(validateContractDto('WebsiteReport',report),want,JSON.stringify(values));
+    if(values.conversion!==null&&(values.reachedSessions===null||values.eligibleSessions===0))assert.equal(validateContractDto('journeysRow',report.breakdowns[0].rows[0]),false,'canonical row schema also rejects an unqualified rate');
+  }
+});
+
+test('account coverage preserves unknown counts and known attribution parts reconcile with the total',async()=>{
+  const fixtures=JSON.parse(await readFile(new URL('../contracts/website-analytics/v1/fixtures.json',import.meta.url),'utf8'));
+  const original=fixtures.valid.find(f=>f.schema==='AccountOutcomeReport').value;
+  const cases=[
+    {coverage:'unmeasured',count:12,attributedCount:9,unattributedCount:8,want:false},
+    {coverage:'not_configured',count:0,attributedCount:null,unattributedCount:null,want:false},
+    {coverage:'unmeasured',count:null,attributedCount:0,unattributedCount:null,want:false},
+    {coverage:'not_configured',count:null,attributedCount:null,unattributedCount:0,want:false},
+    {coverage:'unmeasured',count:null,attributedCount:null,unattributedCount:null,want:true},
+    {coverage:'not_configured',count:null,attributedCount:null,unattributedCount:null,want:true},
+    {coverage:'measured',count:12,attributedCount:9,unattributedCount:8,want:false},
+    {coverage:'measured',count:12,attributedCount:9,unattributedCount:3,want:true},
+    {coverage:'measured',count:0,attributedCount:0,unattributedCount:0,want:true},
+    {coverage:'partial',count:null,attributedCount:9,unattributedCount:3,want:false},
+    {coverage:'partial',count:8,attributedCount:9,unattributedCount:null,want:false},
+    {coverage:'partial',count:8,attributedCount:null,unattributedCount:9,want:false},
+    {coverage:'partial',count:12,attributedCount:9,unattributedCount:null,want:true},
+    {coverage:'partial',count:null,attributedCount:9,unattributedCount:null,want:true},
+  ];
+  for(const {want,...values} of cases) {
+    const report=structuredClone(original);Object.assign(report.breakdowns[0].rows[0],values);
+    for(const schema of ['WebsiteReport','AccountOutcomeReport'])assert.equal(validateContractDto(schema,report),want,`${schema}: ${JSON.stringify(values)}`);
+    if(['unmeasured','not_configured'].includes(values.coverage))assert.equal(validateContractDto('accountsRow',report.breakdowns[0].rows[0]),want,'canonical row schema preserves absent-source nulls');
+  }
+});
+
 test('storage enforces RLS, privacy, ranges and server-side report membership', async()=>{
   const db=await createSqlFixture();
   try {

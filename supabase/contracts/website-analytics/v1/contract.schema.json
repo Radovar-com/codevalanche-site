@@ -11502,146 +11502,270 @@
       "additionalProperties": false
     },
     "journeysRow": {
-      "type": "object",
-      "properties": {
-        "journeyId": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 64,
-          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
-        },
-        "stepId": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 64,
-          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
-        },
-        "stepOrder": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 9007199254740991
-        },
-        "eligibleSessions": {
-          "type": "integer",
-          "minimum": 0,
-          "maximum": 9007199254740991
-        },
-        "reachedSessions": {
-          "anyOf": [
-            {
+      "description": "A numeric conversion requires nonnull reachedSessions and positive eligibleSessions; runtime also verifies conversion = reachedSessions / eligibleSessions and reachedSessions <= eligibleSessions.",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "journeyId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+            },
+            "stepId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+            },
+            "stepOrder": {
               "type": "integer",
               "minimum": 0,
               "maximum": 9007199254740991
             },
-            {
+            "eligibleSessions": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "reachedSessions": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "conversion": {
               "type": "null"
+            },
+            "window": {
+              "type": "string",
+              "enum": [
+                "same_session",
+                "7_day"
+              ]
+            },
+            "attribution": {
+              "type": "string",
+              "enum": [
+                "same_session",
+                "server_correlated",
+                "unattributed",
+                "unmeasured"
+              ]
+            },
+            "dimensions": {
+              "type": "object",
+              "properties": {
+                "pageId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 64,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+                },
+                "ctaId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 64,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+                },
+                "acquisitionSource": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9 _.-]*$"
+                },
+                "campaign": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9 _.-]*$"
+                },
+                "deviceClass": {
+                  "type": "string",
+                  "enum": [
+                    "desktop",
+                    "mobile",
+                    "tablet",
+                    "unknown"
+                  ]
+                },
+                "platform": {
+                  "type": "string",
+                  "enum": [
+                    "web",
+                    "windows",
+                    "macos",
+                    "linux",
+                    "ios",
+                    "android",
+                    "unknown"
+                  ]
+                },
+                "trafficClass": {
+                  "type": "string",
+                  "enum": [
+                    "external",
+                    "internal",
+                    "test",
+                    "suspected_bot",
+                    "unknown"
+                  ]
+                }
+              },
+              "required": [],
+              "additionalProperties": false,
+              "maxProperties": 2
             }
-          ]
+          },
+          "required": [
+            "journeyId",
+            "stepId",
+            "stepOrder",
+            "eligibleSessions",
+            "reachedSessions",
+            "conversion",
+            "window",
+            "attribution",
+            "dimensions"
+          ],
+          "additionalProperties": false
         },
-        "conversion": {
-          "anyOf": [
-            {
+        {
+          "type": "object",
+          "properties": {
+            "journeyId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+            },
+            "stepId": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+            },
+            "stepOrder": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "eligibleSessions": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "reachedSessions": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 9007199254740991
+            },
+            "conversion": {
               "type": "number",
               "minimum": 0,
               "maximum": 1
             },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "window": {
-          "type": "string",
-          "enum": [
-            "same_session",
-            "7_day"
-          ]
-        },
-        "attribution": {
-          "type": "string",
-          "enum": [
-            "same_session",
-            "server_correlated",
-            "unattributed",
-            "unmeasured"
-          ]
-        },
-        "dimensions": {
-          "type": "object",
-          "properties": {
-            "pageId": {
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 64,
-              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
-            },
-            "ctaId": {
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 64,
-              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
-            },
-            "acquisitionSource": {
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 80,
-              "pattern": "^[A-Za-z0-9][A-Za-z0-9 _.-]*$"
-            },
-            "campaign": {
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 80,
-              "pattern": "^[A-Za-z0-9][A-Za-z0-9 _.-]*$"
-            },
-            "deviceClass": {
+            "window": {
               "type": "string",
               "enum": [
-                "desktop",
-                "mobile",
-                "tablet",
-                "unknown"
+                "same_session",
+                "7_day"
               ]
             },
-            "platform": {
+            "attribution": {
               "type": "string",
               "enum": [
-                "web",
-                "windows",
-                "macos",
-                "linux",
-                "ios",
-                "android",
-                "unknown"
+                "same_session",
+                "server_correlated",
+                "unattributed",
+                "unmeasured"
               ]
             },
-            "trafficClass": {
-              "type": "string",
-              "enum": [
-                "external",
-                "internal",
-                "test",
-                "suspected_bot",
-                "unknown"
-              ]
+            "dimensions": {
+              "type": "object",
+              "properties": {
+                "pageId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 64,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+                },
+                "ctaId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 64,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+                },
+                "acquisitionSource": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9 _.-]*$"
+                },
+                "campaign": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 80,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9 _.-]*$"
+                },
+                "deviceClass": {
+                  "type": "string",
+                  "enum": [
+                    "desktop",
+                    "mobile",
+                    "tablet",
+                    "unknown"
+                  ]
+                },
+                "platform": {
+                  "type": "string",
+                  "enum": [
+                    "web",
+                    "windows",
+                    "macos",
+                    "linux",
+                    "ios",
+                    "android",
+                    "unknown"
+                  ]
+                },
+                "trafficClass": {
+                  "type": "string",
+                  "enum": [
+                    "external",
+                    "internal",
+                    "test",
+                    "suspected_bot",
+                    "unknown"
+                  ]
+                }
+              },
+              "required": [],
+              "additionalProperties": false,
+              "maxProperties": 2
             }
           },
-          "required": [],
-          "additionalProperties": false,
-          "maxProperties": 2
+          "required": [
+            "journeyId",
+            "stepId",
+            "stepOrder",
+            "eligibleSessions",
+            "reachedSessions",
+            "conversion",
+            "window",
+            "attribution",
+            "dimensions"
+          ],
+          "additionalProperties": false
         }
-      },
-      "required": [
-        "journeyId",
-        "stepId",
-        "stepOrder",
-        "eligibleSessions",
-        "reachedSessions",
-        "conversion",
-        "window",
-        "attribution",
-        "dimensions"
-      ],
-      "additionalProperties": false
+      ]
     },
     "journeysSourceQuality": {
       "type": "object",
@@ -13210,121 +13334,212 @@
       "additionalProperties": false
     },
     "accountsRow": {
-      "type": "object",
-      "properties": {
-        "concept": {
-          "type": "string",
-          "enum": [
-            "account_created",
-            "email_verified",
-            "login_succeeded",
-            "login_failed",
-            "password_valid",
-            "password_invalid",
-            "token_refreshed",
-            "session_revoked",
-            "logout_completed",
-            "profile_update_succeeded",
-            "profile_update_failed",
-            "password_reset_completed",
-            "password_changed",
-            "mfa_completed",
-            "app_admitted",
-            "account_deletion_requested",
-            "account_deletion_completed"
-          ]
-        },
-        "count": {
-          "anyOf": [
-            {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 9007199254740991
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "attributedCount": {
-          "anyOf": [
-            {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 9007199254740991
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "unattributedCount": {
-          "anyOf": [
-            {
-              "type": "integer",
-              "minimum": 0,
-              "maximum": 9007199254740991
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "coverage": {
-          "type": "string",
-          "enum": [
-            "measured",
-            "partial",
-            "unmeasured",
-            "not_configured"
-          ]
-        },
-        "dimensions": {
+      "description": "Unmeasured/not_configured counts must all be null. When both attribution counts are known, count must be known and equal their sum. Any known part cannot exceed a known total. One unknown part may remain null; runtime verifies arithmetic without inventing it.",
+      "oneOf": [
+        {
           "type": "object",
           "properties": {
-            "platform": {
+            "concept": {
               "type": "string",
               "enum": [
-                "web",
-                "windows",
-                "macos",
-                "linux",
-                "ios",
-                "android",
-                "unknown"
+                "account_created",
+                "email_verified",
+                "login_succeeded",
+                "login_failed",
+                "password_valid",
+                "password_invalid",
+                "token_refreshed",
+                "session_revoked",
+                "logout_completed",
+                "profile_update_succeeded",
+                "profile_update_failed",
+                "password_reset_completed",
+                "password_changed",
+                "mfa_completed",
+                "app_admitted",
+                "account_deletion_requested",
+                "account_deletion_completed"
               ]
             },
-            "appVersion": {
-              "type": "string",
-              "minLength": 1,
-              "maxLength": 64,
-              "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+            "count": {
+              "type": "null"
             },
-            "channel": {
+            "attributedCount": {
+              "type": "null"
+            },
+            "unattributedCount": {
+              "type": "null"
+            },
+            "coverage": {
               "type": "string",
               "enum": [
-                "stable",
-                "beta",
-                "alpha",
-                "dev",
-                "unknown"
+                "unmeasured",
+                "not_configured"
               ]
+            },
+            "dimensions": {
+              "type": "object",
+              "properties": {
+                "platform": {
+                  "type": "string",
+                  "enum": [
+                    "web",
+                    "windows",
+                    "macos",
+                    "linux",
+                    "ios",
+                    "android",
+                    "unknown"
+                  ]
+                },
+                "appVersion": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 64,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+                },
+                "channel": {
+                  "type": "string",
+                  "enum": [
+                    "stable",
+                    "beta",
+                    "alpha",
+                    "dev",
+                    "unknown"
+                  ]
+                }
+              },
+              "required": [],
+              "additionalProperties": false,
+              "maxProperties": 2
             }
           },
-          "required": [],
-          "additionalProperties": false,
-          "maxProperties": 2
+          "required": [
+            "concept",
+            "count",
+            "attributedCount",
+            "unattributedCount",
+            "coverage",
+            "dimensions"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "concept": {
+              "type": "string",
+              "enum": [
+                "account_created",
+                "email_verified",
+                "login_succeeded",
+                "login_failed",
+                "password_valid",
+                "password_invalid",
+                "token_refreshed",
+                "session_revoked",
+                "logout_completed",
+                "profile_update_succeeded",
+                "profile_update_failed",
+                "password_reset_completed",
+                "password_changed",
+                "mfa_completed",
+                "app_admitted",
+                "account_deletion_requested",
+                "account_deletion_completed"
+              ]
+            },
+            "count": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "attributedCount": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "unattributedCount": {
+              "anyOf": [
+                {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "coverage": {
+              "type": "string",
+              "enum": [
+                "measured",
+                "partial"
+              ]
+            },
+            "dimensions": {
+              "type": "object",
+              "properties": {
+                "platform": {
+                  "type": "string",
+                  "enum": [
+                    "web",
+                    "windows",
+                    "macos",
+                    "linux",
+                    "ios",
+                    "android",
+                    "unknown"
+                  ]
+                },
+                "appVersion": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 64,
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]*$"
+                },
+                "channel": {
+                  "type": "string",
+                  "enum": [
+                    "stable",
+                    "beta",
+                    "alpha",
+                    "dev",
+                    "unknown"
+                  ]
+                }
+              },
+              "required": [],
+              "additionalProperties": false,
+              "maxProperties": 2
+            }
+          },
+          "required": [
+            "concept",
+            "count",
+            "attributedCount",
+            "unattributedCount",
+            "coverage",
+            "dimensions"
+          ],
+          "additionalProperties": false
         }
-      },
-      "required": [
-        "concept",
-        "count",
-        "attributedCount",
-        "unattributedCount",
-        "coverage",
-        "dimensions"
-      ],
-      "additionalProperties": false
+      ]
     },
     "accountsSourceQuality": {
       "type": "object",
