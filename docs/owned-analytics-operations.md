@@ -24,7 +24,7 @@ Raw analytics se păstrează 90 zile; numai agregatele neidentificabile suportat
 3. Inventariază procesorii și logurile: câmpuri, acces, retenție, export, redacție, regiune și backup. Providerul poate loga IP/UA/referrer, iar GitHub Pages loghează IP pentru securitate; politica raw90d nu se aplică automat acestor loguri. Retențiile efective nu sunt încă verificate. Nu loga body, header, URL brut, token, user sau obiecte de eroare ale colectorului.
 4. Pregătește configurația server pentru `website-analytics`: `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `ACCOUNT_OAUTH_CLIENT_IDS`, `WEBSITE_ANALYTICS_NETWORK_SECRET`. Ultimele două trebuie calificate pentru mediul real; cheile rămân server-side și nu se tipăresc în loguri. Verifică semantica adresei efective de conexiune: un ingress comun nu este limitare per om. Headerul declarat de client nu devine autoritate de rețea.
 5. Aplică schema aditivă și livrează împreună adaptoarele de cont read/write din 004, colectorul, `download-redirect` și citirile operatorului. Publicarea paginilor și migrarea Supabase sunt operații separate. Califică rolul, sesiunea, MFA, expirarea și retragerea operatorului pentru proxy-ul O `GET /api/website-analytics/:view`; fără JWT/service role în renderer.
-6. Stabilește jobul de mentenanță server-only. `supabase/functions/_shared/websiteAnalyticsRetention.ts` expune `runWebsiteAnalyticsRetention`; inspectează RPC-urile reale la head-ul final. Include refresh/retention W, `wa_profile_retention()` și `wa_prune_download_evidence(...)`. Niciun job nu este instalat de simpla existență a codului. Rulează drill de retention/restore numai pe baza de test; verifică reconcilierea outcome-urilor terminale, backupul și restaurarea înainte de a promite retenția.
+6. Califică și activează separat jobul de mentenanță descris mai jos. Migrarea 009 definește orchestratorul și controlul privat al programării; nu instalează extensia ori jobul. Rulează drill de retention/rollback numai pe baza de test. Un rollback de fixture nu dovedește backup/restaurare completă a bazei și a conturilor Auth.
 7. Pentru D, completează numai manifestul verificat `supabase/functions/_shared/download-manifest.json`, cu gateway HTTPS, origini exacte, release/artifact/platform/architecture și target fără credentials/query/fragment. Colectorul, gateway-ul și buildul public trebuie să folosească același manifest. Califică separat sursa counter/delivery/native; manifestul nu dovedește transfer sau instalare. Lipsa unei surse păstrează metricile ei neconfigurate.
 8. Rulează gate-urile staging din indexul de acceptanță, inclusiv două sesiuni PostgreSQL independente pentru concurența ingest/revoke și deduplicare. Un PGlite cu o conexiune ori `Promise.all` nu califică aceste blocări. Verifică Auth/email/OAuth/MFA reale pe identități sintetice, fără promovări de rol improvizate.
 9. Numai după probe și review configurează URL-urile publice aprobate și `enabled:true`, actualizează politica exact pentru versiunea lansată și livrează site-urile. Fără proiecte analytics moștenite, tracker secundar sau activare prin simpla salvare a preferinței. Înregistrează ora/commit/hash/config și sursele rămase `not_configured`.
@@ -36,6 +36,39 @@ Raw analytics se păstrează 90 zile; numai agregatele neidentificabile suportat
 Canary-ul staging post 006 a folosit GoTrue real pe conturi sintetice admin-confirmate, cu receipt/fence/rollback/suspendare/reactivare și retragerea actorului. Configurația a fost resetată false și membershipul actorului retras. Acesta califică protocolul intern izolat, nu livrare email, OAuth, MFA curent, operator/browser/API ori producție. Migrarea celor 35 și deploymentul funcțiilor în test nu activează captura site-urilor. Calificarea producției, joburile/restore, release-ul real și smoke-ul complet rămân necesare înainte de activare.
 
 ## Build și mentenanță pentru cele două site-uri
+
+### Mentenanța datelor: instalare explicită și verificare
+
+`202610150009_website_analytics_maintenance.sql` adaugă `wa_run_website_analytics_maintenance()` fără parametri de dată, identitate ori țintă. Folosește ora bazei și lanțul existent: 003 construiește agregatele W înainte de ștergerea raw și execută retenția profilurilor din 004 și D din 005; 007 adaugă receipt-urile provider-session. Helperul TypeScript existent rămâne un apel server-only cu dată controlată pentru probe; jobul nou cheamă direct orchestratorul fără parametri.
+
+Politicile sunt raw90d pentru W/sesiuni, outcomes de profil, receipt-uri provider-session și cereri D; agregate W/D, health și snapshots provider13 luni. Registrul receipt/binding are politica separată de expirare și referințe descrisă mai sus. Profilul funcțional și cheile de idempotency rămân până la ștergerea contului. Agregatele nu păstrează user/session/browser IDs și nu permit reconstrucția distinctelor pe perioade după ștergerea raw. Un job zilnic aplică pragurile la fiecare execuție reușită; între execuții poate exista întârzierea de până la o zi, iar un job eșuat trebuie remediat.
+
+Orchestratorul folosește aceeași blocare advisory ca refresh/prune, revine `skipped_busy` dacă rulează deja mentenanța și limitează așteptarea blocărilor la5 secunde. Lucrările de curățare sunt atomice: un eșec D anulează și ștergerile W anterioare din aceeași încercare. `wa_maintenance_state` este un singur rând privat cu ultima încercare finalizată, status, ultimul succes și numai SQLSTATE pentru eroare. Nu conține mesajul erorii, persoane, evenimente ori tokenuri. `last_success_at` este succesul mentenanței, **nu watermark al surselor analytics**. Cancelarea/timeout-ul întrerupe apelul și nu înscrie succes; starea poate rămâne la încercarea anterioară, deci se verifică și rezultatul schedulerului.
+
+După review, administratorul bazei instalează/califică extensia pg_cron în mediul ales și verifică `cron.timezone` UTC/GMT și ținta locală. Instalarea migrației singure nu pornește nimic. Apoi, din conexiunea administrativă a bazei corecte:
+
+```sql
+-- Operație explicită; numai după calificarea extensiei și a mediului.
+select public.wa_configure_website_analytics_maintenance(true);
+select jobid,jobname,schedule,command,database,username,nodename,nodeport,active
+from cron.job where jobname='owned-website-analytics-maintenance-v1';
+```
+
+Programarea este zilnic la02:17 UTC. Comanda locală fixează timeout-ul instrucțiunii la5 minute și așteptarea blocărilor la5 secunde, apoi cheamă orchestratorul. Nu există HTTP, API key sau secret în comandă. Configurarea repetată reutilizează un singur job, corectează ora/activarea pentru jobul verificat și refuză duplicate ori o comandă/identitate/bază/host/port diferite. Nu modifică joburi fără numele exact. `wa_configure_website_analytics_maintenance()` fără argument înseamnă dezactivare/eliminare, la fel ca apelul explicit cu `false`; nu creează job. Operațiile de programare rămân numai administratorului/ownerului funcției, fără EXECUTE pentru `service_role`, `authenticated` ori `anon`. Orchestratorul și citirea health sunt server-only pentru `service_role`, fără acces din browser.
+
+```sql
+select * from public.wa_maintenance_state;
+select d.status,d.start_time,d.end_time,d.return_message
+from cron.job_run_details d join cron.job j using(jobid)
+where j.jobname='owned-website-analytics-maintenance-v1'
+order by d.start_time desc limit 10;
+-- Oprire explicită, idempotentă; nu șterge datele analytics.
+select public.wa_configure_website_analytics_maintenance(false);
+```
+
+Un `succeeded` în pg_cron dovedește că instrucțiunea SQL s-a executat, nu că retenția a reușit: orchestratorul poate întoarce `failed` cu SQLSTATE ori `skipped_busy`. Confirmarea cere `wa_maintenance_state.status='succeeded'` și `last_success_at` în intervalul execuției observate. La timeout/cancel verifică failure-ul din cron chiar dacă starea încă arată un succes vechi. Lipsa unei execuții, succesul învechit ori o eroare nu se prezintă drept retenție calificată. Logs/backup/cron history ale providerului au propria politică; acest job nu le șterge și nu certifică retenția lor.
+
+Calificarea locală folosește SQL real pentru retenție, rollback și autorizare; adaptorul cron din test verifică numai gestionarea jobului. Activarea efectivă, execuția reală pg_cron și observarea succesului trebuie consemnate separat în dovezile staging înainte de lansare. Niciun rezultat local nu înseamnă că jobul rulează în producție.
 
 Runtime-ul este Node `24.18.1`; C declară npm `11.16.0` în `engines` și `packageManager`. Workflow-urile C `.github/workflows/deploy-pages.yml` și R `.github/workflows/deploy.yml` fixează Node `24.18.1`; păstrează pașii existenți. Nu presupune că pinul Node verifică singur versiunea npm ori că workflow-ul a rulat deja. Folosește dependențele și lockfile-urile existente.
 
