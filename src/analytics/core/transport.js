@@ -11,7 +11,7 @@ export function createQueue({manager,endpoint,host=window,now=Date.now,siteId,fe
  checkedEndpoint(endpoint);
  let locks;try{locks=host.navigator?.locks;if(typeof locks?.request!=='function')locks=null;}catch{locks=null;}
  const lockName=manager.keys.queue+':mutation',pending=new Map(),owned=new Set();
- let shared=!!locks,memory=[],disposed=false,running=null,changes=Promise.resolve(),scheduled=null,epoch=0,lastLease=null,nextAttempt=0,serverRetryUntil=0,mutationController=new AbortController();
+ let shared=!!locks,memory=[],disposed=false,running=null,changes=Promise.resolve(),scheduled=null,epoch=0,lastLease=null,nextAttempt=0,serverRetryUntil=0,lifecycleIssued=false,mutationController=new AbortController();
  const envelope=(entry,events)=>({receiptId:entry.receiptId,generation:entry.generation,collectionToken:entry.collectionToken,events});
  const read=()=>{try{const value=JSON.parse(host.localStorage.getItem(manager.keys.queue)??'[]');return Array.isArray(value)?value.slice(-100):[];}catch{shared=false;return null;}};
  const write=entries=>{try{if(entries.length)host.localStorage.setItem(manager.keys.queue,JSON.stringify(entries));else host.localStorage.removeItem(manager.keys.queue);return true;}catch{shared=false;return false;}};
@@ -66,8 +66,34 @@ export function createQueue({manager,endpoint,host=window,now=Date.now,siteId,fe
   schedule();return true; // Synchronous acceptance into bounded memory; persistence is deliberately asynchronous.
  }
  function clear(){
-  const old=lastLease;epoch++;mutationController.abort();mutationController=new AbortController();pending.clear();memory=[];owned.clear();
+  const old=lastLease;lifecycleIssued=false;epoch++;mutationController.abort();mutationController=new AbortController();pending.clear();memory=[];owned.clear();
   if(shared)void coordinate(useShared=>{const state=snapshot(useShared);const kept=state.entries.filter(entry=>old?entry.receiptId!==old.receiptId||entry.generation!==old.generation||entry.event.anonymous_id!==old.anonymousId:!!state.lease);saveSnapshot(state,kept);});
+ }
+ async function acknowledge(ack,sending,events,sentEpoch){
+  if(disposed||sentEpoch!==epoch)return false;const ids=new Set(events.map(event=>event.event_id));
+  if(!validBatchReceipt(ack)||!ack.acceptedIds.every(id=>ids.has(id))||!ack.duplicateIds.every(id=>ids.has(id))||!ack.rejected.every(result=>ids.has(result.eventId)))return false;
+  const acknowledged=new Set([...ack.acceptedIds,...ack.duplicateIds,...ack.rejected.map(result=>result.eventId)]);if(!acknowledged.size)return false;
+  return coordinate(useShared=>{if(disposed||sentEpoch!==epoch||!manager.acceptAck(ack,sending))return false;const state=snapshot(useShared);saveSnapshot(state,state.entries.filter(entry=>!acknowledged.has(entry.event.event_id)));return true;});
+ }
+ function flushLifecycle(){
+  if(disposed||lifecycleIssued||now()<serverRetryUntil)return;
+  const lease=current();if(!lease)return;
+  const staged=[...pending.values()].filter(item=>manager.acceptAck({generation:item.entry.generation},item.lease)).map(item=>item.entry);
+  const passive=new Set(['session_started','page_viewed','page_engagement_reported','page_exited','section_viewed','section_engagement_reported','scroll_depth_reached','web_vital_reported']);
+  // Read only this instance's immutable memory. Prioritize the newest explicit
+  // actions, so the click causing navigation is not stranded behind metrics.
+  const candidates=merge(memory,staged,lease).reverse().sort((a,b)=>Number(passive.has(a.event.event_name))-Number(passive.has(b.event.event_name))),first=candidates[0],events=[];
+  if(!first)return;for(const entry of candidates){if(events.length===50)break;const proposed=[...events,entry.event];if(bytes(envelope(first,proposed))>32768)break;events.push(entry.event);}
+  if(!events.length)return;const sentEpoch=epoch,sending=current();
+  if(!sending||sending.receiptId!==first.receiptId||sending.generation!==first.generation||sending.collectionToken!==first.collectionToken||sending.anonymousId!==first.event.anonymous_id)return;
+  lifecycleIssued=true;
+  // Initiate native keepalive synchronously: no persistence barrier/lock/await
+  // can stand between pagehide and fetch. Initiation never dequeues anything.
+  try{void Promise.resolve(request(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(envelope(first,events)),credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',keepalive:true,signal:sending.signal})).then(async response=>{
+   const ack=await response.json();if(disposed||sentEpoch!==epoch)return;
+   if(!response.ok){if(manager.acceptAck({generation:sending.generation},sending)){const delay=Math.min(86400000,Math.max(1000,Number.isSafeInteger(ack?.retryAfterMs)?ack.retryAfterMs:1000));nextAttempt=now()+delay;if(response.status===429)serverRetryUntil=nextAttempt;}return;}
+   await acknowledge(ack,sending,events,sentEpoch);
+  }).catch(()=>{});}catch{}
  }
  async function whenSettled(){await changes;}
  async function flush(reason='manual'){
@@ -86,16 +112,10 @@ export function createQueue({manager,endpoint,host=window,now=Date.now,siteId,fe
    let response,ack;try{response=await request(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(envelope(first,events)),credentials:'omit',cache:'no-store',referrerPolicy:'no-referrer',keepalive:reason==='hidden'||reason==='pagehide',signal:sending.signal});ack=await response.json();}catch{nextAttempt=now()+1000;return;}
    if(selected.epoch!==epoch)return;
    if(!response.ok){if(!manager.acceptAck({generation:sending.generation},sending))return;const delay=Math.min(86400000,Math.max(1000,Number.isSafeInteger(ack?.retryAfterMs)?ack.retryAfterMs:1000));nextAttempt=now()+delay;if(response.status===429)serverRetryUntil=nextAttempt;return;}
-   const ids=new Set(events.map(event=>event.event_id));
-   if(!validBatchReceipt(ack)||!ack.acceptedIds.every(id=>ids.has(id))||!ack.duplicateIds.every(id=>ids.has(id))||!ack.rejected.every(result=>ids.has(result.eventId)))return;
-   const acknowledged=new Set([...ack.acceptedIds,...ack.duplicateIds,...ack.rejected.map(result=>result.eventId)]);if(!acknowledged.size)return;
-   const changed=await coordinate(useShared=>{
-    if(disposed||selected.epoch!==epoch||!manager.acceptAck(ack,sending))return false;
-    const state=snapshot(useShared);saveSnapshot(state,state.entries.filter(entry=>!acknowledged.has(entry.event.event_id)));return true;
-   });
+   const changed=await acknowledge(ack,sending,events,selected.epoch);
    if(!changed)return;nextAttempt=0;
   }})();try{await running;}finally{running=null;}
  }
  const unsubscribe=manager.subscribe(()=>{if(!manager.getState().websiteAnalytics)clear();});
- return {enqueue,flush,clear,whenSettled,dispose(){disposed=true;epoch++;mutationController.abort();pending.clear();memory=[];owned.clear();unsubscribe();}};
+ return {enqueue,flush,flushLifecycle,resumeLifecycle(){lifecycleIssued=false;},clear,whenSettled,dispose(){disposed=true;epoch++;mutationController.abort();pending.clear();memory=[];owned.clear();unsubscribe();}};
 }
