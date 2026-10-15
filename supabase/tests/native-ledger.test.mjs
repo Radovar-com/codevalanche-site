@@ -36,6 +36,16 @@ async function fixture() {
     "insert into public.codevalanche_account_state(user_id,analytics_consent,consent_generation) values($1,true,2)",
     [uid],
   );
+  // Valid new ingest requires account metadata in addition to the manual source fixture.
+  // This does not create a physical/native execution proof or auto-qualify the producer.
+  await db.query(
+    "insert into auth.mfa_amr_claims(session_id,authentication_method) values($1,'password')",
+    [sid],
+  );
+  const project = (await db.query(
+    "select * from public.codevalanche_project_register($1,$2,1,'cws_synthetic')",
+    [uid, sid],
+  )).rows[0];
   await db.query(
     "insert into public.codevalanche_native_ledger_producers(issuer,subject,key_fingerprint,native_generation,qualified) values($1,$2,$3,4,true)",
     [configuration.issuer, configuration.subject, fingerprint],
@@ -78,7 +88,7 @@ async function fixture() {
     userId: uid,
     sessionId: sid,
     runId: "run_synthetic",
-    projectId: "cws_synthetic",
+    projectId: project.project_id,
     outcome: "success",
     occurredAt: new Date(Date.now() - 1000).toISOString(),
     consentGeneration: 2,
@@ -516,7 +526,7 @@ test("verified summary aggregates the full filtered population beyond1000 receip
   const f = await fixture();
   try {
     await f.db.query(
-      "insert into public.codevalanche_native_ledger_receipts(receipt_id,user_id,session_id,run_id,project_id,outcome,occurred_at,consent_generation,native_generation,policy_version,issuer,subject,key_fingerprint,binding) select gen_random_uuid(),$1,$2,'run_'||n,'cws_synthetic',case n%3 when 0 then 'success' when 1 then 'failed' else 'cancelled' end,'2026-10-11T09:00:00Z',2,4,1,$3,$4,$5,'{}'::jsonb from generate_series(1,1100) n",
+      "insert into public.codevalanche_native_ledger_receipts(receipt_id,user_id,session_id,run_id,project_id,outcome,occurred_at,consent_generation,native_generation,policy_version,issuer,subject,key_fingerprint,binding) select gen_random_uuid(),$1,$2,'run_'||n,$6,case n%3 when 0 then 'success' when 1 then 'failed' else 'cancelled' end,'2026-10-11T09:00:00Z',2,4,1,$3,$4,$5,'{}'::jsonb from generate_series(1,1100) n",
       [
         uid,
         sid,
@@ -525,8 +535,12 @@ test("verified summary aggregates the full filtered population beyond1000 receip
         createHash("sha256").update(
           Buffer.from(f.configuration.verificationKey.x, "base64url"),
         ).digest("hex"),
+        f.receipt().projectId,
       ],
     );
+    // Test-only provenance seed for aggregation scale; production acceptance can only mint via ingest.
+    await f.db.exec("update public.codevalanche_native_ledger_receipts r set binding=jsonb_build_object('receiptId',r.receipt_id,'userId',r.user_id,'sessionId',r.session_id,'runId',r.run_id,'projectId',r.project_id,'outcome',r.outcome,'occurredAt','2026-10-11T09:00:00.000Z','consentGeneration',r.consent_generation,'nativeGeneration',r.native_generation,'policyVersion',r.policy_version)");
+    await f.db.exec("insert into public.codevalanche_native_receipt_ownership(receipt_id,owner_user_id,project_id,binding_version,issuer,subject,key_fingerprint,receipt_binding) select receipt_id,user_id,project_id,1,issuer,subject,key_fingerprint,binding from public.codevalanche_native_ledger_receipts");
     const s = (await f.db.query(
       "select * from public.codevalanche_analytics_summary($1,'2026-10-11T08:00:00Z','2026-10-11T10:00:00Z','Europe/Bucharest')",
       [uid],

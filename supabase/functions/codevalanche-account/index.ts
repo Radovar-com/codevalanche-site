@@ -29,6 +29,7 @@ import { cancelErasure, requestErasure } from "../_shared/erasureJob.ts";
 import { accountReadout } from "../_shared/accountReadouts.ts";
 import { recordAccountRefusal } from "../_shared/securityEvent.ts";
 import { reconcileSuspensionExpiry } from "../_shared/suspensionExpiry.ts";
+import { projectBinding } from "../_shared/projectBindings.ts";
 
 const url = Deno.env.get("SUPABASE_URL")!;
 const service = createClient(url, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
@@ -367,6 +368,12 @@ Deno.serve(async (req) => {
       service,
     });
     if (readout !== null) return respond(readout);
+    const binding = await projectBinding(operation, body, {
+      principal,
+      policy,
+      service,
+    });
+    if (binding !== null) return respond(binding);
     switch (body.action) {
       case "get-account": {
         const name = user.user_metadata?.display_name ||

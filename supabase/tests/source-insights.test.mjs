@@ -107,8 +107,12 @@ test('source readout preserves existing receipt outcomes without promoting rende
   const { db, read } = await fixture();
   try {
     await db.query("insert into public.codevalanche_native_ledger_producers(issuer,subject,key_fingerprint,qualified) values('fixture','fixture',$1,true)", ['a'.repeat(64)]);
-    // Synthetic already-accepted receipts: this is a readout fixture, not producer qualification.
-    await db.query("insert into public.codevalanche_native_ledger_receipts(receipt_id,user_id,session_id,run_id,project_id,outcome,occurred_at,consent_generation,native_generation,policy_version,issuer,subject,key_fingerprint,binding) values(gen_random_uuid(),$1,$2,'run_fixture','project_fixture','failed',$3,2,1,1,'fixture','fixture',$4,'{}')", [uid, sid, window.from, 'a'.repeat(64)]);
+    // Database-owner fixture only: a raw receipt is unconfirmed until an exact
+    // immutable acceptance marker exists. This does not qualify a live producer.
+    const receipt = {receiptId:crypto.randomUUID(),userId:uid,sessionId:sid,runId:'run_fixture',projectId:'prj_'+'a'.repeat(32),outcome:'failed',occurredAt:window.from,consentGeneration:2,nativeGeneration:1,policyVersion:1};
+    await db.query("insert into public.codevalanche_native_ledger_receipts(receipt_id,user_id,session_id,run_id,project_id,outcome,occurred_at,consent_generation,native_generation,policy_version,issuer,subject,key_fingerprint,binding) values($1,$2,$3,$4,$5,$6,$7,2,1,1,'fixture','fixture',$8,$9)", [receipt.receiptId,uid,sid,receipt.runId,receipt.projectId,receipt.outcome,receipt.occurredAt,'a'.repeat(64),receipt]);
+    assert.equal((await read()).sourceInsights.activity.verifiedFailedRuns, 0, 'raw legacy receipt cannot become a verified outcome');
+    await db.query("insert into public.codevalanche_native_receipt_ownership(receipt_id,owner_user_id,project_id,binding_version,issuer,subject,key_fingerprint,receipt_binding) values($1,$2,$3,1,'fixture','fixture',$4,$5)", [receipt.receiptId,uid,receipt.projectId,'a'.repeat(64),receipt]);
     await db.query('insert into auth.users(id,created_at) values($1,$2)', [sid, window.from]);
     await db.query('insert into public.codevalanche_account_state(user_id,analytics_consent) values($1,true)', [sid]);
     await db.query("insert into public.codevalanche_security_events(source,occurred_at,user_id,event_name,outcome) values('provider_audit',$1,$2,'login_failed','failed')", [window.from, sid]);

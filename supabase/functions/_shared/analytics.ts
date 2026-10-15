@@ -63,16 +63,34 @@ export async function summarizeUserActivity(
     !["owner", "accounts_admin", "support_readonly"].includes(actor.role)
   ) throw new AccountError("account_forbidden", 403);
   if (
-    !uuid.test(userId || "") || !Number.isFinite(Date.parse(from)) ||
+    typeof userId !== "string" || !uuid.test(userId) ||
+    typeof from !== "string" || typeof to !== "string" || !Number.isFinite(Date.parse(from)) ||
     !Number.isFinite(Date.parse(to)) || Date.parse(from) >= Date.parse(to) ||
     Date.parse(to) - Date.parse(from) > 366 * 86400000 ||
     typeof timeZone !== "string" || timeZone.length > 100
   ) throw new AccountError("invalid_fields", 400);
-  const row = await operationRpc(service, "codevalanche_analytics_summary", {
+  try { new Intl.DateTimeFormat("en", { timeZone }).format(); }
+  catch { throw new AccountError("invalid_fields", 400); }
+  const row = await operationRpc(service, "codevalanche_user_activity_readout", {
     p_user_id: userId,
     p_from: from,
     p_to: to,
     p_timezone: timeZone,
   });
-  return row.summary;
+  const summary = row?.summary;
+  if (!summary || summary.userId !== userId.toLowerCase() ||
+    Date.parse(summary.from) !== Date.parse(from) || Date.parse(summary.to) !== Date.parse(to) ||
+    summary.timeZone !== timeZone || typeof summary.analyticsConsent !== "boolean" ||
+    !Array.isArray(summary.daily) || summary.daily.length > 368 ||
+    (summary.analyticsConsent !== true && summary.daily.length !== 0) ||
+    summary.daily.some((day: any, i: number) => !day || typeof day.day !== "string" ||
+      !/^\d{4}-\d\d-\d\d$/.test(day.day) ||
+      !Number.isFinite(Date.parse(day.day)) || new Date(day.day).toISOString().slice(0,10) !== day.day ||
+      (i > 0 && summary.daily[i-1].day >= day.day) ||
+      ![0,1].includes(day.activeUsers) ||
+      [day.eventCount,day.appOpened].some(v => !Number.isSafeInteger(v) || v < 0) ||
+      day.appOpened > day.eventCount ||
+      [day.completed,day.failed,day.cancelled].some(v => v !== null && (!Number.isSafeInteger(v) || v < 0))))
+    throw new AccountError("account_service_unavailable", 503);
+  return summary;
 }
