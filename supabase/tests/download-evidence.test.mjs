@@ -69,3 +69,11 @@ test('snapshot import uses durable serialized RPC and rejects unsafe input befor
  await assert.rejects(()=>importReleaseAssetSnapshot(service,snapshot(1,{artifactId:'https://private'})));
  assert.equal(calls.length,1);
 });
+
+test('provider adapter forwards unknown watermark unchanged and preserves explicit SQL freshness provenance',async()=>{
+ const calls=[],result={counterStatus:'measured',countDelta:10,duplicate:false,sourceWatermark:null,sourceWatermarkHighWater:'2026-10-15T09:00:00.000Z',sourceFreshness:'unknown'};
+ const service={rpc:async(name,args)=>{calls.push({name,args});return {data:result,error:null};}};
+ const imported=await importReleaseAssetSnapshot(service,snapshot(110,{sourceWatermark:null}));
+ assert.equal(calls[0].args.p_source_watermark,null);assert.deepEqual(imported,result);
+ assert.notEqual(imported.sourceWatermark,snapshot(110).observedAt,'observation time must not become provider freshness');
+});

@@ -19,11 +19,12 @@ test('actual collector factory accepts only its configured trusted release manif
 });
 test('SQL snapshot import is serialized, idempotent, baseline/reset/removal and monotone',async()=>{
  const db=await createSqlFixture();try{
+  const counters=result=>({counterStatus:result.counterStatus,countDelta:result.countDelta,duplicate:result.duplicate});
   const put=async(n,time='2026-10-15T10:00:00Z',removed=false,release='fixture_1')=>(await db.query('select public.wa_import_release_asset_snapshot($1,$2,$3,$4,$5,$5,$6) v',['codevalanche',release,'fixture_windows',n,time,removed])).rows[0].v;
-  assert.deepEqual(await put(100),{counterStatus:'baseline',countDelta:null,duplicate:false});
+  assert.deepEqual(counters(await put(100)),{counterStatus:'baseline',countDelta:null,duplicate:false});
   assert.equal((await put(100)).duplicate,true);
   await assert.rejects(()=>put(101));
-  assert.deepEqual(await put(106,'2026-10-15T11:00:00Z'),{counterStatus:'measured',countDelta:6,duplicate:false});
+  assert.deepEqual(counters(await put(106,'2026-10-15T11:00:00Z')),{counterStatus:'measured',countDelta:6,duplicate:false});
   await assert.rejects(()=>put(105,'2026-10-15T10:30:00Z'));
   assert.equal((await put(2,'2026-10-15T12:00:00Z')).counterStatus,'reset');
   assert.equal((await put(0,'2026-10-15T13:00:00Z',true)).counterStatus,'asset_removed');
@@ -31,6 +32,54 @@ test('SQL snapshot import is serialized, idempotent, baseline/reset/removal and 
   assert.equal((await put(200,'2026-10-15T15:00:00Z',false,'fixture_2')).counterStatus,'baseline');
   assert.equal((await db.query('select min(count_delta)::int n from wa_source_snapshots')).rows[0].n,6);
   assert.equal((await db.query('select count(*)::int n from wa_events')).rows[0].n,0);
+ }finally{await db.close();}
+});
+
+test('provider watermark high-water survives null rows, replay/conflict and valid recovery',async()=>{
+ const db=await createSqlFixture();try{
+  const put=async(n,observed,watermark)=>(await db.query('select wa_import_release_asset_snapshot($1,$2,$3,$4,$5,$6,false) v',['codevalanche','fixture_1','fixture_windows',n,observed,watermark])).rows[0].v;
+  const known='2026-10-15T10:00:00Z',unknownAt='2026-10-15T11:00:00Z';
+  await put(100,known,known);
+  const unknown=await put(110,unknownAt,null);
+  // A null observation must never erase a previously verified ordering boundary.
+  await assert.rejects(()=>put(120,'2026-10-15T12:00:00Z','2026-10-15T09:00:00Z'),/invalid_fields/);
+  assert.equal(unknown.counterStatus,'measured');assert.equal(unknown.countDelta,10);
+  assert.equal(unknown.sourceWatermark,null);assert.equal(unknown.sourceFreshness,'unknown');assert.equal(Date.parse(unknown.sourceWatermarkHighWater),Date.parse(known));
+  assert.deepEqual(await put(110,unknownAt,null),{...unknown,duplicate:true});
+  await assert.rejects(()=>put(111,unknownAt,null),/invalid_fields/);
+  await assert.rejects(()=>put(110,unknownAt,unknownAt),/invalid_fields/);
+  assert.equal((await db.query('select count(*)::int n from wa_source_snapshots')).rows[0].n,2);
+  // Equality with the last known source boundary is allowed, but observed_at is
+  // not substituted for the provider's timestamp or asserted as new freshness.
+  const equal=await put(120,'2026-10-15T12:00:00Z',known);
+  assert.equal(equal.sourceFreshness,'known');assert.equal(Date.parse(equal.sourceWatermark),Date.parse(known));
+  const recovery=await put(130,'2026-10-15T13:00:00Z','2026-10-15T12:30:00Z');
+  assert.equal(recovery.countDelta,10);assert.equal(Date.parse(recovery.sourceWatermarkHighWater),Date.parse('2026-10-15T12:30:00Z'));
+  assert.deepEqual(await put(110,unknownAt,null),{...unknown,duplicate:true},'replaying an old null row preserves its immutable original provenance');
+ }finally{await db.close();}
+});
+
+test('pruning old known provider snapshot preserves its high-water on retained unknown rows',async()=>{
+ const db=await createSqlFixture();try{
+  const put=async(n,observed,watermark)=>(await db.query('select wa_import_release_asset_snapshot($1,$2,$3,$4,$5,$6,false) v',['codevalanche','fixture_1','fixture_windows',n,observed,watermark])).rows[0].v;
+  const known='2025-08-01T10:00:00Z',unknownAt='2026-10-15T10:00:00Z';
+  await put(100,known,known);const unknown=await put(110,unknownAt,null);
+  await db.query("select wa_prune_download_evidence('2026-10-16T00:00:00Z')");
+  assert.equal((await db.query('select count(*)::int n from wa_source_snapshots')).rows[0].n,1);
+  await assert.rejects(()=>put(120,'2026-10-15T11:00:00Z','2025-08-01T09:00:00Z'),/invalid_fields/);
+  assert.deepEqual(await put(110,unknownAt,null),{...unknown,duplicate:true});
+  const retained=(await db.query('select source_watermark,source_watermark_high_water from wa_source_snapshots')).rows[0];
+  assert.equal(retained.source_watermark,null);assert.equal(Date.parse(retained.source_watermark_high_water),Date.parse(known));
+  const nextUnknown=await put(120,'2026-10-15T11:00:00Z',null);
+  assert.equal(nextUnknown.sourceFreshness,'unknown');assert.equal(Date.parse(nextUnknown.sourceWatermarkHighWater),Date.parse(known));
+  const recovery=await put(130,'2026-10-15T12:00:00Z','2026-10-15T11:30:00Z');assert.equal(recovery.countDelta,10);assert.equal(recovery.sourceFreshness,'known');
+  for(const role of ['anon','authenticated']){await db.exec(`set role ${role}`);await assert.rejects(()=>db.query('select source_watermark_high_water from wa_source_snapshots'),/permission denied/);await db.exec('reset role');}
+  // No unbounded shadow history remains after the entire artifact expires.
+  await db.query("select wa_prune_download_evidence('2028-10-16T00:00:00Z')");
+  assert.equal((await db.query('select count(*)::int n from wa_source_snapshots')).rows[0].n,0);
+  const newBaseline=await put(200,'2028-10-16T10:00:00Z',null);
+  assert.equal(newBaseline.counterStatus,'baseline');assert.equal(newBaseline.countDelta,null);assert.equal(newBaseline.sourceWatermark,null);assert.equal(newBaseline.sourceWatermarkHighWater,null);assert.equal(newBaseline.sourceFreshness,'unknown');
+  assert.deepEqual(await put(200,'2028-10-16T10:00:00Z',null),{...newBaseline,duplicate:true});
  }finally{await db.close();}
 });
 test('operational request UUID retries count once, no W IDs; RLS/grants and bounded retention',async()=>{
