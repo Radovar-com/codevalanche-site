@@ -2,7 +2,9 @@
 
 Acest playbook se aplică oamenilor și agenților care schimbă oricare site. Citește și `AGENTS.md` din fiecare repo. Backendul, SDK-ul comun, CMP-ul și rapoartele Company OS sunt reutilizabile; legăturile UI sunt explicite și trebuie păstrate sau reconectate la fiecare redesign. Istoricul nu se resetează pentru a schimba aspectul.
 
-## Înainte de schimbare
+## Hosting și backend
+
+Redesignul vizual reutilizează backendul și datele existente. Schimbarea proiectului backend sau Auth este o migrare separată de date și identitate, cu plan explicit, reconciliere, autoritate și consimțământ curente, plus validarea integrării. Nu copia consimțăminte sau ID-uri de browser și nu lega persoane între domenii pentru a rezolva domeniul ori hostingul. Păstrează originile preview existente și nu reseta datele.\n\n## Înainte de schimbare
 
 Identifică branchul/worktree-ul care conține integrarea, commitul de bază și lucrările paralele. Inventariază markerii și handlerii elementelor pe care le înlocuiești. Dacă integrarea lipsește local, consultă branchul/istoricul înainte să o recreezi. Păstrează commiturile și schimbările concurente; integrează redesignul prin merge/reconciliere și review, fără înlocuirea întregului repo cu un template. Nu copia ID-uri de browser, receipt-uri sau acorduri între domenii și nu configura preview către colectorul producției.
 
