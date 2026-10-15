@@ -133,3 +133,64 @@ test('atomic A RPC rechecks P4 after trusted pre-read; report joins only exact a
  const after=await readAccountOutcomeReport({actorId:userId},q,f.service);assert.equal(after.breakdowns[0].rows.find(r=>r.concept==='profile_update_succeeded').attributedCount,0);
  }finally{await f.db.close();}
 });
+test('committed profile with lost RPC reply reconciles durable UUID through producer and actual handler',async()=>{
+ const f=await setup();try{
+ const {persistProfileWithOutcome}=await import('../functions/_shared/profileOutcome.ts'),rpc=f.service.rpc;
+ f.service.rpc=async(name,args)=>{const result=await rpc(name,args);if(name==='codevalanche_persist_profile_outcome'&&!result.error)return {data:null,error:{message:'fixture reply lost after commit'}};return result;};
+ const rid=crypto.randomUUID(),save=()=>persistProfileWithOutcome({principal:{userId},requestId:rid,validatedChanges:{display_name:'Committed'}},f.service);
+ assert.deepEqual(await save(),{ok:true});assert.deepEqual(await save(),{ok:true});
+ const handler=await loadHandler(f.service),response=await handler(request('profile.update',{apiVersion:2,requestId:rid,displayName:'Do not replay'}));
+ assert.equal(response.status,200);assert.equal((await response.json()).data.ok,true);
+ assert.equal((await f.db.query('select display_name from codevalanche_profiles where user_id=$1',[userId])).rows[0].display_name,'Committed');
+ assert.deepEqual((await f.db.query('select event_name from wa_profile_outcomes where user_id=$1 and request_id=$2',[userId,rid])).rows,[{event_name:'profile_update_succeeded'}]);
+ }finally{await f.db.close();}
+});
+test('confirmed SQL rollback is superseded by successful UUID retry; concurrent late error cannot add false failure',async()=>{
+ const f=await setup();try{
+ const {persistProfileWithOutcome}=await import('../functions/_shared/profileOutcome.ts'),rid=crypto.randomUUID();
+ const save=()=>persistProfileWithOutcome({principal:{userId},requestId:rid,validatedChanges:{bio:'Retry saved'}},f.service);
+ await f.db.exec("create function fail_profile_once() returns trigger language plpgsql as $$ begin raise exception 'fixture rollback';end $$;create trigger fail_profile_once before update on codevalanche_profiles for each row execute function fail_profile_once()");
+ await assert.rejects(save());
+ assert.deepEqual((await f.db.query('select event_name,reason_code from wa_profile_outcomes where request_id=$1',[rid])).rows,[{event_name:'profile_update_failed',reason_code:'persistence_unavailable'}]);
+ await f.db.exec('drop trigger fail_profile_once on codevalanche_profiles');await save();
+ assert.deepEqual((await f.db.query('select event_name from wa_profile_outcomes where request_id=$1',[rid])).rows,[{event_name:'profile_update_succeeded'}]);
+ const raceId=crypto.randomUUID(),rpc=f.service.rpc;let held=false,release,entered;const ready=new Promise(r=>entered=r),gate=new Promise(r=>release=r);
+ f.service.rpc=async(name,args)=>{if(name==='codevalanche_persist_profile_outcome'&&!held){held=true;entered();await gate;return {data:null,error:{message:'fixture delayed unresolved reply'}};}return rpc(name,args);};
+ const racing=()=>persistProfileWithOutcome({principal:{userId},requestId:raceId,validatedChanges:{bio:'Concurrent saved'}},f.service);
+ const first=racing();await ready;const second=await racing();release();assert.deepEqual(await first,{ok:true});assert.deepEqual(second,{ok:true});
+ assert.deepEqual((await f.db.query('select event_name from wa_profile_outcomes where request_id=$1',[raceId])).rows,[{event_name:'profile_update_succeeded'}]);
+ }finally{await f.db.close();}
+});
+test('unresolved UUID or legacy reply loss stays unknown and never manufactures confirmed failure',async()=>{
+ const f=await setup();try{
+ const rpc=f.service.rpc;let commit=true;
+ f.service.rpc=async(name,args)=>{
+  if(name==='codevalanche_persist_profile_outcome'){if(commit)await rpc(name,args);return {data:null,error:{message:'fixture ambiguous transport failure'}};}
+  if(name==='codevalanche_profile_resolution')return {data:null,error:{message:'fixture reconciliation unavailable'}};
+  return rpc(name,args);
+ };
+ const handler=await loadHandler(f.service);
+ for(const requestId of [crypto.randomUUID(),'legacy-request']){
+  const response=await handler(request('profile.update',{apiVersion:2,requestId,displayName:'Committed despite reply loss'}));assert.equal(response.status,503);assert.equal((await response.json()).error.code,'account_service_unavailable');
+ }
+ commit=false;assert.equal((await handler(request('profile.update',{apiVersion:2,requestId:crypto.randomUUID(),bio:'Never reached database'}))).status,503);
+ assert.equal((await f.db.query("select count(*)::int n from wa_profile_outcomes where event_name='profile_update_failed'")).rows[0].n,0);
+ assert.equal((await f.db.query("select count(*)::int n from wa_profile_outcomes where event_name='profile_update_succeeded'")).rows[0].n,2);
+ }finally{await f.db.close();}
+});
+test('resolution before a late database commit remains unknown without creating a false terminal failure',async()=>{
+ const f=await setup();try{
+ const {persistProfileWithOutcome}=await import('../functions/_shared/profileOutcome.ts'),rpc=f.service.rpc,rid=crypto.randomUUID();let release,pending;
+ const gate=new Promise(r=>release=r);
+ f.service.rpc=async(name,args)=>{
+  if(name==='codevalanche_persist_profile_outcome'){pending=(async()=>{await gate;return rpc(name,args);})();return {data:null,error:{message:'fixture transport timed out before dispatch completion'}};}
+  return rpc(name,args);
+ };
+ await assert.rejects(persistProfileWithOutcome({principal:{userId},requestId:rid,validatedChanges:{display_name:'Late commit'}},f.service),/account_service_unavailable/);
+ assert.equal((await f.db.query('select count(*)::int n from wa_profile_outcomes where request_id=$1',[rid])).rows[0].n,0);
+ release();assert.equal((await pending).error,null);
+ assert.deepEqual((await f.db.query('select event_name from wa_profile_outcomes where request_id=$1',[rid])).rows,[{event_name:'profile_update_succeeded'}]);
+ assert.equal((await f.db.query('select display_name from codevalanche_profiles where user_id=$1',[userId])).rows[0].display_name,'Late commit');
+ for(const role of ['anon','authenticated']){await f.db.exec(`set role ${role}`);await assert.rejects(f.db.query('select * from codevalanche_profile_resolution($1,$2)',[userId,rid]),/permission denied/);await f.db.exec('reset role');}
+ }finally{await f.db.close();}
+});

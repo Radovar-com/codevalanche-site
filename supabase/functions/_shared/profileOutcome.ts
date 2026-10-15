@@ -11,9 +11,14 @@ export async function persistProfileWithOutcome({principal,validatedChanges,requ
   if(row?.ok!==true)throw new AccountError('account_service_unavailable',503);
   return {ok:true};
  }catch(error){
-  // A failed attempt is a separate best-effort operational record. Never claim
-  // success from this producer, and never retain request/profile/error text.
-  await operationRpc(service,'codevalanche_profile_failure',{p_user_id:principal.userId,p_request_id:correlatedId,p_code:'persistence_unavailable'}).catch(()=>undefined);
+  // An RPC error does not establish rollback: its reply may be lost AFTER
+  // commit. Only the save transaction may record a confirmed SQL failure.
+  // Reconcile durable UUID success under the same P4/profile lock order;
+  // absence/unavailability (and all uncorrelated legacy errors) stays unknown.
+  if(correlatedId){
+   const resolution=await operationRpc(service,'codevalanche_profile_resolution',{p_user_id:principal.userId,p_request_id:correlatedId}).catch(()=>null);
+   if(resolution?.committed===true)return {ok:true};
+  }
   throw error;
  }
 }

@@ -20,7 +20,9 @@ create table public.wa_profile_outcomes(
  request_id uuid,event_name text not null check(event_name in ('profile_update_succeeded','profile_update_failed')),
  occurred_at timestamptz not null default clock_timestamp(),
  consent_generation bigint,reason_code text check(reason_code in ('persistence_unavailable')),
- unique(user_id,request_id,event_name)
+ -- One terminal result per correlated operation. A later successful retry
+ -- supersedes its earlier confirmed rollback, never coexists with failure.
+ unique(user_id,request_id)
 );
 comment on table public.wa_profile_outcomes is 'Operational profile results, not optional W/A activity. No profile field values. Raw retention 90 days; Auth erasure cascades.';
 alter table public.codevalanche_profiles enable row level security;
@@ -48,17 +50,33 @@ begin
  perform 1 from public.codevalanche_profiles where user_id=p_user_id for update;
  if not found then raise exception 'account_forbidden';end if;
  if p_request_id is not null and exists(select 1 from public.codevalanche_profile_requests where user_id=p_user_id and request_id=p_request_id) then return query select true;return;end if;
- update public.codevalanche_profiles set display_name=case when p_changes?'display_name' then p_changes->>'display_name' else display_name end,bio=case when p_changes?'bio' then p_changes->>'bio' else bio end,updated_at=clock_timestamp() where user_id=p_user_id;
- insert into public.wa_profile_outcomes(user_id,request_id,event_name,consent_generation) values(p_user_id,p_request_id,'profile_update_succeeded',v_generation);
- if p_request_id is not null then insert into public.codevalanche_profile_requests values(p_user_id,p_request_id);end if;
+ begin
+  update public.codevalanche_profiles set display_name=case when p_changes?'display_name' then p_changes->>'display_name' else display_name end,bio=case when p_changes?'bio' then p_changes->>'bio' else bio end,updated_at=clock_timestamp() where user_id=p_user_id;
+  insert into public.wa_profile_outcomes(user_id,request_id,event_name,consent_generation) values(p_user_id,p_request_id,'profile_update_succeeded',v_generation)
+  on conflict(user_id,request_id) do update set event_name=excluded.event_name,occurred_at=excluded.occurred_at,consent_generation=excluded.consent_generation,reason_code=null;
+  if p_request_id is not null then insert into public.codevalanche_profile_requests values(p_user_id,p_request_id);end if;
+ exception when others then
+  -- This subtransaction has rolled back profile/outcome/key writes. The outer
+  -- P4/profile locks still serialize this result with save/retry/resolution.
+  -- If this record also fails, the entire RPC fails and the caller keeps the
+  -- result unknown. Never manufacture failure from a transport exception.
+  insert into public.wa_profile_outcomes(user_id,request_id,event_name,reason_code) values(p_user_id,p_request_id,'profile_update_failed','persistence_unavailable') on conflict(user_id,request_id) do nothing;
+  return query select false;return;
+ end;
  return query select true;
 end $$;
-create function public.codevalanche_profile_failure(p_user_id uuid,p_request_id uuid,p_code text)
-returns void language sql security definer set search_path='' as $$
- insert into public.wa_profile_outcomes(user_id,request_id,event_name,reason_code) values(p_user_id,p_request_id,'profile_update_failed',p_code) on conflict(user_id,request_id,event_name) do nothing
+create function public.codevalanche_profile_resolution(p_user_id uuid,p_request_id uuid)
+returns table(committed boolean) language plpgsql security definer set search_path='' as $$
+begin
+ -- Same order as persistence, no receipt lock. An absent key is UNKNOWN, not
+ -- proof of terminal failure: a not-yet-started/in-flight attempt can commit.
+ perform 1 from public.codevalanche_account_state where user_id=p_user_id for update;
+ perform 1 from public.codevalanche_profiles where user_id=p_user_id for update;
+ return query select p_request_id is not null and exists(select 1 from public.codevalanche_profile_requests where user_id=p_user_id and request_id=p_request_id);
+end
 $$;
-revoke all on function public.codevalanche_profile_read(uuid),public.codevalanche_persist_profile_outcome(uuid,jsonb,uuid),public.codevalanche_profile_failure(uuid,uuid,text) from public,anon,authenticated;
-grant execute on function public.codevalanche_profile_read(uuid),public.codevalanche_persist_profile_outcome(uuid,jsonb,uuid),public.codevalanche_profile_failure(uuid,uuid,text) to service_role;
+revoke all on function public.codevalanche_profile_read(uuid),public.codevalanche_persist_profile_outcome(uuid,jsonb,uuid),public.codevalanche_profile_resolution(uuid,uuid) from public,anon,authenticated;
+grant execute on function public.codevalanche_profile_read(uuid),public.codevalanche_persist_profile_outcome(uuid,jsonb,uuid),public.codevalanche_profile_resolution(uuid,uuid) to service_role;
 create or replace function public.codevalanche_admin_directory(p_search text default '',p_after uuid default null,p_limit integer default 51)
 returns table(id uuid,email text,display_name text,bio text,email_confirmed_at timestamptz,created_at timestamptz,last_sign_in_at timestamptz,status text,blocked boolean,suspended_until timestamptz,policy_version bigint,remote_enabled boolean,max_hosts integer,max_controllers integer,max_concurrent_runs integer,deletion_scheduled_for timestamptz,session_count bigint,erasure_job_id uuid)
 language sql stable security definer set search_path='' as $$
