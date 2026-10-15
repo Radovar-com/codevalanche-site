@@ -144,6 +144,132 @@ test('deletion pending exposes restricted cancellation and closes profile mutati
   assert.equal(await f.page.locator('#mfa-enroll').isEnabled(), false)
 })
 
+test('accepted self deletion immediately closes profile mutations and cancellation reloads current policy', async t => {
+  const f = await fixture(t)
+  let deleted = false, cancelled = false
+  const mutations = []
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    const { action } = route.request().postDataJSON()
+    let result, status = 200
+    if (action === 'request-deletion') {
+      mutations.push(action); deleted = true; status = 202
+      result = { ok: true, jobId: '33333333-3333-4333-8333-333333333333', state: 'queued', dueAt: '2026-11-10T00:00:00Z', deletion: { scheduledFor: '2026-11-10T00:00:00Z', status: 'pending' } }
+    } else if (action === 'cancel-deletion') {
+      mutations.push(action); cancelled = true
+      result = { ok: true, state: 'cancelled' }
+    } else if (cancelled) { status = 403; result = { error: 'Account blocked' } }
+    else result = { user: { id: USER_A.id, displayName: 'A', bio: '' }, sessions: [], policy: { status: deleted ? 'deletion_pending' : 'active' }, deletion: null }
+    await route.fulfill({ status, contentType: 'application/json', body: JSON.stringify(result) })
+  })
+  await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
+  await f.page.locator('#delete-form').evaluate(form => form.closest('details').open = true)
+  await f.page.locator('#delete-confirm').fill('DELETE'); await f.page.locator('#delete-form button').click()
+  await until(f.page, () => document.getElementById('status').textContent.length > 0 && !document.getElementById('account-state-logout').disabled)
+  assert.equal(await f.page.locator('#profile').isVisible(), false, 'accepted deletion must withdraw editable profile immediately')
+  assert.equal(await f.page.locator('#account-state-title').innerText(), 'Account deletion pending')
+  assert.equal(await f.page.locator('#profile-form button').isEnabled(), false)
+  assert.equal(await f.page.locator('#account-state-cancel').isVisible(), true)
+  assert.match(await f.page.locator('#account-state-description').innerText(), /Local projects are preserved/)
+  await f.page.locator('#account-state-cancel').click()
+  await until(f.page, () => document.getElementById('account-state-title').textContent === 'Account suspended' && !document.getElementById('account-state-logout').disabled)
+  assert.equal(await f.page.locator('#profile').isVisible(), false, 'cancellation must not lift a separate suspension')
+  assert.deepEqual(mutations, ['request-deletion', 'cancel-deletion'])
+})
+
+test('self deletion with an incomplete acceptance remains unconfirmed and offers a read-only retry', async t => {
+  const f = await fixture(t)
+  let mutationCount = 0
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    const { action } = route.request().postDataJSON()
+    if (action === 'request-deletion') mutationCount++
+    await route.fulfill({ status: action === 'request-deletion' ? 202 : 200, contentType: 'application/json', body: JSON.stringify(action === 'get-account'
+      ? { user: { id: USER_A.id, displayName: 'A', bio: '' }, sessions: [], deletion: null } : { ok: true }) })
+  })
+  await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
+  await f.page.locator('#delete-form').evaluate(form => form.closest('details').open = true)
+  await f.page.locator('#delete-confirm').fill('DELETE'); await f.page.locator('#delete-form button').click()
+  await until(f.page, () => document.getElementById('status').textContent.length > 0 && !document.getElementById('account-state-retry').disabled)
+  assert.equal(await f.page.locator('#profile').isVisible(), false, 'an unconfirmed deletion must gate further mutations')
+  assert.equal(await f.page.locator('#status').getAttribute('data-error'), 'true')
+  assert.doesNotMatch(await f.page.locator('#status').innerText(), /recorded|deleted|cancelled/i)
+  await f.page.locator('#account-state-retry').click()
+  await until(f.page, () => !document.getElementById('profile').hidden)
+  assert.equal(mutationCount, 1, 'retry reads account state and must not submit deletion again')
+})
+
+test('deletion cancellation without a cancelled state cannot claim that deletion stopped', async t => {
+  const f = await fixture(t)
+  let cancels = 0
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    const { action } = route.request().postDataJSON()
+    if (action === 'cancel-deletion') cancels++
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(action === 'get-account'
+      ? { user: { id: USER_A.id, displayName: 'A', bio: '' }, sessions: [], policy: { status: 'deletion_pending' }, deletion: { scheduledFor: '2026-11-10T00:00:00Z' } } : { ok: true }) })
+  })
+  await f.load(); await until(f.page, () => document.getElementById('account-state-title').textContent === 'Account deletion pending')
+  await f.page.locator('#account-state-cancel').click()
+  await until(f.page, () => document.getElementById('status').textContent.length > 0 && !document.getElementById('account-state-retry').disabled)
+  assert.equal(await f.page.locator('#status').getAttribute('data-error'), 'true', 'cancellation needs a confirmed cancelled state')
+  assert.doesNotMatch(await f.page.locator('#status').innerText(), /deletion cancelled/i)
+  assert.equal(await f.page.locator('#profile').isVisible(), false)
+  await f.page.locator('#account-state-retry').click()
+  await until(f.page, () => document.getElementById('account-state-title').textContent === 'Account deletion pending')
+  assert.equal(cancels, 1, 'retry must only read current deletion state')
+})
+
+test('an account read for a different UUID cannot populate the current profile', async t => {
+  const f = await fixture(t)
+  await f.page.route('https://account.fixture.invalid/functions/**', route => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ user: { id: USER_B.id, displayName: 'B', bio: 'other account' }, sessions: [], deletion: null }) }))
+  await f.load(); await until(f.page, () => !document.getElementById('account-state-retry').disabled)
+  assert.equal(await f.page.locator('#profile').isVisible(), false, 'response identity must match the current account UUID')
+  assert.equal(await f.page.locator('#account-state-title').innerText(), 'Account temporarily unavailable')
+  assert.equal(await f.page.evaluate(() => !!localStorage.getItem('sb-account-auth-token')), true)
+})
+
+test('a password reset response from the previous account cannot publish into the switched account', async t => {
+  const f = await fixture(t)
+  let release, started
+  const held = new Promise(resolve => { release = resolve })
+  const requested = new Promise(resolve => { started = resolve })
+  const resetBodies = []
+  await f.page.route('https://account.fixture.invalid/auth/v1/recover**', async route => {
+    resetBodies.push(route.request().postDataJSON()); started(); await held
+    await route.fulfill({ status: 200, contentType: 'application/json', body: '{}' })
+  })
+  await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
+  await f.page.locator('#change-password').click(); await requested
+  await f.page.evaluate(async () => { await window.__sdkClient.auth.signInWithPassword({ email: 'b@example.test', password: 'fixture-password' }) })
+  await f.page.clock.runFor(0)
+  await f.page.waitForFunction(() => document.getElementById('profile-email').textContent === 'b@example.test' && !document.getElementById('profile').hidden)
+  release()
+  await f.page.waitForFunction(() => !document.getElementById('change-password').disabled)
+  assert.equal(await f.page.locator('#profile-email').innerText(), USER_B.email)
+  assert.equal(await f.page.locator('#status').innerText(), '', 'old reset result must not claim delivery in the newer account view')
+  assert.equal(resetBodies.length, 1)
+  assert.equal(resetBodies[0].email, USER_A.email)
+})
+
+test('a late consent lookup failure cannot publish after logout', async t => {
+  const f = await fixture(t, { query: '?authorization_id=fixture-consent' })
+  let release, started
+  const held = new Promise(resolve => { release = resolve })
+  const requested = new Promise(resolve => { started = resolve })
+  await f.page.route('https://account.fixture.invalid/auth/v1/oauth/authorizations/**', async route => {
+    started(); await held
+    await route.fulfill({ status: 400, contentType: 'application/json', body: JSON.stringify({ code: 'validation_failed', msg: 'synthetic expired authorization' }) })
+  })
+  const loaded = f.load()
+  await requested
+  await f.page.evaluate(async () => { await window.__sdkClient.auth.signOut({ scope: 'local' }) })
+  await f.page.clock.runFor(0)
+  await f.page.waitForFunction(() => !document.getElementById('auth').hidden)
+  release(); await loaded
+  await f.page.evaluate(() => new Promise(resolve => queueMicrotask(resolve)))
+  assert.equal(await f.page.locator('#profile').isVisible(), false)
+  assert.equal(await f.page.locator('#consent').isVisible(), false)
+  assert.equal(await f.page.locator('#status').innerText(), '', 'an old consent error must not overwrite the signed-out view')
+})
+
 test('actual SDK stale peer snapshot cannot replace the currently stored session view', async t => {
   const f = await fixture(t); await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
   await f.page.evaluate(async () => { await window.__sdkClient.auth.signInWithPassword({ email: 'b@example.test', password: 'fixture-password' }) })

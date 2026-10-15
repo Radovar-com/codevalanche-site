@@ -8,6 +8,7 @@ export function normalizeAccountError(payload, status) {
   const supplied = typeof payload?.error === 'string' ? payload.error : payload?.error?.code || payload?.code
   let code = 'account_service_error'
   if (supplied === 'reauthentication_required' && status === 401) code = supplied
+  else if (supplied === 'operation_conflict' && status === 409) code = supplied
   else if (supplied === 'remote_quota_exceeded' && status === 429) code = supplied
   else if (['mfa_required','recovery_restricted','account_deletion_pending','email_verification_required'].includes(supplied) && status === 403) code = supplied
   else if (status === 401) code = 'session_not_found'
@@ -25,7 +26,9 @@ export function safeError(error) {
     account_service_unavailable: 'The account service is temporarily unavailable. Your saved session is preserved. Try again shortly.',
     account_forbidden: 'Account access could not be verified. Try again or sign out.', profile_invalid: 'Use a name up to 80 characters and a bio up to 500 characters.',
     reauthentication_required: 'Sign in again and verify your authenticator to continue.', mfa_required: 'Verify your authenticator to continue.', recovery_restricted: 'Finish recovery, then sign in again to use sensitive account services.', recovery_invalid_or_expired: 'This recovery link is invalid or expired. Request a new link.', mfa_verification_failed: 'That authenticator code could not be verified. Try a new code.',
-    remote_quota_exceeded: 'Your remote limit is reached. Stop and revoke remain available.', account_deletion_pending: 'Account deletion is pending. Sign in again to cancel before deletion starts.', email_verification_required: 'Verify your email before using sensitive online access.' }
+    remote_quota_exceeded: 'Your remote limit is reached. Stop and revoke remain available.', account_deletion_pending: 'Account deletion is pending. Sign in again to cancel before deletion starts.', email_verification_required: 'Verify your email before using sensitive online access.',
+    operation_conflict: 'The request was refused because another account operation is pending or deletion has started. Refresh your account before trying again.',
+    account_operation_unknown: 'The account request result could not be confirmed. Refresh your account to check its current state. Local projects are preserved.' }
   messages.captcha_required = 'Complete the verification challenge to continue. Try again if it expired.'
   return Object.hasOwn(messages, error?.code) ? messages[error.code] : 'Unable to complete this request. Please try again.'
 }
