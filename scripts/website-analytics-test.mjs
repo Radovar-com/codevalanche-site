@@ -32,7 +32,33 @@ async function localContext(options={}){const context=await browser.newContext(o
 async function ready(page,url='/'){await page.goto(origin+url);await page.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager,null,{timeout:3000});}
 async function choose(page,enabled){await page.evaluate(v=>CodevalancheAnalytics.setConsent({websiteAnalytics:v}),enabled);}
 async function flush(page){await page.evaluate(()=>CodevalancheAnalytics.flush());}
+async function optionalAnalyticsFailures(){
+ const originalFixture=fixture;fixture=false;
+ try{for(const mode of ['aborted_sdk','throwing_bootstrap','held_sdk']){
+  const context=await localContext({viewport:{width:390,height:844},reducedMotion:'reduce'}),page=await context.newPage(),pageErrors=[];page.on('pageerror',error=>pageErrors.push(error.message));
+  let release;const gate=new Promise(resolve=>release=resolve),requestSeen=page.waitForRequest('**/analytics/owned-analytics.js',{timeout:3000});let sdkRequests=0;
+  await context.route('**/analytics/owned-analytics.js',async route=>{sdkRequests++;if(mode==='aborted_sdk')await route.abort();else{if(mode==='held_sdk')await gate;await route.continue();}});
+  if(mode==='throwing_bootstrap')await context.route('**/config.js',async route=>{const response=await route.fetch();await route.fulfill({response,body:(await response.text())+"\nObject.defineProperty(window.CODEVALANCHE_ANALYTICS,'pageVersion',{get(){window.fixtureBootstrapAttempted=true;return 'invalid bootstrap/version';}});"});});
+  try{
+   await page.goto(origin,{waitUntil:'commit'});await requestSeen;
+   assert.equal(await page.evaluate(()=>CODEVALANCHE_ANALYTICS.enabled),false);
+   if(mode==='throwing_bootstrap')await page.waitForFunction(()=>window.fixtureBootstrapAttempted===true);
+   await page.getByRole('tab',{name:'Review 03'}).click();assert.equal(await page.locator('#tab-review').getAttribute('aria-selected'),'true',mode+': tabs initialize independently of optional analytics');assert.equal(await page.locator('#panel-review').isVisible(),true);
+   const theme=await page.evaluate(()=>document.documentElement.dataset.theme);await page.locator('[data-theme-toggle]').click();assert.notEqual(await page.evaluate(()=>document.documentElement.dataset.theme),theme,mode+': theme works without analytics');
+   await page.locator('.mobile-nav summary').click();await page.locator('.mobile-nav-panel a[href="/#workflow"]').click();assert.equal(await page.locator('.mobile-nav').getAttribute('open'),null,mode+': mobile menu closes on native anchor navigation');assert.equal(new URL(page.url()).hash,'#workflow');
+   if(mode==='held_sdk'){assert.equal(await page.evaluate(()=>typeof CodevalancheAnalytics),'undefined','core controls work before the optional asset resolves');release();await page.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager);assert.equal(await page.locator('[data-owned-consent]').count(),1,'one successful bootstrap mounts exactly one CMP');}
+   assert.equal(sdkRequests,1,mode+': one bootstrap request per document');
+   // Ordinary full-document navigation is never gated on analytics readiness.
+   await page.locator('.mobile-nav summary').click();await page.locator('.mobile-nav-panel a[href="/changelog.html"]').click();await page.waitForURL(origin+'/changelog.html');assert.equal(await page.locator('.nav-signin').getAttribute('href'),'/account/');
+   assert.deepEqual(pageErrors,[],mode+': failed imports/bootstrap must not become unhandled exceptions');
+  }finally{release();await context.close();}
+ }
+ console.log('PASS optional analytics failure isolation: aborted SDK, throwing bootstrap, held SDK; tabs/theme/mobile/native navigation and single bootstrap');
+ }finally{fixture=originalFixture;}
+}
 try{
+ await optionalAnalyticsFailures();
+ if(!process.argv.includes('--analytics-failure-only')){
  const context=await localContext({reducedMotion:'reduce'}),page=await context.newPage();let google=0;
  await context.addCookies([{name:'codevalanche_consent',value:'accepted',url:origin}]);await context.addInitScript(()=>localStorage.setItem('codevalanche_analytics_installation','legacy-not-an-owned-id'));
  context.on('request',r=>{if(/google-analytics|googletagmanager/.test(r.url()))google++;});
@@ -69,4 +95,5 @@ try{
  const noStorage=await localContext();await noStorage.addInitScript(()=>{Storage.prototype.getItem=()=>{throw new DOMException('blocked','SecurityError')};Storage.prototype.setItem=()=>{throw new DOMException('blocked','SecurityError')};});const n=await noStorage.newPage();await ready(n);await n.getByRole('tab',{name:'Review 03'}).click();assert.equal(await n.locator('#panel-review').isVisible(),true);await choose(n,false);await noStorage.close();
  const forbidden=await localContext();await forbidden.addInitScript(()=>Object.defineProperty(window,'localStorage',{get(){throw new DOMException('blocked','SecurityError')}}));const x=await forbidden.newPage();await ready(x);await x.getByRole('tab',{name:'Review 03'}).click();assert.equal(await x.locator('#panel-review').isVisible(),true);await choose(x,false);await forbidden.close();
  assert.deepEqual(errors,[]);console.log(`PASS website analytics integration: ${events.size} T1-validated events; GA zero; consent/default navigation/mobile/no-storage/disabled-provider`);
+}
 }finally{await browser.close();server.closeAllConnections();await new Promise(r=>server.close(r));}
