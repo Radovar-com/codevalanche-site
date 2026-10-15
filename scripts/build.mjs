@@ -4,6 +4,9 @@ import path from "node:path"
 import { build } from "esbuild"
 import { fileURLToPath } from "node:url"
 
+import { buildAnalytics } from "./build-analytics.mjs"
+await buildAnalytics()
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const source = path.join(root, "src")
 const destination = path.join(root, "dist")

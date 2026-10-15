@@ -100,12 +100,14 @@ export function createConsentManager({siteId,policyVersion='2026-10-15',transpor
   if(!write('receipt',receipt)){remember(receipt);purge();persistProofs();await retryRevocations();return;}
   write('request',null);locallyFenced=false;sync();notify();
  }
- function getCollectionContext(){
+ function getCollectionContext({touchActivity=true}={}){
   sync();const a=authority();if(!a)return null;
   const time=now();let identity=read('identity');
+  // Automatic observations never create/rotate IDs or renew idle activity.
+  if(!touchActivity&&(!identity||identity.expiresAt<=time||!identity.sessionId||!Number.isFinite(identity.lastActiveAt)||time-identity.lastActiveAt>=30*60000||time-identity.sessionStartedAt>=day))return null;
   if(!identity||identity.expiresAt<=time){identity={anonymousId:host.crypto.randomUUID(),expiresAt:time+30*day};}
   if(!identity.sessionId||time-identity.lastActiveAt>=30*60000||time-identity.sessionStartedAt>=day){identity.sessionId=host.crypto.randomUUID();identity.sessionStartedAt=time;}
-  identity.lastActiveAt=time;if(!write('identity',identity))return null;
+  if(touchActivity){identity.lastActiveAt=time;if(!write('identity',identity))return null;}
   return {anonymousId:identity.anonymousId,sessionId:identity.sessionId,receiptId:a.r.receiptId,generation:a.state.generation,collectionToken:a.r.collectionToken,accountAnalytics:false,signal:controller.signal};
  }
  function acceptAck(ack,lease){sync();const a=authority();return !!a&&!!lease&&!lease.signal?.aborted&&lease.receiptId===a.r.receiptId&&lease.generation===a.state.generation&&ack?.generation===a.state.generation;}
