@@ -1,0 +1,5 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://codevalanche.com/contracts/website-analytics/v1/report-journeys.schema.json",
+  "$ref": "contract.schema.json#/$defs/journeysReport"
+}

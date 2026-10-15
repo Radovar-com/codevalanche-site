@@ -1,0 +1,2411 @@
+{
+  "schemaVersion": 1,
+  "valid": [
+    {
+      "name": "overview report",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "siteId": "codevalanche",
+                "bucketStart": "2026-10-15T00:00:00.000Z",
+                "sessionStarts": 2,
+                "pageViews": 3,
+                "dailyAnonymousIds": 2,
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "overview",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "identity": "consented_browser_ids_only"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "acquisition report",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "acquisitionSource": "unknown",
+                "acquisitionMedium": "unknown",
+                "campaign": "unknown",
+                "landingPageId": "home",
+                "sessions": 2,
+                "attribution": "unknown",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "acquisition",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "attribution": "unknown"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "pages report",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "pageId": "home",
+                "pageVersion": "build_1",
+                "pageViews": 3,
+                "eligibleViews": 3,
+                "activeMs": 1000,
+                "visibleMs": 2000,
+                "maxScrollPct": 50,
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "pages",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "engagement": "visible_recent_interaction_estimate"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "sections report",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "pageId": "home",
+                "pageVersion": "build_1",
+                "sectionId": "hero",
+                "eligibleViews": 3,
+                "exposedViews": 2,
+                "reach": 0.6666666666666666,
+                "activeMs": 1000,
+                "ctaAfterExposureViews": 1,
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "sections",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "exposure": "continuous_1000ms_min_half_section_or_viewport"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "journeys report",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "journeyId": "download",
+                "stepId": "clicked",
+                "stepOrder": 1,
+                "eligibleSessions": 2,
+                "reachedSessions": 1,
+                "conversion": 0.5,
+                "window": "same_session",
+                "attribution": "same_session",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "journeys",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "ordering": "unmeasured"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "downloads report",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "platform": "windows",
+                "architecture": "x64",
+                "releaseId": "unknown",
+                "artifactId": "unknown",
+                "clicks": null,
+                "redirects": null,
+                "providerCountDelta": null,
+                "transferServed": null,
+                "firstObservedOpens": null,
+                "activations": null,
+                "counterStatus": "not_configured",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "downloads",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "releaseCounterSemantics": "not_configured",
+          "transferServed": "not_configured",
+          "guestActivation": "unmeasured"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "accounts report",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "operational_accounts",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "operational_accounts",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "concept",
+            "rows": [
+              {
+                "concept": "login_succeeded",
+                "count": null,
+                "attributedCount": null,
+                "unattributedCount": null,
+                "coverage": "unmeasured",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "accounts",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "providerCoverage": [
+            {
+              "concept": "login_succeeded",
+              "status": "unmeasured",
+              "source": "unavailable",
+              "watermark": null
+            }
+          ]
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "quality report",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "pageId": "home",
+                "buildSha": "build_1",
+                "metric": "INP",
+                "value": null,
+                "unit": "ms",
+                "sampleSize": 0,
+                "statistic": "p75",
+                "normalizedCode": null,
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "quality",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "vitals": "not_configured"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "health report",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "source",
+            "rows": [
+              {
+                "source": "collector",
+                "status": "not_configured",
+                "lastEventAt": null,
+                "watermark": null,
+                "lagMs": null,
+                "accepted": 0,
+                "rejectedSchema": 0,
+                "rejectedConsent": 0,
+                "duplicate": 0,
+                "rateLimited": 0,
+                "botSuspected": 0,
+                "queueExpired": 0,
+                "lateArrival": 0,
+                "clockAdjusted": 0,
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "health",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "rawRetentionDays": 90,
+          "rollupRetentionMonths": 13
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "WebsiteEventV1",
+      "schema": "WebsiteEventV1",
+      "value": {
+        "schema_version": 1,
+        "event_id": "00000001-0000-4000-8000-000000000001",
+        "site_id": "codevalanche",
+        "event_name": "page_viewed",
+        "occurred_at": "2026-10-15T00:00:00.000Z",
+        "page_id": "home",
+        "page_instance_id": "00000002-0000-4000-8000-000000000002",
+        "page_version": "build_1",
+        "session_id": "00000003-0000-4000-8000-000000000003",
+        "anonymous_id": "00000004-0000-4000-8000-000000000004",
+        "consent_receipt_id": "00000005-0000-4000-8000-000000000005",
+        "consent_generation": 1,
+        "properties": {
+          "navigation_type": "initial"
+        }
+      }
+    },
+    {
+      "name": "ConsentState",
+      "schema": "ConsentState",
+      "value": {
+        "policyVersion": "2026-10-15",
+        "websiteAnalytics": false,
+        "accountAnalytics": false,
+        "state": "denied",
+        "generation": 1,
+        "changedAt": "2026-10-15T00:00:00.000Z"
+      }
+    },
+    {
+      "name": "ConsentReceipt",
+      "schema": "ConsentReceipt",
+      "value": {
+        "receiptId": "00000005-0000-4000-8000-000000000005",
+        "siteId": "codevalanche",
+        "policyVersion": "2026-10-15",
+        "generation": 1,
+        "purposes": {
+          "websiteAnalytics": true,
+          "accountAnalytics": false
+        },
+        "issuedAt": "2026-10-15T00:00:00.000Z",
+        "expiresAt": "2026-10-16T00:00:00.000Z",
+        "collectionToken": "synthetic_collection_capability_123456",
+        "revocationProof": "synthetic_revocation_capability_123456"
+      }
+    },
+    {
+      "name": "RevocationProof",
+      "schema": "RevocationProof",
+      "value": {
+        "receiptId": "00000005-0000-4000-8000-000000000005",
+        "generation": 1,
+        "capability": "synthetic_revocation_capability_123456"
+      }
+    },
+    {
+      "name": "BatchReceipt",
+      "schema": "BatchReceipt",
+      "value": {
+        "acceptedIds": [
+          "00000001-0000-4000-8000-000000000001"
+        ],
+        "duplicateIds": [],
+        "rejected": [],
+        "generation": 1,
+        "receivedAt": "2026-10-15T00:00:00.000Z",
+        "retryAfterMs": null
+      }
+    },
+    {
+      "name": "ErrorResponse",
+      "schema": "ErrorResponse",
+      "value": {
+        "error": {
+          "code": "invalid_fields",
+          "message": "Analytics request could not be processed."
+        },
+        "requestId": "00000001-0000-4000-8000-000000000001",
+        "retryAfterMs": null
+      }
+    },
+    {
+      "name": "ReportQuery",
+      "schema": "ReportQuery",
+      "value": {
+        "siteId": "all",
+        "from": "2026-10-15T00:00:00.000Z",
+        "to": "2026-10-16T00:00:00.000Z",
+        "timeZone": "Europe/Bucharest",
+        "granularity": "day",
+        "filters": {},
+        "comparison": null
+      }
+    },
+    {
+      "name": "MetricValue",
+      "schema": "MetricValue",
+      "value": {
+        "id": "page_views",
+        "value": 3,
+        "unit": "count",
+        "population": "consented_website_observations",
+        "numerator": 3,
+        "denominator": null,
+        "status": "measured",
+        "exactness": "exact"
+      }
+    },
+    {
+      "name": "AccountOutcomeReport",
+      "schema": "AccountOutcomeReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "operational_accounts",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "operational_accounts",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "concept",
+            "rows": [
+              {
+                "concept": "login_succeeded",
+                "count": null,
+                "attributedCount": null,
+                "unattributedCount": null,
+                "coverage": "unmeasured",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "accounts",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "providerCoverage": [
+            {
+              "concept": "login_succeeded",
+              "status": "unmeasured",
+              "source": "unavailable",
+              "watermark": null
+            }
+          ]
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "ValidationResult",
+      "schema": "ValidationResult",
+      "value": {
+        "accepted": false,
+        "reason": "invalid_fields"
+      }
+    },
+    {
+      "name": "VerifiedConsentReceipt",
+      "schema": "VerifiedConsentReceipt",
+      "value": {
+        "receiptId": "00000005-0000-4000-8000-000000000005",
+        "siteId": "codevalanche",
+        "policyVersion": "2026-10-15",
+        "generation": 1,
+        "purposes": {
+          "websiteAnalytics": true,
+          "accountAnalytics": false
+        },
+        "issuedAt": "2026-10-15T00:00:00.000Z",
+        "expiresAt": "2026-10-16T00:00:00.000Z"
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "overview row cannot contain PII",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "siteId": "codevalanche",
+                "bucketStart": "2026-10-15T00:00:00.000Z",
+                "sessionStarts": 2,
+                "pageViews": 3,
+                "dailyAnonymousIds": 2,
+                "dimensions": {},
+                "email": "private@example.com"
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "overview",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "identity": "consented_browser_ids_only"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "overview source quality cannot contain raw identity",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "siteId": "codevalanche",
+                "bucketStart": "2026-10-15T00:00:00.000Z",
+                "sessionStarts": 2,
+                "pageViews": 3,
+                "dailyAnonymousIds": 2,
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "overview",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "identity": "consented_browser_ids_only",
+          "rawUserId": "forged"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "acquisition row cannot contain PII",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "acquisitionSource": "unknown",
+                "acquisitionMedium": "unknown",
+                "campaign": "unknown",
+                "landingPageId": "home",
+                "sessions": 2,
+                "attribution": "unknown",
+                "dimensions": {},
+                "email": "private@example.com"
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "acquisition",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "attribution": "unknown"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "acquisition source quality cannot contain raw identity",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "acquisitionSource": "unknown",
+                "acquisitionMedium": "unknown",
+                "campaign": "unknown",
+                "landingPageId": "home",
+                "sessions": 2,
+                "attribution": "unknown",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "acquisition",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "attribution": "unknown",
+          "rawUserId": "forged"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "pages row cannot contain PII",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "pageId": "home",
+                "pageVersion": "build_1",
+                "pageViews": 3,
+                "eligibleViews": 3,
+                "activeMs": 1000,
+                "visibleMs": 2000,
+                "maxScrollPct": 50,
+                "dimensions": {},
+                "email": "private@example.com"
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "pages",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "engagement": "visible_recent_interaction_estimate"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "pages source quality cannot contain raw identity",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "pageId": "home",
+                "pageVersion": "build_1",
+                "pageViews": 3,
+                "eligibleViews": 3,
+                "activeMs": 1000,
+                "visibleMs": 2000,
+                "maxScrollPct": 50,
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "pages",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "engagement": "visible_recent_interaction_estimate",
+          "rawUserId": "forged"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "sections row cannot contain PII",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "pageId": "home",
+                "pageVersion": "build_1",
+                "sectionId": "hero",
+                "eligibleViews": 3,
+                "exposedViews": 2,
+                "reach": 0.6666666666666666,
+                "activeMs": 1000,
+                "ctaAfterExposureViews": 1,
+                "dimensions": {},
+                "email": "private@example.com"
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "sections",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "exposure": "continuous_1000ms_min_half_section_or_viewport"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "sections source quality cannot contain raw identity",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "pageId": "home",
+                "pageVersion": "build_1",
+                "sectionId": "hero",
+                "eligibleViews": 3,
+                "exposedViews": 2,
+                "reach": 0.6666666666666666,
+                "activeMs": 1000,
+                "ctaAfterExposureViews": 1,
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "sections",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "exposure": "continuous_1000ms_min_half_section_or_viewport",
+          "rawUserId": "forged"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "journeys row cannot contain PII",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "journeyId": "download",
+                "stepId": "clicked",
+                "stepOrder": 1,
+                "eligibleSessions": 2,
+                "reachedSessions": 1,
+                "conversion": 0.5,
+                "window": "same_session",
+                "attribution": "same_session",
+                "dimensions": {},
+                "email": "private@example.com"
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "journeys",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "ordering": "unmeasured"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "journeys source quality cannot contain raw identity",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "ready",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": "2026-10-15T00:00:00.000Z",
+          "observedTo": "2026-10-16T00:00:00.000Z"
+        },
+        "metrics": [
+          {
+            "id": "session_starts",
+            "value": 2,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": 2,
+            "denominator": null,
+            "status": "measured",
+            "exactness": "exact"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "journeyId": "download",
+                "stepId": "clicked",
+                "stepOrder": 1,
+                "eligibleSessions": 2,
+                "reachedSessions": 1,
+                "conversion": 0.5,
+                "window": "same_session",
+                "attribution": "same_session",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 2,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": "2026-10-15T00:00:00.000Z",
+        "sourceQuality": {
+          "view": "journeys",
+          "sources": [
+            {
+              "source": "browser",
+              "status": "measured",
+              "watermark": "2026-10-15T00:00:00.000Z",
+              "observedFrom": "2026-10-15T00:00:00.000Z",
+              "observedTo": "2026-10-16T00:00:00.000Z"
+            }
+          ],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "ordering": "unmeasured",
+          "rawUserId": "forged"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "downloads row cannot contain PII",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "platform": "windows",
+                "architecture": "x64",
+                "releaseId": "unknown",
+                "artifactId": "unknown",
+                "clicks": null,
+                "redirects": null,
+                "providerCountDelta": null,
+                "transferServed": null,
+                "firstObservedOpens": null,
+                "activations": null,
+                "counterStatus": "not_configured",
+                "dimensions": {},
+                "email": "private@example.com"
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "downloads",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "releaseCounterSemantics": "not_configured",
+          "transferServed": "not_configured",
+          "guestActivation": "unmeasured"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "downloads source quality cannot contain raw identity",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "platform": "windows",
+                "architecture": "x64",
+                "releaseId": "unknown",
+                "artifactId": "unknown",
+                "clicks": null,
+                "redirects": null,
+                "providerCountDelta": null,
+                "transferServed": null,
+                "firstObservedOpens": null,
+                "activations": null,
+                "counterStatus": "not_configured",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "downloads",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "releaseCounterSemantics": "not_configured",
+          "transferServed": "not_configured",
+          "guestActivation": "unmeasured",
+          "rawUserId": "forged"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "accounts row cannot contain PII",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "operational_accounts",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "operational_accounts",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "concept",
+            "rows": [
+              {
+                "concept": "login_succeeded",
+                "count": null,
+                "attributedCount": null,
+                "unattributedCount": null,
+                "coverage": "unmeasured",
+                "dimensions": {},
+                "email": "private@example.com"
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "accounts",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "providerCoverage": [
+            {
+              "concept": "login_succeeded",
+              "status": "unmeasured",
+              "source": "unavailable",
+              "watermark": null
+            }
+          ]
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "accounts source quality cannot contain raw identity",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "operational_accounts",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "operational_accounts",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "concept",
+            "rows": [
+              {
+                "concept": "login_succeeded",
+                "count": null,
+                "attributedCount": null,
+                "unattributedCount": null,
+                "coverage": "unmeasured",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "accounts",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "providerCoverage": [
+            {
+              "concept": "login_succeeded",
+              "status": "unmeasured",
+              "source": "unavailable",
+              "watermark": null
+            }
+          ],
+          "rawUserId": "forged"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "quality row cannot contain PII",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "pageId": "home",
+                "buildSha": "build_1",
+                "metric": "INP",
+                "value": null,
+                "unit": "ms",
+                "sampleSize": 0,
+                "statistic": "p75",
+                "normalizedCode": null,
+                "dimensions": {},
+                "email": "private@example.com"
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "quality",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "vitals": "not_configured"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "quality source quality cannot contain raw identity",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "time",
+            "rows": [
+              {
+                "pageId": "home",
+                "buildSha": "build_1",
+                "metric": "INP",
+                "value": null,
+                "unit": "ms",
+                "sampleSize": 0,
+                "statistic": "p75",
+                "normalizedCode": null,
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "quality",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "vitals": "not_configured",
+          "rawUserId": "forged"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "health row cannot contain PII",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "source",
+            "rows": [
+              {
+                "source": "collector",
+                "status": "not_configured",
+                "lastEventAt": null,
+                "watermark": null,
+                "lagMs": null,
+                "accepted": 0,
+                "rejectedSchema": 0,
+                "rejectedConsent": 0,
+                "duplicate": 0,
+                "rateLimited": 0,
+                "botSuspected": 0,
+                "queueExpired": 0,
+                "lateArrival": 0,
+                "clockAdjusted": 0,
+                "dimensions": {},
+                "email": "private@example.com"
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "health",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "rawRetentionDays": 90,
+          "rollupRetentionMonths": 13
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "health source quality cannot contain raw identity",
+      "schema": "WebsiteReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "consented_website_observations",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "consented_website_observations",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "source",
+            "rows": [
+              {
+                "source": "collector",
+                "status": "not_configured",
+                "lastEventAt": null,
+                "watermark": null,
+                "lagMs": null,
+                "accepted": 0,
+                "rejectedSchema": 0,
+                "rejectedConsent": 0,
+                "duplicate": 0,
+                "rateLimited": 0,
+                "botSuspected": 0,
+                "queueExpired": 0,
+                "lateArrival": 0,
+                "clockAdjusted": 0,
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "health",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "rawRetentionDays": 90,
+          "rollupRetentionMonths": 13,
+          "rawUserId": "forged"
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ]
+      }
+    },
+    {
+      "name": "WebsiteEventV1 rejects extra properties",
+      "schema": "WebsiteEventV1",
+      "value": {
+        "schema_version": 1,
+        "event_id": "00000001-0000-4000-8000-000000000001",
+        "site_id": "codevalanche",
+        "event_name": "page_viewed",
+        "occurred_at": "2026-10-15T00:00:00.000Z",
+        "page_id": "home",
+        "page_instance_id": "00000002-0000-4000-8000-000000000002",
+        "page_version": "build_1",
+        "session_id": "00000003-0000-4000-8000-000000000003",
+        "anonymous_id": "00000004-0000-4000-8000-000000000004",
+        "consent_receipt_id": "00000005-0000-4000-8000-000000000005",
+        "consent_generation": 1,
+        "properties": {
+          "navigation_type": "initial"
+        },
+        "unregistered": "forbidden"
+      }
+    },
+    {
+      "name": "ConsentState rejects extra properties",
+      "schema": "ConsentState",
+      "value": {
+        "policyVersion": "2026-10-15",
+        "websiteAnalytics": false,
+        "accountAnalytics": false,
+        "state": "denied",
+        "generation": 1,
+        "changedAt": "2026-10-15T00:00:00.000Z",
+        "unregistered": "forbidden"
+      }
+    },
+    {
+      "name": "ConsentReceipt rejects extra properties",
+      "schema": "ConsentReceipt",
+      "value": {
+        "receiptId": "00000005-0000-4000-8000-000000000005",
+        "siteId": "codevalanche",
+        "policyVersion": "2026-10-15",
+        "generation": 1,
+        "purposes": {
+          "websiteAnalytics": true,
+          "accountAnalytics": false
+        },
+        "issuedAt": "2026-10-15T00:00:00.000Z",
+        "expiresAt": "2026-10-16T00:00:00.000Z",
+        "collectionToken": "synthetic_collection_capability_123456",
+        "revocationProof": "synthetic_revocation_capability_123456",
+        "unregistered": "forbidden"
+      }
+    },
+    {
+      "name": "RevocationProof rejects extra properties",
+      "schema": "RevocationProof",
+      "value": {
+        "receiptId": "00000005-0000-4000-8000-000000000005",
+        "generation": 1,
+        "capability": "synthetic_revocation_capability_123456",
+        "unregistered": "forbidden"
+      }
+    },
+    {
+      "name": "BatchReceipt rejects extra properties",
+      "schema": "BatchReceipt",
+      "value": {
+        "acceptedIds": [
+          "00000001-0000-4000-8000-000000000001"
+        ],
+        "duplicateIds": [],
+        "rejected": [],
+        "generation": 1,
+        "receivedAt": "2026-10-15T00:00:00.000Z",
+        "retryAfterMs": null,
+        "unregistered": "forbidden"
+      }
+    },
+    {
+      "name": "ErrorResponse rejects extra properties",
+      "schema": "ErrorResponse",
+      "value": {
+        "error": {
+          "code": "invalid_fields",
+          "message": "Analytics request could not be processed."
+        },
+        "requestId": "00000001-0000-4000-8000-000000000001",
+        "retryAfterMs": null,
+        "unregistered": "forbidden"
+      }
+    },
+    {
+      "name": "ReportQuery rejects extra properties",
+      "schema": "ReportQuery",
+      "value": {
+        "siteId": "all",
+        "from": "2026-10-15T00:00:00.000Z",
+        "to": "2026-10-16T00:00:00.000Z",
+        "timeZone": "Europe/Bucharest",
+        "granularity": "day",
+        "filters": {},
+        "comparison": null,
+        "unregistered": "forbidden"
+      }
+    },
+    {
+      "name": "MetricValue rejects extra properties",
+      "schema": "MetricValue",
+      "value": {
+        "id": "page_views",
+        "value": 3,
+        "unit": "count",
+        "population": "consented_website_observations",
+        "numerator": 3,
+        "denominator": null,
+        "status": "measured",
+        "exactness": "exact",
+        "unregistered": "forbidden"
+      }
+    },
+    {
+      "name": "AccountOutcomeReport rejects extra properties",
+      "schema": "AccountOutcomeReport",
+      "value": {
+        "definitionVersion": "1",
+        "status": "not_configured",
+        "population": "operational_accounts",
+        "period": {
+          "from": "2026-10-15T00:00:00.000Z",
+          "to": "2026-10-16T00:00:00.000Z",
+          "timeZone": "UTC",
+          "observedFrom": null,
+          "observedTo": null
+        },
+        "metrics": [
+          {
+            "id": "eligible_observations",
+            "value": null,
+            "unit": "count",
+            "population": "operational_accounts",
+            "numerator": null,
+            "denominator": null,
+            "status": "unmeasured",
+            "exactness": "not_applicable"
+          }
+        ],
+        "breakdowns": [
+          {
+            "dimension": "concept",
+            "rows": [
+              {
+                "concept": "login_succeeded",
+                "count": null,
+                "attributedCount": null,
+                "unattributedCount": null,
+                "coverage": "unmeasured",
+                "dimensions": {}
+              }
+            ],
+            "nextCursor": null
+          }
+        ],
+        "capabilities": [],
+        "sampleSize": 0,
+        "generatedAt": "2026-10-15T00:00:00.000Z",
+        "watermark": null,
+        "sourceQuality": {
+          "view": "accounts",
+          "sources": [],
+          "botFiltering": "not_configured",
+          "rawWindowStart": null,
+          "rollupWindowStart": null,
+          "providerCoverage": [
+            {
+              "concept": "login_succeeded",
+              "status": "unmeasured",
+              "source": "unavailable",
+              "watermark": null
+            }
+          ]
+        },
+        "consentCoverage": {
+          "status": "unknown",
+          "numerator": null,
+          "denominator": null
+        },
+        "limitations": [
+          "Synthetic contract fixture; not production data."
+        ],
+        "unregistered": "forbidden"
+      }
+    },
+    {
+      "name": "ValidationResult rejects extra properties",
+      "schema": "ValidationResult",
+      "value": {
+        "accepted": false,
+        "reason": "invalid_fields",
+        "unregistered": "forbidden"
+      }
+    },
+    {
+      "name": "VerifiedConsentReceipt rejects extra properties",
+      "schema": "VerifiedConsentReceipt",
+      "value": {
+        "receiptId": "00000005-0000-4000-8000-000000000005",
+        "siteId": "codevalanche",
+        "policyVersion": "2026-10-15",
+        "generation": 1,
+        "purposes": {
+          "websiteAnalytics": true,
+          "accountAnalytics": false
+        },
+        "issuedAt": "2026-10-15T00:00:00.000Z",
+        "expiresAt": "2026-10-16T00:00:00.000Z",
+        "unregistered": "forbidden"
+      }
+    }
+  ]
+}
