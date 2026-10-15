@@ -266,3 +266,9 @@ test('storage enforces RLS, privacy, ranges and server-side report membership', 
     await assert.rejects(()=>db.query("insert into public.wa_source_snapshots(site_id,source,artifact_id,release_id,count_total,observed_at,source_watermark) values('codevalanche','release_provider','artifact','release',-1,now(),now())"),/check constraint/);
   } finally { await db.close(); }
 });
+test('Codevalanche real tab and FAQ IDs are registered without accepting arbitrary DOM labels',()=>{
+ for(const id of ['project','agents','review','local_first'])assert.equal(validateWebsiteEvent(validWebsiteEvent({event_name:'feature_selected',properties:{feature_id:id,selection_id:id}}),eventContext()).accepted,true,id);
+ for(const faq_id of ['product','agents','accounts','privacy','download'])assert.equal(validateWebsiteEvent(validWebsiteEvent({event_name:'faq_toggled',properties:{faq_id,expanded:true}}),eventContext()).accepted,true,faq_id);
+ for(const id of ['Local-first tab text','unregistered'])assert.equal(validateWebsiteEvent(validWebsiteEvent({event_name:'feature_selected',properties:{feature_id:id,selection_id:id}}),eventContext()).accepted,false,id);
+ for(const faq_id of ['What is Codevalanche?','unregistered'])assert.equal(validateWebsiteEvent(validWebsiteEvent({event_name:'faq_toggled',properties:{faq_id,expanded:true}}),eventContext()).accepted,false,faq_id);
+});

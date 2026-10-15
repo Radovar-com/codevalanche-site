@@ -108,18 +108,18 @@ try {
   // Consent controls work independently of the returning-visitor screenshots.
   const fresh = await browser.newPage();
   await fresh.goto(origin);
-  await fresh.locator('[data-consent="declined"]').click();
-  assert.equal(await fresh.locator('#consent-banner').isVisible(), false);
+  await fresh.getByRole('button',{name:'Decline',exact:true}).click();
+  assert.equal(await fresh.locator('.cmp-banner').isVisible(), false);
   await fresh.locator('[data-open-consent]').first().click();
-  assert.equal(await fresh.locator('#consent-preferences').isVisible(), true);
+  assert.equal(await fresh.getByRole('dialog',{name:'Cookie preferences'}).isVisible(), true);
   await fresh.keyboard.press('Escape');
-  assert.equal(await fresh.locator('#consent-preferences').isVisible(), false);
+  assert.equal(await fresh.getByRole('dialog',{name:'Cookie preferences'}).isVisible(), false);
   await fresh.goto(origin + '/changelog.html');
   await fresh.locator('[data-open-consent]').first().click();
-  const analyticsToggle = fresh.locator('[data-toggle-analytics]');
-  assert.equal(await analyticsToggle.getAttribute('aria-checked'), 'false');
+  const analyticsToggle = fresh.getByRole('checkbox',{name:'Website analytics',exact:true});
+  assert.equal(await analyticsToggle.isChecked(), false);
   await analyticsToggle.click();
-  assert.equal(await analyticsToggle.getAttribute('aria-checked'), 'true');
+  assert.equal(await analyticsToggle.isChecked(), true);
   await fresh.keyboard.press('Escape');
   await fresh.close();
   assert.deepEqual(errors, []);

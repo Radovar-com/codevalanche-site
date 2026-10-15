@@ -1,7 +1,7 @@
 import {createConsentManager} from './consent.js';
 import {createPage} from './page.js';
 import {createQueue,createConsentTransport} from './transport.js';
-import {sanitizeEvent,safeId} from './sanitizer.js';
+import {sanitizeEvent,safeId,browserContext} from './sanitizer.js';
 import {registered,PREAUTH,ACCOUNT,SDK_VERSION} from './registry.js';
 export {createConsentManager,createConsentTransport,SDK_VERSION};
 export function createAnalyticsClient({siteId,consentManager,endpoint,baseUrl,pageVersion='build_1',window:host=globalThis.window,now=Date.now,fetch}={}){
@@ -13,14 +13,14 @@ export function createAnalyticsClient({siteId,consentManager,endpoint,baseUrl,pa
   const pageId=context.pageId??current?.pageId,surface=context.surface??current?.surface??'marketing';
   if(context.userInteraction===true&&surface!=='authenticated_account'&&(!['account','account_authorize'].includes(pageId)||surface==='pre_auth')){manager.getCollectionContext({touchActivity:true});current?.refreshScope();}
   if(!registered('page',pageId,siteId)||!allowed(surface,pageId)||ACCOUNT.has(name)||(surface==='pre_auth'&&!PREAUTH.has(name)))return {queued:false,reason:'unavailable'};
-  const sanitized=sanitizeEvent(name,properties,context.context??{},siteId);if(!sanitized)return {queued:false,reason:'invalid_fields'};
+  const sanitized=sanitizeEvent(name,properties,{...browserContext(host),...context.context},siteId);if(!sanitized)return {queued:false,reason:'invalid_fields'};
   const lease=manager.getCollectionContext({touchActivity:context.userInteraction===true});if(!lease)return {queued:false,reason:'invalid_consent'};
   const instance=context.pageInstanceId??current?.pageInstanceId;if(!instance)return {queued:false,reason:'unavailable'};
   const event={schema_version:1,event_id:host.crypto.randomUUID(),site_id:siteId,event_name:name,occurred_at:new Date(now()).toISOString(),page_id:pageId,page_instance_id:instance,page_version:context.pageVersion??current?.pageVersion??pageVersion,session_id:lease.sessionId,anonymous_id:lease.anonymousId,consent_receipt_id:lease.receiptId,consent_generation:lease.generation,properties:sanitized.properties};
   if(Object.keys(sanitized.context).length)event.context=sanitized.context;
   return {queued:queue.enqueue(event,lease),eventId:event.event_id};
  }
- function sessionStart(page){const lease=manager.getCollectionContext({touchActivity:false});if(!lease||page.surface!=='marketing'||sessions.has(lease.sessionId))return;const result=emit('session_started',{landing_page_id:page.pageId,attribution_kind:'unknown'});if(result.queued)sessions.add(lease.sessionId);}
+ function sessionStart(page){const lease=manager.getCollectionContext({touchActivity:false});if(!lease||page.surface!=='marketing'||sessions.has(lease.sessionId))return;const acquisition=browserContext(host,{acquisition:sessions.size===0}),attribution=acquisition.acquisition_source||acquisition.campaign?'campaign':acquisition.referrer_domain&&acquisition.referrer_domain!=='unknown'?'referrer':'unknown';const result=emit('session_started',{landing_page_id:page.pageId,attribution_kind:attribution},{context:acquisition});if(result.queued)sessions.add(lease.sessionId);}
  function startPage({pageId,pageVersion:version=pageVersion,navigationType='initial',surface=(['account','account_authorize'].includes(pageId)?'authenticated_account':'marketing')}={}){
   if(!registered('page',pageId,siteId)||!safeId(version)||!['initial','route','back_forward'].includes(navigationType)||!['marketing','pre_auth','authenticated_account'].includes(surface))throw new TypeError('Invalid analytics page');
   if(current&&current.pageId===pageId&&current.pageVersion===version&&current.surface===surface){current.resume();return current;}

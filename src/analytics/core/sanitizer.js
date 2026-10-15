@@ -27,3 +27,26 @@ export function validStoredEvent(event,site){
 }
 
 export const validBatchReceipt=value=>matches(schema.$defs.BatchReceipt,value);
+
+/** Read only after a valid collection lease. No raw URL, referrer path, UA or query is retained. */
+export function browserContext(host,{acquisition=false}={}){
+ const result={};
+ try{
+  const nav=host.navigator,ua=nav.userAgent??'';
+  result.os_family=/Android/i.test(ua)?'android':/iPhone|iPad|iPod/i.test(ua)?'ios':/Windows/i.test(ua)?'windows':/Mac/i.test(ua)?'macos':/Linux/i.test(ua)?'linux':'unknown';
+  result.browser_family=/Edg\//.test(ua)?'edge':/Firefox\//.test(ua)?'firefox':/Chrome\/|CriOS\//.test(ua)?'chrome':/Safari\//.test(ua)?'safari':ua?'other':'unknown';
+  result.device_class=/iPad|Tablet/i.test(ua)?'tablet':/Mobile|iPhone|iPod/i.test(ua)?'mobile':ua?'desktop':'unknown';
+  result.viewport_bucket=Number.isFinite(host.innerWidth)?host.innerWidth<768?'small':host.innerWidth<1200?'medium':'large':'unknown';
+  const locale=nav.language??'';result.locale=/^[a-z]{2}(?:-[A-Z]{2})?$/.test(locale)?locale:'unknown';
+ }catch{}
+ if(acquisition)try{
+  const url=new URL(host.location.href);
+  // Only a single value per allowed key; reject PII/URL/token-like values before queueing.
+  for(const [query,key] of Object.entries({utm_source:'acquisition_source',utm_medium:'acquisition_medium',utm_campaign:'campaign',utm_content:'content',utm_term:'term'})){
+   const values=url.searchParams.getAll(query),value=values[0];if(values.length===1&&typeof value==='string'&&/^[A-Za-z0-9][A-Za-z0-9 _.-]{0,79}$/.test(value)&&!unsafe.test(value)&&!/(?:email|token|password|secret|authorization|bearer|[0-9][0-9 .-]{6,}|^[0-9a-f]{8}-[0-9a-f-]{27,}$)/i.test(value))result[key]=value;
+  }
+  result.referrer_domain='unknown';
+  if(host.document.referrer){const ref=new URL(host.document.referrer),domain=ref.hostname.toLowerCase();if(['http:','https:'].includes(ref.protocol)&&!ref.username&&!ref.password&&ref.origin!==url.origin&&domain.length<=253&&/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)+$/.test(domain)&&!/^\d+(?:\.\d+){3}$/.test(domain))result.referrer_domain=domain;}
+ }catch{}
+ return result;
+}

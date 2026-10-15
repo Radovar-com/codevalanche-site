@@ -19,7 +19,7 @@ let cleanupPromise = null, cleanupPending = false, ownedSignin = false
 const security = createAccountSecurity(client, { isRecovery: () => recovery, assertRemoval: () => apiV2('security.mfa.remove-authorize') })
 function notice(message = '', error = false) { $('status').textContent = message; $('status').dataset.error = String(error) }
 function applyControls() {
-  document.querySelectorAll('button').forEach(button => { button.disabled = busy || cleanupPending })
+  [...document.querySelectorAll('button')].filter(button => !button.closest('[data-owned-consent]')).forEach(button => { button.disabled = busy || cleanupPending })
   document.querySelectorAll('#profile input, #profile textarea, #profile button').forEach(control => { control.disabled = busy || accountStatus !== 'ready' })
   $('account-state-retry').disabled = busy || cleanupPending || accountStatus === 'loading'
   if ($('mfa-enroll')) $('mfa-enroll').disabled = busy || cleanupPending || accountStatus !== 'ready'
@@ -142,7 +142,7 @@ async function apiV2(operation, fields = {}) {
 }
 async function action(work) {
   if (busy || cleanupPending) return
-  busy = true; document.querySelectorAll('button').forEach(b => b.disabled = true); notice()
+  busy = true; [...document.querySelectorAll('button')].filter(button => !button.closest('[data-owned-consent]')).forEach(b => b.disabled = true); notice()
   try { await work() } catch (error) { if (error?.code !== 'account_request_superseded') { handleAccountRefusal(error); notice(safeError(error), true) } }
   finally { busy = false; applyControls() }
 }
@@ -186,8 +186,8 @@ $('google-signin').addEventListener('click', () => void action(async () => {
   const { error } = await client.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: redirectTo.href } })
   if (error) throw error
 }))
-document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => { notice(); setMode(button.dataset.mode) }))
-$('auth-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => {
+document.querySelectorAll('[data-mode]').forEach(button => button.addEventListener('click', () => { notice(); setMode(button.dataset.mode); if (!user) window.CodevalancheAnalytics?.track(mode === 'signup' ? 'signup_started' : mode === 'reset' ? 'password_reset_requested_ui' : 'login_started', mode === 'reset' ? {entry_point:'password_reset'} : {entry_point:mode === 'signup' ? 'signup' : 'signin',provider_kind:'email'}) }))
+$('auth-form').addEventListener('submit', event => { if (!user && ['signin','signup'].includes(mode)) window.CodevalancheAnalytics?.track(mode === 'signup' ? 'signup_form_submitted' : 'login_form_submitted', {provider_kind:'email'}); event.preventDefault(); void action(async () => {
   const email = $('email').value.trim(), password = $('password').value
   const authIntentGeneration = renderGeneration
   const captchaToken = mode === 'update' ? undefined : await captcha.challenge()

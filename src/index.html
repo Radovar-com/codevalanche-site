@@ -52,7 +52,7 @@
 
     <main id="main">
       <!-- ============ HERO ============ -->
-      <section class="hero" id="top">
+      <section class="hero" id="top" data-analytics-section="hero">
         <div class="shell hero-composition">
         <div class="hero-inner">
           <p class="hero-badge reveal"><span class="pulse-dot"></span> Local-first by design</p>
@@ -133,7 +133,7 @@
       </section>
 
       <!-- ============ SIGNAL BAND ============ -->
-      <section class="signal-band" aria-label="Product principle">
+      <section class="signal-band" id="product-principle" data-analytics-section="product_principle" aria-label="Product principle">
         <div class="shell signal-grid">
           <p class="signal-label">The useful path</p>
           <p class="signal-statement">Your project stays where the work already is. <em>Everything else follows.</em></p>
@@ -142,7 +142,7 @@
       </section>
 
       <!-- ============ PRODUCT / PROVIDERS ============ -->
-      <section class="section shell" id="product">
+      <section class="section shell" id="product" data-analytics-section="product">
         <div class="section-heading reveal">
           <p class="eyebrow"><span class="eyebrow-line"></span> The product</p>
           <h2>One workspace. Every part of the loop.</h2>
@@ -167,7 +167,7 @@
       </section>
 
       <!-- ============ ACCOUNTS ============ -->
-      <section class="accounts-section" id="accounts">
+      <section class="accounts-section" id="accounts" data-analytics-section="accounts">
         <div class="shell">
           <div class="section-heading reveal">
             <p class="eyebrow"><span class="eyebrow-line"></span> <span data-copy="eyebrow">First-class accounts</span></p>
@@ -222,7 +222,7 @@
       </section>
 
       <!-- ============ PARALLEL BOARD ============ -->
-      <section class="board-section" id="parallel">
+      <section class="board-section" id="parallel" data-analytics-section="parallel">
         <div class="shell">
           <div class="section-heading reveal">
             <p class="eyebrow"><span class="eyebrow-line"></span> Parallel work</p>
@@ -270,7 +270,7 @@
       </section>
 
       <!-- ============ WORKFLOW ============ -->
-      <section class="dark-panel-wrap shell" id="workflow">
+      <section class="dark-panel-wrap shell" id="workflow" data-analytics-section="workflow">
         <div class="dark-panel reveal">
           <div class="dark-panel-top">
             <div>
@@ -314,7 +314,7 @@
       </section>
 
       <!-- ============ SMALL THINGS ============ -->
-      <section class="section shell details-section" id="details">
+      <section class="section shell details-section" id="details" data-analytics-section="details">
         <div class="details-heading reveal">
           <p class="eyebrow"><span class="eyebrow-line"></span> Considered down to the details</p>
           <h2>All the small things.</h2>
@@ -378,7 +378,7 @@
       </section>
 
       <!-- ============ SHOWCASE TABS ============ -->
-      <section class="section shell showcase" aria-labelledby="showcase-title">
+      <section class="section shell showcase" id="showcase" aria-labelledby="showcase-title" data-analytics-section="showcase">
         <div class="section-heading section-heading-wide reveal">
           <p class="eyebrow"><span class="eyebrow-line"></span> Work in context</p>
           <h2 id="showcase-title">The surface changes. The thread stays intact.</h2>
@@ -414,7 +414,7 @@
       </section>
 
       <!-- ============ COMPANION ============ -->
-      <section class="companion-section" id="companion">
+      <section class="companion-section" id="companion" data-analytics-section="companion">
         <div class="shell companion-layout">
           <div class="companion-copy reveal">
             <p class="eyebrow"><span class="eyebrow-line"></span> The companion</p>
@@ -454,7 +454,7 @@
       </section>
 
       <!-- ============ PRINCIPLES ============ -->
-      <section class="principles-section" id="privacy">
+      <section class="principles-section" id="privacy" data-analytics-section="privacy_principles">
         <div class="shell principles-layout">
           <div class="principles-lede reveal">
             <p class="eyebrow"><span class="eyebrow-line"></span> Local-first by design</p>
@@ -471,7 +471,7 @@
       </section>
 
       <!-- ============ DOWNLOAD ============ -->
-      <section class="download-section" id="download">
+      <section class="download-section" id="download" data-analytics-section="download">
         <div class="shell">
           <div class="download-heading reveal">
             <p class="eyebrow eyebrow-center"><span class="eyebrow-line"></span> Get Codevalanche</p>
@@ -523,25 +523,25 @@
       </section>
 
       <!-- ============ PROOF ============ -->
-      <section class="section shell proof-section" aria-labelledby="proof-title">
+      <section class="section shell proof-section" id="proof" aria-labelledby="proof-title" data-analytics-section="proof">
         <div class="proof-heading reveal"><p class="eyebrow"><span class="eyebrow-line"></span> The standard</p><h2 id="proof-title">Good tooling should leave you calmer than it found you.</h2></div>
         <div class="proof-quote reveal reveal-late"><p>More context without more chaos. More capability without giving up the boundary.</p></div>
       </section>
 
       <!-- ============ FAQ ============ -->
-      <section class="faq-section section shell" id="faq">
+      <section class="faq-section section shell" id="faq" data-analytics-section="faq">
         <div class="faq-heading reveal"><p class="eyebrow"><span class="eyebrow-line"></span> Questions, answered</p><h2>A clear product deserves a clear boundary.</h2></div>
         <div class="faq-list reveal reveal-late">
-          <details><summary>What is Codevalanche?<span>+</span></summary><p>Codevalanche is a local-first desktop workspace that connects coding agents to real projects on your machine and keeps the work visible from prompt to review.</p></details>
-          <details><summary>Does Codevalanche replace my coding agent?<span>+</span></summary><p>No. It provides the surrounding project, task, permission, process, and review layer while the selected coding-agent runtime keeps its own account and model behavior.</p></details>
-          <details><summary>Can I connect more than one account of the same provider?<span>+</span></summary><p>Yes. Accounts are first-class in Codevalanche. You can keep, for example, a personal and a work Claude subscription connected at the same time, see each account's usage separately, and choose which one a task runs on.</p></details>
-          <details><summary>Where does my repository live?<span>+</span></summary><p>The initial product is designed around the repository you already have on disk. It does not require an upload step to begin working.</p></details>
-          <details><summary>Is Codevalanche available to download?<span>+</span></summary><p>The download section on this page lists every platform build and its current state. The first public builds are in preparation, and the buttons activate the moment they ship.</p></details>
+          <details data-analytics-faq="product"><summary>What is Codevalanche?<span>+</span></summary><p>Codevalanche is a local-first desktop workspace that connects coding agents to real projects on your machine and keeps the work visible from prompt to review.</p></details>
+          <details data-analytics-faq="agents"><summary>Does Codevalanche replace my coding agent?<span>+</span></summary><p>No. It provides the surrounding project, task, permission, process, and review layer while the selected coding-agent runtime keeps its own account and model behavior.</p></details>
+          <details data-analytics-faq="accounts"><summary>Can I connect more than one account of the same provider?<span>+</span></summary><p>Yes. Accounts are first-class in Codevalanche. You can keep, for example, a personal and a work Claude subscription connected at the same time, see each account's usage separately, and choose which one a task runs on.</p></details>
+          <details data-analytics-faq="privacy"><summary>Where does my repository live?<span>+</span></summary><p>The initial product is designed around the repository you already have on disk. It does not require an upload step to begin working.</p></details>
+          <details data-analytics-faq="download"><summary>Is Codevalanche available to download?<span>+</span></summary><p>The download section on this page lists every platform build and its current state. The first public builds are in preparation, and the buttons activate the moment they ship.</p></details>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer" id="footer" data-analytics-section="footer">
       <div class="shell footer-hero">
         <div class="footer-canvas-wrap" role="img" aria-label="Agents. One home.">
           <canvas id="footer-canvas" aria-hidden="true"></canvas>
@@ -549,7 +549,7 @@
         </div>
         <div class="footer-columns">
           <div class="footer-links"><p class="footer-col-title">Product</p><a href="#product">Workspace</a><a href="#accounts">Accounts</a><a href="#parallel">Parallel work</a><a href="#companion">Companion</a><a href="/changelog.html">Changelog</a><a href="#download">Download</a></div>
-          <div class="footer-links"><p class="footer-col-title">Company</p><a href="/account.html">Your account</a><a href="#privacy">Principles</a><a href="/privacy.html">Privacy policy</a><a href="/terms.html">Terms</a><button type="button" data-open-consent>Manage cookies</button></div>
+          <div class="footer-links"><p class="footer-col-title">Company</p><a href="/account/">Your account</a><a href="#privacy">Principles</a><a href="/privacy.html">Privacy policy</a><a href="/terms.html">Terms</a><button type="button" data-open-consent>Manage cookies</button></div>
         </div>
       </div>
       <div class="shell footer-bottom">
@@ -586,18 +586,8 @@
       </div>
     </footer>
 
-    <div class="consent-banner" id="consent-banner" role="region" aria-labelledby="consent-title" aria-describedby="consent-description" hidden>
-      <div><p class="consent-label">Your privacy, in plain language</p><h2 id="consent-title">A little analytics, only if you want it.</h2><p id="consent-description">We use optional analytics to understand which parts of the site help. Nothing loads until you accept. Read the <a href="/privacy.html">privacy policy</a>.</p></div>
-      <div class="consent-actions"><button class="button button-quiet" type="button" data-consent="declined">Decline</button><button class="button button-primary" type="button" data-consent="accepted">Accept analytics</button></div>
-    </div>
-
-    <div class="consent-preferences" id="consent-preferences" role="dialog" aria-modal="true" aria-labelledby="preferences-title" hidden>
-      <div class="preferences-card"><button class="preferences-close" type="button" data-close-consent aria-label="Close cookie preferences">×</button><p class="consent-label">Privacy controls</p><h2 id="preferences-title">Choose what runs.</h2><p>Essential storage keeps your preference. Optional analytics helps us understand visits without receiving source code or form data.</p><div class="preference-row"><span><strong>Essential</strong><small>Always on for consent state.</small></span><span class="preference-state">Required</span></div><div class="preference-row"><span><strong>Analytics</strong><small>Only loaded after acceptance.</small></span><button class="toggle" type="button" role="switch" aria-checked="false" aria-label="Analytics" data-toggle-analytics><span></span><b aria-hidden="true">Off</b></button></div><button class="button button-primary preferences-save" type="button" data-save-preferences>Save preferences</button></div>
-    </div>
-
     <script src="/config.js"></script>
-    <script src="/account-funnel.js"></script>
-    <script src="/site.js"></script>
+    <script type="module" src="/site.js"></script>
     <script>
       (() => {
         "use strict"
@@ -652,7 +642,6 @@
             link.textContent = "Download"
             ctaEl.replaceWith(link)
           }
-          window.CodevalancheAnalytics?.track("download_platform_detected", { platform: detectedLabel })
         }
         if (grid) grid.querySelectorAll("[data-dl-platform]").forEach((card) => {
           const key = card.getAttribute("data-dl-platform")

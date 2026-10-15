@@ -1,0 +1,72 @@
+import {chromium} from 'playwright';
+import {createServer} from 'node:http';
+import {readFile} from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+import path from 'node:path';
+import {PREAUTH} from '../src/analytics/core/registry.js';
+import {validateWebsiteEvent,validateContractDto} from '../supabase/functions/_shared/websiteAnalyticsContract.ts';
+execFileSync(process.execPath,['scripts/build.mjs']);
+const receipts=new Map(),events=new Map(),requests=[],errors=[];let fixture=true,failReceipt=false;
+const server=createServer(async(req,res)=>{try{
+ const url=new URL(req.url,'http://local');res.setHeader('Content-Type','application/json');
+ if(url.pathname==='/collector/consent/receipts'&&req.method==='POST'){
+  if(failReceipt){res.writeHead(503);res.end('{}');return;}
+  const b=JSON.parse(await text(req)),r={receiptId:crypto.randomUUID(),...b,issuedAt:new Date().toISOString(),expiresAt:new Date(Date.now()+180*86400000).toISOString(),collectionToken:'local_fixture_collection_capability_123',revocationProof:'local_fixture_revocation_capability_123'};assert.ok(validateContractDto('ConsentReceipt',r));receipts.set(r.receiptId,r);res.end(JSON.stringify(r));return;
+ }
+ if(url.pathname.startsWith('/collector/consent/receipts/')&&req.method==='DELETE'){res.end('{"revoked":true}');return;}
+ if(url.pathname==='/collector/events'){
+  const raw=await text(req),b=JSON.parse(raw);requests.push(b);assert.equal(req.headers.cookie,undefined);assert.ok(Buffer.byteLength(raw)<=32768);
+  const acceptedIds=[],duplicateIds=[];for(const e of b.events){assert.equal(validateWebsiteEvent(e,{origin:'https://codevalanche.com',receivedAt:new Date().toISOString(),receipt:receipts.get(b.receiptId),surface:['account','account_authorize'].includes(e.page_id)&&PREAUTH.has(e.event_name)?'pre_auth':undefined}).accepted,true,JSON.stringify(e));if(events.has(e.event_id)){assert.deepEqual(events.get(e.event_id),e);duplicateIds.push(e.event_id);}else{events.set(e.event_id,e);acceptedIds.push(e.event_id);}}
+  res.end(JSON.stringify({acceptedIds,duplicateIds,rejected:[],generation:b.generation,receivedAt:new Date().toISOString(),retryAfterMs:null}));return;
+ }
+ let pathname=url.pathname.endsWith('/')?url.pathname+'index.html':url.pathname;
+ if(pathname==='/fixture-download'){res.setHeader('Content-Type','text/html');res.end('<h1>Local download fixture</h1>');return;}
+ let data=await readFile(path.join('dist',pathname));
+ if(pathname==='/config.js'&&fixture)data=Buffer.from(data.toString()+`\nwindow.CODEVALANCHE_ANALYTICS={enabled:true,baseUrl:'${origin}/collector',pageVersion:'local_fixture'};window.CODEVALANCHE_DOWNLOADS.windows='/fixture-download';`);
+ res.setHeader('Content-Type',pathname.endsWith('.js')?'text/javascript':pathname.endsWith('.css')?'text/css':pathname.endsWith('.svg')?'image/svg+xml':'text/html');res.end(data);
+ }catch(error){if(req.url.startsWith('/collector'))errors.push(error.message);res.writeHead(404);res.end();}}).listen(0,'127.0.0.1');
+async function text(req){const a=[];for await(const c of req)a.push(c);return Buffer.concat(a).toString();}
+await new Promise(r=>server.once('listening',r));const origin=`http://127.0.0.1:${server.address().port}`,browser=await chromium.launch({headless:true});
+async function localContext(options={}){const context=await browser.newContext(options);await context.route('https://**/*',route=>route.abort());return context;}
+async function ready(page,url='/'){await page.goto(origin+url);await page.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager,null,{timeout:3000});}
+async function choose(page,enabled){await page.evaluate(v=>CodevalancheAnalytics.setConsent({websiteAnalytics:v}),enabled);}
+async function flush(page){await page.evaluate(()=>CodevalancheAnalytics.flush());}
+try{
+ const context=await localContext({reducedMotion:'reduce'}),page=await context.newPage();let google=0;
+ await context.addCookies([{name:'codevalanche_consent',value:'accepted',url:origin}]);await context.addInitScript(()=>localStorage.setItem('codevalanche_analytics_installation','legacy-not-an-owned-id'));
+ context.on('request',r=>{if(/google-analytics|googletagmanager/.test(r.url()))google++;});
+ await ready(page,'/?utm_source=newsletter&utm_medium=email&utm_campaign=fall_launch&email=private%40example.com&gclid=secret#access_token=private');
+ assert.equal(requests.length,0);assert.equal(await page.evaluate(()=>CodevalancheAnalytics.consentManager.getState().state),'unknown');assert.equal(await page.evaluate(()=>localStorage.getItem('owned_analytics:codevalanche:identity')),null);
+ await page.getByRole('button',{name:'Decline',exact:true}).click();await flush(page);assert.equal(requests.length,0);
+ await page.locator('.cmp-manage').click();await page.getByRole('button',{name:'Accept analytics',exact:true}).click();await page.waitForFunction(()=>CodevalancheAnalytics.getStatus()==='ready');await flush(page);const session=[...events.values()].find(e=>e.event_name==='session_started');assert.equal(session.properties.attribution_kind,'campaign');assert.equal(session.context.acquisition_source,'newsletter');assert.equal(session.context.campaign,'fall_launch');assert.ok(!JSON.stringify([...events.values()]).includes('private'));
+ await page.getByRole('tab',{name:'Review 03'}).click();await page.locator('.faq-list details').nth(2).locator('summary').click();await page.locator('.hero-actions a').first().click();await flush(page);
+ assert.equal([...events.values()].filter(e=>e.event_name==='feature_selected').length,1);assert.equal([...events.values()].filter(e=>e.event_name==='faq_toggled').length,1);
+ for(const name of ['Workspace 01','Runtime 02','Local-first 04'])await page.getByRole('tab',{name}).click();for(const id of ['product','agents','privacy','download'])await page.locator(`[data-analytics-faq="${id}"] summary`).click();await flush(page);
+ assert.deepEqual([...new Set([...events.values()].filter(e=>e.event_name==='feature_selected').map(e=>e.properties.feature_id))].sort(),['agents','local_first','project','review']);assert.deepEqual([...new Set([...events.values()].filter(e=>e.event_name==='faq_toggled').map(e=>e.properties.faq_id))].sort(),['accounts','agents','download','privacy','product']);assert.ok([...events.values()].some(e=>e.event_name==='navigation_used'));
+ await page.locator('header .nav-cta').click();await page.locator('footer a[href="#download"]').click();await flush(page);for(const placement of ['header','hero','footer'])assert.ok([...events.values()].some(e=>e.event_name==='navigation_used'&&e.properties.placement===placement));
+ const beforeDownload=[...events.values()].filter(e=>e.event_name==='download_clicked').length;
+ // Real link + ordinary native document navigation. No queue/flush barrier on this path.
+ await page.locator('[data-download-platform="windows"]').last().click();await page.waitForURL(origin+'/fixture-download');
+ await new Promise(r=>setTimeout(r,600));assert.equal([...events.values()].filter(e=>e.event_name==='download_clicked').length-beforeDownload,1);
+ await ready(page);await page.locator('.nav-signin').click();await page.waitForURL(origin+'/account/');await page.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager);assert.ok([...events.values()].some(e=>e.event_name==='account_entry_clicked'&&e.properties.placement==='header'));
+ await page.getByRole('button',{name:'Create account',exact:true}).click();await flush(page);assert.ok([...events.values()].some(e=>e.page_id==='account'&&e.event_name==='signup_started'));await page.getByRole('button',{name:'Back to sign in',exact:true}).click();await flush(page);assert.ok([...events.values()].some(e=>e.page_id==='account'&&e.event_name==='login_started'));assert.equal([...events.values()].some(e=>e.page_id==='account'&&e.event_name==='page_viewed'),false);
+ await page.locator('.cmp-manage').click();await page.getByRole('button',{name:'Decline',exact:true}).click();const before=requests.length;await flush(page);assert.equal(requests.length,before);
+ assert.equal(google,0);
+ // Disabling a release must fence an already valid persisted grant, not merely a fresh visitor.
+ await ready(page);await choose(page,true);await flush(page);fixture=false;await ready(page);assert.equal(await page.evaluate(()=>CodevalancheAnalytics.consentManager.getCollectionContext({touchActivity:false})),null,'disabled release must reject existing grants');const disabledExisting=requests.length;await flush(page);assert.equal(requests.length,disabledExisting);assert.equal(await page.evaluate(()=>CodevalancheAnalytics.getStatus()),'not_configured');await context.close();
+ fixture=false;const disabled=await localContext({viewport:{width:320,height:844},reducedMotion:'reduce'}),d=await disabled.newPage();await ready(d);await choose(d,true);assert.equal(await d.evaluate(()=>CodevalancheAnalytics.getStatus()),'not_configured');assert.equal(await d.locator('[data-download-platform]').count(),0);assert.equal(await d.locator('#download').getAttribute('data-release-status'),'not_configured');assert.match(await d.locator('[data-owned-status]').first().innerText(),/not enabled/i);assert.equal(await d.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ for(const route of ['/privacy.html','/terms.html','/changelog.html','/account/','/account/authorize/']){await ready(d,route);assert.equal(await d.locator('[data-owned-consent]').count(),1);await d.locator('.cmp-manage').click();await d.locator('.cmp-actions button').last().click();assert.equal(await d.getByRole('dialog',{name:'Cookie preferences'}).isVisible(),true);await d.keyboard.press('Escape');}
+ await disabled.close();fixture=true;
+ // New local source observations: no history backfill, normalized external referral, same-origin unknown.
+ const acquisition=await localContext(),a=await acquisition.newPage();
+ await ready(a,'/?utm_campaign=before_consent');await a.evaluate(()=>history.replaceState({},'', '/?utm_source=person%40example.com&utm_campaign=access_token'));
+ await choose(a,true);await flush(a);let source=[...events.values()].filter(e=>e.event_name==='session_started').at(-1);assert.equal(source.properties.attribution_kind,'unknown');assert.equal(source.context.referrer_domain,'unknown');assert.equal(source.context.campaign,undefined);
+ await a.goto(origin+'/privacy.html');await a.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager);await flush(a);source=[...events.values()].filter(e=>e.event_name==='session_started').at(-1);assert.equal(source.properties.attribution_kind,'unknown');assert.equal(source.context.referrer_domain,'unknown');
+ await a.goto(origin+'/',{referer:'https://NEWS.Example.org/private?email=secret@example.org'});await a.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager);await flush(a);source=[...events.values()].filter(e=>e.event_name==='session_started').at(-1);assert.equal(source.properties.attribution_kind,'referrer');assert.equal(source.context.referrer_domain,'news.example.org');
+ const peer=await acquisition.newPage();await ready(peer);await choose(peer,false);await a.waitForFunction(()=>CodevalancheAnalytics.consentManager.getState().websiteAnalytics===false);const afterPeer=requests.length;await flush(a);assert.equal(requests.length,afterPeer);await acquisition.close();
+ failReceipt=true;const failed=await localContext(),f=await failed.newPage();await ready(f);await choose(f,true);assert.equal(await f.evaluate(()=>CodevalancheAnalytics.getStatus()),'unavailable');assert.match(await f.locator('[data-owned-status]').first().innerText(),/unavailable/i);await failed.close();
+ const noStorage=await localContext();await noStorage.addInitScript(()=>{Storage.prototype.getItem=()=>{throw new DOMException('blocked','SecurityError')};Storage.prototype.setItem=()=>{throw new DOMException('blocked','SecurityError')};});const n=await noStorage.newPage();await ready(n);await n.getByRole('tab',{name:'Review 03'}).click();assert.equal(await n.locator('#panel-review').isVisible(),true);await choose(n,false);await noStorage.close();
+ const forbidden=await localContext();await forbidden.addInitScript(()=>Object.defineProperty(window,'localStorage',{get(){throw new DOMException('blocked','SecurityError')}}));const x=await forbidden.newPage();await ready(x);await x.getByRole('tab',{name:'Review 03'}).click();assert.equal(await x.locator('#panel-review').isVisible(),true);await choose(x,false);await forbidden.close();
+ assert.deepEqual(errors,[]);console.log(`PASS website analytics integration: ${events.size} T1-validated events; GA zero; consent/default navigation/mobile/no-storage/disabled-provider`);
+}finally{await browser.close();server.closeAllConnections();await new Promise(r=>server.close(r));}

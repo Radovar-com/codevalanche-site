@@ -1,66 +1,20 @@
-import { test } from 'node:test'
-import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
-import vm from 'node:vm'
-import { webcrypto } from 'node:crypto'
-
-const source = readFileSync(new URL('../src/account-funnel.js', import.meta.url), 'utf8')
-function setup(origin = 'https://accounts.example.test') {
-  const requests = [], storage = new Map(), listeners = {}
-  const accountLink = { hidden: true }, unavailable = { hidden: false }
-  const document = { cookie: '', querySelectorAll: () => [accountLink], querySelector: () => unavailable, addEventListener: (name, fn) => { listeners[name] = fn } }
-  const context = { document, URL, crypto: webcrypto, location: { protocol: 'https:' }, localStorage: { getItem: k => storage.get(k), setItem: (k,v) => storage.set(k,v), removeItem: k => storage.delete(k) }, fetch: (...args) => { requests.push(args); return Promise.resolve({ok:true}) }, window: { CODEVALANCHE_CONFIG: { apiOrigin: origin, accountOrigin: origin }, addEventListener: (name, fn) => { listeners[name] = fn } } }
-  vm.runInNewContext(source, context)
-  return { ...context, requests, storage, listeners, accountLink, unavailable }
-}
-test('no request or identifier before explicit acceptance; visit is sent once', () => {
-  const c = setup()
-  c.window.CodevalancheFunnel.track('download_clicked', 'windows')
-  assert.equal(c.requests.length, 0); assert.equal(c.storage.size, 0)
-  c.document.cookie = 'codevalanche_consent=accepted'
-  c.listeners['codevalanche-consent'](); c.listeners['codevalanche-consent']()
-  assert.equal(c.requests.length, 1)
-  const [url, options] = c.requests[0], body = JSON.parse(options.body)
-  assert.equal(url, 'https://accounts.example.test/api/codevalanche/accounts/events')
-  assert.deepEqual(Object.keys(body).sort(), ['consent','eventId','eventName','installationId','platform'])
-  assert.equal(body.eventName, 'website_view'); assert.equal(body.platform, 'web')
-  assert.equal(options.credentials, 'omit'); assert.equal(options.referrerPolicy, 'no-referrer')
-  assert.match(body.installationId, /^[0-9a-f-]{36}$/)
-})
-test('download platforms normalize and withdrawal deletes identifier', () => {
-  const c = setup(); c.document.cookie = 'codevalanche_consent=accepted'
-  c.window.CodevalancheFunnel.track('download_clicked', 'mac-arm')
-  assert.equal(JSON.parse(c.requests[0][1].body).platform, 'macos')
-  c.document.cookie = 'codevalanche_consent=declined'; c.listeners['codevalanche-consent']()
-  c.window.CodevalancheFunnel.track('download_clicked', 'windows')
-  assert.equal(c.requests.length, 1); assert.equal(c.storage.size, 0)
-})
-test('unconfigured, unsafe origins and unknown event names stay silent', () => {
-  for (const origin of ['', 'javascript:alert(1)', 'https://a.test/path', 'http://a.test', 'https://user:password@a.test']) {
-    const c = setup(origin); c.document.cookie = 'codevalanche_consent=accepted'
-    c.listeners['codevalanche-consent']()
-    assert.equal(c.requests.length, 0); assert.equal(c.storage.size, 0)
-  }
-  const c = setup(); c.document.cookie = 'codevalanche_consent=accepted'
-  c.window.CodevalancheFunnel.track('email', 'web')
-  assert.equal(c.requests.length, 0)
-})
-test('only a real marked download link produces a click event', () => {
-  const c = setup(); c.document.cookie = 'codevalanche_consent=accepted'
-  c.listeners.click({ target: { closest: () => null } })
-  assert.equal(c.requests.length, 0)
-  c.listeners.click({ target: { closest: () => ({ getAttribute: name => name === 'href' ? 'https://releases.example.test/setup.exe' : 'windows' }) } })
-  assert.equal(c.requests.length, 1)
-  assert.equal(JSON.parse(c.requests[0][1].body).eventName, 'download_clicked')
-})
-test('account link points only to configured central UI; blank config stays usable', () => {
-  const active = setup()
-  assert.equal(active.accountLink.href, 'https://accounts.example.test/account/')
-  assert.equal(active.accountLink.hidden, false)
-  assert.equal(active.unavailable.hidden, true)
-  const blank = setup('')
-  assert.equal(blank.accountLink.href, undefined)
-  assert.equal(blank.accountLink.hidden, true)
-  assert.equal(blank.unavailable.hidden, false)
-})
-
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {browserContext,sanitizeEvent} from '../src/analytics/core/sanitizer.js';
+const host=(href,referrer='')=>({location:{href},document:{referrer},navigator:{language:'en-US',userAgent:'Mozilla/5.0 Windows NT Chrome/123.0'},innerWidth:1024});
+test('acquisition reads only explicitly requested allowlisted context with normalized external referrer',()=>{
+ const input=host('https://codevalanche.com/?utm_source=newsletter&utm_medium=email&utm_campaign=fall_2026&gclid=private#access_token=private','https://EXAMPLE.org/path?email=private@example.org');
+ assert.equal(browserContext(input).acquisition_source,undefined);
+ const context=browserContext(input,{acquisition:true});assert.equal(context.acquisition_source,'newsletter');assert.equal(context.referrer_domain,'example.org');assert.equal(context.viewport_bucket,'medium');assert.equal(context.os_family,'windows');assert.equal(context.browser_family,'chrome');assert.ok(!JSON.stringify(context).includes('private'));
+ assert.ok(sanitizeEvent('session_started',{landing_page_id:'home',attribution_kind:'campaign'},context,'codevalanche'));
+});
+test('missing/same-origin referrer and unsafe, oversized or ambiguous campaign values stay unknown',()=>{
+ for(const referrer of ['', 'https://codevalanche.com/privacy.html', 'javascript:private', 'https://127.0.0.1/path'])assert.equal(browserContext(host('https://codevalanche.com/',referrer),{acquisition:true}).referrer_domain,'unknown');
+ for(const value of ['person%40example.com','https%3A%2F%2Fprivate.example','access_token','a'.repeat(81),'1234567890','550e8400-e29b-41d4-a716-446655440000'])assert.equal(browserContext(host('https://codevalanche.com/?utm_campaign='+value),{acquisition:true}).campaign,undefined,value);
+ assert.equal(browserContext(host('https://codevalanche.com/?utm_source=first&utm_source=second'),{acquisition:true}).acquisition_source,undefined);
+});
+test('public config ships collection disabled and legacy transport/GA code is absent',()=>{
+ const config=readFileSync(new URL('../src/config.js',import.meta.url),'utf8');assert.match(config,/enabled: false/);
+ for(const file of ['account-funnel.js','site.js']){const source=readFileSync(new URL('../src/'+file,import.meta.url),'utf8');assert.doesNotMatch(source,/googletagmanager|gtag\(|\/api\/codevalanche\/accounts\/events|codevalanche_analytics_installation/);}
+});

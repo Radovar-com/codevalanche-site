@@ -155,18 +155,5 @@
       </div>
     </footer>
 
-    <div class="consent-banner" id="consent-banner" role="region" aria-labelledby="consent-title" aria-describedby="consent-description" hidden>
-      <div><p class="consent-label">Your privacy, in plain language</p><h2 id="consent-title">A little analytics, only if you want it.</h2><p id="consent-description">We use optional analytics to understand which parts of the site help. Nothing loads until you accept. Read the <a href="/privacy.html">privacy policy</a>.</p></div>
-      <div class="consent-actions"><button class="button button-quiet" type="button" data-consent="declined">Decline</button><button class="button button-primary" type="button" data-consent="accepted">Accept analytics</button></div>
-    </div>
 
-    <div class="consent-preferences" id="consent-preferences" role="dialog" aria-modal="true" aria-labelledby="preferences-title" hidden>
-      <div class="preferences-card"><button class="preferences-close" type="button" data-close-consent aria-label="Close cookie preferences">×</button><p class="consent-label">Privacy controls</p><h2 id="preferences-title">Choose what runs.</h2><p>Essential storage keeps your preference. Optional analytics helps us understand visits without receiving source code or form data.</p><div class="preference-row"><span><strong>Essential</strong><small>Always on for consent state.</small></span><span class="preference-state">Required</span></div><div class="preference-row"><span><strong>Analytics</strong><small>Only loaded after acceptance.</small></span><button class="toggle" type="button" role="switch" aria-checked="false" aria-label="Analytics" data-toggle-analytics><span></span><b aria-hidden="true">Off</b></button></div><button class="button button-primary preferences-save" type="button" data-save-preferences>Save preferences</button></div>
-    </div>
-
-    <script>
-      window.CODEVALANCHE_ANALYTICS = { measurementId: "G-XXXXXXXXXX" }
-    </script>
-
-  <script src="/site.js" defer></script></body>
-</html>
+<script src="/config.js"></script><script type="module" src="/site.js"></script></body></html>
