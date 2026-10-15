@@ -11,9 +11,38 @@ alter table public.codevalanche_auth_correlation_config enable row level securit
 alter table public.codevalanche_auth_operation_attempts enable row level security;
 revoke all on public.codevalanche_auth_correlation_config,public.codevalanche_auth_operation_attempts from public,anon,authenticated,service_role;
 create function public.codevalanche_auth_correlation_qualified() returns boolean language sql stable security definer set search_path='' as $$
+ with recursive execution_roles as (
+  select oid from pg_catalog.pg_roles where rolname in ('supabase_auth_admin','anon','authenticated','service_role','authenticator','codevalanche_operation_worker')
+ ), reachable_roles(oid) as (
+  select oid from execution_roles
+  union
+  select m.roleid from pg_catalog.pg_auth_members m join reachable_roles r on r.oid=m.member where m.set_option
+ ), expected_triggers as (
+  select t.* from pg_catalog.pg_trigger t where t.tgrelid='auth.users'::regclass and not t.tgisinternal and t.tgqual is null and t.tgnargs=0
+   and ((t.tgname='codevalanche_auth_operation_guard' and t.tgfoid=pg_catalog.to_regprocedure('public.codevalanche_auth_operation_guard()') and t.tgtype=19 and not t.tgdeferrable)
+    or (t.tgname='codevalanche_auth_operation_commit' and t.tgfoid=pg_catalog.to_regprocedure('public.codevalanche_auth_operation_commit()') and t.tgtype=17 and t.tgdeferrable and t.tginitdeferred))
+ )
  select coalesce((select qualified from public.codevalanche_auth_correlation_config where singleton),false)
  and (select count(*)=3 from pg_catalog.pg_attribute where attrelid='auth.users'::regclass and not attisdropped and ((attname='raw_app_meta_data' and atttypid='jsonb'::regtype) or (attname='banned_until' and atttypid='timestamptz'::regtype) or (attname='id' and atttypid='uuid'::regtype)))
- and (select count(*)=2 from pg_catalog.pg_trigger where tgrelid='auth.users'::regclass and tgname in ('codevalanche_auth_operation_guard','codevalanche_auth_operation_commit') and tgenabled='A')
+ and (
+  (select count(*)=2 from expected_triggers where tgenabled='A')
+  or (
+   -- Hosted Auth owns its table. Normal triggers protect only origin/local execution;
+   -- never describe this branch as ALWAYS or accept a replica-capable Auth principal.
+   (select count(*)=2 from expected_triggers where tgenabled='O')
+   and pg_catalog.current_setting('session_replication_role') in ('origin','local')
+   and (select pg_catalog.pg_get_userbyid(relowner)='supabase_auth_admin' from pg_catalog.pg_class where oid='auth.users'::regclass)
+   and (select count(*)=6 from execution_roles)
+   and not exists(select 1 from reachable_roles r join pg_catalog.pg_roles p on p.oid=r.oid where p.rolsuper or pg_catalog.has_parameter_privilege(p.oid,'session_replication_role','SET'))
+   and not exists(select 1 from pg_catalog.pg_auth_members where member=(select oid from pg_catalog.pg_roles where rolname='supabase_auth_admin'))
+   and not exists(
+    select 1 from pg_catalog.pg_db_role_setting s cross join lateral pg_catalog.unnest(s.setconfig) c(setting)
+    where (s.setdatabase=0 or s.setdatabase=(select oid from pg_catalog.pg_database where datname=pg_catalog.current_database()))
+     and (s.setrole=0 or s.setrole in (select oid from reachable_roles))
+     and c.setting like 'session_replication_role=%' and c.setting not in ('session_replication_role=origin','session_replication_role=local')
+   )
+  )
+ )
 $$;
 -- This is an application-enforced transaction protocol, not provider idempotency.
 create function public.codevalanche_auth_operation_guard() returns trigger language plpgsql security definer set search_path='' as $$
@@ -53,8 +82,24 @@ begin
 end $$;
 create trigger codevalanche_auth_operation_guard before update on auth.users for each row execute function public.codevalanche_auth_operation_guard();
 create constraint trigger codevalanche_auth_operation_commit after update on auth.users deferrable initially deferred for each row execute function public.codevalanche_auth_operation_commit();
-alter table auth.users enable always trigger codevalanche_auth_operation_guard;
-alter table auth.users enable always trigger codevalanche_auth_operation_commit;
+-- Reviewed before first deployment: hosted Supabase grants TRIGGER but retains
+-- managed Auth ownership. Keep ordinary enabled triggers there; qualification
+-- above checks that the Auth/application execution roles cannot enter replica mode.
+do $$
+declare v_owner oid;
+begin
+ select relowner into strict v_owner from pg_catalog.pg_class where oid='auth.users'::regclass;
+ if pg_catalog.pg_has_role(current_user,v_owner,'USAGE')
+    or (select rolsuper from pg_catalog.pg_roles where rolname=current_user) then
+  alter table auth.users enable always trigger codevalanche_auth_operation_guard;
+  alter table auth.users enable always trigger codevalanche_auth_operation_commit;
+ elsif pg_catalog.pg_get_userbyid(v_owner)='supabase_auth_admin'
+       and pg_catalog.has_table_privilege(current_user,'auth.users','TRIGGER') then
+  null; -- CREATE TRIGGER already enabled both for origin/local.
+ else
+  raise exception 'auth_correlation_unsupported_owner';
+ end if;
+end $$;
 create function public.codevalanche_prepare_correlated_operation(p_operation_id uuid,p_lease_id uuid)
 returns table(allowed boolean,decision text,binding jsonb) language plpgsql security definer set search_path='' as $$
 declare v_job public.codevalanche_operation_jobs;v_attempt public.codevalanche_auth_operation_attempts;v_prepare record;v_binding jsonb;v_deadline timestamptz;
