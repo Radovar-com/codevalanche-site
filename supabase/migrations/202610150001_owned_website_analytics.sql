@@ -247,4 +247,93 @@ revoke all on public.wa_events,public.wa_consent_receipts,public.wa_sessions,pub
 grant select,insert,update,delete on public.wa_events,public.wa_consent_receipts,public.wa_sessions,public.wa_source_snapshots,public.wa_daily_rollups,public.wa_data_health to service_role;
 revoke all on function public.wa_valid_properties(text,jsonb),public.wa_safe_dimensions(jsonb,text[]),public.wa_assert_report_actor(uuid),public.wa_assert_report_period(timestamptz,timestamptz,text) from public,anon,authenticated;
 grant execute on function public.wa_valid_properties(text,jsonb),public.wa_safe_dimensions(jsonb,text[]),public.wa_assert_report_actor(uuid),public.wa_assert_report_period(timestamptz,timestamptz,text) to service_role;
+-- Collector-only infrastructure brake. Hashes expire after two hours; they are
+-- never visitor identifiers and contain no raw network address.
+create table public.wa_rate_limits(
+ scope text not null check(scope in ('network','receipt')),key_hash text not null check(key_hash ~ '^[0-9a-f]{64}$'),
+ minute_start timestamptz not null,minute_count integer not null check(minute_count>=0),
+ tokens numeric not null check(tokens>=0),updated_at timestamptz not null,expires_at timestamptz not null,
+ primary key(scope,key_hash)
+);
+alter table public.wa_rate_limits enable row level security;
+revoke all on public.wa_rate_limits from public,anon,authenticated;
+grant select,insert,update,delete on public.wa_rate_limits to service_role;
+
+create function public.wa_health_increment(p_site_id text,p_counter text,p_count integer)
+returns void language sql security definer set search_path='' as $$
+ insert into public.wa_data_health(site_id,bucket_start,source,counter,count,watermark)
+ select p_site_id,date_trunc('minute',clock_timestamp()),'collector',p_counter,p_count,clock_timestamp() where p_count>0
+ on conflict(site_id,bucket_start,source,counter) do update set count=public.wa_data_health.count+excluded.count,watermark=excluded.watermark;
+$$;
+
+create function public.wa_take_rate_limit(p_scope text,p_key_hash text,p_site_id text)
+returns integer language plpgsql security definer set search_path='' as $$
+declare v_now timestamptz:=clock_timestamp();v_row public.wa_rate_limits;v_burst integer;v_max integer;v_tokens numeric;v_count integer;v_retry integer;
+begin
+ if p_scope not in ('network','receipt') then raise exception 'invalid_fields';end if;
+ v_burst:=case when p_scope='receipt' then 20 else 60 end;
+ v_max:=case when p_scope='receipt' then 120 else 600 end;
+ delete from public.wa_rate_limits where expires_at<v_now;
+ insert into public.wa_rate_limits values(p_scope,p_key_hash,date_trunc('minute',v_now),0,v_burst,v_now,v_now+interval '2 hours') on conflict do nothing;
+ select * into v_row from public.wa_rate_limits where scope=p_scope and key_hash=p_key_hash for update;
+ v_tokens:=least(v_burst,v_row.tokens+greatest(0,extract(epoch from v_now-v_row.updated_at))*v_max/60);
+ v_count:=case when v_row.minute_start=date_trunc('minute',v_now) then v_row.minute_count else 0 end;
+ if v_count>=v_max or v_tokens<1 then
+  v_retry:=greatest(1,case when v_count>=v_max then ceil(extract(epoch from date_trunc('minute',v_now)+interval '1 minute'-v_now)*1000)::integer else ceil((1-v_tokens)*60000/v_max)::integer end);
+  perform public.wa_health_increment(p_site_id,'rate_limited',1);
+  return v_retry;
+ end if;
+ update public.wa_rate_limits set minute_start=date_trunc('minute',v_now),minute_count=v_count+1,tokens=v_tokens-1,updated_at=v_now,expires_at=v_now+interval '2 hours' where scope=p_scope and key_hash=p_key_hash;
+ return 0;
+end $$;
+
+create function public.wa_get_collection_receipt(p_receipt_id uuid,p_site_id text,p_generation bigint,p_collection_hash text)
+returns public.wa_consent_receipts language plpgsql stable security definer set search_path='' as $$
+declare v_row public.wa_consent_receipts;
+begin
+ select * into v_row from public.wa_consent_receipts where receipt_id=p_receipt_id;
+ if not found or v_row.site_id is distinct from p_site_id or v_row.collection_token_hash is distinct from p_collection_hash or v_row.revoked_at is not null or v_row.expires_at<=clock_timestamp() or v_row.issued_at>clock_timestamp() then raise exception 'invalid_consent';end if;
+ if v_row.generation is distinct from p_generation then raise exception 'stale_generation';end if;
+ return v_row;
+end $$;
+
+-- A single RPC transaction: receipt FOR UPDATE -> rate key -> insert -> ACK.
+-- Revocation uses the SAME receipt lock. A validation pre-read is never the
+-- authorization boundary. A stays disabled pending real current/event P4 proof.
+create function public.wa_ingest_website_batch(p_receipt_id uuid,p_site_id text,p_generation bigint,p_collection_hash text,p_events jsonb,p_rejected jsonb)
+returns jsonb language plpgsql security definer set search_path='' as $$
+declare v_receipt public.wa_consent_receipts;v_item jsonb;v_input jsonb;v_accepted jsonb:='[]';v_duplicates jsonb:='[]';v_retry integer;v_count integer;v_code text;v_received timestamptz:=clock_timestamp();
+begin
+ if jsonb_typeof(p_events) is distinct from 'array' or jsonb_typeof(p_rejected) is distinct from 'array' or jsonb_array_length(p_events)+jsonb_array_length(p_rejected) not between 1 and 50 then raise exception 'invalid_fields';end if;
+ begin
+  v_receipt:=public.wa_lock_consent_receipt(p_receipt_id,p_site_id,p_generation,p_collection_hash,null);
+ exception when others then
+  if sqlerrm not in ('invalid_consent','stale_generation') then raise;end if;
+  perform public.wa_health_increment(p_site_id,'rejected_consent',jsonb_array_length(p_events)+jsonb_array_length(p_rejected));
+  return jsonb_build_object('error',sqlerrm);
+ end;
+ v_retry:=public.wa_take_rate_limit('receipt',p_collection_hash,p_site_id);
+ if v_retry>0 then return jsonb_build_object('error','rate_limited','retryAfterMs',v_retry);end if;
+ for v_item in select value from jsonb_array_elements(p_events) loop
+  v_input:=v_item->'input';
+  if v_item->>'eventSource' is distinct from 'W' or v_item->>'authority' is distinct from 'browser_observation' or v_item->>'surface' not in ('marketing','pre_auth') or v_input->>'site_id' is distinct from p_site_id or (v_input->>'consent_receipt_id')::uuid is distinct from p_receipt_id or (v_input->>'consent_generation')::bigint is distinct from p_generation then raise exception 'invalid_consent';end if;
+  insert into public.wa_events(site_id,event_id,schema_version,event_name,occurred_at,event_at,received_at,page_id,page_instance_id,page_version,session_id,anonymous_id,consent_receipt_id,consent_generation,properties,context,event_source,authority,surface,clock_quality)
+  values(p_site_id,(v_input->>'event_id')::uuid,1,v_input->>'event_name',(v_input->>'occurred_at')::timestamptz,(v_item->>'eventAt')::timestamptz,(v_item->>'receivedAt')::timestamptz,v_input->>'page_id',(v_input->>'page_instance_id')::uuid,v_input->>'page_version',(v_input->>'session_id')::uuid,(v_input->>'anonymous_id')::uuid,p_receipt_id,p_generation,v_input->'properties',coalesce(v_input->'context','{}'),'W','browser_observation',v_item->>'surface',v_item->>'clockQuality')
+  on conflict(site_id,event_id) do nothing;
+  get diagnostics v_count=row_count;
+  if v_count=1 then
+   v_accepted:=v_accepted||jsonb_build_array(v_input->>'event_id');
+   if v_item->>'clockQuality'='adjusted' then perform public.wa_health_increment(p_site_id,'clock_adjusted',1);end if;
+  else v_duplicates:=v_duplicates||jsonb_build_array(v_input->>'event_id');end if;
+ end loop;
+ perform public.wa_health_increment(p_site_id,'accepted',jsonb_array_length(v_accepted));
+ perform public.wa_health_increment(p_site_id,'duplicate',jsonb_array_length(v_duplicates));
+ for v_item in select value from jsonb_array_elements(p_rejected) loop
+  v_code:=case when v_item->>'code' in ('invalid_consent','stale_generation') then 'rejected_consent' else 'rejected_schema' end;
+  perform public.wa_health_increment(p_site_id,v_code,1);
+ end loop;
+ return jsonb_build_object('acceptedIds',v_accepted,'duplicateIds',v_duplicates,'rejected',p_rejected,'generation',p_generation,'receivedAt',to_char(v_received at time zone 'UTC','YYYY-MM-DD"T"HH24:MI:SS.MS"Z"'),'retryAfterMs',null);
+end $$;
+revoke all on function public.wa_health_increment(text,text,integer),public.wa_take_rate_limit(text,text,text),public.wa_get_collection_receipt(uuid,text,bigint,text),public.wa_ingest_website_batch(uuid,text,bigint,text,jsonb,jsonb) from public,anon,authenticated;
+grant execute on function public.wa_health_increment(text,text,integer),public.wa_take_rate_limit(text,text,text),public.wa_get_collection_receipt(uuid,text,bigint,text),public.wa_ingest_website_batch(uuid,text,bigint,text,jsonb,jsonb) to service_role;
 commit;
