@@ -96,6 +96,66 @@ create table public.wa_consent_receipts(
 );
 comment on table public.wa_consent_receipts is 'Minimal choice protocol; no visitor/session/account/IP identity; hashed capabilities only. Not proof of a human.';
 
+-- Restricted P4 binding, separate from the anonymous choice registry. W and P4
+-- generations are independent. A receipt can never be rebound to a new account.
+create table public.wa_receipt_account_bindings(
+ receipt_id uuid primary key references public.wa_consent_receipts(receipt_id) on delete cascade,
+ principal_id uuid not null references auth.users(id) on delete cascade,
+ account_consent_generation bigint not null check(account_consent_generation between 0 and 9007199254740991)
+);
+alter table public.wa_receipt_account_bindings enable row level security;
+revoke all on public.wa_receipt_account_bindings from public,anon,authenticated;
+grant select,insert,update,delete on public.wa_receipt_account_bindings to service_role;
+
+create function public.wa_issue_consent_receipt(p_receipt_id uuid,p_site_id text,p_policy_version text,p_generation bigint,p_website_analytics boolean,p_account_analytics boolean,p_issued_at timestamptz,p_expires_at timestamptz,p_collection_hash text,p_revocation_hash text,p_principal_id uuid,p_account_generation bigint)
+returns void language plpgsql security definer set search_path='' as $$
+declare v_policy public.codevalanche_account_state;
+begin
+ if p_generation<1 or p_generation>=9007199254740991 or not (p_website_analytics or p_account_analytics) or p_expires_at>p_issued_at+interval '180 days' or p_issued_at>clock_timestamp()+interval '5 minutes' then raise exception 'invalid_fields';end if;
+ if p_account_analytics then
+  select * into v_policy from public.codevalanche_account_state where user_id=p_principal_id for update;
+  if not found or not v_policy.analytics_consent or v_policy.status<>'active' or v_policy.blocked then raise exception 'invalid_consent';end if;
+  if v_policy.consent_generation is distinct from p_account_generation then raise exception 'stale_generation';end if;
+ elsif p_principal_id is not null or p_account_generation is not null then raise exception 'invalid_fields';end if;
+ insert into public.wa_consent_receipts(receipt_id,site_id,policy_version,generation,website_analytics,account_analytics,issued_at,expires_at,collection_token_hash,revocation_proof_hash)
+ values(p_receipt_id,p_site_id,p_policy_version,p_generation,p_website_analytics,p_account_analytics,p_issued_at,p_expires_at,p_collection_hash,p_revocation_hash);
+ if p_account_analytics then insert into public.wa_receipt_account_bindings values(p_receipt_id,p_principal_id,p_account_generation);end if;
+end $$;
+
+-- T3 MUST call this guard inside the SAME transaction/RPC as event INSERT.
+-- The FOR UPDATE receipt lock is shared with revocation and held until COMMIT.
+-- p_principal_id is null for W, a verified current P4 principal for A.
+create function public.wa_lock_consent_receipt(p_receipt_id uuid,p_site_id text,p_generation bigint,p_collection_hash text,p_principal_id uuid)
+returns public.wa_consent_receipts language plpgsql security definer set search_path='' as $$
+declare v_receipt public.wa_consent_receipts;v_binding public.wa_receipt_account_bindings;v_policy public.codevalanche_account_state;
+begin
+ select * into v_receipt from public.wa_consent_receipts where receipt_id=p_receipt_id for update;
+ if not found or v_receipt.site_id is distinct from p_site_id or v_receipt.revoked_at is not null or v_receipt.expires_at<=clock_timestamp() or v_receipt.issued_at>clock_timestamp() or v_receipt.collection_token_hash is distinct from p_collection_hash then raise exception 'invalid_consent';end if;
+ if v_receipt.generation is distinct from p_generation then raise exception 'stale_generation';end if;
+ if p_principal_id is null then
+  if not v_receipt.website_analytics then raise exception 'invalid_consent';end if;
+ else
+  select * into v_binding from public.wa_receipt_account_bindings where receipt_id=p_receipt_id;
+  if not found or not v_receipt.account_analytics or v_binding.principal_id<>p_principal_id then raise exception 'invalid_consent';end if;
+  select * into v_policy from public.codevalanche_account_state where user_id=p_principal_id for update;
+  if not found or not v_policy.analytics_consent or v_policy.status<>'active' or v_policy.blocked then raise exception 'invalid_consent';end if;
+  if v_policy.consent_generation<>v_binding.account_consent_generation then raise exception 'stale_generation';end if;
+ end if;
+ return v_receipt;
+end $$;
+
+create function public.wa_revoke_consent_receipt(p_receipt_id uuid,p_generation bigint,p_revocation_hash text,p_site_id text)
+returns table(revoked boolean,generation bigint) language plpgsql security definer set search_path='' as $$
+declare v_receipt public.wa_consent_receipts;
+begin
+ select * into v_receipt from public.wa_consent_receipts where receipt_id=p_receipt_id for update;
+ if not found or v_receipt.site_id is distinct from p_site_id or v_receipt.generation is distinct from p_generation or v_receipt.revocation_proof_hash is distinct from p_revocation_hash then raise exception 'invalid_consent';end if;
+ update public.wa_consent_receipts set revoked_at=coalesce(revoked_at,clock_timestamp()) where receipt_id=p_receipt_id;
+ return query select true,v_receipt.generation+1;
+end $$;
+revoke all on function public.wa_issue_consent_receipt(uuid,text,text,bigint,boolean,boolean,timestamptz,timestamptz,text,text,uuid,bigint),public.wa_lock_consent_receipt(uuid,text,bigint,text,uuid),public.wa_revoke_consent_receipt(uuid,bigint,text,text) from public,anon,authenticated;
+grant execute on function public.wa_issue_consent_receipt(uuid,text,text,bigint,boolean,boolean,timestamptz,timestamptz,text,text,uuid,bigint),public.wa_lock_consent_receipt(uuid,text,bigint,text,uuid),public.wa_revoke_consent_receipt(uuid,bigint,text,text) to service_role;
+
 create table public.wa_events(
  site_id text not null check(site_id in ('radovar','codevalanche')),event_id uuid not null,schema_version integer not null default 1 check(schema_version=1),
  event_name text not null,occurred_at timestamptz not null,event_at timestamptz not null,received_at timestamptz not null default now(),
