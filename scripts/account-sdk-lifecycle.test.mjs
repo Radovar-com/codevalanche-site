@@ -57,7 +57,7 @@ async function fixture(t, { status = 200, expired = false, query = '' } = {}) {
     else if (url.pathname.includes('/functions/')) {
       responseStatus = accountStatus
       const user = request.headers().authorization?.includes(USER_B.id) ? USER_B : USER_A
-      result = accountStatus === 200 ? { user: { displayName: user.user_metadata.display_name, bio: '' }, sessions: [], deletion: null }
+      result = accountStatus === 200 ? body.action === 'operator.oauth.details' ? {apiVersion:2,ok:true,requestId:body.requestId,data:{operator:false}} : { user: { displayName: user.user_metadata.display_name, bio: '' }, sessions: [], deletion: null }
         : { error: accountStatus === 401 ? 'Session revoked' : accountStatus === 403 ? 'Account blocked' : 'Account service unavailable' }
     } else result = {}
     await route.fulfill({ status: responseStatus, contentType: 'application/json', body: JSON.stringify(result) })
@@ -414,3 +414,36 @@ test('actual app Google settings deadline includes a streamed partial body and p
   await until(page, () => document.getElementById('status').textContent.includes('Google sign-in is not available yet') && !document.getElementById('google-signin').disabled)
   assert.equal(settingsRequests, 2, 'a new click must finish a fresh settings request after timeout')
 })
+
+test('operator consent preflight observes autoapproval before any browser provider details call',async t=>{
+ const f=await fixture(t,{query:'?authorization_id=fixture-consent'});
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data:{operator:true,redirect_url:f.origin+'/api/operator-test-callback?code=synthetic'}})});
+ });
+ await f.page.route(f.origin+'/api/operator-test-callback?code=synthetic',route=>route.fulfill({status:200,body:'Callback reached'}));
+ await f.load();await f.page.waitForURL('**/api/operator-test-callback?code=synthetic');
+ assert.equal(f.calls.some(c=>c.path.includes('/oauth/authorizations/')),false);
+});
+
+test('operator manual approval stays server mediated',async t=>{
+ const f=await fixture(t,{query:'?authorization_id=fixture-consent'});let approve=0;
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  const body=route.request().postDataJSON();if(!body.action.startsWith('operator.oauth.'))return route.fallback();
+  if(body.action==='operator.oauth.approve')approve++;
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data:body.action==='operator.oauth.details'?{operator:true,client:{name:'Company OS'},scope:'openid email profile'}:{operator:true,redirect_url:f.origin+'/api/operator-test-callback?code=synthetic'}})});
+ });
+ await f.page.route(f.origin+'/api/operator-test-callback?code=synthetic',route=>route.fulfill({status:200,body:'Callback reached'}));
+ await f.load();await f.page.locator('#consent').waitFor({state:'visible'});await f.page.locator('#approve').click();await f.page.waitForURL('**/api/operator-test-callback?code=synthetic');
+ assert.equal(approve,1);assert.equal(f.calls.some(c=>c.path.includes('/oauth/authorizations/')),false);
+});
+
+test('failed operator preflight cannot fall back to browser autoapproval',async t=>{
+ const f=await fixture(t,{query:'?authorization_id=fixture-consent'});
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
+  await route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:false,requestId:body.requestId,error:{code:'account_service_unavailable'}})});
+ });
+ await f.load();await f.page.waitForFunction(()=>document.getElementById('status').textContent.includes('connection request'));
+ assert.equal(await f.page.locator('#consent').isVisible(),false);assert.equal(f.calls.some(c=>c.path.includes('/oauth/authorizations/')),false);
+});

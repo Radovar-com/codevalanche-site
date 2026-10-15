@@ -16,7 +16,7 @@ const redirectTo = authCallback(location.href)
 const authorizationId = redirectTo.searchParams.get('authorization_id')
 const recoveryRedirect = new URL(redirectTo); recoveryRedirect.searchParams.set('flow', 'recovery')
 let mode = 'signin', user = null, recovery = new URL(location.href).searchParams.get('flow') === 'recovery', busy = false
-let accountStatus = 'signed-out', renderGeneration = 0, currentSession = null
+let accountStatus = 'signed-out', renderGeneration = 0, currentSession = null, operatorConsent = false
 let cleanupPromise = null, cleanupPending = false, ownedSignin = false
 const security = createAccountSecurity(client, { isRecovery: () => recovery, assertRemoval: () => apiV2('security.mfa.remove-authorize') })
 function notice(message = '', error = false) { $('status').textContent = message; $('status').dataset.error = String(error) }
@@ -283,13 +283,23 @@ async function cancelAccountDeletion() {
 }
 $('cancel-deletion').addEventListener('click', () => void action(cancelAccountDeletion))
 async function showConsent(generation) {
-  try { const { data, error } = await client.auth.oauth.getAuthorizationDetails(authorizationId); if (error) throw error
+  try {
+    // Operator autoapproval must be observed server-side under the verified
+    // primary session before any provider SDK call can return a code redirect.
+    const prepared = await apiV2('operator.oauth.details', { authorizationId })
+    if (generation !== renderGeneration || accountStatus !== 'ready') return
+    operatorConsent = prepared.operator === true
+    let data = prepared
+    if (!operatorConsent) { const result = await client.auth.oauth.getAuthorizationDetails(authorizationId); if (result.error) throw result.error; data = result.data }
     if (generation !== renderGeneration || accountStatus !== 'ready') return
     if (data.redirect_url) { location.assign(data.redirect_url); return }
     $('consent-client').textContent = (data.client.name || 'This application') + ' wants to access your Codevalanche account.'
     $('consent-scope').textContent = 'Requested access: ' + data.scope
     $('consent').hidden = false
-  } catch { if (generation === renderGeneration && accountStatus === 'ready') notice('This connection request is invalid or expired. Start sign-in again from the app.', true) }
+  } catch (error) { if (generation === renderGeneration && accountStatus === 'ready') {
+    if (error?.code === 'reauthentication_required') { setAccountStatus('unavailable'); notice('Sign out, then sign in again with the same account to approve this connection.', true) }
+    else notice('This connection request is invalid or expired. Start sign-in again from the app.', true)
+  } }
 }
 for (const decision of ['approve','deny']) $(decision).addEventListener('click', () => void action(async () => {
   if (decision === 'approve' && accountStatus !== 'ready') return
@@ -297,7 +307,9 @@ for (const decision of ['approve','deny']) $(decision).addEventListener('click',
   if (decision === 'approve') await api('get-account')
   if (generation !== renderGeneration) throw { code: 'account_request_superseded' }
   const method = decision === 'approve' ? 'approveAuthorization' : 'denyAuthorization'
-  const { data, error } = await client.auth.oauth[method](authorizationId, { skipBrowserRedirect: true })
+  const { data, error } = decision === 'approve' && operatorConsent
+    ? { data: await apiV2('operator.oauth.approve', { authorizationId }), error: null }
+    : await client.auth.oauth[method](authorizationId, { skipBrowserRedirect: true })
   if (generation !== renderGeneration) throw { code: 'account_request_superseded' }
   if (error) throw error
   if (data.redirect_url) location.assign(data.redirect_url)

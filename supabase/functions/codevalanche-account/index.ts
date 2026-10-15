@@ -31,11 +31,14 @@ import { recordAccountRefusal } from "../_shared/securityEvent.ts";
 import { reconcileSuspensionExpiry } from "../_shared/suspensionExpiry.ts";
 import { projectBinding } from "../_shared/projectBindings.ts";
 import { persistProfileWithOutcome, readOwnedProfile } from "../_shared/profileOutcome.ts";
+import { operatorOAuthConsent, operatorOAuthEvidence } from "../_shared/operatorOAuthProof.ts";
 
 const url = Deno.env.get("SUPABASE_URL")!;
 const service = createClient(url, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
   auth: { persistSession: false, autoRefreshToken: false },
 });
+const operatorOAuthClientIds = (Deno.env.get("ACCOUNT_OPERATOR_OAUTH_CLIENT_IDS") || "").split(",").filter(id =>
+  id && (Deno.env.get("ACCOUNT_OAUTH_CLIENT_IDS") || "").split(",").includes(id));
 Deno.serve(async (req) => {
   const origin = req.headers.get("origin");
   const headers: Record<string, string> = {
@@ -155,7 +158,35 @@ Deno.serve(async (req) => {
       );
     }
     const policy = policyFromState(state);
-    assertAccountOperation(principal, policy, body.action, { recovery });
+    const operatorConsent = ["operator.oauth.details", "operator.oauth.approve"].includes(body.action);
+    const operatorClaim = body.action === "operator.oauth.claim";
+    const operatorRead = body.action.startsWith("admin.") && !isAdminMutation(body.action);
+    let operatorEvidence: any = null;
+    if (operatorConsent || operatorClaim) {
+      const fields = operatorClaim ? ["stateHash", "codeHash", "codeVerifier"] : ["authorizationId"];
+      if (!v2 || !uuid.test(requestId) || Object.keys(body).some(key => !["action", "apiVersion", "requestId", ...fields].includes(key))) {
+        throw new AccountError("invalid_fields", 400);
+      }
+    }
+    // The recovery exception is assembled only for the explicitly scoped
+    // operator read/claim, with the current primary-parent proof and native MFA.
+    // Ordinary consumer operations retain their original recovery predicate.
+    if (recovery && (operatorRead || operatorClaim)) {
+      operatorEvidence = await operatorOAuthEvidence(service, principal, claims, operatorClaim ? body : undefined, operatorOAuthClientIds);
+    }
+    assertAccountOperation(principal, policy, body.action, { recovery: recovery && !operatorEvidence });
+    if (operatorClaim) {
+      if (!operatorEvidence) throw new AccountError("recovery_restricted", 403);
+      return respond({ claimed: true });
+    }
+    if (operatorConsent) {
+      if (checked(await service.rpc("codevalanche_rate_limit", {p_bucket:`operator-consent:${principal.userId}`,p_limit:20})) === false) {
+        throw new AccountError("rate_limited", 429);
+      }
+      return respond(await operatorOAuthConsent({service,principal,claims,token,authorizationId:body.authorizationId,
+        decision:body.action === "operator.oauth.approve" ? "approve" : "details",url,
+        apikey:Deno.env.get("SUPABASE_ANON_KEY"),clientIds:(Deno.env.get("ACCOUNT_OAUTH_CLIENT_IDS") || "").split(",").filter(Boolean),operatorClientIds:operatorOAuthClientIds,origin,fetchImpl:fetch}));
+    }
     const restrictedCancellation = state?.status === "deletion_pending" &&
       ["account.deletion.cancel", "cancel-deletion"].includes(body.action);
     if (
@@ -252,7 +283,7 @@ Deno.serve(async (req) => {
           membership.role,
         )
       ) throw new AccountError("administrator_required", 403);
-      const evidence = await readCredentialStamp(service, principal);
+      const evidence = operatorEvidence || await readCredentialStamp(service, principal);
       const admin = await authorizeAdmin(
         principal,
         operation,

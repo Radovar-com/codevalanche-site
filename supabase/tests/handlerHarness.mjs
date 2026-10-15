@@ -7,7 +7,7 @@ export function request(action,extras={},claims=validClaims(),method='POST') {
  const jwt=`e30.${Buffer.from(JSON.stringify(claims)).toString('base64url')}.signature`;
  return new Request('https://example.test',{method,headers:{authorization:`Bearer ${jwt}`,'content-type':'application/json',origin:'https://codevalanche.com'},...(method==='POST'?{body:JSON.stringify({action,...extras})}:{})});
 }
-export async function loadHandler(db) {
+export async function loadHandler(db,{clientIds=['mobile-approved'],operatorClientIds=[],fetchImpl=globalThis.fetch}={}) {
  const file=new URL('../functions/codevalanche-account/index.ts',import.meta.url);
  let source=await readFile(file,'utf8');const names=[],values=[];
  const imports=[...source.matchAll(/^import\s*\{([^}]+)\}\s*from\s*['"]([^'"]+)['"];?/gm)];
@@ -16,7 +16,7 @@ export async function loadHandler(db) {
   for(const name of match[1].split(',').map(n=>n.trim()).filter(Boolean)){names.push(name);values.push(module[name]);}
  }
  for(const match of imports)source=source.replace(match[0],'');let handler;
- new Function(...names,'Deno',stripTypeScriptTypes(source))(...values,{env:{get:key=>({SUPABASE_URL:'https://example.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'test',ACCOUNT_OAUTH_CLIENT_IDS:'mobile-approved'})[key]},serve:fn=>{handler=fn}});
+ new Function(...names,'Deno','fetch',stripTypeScriptTypes(source))(...values,{env:{get:key=>({SUPABASE_URL:'https://example.supabase.co',SUPABASE_SERVICE_ROLE_KEY:'test',SUPABASE_ANON_KEY:'test-public',ACCOUNT_OAUTH_CLIENT_IDS:clientIds.join(','),ACCOUNT_OPERATOR_OAUTH_CLIENT_IDS:operatorClientIds.join(',')})[key]},serve:fn=>{handler=fn}},fetchImpl);
  return handler;
 }
 export function fixture() {

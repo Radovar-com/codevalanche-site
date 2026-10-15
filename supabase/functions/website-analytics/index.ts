@@ -7,7 +7,7 @@ import {readWebsiteReport} from '../_shared/websiteAnalyticsReports.ts';
 import {validateReportQuery,validateContractDto} from '../_shared/websiteAnalyticsContract.ts';
 import type {BuildRegistry,ReportView} from '../_shared/websiteAnalyticsContract.ts';
 
-type Options={service:any;issuer:string;clientIds?:string[];networkSecret:string;registry?:BuildRegistry;downloadManifest?:unknown;readReport?:(actor:any,query:any,view:ReportView)=>Promise<unknown>};
+type Options={service:any;issuer:string;clientIds?:string[];operatorClientIds?:string[];networkSecret:string;registry?:BuildRegistry;downloadManifest?:unknown;readReport?:(actor:any,query:any,view:ReportView)=>Promise<unknown>};
 async function readBody(request:Request){
  if(!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type')??''))throw new AnalyticsError('invalid_fields',null,415);
  const reader=request.body?.getReader();if(!reader)throw new AnalyticsError('invalid_fields');
@@ -72,6 +72,6 @@ if(typeof Deno!=='undefined'&&import.meta.main){
  const {createClient}=await import('npm:@supabase/supabase-js@2.116.0');
  const url=Deno.env.get('SUPABASE_URL')??'';
  const service=createClient(url,Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')??'',{auth:{persistSession:false,autoRefreshToken:false}});
- const handler=createWebsiteAnalyticsHandler({service,issuer:`${url.replace(/\/$/,'')}/auth/v1`,clientIds:(Deno.env.get('ACCOUNT_OAUTH_CLIENT_IDS')??'').split(',').filter(Boolean),networkSecret:Deno.env.get('WEBSITE_ANALYTICS_NETWORK_SECRET')??''});
+ const handler=createWebsiteAnalyticsHandler({service,issuer:`${url.replace(/\/$/,'')}/auth/v1`,clientIds:(Deno.env.get('ACCOUNT_OAUTH_CLIENT_IDS')??'').split(',').filter(Boolean),operatorClientIds:(Deno.env.get('ACCOUNT_OPERATOR_OAUTH_CLIENT_IDS')??'').split(',').filter(Boolean),networkSecret:Deno.env.get('WEBSITE_ANALYTICS_NETWORK_SECRET')??''});
  Deno.serve((request,info)=>handler(request,{remoteAddress:info.remoteAddr.hostname}));
 }
