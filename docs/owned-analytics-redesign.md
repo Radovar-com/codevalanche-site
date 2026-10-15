@@ -33,6 +33,8 @@ Un wrapper nou trebuie să transmită markerii pe ancora/butonul efectiv din DOM
 
 Sens nou înseamnă ID nou în C `src/analytics/core/registry.js`, validarea backend `supabase/functions/_shared/websiteAnalyticsContract.ts`, schema/fixtures `supabase/contracts/website-analytics/v1/` și catalogul/definițiile relevante. Adaugă apoi hook explicit și probă a acțiunii reale. Un atribut arbitrar singur nu înregistrează eveniment valid. Păstrează ID-urile și etichetele istorice pentru interpretarea filtrelor; nu reutiliza un ID vechi pentru alt sens.
 
+Menține și `PAGE_SECTION_SCOPE` din C `supabase/functions/_shared/metricDefinitions.ts` când adaugi sau muți o secțiune pe alt tip de pagină. Maparea explicită page→section stabilește oportunitățile de expunere inclusiv când nu există niciun eveniment de expunere; numai markerii vizibili nu pot furniza denominatorul pentru zero-exposure. Verifică ambele site-uri și păstrează concordanța cu markup-ul real; o combinație pagină/secțiune neacoperită nu trebuie prezentată drept reach zero măsurat.
+
 `pageVersion` din configurațiile C/R marchează o schimbare materială de design și permite compararea perioadelor. `definitionVersion` aparține contractului metricii/populației/metodei de calcul; schimbarea layoutului nu o rescrie. Dacă se schimbă sensul metricii, versiunea definiției și capabilitățile se revizuiesc separat. Nu amesteca populații/versiuni în comparații fără etichetare. Raw90d/agregate13mo sunt limite reale, nu istoric detaliat pe viață; vezi [operare](owned-analytics-operations.md).
 
 ## Comportament și consimțământ
