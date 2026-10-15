@@ -86,6 +86,27 @@ test('I4 canonical page instance precedes period and dimensional filtering',asyn
  const p=crypto.randomUUID();const es=[event('page_viewed',{page_instance_id:p,event_at:'2026-10-13T23:59:00Z',context:{os_family:'windows'}}),event('page_viewed',{page_instance_id:p,event_at:'2026-10-14T10:00:00Z',context:{os_family:'linux'}})];
  const raw=await report(es);assert.equal(metric(raw,'page_views').value,0);const filtered=await report(es,'pages',{filters:{osFamily:['linux']}});assert.equal(metric(filtered,'page_views').value,0);
 });
+test('I5 cross-day duplicate preserves observation population and raw/archive daily browser parity',async()=>{
+ const db=await createSqlFixture();try{
+  const receipt=crypto.randomUUID(),page=crypto.randomUUID(),session=crypto.randomUUID(),anonymous=crypto.randomUUID();
+  await db.query("insert into wa_consent_receipts values($1,'codevalanche','2026-10-15',1,true,false,'2026-01-01Z','2026-12-01Z',null,$2,$2)",[receipt,'a'.repeat(64)]);
+  for(const at of ['2026-10-13T23:59:00Z','2026-10-14T00:01:00Z'])await db.query("insert into wa_events(site_id,event_id,event_name,occurred_at,event_at,received_at,page_id,page_instance_id,page_version,session_id,anonymous_id,consent_receipt_id,consent_generation,properties,traffic_class) values('codevalanche',gen_random_uuid(),'page_viewed',$1,$1,$1,'home',$2,'build_1',$3,$4,$5,1,'{\"navigation_type\":\"initial\"}','external')",[at,page,session,anonymous,receipt]);
+  const observations=async()=>(await db.query('select * from wa_events order by event_at')).rows;
+  const checkRaw=async(raw,extra={})=>{const r=await report(raw,'overview',{},extra);assert.equal(metric(r,'page_views').value,0);assert.equal(metric(r,'sessions').value,1);assert.equal(metric(r,'browser_ids').value,1);assert.equal(metric(r,'repeat_browser_ids').value,0);assert.equal(r.sampleSize,1);assert.equal(r.breakdowns[0].rows.length,1);assert.equal(r.breakdowns[0].rows[0].pageViews,0);assert.equal(r.breakdowns[0].rows[0].dailyAnonymousIds,1);return r;};
+  const beforeRefresh=await checkRaw(await observations());
+  await db.query('select wa_refresh_website_rollups($1)',[now]);
+  const raw=await checkRaw(await observations());assert.deepEqual(raw.breakdowns,beforeRefresh.breakdowns);
+  const daily=async()=>(await db.query("select to_jsonb(r) r from wa_daily_rollups r where day='2026-10-14' and time_zone='UTC'")).rows.map(({r})=>r);
+  assert.equal(Number((await daily()).find(r=>r.metric_id==='daily_anonymous_ids').value),1);assert.equal((await daily()).some(r=>r.metric_id==='page_views'),false);
+  const cutoff=new Date(Date.parse(from)+90*86400000).toISOString();await db.query('select wa_prune_website_analytics($1)',[cutoff]);
+  const retained=await observations();assert.equal(retained.length,1);assert.equal(retained[0].page_view_canonical,false);await checkRaw(retained,{rawWindowStart:from});
+  const pages=await report(retained,'pages',{}, {rawWindowStart:from});assert.equal(pages.breakdowns[0].rows[0].eligibleViews,0);assert.equal(pages.breakdowns[0].rows[0].pageViews,0);
+  const sections=await report(retained,'sections',{filters:{sectionId:['hero']}},{rawWindowStart:from});assert.equal(metric(sections,'section_reach').value,null);assert.deepEqual(sections.breakdowns[0].rows,[]);
+  const journey=await report(retained,'journeys',{}, {rawWindowStart:from});assert.equal(journey.breakdowns[0].rows[0].eligibleSessions,0);
+  await db.query("select wa_prune_website_analytics('2027-02-01T00:00:00Z')");assert.equal((await observations()).length,0);
+  const archived=await report([],'overview',{}, {rollups:await daily(),rawWindowStart:'2027-01-01T00:00:00Z'});assert.equal(metric(archived,'page_views').value,0);assert.deepEqual(archived.breakdowns,raw.breakdowns);assert.equal(metric(archived,'browser_ids').status,'unsupported_window');
+ }finally{await db.close();}
+});
 test('I2 late earlier revisions and unrefreshed replacements recover the expired baseline',async()=>{
  const p=crypto.randomUUID();const cached=event('page_engagement_reported',{page_instance_id:p,event_at:'2026-10-14T12:00:00Z',active_ms_delta:200,visible_ms_delta:400,properties:{revision:3,active_ms_total:300,visible_ms_total:600,max_scroll_pct:50}});
  const earlier=event('page_engagement_reported',{page_instance_id:p,event_at:'2026-10-14T11:00:00Z',properties:{revision:2,active_ms_total:200,visible_ms_total:400,max_scroll_pct:50}});
