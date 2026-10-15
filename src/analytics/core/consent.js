@@ -6,7 +6,7 @@ export function createConsentManager({siteId,policyVersion='2026-10-15',transpor
  if(!['radovar','codevalanche'].includes(siteId))throw new TypeError('Invalid analytics site');
  const prefix=`owned_analytics:${siteId}:`,cookieName=`${siteId}_consent`,keys=Object.freeze(Object.fromEntries(['preference','receipt','pending','recovery','identity','queue','request'].map(k=>[k,prefix+k])));
  const storage=host.localStorage,day=86400000,listeners=new Set();
- const memoryProofs=new Map(),blockedReceipts=new Set();
+ const memoryProofs=new Map(),blockedReceipts=new Set(),acknowledgedProofs=new Set();
  let disposed=false,controller=new AbortController(),lastScope='',retrying,locallyFenced=false,fenceGeneration=-1,volatilePreference=null,revocationResolved=false;
  const channel=typeof host.BroadcastChannel==='function'?new host.BroadcastChannel(prefix+'consent'):null;
  const read=k=>{try{return JSON.parse(storage.getItem(keys[k])??'null');}catch{return null;}};
@@ -16,7 +16,8 @@ export function createConsentManager({siteId,policyVersion='2026-10-15',transpor
  const validState=s=>s&&s.policyVersion===policyVersion&&Number.isSafeInteger(s.generation)&&s.generation>=0&&['unknown','denied','granted','withdrawn','pending_revoke'].includes(s.state)&&Number.isFinite(Date.parse(s.changedAt));
  const preference=()=>{let p;try{p=JSON.parse(cookie());}catch{}const value=validState(p?.value)&&p.expiresAt>now()?p.value:unknown();return volatilePreference&&volatilePreference.generation>=value.generation?volatilePreference:value;};
  const diskProofs=k=>{const value=read(k);return Array.isArray(value)?value:[];};
- const pending=()=>[...new Map([...diskProofs('pending'),...diskProofs('recovery'),...memoryProofs.values()].map(p=>[p.receiptId,p])).values()];
+ const proofKey=p=>`${p.receiptId}:${p.generation}`;
+ const pending=()=>[...new Map([...diskProofs('pending'),...diskProofs('recovery'),...memoryProofs.values()].filter(p=>!acknowledgedProofs.has(proofKey(p))).map(p=>[p.receiptId,p])).values()];
  const persistProofs=()=>{const value=pending();if(!value.length)return; if(!write('pending',value))write('recovery',value);};
  function putPreference(s){
   const record={value:s,expiresAt:now()+180*day},encoded=encodeURIComponent(JSON.stringify(record));
@@ -27,7 +28,17 @@ export function createConsentManager({siteId,policyVersion='2026-10-15',transpor
   return persisted;
  }
  const proof=r=>({receiptId:r.receiptId,generation:r.generation,capability:r.revocationProof});
- const remember=r=>{if(!r?.receiptId||!r.revocationProof)return;memoryProofs.set(r.receiptId,proof(r));revocationResolved=false;persistProofs();};
+ const remember=r=>{if(!r?.receiptId||!r.revocationProof||acknowledgedProofs.has(proofKey(r)))return;memoryProofs.set(r.receiptId,proof(r));revocationResolved=false;persistProofs();};
+ function acknowledge(p,broadcast=false){
+  // Reconcile only an exact known proof after a real transport ACK. Empty disk
+  // storage is never evidence that a peer's in-memory debt was acknowledged.
+  if(!pending().some(value=>proofKey(value)===proofKey(p)))return;
+  acknowledgedProofs.add(proofKey(p));
+  if(memoryProofs.get(p.receiptId)?.generation===p.generation)memoryProofs.delete(p.receiptId);
+  revocationResolved=true;
+  for(const key of ['pending','recovery']){const remaining=diskProofs(key).filter(value=>proofKey(value)!==proofKey(p));write(key,remaining.length?remaining:null);}
+  if(broadcast)try{channel?.postMessage({acknowledged:{receiptId:p.receiptId,generation:p.generation}});}catch{}
+ }
  function fence(generation=preference().generation){locallyFenced=true;fenceGeneration=Math.max(fenceGeneration,generation);const receipt=read('receipt');if(receipt?.receiptId)blockedReceipts.add(receipt.receiptId);controller.abort();controller=new AbortController();lastScope='';}
  function purge() {
   controller.abort();controller=new AbortController();lastScope='';
@@ -36,19 +47,20 @@ export function createConsentManager({siteId,policyVersion='2026-10-15',transpor
   try{storage.removeItem('codevalanche_analytics_installation');}catch{}try{onPurge();}catch{}
  }
  function notify(){for(const listener of listeners)try{listener(getState());}catch{}}
- function authority(){
+ function authority(ignorePending=false){
   const state=preference(),r=read('receipt');
-  if(disposed||pending().length||state.state!=='granted'||!state.websiteAnalytics||!r||r.siteId!==siteId||r.policyVersion!==policyVersion||r.generation!==state.generation||!r.purposes?.websiteAnalytics||r.purposes.accountAnalytics!==false||!Number.isFinite(Date.parse(r.expiresAt))||!Number.isFinite(Date.parse(r.issuedAt))||Date.parse(r.expiresAt)<=now()||Date.parse(r.issuedAt)>now()||typeof r.collectionToken!=='string')return null;
+  if(disposed||(!ignorePending&&pending().length)||state.state!=='granted'||!state.websiteAnalytics||!r||r.siteId!==siteId||r.policyVersion!==policyVersion||r.generation!==state.generation||!r.purposes?.websiteAnalytics||r.purposes.accountAnalytics!==false||!Number.isFinite(Date.parse(r.expiresAt))||!Number.isFinite(Date.parse(r.issuedAt))||Date.parse(r.expiresAt)<=now()||Date.parse(r.issuedAt)>now()||typeof r.collectionToken!=='string')return null;
   if(locallyFenced&&blockedReceipts.has(r.receiptId))return null;
   locallyFenced=false;
   return {state,r};
  }
  function sync(){
-  const a=authority(),scope=a?`${a.r.receiptId}:${a.state.generation}`:'';
+  const a=authority(),candidate=!a?authority(true):null;
+  const waitingForOldProof=!!candidate&&pending().every(p=>p.receiptId!==candidate.r.receiptId),scope=a?`${a.r.receiptId}:${a.state.generation}`:'';
   const obsolete=read('receipt');
-  if(!a&&obsolete){fence();remember(obsolete);purge();persistProofs();const state=preference();putPreference({...state,websiteAnalytics:false,accountAnalytics:false,state:'pending_revoke'});}
+  if(!a&&obsolete&&!waitingForOldProof){fence();remember(obsolete);purge();persistProofs();const state=preference();putPreference({...state,websiteAnalytics:false,accountAnalytics:false,state:'pending_revoke'});}
   if(lastScope&&scope!==lastScope){controller.abort();controller=new AbortController();write('identity',null);write('queue',null);onPurge();}
-  if(!a){controller.abort();controller=new AbortController();write('identity',null);write('queue',null);try{storage.removeItem('codevalanche_analytics_installation');}catch{}}
+  if(!a){controller.abort();controller=new AbortController();if(waitingForOldProof){void retryRevocations();}else{write('identity',null);write('queue',null);try{storage.removeItem('codevalanche_analytics_installation');}catch{}}}
   lastScope=scope;
  }
  function getState(){const value=preference();if(locallyFenced&&value.generation<=fenceGeneration&&value.state==='granted')return {...value,state:pending().length?'pending_revoke':'withdrawn',websiteAnalytics:false,accountAnalytics:false};return {...value,accountAnalytics:false,websiteAnalytics:value.state==='granted'&&value.websiteAnalytics===true};}
@@ -58,11 +70,10 @@ export function createConsentManager({siteId,policyVersion='2026-10-15',transpor
    for(const p of pending()) {
     if(!transport.revokeReceipt)return false;
     try{const result=await transport.revokeReceipt(p);if(result?.revoked!==true)return false;}catch{return false;}
-    memoryProofs.delete(p.receiptId);revocationResolved=true;
-    for(const key of ['pending','recovery']){const remaining=diskProofs(key).filter(x=>x.receiptId!==p.receiptId);write(key,remaining.length?remaining:null);}
+    acknowledge(p,true);
    }
    const state=preference();if(!pending().length&&state.state==='pending_revoke'){if(!revocationResolved)return false;putPreference({...state,state:'withdrawn'});notify();}
-   return pending().length===0;
+   sync();notify();return pending().length===0;
   })();
   try{return await retrying;}finally{retrying=null;}
  }
@@ -101,7 +112,19 @@ export function createConsentManager({siteId,policyVersion='2026-10-15',transpor
  const onStorage=event=>{if(event.key===null||Object.values(keys).includes(event.key)){sync();notify();}};
  const onOnline=()=>{void retryRevocations();};
  host.addEventListener('storage',onStorage);host.addEventListener('online',onOnline);
- if(channel)channel.onmessage=event=>{const message=event.data,current=preference();if(!validState(message?.state)||message.state.generation<current.generation)return;if(message.state.generation===current.generation&&message.state.state==='pending_revoke'&&['granted','withdrawn'].includes(current.state)&&!diskProofs('pending').length&&!diskProofs('recovery').length)return;fence(message.state.generation);for(const p of message.proofs??[])if(p?.receiptId&&p.capability){memoryProofs.set(p.receiptId,{receiptId:p.receiptId,generation:p.generation,capability:p.capability});revocationResolved=false;}purge();persistProofs();if(message.state.state!=='granted')putPreference(message.state);notify();};
+ if(channel)channel.onmessage=event=>{
+  const message=event.data,current=preference();
+  if(message?.acknowledged){
+   acknowledge(message.acknowledged);
+   if(!pending().length&&current.state==='pending_revoke'&&revocationResolved)putPreference({...current,state:'withdrawn'});
+   sync();notify();return;
+  }
+  if(!validState(message?.state)||message.state.generation<current.generation)return;
+  if(message.state.generation===current.generation&&message.state.state==='pending_revoke'&&['granted','withdrawn'].includes(current.state)&&!pending().length)return;
+  fence(message.state.generation);
+  for(const p of message.proofs??[])if(p?.receiptId&&p.capability&&!acknowledgedProofs.has(proofKey(p))){memoryProofs.set(p.receiptId,{receiptId:p.receiptId,generation:p.generation,capability:p.capability});revocationResolved=false;}
+  purge();persistProofs();if(message.state.state!=='granted')putPreference(message.state);notify();
+ };
  // Legacy accepted is not current policy acceptance; ask again. A legacy
  // refusal can safely migrate without a network request or optional identity.
  if(preference().state==='unknown'){

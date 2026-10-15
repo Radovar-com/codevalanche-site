@@ -3,7 +3,7 @@ import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import assert from 'node:assert/strict';
 
-let receiptCount=0,revokeCount=0,optionalCount=0;let holdIssue=false,resolveIssue,refuseRevoke=false;const revokedProofs=[];
+let receiptCount=0,revokeCount=0,optionalCount=0;let holdIssue=false,resolveIssue,refuseRevoke=false,holdRevoke=false;const revokedProofs=[],revokeWaiters=[];
 const server=createServer(async(req,res)=>{
  const url=new URL(req.url,'http://localhost');
  if(url.pathname==='/issue') {
@@ -11,7 +11,7 @@ const server=createServer(async(req,res)=>{
   const chunks=[];for await(const c of req)chunks.push(c);const body=JSON.parse(Buffer.concat(chunks));
   res.setHeader('Content-Type','application/json');res.end(JSON.stringify({receiptId:crypto.randomUUID(),siteId:body.siteId,policyVersion:body.policyVersion,generation:body.generation,purposes:body.purposes,issuedAt:new Date().toISOString(),expiresAt:new Date(Date.now()+180*86400000).toISOString(),collectionToken:'test_collection_capability_123456789',revocationProof:'test_revocation_capability_123456789'}));return;
  }
- if(url.pathname==='/revoke'){const chunks=[];for await(const c of req)chunks.push(c);revokedProofs.push(JSON.parse(Buffer.concat(chunks)));revokeCount++;res.setHeader('Content-Type','application/json');res.end(JSON.stringify({revoked:!refuseRevoke}));return;}
+ if(url.pathname==='/revoke'){const chunks=[];for await(const c of req)chunks.push(c);revokedProofs.push(JSON.parse(Buffer.concat(chunks)));revokeCount++;if(holdRevoke)await new Promise(resolve=>revokeWaiters.push(resolve));res.setHeader('Content-Type','application/json');res.end(JSON.stringify({revoked:!refuseRevoke}));return;}
  if(url.pathname==='/optional'){optionalCount++;res.end('ok');return;}
  if(url.pathname.endsWith('.js')){try{res.setHeader('Content-Type','text/javascript');res.end(await readFile(new URL('../src'+url.pathname,import.meta.url)));}catch{res.writeHead(404);res.end();}return;}
  res.setHeader('Content-Type','text/html');res.end('<button id="before">Before</button><main>Public page</main><script type="module">import {createConsentManager} from "/analytics/core/consent.js";import {mountConsentUI} from "/analytics/consent-ui.js";window.manager=createConsentManager({siteId:"codevalanche",policyVersion:"2026-10-15",now:()=>window.testNow??Date.now(),transport:{issueReceipt:async body=>(await fetch("/issue",{method:"POST",body:JSON.stringify(body)})).json(),revokeReceipt:async body=>(await fetch("/revoke",{method:"POST",body:JSON.stringify(body)})).json()}});window.sendOptional=async()=>{const lease=manager.getCollectionContext();if(!lease)return false;await fetch("/optional",{method:"POST",signal:lease.signal});return true;};window.ui=mountConsentUI({manager:window.manager});window.ready=true;</script>');
@@ -21,6 +21,29 @@ const origin=`http://127.0.0.1:${server.address().port}`,browser=await chromium.
 const context=await browser.newContext();
 async function ready(page,url=origin){await page.goto(url);await page.waitForFunction(()=>window.ready);}
 try {
+ // Keep both tabs online. Deliver the withdrawal broadcast while the actual
+ // HTTP revoke ACK is held, then regrant only after the writer receives ACK.
+ const peerContext=await browser.newContext(),peerWriter=await peerContext.newPage();await ready(peerWriter);await peerWriter.evaluate(()=>manager.setConsent({websiteAnalytics:true}));
+ const peerReader=await peerContext.newPage();await ready(peerReader);
+ const oldReceipt=await peerWriter.evaluate(()=>manager.getCollectionContext().receiptId);
+ await peerReader.evaluate(()=>{window.oldLease=manager.getCollectionContext();window.withdrawalSeen=false;window.probe=new BroadcastChannel('owned_analytics:codevalanche:consent');probe.onmessage=event=>{if(event.data.proofs?.length)withdrawalSeen=true;if(event.data.acknowledged)window.observedAckGeneration=event.data.acknowledged.generation;};});
+ holdRevoke=true;await peerWriter.evaluate(()=>{window.withdrawal=manager.setConsent({websiteAnalytics:false});});
+ await peerReader.waitForFunction(()=>withdrawalSeen&&oldLease.signal.aborted&&manager.getState().state==='pending_revoke');
+ // Neither vanished disk data nor a mismatched ACK may discharge memory debt.
+ await peerReader.evaluate(()=>{localStorage.removeItem(manager.keys.pending);localStorage.removeItem(manager.keys.recovery);});
+ assert.equal(await peerReader.evaluate(()=>manager.getCollectionContext()),null);
+ await peerWriter.evaluate(receiptId=>{const probe=new BroadcastChannel('owned_analytics:codevalanche:consent');probe.postMessage({acknowledged:{receiptId,generation:99999}});probe.close();},oldReceipt);
+ await peerReader.waitForFunction(()=>window.observedAckGeneration===99999);assert.equal(await peerReader.evaluate(()=>manager.getState().state),'pending_revoke');assert.equal(await peerReader.evaluate(()=>manager.getCollectionContext()),null);
+ while(!revokeWaiters.length)await new Promise(resolve=>setTimeout(resolve,5));holdRevoke=false;for(const release of revokeWaiters.splice(0))release();
+ await peerWriter.evaluate(()=>window.withdrawal);assert.equal(await peerWriter.evaluate(()=>localStorage.getItem(manager.keys.pending)),null);
+ await peerWriter.evaluate(()=>manager.setConsent({websiteAnalytics:true}));
+ const newReceipt=await peerWriter.evaluate(()=>manager.getCollectionContext()?.receiptId);assert.ok(newReceipt);assert.notEqual(newReceipt,oldReceipt);
+ await peerReader.waitForFunction(()=>manager.getCollectionContext()!==null);
+ assert.equal(await peerReader.evaluate(()=>manager.getCollectionContext().receiptId),newReceipt);
+ assert.equal(await peerWriter.evaluate(()=>manager.getCollectionContext()?.receiptId),newReceipt);
+ assert.equal(await peerReader.evaluate(()=>JSON.parse(localStorage.getItem(manager.keys.receipt)).receiptId),newReceipt);
+ assert.equal(await peerReader.evaluate(()=>manager.getState().state),'granted');assert.equal(await peerWriter.evaluate(()=>manager.getState().state),'granted');await peerContext.close();
+ if(process.argv.includes('--peer-ack-only')){console.log('PASS consent peer ACK/regrant regression');}else{
  if(!process.argv.includes('--cookies-only'))for(const failedKey of ['pending','preference','all-writes']){
   const failureContext=await browser.newContext(),writer=await failureContext.newPage();await ready(writer);await writer.evaluate(()=>manager.setConsent({websiteAnalytics:true}));
   const reader=await failureContext.newPage();await ready(reader);
@@ -165,5 +188,6 @@ try {
  await corrupt.evaluate(()=>{const receipt=JSON.parse(localStorage.getItem(manager.keys.receipt));receipt.expiresAt='invalid';localStorage.setItem(manager.keys.receipt,JSON.stringify(receipt));});
  assert.equal(await corrupt.evaluate(()=>manager.getCollectionContext()),null);await corruptContext.close();
  console.log('PASS consent browser: quota failures, essential host-only180d cookie, refusal, cross-tab/offline revoke, minimal proof, late ACK/issue, identity rotation, Auth isolation, focus, origin isolation');
+ }
  }
 } finally {await browser.close();server.close();}
