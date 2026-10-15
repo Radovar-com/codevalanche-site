@@ -69,6 +69,8 @@ test('schema, provenance spoof, stale generation, token, origin, clock and A gua
 });
 test('receipt burst limit persists refusal and health counters independently of account/download',async()=>{
  const f=await setup();try{for(let i=0;i<20;i++)await ingestWebsiteBatch(f.body(),{origin,service:f.s});
+ // Seed a depleted bucket because real request time legitimately refills it.
+ await f.db.query("update wa_rate_limits set tokens=0,updated_at=clock_timestamp() where scope='receipt'");
  await assert.rejects(ingestWebsiteBatch(f.body(),{origin,service:f.s}),e=>e.message==='rate_limited'&&e.retryAfterMs>0);
  assert.equal((await f.db.query("select sum(count)::int n from wa_data_health where counter='rate_limited'")).rows[0].n,1);
  await f.db.query("update wa_rate_limits set tokens=20,minute_count=120,minute_start=date_trunc('minute',clock_timestamp()) where scope='receipt'");
