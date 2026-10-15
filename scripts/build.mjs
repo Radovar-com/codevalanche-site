@@ -15,6 +15,12 @@ await rm(destination, { recursive: true, force: true })
 await mkdir(destination, { recursive: true })
 await cp(source, destination, { recursive: true, errorOnExist: false })
 
+// Public link configuration and server gateway/collector share a reviewed manifest.
+const downloadManifest = JSON.parse(await readFile(path.join(root, "supabase/functions/_shared/download-manifest.json"), "utf8"))
+const publicConfig = await readFile(path.join(destination, "config.js"), "utf8")
+await writeFile(path.join(destination, "config.js"), publicConfig.replace(/window\.CODEVALANCHE_RELEASE_MANIFEST = [^\r\n]+/, () => `window.CODEVALANCHE_RELEASE_MANIFEST = ${JSON.stringify(downloadManifest)}`))
+await build({entryPoints:[path.join(source,"downloads.js")],outfile:path.join(destination,"downloads.js"),bundle:true,format:"iife",target:["es2022"],minify:true})
+
 // Render the same navigation on every marketing page so account access cannot drift.
 const sharedHeader = await readFile(path.join(source, "partials/header.html"), "utf8")
 for (const page of ["index.html", "changelog.html", "privacy.html", "terms.html"]) {

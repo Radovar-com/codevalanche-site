@@ -9,7 +9,7 @@ try { const url=new URL(config.baseUrl);const local=url.protocol==='http:'&&['lo
 let storage;try{storage=window.localStorage;}catch{storage={getItem:()=>null,removeItem:()=>{},setItem:()=>{throw new Error('Storage unavailable');}};}
 const consentHost={localStorage:storage,document,location,crypto:window.crypto,BroadcastChannel:window.BroadcastChannel,addEventListener:window.addEventListener.bind(window),removeEventListener:window.removeEventListener.bind(window)};
 const consent=createConsentManager({siteId:'codevalanche',window:consentHost,transport:baseUrl?createConsentTransport({baseUrl}):{}});
-const client=createAnalyticsClient({siteId:'codevalanche',baseUrl,consentManager:baseUrl?consent:{...consent,getCollectionContext:()=>null,acceptAck:()=>false},pageVersion:config.pageVersion??'owned_analytics_1'});
+const client=createAnalyticsClient({siteId:'codevalanche',downloadManifest:window.CODEVALANCHE_RELEASE_MANIFEST,baseUrl,consentManager:baseUrl?consent:{...consent,getCollectionContext:()=>null,acceptAck:()=>false},pageVersion:config.pageVersion??'owned_analytics_1'});
 const manager=client.consentManager;
 const path=location.pathname;
 const pageId=path.startsWith('/account/authorize')?'account_authorize':path.startsWith('/account/')?'account':({'/':'home','/index.html':'home','/privacy.html':'privacy','/terms.html':'terms','/changelog.html':'changelog','/account.html':'account_entry_legacy'}[path]??'not_found');
@@ -40,7 +40,7 @@ const architecture=value=>value==='mac-arm'?'arm64':value==='mac-intel'?'x64':'u
 document.addEventListener('click',event=>{
  const link=event.target.closest?.('a[href]');if(!link||event.defaultPrevented)return;
  const place=placement(link),key=link.dataset.downloadPlatform;
- if(key){track('download_clicked',{cta_id:'download',platform:platform(key),architecture:architecture(key),release_id:'unknown',artifact_id:'unknown',placement:place});return;}
+ if(key){track('download_clicked',{cta_id:'download',platform:platform(key),architecture:link.dataset.downloadArchitecture??architecture(key),release_id:link.dataset.downloadRelease??'unknown',artifact_id:link.dataset.downloadArtifact??'unknown',placement:place});return;}
  let url;try{url=new URL(link.href,location.href);}catch{return;}
  if(url.origin===location.origin&&['/account/','/account.html'].includes(url.pathname)){track('account_entry_clicked',{placement:place,entry_mode:'signin'});return;}
  if(url.protocol==='mailto:'){const id=link.dataset.contactId;if(['info','press','security'].includes(id))track('contact_clicked',{contact_id:id,placement:place});return;}

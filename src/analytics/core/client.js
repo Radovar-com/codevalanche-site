@@ -1,19 +1,21 @@
+import {downloadRegistry} from '../../../supabase/functions/_shared/downloadManifest.js';
 import {createConsentManager} from './consent.js';
 import {createPage} from './page.js';
 import {createQueue,createConsentTransport} from './transport.js';
 import {sanitizeEvent,safeId,browserContext} from './sanitizer.js';
 import {registered,PREAUTH,ACCOUNT,SDK_VERSION} from './registry.js';
 export {createConsentManager,createConsentTransport,SDK_VERSION};
-export function createAnalyticsClient({siteId,purpose='websiteAnalytics',consentManager,endpoint,baseUrl,pageVersion='build_1',window:host=globalThis.window,now=Date.now,fetch}={}){
+export function createAnalyticsClient({siteId,purpose='websiteAnalytics',downloadManifest,consentManager,endpoint,baseUrl,pageVersion='build_1',window:host=globalThis.window,now=Date.now,fetch}={}){
  if(!['codevalanche','radovar'].includes(siteId)||!safeId(pageVersion))throw new TypeError('Invalid analytics configuration');
  const manager=consentManager??createConsentManager({siteId,purpose,window:host,now,transport:createConsentTransport({baseUrl,fetch:fetch??host.fetch.bind(host)})});
- const queue=createQueue({manager,siteId,endpoint:endpoint??baseUrl+'/events',host,now,fetch});let current=null,disposed=false,documentClaimed=false;const sessions=new Set();
+ const registry=downloadRegistry(downloadManifest??host.CODEVALANCHE_RELEASE_MANIFEST);
+ const queue=createQueue({manager,siteId,registry,endpoint:endpoint??baseUrl+'/events',host,now,fetch});let current=null,disposed=false,documentClaimed=false;const sessions=new Set();
  function allowed(surface,pageId){if(disposed)return null;if(purpose==='accountAnalytics'?(surface!=='authenticated_account'||!['account','account_authorize'].includes(pageId)):(surface==='authenticated_account'||(['account','account_authorize'].includes(pageId)&&surface!=='pre_auth')))return null;const lease=manager.getCollectionContext({touchActivity:false});return lease?`${lease.receiptId}:${lease.generation}:${lease.anonymousId}:${lease.sessionId}`:null;}
  function emit(name,properties,context={}){
   const pageId=context.pageId??current?.pageId,surface=context.surface??current?.surface??'marketing';
   if(context.userInteraction===true&&(purpose==='accountAnalytics'?surface==='authenticated_account':surface!=='authenticated_account'&&(!['account','account_authorize'].includes(pageId)||surface==='pre_auth'))){manager.getCollectionContext({touchActivity:true});current?.refreshScope();}
   if(!registered('page',pageId,siteId)||!allowed(surface,pageId)||(ACCOUNT.has(name)&&purpose!=='accountAnalytics')||(surface==='pre_auth'&&!PREAUTH.has(name)))return {queued:false,reason:'unavailable'};
-  const sanitized=sanitizeEvent(name,properties,{...browserContext(host),...context.context},siteId);if(!sanitized)return {queued:false,reason:'invalid_fields'};
+  const sanitized=sanitizeEvent(name,properties,{...browserContext(host),...context.context},siteId,registry);if(!sanitized)return {queued:false,reason:'invalid_fields'};
   const lease=manager.getCollectionContext({touchActivity:context.userInteraction===true});if(!lease)return {queued:false,reason:'invalid_consent'};
   const instance=context.pageInstanceId??current?.pageInstanceId;if(!instance)return {queued:false,reason:'unavailable'};
   const event={schema_version:1,event_id:host.crypto.randomUUID(),site_id:siteId,event_name:name,occurred_at:new Date(now()).toISOString(),page_id:pageId,page_instance_id:instance,page_version:context.pageVersion??current?.pageVersion??pageVersion,session_id:lease.sessionId,anonymous_id:lease.anonymousId,consent_receipt_id:lease.receiptId,consent_generation:lease.generation,properties:sanitized.properties};

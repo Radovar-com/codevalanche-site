@@ -11,9 +11,9 @@ function matches(s,v){
  if(s.type==='integer'||s.type==='number')return typeof v==='number'&&Number.isFinite(v)&&(s.type!=='integer'||Number.isSafeInteger(v))&&v>=(s.minimum??-Infinity)&&v<=(s.maximum??Infinity);
  return s.type==='boolean'?typeof v==='boolean':true;
 }
-export function sanitizeEvent(name,properties,context,site){
+export function sanitizeEvent(name,properties,context,site,registry){
  const branch=schema.$defs.WebsiteEventV1.oneOf.find(s=>s.properties.event_name.const===name);if(!branch||!matches(branch.properties.properties,properties)||!matches(branch.properties.context,context??{}))return null;
- for(const [key,value] of Object.entries(properties)){if(typeof value==='string'&&unsafe.test(value))return null;if(PROPERTY_IDS[key]&&!registered(PROPERTY_IDS[key],value,site))return null;}
+ for(const [key,value] of Object.entries(properties)){if(typeof value==='string'&&unsafe.test(value))return null;if(PROPERTY_IDS[key]&&!registered(PROPERTY_IDS[key],value,site,registry))return null;}
  for(const [key,value] of Object.entries(context??{})){if(key!=='referrer_domain'&&unsafe.test(value))return null;if(key==='landing_page_id'&&!registered('page',value,site))return null;}
  if(name==='cta_clicked'&&(['download','signup','login','contact'].includes(properties.action_id)||['download','signup','login','contact'].includes(properties.cta_id)))return null;
  if(name==='page_engagement_reported'&&properties.active_ms_total>properties.visible_ms_total)return null;
@@ -21,9 +21,9 @@ export function sanitizeEvent(name,properties,context,site){
  return {properties:{...properties},context:{...context}};
 }
 
-export function validStoredEvent(event,site){
+export function validStoredEvent(event,site,registry){
  const branch=schema.$defs.WebsiteEventV1.oneOf.find(s=>s.properties.event_name.const===event?.event_name);
- return !!branch&&matches(branch,event)&&event.site_id===site&&safeId(event.page_id)&&safeId(event.page_version)&&registered('page',event.page_id,site)&&Number.isFinite(Date.parse(event.occurred_at))&&!!sanitizeEvent(event.event_name,event.properties,event.context,site);
+ return !!branch&&matches(branch,event)&&event.site_id===site&&safeId(event.page_id)&&safeId(event.page_version)&&registered('page',event.page_id,site)&&Number.isFinite(Date.parse(event.occurred_at))&&!!sanitizeEvent(event.event_name,event.properties,event.context,site,registry);
 }
 
 export const validBatchReceipt=value=>matches(schema.$defs.BatchReceipt,value);

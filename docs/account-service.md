@@ -4,7 +4,7 @@ Edit `src/config.js` before publishing, then run `npm run build`. All values in 
 
 - `accountOrigin`: HTTPS origin hosting the central `/account` UI. Sign-in remains on that origin, so the website never receives tokens or credentials. The site account page shows an availability message and hides its sign-in link when unconfigured.
 - `apiOrigin`: HTTPS origin receiving `POST /api/codevalanche/accounts/events`. The service must allow the website origin (including `https://codevalanche.com`) in CORS for POST and Content-Type preflight. Localhost HTTP origins are supported for local testing only.
-- `CODEVALANCHE_DOWNLOADS`: real release URLs for each listed platform; null entries retain release-in-preparation labels. Only live download link clicks produce events.
+- `CODEVALANCHE_RELEASE_MANIFEST`: build-generated public view of the server-owned qualified release manifest. Empty assets retain release-in-preparation labels. Native links use the owned gateway; see [owned download evidence](owned-download-evidence.md) for operational evidence, registry and retention semantics.
 - `CODEVALANCHE_ANALYTICS.measurementId`: existing optional GA adapter; the placeholder remains inactive.
 
 First-party requests contain exactly `{ eventId, eventName, platform, installationId, consent: true }`. IDs are random UUIDs. Event names are `website_view` and `download_clicked`; platforms are `web`, `windows`, `macos`, `linux`, `ios`, `android`. Mac architecture selection normalizes to `macos`. The optional API `appVersion` field is omitted because the website does not know the installed version.

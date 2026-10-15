@@ -7,7 +7,7 @@ export function createConsentTransport({baseUrl,fetch:request=globalThis.fetch}=
 }
 export function checkedEndpoint(value){if(typeof value!=='string'||!value||/[?#]/.test(value))throw new TypeError('Invalid analytics endpoint');const url=new URL(value,globalThis.location?.href??'https://localhost');if(url.username||url.password||!['https:','http:'].includes(url.protocol))throw new TypeError('Invalid analytics endpoint');if(url.protocol!=='https:'&&!['localhost','127.0.0.1'].includes(url.hostname))throw new TypeError('Invalid analytics endpoint');return value.replace(/\/$/,'');}
 const bytes=value=>new TextEncoder().encode(JSON.stringify(value)).length;
-export function createQueue({manager,endpoint,host=window,now=Date.now,siteId,fetch:request=host.fetch.bind(host)}){
+export function createQueue({manager,endpoint,host=window,now=Date.now,siteId,registry,fetch:request=host.fetch.bind(host)}){
  checkedEndpoint(endpoint);
  let locks;try{locks=host.navigator?.locks;if(typeof locks?.request!=='function')locks=null;}catch{locks=null;}
  // One mutation lock bounds both purpose-specific persisted queues together.
@@ -19,7 +19,7 @@ export function createQueue({manager,endpoint,host=window,now=Date.now,siteId,fe
  const write=entries=>{try{if(entries.length)host.localStorage.setItem(manager.keys.queue,JSON.stringify(entries));else host.localStorage.removeItem(manager.keys.queue);return true;}catch{shared=false;return false;}};
  const current=()=>{const lease=manager.getCollectionContext({touchActivity:false});if(lease)lastLease=lease;return lease;};
  function valid(entry,lease){
-  if(!entry||!validStoredEvent(entry.event,siteId)||entry.event.consent_receipt_id!==entry.receiptId||entry.event.consent_generation!==entry.generation||!Number.isFinite(entry.queuedAt)||now()-entry.queuedAt>=86400000||now()<entry.queuedAt)return false;
+  if(!entry||!validStoredEvent(entry.event,siteId,registry)||entry.event.consent_receipt_id!==entry.receiptId||entry.event.consent_generation!==entry.generation||!Number.isFinite(entry.queuedAt)||now()-entry.queuedAt>=86400000||now()<entry.queuedAt)return false;
   if(lease)return entry.receiptId===lease.receiptId&&entry.generation===lease.generation&&entry.collectionToken===lease.collectionToken&&entry.event.anonymous_id===lease.anonymousId;
   // An idle session may retain its immutable bounded queue, but cannot send or
   // create IDs. A peer awaiting an old revoke ACK must preserve the fresh granted
@@ -39,7 +39,7 @@ export function createQueue({manager,endpoint,host=window,now=Date.now,siteId,fe
     const raw=JSON.parse(host.localStorage.getItem(peerQueue)??'[]');
     // Purpose-neutral expiry cleanup prevents an abandoned tab from reserving
     // capacity forever. Valid peer data, its identity and consent stay intact.
-    const peer=Array.isArray(raw)?raw.filter(entry=>Number.isFinite(entry?.queuedAt)&&now()>=entry.queuedAt&&now()-entry.queuedAt<86400000&&validStoredEvent(entry.event,siteId)):[];
+    const peer=Array.isArray(raw)?raw.filter(entry=>Number.isFinite(entry?.queuedAt)&&now()>=entry.queuedAt&&now()-entry.queuedAt<86400000&&validStoredEvent(entry.event,siteId,registry)):[];
     if(!Array.isArray(raw)||peer.length!==raw.length){if(peer.length)host.localStorage.setItem(peerQueue,JSON.stringify(peer));else host.localStorage.removeItem(peerQueue);}
     const capacity=Math.max(0,100-peer.length);entries=capacity?entries.slice(-capacity):[];
    }

@@ -1,3 +1,4 @@
+import {releaseRegistry,trustedDownloadManifest} from '../_shared/downloadManifest.ts';
 import {issueConsentReceipt,revokeConsentReceipt} from '../_shared/websiteAnalyticsConsent.ts';
 import {AnalyticsError,analyticsRpc,ingestWebsiteBatch,siteForOrigin} from '../_shared/websiteAnalyticsIngestion.ts';
 import {authorizeWebsiteReport} from '../_shared/websiteAnalyticsAuthorization.ts';
@@ -6,7 +7,7 @@ import {readAccountOutcomeReport} from '../_shared/accountOutcomeReports.ts';
 import {validateReportQuery,validateContractDto} from '../_shared/websiteAnalyticsContract.ts';
 import type {BuildRegistry,ReportView} from '../_shared/websiteAnalyticsContract.ts';
 
-type Options={service:any;issuer:string;clientIds?:string[];networkSecret:string;registry?:BuildRegistry;readReport?:(actor:any,query:any,view:ReportView)=>Promise<unknown>};
+type Options={service:any;issuer:string;clientIds?:string[];networkSecret:string;registry?:BuildRegistry;downloadManifest?:unknown;readReport?:(actor:any,query:any,view:ReportView)=>Promise<unknown>};
 async function readBody(request:Request){
  if(!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type')??''))throw new AnalyticsError('invalid_fields',null,415);
  const reader=request.body?.getReader();if(!reader)throw new AnalyticsError('invalid_fields');
@@ -22,6 +23,7 @@ async function networkHash(address:string,secret:string){
  return Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
 }
 export function createWebsiteAnalyticsHandler(options:Options){
+ options={...options,registry:{...options.registry,...releaseRegistry(options.downloadManifest??trustedDownloadManifest)}};
  return async(request:Request,connection?:{remoteAddress?:string})=>{
   const headers:Record<string,string>={'Content-Type':'application/json','Cache-Control':'no-store','Vary':'Origin','Access-Control-Allow-Headers':'authorization,apikey,content-type','Access-Control-Allow-Methods':'POST,DELETE,GET,OPTIONS'};
   const respond=(body:unknown,status=200)=>new Response(body===null?null:JSON.stringify(body),{status,headers});

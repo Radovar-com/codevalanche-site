@@ -4,9 +4,13 @@ import {readFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import path from 'node:path';
+import {createDownloadRedirectHandler} from '../supabase/functions/download-redirect/index.ts';
+import {releaseRegistry} from '../supabase/functions/_shared/downloadManifest.ts';
 import {PREAUTH} from '../src/analytics/core/registry.js';
 import {validateWebsiteEvent,validateContractDto} from '../supabase/functions/_shared/websiteAnalyticsContract.ts';
 execFileSync(process.execPath,['scripts/build.mjs']);
+const downloadManifest={version:1,gatewayBaseUrl:'https://downloads.example.org/functions/v1/download-redirect/v1',allowedOrigins:['https://artifacts.example.org'],assets:[{siteId:'codevalanche',platform:'windows',architecture:'x64',releaseId:'fixture_1',artifactId:'fixture_windows',qualified:true,targetUrl:'https://artifacts.example.org/fixture.exe'}]};
+const downloadRequests=[];const redirect=createDownloadRedirectHandler({manifest:downloadManifest,record:e=>downloadRequests.push(e)});
 const receipts=new Map(),events=new Map(),requests=[],errors=[];let fixture=true,failReceipt=false;
 const server=createServer(async(req,res)=>{try{
  const url=new URL(req.url,'http://local');res.setHeader('Content-Type','application/json');
@@ -17,18 +21,18 @@ const server=createServer(async(req,res)=>{try{
  if(url.pathname.startsWith('/collector/consent/receipts/')&&req.method==='DELETE'){res.end('{"revoked":true}');return;}
  if(url.pathname==='/collector/events'){
   const raw=await text(req),b=JSON.parse(raw);requests.push(b);assert.equal(req.headers.cookie,undefined);assert.ok(Buffer.byteLength(raw)<=32768);
-  const acceptedIds=[],duplicateIds=[];for(const e of b.events){assert.equal(validateWebsiteEvent(e,{origin:'https://codevalanche.com',receivedAt:new Date().toISOString(),receipt:receipts.get(b.receiptId),surface:['account','account_authorize'].includes(e.page_id)&&PREAUTH.has(e.event_name)?'pre_auth':undefined}).accepted,true,JSON.stringify(e));if(events.has(e.event_id)){assert.deepEqual(events.get(e.event_id),e);duplicateIds.push(e.event_id);}else{events.set(e.event_id,e);acceptedIds.push(e.event_id);}}
+  const acceptedIds=[],duplicateIds=[];for(const e of b.events){assert.equal(validateWebsiteEvent(e,{origin:'https://codevalanche.com',registry:releaseRegistry(downloadManifest),receivedAt:new Date().toISOString(),receipt:receipts.get(b.receiptId),surface:['account','account_authorize'].includes(e.page_id)&&PREAUTH.has(e.event_name)?'pre_auth':undefined}).accepted,true,JSON.stringify(e));if(events.has(e.event_id)){assert.deepEqual(events.get(e.event_id),e);duplicateIds.push(e.event_id);}else{events.set(e.event_id,e);acceptedIds.push(e.event_id);}}
   res.end(JSON.stringify({acceptedIds,duplicateIds,rejected:[],generation:b.generation,receivedAt:new Date().toISOString(),retryAfterMs:null}));return;
  }
  let pathname=url.pathname.endsWith('/')?url.pathname+'index.html':url.pathname;
  if(pathname==='/fixture-download'){res.setHeader('Content-Type','text/html');res.end('<h1>Local download fixture</h1>');return;}
  let data=await readFile(path.join('dist',pathname));
- if(pathname==='/config.js'&&fixture)data=Buffer.from(data.toString()+`\nwindow.CODEVALANCHE_ANALYTICS={enabled:true,baseUrl:'${origin}/collector',pageVersion:'local_fixture'};window.CODEVALANCHE_DOWNLOADS.windows='/fixture-download';`);
+ if(pathname==='/config.js'&&fixture)data=Buffer.from(data.toString()+`\nwindow.CODEVALANCHE_ANALYTICS={enabled:true,baseUrl:'${origin}/collector',pageVersion:'local_fixture'};window.CODEVALANCHE_RELEASE_MANIFEST=${JSON.stringify(downloadManifest)};`);
  res.setHeader('Content-Type',pathname.endsWith('.js')?'text/javascript':pathname.endsWith('.css')?'text/css':pathname.endsWith('.svg')?'image/svg+xml':'text/html');res.end(data);
  }catch(error){if(req.url.startsWith('/collector'))errors.push(error.message);res.writeHead(404);res.end();}}).listen(0,'127.0.0.1');
 async function text(req){const a=[];for await(const c of req)a.push(c);return Buffer.concat(a).toString();}
 await new Promise(r=>server.once('listening',r));const origin=`http://127.0.0.1:${server.address().port}`,browser=await chromium.launch({headless:true});
-async function localContext(options={}){const context=await browser.newContext(options);await context.route('https://**/*',route=>route.abort());return context;}
+async function localContext(options={}){const context=await browser.newContext(options);await context.route('https://**/*',route=>route.abort());await context.route('https://downloads.example.org/**',async route=>{const response=await redirect(new Request(route.request().url()));if(response.status===302)assert.equal(response.headers.get('location'),downloadManifest.assets[0].targetUrl);/* Playwright does not re-route fulfilled redirects: translate the synthetic artifact to the local fixture at the transport boundary. */await route.fulfill({status:response.status,headers:{...Object.fromEntries(response.headers),...(response.status===302?{location:origin+'/fixture-download'}:{})},body:await response.text()});});await context.route('https://artifacts.example.org/fixture.exe',route=>route.fulfill({status:302,headers:{location:origin+'/fixture-download'}}));return context;}
 async function ready(page,url='/'){await page.goto(origin+url);await page.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager,null,{timeout:3000});}
 async function choose(page,enabled){await page.evaluate(v=>CodevalancheAnalytics.setConsent({websiteAnalytics:v}),enabled);}
 async function flush(page){await page.evaluate(()=>CodevalancheAnalytics.flush());}
@@ -58,6 +62,8 @@ async function optionalAnalyticsFailures(){
 }
 try{
  await optionalAnalyticsFailures();
+ // A configured native link also works when the optional SDK cannot load.
+ const isolated=await localContext({reducedMotion:'reduce'});await isolated.route('**/analytics/owned-analytics.js',route=>route.abort());const isolatedPage=await isolated.newPage();await isolatedPage.goto(origin);const countBefore=downloadRequests.length;await isolatedPage.locator('[data-download-platform="windows"]').last().click();await isolatedPage.waitForURL(origin+'/fixture-download');assert.equal(downloadRequests.length,countBefore+1);downloadRequests.length=0;await isolated.close();
  if(!process.argv.includes('--analytics-failure-only')){
  const context=await localContext({reducedMotion:'reduce'}),page=await context.newPage();let google=0;
  await context.addCookies([{name:'codevalanche_consent',value:'accepted',url:origin}]);await context.addInitScript(()=>localStorage.setItem('codevalanche_analytics_installation','legacy-not-an-owned-id'));
@@ -74,8 +80,10 @@ try{
  const beforeDownload=[...events.values()].filter(e=>e.event_name==='download_clicked').length;
  // Real link + ordinary native document navigation. No queue/flush barrier on this path.
  await page.locator('[data-download-platform="windows"]').last().click();await page.waitForURL(origin+'/fixture-download');
- await new Promise(r=>setTimeout(r,600));assert.equal([...events.values()].filter(e=>e.event_name==='download_clicked').length-beforeDownload,1);
- await ready(page);await page.locator('.nav-signin').click();await page.waitForURL(origin+'/account/');await page.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager);assert.ok([...events.values()].some(e=>e.event_name==='account_entry_clicked'&&e.properties.placement==='header'));
+ await new Promise(r=>setTimeout(r,600));assert.equal([...events.values()].filter(e=>e.event_name==='download_clicked').length-beforeDownload,1);const clicked=[...events.values()].filter(e=>e.event_name==='download_clicked').at(-1);assert.equal(clicked.properties.release_id,'fixture_1');assert.equal(clicked.properties.artifact_id,'fixture_windows');assert.equal(clicked.properties.architecture,'x64');assert.equal(downloadRequests.filter(e=>e.eventName==='download_redirected').length,1);assert.ok(!JSON.stringify(downloadRequests).includes('receipt'));
+ // Refusal preserves the same ordinary link and operational gateway request without W.
+ await ready(page);await choose(page,false);const refusedRequests=requests.length;await page.locator('[data-download-platform="windows"]').last().click();await page.waitForURL(origin+'/fixture-download');assert.equal(requests.length,refusedRequests);assert.equal(downloadRequests.filter(e=>e.eventName==='download_redirected').length,2);
+ await ready(page);await choose(page,true);await page.locator('.nav-signin').click();await page.waitForURL(origin+'/account/');await page.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager);assert.ok([...events.values()].some(e=>e.event_name==='account_entry_clicked'&&e.properties.placement==='header'));
  await page.getByRole('button',{name:'Create account',exact:true}).click();await flush(page);assert.ok([...events.values()].some(e=>e.page_id==='account'&&e.event_name==='signup_started'));await page.getByRole('button',{name:'Back to sign in',exact:true}).click();await flush(page);assert.ok([...events.values()].some(e=>e.page_id==='account'&&e.event_name==='login_started'));assert.equal([...events.values()].some(e=>e.page_id==='account'&&e.event_name==='page_viewed'),false);
  await page.locator('.cmp-manage').click();await page.getByRole('button',{name:'Decline',exact:true}).click();const before=requests.length;await flush(page);assert.equal(requests.length,before);
  assert.equal(google,0);

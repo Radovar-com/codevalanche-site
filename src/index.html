@@ -587,12 +587,13 @@
     </footer>
 
     <script src="/config.js"></script>
+    <script src="/downloads.js"></script>
     <script type="module" src="/site.js"></script>
     <script>
       (() => {
         "use strict"
         // ---- Platform-aware download ----
-        const downloads = window.CODEVALANCHE_DOWNLOADS || {}
+        const downloads = window.CODEVALANCHE_DOWNLOAD_LINKS || {}
         const ua = navigator.userAgent || ""
         const uaPlatform = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || ""
         const isIpadOs = /Mac/i.test(uaPlatform) && navigator.maxTouchPoints > 1
@@ -637,8 +638,11 @@
           if (ctaEl && url) {
             const link = document.createElement("a")
             link.className = "dl-cta dl-cta-live"
-            link.href = url
+            link.href = url.href
             link.setAttribute("data-download-platform", platform)
+            link.dataset.downloadRelease = url.releaseId
+            link.dataset.downloadArtifact = url.artifactId
+            link.dataset.downloadArchitecture = url.architecture
             link.textContent = "Download"
             ctaEl.replaceWith(link)
           }
@@ -650,8 +654,11 @@
           if (url && state) {
             const link = document.createElement("a")
             link.className = "dl-card-state dl-card-live"
-            link.href = url
+            link.href = url.href
             link.setAttribute("data-download-platform", key)
+            link.dataset.downloadRelease = url.releaseId
+            link.dataset.downloadArtifact = url.artifactId
+            link.dataset.downloadArchitecture = url.architecture
             link.textContent = "Download"
             state.replaceWith(link)
           }

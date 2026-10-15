@@ -1,2 +1,5 @@
 [functions.website-analytics]
 verify_jwt = false
+
+[functions.download-redirect]
+verify_jwt = false
