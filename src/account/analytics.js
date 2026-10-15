@@ -2,7 +2,7 @@
  * the collector verifies the current session and its own P4 snapshot afresh.
  * Credentials live only in this in-memory Auth handoff and HTTP headers. */
 export function createAccountAnalytics({config={},window:host=globalThis.window,loadSdk=()=>import('../analytics/owned-analytics.js')}={}){
- let sdk=null,loading=null,session=null,key=null,epoch=0,active=false,expiryTimer=null;
+ let sdk=null,loading=null,session=null,key=null,epoch=0,active=false,expiryTimer=null,profileEditRecorded=false;
  const unavailable=()=>({queued:false,reason:'unavailable'});
  const credential=()=>active&&session?.access_token&&session.expires_at*1000>Date.now()?`Bearer ${session.access_token}`:null;
  const send=(url,options)=>{
@@ -13,7 +13,7 @@ export function createAccountAnalytics({config={},window:host=globalThis.window,
  };
  function suspend(){
   host.clearTimeout(expiryTimer);expiryTimer=null;
-  epoch++;active=false;session=null;key=null;
+  epoch++;active=false;session=null;key=null;profileEditRecorded=false;
   // setConsent fences synchronously before its first await. No Auth or core UI
   // operation waits on optional revocation transport.
   if(sdk)try{sdk.resetIdentity('account_boundary');void sdk.setConsent({accountAnalytics:false}).catch(()=>{});}catch{}
@@ -36,5 +36,13 @@ export function createAccountAnalytics({config={},window:host=globalThis.window,
    sdk.track('account_page_viewed',{account_page_id:'profile'});
   }catch{if(epoch===attempt)suspend();}
  }
- return Object.freeze({update,suspend,track(name,properties){try{if(!active)return unavailable();if(!credential()){suspend();return unavailable();}return sdk?.track(name,properties)??unavailable();}catch{return unavailable();}},async flush(){try{if(active)await sdk?.flush();}catch{}},dispose(){suspend();sdk?.dispose();}});
+ function track(name,properties){try{if(!active)return unavailable();if(!credential()){suspend();return unavailable();}return sdk?.track(name,properties)??unavailable();}catch{return unavailable();}}
+ return Object.freeze({update,suspend,track,startProfileEdit(){
+  if(profileEditRecorded)return {queued:false,reason:'already_recorded'};
+  // A refused, unready or storage-blocked focus is not an observation. Only a
+  // fresh interaction accepted by this account/page/consent scope consumes it.
+  const result=track('profile_edit_started',{edit_area_id:'profile'});
+  if(result.queued)profileEditRecorded=true;
+  return result;
+ },async flush(){try{if(active)await sdk?.flush();}catch{}},dispose(){suspend();sdk?.dispose();}});
 }

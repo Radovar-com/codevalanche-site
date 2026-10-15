@@ -209,9 +209,11 @@ $('auth-form').addEventListener('submit', event => { if (!user && ['signin','sig
   else if (mode === 'update') { recovery = false; history.replaceState(null, '', redirectTo.pathname + redirectTo.search); await cleanUpLocalSession(); notice('Password updated. Sign in again to continue.') }
 }) })
 $('resend').addEventListener('click', () => void action(async () => { const { error } = await client.auth.resend({ type: 'signup', email: $('email').value.trim(), options: { emailRedirectTo: redirectTo.href } }); if (error) throw error; notice('If confirmation is needed, a new email is on its way.') }))
-$('profile-form').addEventListener('focusin', () => { accountAnalytics.track('profile_edit_started', { edit_area_id: 'profile' }) }, { once: true })
+$('profile-form').addEventListener('focusin', () => { accountAnalytics.startProfileEdit() })
 $('profile-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => { const requestId = crypto.randomUUID(); const changes = normalizeAccountProfile({ displayName: $('display-name').value.trim(), bio: $('bio').value.trim() }); accountAnalytics.track('profile_save_submitted', { operation_id: requestId }); await apiV2('profile.update', { requestId, ...changes }); notice('Profile saved.') }) })
-async function signOut() { accountAnalytics.track('logout_clicked', { account_surface: 'profile' }); await cleanUpLocalSession(); notice('Signed out.') }
+// Logout immediately fences the optional queue and receipt. It must not wait
+// for a collector; logout-click analytics therefore stays explicitly unmeasured.
+async function signOut() { await cleanUpLocalSession(); notice('Signed out.') }
 $('logout').addEventListener('click', () => void action(signOut))
 $('account-state-logout').addEventListener('click', () => void action(signOut))
 $('account-state-retry').addEventListener('click', () => void action(async () => { if (lifecycle.logoutIntent() === 'pending') await cleanUpLocalSession(); else await readCurrentSession() }))
