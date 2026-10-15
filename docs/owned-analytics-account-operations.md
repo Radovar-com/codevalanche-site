@@ -1,0 +1,33 @@
+# Account outcomes and optional account observations (T7)
+
+This is source/local-fixture integration, not hosted provider qualification. Public capture remains disabled in `src/config.js`; Radovar remains W-only by default. T12 owns provisioning, migration application, hosted Auth/email/MFA/session qualification and activation. No real account or provider was mutated for these tests.
+
+## Deployment boundary
+
+Apply the sorted, currently unapplied website migration 001 and new profile migration 004 before deploying the new account and website collector handlers. Historical migrations are immutable. Migration 004 creates an owned canonical profile; it does not write Auth metadata, credentials, roles or provider schema objects. The existing Auth UUID is still the identity authority.
+
+The first profile save seeds unedited display fields from legacy Auth metadata. `account.overview` / `get-account`, admin directory search and admin detail immediately read the canonical row, preserving their current DTOs. Empty strings are intentional clears. Existing signup metadata remains the fallback only before an owned save. Deploy all these read/write adapters together. Rolling back to a metadata-only reader after canonical saves would show stale fields: reconcile explicitly before such a rollback. No unsupported Auth metadata dual-write or projection worker is introduced.
+
+`codevalanche_persist_profile_outcome` locks P4 state, inserts/locks the owned profile, checks the actor-scoped UUID idempotency key, updates the canonical fields, and inserts the operational success outcome and idempotency key in one transaction. It never locks a website receipt. A failure rolls everything back; the API may separately record the constant `persistence_unavailable` reason. Profile values never enter outcome records. Non-UUID legacy request IDs still save, without UUID correlation/deduplication. Functional idempotency keys persist until account erasure so raw-retention cleanup cannot replay an old profile change.
+
+## Optional A authority
+
+`POST /v1/consent/receipts` with `purposes.accountAnalytics=true` and A ingestion require a Bearer access token verified through the existing consumer `authenticateAccountContext`, current account policy and P4 opt-in. An ordinary permitted consumer session works; report/operator MFA authorization is not reused for observations. Auth credentials travel only in HTTP headers, never events, analytics queues or report DTOs.
+
+The browser's choice/P4 response is only a local capture hint. The server binds the receipt to its verified principal and P4 consent-generation snapshot. Ingestion retrieves that original binding, verifies the current principal, and then calls the service-only `wa_ingest_website_batch(..., p_principal_id)` RPC. Its transaction locks receipt first, current P4 second, validates the unchanged binding/generation, then inserts and ACKs. Revocation serializes on the same receipt lock. Receipt generation and P4 generation are independent counters and are never compared to each other.
+
+The account controller fences on account-view invalidation, logout, Auth changes, P4 choice changes, token expiry and collector 401/403/409. Old A data cannot be reassigned to a new principal. Browser storage uses `owned_analytics:codevalanche:account:*` and the account-only consent cookie, separately from marketing W; A receipt purposes are `{websiteAnalytics:false,accountAnalytics:true}`. W refusal does not block A; A refusal does not withdraw W. No Guest history or cross-domain identity join exists.
+
+Both namespaces share one per-site queue mutation Web Lock. Combined persisted entries are capped at 100. Valid peer entries reserve capacity; overflow drops the current queue's oldest observations, and expired/invalid peer entries are cleaned under the same lock. This never changes peer consent or identity. Without Web Locks or usable storage, each instance uses the existing bounded memory fallback (100 entries/24h); that fallback cannot promise a global cross-tab bound. Transport may lose optional observations during expiry, navigation, overflow or unavailable capture; core profile/Auth behavior does not wait for capture.
+
+## Readout and retention
+
+`readAccountOutcomeReport(actor, query, service)` is the accounts-view adapter. The HTTP report route verifies the existing administrator/session/MFA authority; its SQL reader rechecks membership/current policy. Reports return the frozen `AccountOutcomeReport` DTO with `population=operational_accounts`. Filters, comparison, cursor and grouping are rejected until implemented, rather than silently ignored. Codevalanche/all use the retained account source; Radovar returns `not_configured`.
+
+Created and email-verified counts use their distinct retained Auth timestamps. Provider-audit login requires the persisted successful provider event with user and session; token refresh and password-hook verification remain distinct concepts. Disabled/missing provider sources return null counts and explicit coverage gaps. Unsupported concepts remain unmeasured. Profile failures cover persistence attempts, not every UI validation refusal. Counts remain partial, describing retained observed results, not a complete historical user census. `sampleSize` sums known outcome counts, not distinct users or a funnel denominator.
+
+Only profile outcomes can be attributed: exact operation UUID, verified receipt principal and original P4 generation must match the durable profile result, and current P4 consent must still qualify. This is a server-side join; browser data receives no user ID. Signup/login have no qualified ephemeral provider nonce handoff and remain unassigned. No probabilistic or retroactive Guest merge is made. No operational count is divided by a W population.
+
+T12 must schedule service-only `wa_profile_retention()` alongside the collector retention jobs; it deletes operational raw outcomes older than 90 days. Profile rows and functional idempotency keys are account data, retained until Auth erasure, with `ON DELETE CASCADE`. All new tables use RLS and deny anon/authenticated direct access. No retention schedule or infrastructure was installed in T7.
+
+T12 still must verify actual hosted signup/email confirmation, password-only versus completed MFA/session login, token refresh, profile save/refresh, logout, two independent browser sessions, account switching, out-of-band P4 withdrawal/regrant, provider delivery/watermarks, and concurrent independent PostgreSQL sessions. PGlite covers real SQL transactions and committed orderings but is not proof of hosted provider behavior or independent-session lock scheduling.

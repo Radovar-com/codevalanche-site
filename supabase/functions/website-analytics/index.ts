@@ -1,6 +1,8 @@
 import {issueConsentReceipt,revokeConsentReceipt} from '../_shared/websiteAnalyticsConsent.ts';
 import {AnalyticsError,analyticsRpc,ingestWebsiteBatch,siteForOrigin} from '../_shared/websiteAnalyticsIngestion.ts';
 import {authorizeWebsiteReport} from '../_shared/websiteAnalyticsAuthorization.ts';
+import {confirmWebsiteAccount} from '../_shared/websiteAccountContext.ts';
+import {readAccountOutcomeReport} from '../_shared/accountOutcomeReports.ts';
 import {validateReportQuery,validateContractDto} from '../_shared/websiteAnalyticsContract.ts';
 import type {BuildRegistry,ReportView} from '../_shared/websiteAnalyticsContract.ts';
 
@@ -33,8 +35,8 @@ export function createWebsiteAnalyticsHandler(options:Options){
     let query;try{if([...url.searchParams.keys()].some(k=>k!=='query')||url.searchParams.getAll('query').length!==1)throw 0;query=JSON.parse(url.searchParams.get('query')??'');}catch{throw new AnalyticsError('unsupported_query');}
     const view=report[1] as ReportView,result=validateReportQuery(query,view,options.registry);
     if(!result.accepted)throw new AnalyticsError('unsupported_query');
-    if(!options.readReport)throw new AnalyticsError('source_unavailable');
-    const data=await options.readReport(actor,result.query,view);
+    if(!options.readReport&&view!=='accounts')throw new AnalyticsError('source_unavailable');
+    const data=options.readReport?await options.readReport(actor,result.query,view):await readAccountOutcomeReport(actor,result.query,options.service);
     if(!validateContractDto('WebsiteReport',data)||(data as any)?.sourceQuality?.view!==view)throw new AnalyticsError('source_unavailable');
     return respond(data);
    }
@@ -45,8 +47,11 @@ export function createWebsiteAnalyticsHandler(options:Options){
    if(!Number.isFinite(retry))throw new AnalyticsError('source_unavailable');
    if(retry>0)throw new AnalyticsError('rate_limited',retry);
    if(url.search)throw new AnalyticsError('invalid_fields');
-   if(path==='/v1/events'&&request.method==='POST')return respond(await ingestWebsiteBatch(await readBody(request),{origin,service:options.service,registry:options.registry}));
-   if(path==='/v1/consent/receipts'&&request.method==='POST')return respond(await issueConsentReceipt(await readBody(request),{origin,service:options.service}),201);
+   if(path==='/v1/events'&&request.method==='POST')return respond(await ingestWebsiteBatch(await readBody(request),{origin,service:options.service,registry:options.registry,confirmAccount:()=>confirmWebsiteAccount(request,options)}));
+   if(path==='/v1/consent/receipts'&&request.method==='POST'){
+    const body=await readBody(request),account=body?.purposes?.accountAnalytics===true?await confirmWebsiteAccount(request,options):undefined;
+    return respond(await issueConsentReceipt(body,{origin,service:options.service,account}),201);
+   }
    const revoke=path.match(/^\/v1\/consent\/receipts\/([0-9a-f-]+)$/i);
    if(revoke&&request.method==='DELETE'){const proof=await readBody(request);if(proof?.receiptId!==revoke[1])throw new AnalyticsError('invalid_fields');return respond(await revokeConsentReceipt(proof,{origin,service:options.service}));}
    throw new AnalyticsError('invalid_fields',null,404);

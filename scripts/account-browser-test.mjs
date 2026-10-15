@@ -11,7 +11,7 @@ const screenshotRoot = process.env.CODEVALANCHE_ACCOUNT_TEST_OUTPUT || '../_buil
 await mkdir(screenshotRoot, { recursive: true })
 const user={id:'11111111-1111-4111-8111-111111111111',aud:'authenticated',role:'authenticated',email:'test@example.test',email_confirmed_at:new Date().toISOString(),user_metadata:{display_name:'Test'},app_metadata:{provider:'email'},identities:[{provider:'email'}],created_at:new Date().toISOString()}
 await page.route('https://hvevaxsfeyiikjhcsafi.supabase.co/**',async route=>{
- const url=route.request().url(); let body={}; if(url.includes('/settings')) body={external:{google:googleEnabled}}; else if(url.includes('/token')) body={access_token:'test-access',refresh_token:'test-refresh',token_type:'bearer',expires_in:3600,user}; else if(url.includes('/functions/')) body={user:{displayName:'Test',bio:''},sessions:[{current:true,createdAt:new Date().toISOString()}],deletion:null}; else if(url.includes('/user'))body=user;
+ const url=route.request().url(); let body={}; if(url.includes('/settings')) body={external:{google:googleEnabled}}; else if(url.includes('/token')) body={access_token:'test-access',refresh_token:'test-refresh',token_type:'bearer',expires_in:3600,user}; else if(url.includes('/functions/')) { const call=route.request().postDataJSON();body=call.action==='profile.update'?{apiVersion:2,ok:true,requestId:call.requestId,data:{ok:true}}:{user:{displayName:'Test',bio:''},sessions:[{current:true,createdAt:new Date().toISOString()}],deletion:null}; } else if(url.includes('/user'))body=user;
  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(body)})
 })
 try {

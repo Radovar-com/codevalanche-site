@@ -4,8 +4,10 @@ import { createAccountSessionLifecycle, accountAuthFetch } from './sessionLifecy
 import { createAccountSecurity } from './security.js'
 import { recoveryCallback, exchangeRecovery, validateNewPassword, recoveryNotice } from './recovery.js'
 import { createAccountCaptcha } from './captcha.js'
+import { createAccountAnalytics } from './analytics.js'
 const $ = (id) => document.getElementById(id)
 const config = window.CODEVALANCHE_CONFIG
+const accountAnalytics = createAccountAnalytics({ config: window.CODEVALANCHE_ANALYTICS })
 const captcha = createAccountCaptcha({ siteKey: config.captchaSiteKey, container: $('captcha') })
 const storageKey = `sb-${new URL(config.supabaseUrl).hostname.split('.')[0]}-auth-token`
 const lifecycle = createAccountSessionLifecycle(storageKey)
@@ -27,6 +29,7 @@ function applyControls() {
   if (mode === 'update') $('auth-submit').disabled = busy || cleanupPending || accountStatus !== 'ready'
 }
 function setAccountStatus(next) {
+  if (next !== 'ready') accountAnalytics.suspend()
   accountStatus = next
   const gated = ['loading', 'suspended', 'deletion-pending', 'unavailable', 'signing-out', 'logout-failed'].includes(next)
   $('auth').hidden = (gated && next !== 'logout-failed') || (Boolean(user) && !recovery) || (recovery && user && next !== 'ready')
@@ -165,6 +168,7 @@ async function render(session) {
     list('methods', identityLabels(user.identities))
     $('display-name').value = account.user?.displayName || ''; $('bio').value = account.user?.bio || ''; $('cancel-deletion').hidden = !account.deletion
     if ($('analytics-consent')) $('analytics-consent').checked = account.analyticsConsent === true
+    void accountAnalytics.update({ session, account })
     list('sessions', account.sessions?.length ? account.sessions.map(s => `${s.current ? 'This session' : s.label || 'Signed-in session'}${s.userAgent ? ` · ${s.userAgent}` : ''}${s.createdAt ? ` · Started ${new Date(s.createdAt).toLocaleDateString()}` : ''}`) : ['No session details available.'])
     if (account.deletion?.scheduledFor) notice(`Account deletion requested for ${new Date(account.deletion.scheduledFor).toLocaleDateString()}.`)
   } catch (error) {
@@ -205,8 +209,9 @@ $('auth-form').addEventListener('submit', event => { if (!user && ['signin','sig
   else if (mode === 'update') { recovery = false; history.replaceState(null, '', redirectTo.pathname + redirectTo.search); await cleanUpLocalSession(); notice('Password updated. Sign in again to continue.') }
 }) })
 $('resend').addEventListener('click', () => void action(async () => { const { error } = await client.auth.resend({ type: 'signup', email: $('email').value.trim(), options: { emailRedirectTo: redirectTo.href } }); if (error) throw error; notice('If confirmation is needed, a new email is on its way.') }))
-$('profile-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => { await api('update-profile', normalizeAccountProfile({ displayName: $('display-name').value.trim(), bio: $('bio').value.trim() })); notice('Profile saved.') }) })
-async function signOut() { await cleanUpLocalSession(); notice('Signed out.') }
+$('profile-form').addEventListener('focusin', () => { accountAnalytics.track('profile_edit_started', { edit_area_id: 'profile' }) }, { once: true })
+$('profile-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => { const requestId = crypto.randomUUID(); const changes = normalizeAccountProfile({ displayName: $('display-name').value.trim(), bio: $('bio').value.trim() }); accountAnalytics.track('profile_save_submitted', { operation_id: requestId }); await apiV2('profile.update', { requestId, ...changes }); notice('Profile saved.') }) })
+async function signOut() { accountAnalytics.track('logout_clicked', { account_surface: 'profile' }); await cleanUpLocalSession(); notice('Signed out.') }
 $('logout').addEventListener('click', () => void action(signOut))
 $('account-state-logout').addEventListener('click', () => void action(signOut))
 $('account-state-retry').addEventListener('click', () => void action(async () => { if (lifecycle.logoutIntent() === 'pending') await cleanUpLocalSession(); else await readCurrentSession() }))
@@ -315,6 +320,6 @@ $('mfa-form')?.addEventListener('submit', event => { event.preventDefault(); voi
 }) })
 $('mfa-cancel')?.addEventListener('click', () => void action(async () => { await security.cancel(); $('mfa-secret').textContent = ''; $('mfa-code').value = ''; $('mfa-challenge').hidden = true }))
 $('mfa-remove')?.addEventListener('click', () => void action(async () => { const factors = await security.factors(); if (!factors.length) { notice('No verified authenticator is enrolled.'); return }; await security.remove(factors[0].id); notice('Authenticator removed. Earlier remote approvals have been withdrawn.'); await readCurrentSession() }))
-$('analytics-save')?.addEventListener('click', () => void action(async () => { const result = await apiV2('analytics.consent', { analytics: $('analytics-consent').checked }); notice(result.analyticsConsent ? 'Account activity analytics accepted.' : 'Account activity analytics stopped. Queued events from earlier consent are refused.'); }))
+$('analytics-save')?.addEventListener('click', () => void action(async () => { accountAnalytics.suspend(); const result = await apiV2('analytics.consent', { analytics: $('analytics-consent').checked }); void accountAnalytics.update({ session: currentSession, account: result }); notice(result.analyticsConsent ? 'Account activity analytics accepted.' : 'Account activity analytics stopped. Queued events from earlier consent are refused.'); }))
 $('activity-load')?.addEventListener('click', () => void action(async () => { const result = await apiV2('security.activity', { limit: 20 }); list('security-activity', result.events.map(e => `${new Date(e.occurredAt).toLocaleString()} · ${e.eventName} · ${e.outcome} · ${e.source}`)); $('activity-coverage').textContent = result.coverage.status === 'qualified' ? 'Configured sources are current.' : 'Some provider sources are missing or delayed. An empty list does not establish zero attempts.' }))
 $('account-state-cancel')?.addEventListener('click', () => void action(cancelAccountDeletion))

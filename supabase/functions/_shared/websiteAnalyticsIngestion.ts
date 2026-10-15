@@ -1,5 +1,5 @@
 import {validateWebsiteBatch} from './websiteAnalyticsContract.ts';
-import type {BatchReceipt,BuildRegistry,ErrorCode,SiteId} from './websiteAnalyticsContract.ts';
+import type {BatchReceipt,BuildRegistry,ErrorCode,SiteId,ConfirmedAccountContext} from './websiteAnalyticsContract.ts';
 import {hashCapability} from './websiteAnalyticsConsent.ts';
 
 export class AnalyticsError extends Error {
@@ -19,9 +19,7 @@ export async function analyticsRpc(service:any,name:string,args:Record<string,un
  if(result?.error)throw new AnalyticsError(result.error,result.retryAfterMs??null);
  return result;
 }
-type Context={origin:string;service:any;registry?:BuildRegistry};
-/** A proof is intentionally not accepted here until a real current P4 adapter
- * verifies BOTH the principal and per-event generation binding. */
+type Context={origin:string;service:any;registry?:BuildRegistry;confirmAccount?:()=>Promise<Pick<ConfirmedAccountContext,'confirmed'|'principalId'|'consentGeneration'>>};
 export async function ingestWebsiteBatch(input:any,context:Context):Promise<BatchReceipt> {
  const siteId=siteForOrigin(context.origin);
  if(!input||Object.keys(input).sort().join(',')!=='collectionToken,events,generation,receiptId'||typeof input.collectionToken!=='string'||!/^[A-Za-z0-9_-]{32,128}$/.test(input.collectionToken)||typeof input.receiptId!=='string'||!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(input.receiptId)||!Number.isSafeInteger(input.generation)||input.generation<1||new TextEncoder().encode(JSON.stringify(input)).length>32768||!Array.isArray(input.events)||input.events.length<1||input.events.length>50)throw new AnalyticsError('invalid_fields');
@@ -34,6 +32,15 @@ export async function ingestWebsiteBatch(input:any,context:Context):Promise<Batc
   throw error;
  }
  if(!row)throw new AnalyticsError('invalid_consent');
+ let account:ConfirmedAccountContext|undefined;
+ if(row.account_analytics){
+  if(!context.confirmAccount)throw new AnalyticsError('unauthenticated');
+  const current=await context.confirmAccount();
+  const binding=await analyticsRpc(context.service,'wa_get_account_binding',{p_receipt_id:input.receiptId});
+  if(!binding||binding.principal_id!==current.principalId)throw new AnalyticsError('invalid_consent');
+  if(Number(binding.account_consent_generation)!==current.consentGeneration)throw new AnalyticsError('stale_generation');
+  account={...current,boundPrincipalId:binding.principal_id,boundConsentGeneration:Number(binding.account_consent_generation)};
+ }
  const receipt={receiptId:row.receipt_id,siteId:row.site_id,policyVersion:row.policy_version,generation:Number(row.generation),purposes:{websiteAnalytics:row.website_analytics,accountAnalytics:row.account_analytics},issuedAt:new Date(row.issued_at).toISOString(),expiresAt:new Date(row.expires_at).toISOString(),revokedAt:row.revoked_at};
  const receivedAt=new Date().toISOString();
  // The pre-auth event vocabulary is server-owned. Generic account engagement
@@ -41,11 +48,11 @@ export async function ingestWebsiteBatch(input:any,context:Context):Promise<Batc
  const preAuth=new Set(['signup_started','signup_form_submitted','verification_notice_viewed','login_started','login_form_submitted','auth_challenge_viewed','password_reset_requested_ui','password_reset_form_submitted','account_entry_clicked']);
  const events:any[]=[],rejected:any[]=[];
  for(const raw of input.events){
-  const surface=(raw?.page_id==='account'||raw?.page_id==='account_authorize')&&preAuth.has(raw?.event_name)?'pre_auth':undefined;
-  const result=validateWebsiteBatch([raw],{origin:context.origin,receivedAt,receipt,surface,registry:context.registry});
+  const surface=account?'authenticated_account':(raw?.page_id==='account'||raw?.page_id==='account_authorize')&&preAuth.has(raw?.event_name)?'pre_auth':undefined;
+  const result=validateWebsiteBatch([raw],{origin:context.origin,receivedAt,receipt,surface,account,registry:context.registry});
   const item=result.accepted?result.results[0]:{accepted:false,reason:result.reason};
   if(item.accepted)events.push(item.event);
   else rejected.push({eventId:typeof raw?.event_id==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(raw.event_id)?raw.event_id:null,code:item.reason});
  }
- return analyticsRpc(context.service,'wa_ingest_website_batch',{...args,p_events:events,p_rejected:rejected});
+ return analyticsRpc(context.service,'wa_ingest_website_batch',{...args,p_events:events,p_rejected:rejected,...(account?{p_principal_id:account.principalId}: {})});
 }

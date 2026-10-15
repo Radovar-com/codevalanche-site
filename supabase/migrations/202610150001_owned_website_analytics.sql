@@ -299,14 +299,14 @@ end $$;
 
 -- A single RPC transaction: receipt FOR UPDATE -> rate key -> insert -> ACK.
 -- Revocation uses the SAME receipt lock. A validation pre-read is never the
--- authorization boundary. A stays disabled pending real current/event P4 proof.
-create function public.wa_ingest_website_batch(p_receipt_id uuid,p_site_id text,p_generation bigint,p_collection_hash text,p_events jsonb,p_rejected jsonb)
+-- authorization boundary. A also locks current P4 state after the receipt.
+create function public.wa_ingest_website_batch(p_receipt_id uuid,p_site_id text,p_generation bigint,p_collection_hash text,p_events jsonb,p_rejected jsonb,p_principal_id uuid default null)
 returns jsonb language plpgsql security definer set search_path='' as $$
 declare v_receipt public.wa_consent_receipts;v_item jsonb;v_input jsonb;v_accepted jsonb:='[]';v_duplicates jsonb:='[]';v_retry integer;v_count integer;v_code text;v_received timestamptz:=clock_timestamp();
 begin
  if jsonb_typeof(p_events) is distinct from 'array' or jsonb_typeof(p_rejected) is distinct from 'array' or jsonb_array_length(p_events)+jsonb_array_length(p_rejected) not between 1 and 50 then raise exception 'invalid_fields';end if;
  begin
-  v_receipt:=public.wa_lock_consent_receipt(p_receipt_id,p_site_id,p_generation,p_collection_hash,null);
+  v_receipt:=public.wa_lock_consent_receipt(p_receipt_id,p_site_id,p_generation,p_collection_hash,p_principal_id);
  exception when others then
   if sqlerrm not in ('invalid_consent','stale_generation') then raise;end if;
   perform public.wa_health_increment(p_site_id,'rejected_consent',jsonb_array_length(p_events)+jsonb_array_length(p_rejected));
@@ -316,9 +316,9 @@ begin
  if v_retry>0 then return jsonb_build_object('error','rate_limited','retryAfterMs',v_retry);end if;
  for v_item in select value from jsonb_array_elements(p_events) loop
   v_input:=v_item->'input';
-  if v_item->>'eventSource' is distinct from 'W' or v_item->>'authority' is distinct from 'browser_observation' or v_item->>'surface' not in ('marketing','pre_auth') or v_input->>'site_id' is distinct from p_site_id or (v_input->>'consent_receipt_id')::uuid is distinct from p_receipt_id or (v_input->>'consent_generation')::bigint is distinct from p_generation then raise exception 'invalid_consent';end if;
+  if (p_principal_id is null and (v_item->>'eventSource' is distinct from 'W' or v_item->>'authority' is distinct from 'browser_observation' or v_item->>'surface' not in ('marketing','pre_auth'))) or (p_principal_id is not null and (v_item->>'eventSource' is distinct from 'A' or v_item->>'authority' is distinct from 'consented_account_observation' or v_item->>'surface' is distinct from 'authenticated_account')) or v_input->>'site_id' is distinct from p_site_id or (v_input->>'consent_receipt_id')::uuid is distinct from p_receipt_id or (v_input->>'consent_generation')::bigint is distinct from p_generation then raise exception 'invalid_consent';end if;
   insert into public.wa_events(site_id,event_id,schema_version,event_name,occurred_at,event_at,received_at,page_id,page_instance_id,page_version,session_id,anonymous_id,consent_receipt_id,consent_generation,properties,context,event_source,authority,surface,clock_quality)
-  values(p_site_id,(v_input->>'event_id')::uuid,1,v_input->>'event_name',(v_input->>'occurred_at')::timestamptz,(v_item->>'eventAt')::timestamptz,(v_item->>'receivedAt')::timestamptz,v_input->>'page_id',(v_input->>'page_instance_id')::uuid,v_input->>'page_version',(v_input->>'session_id')::uuid,(v_input->>'anonymous_id')::uuid,p_receipt_id,p_generation,v_input->'properties',coalesce(v_input->'context','{}'),'W','browser_observation',v_item->>'surface',v_item->>'clockQuality')
+  values(p_site_id,(v_input->>'event_id')::uuid,1,v_input->>'event_name',(v_input->>'occurred_at')::timestamptz,(v_item->>'eventAt')::timestamptz,(v_item->>'receivedAt')::timestamptz,v_input->>'page_id',(v_input->>'page_instance_id')::uuid,v_input->>'page_version',(v_input->>'session_id')::uuid,(v_input->>'anonymous_id')::uuid,p_receipt_id,p_generation,v_input->'properties',coalesce(v_input->'context','{}'),v_item->>'eventSource',v_item->>'authority',v_item->>'surface',v_item->>'clockQuality')
   on conflict(site_id,event_id) do nothing;
   get diagnostics v_count=row_count;
   if v_count=1 then
@@ -334,6 +334,13 @@ begin
  end loop;
  return jsonb_build_object('acceptedIds',v_accepted,'duplicateIds',v_duplicates,'rejected',p_rejected,'generation',p_generation,'receivedAt',to_char(v_received at time zone 'UTC','YYYY-MM-DD"T"HH24:MI:SS.MS"Z"'),'retryAfterMs',null);
 end $$;
-revoke all on function public.wa_health_increment(text,text,integer),public.wa_take_rate_limit(text,text,text),public.wa_get_collection_receipt(uuid,text,bigint,text),public.wa_ingest_website_batch(uuid,text,bigint,text,jsonb,jsonb) from public,anon,authenticated;
-grant execute on function public.wa_health_increment(text,text,integer),public.wa_take_rate_limit(text,text,text),public.wa_get_collection_receipt(uuid,text,bigint,text),public.wa_ingest_website_batch(uuid,text,bigint,text,jsonb,jsonb) to service_role;
+revoke all on function public.wa_health_increment(text,text,integer),public.wa_take_rate_limit(text,text,text),public.wa_get_collection_receipt(uuid,text,bigint,text),public.wa_ingest_website_batch(uuid,text,bigint,text,jsonb,jsonb,uuid) from public,anon,authenticated;
+grant execute on function public.wa_health_increment(text,text,integer),public.wa_take_rate_limit(text,text,text),public.wa_get_collection_receipt(uuid,text,bigint,text),public.wa_ingest_website_batch(uuid,text,bigint,text,jsonb,jsonb,uuid) to service_role;
+-- Restricted binding read for the trusted validator; the ingestion lock remains authoritative.
+create function public.wa_get_account_binding(p_receipt_id uuid)
+returns public.wa_receipt_account_bindings language sql stable security definer set search_path='' as $$
+ select * from public.wa_receipt_account_bindings where receipt_id=p_receipt_id
+$$;
+revoke all on function public.wa_get_account_binding(uuid) from public,anon,authenticated;
+grant execute on function public.wa_get_account_binding(uuid) to service_role;
 commit;

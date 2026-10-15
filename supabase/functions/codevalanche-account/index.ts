@@ -30,6 +30,7 @@ import { accountReadout } from "../_shared/accountReadouts.ts";
 import { recordAccountRefusal } from "../_shared/securityEvent.ts";
 import { reconcileSuspensionExpiry } from "../_shared/suspensionExpiry.ts";
 import { projectBinding } from "../_shared/projectBindings.ts";
+import { persistProfileWithOutcome, readOwnedProfile } from "../_shared/profileOutcome.ts";
 
 const url = Deno.env.get("SUPABASE_URL")!;
 const service = createClient(url, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
@@ -376,8 +377,8 @@ Deno.serve(async (req) => {
     if (binding !== null) return respond(binding);
     switch (body.action) {
       case "get-account": {
-        const name = user.user_metadata?.display_name ||
-          user.user_metadata?.full_name || "";
+        const profile = await readOwnedProfile(service, user);
+        const name = profile.display_name;
         return respond({
           id: user.id,
           userId: user.id,
@@ -391,7 +392,7 @@ Deno.serve(async (req) => {
             id: user.id,
             email: user.email,
             displayName: name,
-            bio: user.user_metadata?.bio || "",
+            bio: profile.bio,
             emailVerified: !!user.email_confirmed_at,
           },
           signInMethods: (user.identities || []).map((
@@ -424,11 +425,7 @@ Deno.serve(async (req) => {
         } catch {
           return respond({ error: "Invalid profile" }, 400);
         }
-        const result = await service.auth.admin.updateUserById(user.id, {
-          user_metadata: { ...user.user_metadata, ...patch },
-        });
-        if (result.error) throw new Error("Profile update failed");
-        return respond({ ok: true });
+        return respond(await persistProfileWithOutcome({principal,validatedChanges:patch,requestId:body.requestId,consentGeneration:state?.consent_generation},service));
       }
       case "sign-out-current":
       case "sign-out-others": {

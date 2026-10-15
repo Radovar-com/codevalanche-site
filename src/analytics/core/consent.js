@@ -2,9 +2,11 @@
  * T4 owns event production/transport: acquire a fresh lease immediately before
  * sending, pass its signal, and ignore ACKs unless acceptAck returns true.
  */
-export function createConsentManager({siteId,policyVersion='2026-10-15',transport={},window:host=globalThis.window,now=Date.now,onPurge=()=>{}}={}) {
+export function createConsentManager({siteId,policyVersion='2026-10-15',purpose='websiteAnalytics',transport={},window:host=globalThis.window,now=Date.now,onPurge=()=>{}}={}) {
+ if(!['websiteAnalytics','accountAnalytics'].includes(purpose))throw new TypeError('Invalid analytics purpose');
  if(!['radovar','codevalanche'].includes(siteId))throw new TypeError('Invalid analytics site');
- const prefix=`owned_analytics:${siteId}:`,cookieName=`${siteId}_consent`,keys=Object.freeze(Object.fromEntries(['preference','receipt','pending','recovery','identity','queue','request'].map(k=>[k,prefix+k])));
+ const accountScope=purpose==='accountAnalytics',otherPurpose=accountScope?'websiteAnalytics':'accountAnalytics';
+ const prefix=`owned_analytics:${siteId}:${accountScope?'account:':''}`,cookieName=`${siteId}_${accountScope?'account_':''}consent`,keys=Object.freeze(Object.fromEntries(['preference','receipt','pending','recovery','identity','queue','request'].map(k=>[k,prefix+k])));
  const storage=host.localStorage,day=86400000,listeners=new Set();
  const memoryProofs=new Map(),blockedReceipts=new Set(),acknowledgedProofs=new Set();
  let disposed=false,controller=new AbortController(),lastScope='',retrying,locallyFenced=false,fenceGeneration=-1,volatilePreference=null,revocationResolved=false;
@@ -49,7 +51,7 @@ export function createConsentManager({siteId,policyVersion='2026-10-15',transpor
  function notify(){for(const listener of listeners)try{listener(getState());}catch{}}
  function authority(ignorePending=false){
   const state=preference(),r=read('receipt');
-  if(disposed||(!ignorePending&&pending().length)||state.state!=='granted'||!state.websiteAnalytics||!r||r.siteId!==siteId||r.policyVersion!==policyVersion||r.generation!==state.generation||!r.purposes?.websiteAnalytics||r.purposes.accountAnalytics!==false||!Number.isFinite(Date.parse(r.expiresAt))||!Number.isFinite(Date.parse(r.issuedAt))||Date.parse(r.expiresAt)<=now()||Date.parse(r.issuedAt)>now()||typeof r.collectionToken!=='string')return null;
+  if(disposed||(!ignorePending&&pending().length)||state.state!=='granted'||!state[purpose]||!r||r.siteId!==siteId||r.policyVersion!==policyVersion||r.generation!==state.generation||!r.purposes?.[purpose]||r.purposes[otherPurpose]!==false||!Number.isFinite(Date.parse(r.expiresAt))||!Number.isFinite(Date.parse(r.issuedAt))||Date.parse(r.expiresAt)<=now()||Date.parse(r.issuedAt)>now()||typeof r.collectionToken!=='string')return null;
   if(locallyFenced&&blockedReceipts.has(r.receiptId))return null;
   locallyFenced=false;
   return {state,r};
@@ -63,7 +65,7 @@ export function createConsentManager({siteId,policyVersion='2026-10-15',transpor
   if(!a){controller.abort();controller=new AbortController();if(waitingForOldProof){void retryRevocations();}else{write('identity',null);write('queue',null);try{storage.removeItem('codevalanche_analytics_installation');}catch{}}}
   lastScope=scope;
  }
- function getState(){const value=preference();if(locallyFenced&&value.generation<=fenceGeneration&&value.state==='granted')return {...value,state:pending().length?'pending_revoke':'withdrawn',websiteAnalytics:false,accountAnalytics:false};return {...value,accountAnalytics:false,websiteAnalytics:value.state==='granted'&&value.websiteAnalytics===true};}
+ function getState(){const value=preference();if(locallyFenced&&value.generation<=fenceGeneration&&value.state==='granted')return {...value,state:pending().length?'pending_revoke':'withdrawn',websiteAnalytics:false,accountAnalytics:false};return {...value,[otherPurpose]:false,[purpose]:value.state==='granted'&&value[purpose]===true};}
  async function retryRevocations(){
   if(disposed)return false;if(retrying)return retrying;
   retrying=(async()=>{
@@ -79,23 +81,23 @@ export function createConsentManager({siteId,policyVersion='2026-10-15',transpor
  }
  async function setConsent(choice){
   if(disposed)return;
-  const enabled=choice?.websiteAnalytics===true,old=preference();
+  const enabled=choice?.[purpose]===true,old=preference();
   // Abort/fence BEFORE any fallible persistence, including the pending proof.
   fence(old.generation+1);remember(read('receipt'));purge();persistProofs();
   const awaitingRevoke=pending().length>0||(old.state==='pending_revoke'&&!revocationResolved);
-  const state={policyVersion,websiteAnalytics:enabled&&!awaitingRevoke,accountAnalytics:false,state:awaitingRevoke?'pending_revoke':enabled?'granted':old.state==='granted'?'withdrawn':'denied',generation:old.generation+1,changedAt:new Date(now()).toISOString()};
+  const state={policyVersion,[purpose]:enabled&&!awaitingRevoke,[otherPurpose]:false,state:awaitingRevoke?'pending_revoke':enabled?'granted':old.state==='granted'?'withdrawn':'denied',generation:old.generation+1,changedAt:new Date(now()).toISOString()};
   putPreference(state);notify();
   if(state.state!=='granted')try{channel?.postMessage({state,proofs:pending()});}catch{}
   if(!enabled){await retryRevocations();return;}
   const attempt=host.crypto.randomUUID();if(!write('request',attempt))return;
   const current=()=>!disposed&&read('request')===attempt&&preference().generation===state.generation;
   if(!await retryRevocations()||!current())return;
-  if(!putPreference({...state,websiteAnalytics:true,state:'granted'}))return;notify();
+  if(!putPreference({...state,[purpose]:true,state:'granted'}))return;notify();
   if(!transport.issueReceipt)return;
   let receipt;
-  try{receipt=await transport.issueReceipt({siteId,policyVersion,generation:state.generation,purposes:{websiteAnalytics:true,accountAnalytics:false}});}catch{return;}
+  try{receipt=await transport.issueReceipt({siteId,policyVersion,generation:state.generation,purposes:{[purpose]:true,[otherPurpose]:false}});}catch{return;}
   if(!current()){remember(receipt);await retryRevocations();return;}
-  const valid=receipt?.siteId===siteId&&receipt.policyVersion===policyVersion&&receipt.generation===state.generation&&receipt.purposes?.websiteAnalytics===true&&receipt.purposes.accountAnalytics===false&&Date.parse(receipt.expiresAt)>now()&&Date.parse(receipt.issuedAt)<=now()&&typeof receipt.collectionToken==='string'&&typeof receipt.revocationProof==='string';
+  const valid=receipt?.siteId===siteId&&receipt.policyVersion===policyVersion&&receipt.generation===state.generation&&receipt.purposes?.[purpose]===true&&receipt.purposes[otherPurpose]===false&&Date.parse(receipt.expiresAt)>now()&&Date.parse(receipt.issuedAt)<=now()&&typeof receipt.collectionToken==='string'&&typeof receipt.revocationProof==='string';
   if(!valid){remember(receipt);await retryRevocations();return;}
   if(!write('receipt',receipt)){remember(receipt);purge();persistProofs();await retryRevocations();return;}
   write('request',null);locallyFenced=false;sync();notify();
@@ -108,7 +110,7 @@ export function createConsentManager({siteId,policyVersion='2026-10-15',transpor
   if(!identity||identity.expiresAt<=time){identity={anonymousId:host.crypto.randomUUID(),expiresAt:time+30*day};}
   if(!identity.sessionId||time-identity.lastActiveAt>=30*60000||time-identity.sessionStartedAt>=day){identity.sessionId=host.crypto.randomUUID();identity.sessionStartedAt=time;}
   if(touchActivity){identity.lastActiveAt=time;if(!write('identity',identity))return null;}
-  return {anonymousId:identity.anonymousId,sessionId:identity.sessionId,receiptId:a.r.receiptId,generation:a.state.generation,collectionToken:a.r.collectionToken,accountAnalytics:false,signal:controller.signal};
+  return {anonymousId:identity.anonymousId,sessionId:identity.sessionId,receiptId:a.r.receiptId,generation:a.state.generation,collectionToken:a.r.collectionToken,accountAnalytics:accountScope,signal:controller.signal};
  }
  function acceptAck(ack,lease){sync();const a=authority();return !!a&&!!lease&&!lease.signal?.aborted&&lease.receiptId===a.r.receiptId&&lease.generation===a.state.generation&&ack?.generation===a.state.generation;}
  const onStorage=event=>{if(event.key===null||Object.values(keys).includes(event.key)){sync();notify();}};

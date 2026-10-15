@@ -10,7 +10,9 @@ const bytes=value=>new TextEncoder().encode(JSON.stringify(value)).length;
 export function createQueue({manager,endpoint,host=window,now=Date.now,siteId,fetch:request=host.fetch.bind(host)}){
  checkedEndpoint(endpoint);
  let locks;try{locks=host.navigator?.locks;if(typeof locks?.request!=='function')locks=null;}catch{locks=null;}
- const lockName=manager.keys.queue+':mutation',pending=new Map(),owned=new Set();
+ // One mutation lock bounds both purpose-specific persisted queues together.
+ // Never copy/relabel the peer's events or capabilities into this scope.
+ const lockName=`owned_analytics:${siteId}:queue:mutation`,peerQueue=manager.keys.queue===`owned_analytics:${siteId}:queue`?`owned_analytics:${siteId}:account:queue`:`owned_analytics:${siteId}:queue`,pending=new Map(),owned=new Set();
  let shared=!!locks,memory=[],disposed=false,running=null,changes=Promise.resolve(),scheduled=null,epoch=0,lastLease=null,nextAttempt=0,serverRetryUntil=0,lifecycleIssued=false,mutationController=new AbortController();
  const envelope=(entry,events)=>({receiptId:entry.receiptId,generation:entry.generation,collectionToken:entry.collectionToken,events});
  const read=()=>{try{const value=JSON.parse(host.localStorage.getItem(manager.keys.queue)??'[]');return Array.isArray(value)?value.slice(-100):[];}catch{shared=false;return null;}};
@@ -22,7 +24,7 @@ export function createQueue({manager,endpoint,host=window,now=Date.now,siteId,fe
   // An idle session may retain its immutable bounded queue, but cannot send or
   // create IDs. A peer awaiting an old revoke ACK must preserve the fresh granted
   // generation; sending still requires the fully verified fresh receipt lease.
-  const state=manager.getState();return state.websiteAnalytics&&entry.generation===state.generation;
+  const state=manager.getState();return (state.websiteAnalytics||state.accountAnalytics)&&entry.generation===state.generation;
  }
  function merge(base,additions,lease){
   const unique=new Map();for(const entry of [...base,...additions])if(valid(entry,lease)&&!unique.has(entry.event.event_id))unique.set(entry.event.event_id,entry);
@@ -32,6 +34,17 @@ export function createQueue({manager,endpoint,host=window,now=Date.now,siteId,fe
   const lease=current(),staged=[...pending.values()],additions=staged.filter(item=>manager.acceptAck({generation:item.entry.generation},item.lease)).map(item=>item.entry);
   let base=useShared&&shared?read():null,useStorage=useShared&&shared&&base!==null;
   let entries=merge(useStorage?base:memory,additions,lease);
+  if(useStorage){
+   try{
+    const raw=JSON.parse(host.localStorage.getItem(peerQueue)??'[]');
+    // Purpose-neutral expiry cleanup prevents an abandoned tab from reserving
+    // capacity forever. Valid peer data, its identity and consent stay intact.
+    const peer=Array.isArray(raw)?raw.filter(entry=>Number.isFinite(entry?.queuedAt)&&now()>=entry.queuedAt&&now()-entry.queuedAt<86400000&&validStoredEvent(entry.event,siteId)):[];
+    if(!Array.isArray(raw)||peer.length!==raw.length){if(peer.length)host.localStorage.setItem(peerQueue,JSON.stringify(peer));else host.localStorage.removeItem(peerQueue);}
+    const capacity=Math.max(0,100-peer.length);entries=capacity?entries.slice(-capacity):[];
+   }
+   catch{shared=false;useStorage=false;entries=merge(memory,additions,lease);}
+  }
   if(useStorage&&!write(entries)){useStorage=false;entries=merge(memory,additions,lease);}
   if(lease&&!manager.acceptAck({generation:lease.generation},lease)){entries=entries.filter(entry=>entry.receiptId!==lease.receiptId||entry.generation!==lease.generation);if(useStorage&&!write(entries))useStorage=false;}
   memory=useStorage?entries.filter(entry=>owned.has(entry.event.event_id)):entries;
@@ -116,6 +129,6 @@ export function createQueue({manager,endpoint,host=window,now=Date.now,siteId,fe
    if(!changed)return;nextAttempt=0;
   }})();try{await running;}finally{running=null;}
  }
- const unsubscribe=manager.subscribe(()=>{if(!manager.getState().websiteAnalytics)clear();});
+ const unsubscribe=manager.subscribe(()=>{if(!manager.getState().websiteAnalytics&&!manager.getState().accountAnalytics)clear();});
  return {enqueue,flush,flushLifecycle,resumeLifecycle(){lifecycleIssued=false;},clear,whenSettled,dispose(){disposed=true;epoch++;mutationController.abort();pending.clear();memory=[];owned.clear();unsubscribe();}};
 }
