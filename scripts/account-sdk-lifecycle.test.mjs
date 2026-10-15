@@ -23,8 +23,8 @@ async function until(page, check) {
   for (let i = 0; i < 24; i++) { if (await page.evaluate(check)) return; await page.clock.runFor(4000); await new Promise(resolve => setTimeout(resolve, 10)) }
   throw new Error('actual SDK lifecycle did not settle')
 }
-async function fixture(t, { status = 200, expired = false, query = '' } = {}) {
-  const [html, source] = await Promise.all([readFile('src/account/index.html', 'utf8'), bundle()])
+async function fixture(t, { status = 200, expired = false, query = '', authorizePage = false } = {}) {
+  const [html, source] = await Promise.all([readFile(authorizePage ? 'src/account/authorize/index.html' : 'src/account/index.html', 'utf8'), bundle()])
   const server = createServer((request, response) => {
     if (request.url.startsWith('/account/app.js')) { response.setHeader('Content-Type', 'text/javascript'); response.end(source) }
     else if (request.url.startsWith('/account/')) { response.setHeader('Content-Type', 'text/html'); response.end(html) }
@@ -63,7 +63,7 @@ async function fixture(t, { status = 200, expired = false, query = '' } = {}) {
     await route.fulfill({ status: responseStatus, contentType: 'application/json', body: JSON.stringify(result) })
   })
   const origin = `http://127.0.0.1:${server.address().port}`
-  return { page, calls, origin, load: () => page.goto(`${origin}/account/${query}`),
+  return { page, calls, origin, load: () => page.goto(`${origin}/account/${authorizePage ? 'authorize/' : ''}${query}`),
     async openPeer(peerQuery = '', { ignoreStorageEvents = false } = {}) {
       const peer = await context.newPage()
       if (ignoreStorageEvents) await peer.addInitScript(() => window.addEventListener('storage', event => event.stopImmediatePropagation()))
@@ -446,4 +446,47 @@ test('failed operator preflight cannot fall back to browser autoapproval',async 
  });
  await f.load();await f.page.waitForFunction(()=>document.getElementById('status').textContent.includes('connection request'));
  assert.equal(await f.page.locator('#consent').isVisible(),false);assert.equal(f.calls.some(c=>c.path.includes('/oauth/authorizations/')),false);
+});
+
+test('actual authorize page exposes parent MFA and resumes consent after a rejected code and a valid retry',async t=>{
+ const f=await fixture(t,{query:'?authorization_id=fixture-consent',authorizePage:true});let parentVerified=false,verifyCalls=0,providerDetails=0;
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data:parentVerified?{operator:true,client:{name:'Company OS'},scope:'openid'}:{operator:true,parentMfaRequired:true}})});
+ });
+ await f.page.route('https://account.fixture.invalid/auth/v1/user',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({...USER_A,factors:[{id:'fixture-factor',factor_type:'totp',status:'verified'}]})}));
+ await f.page.route('https://account.fixture.invalid/auth/v1/oauth/authorizations/**',async route=>{providerDetails++;return route.fallback()});
+ await f.page.route('https://account.fixture.invalid/auth/v1/factors/**',async route=>{
+  const isVerify=route.request().url().endsWith('/verify');if(isVerify)verifyCalls++;
+  if(isVerify&&verifyCalls===1)return route.fulfill({status:400,contentType:'application/json',headers:{'x-supabase-api-version':'2024-01-01','access-control-expose-headers':'x-supabase-api-version'},body:JSON.stringify({code:'mfa_verification_failed',msg:'Synthetic wrong code'})});
+  if(isVerify)parentVerified=true;
+  return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(isVerify?sessionFor(USER_A):{id:'fixture-challenge'})});
+ });
+ await f.load();assert.equal(await f.page.locator('#mfa-section').count(),1);
+ await f.page.locator('#mfa-step-up').waitFor({state:'visible'});assert.equal(await f.page.locator('#consent').isVisible(),false);assert.equal(providerDetails,0);
+ await f.page.locator('#mfa-step-up').click();await f.page.locator('#mfa-code').fill('000000');await f.page.locator('#mfa-form button[type=submit]').click();
+ try{await until(f.page,()=>document.getElementById('status').textContent.includes('could not be verified'))}catch{throw new Error(`MFA retry status: ${await f.page.locator('#status').textContent()}; verify calls ${verifyCalls}`)}assert.equal(await f.page.locator('#consent').isVisible(),false);
+ await f.page.locator('#mfa-code').fill('123456');await f.page.locator('#mfa-form button[type=submit]').click();await f.page.locator('#consent').waitFor({state:'visible'});
+ assert.equal(verifyCalls,2);assert.equal(providerDetails,0);assert.equal(new URL(f.page.url()).searchParams.get('authorization_id'),'fixture-consent');
+});
+
+for(const authorizePage of [false,true])test(`${authorizePage?'authorize':'main social callback'} enrollment explains the credential change and offers explicit sign-in again without losing the request`,async t=>{
+ const f=await fixture(t,{query:'?authorization_id=fixture-consent',authorizePage});let enrolled=false,freshPrimary=false,parentVerified=false;
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
+  const stale=enrolled&&!freshPrimary;
+  await route.fulfill({status:stale?401:200,contentType:'application/json',body:JSON.stringify(stale?{apiVersion:2,ok:false,requestId:body.requestId,error:{code:'reauthentication_required'}}:{apiVersion:2,ok:true,requestId:body.requestId,data:parentVerified?{operator:true,client:{name:'Company OS'},scope:'openid'}:{operator:true,parentMfaRequired:true}})});
+ });
+ await f.page.route('https://account.fixture.invalid/auth/v1/token**',async route=>{freshPrimary=true;return route.fallback()});
+ await f.page.route('https://account.fixture.invalid/auth/v1/user',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({...USER_A,factors:enrolled?[{id:'fixture-factor',factor_type:'totp',status:'verified'}]:[]})}));
+ await f.page.route('https://account.fixture.invalid/auth/v1/factors**',async route=>{
+  const path=new URL(route.request().url()).pathname;
+  let data;if(path.endsWith('/verify')){if(freshPrimary)parentVerified=true;enrolled=true;data=sessionFor(USER_A)}else if(path.endsWith('/challenge'))data={id:'fixture-challenge'};else data={id:'fixture-factor',totp:{secret:'synthetic-enrollment-secret'}};
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(data)});
+ });
+ await f.load();await f.page.locator('#mfa-enroll').waitFor({state:'visible'});await f.page.locator('#mfa-enroll').click();await f.page.locator('#mfa-code').fill('123456');await f.page.locator('#mfa-form button[type=submit]').click();
+ await f.page.locator('#operator-reauth').waitFor({state:'visible'});assert.match(await f.page.locator('#account-state-description').textContent(),/security settings changed/i);assert.doesNotMatch(await f.page.locator('#status').textContent(),/Verify again with a new code/);
+ await f.page.locator('#operator-reauth').click();await f.page.locator('#auth').waitFor({state:'visible'});assert.equal(new URL(f.page.url()).searchParams.get('authorization_id'),'fixture-consent');
+ await f.page.locator('#email').fill(USER_A.email);await f.page.locator('#password').fill('fixture-password');await f.page.locator('#auth-submit').click();await f.page.locator('#mfa-step-up').waitFor({state:'visible'});
+ await f.page.locator('#mfa-step-up').click();await f.page.locator('#mfa-code').fill('123456');await f.page.locator('#mfa-form button[type=submit]').click();await f.page.locator('#consent').waitFor({state:'visible'});assert.equal(parentVerified,true);
 });

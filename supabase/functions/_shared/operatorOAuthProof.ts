@@ -7,6 +7,12 @@ async function digest(value:string){return new Uint8Array(await crypto.subtle.di
 const hex=(bytes:Uint8Array)=>Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
 const base64url=(bytes:Uint8Array)=>btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
 function scalar(data:any){return Array.isArray(data)?data[0]?.codevalanche_operator_oauth_context??data[0]?.codevalanche_operator_oauth_store??data[0]:data;}
+function operatorChecked(result:any){
+ const codes:Record<string,[string,number]>={forbidden:['administrator_required',403],recovery_restricted:['recovery_restricted',403],reauthentication_required:['reauthentication_required',401],mfa_required:['mfa_required',403]};
+ const guard=result?.error?.code==='P0001'&&Object.hasOwn(codes,result.error.message)?codes[result.error.message]:null;
+ if(guard)throw new AccountError(guard[0],guard[1]);
+ return checked(result);
+}
 export async function operatorOAuthEvidence(service:any,principal:any,claims:any,claim?:any,operatorClientIds:string[]=[]){
  const methods=Array.isArray(claims?.amr)?claims.amr:[];
  if(!principal.clientId||!operatorClientIds.includes(principal.clientId)||!methods.some((m:any)=>m.method==='oauth_provider/authorization_code')||
@@ -24,14 +30,14 @@ export async function operatorOAuthEvidence(service:any,principal:any,claims:any
   // Verifier is never stored, reflected in a DTO, or sent to analytics.
   args.p_pkce_challenge=base64url(await digest(claim.codeVerifier));
  }
- const rows=checked(await service.rpc('codevalanche_operator_oauth_evidence',args)) as any;
+ const rows=operatorChecked(await service.rpc('codevalanche_operator_oauth_evidence',args)) as any;
  if(rows?.[0]?.qualified!==true)throw new AccountError('recovery_restricted',403);
  return assembled;
 }
 
 export async function operatorOAuthConsent({service,principal,claims,token,authorizationId,decision,url,apikey,clientIds,operatorClientIds=[],origin,fetchImpl=fetch}:any){
  if(typeof authorizationId!=='string'||!/^[A-Za-z0-9_-]{1,200}$/.test(authorizationId))throw new AccountError('invalid_fields',400);
- const context=scalar(checked(await service.rpc('codevalanche_operator_oauth_context',{
+ const context=scalar(operatorChecked(await service.rpc('codevalanche_operator_oauth_context',{
   p_user_id:principal.userId,p_session_id:principal.sessionId,p_authorization_id:authorizationId,p_client_ids:operatorClientIds.filter((id:string)=>clientIds.includes(id)),
  })));
  if(context?.operator===false)return {operator:false};
@@ -39,6 +45,13 @@ export async function operatorOAuthConsent({service,principal,claims,token,autho
  const primary=(Array.isArray(claims.amr)?claims.amr:[]).filter((m:any)=>['password','oauth','sso/saml'].includes(m.method)&&Number.isFinite(m.timestamp)&&m.timestamp>0&&m.timestamp<=Date.now()/1000);
  const primaryAt=Math.max(...primary.map((m:any)=>m.timestamp*1000));
  if(!Number.isFinite(primaryAt)||(context.credentialStamp&&primaryAt<=Date.parse(context.credentialStamp)))throw new AccountError('reauthentication_required',401);
+ if(context.parentMfaRequired===true||principal.aal!=='aal2')return {operator:true,parentMfaRequired:true};
+ const parentEvidence=await readCredentialStamp(service,principal);
+ try{assertCurrentAssurance(principal,{evidence:parentEvidence});}
+ catch(error){
+  if(error instanceof AccountError&&['mfa_required','reauthentication_required'].includes(error.code))return {operator:true,parentMfaRequired:true};
+  throw error;
+ }
  let expected:URL;
  try{expected=new URL(context.redirectUri);if(expected.username||expected.password||expected.hash||expected.search)throw 0;}catch{throw new AccountError('account_service_unavailable',503);}
  const path=`/auth/v1/oauth/authorizations/${encodeURIComponent(authorizationId)}`+(decision==='approve'?'/consent':'');
@@ -57,7 +70,7 @@ export async function operatorOAuthConsent({service,principal,claims,token,autho
   const stateHash=hex(await digest(context.state)),codeHash=hex(await digest(redirect.searchParams.get('code')!));
   // Provider success followed by storage failure deliberately returns no
   // redirect/proof. Restart the authorization; never manufacture a receipt.
-  const stored=scalar(checked(await service.rpc('codevalanche_operator_oauth_store',{
+  const stored=scalar(operatorChecked(await service.rpc('codevalanche_operator_oauth_store',{
    p_user_id:principal.userId,p_session_id:principal.sessionId,p_authorization_id:authorizationId,p_client_id:context.clientId,
    p_state_hash:stateHash,p_code_hash:codeHash,p_credential_stamp:context.credentialStamp??null,
   })));

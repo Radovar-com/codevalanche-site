@@ -14,6 +14,12 @@ const lifecycle = createAccountSessionLifecycle(storageKey)
 const client = createClient(config.supabaseUrl, config.supabasePublishableKey, { auth: { flowType: 'pkce', detectSessionInUrl: false, persistSession: true, autoRefreshToken: true, storageKey, lock: lifecycle.lock }, global: { fetch: accountAuthFetch } })
 const redirectTo = authCallback(location.href)
 const authorizationId = redirectTo.searchParams.get('authorization_id')
+// Social sign-in returns to /account/?authorization_id. Give that preserved
+// connection context the same explicit reauthentication action as /authorize/.
+if (authorizationId && !$('operator-reauth')) {
+  const button = document.createElement('button'); button.id = 'operator-reauth'; button.type = 'button'; button.className = 'cr-btn cr-btn-primary'; button.hidden = true; button.textContent = 'Sign in again'
+  $('account-state-logout').before(button)
+}
 const recoveryRedirect = new URL(redirectTo); recoveryRedirect.searchParams.set('flow', 'recovery')
 let mode = 'signin', user = null, recovery = new URL(location.href).searchParams.get('flow') === 'recovery', busy = false
 let accountStatus = 'signed-out', renderGeneration = 0, currentSession = null, operatorConsent = false
@@ -38,6 +44,7 @@ function setAccountStatus(next) {
   $('consent').hidden = true
   if ($('mfa-section')) $('mfa-section').hidden = !user || recovery || !['ready', 'deletion-pending'].includes(next)
   if ($('account-state-cancel')) $('account-state-cancel').hidden = next !== 'deletion-pending'
+  if ($('operator-reauth')) $('operator-reauth').hidden = true
   $('stage').classList.toggle('signed-in', Boolean(user) && !recovery)
   const content = next === 'signing-out' ? ['Signing out', 'Finishing local session cleanup…']
     : next === 'logout-failed' ? ['Sign-out incomplete', 'Your account view is closed. Try again to finish signing out, or sign in explicitly.']
@@ -216,6 +223,13 @@ $('profile-form').addEventListener('submit', event => { event.preventDefault(); 
 async function signOut() { await cleanUpLocalSession(); notice('Signed out.') }
 $('logout').addEventListener('click', () => void action(signOut))
 $('account-state-logout').addEventListener('click', () => void action(signOut))
+$('operator-reauth')?.addEventListener('click', () => void action(async () => {
+  // Explicit local cleanup preserves authorization_id and the existing
+  // credential-lock/logout fences. The next sign-in is user initiated.
+  await cleanUpLocalSession(); setMode('signin')
+  notice('Sign in again with the same account, then verify your authenticator to continue connecting Company OS.')
+  $('email').focus()
+}))
 $('account-state-retry').addEventListener('click', () => void action(async () => { if (lifecycle.logoutIntent() === 'pending') await cleanUpLocalSession(); else await readCurrentSession() }))
 $('logout-others').addEventListener('click', () => void action(async () => { await api('sign-out-others'); await render((await client.auth.getSession()).data.session); notice('Other sessions signed out. Existing access tokens may remain valid until they expire.') }))
 $('change-password').addEventListener('click', () => void action(async () => {
@@ -289,6 +303,11 @@ async function showConsent(generation) {
     const prepared = await apiV2('operator.oauth.details', { authorizationId })
     if (generation !== renderGeneration || accountStatus !== 'ready') return
     operatorConsent = prepared.operator === true
+    if (prepared.parentMfaRequired === true) {
+      $('consent').hidden = true
+      notice('Verify your authenticator here before connecting Company OS. If you have not added one yet, choose Add authenticator.')
+      return
+    }
     let data = prepared
     if (!operatorConsent) { const result = await client.auth.oauth.getAuthorizationDetails(authorizationId); if (result.error) throw result.error; data = result.data }
     if (generation !== renderGeneration || accountStatus !== 'ready') return
@@ -297,7 +316,11 @@ async function showConsent(generation) {
     $('consent-scope').textContent = 'Requested access: ' + data.scope
     $('consent').hidden = false
   } catch (error) { if (generation === renderGeneration && accountStatus === 'ready') {
-    if (error?.code === 'reauthentication_required') { setAccountStatus('unavailable'); notice('Sign out, then sign in again with the same account to approve this connection.', true) }
+    if (error?.code === 'reauthentication_required') {
+      setAccountStatus('unavailable')
+      if ($('operator-reauth')) { $('operator-reauth').hidden = false; $('account-state-title').textContent = 'Sign in again to connect Company OS'; $('account-state-description').textContent = 'Your security settings changed. Sign in again with the same account, then verify your authenticator. This connection request will be kept.' }
+      notice('Sign in again with the same account to approve this connection after the security change.', true)
+    }
     else notice('This connection request is invalid or expired. Start sign-in again from the app.', true)
   } }
 }
@@ -312,6 +335,7 @@ for (const decision of ['approve','deny']) $(decision).addEventListener('click',
     : await client.auth.oauth[method](authorizationId, { skipBrowserRedirect: true })
   if (generation !== renderGeneration) throw { code: 'account_request_superseded' }
   if (error) throw error
+  if (data.parentMfaRequired === true) { await showConsent(generation); return }
   if (data.redirect_url) location.assign(data.redirect_url)
 }))
 
@@ -330,7 +354,9 @@ $('mfa-form')?.addEventListener('submit', event => { event.preventDefault(); voi
   await security.verify($('mfa-code').value, $('mfa-factor-id').value)
   $('mfa-code').value = ''; $('mfa-secret').textContent = ''; $('mfa-challenge').hidden = true
   const needsFreshVerification=security.state().requiresFreshVerification
-  await readCurrentSession(); notice(needsFreshVerification?'Authenticator verified and added. Verify again with a new code before sensitive access.':'Authenticator verified. Sensitive operations still verify your current account access.')
+  await readCurrentSession()
+  if (authorizationId && accountStatus !== 'ready') return
+  notice(needsFreshVerification?'Authenticator verified and added. Verify again with a new code before sensitive access.':'Authenticator verified. Sensitive operations still verify your current account access.')
 }) })
 $('mfa-cancel')?.addEventListener('click', () => void action(async () => { await security.cancel(); $('mfa-secret').textContent = ''; $('mfa-code').value = ''; $('mfa-challenge').hidden = true }))
 $('mfa-remove')?.addEventListener('click', () => void action(async () => { const factors = await security.factors(); if (!factors.length) { notice('No verified authenticator is enrolled.'); return }; await security.remove(factors[0].id); notice('Authenticator removed. Earlier remote approvals have been withdrawn.'); await readCurrentSession() }))
