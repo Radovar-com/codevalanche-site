@@ -56,6 +56,9 @@ export function assertAccountOperation(
     ![
       "account.overview",
       "account.deletion.cancel",
+      // The right of access holds until the account is actually erased.
+      "account.export",
+      "export-data",
       "security.activity",
       "get-account",
       "cancel-deletion",

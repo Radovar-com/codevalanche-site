@@ -32,6 +32,7 @@ import { reconcileSuspensionExpiry } from "../_shared/suspensionExpiry.ts";
 import { projectBinding } from "../_shared/projectBindings.ts";
 import { persistProfileWithOutcome, readOwnedProfile } from "../_shared/profileOutcome.ts";
 import { operatorOAuthConsent, operatorOAuthEvidence } from "../_shared/operatorOAuthProof.ts";
+import { ACCOUNT_EXPORT_PER_MINUTE, buildAccountExport } from "../_shared/accountExport.ts";
 
 const url = Deno.env.get("SUPABASE_URL")!;
 const service = createClient(url, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
@@ -239,6 +240,7 @@ Deno.serve(async (req) => {
       "account.deletion.request": "request-deletion",
       "account.deletion.cancel": "cancel-deletion",
       "feedback.submit": "feedback",
+      "account.export": "export-data",
     };
     if (v2) body.action = aliases[body.action] || body.action;
     if (
@@ -472,13 +474,33 @@ Deno.serve(async (req) => {
           !uuid.test(body.sessionId || "") ||
           !sessions.some((s) => s.id === body.sessionId)
         ) return respond({ error: "Session not found" }, 404);
-        checked(
-          await service.from("codevalanche_revoked_sessions").upsert({
-            session_id: body.sessionId,
-            user_id: user.id,
+        // One transaction: the application revocation row plus the Auth
+        // session itself (its refresh tokens cascade), so a copy of that
+        // device's token can no longer be renewed even if it never returns.
+        const providerSession = checked(
+          await service.rpc("codevalanche_revoke_session", {
+            p_user_id: user.id,
+            p_session_id: body.sessionId,
           }),
         );
-        return respond({ ok: true });
+        return respond({ ok: true, providerSession });
+      }
+      case "export-data": {
+        if (
+          !checked(
+            await service.rpc("codevalanche_rate_limit", {
+              p_bucket: `export:${user.id}`,
+              p_limit: ACCOUNT_EXPORT_PER_MINUTE,
+            }),
+          )
+        ) return respond({ code: "rate_limited" }, 429);
+        return respond(
+          await buildAccountExport({
+            user,
+            sessions,
+            currentSessionId: claims.session_id,
+          }, service),
+        );
       }
       case "request-deletion": {
         if (body.confirmation !== "DELETE") {

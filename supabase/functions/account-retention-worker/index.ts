@@ -1,7 +1,8 @@
 import { createScopedWorkerService } from "../_shared/workerDatabase.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.57.4";
 import { assertMaintenance } from "../_shared/maintenanceAuth.ts";
-import { AccountError, checked } from "../_shared/accountContract.ts";
+import { AccountError } from "../_shared/accountContract.ts";
+import { runAccountRetention } from "../_shared/accountRetention.ts";
 Deno.serve(async (req) => {
   try {
     assertMaintenance(req, Deno.env.get("ACCOUNT_RETENTION_WORKER_TOKEN"));
@@ -14,11 +15,7 @@ Deno.serve(async (req) => {
     if (Deno.env.get("ACCOUNT_RETENTION_EXECUTION_ENABLED") !== "true") {
       throw new AccountError("worker_not_configured", 503);
     }
-    const security = checked(await service.rpc("codevalanche_retention_sweep"));
-    const analytics = checked(
-      await service.rpc("codevalanche_analytics_retention"),
-    );
-    return Response.json({ security, analytics }, {
+    return Response.json(await runAccountRetention(service), {
       headers: { "Cache-Control": "no-store" },
     });
   } catch (error) {
