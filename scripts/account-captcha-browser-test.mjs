@@ -33,6 +33,7 @@ async function open(siteKey) {
   const page = await browser.newPage({ locale: 'ro-RO' })
   const errors = [], authCalls = [], turnstileLoads = []
   page.on('pageerror', e => errors.push(e.message))
+  page.on('console', m => { if (/Content Security Policy/i.test(m.text())) errors.push(m.text()) })
   await page.route('https://challenges.cloudflare.com/**', async route => { turnstileLoads.push(route.request().url()); await route.fulfill({ status: 200, contentType: 'text/javascript', body: fakeTurnstile }) })
   await page.route('https://hvevaxsfeyiikjhcsafi.supabase.co/**', async route => {
     const url = route.request().url(); const body = route.request().postDataJSON?.() ?? null

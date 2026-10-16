@@ -1,8 +1,10 @@
-import { cp, mkdir, rm, readFile, writeFile } from "node:fs/promises"
+import { cp, mkdir, rm, readFile, writeFile, readdir } from "node:fs/promises"
 import { createHash } from "node:crypto"
 import path from "node:path"
 import { build } from "esbuild"
 import { fileURLToPath } from "node:url"
+import { headersFile } from "../cloudflare/security-headers.mjs"
+import { addContentSecurityPolicyMeta, publicConfigValue } from "./page-csp.mjs"
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const source = path.join(root, "src")
@@ -37,4 +39,24 @@ for (const page of ["account/index.html", "account/authorize/index.html"]) {
   for (const [asset, version] of versions) html = html.replaceAll(`"${asset}"`, `"${asset}?v=${version}"`)
   await writeFile(output, html)
 }
+// Content Security Policy on every page as <meta>, so it holds on any host
+// (GitHub Pages cannot send headers). Inline scripts are allowed by their
+// exact hash; anything injected later is refused.
+const publicConfig = await readFile(path.join(destination, "config.js"), "utf8")
+const supabaseUrl = publicConfigValue(publicConfig, "supabaseUrl"), apiOrigin = publicConfigValue(publicConfig, "apiOrigin")
+async function htmlPages(dir) {
+  const entries = await readdir(dir, { withFileTypes: true })
+  const nested = await Promise.all(entries.map((entry) => entry.isDirectory()
+    ? (entry.name === "partials" ? [] : htmlPages(path.join(dir, entry.name)))
+    : [entry.name.endsWith(".html") ? path.join(dir, entry.name) : null]))
+  return nested.flat().filter(Boolean)
+}
+for (const output of await htmlPages(destination)) {
+  const html = await readFile(output, "utf8")
+  const relative = path.relative(destination, output).split(path.sep).join("/")
+  await writeFile(output, addContentSecurityPolicyMeta(html, { relative, supabaseUrl, apiOrigin }))
+}
+// Cloudflare Pages reads security headers from dist/_headers; GitHub Pages would
+// only publish it as a file, so it is written on request.
+if (process.env.CODEVALANCHE_HEADERS_FILE === "1") await writeFile(path.join(destination, "_headers"), headersFile())
 console.log(`Built static site to ${destination}`)
