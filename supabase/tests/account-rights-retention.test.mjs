@@ -121,6 +121,7 @@ f.db.rpc=async(name,args)=>{rpcCalls.push([name,args]);
  if(name==='codevalanche_revoke_session')return {data:'provider_ended',error:null};
  if(name==='codevalanche_account_export')return {data:{feedback:[{message:'mine'}]},error:null};
  if(name==='codevalanche_rate_limit'&&String(args?.p_bucket).startsWith('export:')&&f.exportLimited)return {data:false,error:null};
+ if(name==='codevalanche_credential_evidence')return {data:[{qualified:true,verified_factor_count:f.factors||0,credential_changed_at:null,recovery_only:false,policy_version:1,current_status:'active',blocked:false,session_active:true}],error:null};
  return baseRpc(name,args)};
 const handler=await loadHandler(f.db);
 const v2=(action,fields={})=>handler(request(action,{apiVersion:2,requestId:'w7-request',...fields}));
@@ -153,4 +154,51 @@ test('feedback is never anonymous and never shares a bucket between people',asyn
  await v2('feedback.submit',{category:'bug',message:'hello'});
  const buckets=rpcCalls.filter(c=>c[0]==='codevalanche_rate_limit').map(c=>c[1].p_bucket);
  assert.ok(buckets.includes(`feedback:${userId}`));assert.equal(buckets.some(b=>!b.endsWith(userId)),false);
+});
+
+// --- Review fixes (W7-FIX-SRV-ACCOUNT) ----------------------------------------------
+const staleClaims=()=>({...validClaims(),amr:[{method:'password',timestamp:Math.floor(Date.now()/1000)-3600}]});
+test('account.export asks for a recent sign-in, like a deletion request',async()=>{rpcCalls.length=0;
+ const r=await handler(request('account.export',{apiVersion:2,requestId:'w7-stale'},staleClaims())),b=await r.json();
+ assert.equal(r.status,401);assert.equal(b.error.code,'reauthentication_required');
+ assert.equal(rpcCalls.some(c=>c[0]==='codevalanche_account_export'),false,'no data is read for a stale sign-in');
+ const flat=await handler(request('export-data',{},staleClaims()));assert.equal(flat.status,401,'the v1 action name is held to the same rule');
+});
+test('account.export asks for the authenticator when one is enrolled',async()=>{rpcCalls.length=0;f.factors=1;try{
+ const r=await v2('account.export'),b=await r.json();
+ assert.equal(r.status,403);assert.equal(b.error.code,'mfa_required');
+ assert.equal(rpcCalls.some(c=>c[0]==='codevalanche_account_export'),false);
+}finally{f.factors=0}});
+test('an export above the byte cap is refused with a clear 413, not an Edge 5xx',async()=>{
+ const user={id:userId,identities:[]};
+ await assert.rejects(()=>buildAccountExport({user,sessions:[],currentSessionId:sessionId},{rpc:async()=>({data:null,error:{message:'export_too_large'}})}),e=>e.code==='export_too_large'&&e.status===413);
+ const db=await sqlFixture();try{
+  await db.query("insert into public.codevalanche_feedback(user_id,category,message) select $1,'bug',repeat('x',1000) from generate_series(1,40)",[userId]);
+  assert.ok((await one(db,'select public.codevalanche_account_export($1) d',[userId])).d.feedback.length===40,'under the cap the document is returned');
+  await db.exec("set codevalanche.account_export_max_bytes = '20000'");
+  await assert.rejects(()=>db.query('select public.codevalanche_account_export($1)',[userId]),/export_too_large/);
+  await db.exec("set codevalanche.account_export_max_bytes = '999999999999'");
+  assert.ok((await one(db,'select public.codevalanche_account_export($1) d',[userId])).d.feedback.length===40,'the setting can only lower the built-in cap');
+ }finally{await db.close()}
+});
+test('retention deletes in bounded batches and reports that more is left',async()=>{const db=await sqlFixture();try{
+ await db.query("insert into public.codevalanche_events(id,user_id,event_name,platform,created_at) select gen_random_uuid(),$1,'app_opened','windows',now()-interval '100 days' from generate_series(1,12000)",[userId]);
+ await db.query("insert into public.codevalanche_rate_limits(bucket,started_at) select 'old'||g,now()-interval '1 hour' from generate_series(1,10500) g");
+ const first=(await one(db,'select public.codevalanche_account_retention() r')).r;
+ assert.equal(first.eventsDeleted,10000);assert.equal(first.rateLimitsDeleted,10000);assert.equal(first.more,true);
+ const second=(await one(db,'select public.codevalanche_account_retention() r')).r;
+ assert.equal(second.eventsDeleted,2000);assert.equal(second.rateLimitsDeleted,500);assert.equal(second.more,false);
+ assert.equal((await one(db,'select count(*)::int n from public.codevalanche_events')).n,0);
+}finally{await db.close()}});
+test('the retention worker repeats the account pass while it reports more, within a bound',async()=>{
+ let left=3;const calls=[];const service={rpc:async name=>{calls.push(name);if(name!=='codevalanche_account_retention')return {data:1,error:null};left--;return {data:{eventsDeleted:10000,more:left>0},error:null}}};
+ const result=await runAccountRetention(service);
+ assert.equal(calls.filter(n=>n==='codevalanche_account_retention').length,3);assert.equal(result.account.more,false);assert.equal(result.account.passes,3);assert.equal(result.account.eventsDeleted,30000);
+ const endless={rpc:async name=>({data:name==='codevalanche_account_retention'?{eventsDeleted:1,more:true}:1,error:null})};
+ const capped=await runAccountRetention(endless);assert.equal(capped.account.more,true);assert.ok(capped.account.passes<=20);
+});
+test('the account page names the export size refusal instead of a generic error',async()=>{
+ const {normalizeAccountError,safeError}=await import('../../src/account/helpers.js');
+ const e=normalizeAccountError({apiVersion:2,ok:false,error:{code:'export_too_large'}},413);
+ assert.equal(e.code,'export_too_large');assert.match(safeError(e),/too large/);
 });

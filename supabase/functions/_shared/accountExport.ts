@@ -21,9 +21,16 @@ export async function buildAccountExport(
   now = new Date(),
 ) {
   if (!user?.id) throw new AccountError("sign_in_required", 401);
-  const stored = checked(
-    await service.rpc("codevalanche_account_export", { p_user_id: user.id }),
-  ) as Record<string, unknown> | null;
+  const result = await service.rpc("codevalanche_account_export", {
+    p_user_id: user.id,
+  });
+  // The database refuses a document above its byte cap before sending it
+  // (migration 202610160002), so a very large account gets a clear 413
+  // instead of an Edge Function that runs out of memory.
+  if (/export_too_large/.test(String(result?.error?.message ?? ""))) {
+    throw new AccountError("export_too_large", 413);
+  }
+  const stored = checked(result) as Record<string, unknown> | null;
   if (!stored || typeof stored !== "object" || Array.isArray(stored)) {
     throw new AccountError("account_service_unavailable", 503);
   }

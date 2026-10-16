@@ -486,6 +486,14 @@ Deno.serve(async (req) => {
         return respond({ ok: true, providerSession });
       }
       case "export-data": {
+        // The export is the whole dossier (email, sessions, IP addresses of
+        // security events), so an access token alone is not enough: the same
+        // recent sign-in, or the authenticator when one is enrolled, as a
+        // deletion request.
+        assertRecentAuthentication(principal, {
+          claims,
+          evidence: await readCredentialStamp(service, principal),
+        });
         if (
           !checked(
             await service.rpc("codevalanche_rate_limit", {
