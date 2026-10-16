@@ -241,6 +241,14 @@ $('change-password').addEventListener('click', () => void action(async () => {
   if (result.error) throw result.error
   notice(recoveryNotice())
 }))
+$('export-data')?.addEventListener('click', () => void action(async () => {
+  const data = await apiV2('account.export')
+  if (data?.format !== 'codevalanche-account-export/v1' || data.user?.id !== user?.id) throw { code: 'account_service_unavailable' }
+  const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }))
+  const link = document.createElement('a'); link.href = url; link.download = `codevalanche-account-data-${new Date().toISOString().slice(0, 10)}.json`
+  document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 10000)
+  notice('Your account data was downloaded.')
+}))
 $('delete-form').addEventListener('submit', event => { event.preventDefault(); if ($('delete-confirm').value !== 'DELETE') return; void action(async () => {
   let result
   try { result = await api('request-deletion', { confirmation: 'DELETE' }) }

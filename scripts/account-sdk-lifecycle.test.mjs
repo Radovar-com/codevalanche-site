@@ -490,3 +490,21 @@ for(const authorizePage of [false,true])test(`${authorizePage?'authorize':'main 
  await f.page.locator('#email').fill(USER_A.email);await f.page.locator('#password').fill('fixture-password');await f.page.locator('#auth-submit').click();await f.page.locator('#mfa-step-up').waitFor({state:'visible'});
  await f.page.locator('#mfa-step-up').click();await f.page.locator('#mfa-code').fill('123456');await f.page.locator('#mfa-form button[type=submit]').click();await f.page.locator('#consent').waitFor({state:'visible'});assert.equal(parentVerified,true);
 });
+
+test('Download my data saves the account export returned by the v2 API', async t => {
+  const f = await fixture(t), requests = []
+  await f.page.route('https://account.fixture.invalid/functions/**', async route => {
+    const body = route.request().postDataJSON() || {}
+    if (body.action !== 'account.export') return route.fallback()
+    requests.push(body)
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ apiVersion: 2, apiRevision: 1, ok: true, requestId: body.requestId,
+      data: { format: 'codevalanche-account-export/v1', generatedAt: '2026-10-16T00:00:00.000Z', user: { id: USER_A.id, email: USER_A.email }, signInMethods: [], sessions: [], stored: { feedback: [] } } }) })
+  })
+  await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
+  const [download] = await Promise.all([f.page.waitForEvent('download'), f.page.locator('#export-data').click()])
+  assert.match(download.suggestedFilename(), /^codevalanche-account-data-\d{4}-\d{2}-\d{2}\.json$/)
+  const saved = JSON.parse(await readFile(await download.path(), 'utf8'))
+  assert.equal(saved.user.id, USER_A.id); assert.equal(saved.format, 'codevalanche-account-export/v1')
+  assert.equal(requests.length, 1); assert.equal(requests[0].apiVersion, 2)
+  await until(f.page, () => document.getElementById('status').textContent.includes('downloaded'))
+})
