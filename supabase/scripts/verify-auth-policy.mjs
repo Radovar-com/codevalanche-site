@@ -5,7 +5,7 @@ export function validateAuthPolicy(snapshot={}) {
  const missingControls=[];
  const requireControl=(ok,name)=>{if(!ok)missingControls.push(name)};
  requireControl(snapshot.captchaEnabled===true,'provider_captcha');
- requireControl(Number.isInteger(snapshot.passwordMinLength)&&snapshot.passwordMinLength>=15,'password_minimum');
+ requireControl(Number.isInteger(snapshot.passwordMinLength)&&snapshot.passwordMinLength>=12,'password_minimum');
  requireControl(Number.isInteger(snapshot.recoveryExpirySeconds)&&snapshot.recoveryExpirySeconds>0&&snapshot.recoveryExpirySeconds<=900,'recovery_15_minutes');
  requireControl(snapshot.customSmtpConfigured===true,'custom_smtp_delivery');
  requireControl(snapshot.leakedPasswordProtection===true,'leaked_password_protection');

@@ -35,7 +35,7 @@ async function fixture(t, { status = 200, expired = false, query = '', authorize
   const context = await (await browserPromise).newContext(), page = await context.newPage()
   t.after(async () => { await context.close(); server.closeAllConnections(); await new Promise(resolve => server.close(resolve)) })
   await context.addInitScript(session => {
-    window.CODEVALANCHE_CONFIG = { supabaseUrl: 'https://account.fixture.invalid', supabasePublishableKey: 'fixture-public' }
+    window.CODEVALANCHE_CONFIG = { supabaseUrl: 'https://account.fixture.invalid', supabasePublishableKey: 'fixture-public', accountServer: 'v2' }
     if (!localStorage.getItem('fixture-seeded')) { localStorage.setItem('sb-account-auth-token', JSON.stringify(session)); localStorage.setItem('fixture-seeded', 'yes') }
     if (location.search.includes('code=')) localStorage.setItem('sb-account-auth-token-code-verifier', JSON.stringify('fixture-pkce-verifier'))
   }, sessionFor(USER_A, expired))
@@ -125,10 +125,10 @@ test('actual SDK MFA verification uses its public credential lock without nestin
     await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(data) })
   })
   await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
-  await f.page.locator('#mfa-enroll').click(); await until(f.page, () => !document.getElementById('mfa-challenge').hidden)
+  await f.page.locator('#authenticator-add').click(); await until(f.page, () => !document.getElementById('authenticator-verify').hidden)
   await f.page.locator('#mfa-code').fill('123456'); await f.page.locator('#mfa-form button[type=submit]').click()
   await until(f.page, () => document.getElementById('status').textContent.includes('Authenticator verified'))
-  assert.equal(await f.page.locator('#mfa-secret').textContent(), '')
+  assert.equal(await f.page.locator('#authenticator-secret').textContent(), '')
 })
 
 test('deletion pending exposes restricted cancellation and closes profile mutations', async t => {
@@ -141,7 +141,7 @@ test('deletion pending exposes restricted cancellation and closes profile mutati
   await f.load(); await until(f.page, () => document.getElementById('account-state-title').textContent === 'Account deletion pending')
   assert.equal(await f.page.locator('#profile').isVisible(), false)
   assert.equal(await f.page.locator('#account-state-cancel').isVisible(), true)
-  assert.equal(await f.page.locator('#mfa-enroll').isEnabled(), false)
+  assert.equal(await f.page.locator('#authenticator-add').isEnabled(), false)
 })
 
 test('accepted self deletion immediately closes profile mutations and cancellation reloads current policy', async t => {
@@ -365,7 +365,7 @@ test('actual SDK sign-in deadline includes a streamed partial JSON body and rele
   browserPromise ??= chromium.launch({ headless: true })
   const context = await (await browserPromise).newContext(), page = await context.newPage()
   t.after(async () => { await context.close(); server.closeAllConnections(); await new Promise(resolve => server.close(resolve)) })
-  await context.addInitScript(url => { window.CODEVALANCHE_CONFIG = { supabaseUrl: url, supabasePublishableKey: 'fixture-public' } }, origin)
+  await context.addInitScript(url => { window.CODEVALANCHE_CONFIG = { supabaseUrl: url, supabasePublishableKey: 'fixture-public', accountServer: 'v2' } }, origin)
   await page.clock.install(); await page.goto(`${origin}/account/`)
   await until(page, () => !document.getElementById('auth').hidden && !document.getElementById('auth-submit').disabled)
   await page.locator('#email').fill(USER_A.email); await page.locator('#password').fill('fixture-password')
@@ -400,7 +400,7 @@ test('actual app Google settings deadline includes a streamed partial body and p
   browserPromise ??= chromium.launch({ headless: true })
   const context = await (await browserPromise).newContext(), page = await context.newPage()
   t.after(async () => { await context.close(); server.closeAllConnections(); await new Promise(resolve => server.close(resolve)) })
-  await context.addInitScript(url => { window.CODEVALANCHE_CONFIG = { supabaseUrl: url, supabasePublishableKey: 'fixture-public' } }, origin)
+  await context.addInitScript(url => { window.CODEVALANCHE_CONFIG = { supabaseUrl: url, supabasePublishableKey: 'fixture-public', accountServer: 'v2' } }, origin)
   await page.clock.install(); await page.goto(`${origin}/account/`)
   await until(page, () => !document.getElementById('auth').hidden && !document.getElementById('google-signin').disabled)
   await page.locator('#google-signin').click(); await partialBody
@@ -462,7 +462,7 @@ test('actual authorize page exposes parent MFA and resumes consent after a rejec
   if(isVerify)parentVerified=true;
   return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(isVerify?sessionFor(USER_A):{id:'fixture-challenge'})});
  });
- await f.load();assert.equal(await f.page.locator('#mfa-section').count(),1);
+ await f.load();assert.equal(await f.page.locator('#authenticator-section').count(),1);
  await f.page.locator('#mfa-step-up').waitFor({state:'visible'});assert.equal(await f.page.locator('#consent').isVisible(),false);assert.equal(providerDetails,0);
  await f.page.locator('#mfa-step-up').click();await f.page.locator('#mfa-code').fill('000000');await f.page.locator('#mfa-form button[type=submit]').click();
  try{await until(f.page,()=>document.getElementById('status').textContent.includes('could not be verified'))}catch{throw new Error(`MFA retry status: ${await f.page.locator('#status').textContent()}; verify calls ${verifyCalls}`)}assert.equal(await f.page.locator('#consent').isVisible(),false);
@@ -484,7 +484,7 @@ for(const authorizePage of [false,true])test(`${authorizePage?'authorize':'main 
   let data;if(path.endsWith('/verify')){if(freshPrimary)parentVerified=true;enrolled=true;data=sessionFor(USER_A)}else if(path.endsWith('/challenge'))data={id:'fixture-challenge'};else data={id:'fixture-factor',totp:{secret:'synthetic-enrollment-secret'}};
   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(data)});
  });
- await f.load();await f.page.locator('#mfa-enroll').waitFor({state:'visible'});await f.page.locator('#mfa-enroll').click();await f.page.locator('#mfa-code').fill('123456');await f.page.locator('#mfa-form button[type=submit]').click();
+ await f.load();await f.page.locator('#authenticator-add').waitFor({state:'visible'});await f.page.locator('#authenticator-add').click();await f.page.locator('#mfa-code').fill('123456');await f.page.locator('#mfa-form button[type=submit]').click();
  await f.page.locator('#operator-reauth').waitFor({state:'visible'});assert.match(await f.page.locator('#account-state-description').textContent(),/security settings changed/i);assert.doesNotMatch(await f.page.locator('#status').textContent(),/Verify again with a new code/);
  await f.page.locator('#operator-reauth').click();await f.page.locator('#auth').waitFor({state:'visible'});assert.equal(new URL(f.page.url()).searchParams.get('authorization_id'),'fixture-consent');
  await f.page.locator('#email').fill(USER_A.email);await f.page.locator('#password').fill('fixture-password');await f.page.locator('#auth-submit').click();await f.page.locator('#mfa-step-up').waitFor({state:'visible'});

@@ -3,7 +3,7 @@ import { createHash } from "node:crypto"
 import path from "node:path"
 import { build } from "esbuild"
 import { fileURLToPath } from "node:url"
-
+import { headersFile } from "../cloudflare/security-headers.mjs"
 import { buildAnalytics } from "./build-analytics.mjs"
 import { applyPostbuildSecurity } from "./postbuild-security.mjs"
 import { applyLocalizedMetadata, buildLocalizedSitemap, ensureLanguagePicker, rewriteFooterLanguageLinks, rewriteLocalizedLinks } from "./locale-export.mjs"
@@ -111,5 +111,9 @@ for (const page of ["account/index.html", "account/authorize/index.html"]) {
   await writeFile(output, html)
 }
 const security = await applyPostbuildSecurity(destination)
+// Cloudflare Pages reads security headers from dist/_headers; GitHub Pages would
+// only publish it as a file, so it is written on request. The header CSP carries
+// only frame-ancestors/base-uri/object-src/form-action; scripts stay with the meta CSP.
+if (process.env.CODEVALANCHE_HEADERS_FILE === "1") await writeFile(path.join(destination, "_headers"), headersFile())
 const seo = englishPreviewOnly ? { publicPages: "English preview only, not" } : await validateSeoExport(destination)
 console.log(`Built static site to ${destination} (${security.htmlFiles} HTML pages passed CSP; ${seo.publicPages} public routes; ${llms.pages} discovery pages)`)

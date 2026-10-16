@@ -1,3 +1,149 @@
+# Supabase project configuration for the Codevalanche account service.
+#
+# No secrets live here: every secret is read from the environment with env(...)
+# (set them in the shell or in supabase/.env, which is never committed).
+#
+# This file serves two purposes:
+# - local development with `supabase start` (fake keys, nothing reaches production);
+# - the reviewed, versioned copy of the production Auth settings.
+#
+# Production is changed ONLY by the operator. Before any `supabase config push`:
+#   1. `supabase link --project-ref <ref>` and compare with the dashboard;
+#   2. set the env(...) values below for every provider that is enabled in production
+#      (Google, CAPTCHA, SMTP), otherwise the push would switch them off;
+#   3. read the diff the CLI prints and confirm only the intended changes.
+
+project_id = "codevalanche-site"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+# Must match the production Postgres major version (dashboard > Settings > Infrastructure).
+major_version = 17
+
+[db.migrations]
+enabled = true
+
+[studio]
+enabled = true
+port = 54323
+
+[inbucket]
+# Local fake mailbox for `supabase start`: account emails land here, not in real inboxes.
+enabled = true
+port = 54324
+
+[auth]
+enabled = true
+# The account page is the only place where Auth redirects land.
+site_url = "https://codevalanche.com/account/"
+additional_redirect_urls = [
+  "https://codevalanche.com/account/",
+  "https://codevalanche.com/account/**",
+  "https://www.codevalanche.com/account/**",
+  "https://account.codevalanche.com/account/**",
+]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+refresh_token_reuse_interval = 10
+enable_signup = true
+enable_anonymous_sign_ins = false
+enable_manual_linking = false
+# New passwords need 12 characters (also checked on the account page). Existing
+# accounts with shorter passwords keep signing in; Auth checks the minimum only
+# when a password is set.
+minimum_password_length = 12
+password_requirements = ""
+
+[auth.captcha]
+# Cloudflare Turnstile on sign-up, sign-in and password reset. Supabase Auth
+# verifies every token server side with this secret.
+# Turn on only AFTER the site ships with config.js turnstileSiteKey set,
+# otherwise sign-in without a token is refused. Off = no CAPTCHA, nothing breaks.
+enabled = false
+provider = "turnstile"
+secret = "env(SUPABASE_AUTH_CAPTCHA_SECRET)"
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = true
+secure_password_change = false
+max_frequency = "1m0s"
+otp_length = 6
+otp_expiry = 3600
+
+# Translated email templates (English + Romanian, chosen from the user's
+# metadata `locale`). Source: supabase/templates/email-templates.mjs.
+[auth.email.template.confirmation]
+subject = "Confirm your Codevalanche email"
+content_path = "./supabase/templates/confirmation.html"
+
+[auth.email.template.recovery]
+subject = "Reset your Codevalanche password"
+content_path = "./supabase/templates/recovery.html"
+
+[auth.email.template.magic_link]
+subject = "Your Codevalanche sign-in link"
+content_path = "./supabase/templates/magic_link.html"
+
+[auth.email.template.invite]
+subject = "You are invited to Codevalanche"
+content_path = "./supabase/templates/invite.html"
+
+[auth.email.template.email_change]
+subject = "Confirm your new Codevalanche email"
+content_path = "./supabase/templates/email_change.html"
+
+[auth.email.template.reauthentication]
+subject = "Your Codevalanche confirmation code"
+content_path = "./supabase/templates/reauthentication.html"
+
+# Custom SMTP (deliverability, SPF/DKIM/DMARC). Off until the operator configures it.
+# [auth.email.smtp]
+# enabled = true
+# host = "env(SUPABASE_AUTH_SMTP_HOST)"
+# port = 587
+# user = "env(SUPABASE_AUTH_SMTP_USER)"
+# pass = "env(SUPABASE_AUTH_SMTP_PASS)"
+# admin_email = "env(SUPABASE_AUTH_SMTP_ADMIN_EMAIL)"
+# sender_name = "Codevalanche"
+
+[auth.mfa]
+# Two-step verification with an authenticator app (TOTP), opt-in per user on the
+# account page. Recovery codes are the account function's own (hashed, service-only
+# table), because Auth has none. Phone and WebAuthn factors stay off.
+max_enrolled_factors = 10
+
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
+
+[auth.mfa.phone]
+enroll_enabled = false
+verify_enabled = false
+
+[auth.external.google]
+# Production state lives in the dashboard; set enabled = true and the env values
+# before any config push if Google sign-in is on there.
+enabled = false
+client_id = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
+skip_nonce_check = false
+
+[functions.codevalanche-account]
+enabled = true
+# The handler verifies the Bearer token itself against Auth (see README.md).
+verify_jwt = false
+
+# Public endpoints (website analytics collector, download redirect) check their own input.
 [functions.website-analytics]
 verify_jwt = false
 

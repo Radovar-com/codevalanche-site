@@ -170,3 +170,10 @@ textarea.cr-input { min-height: 96px; height: auto; padding-block: 12px; resize:
 }
 .full{width:100%}.auth-switch{display:flex;justify-content:space-between;gap:16px;margin-top:16px}.auth-switch button,.quiet{border:0;background:none;color:var(--cr-muted);padding:4px 0;font:inherit;font-size:12px;cursor:pointer}.quiet:hover,.auth-switch button:hover{color:var(--cr-text)}#status:empty{display:none}#status{font-size:13px;padding:12px;border:1px solid var(--cr-hairline);border-radius:7px;overflow-wrap:anywhere}#status[data-error=true]{color:var(--cr-danger);border-color:#674640}.account-section{padding:22px 0;border-top:1px solid var(--cr-hairline)}.account-section h2{font-size:17px;font-weight:550;margin:0 0 14px}.account-section form .cr-btn{margin-top:12px}.account-actions{display:flex;gap:8px;flex-wrap:wrap}.account-section ul{list-style:none;padding:0;font-size:13px}.account-section li{padding:10px 0;overflow-wrap:anywhere}.danger h2,.danger summary{color:var(--cr-danger)}.danger details{margin-top:15px}.danger summary{cursor:pointer;font-size:13px}.danger form{margin-top:18px}#stage.signed-in{width:min(580px,calc(100% - 40px));justify-content:flex-start;padding-top:40px}#profile-email{overflow-wrap:anywhere}
 html[data-locale-pending=true] body{visibility:hidden}
+/* Cloudflare Turnstile (only when a site key is configured). */
+.cr-captcha { min-height: 65px; margin: 0 0 14px; max-width: 100%; overflow: hidden; }
+.cr-captcha[hidden] { display: none; }
+/* Two-step verification: recovery codes shown once after they are created. */
+.cr-recovery-codes { columns: 2; column-gap: 24px; margin: 14px 0; padding-left: 22px; font-family: ui-monospace, monospace; font-size: 14px; }
+.cr-recovery-codes li { padding: 4px 0; break-inside: avoid; }
+#mfa-challenge .quiet { display: block; margin-top: 14px; }

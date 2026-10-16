@@ -1,0 +1,22 @@
+# Cloudflare Worker that adds security headers (CSP frame-ancestors, HSTS, ...)
+# to codevalanche.com while the site itself stays on GitHub Pages.
+# No secrets: this Worker needs none.
+#
+# Operator steps (Mihai), only after the domain is proxied by Cloudflare:
+#   1. uncomment the routes below;
+#   2. `npx wrangler deploy --config cloudflare/wrangler.toml --dry-run`, then without --dry-run;
+#   3. check the headers: `curl -sI https://codevalanche.com/ | findstr /i "strict-transport content-security x-frame"`.
+# Rollback: `npx wrangler delete --config cloudflare/wrangler.toml` (the site keeps working without it).
+#
+# Alternative: if the site moves to Cloudflare Pages, build with
+# CODEVALANCHE_HEADERS_FILE=1 so dist/_headers carries the same headers.
+
+name = "codevalanche-site-headers"
+main = "worker.mjs"
+compatibility_date = "2026-09-01"
+workers_dev = false
+
+# routes = [
+#   { pattern = "codevalanche.com/*", zone_name = "codevalanche.com" },
+#   { pattern = "www.codevalanche.com/*", zone_name = "codevalanche.com" },
+# ]

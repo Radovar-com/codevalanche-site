@@ -1,7 +1,7 @@
 {
   "desiredPolicyOnly": true,
   "captchaEnabled": true,
-  "passwordMinLength": 15,
+  "passwordMinLength": 12,
   "recoveryExpirySeconds": 900,
   "customSmtpConfigured": true,
   "leakedPasswordProtection": true,

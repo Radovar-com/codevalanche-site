@@ -32,6 +32,8 @@ import { reconcileSuspensionExpiry } from "../_shared/suspensionExpiry.ts";
 import { projectBinding } from "../_shared/projectBindings.ts";
 import { persistProfileWithOutcome, readOwnedProfile } from "../_shared/profileOutcome.ts";
 import { operatorOAuthConsent, operatorOAuthEvidence } from "../_shared/operatorOAuthProof.ts";
+import { validateAccountRequest } from "./schemas.mjs";
+import { generateRecoveryCodes, hashRecoveryCode, mfaGate, normalizeRecoveryCode, verifiedTotpFactors } from "./mfa.mjs";
 
 const url = Deno.env.get("SUPABASE_URL")!;
 const service = createClient(url, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
@@ -139,6 +141,18 @@ Deno.serve(async (req) => {
           .filter(Boolean),
       });
     verifiedPrincipal = principal;
+    // Every action (v1 names and v2 operations) is shape-checked before it runs
+    // (schemas.mjs); a refusal touches no account table and no Auth admin API.
+    const invalid = validateAccountRequest(body);
+    if (invalid) return respond({ error: invalid.error }, invalid.status);
+    // Two-step verification: a user with a verified authenticator needs an aal2 session (mfa.mjs).
+    const mfaRefusal = mfaGate({ user, claims, action: body.action, enforceOAuth: Deno.env.get("CODEVALANCHE_MFA_ENFORCE_OAUTH_AAL2") === "true" });
+    if (mfaRefusal) return respond(v2 ? { ...mfaRefusal.body, code: "mfa_required" } : mfaRefusal.body, mfaRefusal.status);
+    const totpFactors = verifiedTotpFactors(user) as { id: string; friendly_name?: string; created_at?: string }[];
+    // Every administrator read or change is journaled first; without the journal entry nothing is returned.
+    const journal = async (action: string, rowCount: number | null, targetUserId: string | null = null, detail: Record<string, unknown> = {}) => {
+      checked(await service.from("codevalanche_admin_access_log").insert({ actor_id: user.id, action, target_user_id: targetUserId, row_count: rowCount, detail }));
+    };
     let state = checked(
       await service.from("codevalanche_account_state").select("*").eq(
         "user_id",
@@ -272,6 +286,19 @@ Deno.serve(async (req) => {
     };
     const operation = adminAliases[body.action] || body.action;
     if (operation.startsWith("admin.")) {
+      const rowCount = (result: any) => {
+        for (const key of ["rows", "users", "feedback", "events", "items"]) if (Array.isArray(result?.[key])) return result[key].length;
+        return null;
+      };
+      // The journal table (migration 202610160301) names the five administrator
+      // actions of the first account page; a v2 operation with the same meaning is
+      // journaled under that name, with the operation itself in detail.operation.
+      // Other v2 administrator operations are recorded by codevalanche_admin_audit.
+      const journalAction = Object.keys(adminAliases).find((name) => adminAliases[name] === operation);
+      const adminRespond = async (result: any, status = 200) => {
+        if (status < 400 && journalAction) await journal(journalAction, rowCount(result), typeof body.userId === "string" ? body.userId : null, { operation, ...(Number.isInteger(body.page) ? { page: body.page } : {}) });
+        return respond(result, status);
+      };
       const membership = checked(
         await service.from("codevalanche_admin_memberships").select(
           "role,active",
@@ -300,7 +327,7 @@ Deno.serve(async (req) => {
         )
       ) throw new AccountError("rate_limited", 429);
       if (operation === "admin.operator.session") {
-        return respond({ principal, role: admin.role });
+        return await adminRespond({ principal, role: admin.role });
       }
       if (operation === "admin.deletion.get") {
         if (!uuid.test(body.jobId || "")) {
@@ -315,7 +342,7 @@ Deno.serve(async (req) => {
         if (body.userId && body.userId !== job.user_id) {
           throw new AccountError("account_forbidden", 403);
         }
-        return respond({
+        return await adminRespond({
           jobId: job.job_id,
           operationId: job.operation_id,
           userId: job.user_id,
@@ -335,15 +362,15 @@ Deno.serve(async (req) => {
         service,
         admin,
       });
-      if (readout !== null) return respond(readout);
+      if (readout !== null) return await adminRespond(readout);
       if (operation === "admin.users.list") {
-        return respond(await readAdminDirectory(service, body));
+        return await adminRespond(await readAdminDirectory(service, body));
       }
       if (operation === "admin.users.detail") {
-        return respond(await readAdminUserDetail(service, body.userId));
+        return await adminRespond(await readAdminUserDetail(service, body.userId));
       }
       if (operation === "admin.deletion.request") {
-        return respond(
+        return await adminRespond(
           await requestErasure({
             userId: body.userId,
             actorId: principal.userId,
@@ -361,12 +388,18 @@ Deno.serve(async (req) => {
           "admin.sessions.revoke",
         ].includes(operation)
       ) {
-        const result = await requestAccountOperation({
+        const result: any = await requestAccountOperation({
           ...body,
           actorId: principal.userId,
           action: operation,
         }, service);
-        return respond(result, result.state === "completed" ? 200 : 202);
+        if (operation === "admin.account.suspend" && result?.state !== "failed") {
+          // Banned (or the ban is queued) first, then every app session, Auth
+          // session and refresh token of the target is cut.
+          const cut = checked(await service.rpc("codevalanche_revoke_all_sessions", { p_user_id: body.userId })) as { app_revoked?: number; auth_sessions_deleted?: number; refresh_tokens_deleted?: number; auth_revoked?: boolean } | null;
+          result.sessions = { appRevoked: Number(cut?.app_revoked) || 0, authSessionsDeleted: Number(cut?.auth_sessions_deleted) || 0, refreshTokensDeleted: Number(cut?.refresh_tokens_deleted) || 0, authRevoked: cut?.auth_revoked === true };
+        }
+        return await adminRespond(result, result.state === "completed" ? 200 : 202);
       }
       if (operation === "admin.operations.get") {
         if (!uuid.test(body.operationId || "")) {
@@ -378,7 +411,7 @@ Deno.serve(async (req) => {
           ).eq("operation_id", body.operationId).maybeSingle(),
         );
         if (!row) throw new AccountError("not_found", 404);
-        return respond({
+        return await adminRespond({
           operationId: row.operation_id,
           state: row.state,
           action: row.action,
@@ -388,7 +421,7 @@ Deno.serve(async (req) => {
           errorCode: row.error_code,
         });
       }
-      return respond({ code: "operation_not_available" }, 503);
+      return await adminRespond({ code: "operation_not_available" }, 503);
     }
     if (operation === "security.mfa.remove-authorize") {
       const evidence = await readCredentialStamp(service, principal);
@@ -446,6 +479,11 @@ Deno.serve(async (req) => {
           analyticsConsent: state?.analytics_consent || false,
           consentGeneration: state?.consent_generation || 1,
           policy,
+          mfa: {
+            enabled: totpFactors.length > 0,
+            factors: totpFactors.map((f) => ({ id: f.id, friendlyName: f.friendly_name || "", createdAt: f.created_at })),
+            recoveryCodesRemaining: totpFactors.length ? Number(checked(await service.rpc("codevalanche_mfa_recovery_remaining", { p_user_id: user.id })) || 0) : 0,
+          },
           ...(v2 ? { principal } : {}),
         });
       }
@@ -478,6 +516,35 @@ Deno.serve(async (req) => {
             user_id: user.id,
           }),
         );
+        return respond({ ok: true });
+      }
+      case "mfa-recovery-codes": {
+        // Shown once; only hashes are stored. Replaces any earlier codes.
+        if (!totpFactors.length) return respond({ error: "MFA not enabled" }, 400);
+        const codes = generateRecoveryCodes();
+        const hashes = await Promise.all(codes.map((code: string) => hashRecoveryCode(user.id, normalizeRecoveryCode(code))));
+        checked(await service.rpc("codevalanche_mfa_recovery_replace", { p_user_id: user.id, p_code_hashes: hashes }));
+        return respond({ codes });
+      }
+      case "mfa-recovery-redeem": {
+        // Lost authenticator: one unused recovery code removes the authenticator from this account.
+        if (!checked(await service.rpc("codevalanche_rate_limit", { p_bucket: `mfa-recovery:${user.id}`, p_limit: 5 }))) return respond({ error: "Too many requests" }, 429);
+        const code = normalizeRecoveryCode(body.code);
+        if (!code || !totpFactors.length) return respond({ error: "Invalid recovery code" }, 400);
+        if (!checked(await service.rpc("codevalanche_mfa_recovery_consume", { p_user_id: user.id, p_code_hash: await hashRecoveryCode(user.id, code) }))) return respond({ error: "Invalid recovery code" }, 400);
+        for (const factor of (user.factors || []).filter((f: { factor_type: string }) => f.factor_type === "totp")) {
+          const result = await service.auth.admin.mfa.deleteFactor({ id: factor.id, userId: user.id });
+          if (result.error) throw new Error("Factor removal failed");
+        }
+        checked(await service.rpc("codevalanche_mfa_recovery_clear", { p_user_id: user.id }));
+        return respond({ ok: true, mfa: { enabled: false } });
+      }
+      case "mfa-disable": {
+        const factor = (user.factors || []).find((f: { id: string; factor_type: string }) => f.id === body.factorId && f.factor_type === "totp");
+        if (!factor) return respond({ error: "Factor not found" }, 404);
+        const result = await service.auth.admin.mfa.deleteFactor({ id: factor.id, userId: user.id });
+        if (result.error) throw new Error("Factor removal failed");
+        if (!totpFactors.some((f) => f.id !== factor.id)) checked(await service.rpc("codevalanche_mfa_recovery_clear", { p_user_id: user.id }));
         return respond({ ok: true });
       }
       case "request-deletion": {
