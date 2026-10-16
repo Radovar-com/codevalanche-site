@@ -37,6 +37,10 @@ export const ACCOUNT_REQUEST_SCHEMAS = Object.freeze({
   'sign-out-others': { fields: none },
   // Shape only; ownership is still decided by the handler.
   'revoke-session': { status: 404, error: 'Session not found', fields: { sessionId: uuid() } },
+  // Two-step verification (mfa.mjs). The code text is checked again by normalizeRecoveryCode.
+  'mfa-recovery-codes': { fields: none },
+  'mfa-recovery-redeem': { status: 400, error: 'Invalid recovery code', fields: { code: text({ max: 32, singleLine: true }) } },
+  'mfa-disable': { status: 404, error: 'Factor not found', fields: { factorId: uuid() } },
   'request-deletion': { status: 400, error: 'Type DELETE to confirm', fields: { confirmation: text({ max: 32, singleLine: true, optional: true }) } },
   'cancel-deletion': { fields: none },
   consent: { status: 400, error: 'Invalid consent', fields: { analytics: bool() } },

@@ -4,6 +4,7 @@ import {readFile} from 'node:fs/promises';
 import {stripTypeScriptTypes} from 'node:module';
 import * as validation from '../functions/codevalanche-account/validation.mjs';
 import * as schemas from '../functions/codevalanche-account/schemas.mjs';
+import * as mfa from '../functions/codevalanche-account/mfa.mjs';
 const userId='11111111-1111-4111-8111-111111111111', sessionId='22222222-2222-4222-8222-222222222222';
 let user={id:userId,email:'test@example.test',email_confirmed_at:'2026-09-08',user_metadata:{codevalanche_admin:true},app_metadata:{},identities:[]};
 let active=true,blocked=false,invalid=false,writes=[];
@@ -12,7 +13,7 @@ let handler;
 const source=await readFile(new URL('../functions/codevalanche-account/index.ts',import.meta.url),'utf8');
 const runnable=stripTypeScriptTypes(source.replace(/^import .*;\r?\n/gm,''));
 // Inject every name the handler imports from its own sibling modules.
-const local={...validation,...schemas};
+const local={...validation,...schemas,...mfa};
 const names=[...source.matchAll(/^import \{([^}]+)\} from '\.\/[^']+';/gm)].flatMap(m=>m[1].split(',').map(n=>n.trim()).filter(Boolean));
 new Function('createClient','Deno',...names,runnable)(()=>db,{env:{get:()=> 'test'},serve:fn=>{handler=fn}},...names.map(n=>local[n]));
 const jwt=`e30.${Buffer.from(JSON.stringify({sub:userId,session_id:sessionId})).toString('base64url')}.signature`;

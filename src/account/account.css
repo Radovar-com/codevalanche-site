@@ -172,3 +172,7 @@ textarea.cr-input { min-height: 96px; height: auto; padding-block: 12px; resize:
 /* Cloudflare Turnstile (only when a site key is configured). */
 .cr-captcha { min-height: 65px; margin: 0 0 14px; max-width: 100%; overflow: hidden; }
 .cr-captcha[hidden] { display: none; }
+/* Two-step verification: recovery codes shown once after they are created. */
+.cr-recovery-codes { columns: 2; column-gap: 24px; margin: 14px 0; padding-left: 22px; font-family: ui-monospace, monospace; font-size: 14px; }
+.cr-recovery-codes li { padding: 4px 0; break-inside: avoid; }
+#mfa-challenge .quiet { display: block; margin-top: 14px; }

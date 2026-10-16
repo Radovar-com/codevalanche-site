@@ -1,6 +1,13 @@
 import { createClient } from '@supabase/supabase-js'
 import { safeError, identityLabels, authCallback, passwordProblem, MIN_PASSWORD_LENGTH, captchaModes, turnstileSiteKey, emailLocaleFor } from './helpers.js'
+import { mfaLocaleFor, mfaText, totpCodeFrom } from './mfa-i18n.js'
 const $ = (id) => document.getElementById(id)
+// Two-step verification texts in the browser's language (mfa-i18n.js).
+const mfaLocale = mfaLocaleFor(navigator.languages?.length ? navigator.languages : [navigator.language])
+const T = (key, vars) => mfaText(mfaLocale, key, vars)
+document.querySelectorAll('[data-mfa]').forEach(element => { element.textContent = T(element.dataset.mfa) })
+if ($('mfa-qr')) $('mfa-qr').alt = T('qrAlt')
+let pendingFactorId = null, mfaFactors = []
 const config = window.CODEVALANCHE_CONFIG
 const client = createClient(config.supabaseUrl, config.supabasePublishableKey, { auth: { flowType: 'pkce', detectSessionInUrl: true, persistSession: true, autoRefreshToken: true } })
 const redirectTo = authCallback(location.href)
@@ -71,8 +78,34 @@ async function api(action, data = {}) {
   if (!session) throw { code: 'session_not_found' }
   const response = await fetch(`${config.supabaseUrl}/functions/v1/codevalanche-account`, { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: config.supabasePublishableKey, Authorization: `Bearer ${session.access_token}` }, body: JSON.stringify({ action, ...data }) })
   const result = await response.json().catch(() => ({}))
-  if (!response.ok) throw { code: result.error?.code || result.code || 'account_service_error' }
+  if (!response.ok) throw { code: result.error?.code || result.code || 'account_service_error', status: response.status, mfaRequired: result.mfaRequired === true }
   return result
+}
+// True when this session still has to pass the authenticator (Auth MFA, aal1 -> aal2).
+async function needsMfa() {
+  try { const { data, error } = await client.auth.mfa.getAuthenticatorAssuranceLevel(); return !error && data?.nextLevel === 'aal2' && data?.currentLevel !== 'aal2' } catch { return false }
+}
+function showMfaChallenge() {
+  $('auth').hidden = true; $('profile').hidden = true; $('consent').hidden = true; $('stage').classList.remove('signed-in')
+  $('mfa-challenge').hidden = false; $('mfa-recovery-form').hidden = true; $('mfa-use-recovery').hidden = false
+  $('mfa-challenge-code').value = ''; $('mfa-recovery-code').value = ''; $('mfa-challenge-code').focus()
+}
+function renderMfa(state) {
+  if (!state || typeof state.enabled !== 'boolean') { $('mfa-section').hidden = true; return } // older account service
+  mfaFactors = Array.isArray(state.factors) ? state.factors : []
+  $('mfa-section').hidden = false
+  $('mfa-state').textContent = state.enabled ? T('stateOn', { n: Number(state.recoveryCodesRemaining) || 0 }) : T('stateOff')
+  $('mfa-enable').hidden = state.enabled || pendingFactorId !== null; $('mfa-regenerate').hidden = !state.enabled; $('mfa-disable').hidden = !state.enabled
+}
+function showRecoveryCodes(codes) {
+  $('mfa-codes').replaceChildren(...codes.map(code => { const li = document.createElement('li'); li.textContent = code; return li }))
+  $('mfa-codes-panel').hidden = false
+}
+function mfaFailure(error, wrongCodeKey) {
+  if (error?.mfaRequired) return T('reverify')
+  if (error?.status === 400) return T(wrongCodeKey)
+  if (error?.status === 429) return safeError({ code: 'over_request_rate_limit' })
+  return safeError(error)
 }
 async function action(work) {
   if (busy) return
@@ -83,6 +116,9 @@ async function action(work) {
 function list(id, values) { $(id).replaceChildren(...values.map(value => { const li = document.createElement('li'); li.textContent = value; return li })) }
 async function render(session) {
   user = session?.user || null
+  $('mfa-challenge').hidden = true
+  // Two-step verification comes before the account, the desktop consent and a password change.
+  if (user && await needsMfa()) { showMfaChallenge(); return }
   $('auth').hidden = Boolean(user) && !recovery; $('profile').hidden = !user || recovery; $('stage').classList.toggle('signed-in', Boolean(user) && !recovery)
   $('consent').hidden = true
   if (authorizationId && user && !recovery) { $('profile').hidden = true; await showConsent(); return }
@@ -96,8 +132,9 @@ async function render(session) {
     if (!user || user.id !== session.user.id) return
     $('display-name').value = account.user?.displayName || ''; $('bio').value = account.user?.bio || ''; $('cancel-deletion').hidden = !account.deletion
     list('sessions', account.sessions?.length ? account.sessions.map(s => `${s.current ? 'This session' : s.label || 'Signed-in session'}${s.userAgent ? ` · ${s.userAgent}` : ''}${s.createdAt ? ` · Started ${new Date(s.createdAt).toLocaleDateString()}` : ''}`) : ['No session details available.'])
+    renderMfa(account.mfa)
     if (account.deletion?.scheduledFor) notice(`Account deletion requested for ${new Date(account.deletion.scheduledFor).toLocaleDateString()}.`)
-  } catch { list('sessions', ['Session details are temporarily unavailable. You can still sign out.']) }
+  } catch (error) { if (error?.mfaRequired) { showMfaChallenge(); return } list('sessions', ['Session details are temporarily unavailable. You can still sign out.']) }
 }
 $('password-toggle').addEventListener('click', () => {
   const show = $('password').type === 'password'; $('password').type = show ? 'text' : 'password'
@@ -136,7 +173,63 @@ $('resend').addEventListener('click', () => void action(async () => {
   if (result.error) throw result.error; notice('If confirmation is needed, a new email is on its way.')
 }))
 $('profile-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => { await api('update-profile', { displayName: $('display-name').value.trim(), bio: $('bio').value.trim() }); notice('Profile saved.') }) })
-$('logout').addEventListener('click', () => void action(async () => { const { error } = await client.auth.signOut({ scope: 'local' }); if (error) throw error; notice('Signed out.') }))
+// Two-step verification. The authenticator is Supabase Auth MFA (TOTP); recovery
+// codes and turning it off go through the account service.
+async function refreshAndRender() { await client.auth.refreshSession(); await render((await client.auth.getSession()).data.session) }
+$('mfa-challenge-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => {
+  const code = totpCodeFrom($('mfa-challenge-code').value)
+  if (!code) { notice(T('codeInvalid'), true); return }
+  const { data, error } = await client.auth.mfa.listFactors()
+  const factor = !error && (data?.totp || []).find(f => f.status === 'verified')
+  if (!factor) throw { code: 'mfa_unavailable' }
+  const verified = await client.auth.mfa.challengeAndVerify({ factorId: factor.id, code })
+  if (verified.error) { $('mfa-challenge-code').value = ''; notice(T('codeWrong'), true); return }
+  await render((await client.auth.getSession()).data.session)
+}) })
+$('mfa-use-recovery').addEventListener('click', () => { $('mfa-recovery-form').hidden = false; $('mfa-use-recovery').hidden = true; $('mfa-recovery-code').focus() })
+$('mfa-recovery-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => {
+  try { await api('mfa-recovery-redeem', { code: $('mfa-recovery-code').value }) } catch (error) { notice(mfaFailure(error, 'recoveryInvalid'), true); return }
+  $('mfa-recovery-code').value = ''
+  await refreshAndRender(); notice(T('recovered'))
+}) })
+$('mfa-challenge-signout').addEventListener('click', () => void action(async () => { const { error } = await client.auth.signOut({ scope: 'local' }); if (error) throw error; notice('Signed out.') }))
+$('mfa-enable').addEventListener('click', () => void action(async () => {
+  // An enrolment left unfinished earlier would block a new one: remove it first.
+  const listed = await client.auth.mfa.listFactors()
+  for (const factor of (listed.data?.all || []).filter(f => f.factor_type === 'totp' && f.status !== 'verified')) await client.auth.mfa.unenroll({ factorId: factor.id })
+  const { data, error } = await client.auth.mfa.enroll({ factorType: 'totp', friendlyName: `Codevalanche ${Math.random().toString(36).slice(2, 8)}` })
+  if (error) throw error
+  pendingFactorId = data.id
+  $('mfa-qr').src = data.totp?.qr_code || ''; $('mfa-secret').textContent = data.totp?.secret || ''
+  $('mfa-enroll').hidden = false; $('mfa-enable').hidden = true; $('mfa-enroll-code').value = ''; $('mfa-enroll-code').focus()
+}))
+function closeEnrollment() { pendingFactorId = null; $('mfa-enroll').hidden = true; $('mfa-qr').removeAttribute('src'); $('mfa-secret').textContent = ''; $('mfa-enroll-code').value = '' }
+$('mfa-enroll-cancel').addEventListener('click', () => void action(async () => {
+  const factorId = pendingFactorId; closeEnrollment(); $('mfa-enable').hidden = false
+  if (factorId) await client.auth.mfa.unenroll({ factorId })
+}))
+$('mfa-enroll-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => {
+  const code = totpCodeFrom($('mfa-enroll-code').value)
+  if (!code || !pendingFactorId) { notice(T('codeInvalid'), true); return }
+  const verified = await client.auth.mfa.challengeAndVerify({ factorId: pendingFactorId, code })
+  if (verified.error) { $('mfa-enroll-code').value = ''; notice(T('codeWrong'), true); return }
+  closeEnrollment()
+  // The session is aal2 now: create the recovery codes and show them once.
+  const { codes } = await api('mfa-recovery-codes')
+  showRecoveryCodes(codes); await render((await client.auth.getSession()).data.session); notice(T('enabled'))
+}) })
+$('mfa-regenerate').addEventListener('click', () => void action(async () => {
+  try { const { codes } = await api('mfa-recovery-codes'); showRecoveryCodes(codes); await render((await client.auth.getSession()).data.session); notice(T('codesRegenerated')) } catch (error) { notice(mfaFailure(error, 'reverify'), true) }
+}))
+$('mfa-codes-done').addEventListener('click', () => void action(async () => { $('mfa-codes').replaceChildren(); $('mfa-codes-panel').hidden = true; await render((await client.auth.getSession()).data.session) }))
+$('mfa-disable').addEventListener('click', () => void action(async () => {
+  const factor = mfaFactors[0]
+  if (!factor || !window.confirm(T('disableConfirm'))) return
+  try { await api('mfa-disable', { factorId: factor.id }) } catch (error) { notice(mfaFailure(error, 'reverify'), true); return }
+  $('mfa-codes').replaceChildren(); $('mfa-codes-panel').hidden = true
+  await refreshAndRender(); notice(T('disabled'))
+}))
+$('logout').addEventListener('click',() => void action(async () => { const { error } = await client.auth.signOut({ scope: 'local' }); if (error) throw error; notice('Signed out.') }))
 $('logout-others').addEventListener('click', () => void action(async () => { await api('sign-out-others'); await render((await client.auth.getSession()).data.session); notice('Other sessions signed out. Existing access tokens may remain valid until they expire.') }))
 $('change-password').addEventListener('click', () => void action(async () => {
   const captchaToken = captchaFor('profile-captcha')

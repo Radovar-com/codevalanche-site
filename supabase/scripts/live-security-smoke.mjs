@@ -28,7 +28,7 @@ async function createFixture(label,isAdmin=false) {
 }
 async function login(fixture) {
  const data=expect(await call('/auth/v1/token?grant_type=password',{method:'POST',body:{email:fixture.email,password:fixture.password}}),200,'fixture password sign-in');
- assert.equal(typeof data.access_token,'string');return data.access_token;
+ assert.equal(typeof data.access_token,'string');fixture.refreshToken=data.refresh_token;return data.access_token;
 }
 let failure;
 try {
@@ -52,10 +52,17 @@ try {
   const r=await call('/rest/v1/rpc/codevalanche_sessions',{method:'POST',token,body:{p_user_id:bob.id}});assert.ok([401,403,404].includes(r.status),'Direct sessions RPC unexpectedly allowed');
  }
  checks.push('anonymous and authenticated tables/RPC inaccessible');
- expect(await account(adm,'admin-block-user',{userId:bob.id}),200,'administrator blocks fixture');
+ const bobRefresh=bob.refreshToken;
+ const blocked=expect(await account(adm,'admin-block-user',{userId:bob.id}),200,'administrator blocks fixture');
+ assert.equal(blocked?.sessions?.authRevoked,true,'Block did not delete the Auth sessions');checks.push('block deletes Auth sessions and refresh tokens');
  const blockedResponse=await account(b,'get-account');assert.ok([401,403].includes(blockedResponse.status),'Block did not deny existing JWT');checks.push('block denies existing JWT');
+ const refreshed=await call('/auth/v1/token?grant_type=refresh_token',{method:'POST',body:{refresh_token:bobRefresh}});assert.ok(refreshed.status>=400,'Blocked refresh token still mints tokens');checks.push('blocked refresh token refused');
  expect(await account(adm,'admin-unblock-user',{userId:bob.id}),200,'administrator unblocks fixture');
- expect(await account(b,'get-account'),200,'unblocked session admitted');
+ expect(await account(b,'get-account'),401,'session cut by the block stays cut after unblock');
+ const bobAgain=await login(bob);
+ expect(await account(bobAgain,'get-account'),200,'unblocked user signs in again');
+ const journalRead=await call(`/rest/v1/codevalanche_admin_access_log?select=action,target_user_id&actor_id=eq.${administrator.id}&target_user_id=eq.${bob.id}`,{key:serviceKey,token:serviceKey});
+ assert.ok(journalRead.status===200 && ['admin-block-user','admin-unblock-user'].every(action=>journalRead.data?.some(row=>row.action===action)),'Block/unblock not journaled');checks.push('admin actions journaled');
  const thirdToken=await login(alice);
  expect(await account(a,'sign-out-others'),200,'sign out other provider sessions');
  expect(await account(thirdToken,'get-account'),401,'provider revoked JWT denied');
