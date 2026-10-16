@@ -10,7 +10,7 @@ The `codevalanche-account` Edge Function is called by clients we cannot update o
 | apiRevision | Change |
 |---|---|
 | (absent) | v2 as shipped with desktop 0.2.9426 |
-| 1 | `sessions.revoke` also ends the Auth session (`providerSession` in the result); new action `account.export` |
+| 1 | `sessions.revoke` also ends the Auth session (`providerSession` in the result); new action `account.export` (recent sign-in or authenticator check, like a deletion request; `413 export_too_large` above 20 MiB) |
 
 ## Rules
 
