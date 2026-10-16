@@ -396,7 +396,8 @@ p { text-wrap: pretty; }
   .footer-hero { grid-template-columns: 1fr; }
 }
 @media (max-width: 860px) {
-  .desktop-nav, .nav-signin { display: none; }
+  .desktop-nav { display: none; }
+  .nav-signin { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 4px; }
   .mobile-nav { display: block; }
   .nav-actions { gap: 10px; }
   .section-head, .principle-grid, .parallel-layout, .faq-layout, .companion, .showcase-layout, .changelog-layout { grid-template-columns: 1fr; }
@@ -405,13 +406,16 @@ p { text-wrap: pretty; }
   .feature-tab.is-active { border-bottom-color: var(--accent); }
   [dir="rtl"] .feature-tab { border-right: 0; border-radius: 8px 8px 0 0; }
   .feature-copy { grid-template-columns: 1fr; }
-  .cl-rail { position: static; }
+  .cl-rail { position: static; min-width: 0; }
+  .changelog-layout { grid-template-columns: minmax(0, 1fr); }
   .cl-rail-list { display: flex; gap: 18px; overflow-x: auto; padding-bottom: 6px; border-top: 0; }
   .cl-rail-list a { flex: 0 0 auto; border-bottom: 0; }
   .cl-rail-list em { display: none; }
 }
 /* Phone */
 @media (max-width: 640px) {
+  /* On a phone the hero already carries the download button; the header keeps account access. */
+  .nav-cta { display: none; }
   .footer-canvas-wrap { min-height: 0; }
   body { font-size: 16px; }
   .nav-shell { gap: 12px; min-height: 60px; }
@@ -444,7 +448,6 @@ p { text-wrap: pretty; }
 }
 @media (max-width: 380px) {
   .dl-grid, .footer-columns { grid-template-columns: 1fr; }
-  .nav-cta { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; animation: none !important; }

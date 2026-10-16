@@ -61,7 +61,7 @@ export function localizeDocument(document, catalog, locale, root = document?.doc
   const origin = document.location?.origin ?? document.defaultView?.location?.origin;
   for (const link of root.querySelectorAll?.('a[href]') ?? []) {
     try {
-      if (link.hasAttribute('data-locale')) continue;
+      if (link.hasAttribute('data-locale') || link.getAttribute('href').startsWith('#')) continue;
       const url = new URL(link.href, origin);
       const route = url.origin === origin ? resolveMarketingRoute(url.pathname) : null;
       if (!route || !['home', 'changelog', 'privacy', 'terms'].includes(route.pageId)) continue;

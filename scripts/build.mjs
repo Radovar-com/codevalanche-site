@@ -37,7 +37,9 @@ for (const page of MARKETING_PAGES) {
   const header = page.file === "changelog.html"
     ? sharedHeader.replaceAll('href="/changelog.html"', 'href="/changelog.html" aria-current="page"')
     : sharedHeader
-  await writeFile(output, html.replace("<!-- site-header -->", header).replace("<!-- site-footer -->", sharedFooter))
+  // On the homepage, links to its own sections stay in-page fragments so they never reload the page.
+  const inPage = (partial) => page.path === "/" ? partial.replaceAll('href="/#', 'href="#') : partial
+  await writeFile(output, html.replace("<!-- site-header -->", inPage(header)).replace("<!-- site-footer -->", inPage(sharedFooter)))
 }
 
 const homeHtml = await readFile(path.join(destination, "index.html"), "utf8")

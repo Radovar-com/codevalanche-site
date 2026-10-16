@@ -6,7 +6,7 @@ import { LOCALES } from '../src/locales/manifest.js';
 const routeModule = await import('../src/locales/manifest.js').catch(() => null);
 
 test('locale manifest matches all 17 languages already listed in the footer', async () => {
-  const html = await readFile(new URL('../src/index.html', import.meta.url), 'utf8');
+  const html = await readFile(new URL('../src/partials/footer.html', import.meta.url), 'utf8');
   const document = parse(html);
   const find = (node, predicate) => {
     if (predicate(node)) return node;

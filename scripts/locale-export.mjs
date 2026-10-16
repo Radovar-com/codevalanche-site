@@ -67,7 +67,7 @@ export function rewriteLocalizedLinks(html, targetLocale) {
     const attrs = attributes(node);
     if (attrs.has('data-locale')) return;
     const href = attrs.get('href');
-    if (!href) return;
+    if (!href || href.startsWith('#')) return;
     try {
       const url = new URL(href, SITE_ORIGIN);
       const route = url.origin === SITE_ORIGIN ? resolveMarketingRoute(url.pathname) : null;
