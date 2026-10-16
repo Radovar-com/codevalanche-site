@@ -29,9 +29,15 @@ The account-service periods are a proposal by the implementer (W7-SRV-ACCOUNT, 1
 
 All retention functions run from `account-retention-worker` (POST, worker token, `ACCOUNT_RETENTION_EXECUTION_ENABLED=true`). The operator schedules it **once a day**.
 
+`codevalanche_account_retention` deletes at most 10,000 rows per table per call (migration `202610160002`) and returns `more: true` while a table may still hold expired rows. The worker repeats the call up to 20 times per run (`ACCOUNT_RETENTION_MAX_PASSES`). Each call is its own short transaction, so a large first backlog shrinks on every run instead of hitting `statement_timeout`. A run that stops at the bound reports `account.more: true`, and the next daily run continues.
+
 ## Data export (right of access and portability)
 
 `account.export` (API v2) or `export-data` (v1) returns one JSON document for the signed-in person: format `codevalanche-account-export/v1`, their Auth identity (email, sign-in methods, live sessions) and every application row about them (`codevalanche_account_export`): account state, profile, feedback, events, activity, revocations, credential and security events, account actions taken on them, deletion requests, notifications, projects, run receipts and website consent bindings. Identifiers of other people (for example the administrator who acted) are left out. Each list is capped at 50,000 rows (`limitPerList`). A person may start 2 exports per minute. Export stays available while a deletion is pending.
+
+The document is the whole dossier (email, sessions, IP addresses of recent security events), so the export asks for the same proof as a deletion request (`assertRecentAuthentication`): a sign-in in the last 5 minutes or, when an authenticator is enrolled, an authenticator check in the last 5 minutes. Otherwise the answer is `401 reauthentication_required` or `403 mfa_required`. Recovery sessions are refused. The whole document is capped at 20 MiB in the database (`maxBytes`, migration `202610160002`); above it the call answers `413 export_too_large` and support provides the copy by hand.
+
+Suspended accounts get `403 account_suspended` for the export, as for every other account action (`assertAccountOperation`). Whether a suspended person may still download their data (the right of access does not end with a suspension) is an owner decision. Until it is taken, support answers such requests by hand.
 
 ## Revoking one session
 
