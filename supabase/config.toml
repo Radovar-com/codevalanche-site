@@ -116,6 +116,20 @@ content_path = "./supabase/templates/reauthentication.html"
 # admin_email = "env(SUPABASE_AUTH_SMTP_ADMIN_EMAIL)"
 # sender_name = "Codevalanche"
 
+[auth.mfa]
+# Two-step verification with an authenticator app (TOTP), opt-in per user on the
+# account page. Recovery codes are the account function's own (hashed, service-only
+# table), because Auth has none. Phone and WebAuthn factors stay off.
+max_enrolled_factors = 10
+
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
+
+[auth.mfa.phone]
+enroll_enabled = false
+verify_enabled = false
+
 [auth.external.google]
 # Production state lives in the dashboard; set enabled = true and the env values
 # before any config push if Google sign-in is on there.

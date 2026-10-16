@@ -24,6 +24,12 @@ test('Auth requires 12-character passwords and keeps sign-up confirmations', () 
   assert.equal(section('auth.email').enable_confirmations, 'true');
 });
 
+test('authenticator-app (TOTP) two-step verification is on; phone factors stay off', () => {
+  assert.equal(section('auth.mfa.totp').enroll_enabled, 'true');
+  assert.equal(section('auth.mfa.totp').verify_enabled, 'true');
+  assert.equal(section('auth.mfa.phone').enroll_enabled, 'false');
+});
+
 test('Turnstile is prepared for Supabase Auth with the secret only from the environment', () => {
   const captcha = section('auth.captcha');
   assert.equal(captcha.provider, '"turnstile"');
