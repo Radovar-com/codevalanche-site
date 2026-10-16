@@ -30,20 +30,25 @@ await build({entryPoints:[path.join(source,"downloads.js")],outfile:path.join(de
 
 // Render the same navigation on every marketing page so account access cannot drift.
 const sharedHeader = await readFile(path.join(source, "partials/header.html"), "utf8")
+const sharedFooter = await readFile(path.join(source, "partials/footer.html"), "utf8")
 for (const page of MARKETING_PAGES) {
   const output = path.join(destination, page.file)
   const html = await readFile(output, "utf8")
   const header = page.file === "changelog.html"
     ? sharedHeader.replaceAll('href="/changelog.html"', 'href="/changelog.html" aria-current="page"')
     : sharedHeader
-  await writeFile(output, html.replace("<!-- site-header -->", header))
+  await writeFile(output, html.replace("<!-- site-header -->", header).replace("<!-- site-footer -->", sharedFooter))
 }
 
 const homeHtml = await readFile(path.join(destination, "index.html"), "utf8")
 const languagePicker = homeHtml.match(/<details class="lang-picker">[\s\S]*?<\/details>/)?.[0]
 if (!languagePicker) throw new Error("The existing footer language picker could not be found")
-await validateEnglishSourceCatalog(root)
-await validateLocaleCatalogs(root)
+// Local design previews may skip translated output; a publishable build never sets this.
+const englishPreviewOnly = process.env.CODEVALANCHE_PREVIEW_ENGLISH_ONLY === "1"
+if (!englishPreviewOnly) {
+  await validateEnglishSourceCatalog(root)
+  await validateLocaleCatalogs(root)
+}
 
 const englishPages = new Map()
 const includeLocaleBootstrap = html => html.includes('src="/locales/bootstrap.js"')
@@ -61,7 +66,7 @@ for (const page of MARKETING_PAGES) {
   englishPages.set(page.file, html)
 }
 
-for (const locale of LOCALES.filter(item => item.slug)) {
+for (const locale of englishPreviewOnly ? [] : LOCALES.filter(item => item.slug)) {
   const catalog = JSON.parse(await readFile(path.join(source, "locales", `${locale.slug}.json`), "utf8"))
   for (const page of MARKETING_PAGES) {
     let html = renderTranslatedHtml(englishPages.get(page.file), catalog, locale.tag)
@@ -89,7 +94,7 @@ for (const page of ["account/index.html", "account/authorize/index.html", "accou
   if (page === "account/signed-in/index.html") html = html.replace("</body>", '<script type="module" src="/locales/bootstrap.js"></script></body>')
   await writeFile(output, html)
 }
-const llms = await buildLlmsFull(destination)
+const llms = englishPreviewOnly ? { pages: 0 } : await buildLlmsFull(destination)
 
 await build({ entryPoints: [path.join(source, "account/app.js")], outfile: path.join(destination, "account/app.js"), bundle: true, format: "esm", minify: true, target: ["es2022"], legalComments: "eof" })
 // Version the completed bundle, styles and public configuration so a new page
@@ -106,5 +111,5 @@ for (const page of ["account/index.html", "account/authorize/index.html"]) {
   await writeFile(output, html)
 }
 const security = await applyPostbuildSecurity(destination)
-const seo = await validateSeoExport(destination)
+const seo = englishPreviewOnly ? { publicPages: "English preview only, not" } : await validateSeoExport(destination)
 console.log(`Built static site to ${destination} (${security.htmlFiles} HTML pages passed CSP; ${seo.publicPages} public routes; ${llms.pages} discovery pages)`)

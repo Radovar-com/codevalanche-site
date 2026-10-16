@@ -14,13 +14,14 @@ const SOURCE_PAGES = [
 export async function collectSiteStrings(root = ROOT) {
   const source = path.join(root, 'src');
   const sharedHeader = await readFile(path.join(source, 'partials/header.html'), 'utf8');
-  const homepage = await readFile(path.join(source, 'index.html'), 'utf8');
+  const sharedFooter = await readFile(path.join(source, 'partials/footer.html'), 'utf8');
+  const homepage = (await readFile(path.join(source, 'index.html'), 'utf8')).replace('<!-- site-footer -->', sharedFooter);
   const footerPicker = homepage.match(/<details class="lang-picker">[\s\S]*?<\/details>/)?.[0];
   if (!footerPicker) throw new Error('The source footer language picker could not be found');
   const units = new Set();
   for (const relativePath of SOURCE_PAGES) {
     let html = await readFile(path.join(source, relativePath), 'utf8');
-    html = html.replace('<!-- site-header -->', sharedHeader);
+    html = html.replace('<!-- site-header -->', sharedHeader).replace('<!-- site-footer -->', sharedFooter);
     if (['privacy.html', 'terms.html'].includes(relativePath)) html = ensureLanguagePicker(html, footerPicker);
     for (const unit of extractTranslationUnits(html)) units.add(unit);
   }

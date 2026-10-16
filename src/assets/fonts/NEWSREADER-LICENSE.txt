@@ -1,0 +1,1 @@
+Newsreader: Copyright 2020 The Newsreader Project Authors (https://github.com/productiontype/Newsreader). Licensed under the SIL Open Font License 1.1, the same license text as OFL.txt in this folder.
