@@ -449,3 +449,8 @@ p { text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: .01ms !important; animation: none !important; }
 }
+
+/* CJK headings: the display serif has no CJK glyphs, so break by phrase, drop the tight tracking and size down a step. */
+:is(:lang(ja), :lang(ko), :lang(zh)) :is(h1, h2, .principle-statement) { letter-spacing: 0; word-break: auto-phrase; line-height: 1.2; }
+:is(:lang(ja), :lang(ko), :lang(zh)) .hero-head h1 { max-width: 26ch; font-size: clamp(36px, 4.8vw, 72px); }
+:is(:lang(ja), :lang(ko), :lang(zh)) h2 { font-size: clamp(28px, 3.4vw, 46px); }
