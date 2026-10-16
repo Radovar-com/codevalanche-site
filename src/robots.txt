@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /account/
+Disallow: /account.html
+Disallow: /admin-accounts/
+Disallow: /insights/
 
 Sitemap: https://codevalanche.com/sitemap.xml

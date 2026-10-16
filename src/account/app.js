@@ -5,6 +5,10 @@ import { createAccountSecurity } from './security.js'
 import { recoveryCallback, exchangeRecovery, validateNewPassword, recoveryNotice } from './recovery.js'
 import { createAccountCaptcha } from './captcha.js'
 import { createAccountAnalytics } from './analytics.js'
+import { initializeLocale, localizeDocument } from '../locales/runtime.js'
+const localeState = await initializeLocale(document)
+localizeDocument(document, localeState.catalog, localeState.locale)
+const t = localeState.translate
 const $ = (id) => document.getElementById(id)
 const config = window.CODEVALANCHE_CONFIG
 const accountAnalytics = createAccountAnalytics({ config: window.CODEVALANCHE_ANALYTICS })
@@ -17,7 +21,7 @@ const authorizationId = redirectTo.searchParams.get('authorization_id')
 // Social sign-in returns to /account/?authorization_id. Give that preserved
 // connection context the same explicit reauthentication action as /authorize/.
 if (authorizationId && !$('operator-reauth')) {
-  const button = document.createElement('button'); button.id = 'operator-reauth'; button.type = 'button'; button.className = 'cr-btn cr-btn-primary'; button.hidden = true; button.textContent = 'Sign in again'
+  const button = document.createElement('button'); button.id = 'operator-reauth'; button.type = 'button'; button.className = 'cr-btn cr-btn-primary'; button.hidden = true; button.textContent = t('Sign in again')
   $('account-state-logout').before(button)
 }
 const recoveryRedirect = new URL(redirectTo); recoveryRedirect.searchParams.set('flow', 'recovery')
@@ -25,7 +29,8 @@ let mode = 'signin', user = null, recovery = new URL(location.href).searchParams
 let accountStatus = 'signed-out', renderGeneration = 0, currentSession = null, operatorConsent = false
 let cleanupPromise = null, cleanupPending = false, ownedSignin = false
 const security = createAccountSecurity(client, { isRecovery: () => recovery, assertRemoval: () => apiV2('security.mfa.remove-authorize') })
-function notice(message = '', error = false) { $('status').textContent = message; $('status').dataset.error = String(error) }
+function notice(message = '', error = false) { $('status').textContent = t(message); $('status').dataset.error = String(error) }
+function noticeTranslated(message = '', error = false) { $('status').textContent = message; $('status').dataset.error = String(error) }
 function applyControls() {
   [...document.querySelectorAll('button')].filter(button => !button.closest('[data-owned-consent]')).forEach(button => { button.disabled = busy || cleanupPending })
   document.querySelectorAll('#profile input, #profile textarea, #profile button').forEach(control => { control.disabled = busy || accountStatus !== 'ready' })
@@ -52,7 +57,7 @@ function setAccountStatus(next) {
       : next === 'deletion-pending' ? ['Account deletion pending', 'Sign in again and verify any enrolled authenticator to cancel before deletion starts. Local projects are preserved.']
     : next === 'loading' ? ['Opening your account', 'Checking account access…']
       : ['Account temporarily unavailable', 'Your saved session is preserved. Try again or sign out.']
-  $('account-state-title').textContent = content[0]; $('account-state-description').textContent = content[1]
+  $('account-state-title').textContent = t(content[0]); $('account-state-description').textContent = t(content[1])
   applyControls()
 }
 function invalidateAccountView() {
@@ -115,12 +120,12 @@ async function completeExplicitSignin(work, unprotected = false) {
 function setMode(next) {
   mode = next
   const reset = next === 'reset', signup = next === 'signup', update = next === 'update'
-  $('auth-title').textContent = reset ? 'Reset password' : signup ? 'Create your account' : update ? 'Choose a new password' : 'Sign in'
-  $('auth-submit').textContent = reset ? 'Send reset link' : signup ? 'Create account' : update ? 'Save password' : 'Sign in'
-  $('auth-description').textContent = reset ? 'We’ll email you a link to choose a new password.' : signup ? 'Your Codevalanche account.' : update ? 'Choose a password with at least 15 characters.' : 'Welcome back to Codevalanche.'
+  $('auth-title').textContent = t(reset ? 'Reset password' : signup ? 'Create your account' : update ? 'Choose a new password' : 'Sign in')
+  $('auth-submit').textContent = t(reset ? 'Send reset link' : signup ? 'Create account' : update ? 'Save password' : 'Sign in')
+  $('auth-description').textContent = t(reset ? 'We’ll email you a link to choose a new password.' : signup ? 'Your Codevalanche account.' : update ? 'Choose a password with at least 15 characters.' : 'Welcome back to Codevalanche.')
   $('social-auth').hidden = reset || update
   $('forgot-row').hidden = next !== 'signin'; $('signup-prompt').hidden = next !== 'signin'
-  $('password').type = 'password'; $('password-toggle').setAttribute('aria-label', 'Show password'); $('password-toggle').setAttribute('aria-pressed', 'false')
+  $('password').type = 'password'; $('password-toggle').setAttribute('aria-label', t('Show password')); $('password-toggle').setAttribute('aria-pressed', 'false')
   $('name-field').hidden = !signup; $('email-field').hidden = update; $('email').required = !update
   $('password-field').hidden = reset; $('password').required = !reset; $('password').autocomplete = signup || update ? 'new-password' : 'current-password'
   $('password').minLength = signup || update ? 15 : 1
@@ -177,7 +182,10 @@ async function render(session) {
     if ($('analytics-consent')) $('analytics-consent').checked = account.analyticsConsent === true
     void accountAnalytics.update({ session, account })
     list('sessions', account.sessions?.length ? account.sessions.map(s => `${s.current ? 'This session' : s.label || 'Signed-in session'}${s.userAgent ? ` · ${s.userAgent}` : ''}${s.createdAt ? ` · Started ${new Date(s.createdAt).toLocaleDateString()}` : ''}`) : ['No session details available.'])
-    if (account.deletion?.scheduledFor) notice(`Account deletion requested for ${new Date(account.deletion.scheduledFor).toLocaleDateString()}.`)
+    if (account.deletion?.scheduledFor) {
+      const date = new Intl.DateTimeFormat(localeState.locale.tag).format(new Date(account.deletion.scheduledFor))
+      noticeTranslated(t('Account deletion requested for {date}.', { date }))
+    }
   } catch (error) {
     if (generation !== renderGeneration) return
     if (error?.code === 'account_request_superseded') { void readCurrentSession(); return }
@@ -188,7 +196,7 @@ async function render(session) {
 }
 $('password-toggle').addEventListener('click', () => {
   const show = $('password').type === 'password'; $('password').type = show ? 'text' : 'password'
-  $('password-toggle').setAttribute('aria-label', show ? 'Hide password' : 'Show password'); $('password-toggle').setAttribute('aria-pressed', String(show))
+  $('password-toggle').setAttribute('aria-label', t(show ? 'Hide password' : 'Show password')); $('password-toggle').setAttribute('aria-pressed', String(show))
 })
 $('google-signin').addEventListener('click', () => void action(async () => {
   const response = await accountAuthFetch(`${config.supabaseUrl}/auth/v1/settings`, { headers: { apikey: config.supabasePublishableKey } })
@@ -312,13 +320,13 @@ async function showConsent(generation) {
     if (!operatorConsent) { const result = await client.auth.oauth.getAuthorizationDetails(authorizationId); if (result.error) throw result.error; data = result.data }
     if (generation !== renderGeneration || accountStatus !== 'ready') return
     if (data.redirect_url) { location.assign(data.redirect_url); return }
-    $('consent-client').textContent = (data.client.name || 'This application') + ' wants to access your Codevalanche account.'
-    $('consent-scope').textContent = 'Requested access: ' + data.scope
+    $('consent-client').textContent = t('{client} wants to access your Codevalanche account.', { client: data.client.name || 'This application' })
+    $('consent-scope').textContent = t('Requested access: {scope}', { scope: data.scope })
     $('consent').hidden = false
   } catch (error) { if (generation === renderGeneration && accountStatus === 'ready') {
     if (error?.code === 'reauthentication_required') {
       setAccountStatus('unavailable')
-      if ($('operator-reauth')) { $('operator-reauth').hidden = false; $('account-state-title').textContent = 'Sign in again to connect Company OS'; $('account-state-description').textContent = 'Your security settings changed. Sign in again with the same account, then verify your authenticator. This connection request will be kept.' }
+      if ($('operator-reauth')) { $('operator-reauth').hidden = false; $('account-state-title').textContent = t('Sign in again to connect Company OS'); $('account-state-description').textContent = t('Your security settings changed. Sign in again with the same account, then verify your authenticator. This connection request will be kept.') }
       notice('Sign in again with the same account to approve this connection after the security change.', true)
     }
     else notice('This connection request is invalid or expired. Start sign-in again from the app.', true)
@@ -361,5 +369,5 @@ $('mfa-form')?.addEventListener('submit', event => { event.preventDefault(); voi
 $('mfa-cancel')?.addEventListener('click', () => void action(async () => { await security.cancel(); $('mfa-secret').textContent = ''; $('mfa-code').value = ''; $('mfa-challenge').hidden = true }))
 $('mfa-remove')?.addEventListener('click', () => void action(async () => { const factors = await security.factors(); if (!factors.length) { notice('No verified authenticator is enrolled.'); return }; await security.remove(factors[0].id); notice('Authenticator removed. Earlier remote approvals have been withdrawn.'); await readCurrentSession() }))
 $('analytics-save')?.addEventListener('click', () => void action(async () => { accountAnalytics.suspend(); const result = await apiV2('analytics.consent', { analytics: $('analytics-consent').checked }); void accountAnalytics.update({ session: currentSession, account: result }); notice(result.analyticsConsent ? 'Account activity analytics accepted.' : 'Account activity analytics stopped. Queued events from earlier consent are refused.'); }))
-$('activity-load')?.addEventListener('click', () => void action(async () => { const result = await apiV2('security.activity', { limit: 20 }); list('security-activity', result.events.map(e => `${new Date(e.occurredAt).toLocaleString()} · ${e.eventName} · ${e.outcome} · ${e.source}`)); $('activity-coverage').textContent = result.coverage.status === 'qualified' ? 'Configured sources are current.' : 'Some provider sources are missing or delayed. An empty list does not establish zero attempts.' }))
+$('activity-load')?.addEventListener('click', () => void action(async () => { const result = await apiV2('security.activity', { limit: 20 }); list('security-activity', result.events.map(e => `${new Intl.DateTimeFormat(localeState.locale.tag, { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(e.occurredAt))} · ${e.eventName} · ${e.outcome} · ${e.source}`)); $('activity-coverage').textContent = t(result.coverage.status === 'qualified' ? 'Configured sources are current.' : 'Some provider sources are missing or delayed. An empty list does not establish zero attempts.') }))
 $('account-state-cancel')?.addEventListener('click', () => void action(cancelAccountDeletion))

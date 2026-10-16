@@ -1,0 +1,103 @@
+import { readFile, readdir } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { parse } from 'parse5';
+import { LOCALES, MARKETING_PAGES, localizedMarketingPath } from '../src/locales/manifest.js';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const SITE_ORIGIN = 'https://codevalanche.com';
+
+function walk(node, predicate, output = []) {
+  if (predicate(node)) output.push(node);
+  for (const child of node.childNodes ?? []) walk(child, predicate, output);
+  return output;
+}
+
+function attrs(node) {
+  return new Map((node.attrs ?? []).map(attribute => [attribute.name, attribute.value]));
+}
+
+function text(node) {
+  if (node.nodeName === '#text') return node.value ?? '';
+  return (node.childNodes ?? []).map(text).join('');
+}
+
+function requireValue(condition, message) {
+  if (!condition) throw new Error(`SEO export validation failed: ${message}`);
+}
+
+export async function validateSeoExport(destination) {
+  const canonicalUrls = new Set();
+  for (const page of MARKETING_PAGES) {
+    for (const locale of LOCALES) {
+      const urlPath = localizedMarketingPath(page.path, locale.tag);
+      const relative = page.path === '/'
+        ? path.join(locale.slug, 'index.html')
+        : path.join(locale.slug, page.file);
+      const html = await readFile(path.join(destination, relative), 'utf8');
+      const document = parse(html);
+      const htmlRoot = walk(document, node => node.tagName === 'html')[0];
+      const rootAttrs = attrs(htmlRoot ?? {});
+      requireValue(rootAttrs.get('lang') === locale.tag, `${relative} has wrong lang`);
+      requireValue(rootAttrs.get('dir') === locale.dir, `${relative} has wrong direction`);
+
+      const canonicalNodes = walk(document, node => node.tagName === 'link' && (attrs(node).get('rel') ?? '').split(/\s+/).includes('canonical'));
+      const canonicalUrl = new URL(urlPath, SITE_ORIGIN).href;
+      requireValue(canonicalNodes.length === 1 && attrs(canonicalNodes[0]).get('href') === canonicalUrl, `${relative} has wrong canonical`);
+      canonicalUrls.add(canonicalUrl);
+
+      const title = walk(document, node => node.tagName === 'title')[0];
+      const description = walk(document, node => node.tagName === 'meta' && attrs(node).get('name') === 'description')[0];
+      requireValue(Boolean(text(title).trim()), `${relative} has no title`);
+      requireValue(Boolean(attrs(description ?? {}).get('content')?.trim()), `${relative} has no description`);
+      for (const [kind, key] of [['property', 'og:url'], ['property', 'og:title'], ['property', 'og:description'], ['name', 'twitter:card'], ['name', 'twitter:title'], ['name', 'twitter:description']]) {
+        const meta = walk(document, node => node.tagName === 'meta' && (attrs(node).get(kind) ?? '').toLowerCase() === key)[0];
+        requireValue(Boolean(attrs(meta ?? {}).get('content')?.trim()), `${relative} is missing ${key}`);
+      }
+      requireValue(attrs(walk(document, node => node.tagName === 'meta' && attrs(node).get('property') === 'og:url')[0] ?? {}).get('content') === canonicalUrl, `${relative} has inconsistent og:url`);
+
+      const alternates = walk(document, node => node.tagName === 'link' && (attrs(node).get('rel') ?? '').split(/\s+/).includes('alternate') && attrs(node).has('hreflang'));
+      requireValue(alternates.length === LOCALES.length + 1, `${relative} has ${alternates.length} hreflang links`);
+      for (const language of LOCALES) {
+        const alternate = alternates.find(node => attrs(node).get('hreflang') === language.tag);
+        const expected = new URL(localizedMarketingPath(page.path, language.tag), SITE_ORIGIN).href;
+        requireValue(alternate && attrs(alternate).get('href') === expected, `${relative} has inconsistent ${language.tag} alternate`);
+      }
+      const fallback = alternates.find(node => attrs(node).get('hreflang') === 'x-default');
+      requireValue(fallback && attrs(fallback).get('href') === new URL(page.path, SITE_ORIGIN).href, `${relative} has inconsistent x-default`);
+
+      const schemaScripts = walk(document, node => node.tagName === 'script' && (attrs(node).get('type') ?? '').toLowerCase() === 'application/ld+json');
+      const schemas = schemaScripts.map(script => JSON.parse((script.childNodes ?? []).map(child => child.value ?? '').join('')));
+      const graph = schemas.flatMap(schema => Array.isArray(schema['@graph']) ? schema['@graph'] : [schema]);
+      const webPages = graph.filter(item => item?.['@type'] === 'WebPage');
+      requireValue(webPages.some(item => item['@id'] === `${canonicalUrl}#webpage` && item.url === canonicalUrl && item.inLanguage === locale.tag), `${relative} is missing route WebPage schema`);
+      const csp = walk(document, node => node.tagName === 'meta' && (attrs(node).get('http-equiv') ?? '').toLowerCase() === 'content-security-policy')[0];
+      requireValue(Boolean(attrs(csp ?? {}).get('content')?.includes("script-src 'self'")), `${relative} has no strict CSP`);
+      const localeBootstrap = walk(document, node => node.tagName === 'script' && attrs(node).get('src') === '/locales/bootstrap.js')[0];
+      requireValue(Boolean(localeBootstrap), `${relative} has no locale runtime bootstrap`);
+    }
+  }
+
+  const sitemap = await readFile(path.join(destination, 'sitemap.xml'), 'utf8');
+  const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
+  requireValue(locations.length === canonicalUrls.size, 'sitemap route count does not match exported public pages');
+  requireValue(!/account|authorize|signed-in/i.test(sitemap), 'sitemap contains an account route');
+  for (const url of canonicalUrls) requireValue(locations.includes(url), `sitemap is missing ${url}`);
+
+  const robots = await readFile(path.join(destination, 'robots.txt'), 'utf8');
+  for (const route of ['/account/', '/admin-accounts/', '/insights/']) requireValue(robots.includes(`Disallow: ${route}`), `robots.txt does not exclude ${route}`);
+  requireValue(robots.includes('https://codevalanche.com/sitemap.xml'), 'robots.txt has no sitemap reference');
+  const [llms, full] = await Promise.all([
+    readFile(path.join(destination, 'llms.txt'), 'utf8'),
+    readFile(path.join(destination, 'llms-full.txt'), 'utf8'),
+  ]);
+  requireValue(llms.includes('/llms-full.txt') && llms.includes('/sitemap.xml'), 'llms.txt is missing discovery links');
+  requireValue((full.match(/^## /gm) ?? []).length === canonicalUrls.size, 'llms-full.txt does not cover every public route');
+  requireValue(!/\/account\/(?:authorize|signed-in)/i.test(full), 'llms-full.txt includes an account callback route');
+  return { publicPages: canonicalUrls.size, localeAlternates: LOCALES.length };
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  const result = await validateSeoExport(path.join(ROOT, 'dist'));
+  console.log(`Verified ${result.publicPages} public routes across ${result.localeAlternates} locale variants`);
+}

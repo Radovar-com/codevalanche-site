@@ -1,0 +1,36 @@
+{
+  "preserve": [
+    "Codevalanche",
+    "Radovar",
+    "Company OS",
+    "Claude",
+    "Claude Code",
+    "Codex",
+    "Antigravity",
+    "Supabase",
+    "GitHub",
+    "GitHub Pages",
+    "Google",
+    "Apple",
+    "Windows",
+    "macOS",
+    "Linux",
+    "Android",
+    "iOS",
+    "OAuth",
+    "PKCE",
+    "API",
+    "URL",
+    "JSON",
+    "MFA",
+    "AI",
+    "Qwen"
+  ],
+  "notes": [
+    "Keep route paths, URLs, file paths, shell commands, event IDs, dates, numeric limits, product/provider names, and code identifiers unchanged.",
+    "Translate surrounding natural-language text fluently; do not translate strings that consist only of code, symbols, numbers, or identifiers.",
+    "Preserve the meaning and all conditions in privacy, account-security, consent, deletion, and service-availability copy. Do not strengthen promises or soften restrictions.",
+    "Use the standard native-language name for each platform and interface concept where the English source is plain language.",
+    "Use natural, concise UI wording rather than literal word-for-word translations."
+  ]
+}

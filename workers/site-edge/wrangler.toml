@@ -1,0 +1,9 @@
+name = "codevalanche-site-edge"
+main = "./src/index.js"
+compatibility_date = "2026-10-16"
+workers_dev = true
+
+# Set SITE_ORIGIN and SITE_BASE_PATH only after the company GitHub Pages origin
+# has been verified. Production routing is intentionally not configured here.
+[vars]
+HSTS_ENABLED = "false"

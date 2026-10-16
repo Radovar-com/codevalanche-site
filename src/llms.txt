@@ -1,0 +1,14 @@
+# Codevalanche
+
+> Codevalanche is a local-first workspace for coding agents, real repositories, visible changes and evidence-driven review. It is made by Radovar.
+
+The English site is available at `/`. Localized versions are generated for the languages listed in the footer. Account and authentication routes are private service flows and are not part of the public discovery content.
+
+## Public pages
+
+- [Home](/)
+- [Changelog](/changelog.html)
+- [Privacy and cookies](/privacy.html)
+- [Terms](/terms.html)
+- [All public page content](/llms-full.txt)
+- [Sitemap](/sitemap.xml)

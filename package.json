@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
+    "locales:extract": "node scripts/translate-site.mjs extract",
+    "locales:check": "node scripts/translate-site.mjs check",
     "test": "node --test --test-concurrency=1 scripts/*.test.mjs supabase/tests/*.test.mjs",
+    "test:locale": "node scripts/locale-browser-test.mjs",
     "test:browser": "node scripts/account-browser-test.mjs",
     "test:marketing": "node scripts/marketing-browser-test.mjs",
     "test:remote:browser": "node scripts/remote-browser-test.mjs"
@@ -17,6 +20,7 @@
   "devDependencies": {
     "@electric-sql/pglite": "0.5.8",
     "esbuild": "0.28.2",
+    "parse5": "8.0.1",
     "playwright": "1.62.0"
   },
   "engines": {

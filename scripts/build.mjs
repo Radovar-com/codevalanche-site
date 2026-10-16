@@ -5,6 +5,13 @@ import { build } from "esbuild"
 import { fileURLToPath } from "node:url"
 
 import { buildAnalytics } from "./build-analytics.mjs"
+import { applyPostbuildSecurity } from "./postbuild-security.mjs"
+import { applyLocalizedMetadata, buildLocalizedSitemap, ensureLanguagePicker, rewriteFooterLanguageLinks, rewriteLocalizedLinks } from "./locale-export.mjs"
+import { buildLlmsFull } from "./build-llms-full.mjs"
+import { validateEnglishSourceCatalog, validateLocaleCatalogs } from "./translate-site.mjs"
+import { renderTranslatedHtml } from "./localization.mjs"
+import { validateSeoExport } from "./seo-export-test.mjs"
+import { LOCALES, MARKETING_PAGES } from "../src/locales/manifest.js"
 await buildAnalytics()
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
@@ -23,14 +30,66 @@ await build({entryPoints:[path.join(source,"downloads.js")],outfile:path.join(de
 
 // Render the same navigation on every marketing page so account access cannot drift.
 const sharedHeader = await readFile(path.join(source, "partials/header.html"), "utf8")
-for (const page of ["index.html", "changelog.html", "privacy.html", "terms.html"]) {
-  const output = path.join(destination, page)
+for (const page of MARKETING_PAGES) {
+  const output = path.join(destination, page.file)
   const html = await readFile(output, "utf8")
-  const header = page === "changelog.html"
+  const header = page.file === "changelog.html"
     ? sharedHeader.replaceAll('href="/changelog.html"', 'href="/changelog.html" aria-current="page"')
     : sharedHeader
   await writeFile(output, html.replace("<!-- site-header -->", header))
 }
+
+const homeHtml = await readFile(path.join(destination, "index.html"), "utf8")
+const languagePicker = homeHtml.match(/<details class="lang-picker">[\s\S]*?<\/details>/)?.[0]
+if (!languagePicker) throw new Error("The existing footer language picker could not be found")
+await validateEnglishSourceCatalog(root)
+await validateLocaleCatalogs(root)
+
+const englishPages = new Map()
+const includeLocaleBootstrap = html => html.includes('src="/locales/bootstrap.js"')
+  ? html
+  : html.replace("</body>", '<script type="module" src="/locales/bootstrap.js"></script></body>')
+for (const page of MARKETING_PAGES) {
+  const output = path.join(destination, page.file)
+  let html = await readFile(output, "utf8")
+  html = ensureLanguagePicker(html, languagePicker)
+  html = rewriteLocalizedLinks(html, "en")
+  html = rewriteFooterLanguageLinks(html, page.path, "en")
+  html = applyLocalizedMetadata(html, page.path, "en")
+  html = includeLocaleBootstrap(html)
+  await writeFile(output, html)
+  englishPages.set(page.file, html)
+}
+
+for (const locale of LOCALES.filter(item => item.slug)) {
+  const catalog = JSON.parse(await readFile(path.join(source, "locales", `${locale.slug}.json`), "utf8"))
+  for (const page of MARKETING_PAGES) {
+    let html = renderTranslatedHtml(englishPages.get(page.file), catalog, locale.tag)
+    html = rewriteLocalizedLinks(html, locale.tag)
+    html = rewriteFooterLanguageLinks(html, page.path, locale.tag)
+    html = applyLocalizedMetadata(html, page.path, locale.tag)
+    html = includeLocaleBootstrap(html)
+    const relativeOutput = path.join(locale.slug, page.path === "/" ? "index.html" : page.file)
+    const output = path.join(destination, relativeOutput)
+    await mkdir(path.dirname(output), { recursive: true })
+    await writeFile(output, html)
+  }
+}
+await writeFile(path.join(destination, "sitemap.xml"), buildLocalizedSitemap())
+for (const privateSource of ["en.json", "glossary.json", "runtime-strings.en.json"]) {
+  await rm(path.join(destination, "locales", privateSource), { force: true })
+}
+// Partials are build inputs, not standalone public documents.
+await rm(path.join(destination, "partials"), { recursive: true, force: true })
+
+for (const page of ["account/index.html", "account/authorize/index.html", "account/signed-in/index.html"]) {
+  const output = path.join(destination, page)
+  let html = await readFile(output, "utf8")
+  html = html.replace("</head>", '<script src="/locales/preload.js"></script></head>')
+  if (page === "account/signed-in/index.html") html = html.replace("</body>", '<script type="module" src="/locales/bootstrap.js"></script></body>')
+  await writeFile(output, html)
+}
+const llms = await buildLlmsFull(destination)
 
 await build({ entryPoints: [path.join(source, "account/app.js")], outfile: path.join(destination, "account/app.js"), bundle: true, format: "esm", minify: true, target: ["es2022"], legalComments: "eof" })
 // Version the completed bundle, styles and public configuration so a new page
@@ -46,4 +105,6 @@ for (const page of ["account/index.html", "account/authorize/index.html"]) {
   for (const [asset, version] of versions) html = html.replaceAll(`"${asset}"`, `"${asset}?v=${version}"`)
   await writeFile(output, html)
 }
-console.log(`Built static site to ${destination}`)
+const security = await applyPostbuildSecurity(destination)
+const seo = await validateSeoExport(destination)
+console.log(`Built static site to ${destination} (${security.htmlFiles} HTML pages passed CSP; ${seo.publicPages} public routes; ${llms.pages} discovery pages)`)

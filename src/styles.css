@@ -525,6 +525,8 @@ b, strong { font-weight: 600; }
 .lang-panel-head { margin: 0 0 14px; color: var(--muted); font-size: 12.5px; max-width: 52ch; }
 .lang-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin: 0; padding: 0; list-style: none; }
 .lang-grid li { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 7px 10px; border-radius: 8px; color: var(--ink); font-size: 12.5px; white-space: nowrap; }
+.lang-grid li a { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; width: 100%; color: inherit; text-decoration: none; }
+.lang-grid li a:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 4px; }
 .lang-grid li:hover { background: rgba(255,255,255,.04); }
 .lang-grid em { color: var(--soft); font-family: var(--font-mono); font-size: 9px; font-style: normal; letter-spacing: .04em; }
 .lang-grid li.is-site { background: rgba(102,239,230,.07); }

@@ -9,6 +9,13 @@
         mobileNav?.querySelectorAll(".mobile-nav-panel a").forEach((link) => link.addEventListener("click", () => mobileNav.removeAttribute("open")))
         const langPicker = document.querySelector(".lang-picker")
         document.addEventListener("click", (event) => {
+          const link = event.target.closest?.("a[data-locale]")
+          const locale = link?.dataset.locale
+          if (!locale || !/^(en|ar|de|es|fr|hi|id|it|ja|ko|pt-br|ro|ru|tr|vi|zh-hans|zh-hant)$/.test(locale)) return
+          const secure = location.protocol === "https:" ? "; Secure" : ""
+          try { document.cookie = `codevalanche_language=${encodeURIComponent(locale)}; Max-Age=31536000; Path=/; SameSite=Lax${secure}` } catch {}
+        })
+        document.addEventListener("click", (event) => {
           if (mobileNav?.hasAttribute("open") && !mobileNav.contains(event.target)) mobileNav.removeAttribute("open")
           if (langPicker?.hasAttribute("open") && !langPicker.contains(event.target)) langPicker.removeAttribute("open")
         })
@@ -21,13 +28,15 @@
         const applyTheme = (theme, persist) => {
           document.documentElement.setAttribute("data-theme", theme)
           if (persist) { try { localStorage.setItem(THEME_KEY, theme) } catch {} }
-          themeToggle?.setAttribute("aria-label", theme === "dark" ? "Switch to light theme" : "Switch to dark theme")
+          const themeLabel = theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
+          themeToggle?.setAttribute("aria-label", window.CodevalancheLocale?.translate(themeLabel) ?? themeLabel)
           document.querySelector("meta[name='theme-color']")?.setAttribute("content", theme === "dark" ? "#07090b" : "#f7f9fa")
           window.dispatchEvent(new CustomEvent("codevalanche-theme"))
         }
         themeToggle?.addEventListener("click", () => { const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"; applyTheme(next, true) })
         const lightQuery = window.matchMedia("(prefers-color-scheme: light)")
         lightQuery.addEventListener?.("change", () => { try { if (!localStorage.getItem(THEME_KEY)) applyTheme(lightQuery.matches ? "light" : "dark", false) } catch {} })
+        window.addEventListener("codevalanche-locale-ready", () => applyTheme(document.documentElement.getAttribute("data-theme") || "dark", false))
         applyTheme(document.documentElement.getAttribute("data-theme") || "dark", false)
       })()
 
