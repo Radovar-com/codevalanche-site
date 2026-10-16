@@ -1,5 +1,6 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.57.4';
 import { allowedOrigin, normalizeProfile, readClaims } from './validation.mjs';
+import { validateAccountRequest } from './schemas.mjs';
 
 const url = Deno.env.get('SUPABASE_URL')!;
 const service = createClient(url, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!, {auth:{persistSession:false,autoRefreshToken:false}});
@@ -34,6 +35,7 @@ Deno.serve(async (req) => {
    try{body=JSON.parse(new TextDecoder().decode(bytes));}catch{return respond({error:'Invalid JSON'},400);}
    if(!body || typeof body!=='object' || Array.isArray(body)) return respond({error:'Invalid body'},400);
   }
+  const invalid=validateAccountRequest(body);if(invalid)return respond({error:invalid.error},invalid.status);
   const saveState=async (patch:Record<string,unknown>, targetId=user.id)=>{ checked(await service.from('codevalanche_account_state').upsert({user_id:targetId},{onConflict:'user_id',ignoreDuplicates:true})); checked(await service.from('codevalanche_account_state').update({...patch,updated_at:new Date().toISOString()}).eq('user_id',targetId)); };
   switch(body.action) {
    case 'get-account': {

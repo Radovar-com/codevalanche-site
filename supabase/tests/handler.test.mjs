@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {stripTypeScriptTypes} from 'node:module';
-import {allowedOrigin,normalizeProfile,readClaims} from '../functions/codevalanche-account/validation.mjs';
+import * as validation from '../functions/codevalanche-account/validation.mjs';
+import * as schemas from '../functions/codevalanche-account/schemas.mjs';
 const userId='11111111-1111-4111-8111-111111111111', sessionId='22222222-2222-4222-8222-222222222222';
 let user={id:userId,email:'test@example.test',email_confirmed_at:'2026-09-08',user_metadata:{codevalanche_admin:true},app_metadata:{},identities:[]};
 let active=true,blocked=false,invalid=false,writes=[];
@@ -10,7 +11,10 @@ const db={auth:{getUser:async()=>({data:{user:invalid?null:user},error:invalid?n
 let handler;
 const source=await readFile(new URL('../functions/codevalanche-account/index.ts',import.meta.url),'utf8');
 const runnable=stripTypeScriptTypes(source.replace(/^import .*;\r?\n/gm,''));
-new Function('createClient','Deno','allowedOrigin','normalizeProfile','readClaims',runnable)(()=>db,{env:{get:()=> 'test'},serve:fn=>{handler=fn}},allowedOrigin,normalizeProfile,readClaims);
+// Inject every name the handler imports from its own sibling modules.
+const local={...validation,...schemas};
+const names=[...source.matchAll(/^import \{([^}]+)\} from '\.\/[^']+';/gm)].flatMap(m=>m[1].split(',').map(n=>n.trim()).filter(Boolean));
+new Function('createClient','Deno',...names,runnable)(()=>db,{env:{get:()=> 'test'},serve:fn=>{handler=fn}},...names.map(n=>local[n]));
 const jwt=`e30.${Buffer.from(JSON.stringify({sub:userId,session_id:sessionId})).toString('base64url')}.signature`;
 const request=(action,extras={})=>new Request('https://example.test',{method:'POST',headers:{authorization:`Bearer ${jwt}`,'content-type':'application/json',origin:'https://codevalanche.com'},body:JSON.stringify({action,...extras})});
 test('get-account returns only the verified subject and session',async()=>{const r=await handler(request('get-account'));const body=await r.json();assert.equal(r.status,200);assert.equal(body.userId,userId);assert.equal(body.session_id,sessionId);assert.equal(body.sessions[0].current,true)});
@@ -23,3 +27,5 @@ test('invalid authentication never reaches account response',async()=>{invalid=t
 test('oversized request rejected',async()=>{assert.equal((await handler(request('get-account',{junk:'x'.repeat(17000)}))).status,413)});
 
 test('sign-out-current uses provider local revocation',async()=>{let scope;db.auth.admin.signOut=async(token,value)=>{scope=value;return {error:null}};assert.equal((await handler(request('sign-out-current'))).status,200);assert.equal(scope,'local')});
+test('malformed profile is refused before any account write or Auth admin call',async()=>{writes=[];let called=false;db.auth.admin.updateUserById=async()=>{called=true;return {error:null}};const r=await handler(request('update-profile',{displayName:'a\u0000b'}));assert.equal(r.status,400);assert.deepEqual(await r.json(),{error:'Invalid profile'});assert.equal(called,false);assert.equal(writes.length,0)});
+test('every action is schema-checked: wrong field types answer 400 without writes',async()=>{writes=[];for(const [action,extras] of [['consent',{analytics:'true'}],['feedback',{category:'bug',message:{}}],['event',{eventId:7,eventName:'app_opened',platform:'web',consent:true}]]){assert.equal((await handler(request(action,extras))).status,400,action)}assert.equal(writes.length,0)});
