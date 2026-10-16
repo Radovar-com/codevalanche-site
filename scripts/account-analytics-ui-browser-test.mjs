@@ -14,7 +14,7 @@ const json=(res,body,status=200)=>{res.statusCode=status;res.setHeader('Content-
 const server=createServer(async(req,res)=>{
  try{
   const pathname=new URL(req.url,'http://localhost').pathname;
-  if(pathname==='/config.js'){res.setHeader('Content-Type','text/javascript');res.end(`window.CODEVALANCHE_CONFIG={supabaseUrl:location.origin,accountOrigin:location.origin,supabasePublishableKey:'fixture_public'};window.CODEVALANCHE_ANALYTICS={enabled:true,baseUrl:location.origin+'/collector',pageVersion:'test_1'};`);return;}
+  if(pathname==='/config.js'){res.setHeader('Content-Type','text/javascript');res.end(`window.CODEVALANCHE_CONFIG={supabaseUrl:location.origin,accountOrigin:location.origin,supabasePublishableKey:'fixture_public',accountServer:'v2'};window.CODEVALANCHE_ANALYTICS={enabled:true,baseUrl:location.origin+'/collector',pageVersion:'test_1'};`);return;}
   if(pathname==='/account/app.js'){res.setHeader('Content-Type','text/javascript');res.end(bundle.outputFiles[0].text);return;}
   if(pathname.startsWith('/auth/')||pathname.startsWith('/functions/')||pathname.startsWith('/collector/')){
    let raw='';for await(const part of req)raw+=part;const body=raw?JSON.parse(raw):{};

@@ -2,7 +2,7 @@
 
 The additive v2 code is local implementation. Before rollout, the operator must provide separate staging receipts for database privileges, current Auth schema, OAuth clients and `aal2`/`amr` propagation, direct provider endpoints, CAPTCHA, SMTP, and recovery in another browser. No production changes are made by these scripts.
 
-`supabase/scripts/auth-policy.json` is desired configuration, not a provider snapshot. Run `verify-auth-policy.mjs` on a sanitized actual snapshot; its output contains missing controls only. Recovery expiry is 900 seconds, new passwords at least 15 Unicode characters, exact HTTPS callbacks, distinct desktop/iOS/Android clients, and provider CAPTCHA. A frontend challenge or gateway rate limit cannot protect direct Auth requests. Keep refresh capacity separate from password ceilings. Failed password attempts never suspend accounts or revoke legitimate sessions.
+`supabase/scripts/auth-policy.json` is desired configuration, not a provider snapshot. Run `verify-auth-policy.mjs` on a sanitized actual snapshot; its output contains missing controls only. Recovery expiry is 900 seconds, new passwords at least 12 Unicode characters (same as `minimum_password_length` in supabase/config.toml), exact HTTPS callbacks, distinct desktop/iOS/Android clients, and provider CAPTCHA. A frontend challenge or gateway rate limit cannot protect direct Auth requests. Keep refresh capacity separate from password ceilings. Failed password attempts never suspend accounts or revoke legitimate sessions.
 
 Provider MFA/password verification hooks may require a plan capability. Do not purchase or enable them automatically. Record missing capability in the coverage report. No hook inference can substitute for successful provider session creation.
 

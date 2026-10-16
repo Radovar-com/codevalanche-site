@@ -14,7 +14,7 @@ test('actual account UI saves with both refused or capture unavailable, and emit
   const context=await browser.newContext(),page=await context.newPage(),events=[],receipts=[],calls=[],errors=[];page.on('pageerror',e=>errors.push(e.message));
   await context.addInitScript(()=>{
    const user={id:'11111111-1111-4111-8111-111111111111',email:'fixture@example.test',identities:[]},session={user,access_token:'fixture-auth-only',expires_at:Date.now()/1000+3600};
-   window.CODEVALANCHE_CONFIG={supabaseUrl:'https://account.fixture.invalid',supabasePublishableKey:'public-fixture'};
+   window.CODEVALANCHE_CONFIG={supabaseUrl:'https://account.fixture.invalid',supabasePublishableKey:'public-fixture',accountServer:'v2'};
    window.CODEVALANCHE_ANALYTICS={enabled:true,baseUrl:'https://collector.fixture.invalid/v1',pageVersion:'test_1'};
    window.fixtureAuth={auth:{getSession:async()=>({data:{session},error:null}),onAuthStateChange(){},signOut:async()=>({error:null})}};
   });

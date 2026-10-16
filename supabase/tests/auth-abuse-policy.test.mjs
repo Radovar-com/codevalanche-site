@@ -1,6 +1,6 @@
 import test from 'node:test';import assert from 'node:assert/strict';
 import {validateAuthPolicy,publicAuthError} from '../scripts/verify-auth-policy.mjs';
-const desired={captchaEnabled:true,passwordMinLength:15,recoveryExpirySeconds:900,customSmtpConfigured:true,leakedPasswordProtection:true,rateLimits:{emailSent:30,tokenVerify:30,signIn:30,tokenRefresh:150},redirectAllowlist:['https://codevalanche.com/account/'],oauthClients:['ios','android','desktop'],trustedIngress:true};
+const desired={captchaEnabled:true,passwordMinLength:12,recoveryExpirySeconds:900,customSmtpConfigured:true,leakedPasswordProtection:true,rateLimits:{emailSent:30,tokenVerify:30,signIn:30,tokenRefresh:150},redirectAllowlist:['https://codevalanche.com/account/'],oauthClients:['ios','android','desktop'],trustedIngress:true};
 test('provider CAPTCHA absence is a gate even with frontend CAPTCHA',()=>{const r=validateAuthPolicy({...desired,captchaEnabled:false,frontendCaptcha:true});assert.equal(r.ok,false);assert.ok(r.missingControls.includes('provider_captcha'))});
 test('OTP lifetime cannot exceed fifteen minutes',()=>assert.equal(validateAuthPolicy({...desired,recoveryExpirySeconds:3600}).ok,false));
 test('refresh quota cannot be reduced to simulate password protection',()=>assert.equal(validateAuthPolicy({...desired,rateLimits:{...desired.rateLimits,tokenRefresh:5}}).ok,false));

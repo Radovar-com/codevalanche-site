@@ -1,7 +1,9 @@
+// New passwords follow the same 12-character minimum as Supabase Auth (supabase/config.toml).
+import { MIN_PASSWORD_LENGTH } from './helpers.js'
 const origins=['https://codevalanche.com','https://www.codevalanche.com','https://account.codevalanche.com']
 export const recoveryNotice=()=> 'If an account exists for this email, you will receive instructions.'
 export function validateNewPassword(password) {
- if(typeof password!=='string'||Array.from(password).length<15)throw new Error('Choose a password with at least 15 characters.')
+ if(typeof password!=='string'||Array.from(password).length<MIN_PASSWORD_LENGTH)throw new Error(`Choose a password with at least ${MIN_PASSWORD_LENGTH} characters.`)
  return password
 }
 export function recoveryCallback(href,{allowLoopback=false}={}) {
