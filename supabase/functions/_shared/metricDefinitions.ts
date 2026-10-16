@@ -29,5 +29,5 @@ export const VIEW_METRICS = Object.freeze({overview:['page_views','sessions','br
  * A registry entry alone does not imply that section exists on every page. */
 export const PAGE_SECTION_SCOPE:Readonly<Record<string,Readonly<Record<string,readonly string[]>>>>=Object.freeze({
  codevalanche:{home:['hero','product_principle','product','accounts','parallel','workflow','details','showcase','companion','privacy_principles','download','proof','faq','footer']},
- radovar:{home:['intro','codevalanche','company','resources','footer'],docs:['intro','resources','footer'],security:['intro','resources','footer'],privacy:['intro','resources','footer'],terms:['intro','resources','footer'],press:['intro','resources','footer'],releases_archive:['intro','resources','footer'],changelog_archive:['intro','resources','footer'],not_found:['intro','footer']}
+ radovar:{home:['intro','codevalanche','company','resources','footer'],docs:['intro','resources','footer'],security:['intro','resources','footer'],privacy:['intro','resources','footer'],terms:['intro','resources','footer'],press:['intro','company','resources','footer'],releases_archive:['intro','resources','footer'],changelog_archive:['intro','resources','footer'],company:['intro','company','codevalanche','resources','footer'],codevalanche:['intro','codevalanche','resources','footer'],not_found:['intro','footer']}
 });

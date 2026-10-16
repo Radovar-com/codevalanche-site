@@ -1,9 +1,9 @@
 {
   "sdkVersion": "1.0.0",
   "contractVersion": 1,
-  "sha256": "a17779e67941738f4e392f446236201d8753d3ddb48d4f664b82f47d795f599b",
-  "sourceSha256": "b0273ddecc3c4c87652321138d1908b40e3130b5bd85d9999937a8edbac1bb9f",
-  "bytes": 113890,
+  "sha256": "32fc4931193e93ea65ab9d1c95230c8f69dfd16edd20987521965081ed88e924",
+  "sourceSha256": "31a0094e840a6710ee7b252bd9e3c2a51ae6d72e7ca4e55b5520ac11395ceb08",
+  "bytes": 113915,
   "format": "esm",
   "asset": "owned-analytics.js"
 }
