@@ -392,7 +392,7 @@ test('actual app Google settings deadline includes a streamed partial body and p
     else if (url.pathname.endsWith('/settings')) {
       settingsRequests++
       if (settingsRequests === 1) { response.flushHeaders(); response.write('{"external":'); bodyStarted() }
-      else response.end(JSON.stringify({ external: { google: false } }))
+      else setTimeout(() => response.end(JSON.stringify({ external: { google: false } })), 100)
     } else response.end('{}')
   })
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve))
@@ -411,7 +411,13 @@ test('actual app Google settings deadline includes a streamed partial body and p
   assert.match(await page.locator('#status').innerText(), /try again/i)
   assert.equal(await page.evaluate(() => localStorage.getItem('sb-127-auth-token')), null)
   await page.locator('#google-signin').click()
-  await until(page, () => document.getElementById('status').textContent.includes('Google sign-in is not available yet') && !document.getElementById('google-signin').disabled)
+  // The retry uses real HTTP I/O; advancing fake time here could abort a healthy
+  // response before the server has had time to send its body.
+  const retryDeadline = Date.now() + 5000
+  while (!await page.evaluate(() => document.getElementById('status').textContent.includes('Google sign-in is not available yet') && !document.getElementById('google-signin').disabled)) {
+    assert.ok(Date.now() < retryDeadline, 'healthy Google settings retry must settle within five real seconds')
+    await new Promise(resolve => setTimeout(resolve, 10))
+  }
   assert.equal(settingsRequests, 2, 'a new click must finish a fresh settings request after timeout')
 })
 
