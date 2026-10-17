@@ -1,10 +1,39 @@
 (() => {
  const track=(name,properties)=>window.CodevalancheAnalytics?.track(name,properties);
- const featureIds={workspace:'project',runtime:'agents',review:'review',local:'local_first'};
-        document.querySelectorAll(".feature-tab").forEach((button) => {
-          button.addEventListener("click", () => { const feature = button.getAttribute("data-feature"); const changed = button.getAttribute("aria-selected") !== "true"; document.querySelectorAll(".feature-tab").forEach((item) => { const active = item === button; item.classList.toggle("is-active", active); item.setAttribute("aria-selected", String(active)); item.tabIndex = active ? 0 : -1 }); document.querySelectorAll(".feature-panel").forEach((panel) => { panel.hidden = panel.getAttribute("data-panel") !== feature; panel.classList.toggle("is-active", panel.getAttribute("data-panel") === feature) }); const featureId=featureIds[feature]; if (featureId && changed) track("feature_selected", { feature_id: featureId, selection_id: featureId }) })
-          button.addEventListener("keydown", (event) => { if (!["ArrowDown", "ArrowUp", "ArrowRight", "ArrowLeft", "Home", "End"].includes(event.key)) return; const buttons = [...document.querySelectorAll(".feature-tab")]; const index = buttons.indexOf(button); const forward = event.key === "ArrowDown" || event.key === "ArrowRight"; const next = event.key === "Home" ? 0 : event.key === "End" ? buttons.length - 1 : (index + (forward ? 1 : -1) + buttons.length) % buttons.length; event.preventDefault(); buttons[next]?.focus(); buttons[next]?.click() })
-        })
+ const featureIds={brief:'task_brief',execution:'task_execution',approval:'command_approval',review:'review'};
+        document.querySelectorAll('.feature-tabs').forEach(group => {
+          const buttons = [...group.querySelectorAll('.feature-tab')];
+          const panels = buttons.map(button => document.getElementById(button.getAttribute('aria-controls')));
+          buttons.forEach(button => {
+            button.addEventListener('click', () => {
+              const changed = button.getAttribute('aria-selected') !== 'true';
+              buttons.forEach((item, index) => {
+                const active = item === button;
+                item.classList.toggle('is-active', active);
+                item.setAttribute('aria-selected', String(active));
+                item.tabIndex = active ? 0 : -1;
+                if (panels[index]) {
+                  panels[index].hidden = !active;
+                  panels[index].classList.toggle('is-active', active);
+                }
+              });
+              const featureId = featureIds[button.dataset.feature];
+              if (changed && featureId) track('feature_selected', {feature_id:featureId, selection_id:featureId});
+            });
+            button.addEventListener('keydown', event => {
+              const vertical = group.getAttribute('aria-orientation') === 'vertical';
+              const arrows = vertical ? ['ArrowUp','ArrowDown'] : ['ArrowLeft','ArrowRight'];
+              if (!['Home','End',...arrows].includes(event.key)) return;
+              const rtl = getComputedStyle(group).direction === 'rtl';
+              const forward = event.key === (vertical ? 'ArrowDown' : rtl ? 'ArrowLeft' : 'ArrowRight');
+              const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1
+                : (buttons.indexOf(button) + (forward ? 1 : -1) + buttons.length) % buttons.length;
+              event.preventDefault();
+              buttons[next]?.focus();
+              buttons[next]?.click();
+            });
+          });
+        });
         const mobileNav = document.querySelector(".mobile-nav")
         mobileNav?.querySelectorAll(".mobile-nav-panel a").forEach((link) => link.addEventListener("click", () => mobileNav.removeAttribute("open")))
         const langPicker = document.querySelector(".lang-picker")
@@ -86,7 +115,10 @@
             off.width = w
             off.height = h
             const octx = off.getContext("2d")
-            const lines = ["Agents.", "One home."]
+            const lines = ["Agents.", "One home."].map((line) => window.CodevalancheLocale?.translate(line) ?? line)
+            const rtl = getComputedStyle(wrap).direction === "rtl"
+            octx.direction = rtl ? "rtl" : "ltr"
+            octx.textAlign = rtl ? "right" : "left"
             let size = Math.floor(h / 2.6)
             octx.textBaseline = "alphabetic"
             const fontFor = (s) => `300 ${s}px Newsreader, Georgia, serif`
@@ -96,7 +128,7 @@
             const lineGap = Math.round(size * 1.02)
             const startY = Math.round((h - lineGap * (lines.length - 1) + size * 0.62) / 2)
             octx.fillStyle = "#fff"
-            lines.forEach((line, i) => octx.fillText(line, 6, startY + i * lineGap))
+            lines.forEach((line, i) => octx.fillText(line, rtl ? w - 6 : 6, startY + i * lineGap))
             const gap = Math.max(3, Math.round(size / 26))
             const data = octx.getImageData(0, 0, w, h).data
             particles = []
@@ -145,6 +177,7 @@
           let resizeTimer = 0
           window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { build(); if (running) { stop(); start() } }, 180) })
           window.addEventListener("codevalanche-theme", () => build())
+          window.addEventListener("codevalanche-locale-ready", () => build())
           wrap.addEventListener("pointermove", (event) => { const rect = canvas.getBoundingClientRect(); pointer.x = event.clientX - rect.left; pointer.y = event.clientY - rect.top })
           wrap.addEventListener("pointerleave", () => { pointer.x = -9999; pointer.y = -9999 })
           if ("IntersectionObserver" in window) {

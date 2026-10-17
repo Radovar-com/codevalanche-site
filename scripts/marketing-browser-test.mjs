@@ -3,6 +3,7 @@ import { createServer } from 'node:http';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import { MARKETING_PAGES } from '../src/locales/manifest.js';
 
 const root = path.resolve('dist');
 const artifacts = path.resolve('../_build/site-redesign');
@@ -14,7 +15,7 @@ const server = createServer(async (req, res) => {
   if (!file.startsWith(root + path.sep)) { res.writeHead(400); res.end(); return; }
   try {
     const data = await readFile(file);
-    const types = { '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.png': 'image/png' };
+    const types = { '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.png': 'image/png', '.webp':'image/webp', '.json':'application/json' };
     res.setHeader('Content-Type', types[path.extname(file)] || 'text/html');
     res.end(data);
   } catch { res.writeHead(404); res.end(); }
@@ -50,10 +51,14 @@ try {
   for (const width of [1440, 1024, 768, 390, 320]) {
     for (const theme of ['light', 'dark']) {
       const page = await browser.newPage({ viewport: { width, height: width > 900 ? 1000 : 844 }, reducedMotion: 'reduce' });
+      await page.route('https://**/*', route => route.abort());
       page.on('pageerror', error => errors.push(error.message));
       await page.addInitScript(theme => localStorage.setItem('codevalanche_theme', theme), theme);
       await page.context().addCookies([{ name: 'codevalanche_consent', value: 'declined', url: origin }]);
       await page.goto(origin);
+      await page.waitForFunction(() => window.CodevalancheAnalytics?.consentManager);
+      const bannerDecline = page.getByRole('button', {name:'Decline',exact:true});
+      if (await bannerDecline.isVisible()) await bannerDecline.click();
       await page.evaluate(() => document.fonts.ready);
       assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), theme);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true, `Home overflow ${width}/${theme}`);
@@ -62,13 +67,13 @@ try {
       const signIn = page.locator('.nav-signin');
       assert.equal(await signIn.isVisible(), true);
       assert.ok((await signIn.boundingBox()).x >= 0);
-      const primary = page.locator('.hero-actions .button-primary');
+      const primary = page.locator('.hero .hero-actions .button-primary');
       assert.ok((await primary.boundingBox()).y < 844, 'Primary CTA in initial viewport');
       // Tabs support click and keyboard; FAQ expands in place.
-      await page.getByRole('tab', { name: 'Review 03' }).click();
+      await page.locator('#tab-review').click();
       assert.equal(await page.locator('#panel-review').isVisible(), true);
-      await page.getByRole('tab', { name: 'Review 03' }).press('Home');
-      assert.equal(await page.locator('#panel-workspace').isVisible(), true);
+      await page.locator('#tab-review').press('Home');
+      assert.equal(await page.locator('#panel-brief').isVisible(), true);
       await page.locator('.faq-list summary').first().click();
       assert.equal(await page.locator('.faq-list details').first().getAttribute('open'), '');
       await page.locator('.faq-list summary').first().click();
@@ -86,9 +91,9 @@ try {
       if (width <= 900) {
         await page.locator('.mobile-nav summary').click();
         await page.locator('.mobile-nav-panel a[href="/changelog.html"]').click();
-      } else await page.locator('.desktop-nav a[href="/changelog.html"]').click();
+      } else await page.locator('footer a[href="/changelog.html"]').click();
       assert.equal(new URL(page.url()).pathname, '/changelog.html');
-      for (const route of ['/changelog.html', '/privacy.html', '/terms.html']) {
+      for (const {path:route} of MARKETING_PAGES.filter(page => page.path !== '/')) {
         await page.goto(origin + route);
         await page.locator('[data-theme-toggle]').click();
         assert.equal(await page.evaluate(() => document.documentElement.dataset.theme), theme === 'light' ? 'dark' : 'light', `Theme toggle ${route}`);
@@ -101,7 +106,7 @@ try {
       await page.locator('.nav-signin').click();
       assert.equal(new URL(page.url()).pathname, '/account/');
       await page.getByRole('heading', { name: 'Sign in', exact: true }).waitFor();
-      results.push({ width, theme, minimumContrast: contrast.minimum, publicPages: 4, accountNavigation: 'pass' });
+      results.push({ width, theme, minimumContrast: contrast.minimum, publicPages: MARKETING_PAGES.length, accountNavigation: 'pass' });
       await page.close();
     }
   }
@@ -125,5 +130,5 @@ try {
   assert.deepEqual(errors, []);
   await writeFile(path.join(artifacts, 'verification.json'), JSON.stringify({ results, errors, consent: 'pass', tabs: 'pass', faq: 'pass' }, null, 2));
   console.log(JSON.stringify(results));
-  console.log('PASS: 10 viewport/theme combinations, 4 public pages, account navigation, contrast, tabs, FAQ, consent, no page errors.');
+  console.log(`PASS: 10 viewport/theme combinations, ${MARKETING_PAGES.length} public pages, account navigation, contrast, tabs, FAQ, consent, no page errors.`);
 } finally { await browser.close(); server.close(); }

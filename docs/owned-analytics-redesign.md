@@ -1,5 +1,7 @@
 # Păstrarea analytics la redesign — Codevalanche și Radovar
 
+Pentru paginile de produs, registrul rutelor, cele 17 traduceri și stările de download consultă și [ghidul de mentenanță al website-ului](product-website-maintenance.md).
+
 Acest playbook se aplică oamenilor și agenților care schimbă oricare site. Citește și `AGENTS.md` din fiecare repo. Backendul, SDK-ul comun, CMP-ul și rapoartele Company OS sunt reutilizabile; legăturile UI sunt explicite și trebuie păstrate sau reconectate la fiecare redesign. Istoricul nu se resetează pentru a schimba aspectul.
 
 ## Hosting și backend

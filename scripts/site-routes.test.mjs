@@ -52,3 +52,41 @@ test('footer locale targets preserve the current route and English strips the lo
   assert.equal(routeModule.localizedMarketingPath('/account/authorize/', 'it'), '/');
   assert.equal(routeModule.localizedMarketingPath('/account.html', 'it'), '/');
 });
+
+const directoryPages = [
+  ['/how-it-works/', 'how_it_works'], ['/agents/', 'agents'],
+  ['/features/multiple-accounts/', 'multiple_accounts'], ['/local-ai/', 'local_ai'],
+  ['/docs/', 'docs'], ['/download/', 'download'], ['/security/', 'security'],
+];
+
+test('directory routes and index aliases retain their canonical slash in every locale', () => {
+  for (const [pathname, pageId] of directoryPages) {
+    for (const locale of LOCALES) {
+      const prefix = locale.slug ? `/${locale.slug}` : '';
+      for (const alias of [pathname, pathname.slice(0, -1), `${pathname}index.html`]) {
+        assert.deepEqual(routeModule.resolveMarketingRoute(`${prefix}${alias}`), { locale: locale.tag, pathname, pageId }, `${prefix}${alias}`);
+        assert.equal(routeModule.localizedMarketingPath(`${prefix}${alias}`, 'ar'), `/ar${pathname}`);
+        assert.equal(routeModule.localizedMarketingPath(`${prefix}${alias}`, 'en'), pathname);
+      }
+    }
+  }
+});
+
+test('page registry lists exactly eleven unique canonical public routes and source files', () => {
+  const pages = routeModule.MARKETING_PAGES;
+  assert.equal(pages.length, 11);
+  for (const key of ['path', 'file', 'pageId']) assert.equal(new Set(pages.map(page => page[key])).size, pages.length, `unique ${key}`);
+  for (const [pathname, pageId] of directoryPages) {
+    assert.deepEqual(pages.find(page => page.pageId === pageId), { path: pathname, file: `${pathname.slice(1)}index.html`, pageId, priority: '0.8' });
+  }
+});
+
+test('home aliases, legacy html routes and account boundaries retain their prior meaning', () => {
+  for (const alias of ['/', '/index.html', '/it', '/it/', '/it/index.html']) {
+    assert.equal(routeModule.resolveMarketingRoute(alias)?.pathname, '/');
+  }
+  assert.deepEqual(routeModule.resolveMarketingRoute('/ar/account.html'), { locale: 'ar', pathname: '/account.html', pageId: 'account_entry_legacy' });
+  for (const pathname of ['/account/', '/account/index.html', '/account/authorize/', '/it/account/authorize/', '/ar/account/signed-in/index.html', '/unknown/', '/it/agents/extra/', '/it/features//multiple-accounts/', '/it/agents/index.html/extra']) {
+    assert.equal(routeModule.resolveMarketingRoute(pathname), null, pathname);
+  }
+});

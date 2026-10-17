@@ -26,6 +26,18 @@ function requireValue(condition, message) {
   if (!condition) throw new Error(`SEO export validation failed: ${message}`);
 }
 
+export function validateSitemapLocations(sitemap, canonicalUrls) {
+  const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
+  requireValue(locations.length === canonicalUrls.size, 'sitemap route count does not match exported public pages');
+  const localeSlugs = new Set(LOCALES.filter(locale => locale.slug).map(locale => locale.slug));
+  for (const location of locations) {
+    const segments = new URL(location).pathname.toLowerCase().split('/').filter(Boolean);
+    if (localeSlugs.has(segments[0])) segments.shift();
+    requireValue(!/^(?:account(?:\.html)?|authorize|signed-in|admin-accounts|insights)$/.test(segments[0] ?? ''), 'sitemap contains an account route');
+  }
+  for (const url of canonicalUrls) requireValue(locations.includes(url), `sitemap is missing ${url}`);
+}
+
 export async function validateSeoExport(destination) {
   const canonicalUrls = new Set();
   for (const page of MARKETING_PAGES) {
@@ -79,10 +91,7 @@ export async function validateSeoExport(destination) {
   }
 
   const sitemap = await readFile(path.join(destination, 'sitemap.xml'), 'utf8');
-  const locations = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(match => match[1]);
-  requireValue(locations.length === canonicalUrls.size, 'sitemap route count does not match exported public pages');
-  requireValue(!/account|authorize|signed-in/i.test(sitemap), 'sitemap contains an account route');
-  for (const url of canonicalUrls) requireValue(locations.includes(url), `sitemap is missing ${url}`);
+  validateSitemapLocations(sitemap, canonicalUrls);
 
   const robots = await readFile(path.join(destination, 'robots.txt'), 'utf8');
   for (const route of ['/account/', '/admin-accounts/', '/insights/']) requireValue(robots.includes(`Disallow: ${route}`), `robots.txt does not exclude ${route}`);
