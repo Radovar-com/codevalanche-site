@@ -85,7 +85,7 @@ export async function validateSeoExport(destination) {
       requireValue(webPages.some(item => item['@id'] === `${canonicalUrl}#webpage` && item.url === canonicalUrl && item.inLanguage === locale.tag), `${relative} is missing route WebPage schema`);
       const csp = walk(document, node => node.tagName === 'meta' && (attrs(node).get('http-equiv') ?? '').toLowerCase() === 'content-security-policy')[0];
       requireValue(Boolean(attrs(csp ?? {}).get('content')?.includes("script-src 'self'")), `${relative} has no strict CSP`);
-      const localeBootstrap = walk(document, node => node.tagName === 'script' && attrs(node).get('src') === '/locales/bootstrap.js')[0];
+      const localeBootstrap = walk(document, node => node.tagName === 'script' && (attrs(node).get('src') ?? '').split('?')[0] === '/locales/bootstrap.js')[0];
       requireValue(Boolean(localeBootstrap), `${relative} has no locale runtime bootstrap`);
     }
   }
