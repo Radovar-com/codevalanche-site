@@ -66,6 +66,20 @@ test('catalog request failure retains server-rendered Arabic page and saves its 
   assert.match(document.cookie, /^codevalanche_language=ar;.*; Secure$/);
 });
 
+test('locale catalogs use build metadata as their cache key and normal cache validation', async () => {
+  for (const revision of ['0123456789abcdef', undefined]) {
+    const document = runtimeDocument('/ar/docs/');
+    document.documentElement.dataset = { assetRevision: revision };
+    let request;
+    await moduleUnderTest.initializeLocale(document, async (url, options) => {
+      request = { url, cache: options.cache };
+      return { ok: true, json: async () => ({}) };
+    });
+    assert.equal(request.url, `/locales/ar.json${revision ? `?v=${revision}` : ''}`);
+    assert.equal(request.cache, 'default');
+  }
+});
+
 test('locale runtime translates complete phrases and keeps interpolated values intact', () => {
   assert.equal(typeof moduleUnderTest?.translateText, 'function', 'safe translation helper exists');
   const catalog = {

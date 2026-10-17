@@ -95,7 +95,9 @@ export function initializeLocale(document = globalThis.document, fetcher = globa
     if (preferred.slug) {
       try {
         if (typeof fetcher !== 'function') throw new Error('Locale catalog fetch is unavailable');
-        const response = await fetcher(`/locales/${preferred.slug}.json`, { credentials: 'same-origin', cache: 'force-cache', signal: AbortSignal.timeout(1500) });
+        const revision = document.documentElement?.dataset?.assetRevision;
+        const version = typeof revision === 'string' && /^[a-f0-9]{16}$/.test(revision) ? `?v=${revision}` : '';
+        const response = await fetcher(`/locales/${preferred.slug}.json${version}`, { credentials: 'same-origin', cache: 'default', signal: AbortSignal.timeout(1500) });
         if (!response.ok) throw new Error(`Locale catalog request failed with ${response.status}`);
         const data = await response.json();
         if (!data || Array.isArray(data) || typeof data !== 'object') throw new Error('Locale catalog is invalid');

@@ -13,6 +13,7 @@ import { renderTranslatedHtml } from "./localization.mjs"
 import { validateSeoExport } from "./seo-export-test.mjs"
 import { LOCALES, MARKETING_PAGES } from "../src/locales/manifest.js"
 import { prepareMarketingPartial } from "./marketing-partials.mjs"
+import { versionSiteAssets } from "./asset-cache.mjs"
 await buildAnalytics()
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
@@ -110,6 +111,7 @@ for (const page of ["account/index.html", "account/authorize/index.html"]) {
   for (const [asset, version] of versions) html = html.replaceAll(`"${asset}"`, `"${asset}?v=${version}"`)
   await writeFile(output, html)
 }
+await versionSiteAssets(destination)
 const security = await applyPostbuildSecurity(destination)
 // Cloudflare Pages reads security headers from dist/_headers; GitHub Pages would
 // only publish it as a file, so it is written on request. The header CSP carries

@@ -9,6 +9,7 @@ The product website uses the existing static HTML/CSS/JavaScript build. Its mark
 - New English prose, metadata, alt text and accessible labels require `node scripts/translate-site.mjs extract`, then complete updates to the other sixteen catalogs. Retain existing translations by unchanged source key and remove stale keys. Run `node scripts/translate-site.mjs check` before the full build.
 - `CODEVALANCHE_PREVIEW_ENGLISH_ONLY=1` is for local iteration only. It must not be used for a publishable build or reported as full localization verification.
 - The footer language picker preserves the current page. Keep Arabic RTL and long/CJK text readable, and keep the account callback contract independent of marketing locale paths.
+- Keep `scripts/asset-cache.mjs` after bundling and before CSP generation. It versions stylesheet/script entries and their shared module graph together; locale catalog requests use the document revision. Entry-only versioning can leave returning visitors on an older dependency or translation catalog. Preserve the generated SDK bytes and final account/config content hashes, and run the asset-cache/runtime regressions when changing this step.
 
 ## Product facts and evidence
 
