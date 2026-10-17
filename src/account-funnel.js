@@ -17,7 +17,7 @@ const path=location.pathname;
 const marketingRoute=resolveMarketingRoute(path);
 const pageId=path.startsWith('/account/authorize')?'account_authorize':path.startsWith('/account/')?'account':(marketingRoute?.pageId??'not_found');
 const account=['account','account_authorize'].includes(pageId);
-const download=document.querySelector('#download');if(download)download.dataset.releaseStatus=download.querySelector('[data-download-platform]')?'configured':'not_configured';
+const download=document.querySelector('#download');if(download)download.dataset.downloadStatus=download.querySelector('[data-download-platform]')?'configured':'not_configured';
 const page=client.startPage({pageId,surface:account?'pre_auth':'marketing'});
 for(const element of document.querySelectorAll('[data-analytics-section]'))page.observeSection(element,{sectionId:element.dataset.analyticsSection});
 let requestedGeneration=-1;

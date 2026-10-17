@@ -8,13 +8,13 @@
     <link rel="canonical" href="https://codevalanche.com/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://codevalanche.com/">
-    <meta property="og:title" content="Codevalanche | One place to work with AI coding agents">
-    <meta property="og:description" content="Open your project, give a task to the agent you choose and review every change before it stays.">
+    <meta property="og:title" content="Codevalanche">
+    <meta property="og:description" content="A Windows workspace for your coding agents, connected accounts and supported local models. Follow progress and inspect the changes.">
     <meta property="og:image" content="https://codevalanche.com/assets/codevalanche-social.png">
     <meta property="og:image:alt" content="Codevalanche on Windows, showing a finished task in a sample project.">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Codevalanche | One place to work with AI coding agents">
-    <meta name="twitter:description" content="Open your project, give a task to the agent you choose and review every change before it stays.">
+    <meta name="twitter:title" content="Codevalanche">
+    <meta name="twitter:description" content="A Windows workspace for your coding agents, connected accounts and supported local models. Follow progress and inspect the changes.">
     <meta name="twitter:image" content="https://codevalanche.com/assets/codevalanche-social.png">
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
     <script>(function(){var t="light";try{var s=localStorage.getItem("codevalanche_theme");if(s==="light"||s==="dark"){t=s}else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){t="dark"}}catch(e){}document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("js")})()</script>
@@ -22,7 +22,7 @@
     <script type="application/ld+json">
       {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://radovar.com/#organization","name":"Radovar","url":"https://radovar.com/"},{"@type":"SoftwareApplication","@id":"https://radovar.com/#codevalanche","name":"Codevalanche","url":"https://codevalanche.com/","sameAs":["https://radovar.com/codevalanche/"],"applicationCategory":"DeveloperApplication","operatingSystem":"Windows","publisher":{"@id":"https://radovar.com/#organization"}},{"@type":"WebSite","@id":"https://codevalanche.com/#website","name":"Codevalanche","url":"https://codevalanche.com/","publisher":{"@id":"https://radovar.com/#organization"},"about":{"@id":"https://radovar.com/#codevalanche"}}]}
     </script>
-    <title>Codevalanche | One place to work with AI coding agents</title>
+    <title>Codevalanche</title>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -30,21 +30,16 @@
     <!-- site-header -->
 
     <main id="main">
-      <!-- Hero -->
-      <section class="hero" id="top" data-analytics-section="hero" aria-labelledby="hero-title">
-        <div class="shell hero-head">
-          <p class="kicker reveal"><span class="kicker-dot" aria-hidden="true"></span>Early access for Windows</p>
-          <h1 id="hero-title" class="reveal">One place to work with <em>AI coding agents.</em></h1>
-          <div class="hero-row reveal">
-            <p class="hero-lede">Open your project, give a task to the agent you choose and follow it from the first message to a change you have checked. In the cloud or on your own PC.</p>
-            <div class="hero-actions">
-              <a class="button button-primary" href="#download">Get Codevalanche</a>
-              <a class="button" href="#workflow">See how it works</a>
-            </div>
-          </div>
-        </div>
-        <div class="shell">
-          <figure class="shot shot-stage reveal" data-terrain>
+<section class="hero" id="top" data-analytics-section="hero" aria-labelledby="hero-title">
+  <div class="shell hero-grid">
+    <div class="hero-copy">
+      <p class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Early access for Windows</p>
+      <h1 id="hero-title">From prompt to a change you understand.</h1>
+      <p class="hero-lede">Work with Claude Code, Codex and supported local models in one Windows app. Choose a connected account, follow progress and inspect the changes.</p>
+      <div class="hero-actions"><a class="button button-primary" data-release-primary href="/how-it-works/">See how it works</a><a class="hero-release-link" href="/download/">Windows release status</a></div>
+      <p class="hero-availability" data-release-status>Public installer in preparation.</p>
+    </div>
+    <figure class="shot hero-product">
             <div class="shot-window shot-themed">
               <picture>
                 <source media="(max-width: 760px)" srcset="/assets/shots/task-review-detail-light-640.webp 640w, /assets/shots/task-review-detail-light-960.webp 960w, /assets/shots/task-review-detail-light.webp 1200w" sizes="100vw" width="1200" height="1068">
@@ -57,26 +52,55 @@
             </div>
             <figcaption>Codevalanche on Windows, working on a sample project.</figcaption>
           </figure>
-        </div>
-        <div class="shell hero-runtimes reveal" aria-label="Agents and models you can use">
+  </div>
+  <div class="shell"><div class="hero-runtimes" aria-label="Agents and models you can use">
           <span class="runtimes-label">Works with the agents you already use</span>
           <span class="runtime-chip"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><use href="#mark-claude"/></svg> Claude Code</span>
           <span class="runtime-chip"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><use href="#mark-codex"/></svg> Codex</span>
           <span class="runtime-chip"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><use href="#mark-local"/></svg> Local models</span>
           <span class="runtime-chip runtime-chip-soft">More providers in Settings</span>
-        </div>
-      </section>
+        </div></div>
+</section>
 
-      <!-- Principle -->
-      <section class="principle-band" id="product-principle" data-analytics-section="product_principle" aria-label="Product principle">
+<section class="section shell showcase task-tour" id="showcase" data-analytics-section="showcase" aria-labelledby="showcase-title">
+  <div class="section-head"><div><p class="kicker">Inside the app</p><h2 id="showcase-title">Follow one task, from brief to review.</h2></div><p>Real screenshots of Codevalanche on Windows, working on a sample project.</p></div>
+  <div class="showcase-layout">
+    <div class="feature-tabs" role="tablist" aria-orientation="horizontal" aria-label="A task in Codevalanche">
+      <button class="feature-tab is-active" role="tab" id="tab-brief" data-feature="brief" aria-controls="panel-brief" aria-selected="true"><span>01</span> Brief</button>
+      <button class="feature-tab" role="tab" id="tab-execution" data-feature="execution" aria-controls="panel-execution" aria-selected="false" tabindex="-1"><span>02</span> Execution</button>
+      <button class="feature-tab" role="tab" id="tab-approval" data-feature="approval" aria-controls="panel-approval" aria-selected="false" tabindex="-1"><span>03</span> Approval</button>
+      <button class="feature-tab" role="tab" id="tab-review" data-feature="review" aria-controls="panel-review" aria-selected="false" tabindex="-1"><span>04</span> Review</button>
+    </div>
+    <div class="feature-content">
+      <div class="feature-panel is-active" id="panel-brief" role="tabpanel" aria-labelledby="tab-brief" data-panel="brief"><div class="feature-copy"><h3>Start with a brief.</h3><p>Projects and tasks sit in the sidebar. Open a task, describe what should change and send it to the agent.</p></div><figure class="shot"><div class="shot-window"><picture><img class="shot-img" src="/assets/shots/task-brief.webp" width="2000" height="1250" alt="A new task in Codevalanche with a written brief in the message box, ready to send." loading="lazy" decoding="async"></picture></div><figcaption>A new task in Codevalanche with a written brief in the message box, ready to send.</figcaption></figure></div>
+      <div class="feature-panel" id="panel-execution" role="tabpanel" aria-labelledby="tab-execution" data-panel="execution" hidden><div class="feature-copy"><h3>Follow the work.</h3><p>Each task keeps its own conversation, agent and changes. See which one is working, which one needs you and which one is ready for review.</p></div><figure class="shot">
+            <div class="shot-window shot-themed">
+              <picture>
+                <source media="(max-width: 760px)" srcset="/assets/shots/task-review-detail-light-640.webp 640w, /assets/shots/task-review-detail-light-960.webp 960w, /assets/shots/task-review-detail-light.webp 1200w" sizes="100vw" width="1200" height="1068">
+                <img class="shot-img shot-img-light" src="/assets/shots/task-review-light.webp" width="2000" height="1250" alt="Codevalanche on Windows: a finished task in a sample project. The agent lists its steps and a summary, and two changed files wait for review." loading="lazy" decoding="async">
+              </picture>
+              <picture>
+                <source media="(max-width: 760px)" srcset="/assets/shots/task-review-detail-dark-640.webp 640w, /assets/shots/task-review-detail-dark-960.webp 960w, /assets/shots/task-review-detail-dark.webp 1200w" sizes="100vw" width="1200" height="1068">
+                <img class="shot-img shot-img-dark" src="/assets/shots/task-review-dark.webp" width="2000" height="1250" alt="Codevalanche on Windows in the dark theme: a finished task in a sample project, with two changed files waiting for review." loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <figcaption>Codevalanche on Windows: a finished task in a sample project. The agent lists its steps and a summary, and two changed files wait for review.</figcaption>
+          </figure></div>
+      <div class="feature-panel" id="panel-approval" role="tabpanel" aria-labelledby="tab-approval" data-panel="approval" hidden><div class="feature-copy"><h3>See the command before you allow it.</h3><p>Commands that need your permission stop and ask, with the exact command in view. Allow it once or deny it.</p></div><figure class="shot"><div class="shot-window"><picture><source media="(max-width: 760px)" srcset="/assets/shots/approval-detail-640.webp 640w, /assets/shots/approval-detail-960.webp 960w, /assets/shots/approval-detail.webp 1400w" sizes="100vw" width="1400" height="1256"><img class="shot-img" src="/assets/shots/approval.webp" width="2000" height="1250" alt="An approval request in Codevalanche: the agent asks to run npm test, with Allow once and Deny buttons." loading="lazy" decoding="async"></picture></div><figcaption>An approval request in Codevalanche: the agent asks to run npm test, with Allow once and Deny buttons.</figcaption></figure></div>
+      <div class="feature-panel" id="panel-review" role="tabpanel" aria-labelledby="tab-review" data-panel="review" hidden><div class="feature-copy"><h3>Inspect the changed files.</h3><p>When the agent finishes, Codevalanche lists the changed files. Open the diff and decide what belongs in your codebase.</p></div><figure class="shot"><div class="shot-window"><picture><source media="(max-width: 760px)" srcset="/assets/shots/changes-detail-640.webp 640w, /assets/shots/changes-detail-960.webp 960w, /assets/shots/changes-detail.webp 1000w" sizes="100vw" width="1000" height="1092"><img class="shot-img" src="/assets/shots/changes.webp" width="2000" height="1250" alt="The changes view in Codevalanche, showing the diff of two edited files." loading="lazy" decoding="async"></picture></div><figcaption>The changes view in Codevalanche, showing the diff of two edited files.</figcaption></figure></div>
+    </div>
+  </div>
+  <p class="tour-next"><a href="/how-it-works/">See the complete walkthrough</a></p>
+</section>
+
+<section class="principle-band" id="product-principle" data-analytics-section="product_principle" aria-label="Product principle">
         <div class="shell principle-grid reveal">
           <p class="principle-statement">Your project stays where it already is. <em>The agent comes to it.</em></p>
-          <p class="principle-aside">No upload step and no second copy of your repository. You see what the agent did, and nothing stays until you have checked it.</p>
+          <p class="principle-aside">Your repository stays on disk. A hosted model can still receive prompts and relevant file context, so the provider and runtime you choose determine those boundaries. A supported local model runs on your own hardware.</p>
         </div>
       </section>
 
-      <!-- Product -->
-      <section class="section shell" id="product" data-analytics-section="product" aria-labelledby="product-title">
+<section class="section shell" id="product" data-analytics-section="product" aria-labelledby="product-title">
         <div class="section-head reveal">
           <div>
             <p class="kicker">The workspace</p>
@@ -84,53 +108,52 @@
           </div>
           <p>Claude Code and Codex are agents. Codevalanche is the workspace around them: your projects, the choice of agent for each task, the conversation that guided the work and the review of what changed.</p>
         </div>
-        <div class="cards cards-three">
+        <div class="cards product-overview">
           <article class="card reveal">
-            <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 7.5a2 2 0 0 1 2-2h4l2 2h7a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z"/></svg></span>
+
             <h3>Your project, where it already is.</h3>
-            <p>Open the repository that is already on your PC, with its files, folders and version control. Nothing to import or rebuild.</p>
+            <p>Open the repository that is already on your PC, with its files, folders and version control. Nothing to import or rebuild.</p><a href="/docs/">Getting started</a>
           </article>
           <article class="card reveal">
-            <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="4" rx="1.4"/><rect x="3.5" y="10" width="17" height="4" rx="1.4"/><rect x="3.5" y="15.5" width="17" height="4" rx="1.4"/></svg></span>
+
             <h3>Several tasks at once.</h3>
-            <p>Each task keeps its own conversation, agent and changes. See which one is working, which one needs you and which one is ready for review.</p>
+            <p>Each task keeps its own conversation, agent and changes. See which one is working, which one needs you and which one is ready for review.</p><a href="/how-it-works/">How a task works</a>
           </article>
           <article class="card reveal">
-            <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 5 6.2v5.3c0 4.2 2.9 7.6 7 9 4.1-1.4 7-4.8 7-9V6.2z"/><path d="m8.8 12.2 2.2 2.2 4.2-4.4"/></svg></span>
-            <h3>You decide what stays.</h3>
-            <p>Read every file change and run the checks before you keep the result. A confident answer is where the review starts.</p>
+
+            <h3>Inspect the result.</h3>
+            <p>Read the changed files and run the checks before deciding what belongs in your project.</p><a href="/security/">Permissions and review</a>
           </article>
         </div>
       </section>
 
-      <!-- Accounts and agents -->
-      <section class="section section-tint" id="accounts" data-analytics-section="accounts" aria-labelledby="accounts-title">
+<section class="section section-tint" id="accounts" data-analytics-section="accounts" aria-labelledby="accounts-title">
         <div class="shell">
           <div class="section-head reveal">
             <div>
               <p class="kicker">Your choice of agent</p>
               <h2 id="accounts-title">In the cloud or on your PC. Per task.</h2>
             </div>
-            <p>The project, the conversation and the review stay in the same place when the agent changes.</p>
+            <p>Choose a supported agent, API connection or local model. Connection requirements and capabilities differ.</p>
           </div>
           <div class="agents-layout">
             <div class="agent-cards">
               <article class="agent-card reveal">
                 <p class="agent-where">In the cloud</p>
                 <h3>Use the coding agents you already have.</h3>
-                <p>Sign in with your own accounts for supported agents such as Claude Code and Codex. They work on your project from inside Codevalanche, on the plans you already pay for.</p>
+                <p>Sign in with your own accounts for supported agents such as Claude Code and Codex. They work on your project from inside Codevalanche, on the plans you already pay for.</p><a href="/agents/">Agents and connections</a>
                 <ul class="tag-list" aria-label="Examples of cloud agents"><li>Claude Code</li><li>Codex</li><li>More by build</li></ul>
               </article>
               <article class="agent-card reveal">
                 <p class="agent-where">On your PC</p>
                 <h3>Run a model on your own hardware.</h3>
-                <p>When a task should stay on your machine, give it to a supported local model. The app checks your hardware before you download a model.</p>
+                <p>When a task should stay on your machine, give it to a supported local model. The app checks your hardware before you download a model.</p><a href="/local-ai/">Local AI in Codevalanche</a>
                 <ul class="tag-list" aria-label="Local model support"><li>Local models</li><li>Where supported</li></ul>
               </article>
               <article class="agent-card reveal">
                 <p class="agent-where">Accounts</p>
-                <h3>More than one account per provider.</h3>
-                <p>Keep a personal and a work account connected side by side, each with its own sign-in, and pick the account for each task.</p>
+                <h3>Keep work and personal accounts separate.</h3>
+                <p>Keep separate Claude Code and Codex accounts connected, then choose the account for a run. No pooled subscriptions or automatic account rotation.</p><a href="/features/multiple-accounts/">Multiple accounts</a>
               </article>
             </div>
             <figure class="shot shot-side reveal">
@@ -146,13 +169,12 @@
         </div>
       </section>
 
-      <!-- Parallel -->
-      <section class="section shell" id="parallel" data-analytics-section="parallel" aria-labelledby="parallel-title">
+<section class="section shell" id="parallel" data-analytics-section="parallel" aria-labelledby="parallel-title">
         <div class="parallel-layout">
           <div class="parallel-copy reveal">
             <p class="kicker">Parallel work</p>
             <h2 id="parallel-title">Several tasks, each in its own place.</h2>
-            <p>Every task keeps its conversation, agent and changed files together. The sidebar shows which task is working, which one is waiting for your approval and which one is done, so nothing gets lost between tabs.</p>
+            <p>Every task keeps its conversation, agent and changed files together. The sidebar shows which task is working, which one is waiting for your approval and which one is done, so you can find the task that needs attention.</p><a href="/how-it-works/">Follow the workflow</a>
           </div>
           <figure class="shot shot-crop reveal">
             <div class="shot-window">
@@ -163,15 +185,14 @@
         </div>
       </section>
 
-      <!-- Workflow -->
-      <section class="section shell" id="workflow" data-analytics-section="workflow" aria-labelledby="workflow-title">
+<section class="section shell" id="workflow" data-analytics-section="workflow" aria-labelledby="workflow-title">
         <div class="workflow-panel reveal" data-terrain>
           <div class="section-head section-head-dark">
             <div>
               <p class="kicker">How a task works</p>
-              <h2 id="workflow-title">From a request to a change you understand.</h2>
+              <h2 id="workflow-title">Open a project. Work through the task.</h2>
             </div>
-            <p>The agent moves fast. You keep the final say at the moments that matter.</p>
+            <p>The steps stay visible. Review the result and use the permission modes your agent supports.</p>
           </div>
           <ol class="steps">
             <li class="step">
@@ -192,51 +213,13 @@
             <li class="step">
               <span class="step-number">04</span>
               <h3>Review, then keep.</h3>
-              <p>See which files changed and read the diff. Keep the result when it is right, or ask for another pass.</p>
+              <p>See which files changed and read the diff. Check the result, or ask for another pass.</p>
             </li>
           </ol>
         </div>
       </section>
 
-      <!-- Showcase -->
-      <section class="section shell showcase" id="showcase" aria-labelledby="showcase-title" data-analytics-section="showcase">
-        <div class="section-head reveal">
-          <div>
-            <p class="kicker">Inside the app</p>
-            <h2 id="showcase-title">See each part for yourself.</h2>
-          </div>
-          <p>Real screenshots of Codevalanche on Windows, working on a sample project.</p>
-        </div>
-        <div class="showcase-layout reveal">
-          <div class="feature-tabs" role="tablist" aria-orientation="vertical" aria-label="Codevalanche workspace surfaces">
-            <button class="feature-tab is-active" role="tab" aria-selected="true" aria-controls="panel-workspace" id="tab-workspace" data-feature="workspace">Workspace <span>01</span></button>
-            <button class="feature-tab" role="tab" aria-selected="false" aria-controls="panel-runtime" id="tab-runtime" data-feature="runtime" tabindex="-1">Agents <span>02</span></button>
-            <button class="feature-tab" role="tab" aria-selected="false" aria-controls="panel-review" id="tab-review" data-feature="review" tabindex="-1">Review <span>03</span></button>
-            <button class="feature-tab" role="tab" aria-selected="false" aria-controls="panel-local" id="tab-local" data-feature="local" tabindex="-1">On your PC <span>04</span></button>
-          </div>
-          <div class="feature-content">
-            <div class="feature-panel is-active" id="panel-workspace" role="tabpanel" aria-labelledby="tab-workspace" data-panel="workspace">
-              <div class="feature-copy"><h3>Start with a brief.</h3><p>Projects and tasks sit in the sidebar. Open a task, describe what should change and send it to the agent.</p></div>
-              <figure class="shot"><div class="shot-window"><picture><source media="(max-width: 760px)" srcset="/assets/shots/task-brief-detail-640.webp 640w, /assets/shots/task-brief-detail-960.webp 960w, /assets/shots/task-brief-detail.webp 1000w" sizes="100vw" width="1000" height="882"><img class="shot-img" src="/assets/shots/task-brief.webp" width="2000" height="1250" alt="A new task in Codevalanche with a written brief in the message box, ready to send." loading="lazy" decoding="async"></picture></div></figure>
-            </div>
-            <div class="feature-panel" id="panel-runtime" role="tabpanel" aria-labelledby="tab-runtime" data-panel="runtime" hidden>
-              <div class="feature-copy"><h3>Pick the agent for the task.</h3><p>Connect the providers you use and choose a cloud agent or a local model for each task. The rest of the workspace stays the same.</p></div>
-              <figure class="shot"><div class="shot-window"><picture><source media="(max-width: 760px)" srcset="/assets/shots/ai-providers-detail-640.webp 640w, /assets/shots/ai-providers-detail-960.webp 960w, /assets/shots/ai-providers-detail.webp 1000w" sizes="100vw" width="1000" height="1032"><img class="shot-img" src="/assets/shots/ai-providers.webp" width="2000" height="1250" alt="The AI Providers settings page with the list of providers and their connection status." loading="lazy" decoding="async"></picture></div></figure>
-            </div>
-            <div class="feature-panel" id="panel-review" role="tabpanel" aria-labelledby="tab-review" data-panel="review" hidden>
-              <div class="feature-copy"><h3>Read every change.</h3><p>When the agent finishes, Codevalanche lists the changed files. Open the diff and decide what belongs in your codebase.</p></div>
-              <figure class="shot"><div class="shot-window"><picture><source media="(max-width: 760px)" srcset="/assets/shots/changes-detail-640.webp 640w, /assets/shots/changes-detail-960.webp 960w, /assets/shots/changes-detail.webp 1000w" sizes="100vw" width="1000" height="1092"><img class="shot-img" src="/assets/shots/changes.webp" width="2000" height="1250" alt="The changes view in Codevalanche, showing the diff of two edited files." loading="lazy" decoding="async"></picture></div></figure>
-            </div>
-            <div class="feature-panel" id="panel-local" role="tabpanel" aria-labelledby="tab-local" data-panel="local" hidden>
-              <div class="feature-copy"><h3>Commands wait for you.</h3><p>Your project stays on your PC. When the agent wants to run a command that needs permission, it stops and asks, here with a local model doing the work.</p></div>
-              <figure class="shot"><div class="shot-window"><picture><source media="(max-width: 760px)" srcset="/assets/shots/approval-detail-640.webp 640w, /assets/shots/approval-detail-960.webp 960w, /assets/shots/approval-detail.webp 1400w" sizes="100vw" width="1400" height="1256"><img class="shot-img" src="/assets/shots/approval.webp" width="2000" height="1250" alt="An approval request in Codevalanche: the agent asks to run npm test, with Allow once and Deny buttons." loading="lazy" decoding="async"></picture></div></figure>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Details -->
-      <section class="section section-tint" id="details" data-analytics-section="details" aria-labelledby="details-title">
+<section class="section section-tint" id="details" data-analytics-section="details" aria-labelledby="details-title">
         <div class="shell">
           <div class="section-head reveal">
             <div>
@@ -256,8 +239,7 @@
         </div>
       </section>
 
-      <!-- Companion -->
-      <section class="section shell" id="companion" data-analytics-section="companion" aria-labelledby="companion-title">
+<section class="section shell" id="companion" data-analytics-section="companion" aria-labelledby="companion-title">
         <div class="companion reveal">
           <div>
             <p class="kicker">The companion <span class="status-pill">In development</span></p>
@@ -269,8 +251,7 @@
         </div>
       </section>
 
-      <!-- Privacy principles -->
-      <section class="section shell" id="privacy" data-analytics-section="privacy_principles" aria-labelledby="privacy-title">
+<section class="section shell" id="privacy" data-analytics-section="privacy_principles" aria-labelledby="privacy-title">
         <div class="section-head reveal">
           <div>
             <p class="kicker">Where your code goes</p>
@@ -282,73 +263,24 @@
           <div class="principle reveal"><span>01</span><div><h3>Your repository stays on disk.</h3><p>Agents work on the project you opened. There is no upload step and no copy of your code on our servers.</p></div></div>
           <div class="principle reveal"><span>02</span><div><h3>Cloud agents receive context.</h3><p>A hosted model receives your prompts and the file context it needs for the task. The provider you choose sets those terms.</p></div></div>
           <div class="principle reveal"><span>03</span><div><h3>Local models stay local.</h3><p>A supported local model runs on your own hardware, so the task does not need a cloud provider.</p></div></div>
-          <div class="principle reveal"><span>04</span><div><h3>You approve the actions.</h3><p>Commands that need permission ask first, and every change can be reviewed before you keep it.</p></div></div>
-        </div>
+          <div class="principle reveal"><span>04</span><div><h3>Permission modes have boundaries.</h3><p>Approval behavior depends on the agent and its mode. Some modes can write files directly; review and Undo have their own limits.</p></div></div>
+        </div><p class="section-link"><a href="/security/">Security and data boundaries</a></p>
       </section>
 
-      <!-- Download -->
-      <section class="section download-section" id="download" data-analytics-section="download" aria-labelledby="download-title">
-        <div class="shell">
-          <div class="download-head reveal">
-            <p class="kicker">Get Codevalanche</p>
-            <h2 id="download-title">Built for the computer in front of you.</h2>
-            <p>Codevalanche is in early access for Windows. Public downloads are in preparation, and this page updates the moment they ship.</p>
-          </div>
+<section class="section download-section" id="download" data-analytics-section="download" aria-labelledby="download-title"><div class="shell release-overview">
+  <div><p class="kicker">Get Codevalanche</p><h2 id="download-title">Start with one small change.</h2><p data-release-status>Codevalanche is in early access for Windows. Public downloads are in preparation.</p><div class="hero-actions"><a class="button button-primary" data-release-primary href="/how-it-works/">See how it works</a><a class="button" href="/docs/">Getting started</a></div></div>
+  <div class="release-status-card" data-dl-platform="windows"><p class="kicker">Windows release status</p><h3>Codevalanche for Windows.</h3><p class="dl-card-state" data-release-status>Public installer in preparation.</p><p>Only a qualified public release can provide a download here.</p><a href="/download/">Available releases</a></div>
+</div></section>
 
-          <div class="dl-mobile reveal" data-dl-mobile hidden>
-            <p class="dl-mobile-title">You are reading this on a phone.</p>
-            <p>Codevalanche is a desktop app. Open this page on your computer when you are back at the desk. The right build appears here as soon as it ships.</p>
-          </div>
-
-          <div class="dl-detect reveal" data-dl-desktop>
-            <div class="dl-primary">
-              <div class="dl-os-icon" data-dl-icon aria-hidden="true"></div>
-              <div class="dl-primary-copy">
-                <p class="dl-primary-name">Codevalanche for <span data-dl-name>desktop</span></p>
-                <p class="dl-primary-note" data-dl-note>Pick your platform below</p>
-              </div>
-              <span class="dl-cta" data-dl-cta>Release in preparation</span>
-            </div>
-            <p class="dl-detected" data-dl-detected-row hidden>Detected from your browser: <span data-dl-detected>…</span>. Wrong guess? Every build is listed below.</p>
-          </div>
-
-          <div class="dl-grid reveal" data-dl-grid>
-            <div class="dl-card" data-dl-platform="windows">
-              <p class="dl-card-name">Windows</p>
-              <p class="dl-card-note">64-bit installer</p>
-              <span class="dl-card-state">In preparation</span>
-            </div>
-            <div class="dl-card" data-dl-platform="mac-arm">
-              <p class="dl-card-name">macOS</p>
-              <p class="dl-card-note">Apple Silicon</p>
-              <span class="dl-card-state">In preparation</span>
-            </div>
-            <div class="dl-card" data-dl-platform="mac-intel">
-              <p class="dl-card-name">macOS</p>
-              <p class="dl-card-note">Intel</p>
-              <span class="dl-card-state">In preparation</span>
-            </div>
-            <div class="dl-card" data-dl-platform="linux">
-              <p class="dl-card-name">Linux</p>
-              <p class="dl-card-note">x64</p>
-              <span class="dl-card-state">In preparation</span>
-            </div>
-          </div>
-          <p class="dl-footnote reveal">No waitlist and no email required. Every early-access build is listed in the <a href="/changelog.html">changelog</a>.</p>
-        </div>
-      </section>
-
-      <!-- Standard -->
-      <section class="section shell proof-section" id="proof" aria-labelledby="proof-title" data-analytics-section="proof">
+<section class="section shell proof-section" id="proof" aria-labelledby="proof-title" data-analytics-section="proof">
         <div class="proof reveal">
           <p class="kicker">The standard we hold</p>
           <h2 id="proof-title">A confident answer is where the review starts.</h2>
-          <p>Agents can write a lot of code quickly. Codevalanche exists so that you can see what they did and decide what to keep, without losing the thread.</p>
+          <p>Agents can write a lot of code quickly. Codevalanche exists so that you can see what they did and decide what to keep, with the project and its conversation in view.</p>
         </div>
       </section>
 
-      <!-- FAQ -->
-      <section class="section shell faq-section" id="faq" data-analytics-section="faq" aria-labelledby="faq-title">
+<section class="section shell faq-section" id="faq" data-analytics-section="faq" aria-labelledby="faq-title">
         <div class="faq-layout">
           <div class="faq-head reveal">
             <p class="kicker">Questions</p>
@@ -356,17 +288,17 @@
             <p>Something missing? Write to <a href="mailto:info@radovar.com" data-contact-id="info">info@radovar.com</a>.</p>
           </div>
           <div class="faq-list reveal">
-            <details data-analytics-faq="product"><summary>What is Codevalanche?</summary><p>A desktop app for Windows for coding with AI agents. It opens a project on your computer, lets you give a task to an agent or a local model, keeps the conversation for each task together and shows the changed files and diffs before you keep them. It is made by Radovar.</p></details>
+            <details data-analytics-faq="product"><summary>What is Codevalanche?</summary><p>A desktop app for Windows for coding with AI agents. It opens a project on your computer, lets you give a task to an agent or a local model, keeps the conversation for each task together and shows the changed files and diffs for review. It is made by Radovar.</p></details>
             <details data-analytics-faq="agents"><summary>How is it different from using Claude Code or Codex directly?</summary><p>Claude Code and Codex are agents. Codevalanche is the workspace around them: your projects, the choice of agent or local model for each task, the conversation that guided the work and the review of what changed, in one window.</p></details>
-            <details data-analytics-faq="accounts"><summary>Which agents and accounts can I connect?</summary><p>The agents and accounts supported by your installed build, such as Claude Code, Codex and supported local models. You sign in with your own accounts, and you can connect more than one account for the same provider.</p></details>
+            <details data-analytics-faq="accounts"><summary>Which agents and accounts can I connect?</summary><p>Your installed build determines the supported integrations. Claude Code and Codex support separate connected accounts; local models and API providers have different setup requirements.</p></details>
             <details data-analytics-faq="guest"><summary>Do I need a Codevalanche account?</summary><p>No. You can use the app as a guest. A Codevalanche account lets you sign in on the desktop app and manage your profile and sessions on this website.</p></details>
             <details data-analytics-faq="privacy"><summary>Does my code leave my computer?</summary><p>Your repository stays on disk. A hosted model can still receive prompts and relevant file context, so the provider and runtime you choose determine those boundaries. A supported local model runs on your own hardware.</p></details>
-            <details data-analytics-faq="platforms"><summary>Which platforms are supported?</summary><p>Windows first. Builds for macOS and Linux are listed on this page and marked as in preparation until they ship.</p></details>
-            <details data-analytics-faq="download"><summary>When can I download it?</summary><p>Codevalanche is in early access for Windows, and public downloads are in preparation. This page will carry them as soon as they ship.</p></details>
+            <details data-analytics-faq="platforms"><summary>Which platforms are supported?</summary><p>Codevalanche is built for Windows. No public macOS or Linux download is currently offered. Check the release page for qualified availability.</p></details>
+            <details data-analytics-faq="download"><summary>When can I download it?</summary><p data-release-status>Codevalanche is in early access for Windows, and public downloads are in preparation. This page will carry them as soon as they ship.</p></details>
           </div>
         </div>
       </section>
-    </main>
+</main>
 
     <!-- site-footer -->
 
@@ -389,82 +321,6 @@
     <script src="/config.js"></script>
     <script src="/downloads.js"></script>
     <script type="module" src="/site.js"></script>
-    <script>
-      (() => {
-        "use strict"
-        // ---- Platform-aware download ----
-        const downloads = window.CODEVALANCHE_DOWNLOAD_LINKS || {}
-        const ua = navigator.userAgent || ""
-        const uaPlatform = (navigator.userAgentData && navigator.userAgentData.platform) || navigator.platform || ""
-        const isIpadOs = /Mac/i.test(uaPlatform) && navigator.maxTouchPoints > 1
-        const detect = () => {
-          if (/Android/i.test(ua)) return "android"
-          if (/iPhone|iPad|iPod/i.test(ua) || isIpadOs) return "ios"
-          if (/Mac/i.test(uaPlatform) || /Mac OS X/i.test(ua)) return "mac-arm"
-          if (/Linux/i.test(uaPlatform) || /Linux/i.test(ua)) return "linux"
-          if (/Win/i.test(uaPlatform) || /Windows/i.test(ua)) return "windows"
-          return "windows"
-        }
-        const NAMES = { windows: "Windows", "mac-arm": "macOS", "mac-intel": "macOS", linux: "Linux" }
-        const NOTES = { windows: "64-bit installer", "mac-arm": "Apple Silicon. Intel build listed below.", "mac-intel": "Intel", linux: "x64" }
-        const ICONS = {
-          windows: '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.5 5.7 10.6 4.7v6.8H3.5V5.7zm0 12.6 7.1 1v-6.7H3.5v5.7zm7.9 1.1 9.1 1.3v-8.1h-9.1v6.8zm0-14.8v6.9h9.1V3.3l-9.1 1.3z"/></svg>',
-          "mac-arm": '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3.1-.7 1.4 0 1.8.7 3 .7 1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.6-1-2.6-3.6zM14.1 5.4c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.7 1.4-.6.7-1.2 1.9-1 3 1 .1 2.1-.6 2.7-1.4z"/></svg>',
-          "mac-intel": '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.8-3.5.8-.7 0-1.8-.8-3-.8-1.5 0-3 .9-3.8 2.3-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2 0 1.6-.7 3.1-.7 1.4 0 1.8.7 3 .7 1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.6-1-2.6-3.6zM14.1 5.4c.6-.8 1.1-1.9 1-3-.9 0-2.1.6-2.7 1.4-.6.7-1.2 1.9-1 3 1 .1 2.1-.6 2.7-1.4z"/></svg>',
-          linux: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M12 3.5c-2 0-3.2 1.6-3.2 3.6 0 1.5-.5 2.6-1.3 3.9-.9 1.5-1.9 3-1.9 4.9 0 2.8 2.9 4.6 6.4 4.6s6.4-1.8 6.4-4.6c0-1.9-1-3.4-1.9-4.9-.8-1.3-1.3-2.4-1.3-3.9 0-2-1.2-3.6-3.2-3.6z"/><circle cx="10.4" cy="8.4" r=".6" fill="currentColor" stroke="none"/><circle cx="13.6" cy="8.4" r=".6" fill="currentColor" stroke="none"/><path d="M10.6 10.6c.9.7 1.9.7 2.8 0"/></svg>',
-        }
-        const platform = detect()
-        const isMobile = platform === "android" || platform === "ios"
-        const mobileBlock = document.querySelector("[data-dl-mobile]")
-        const desktopBlock = document.querySelector("[data-dl-desktop]")
-        const grid = document.querySelector("[data-dl-grid]")
-        if (isMobile) {
-          if (mobileBlock) mobileBlock.hidden = false
-          if (desktopBlock) desktopBlock.hidden = true
-        } else if (desktopBlock) {
-          const nameEl = document.querySelector("[data-dl-name]")
-          const noteEl = document.querySelector("[data-dl-note]")
-          const ctaEl = document.querySelector("[data-dl-cta]")
-          const iconEl = document.querySelector("[data-dl-icon]")
-          const detectedEl = document.querySelector("[data-dl-detected]")
-          const detectedRow = document.querySelector("[data-dl-detected-row]")
-          const detectedLabel = platform === "mac-arm" ? "macOS" : NAMES[platform] || "Windows"
-          if (nameEl) nameEl.textContent = detectedLabel
-          if (noteEl) noteEl.textContent = NOTES[platform] || ""
-          if (iconEl) iconEl.innerHTML = ICONS[platform] || ""
-          if (detectedEl) detectedEl.textContent = detectedLabel
-          if (detectedRow) detectedRow.hidden = false
-          const url = downloads[platform]
-          if (ctaEl && url) {
-            const link = document.createElement("a")
-            link.className = "dl-cta dl-cta-live"
-            link.href = url.href
-            link.setAttribute("data-download-platform", platform)
-            link.dataset.downloadRelease = url.releaseId
-            link.dataset.downloadArtifact = url.artifactId
-            link.dataset.downloadArchitecture = url.architecture
-            link.textContent = "Download"
-            ctaEl.replaceWith(link)
-          }
-        }
-        if (grid) grid.querySelectorAll("[data-dl-platform]").forEach((card) => {
-          const key = card.getAttribute("data-dl-platform")
-          const url = downloads[key]
-          const state = card.querySelector(".dl-card-state")
-          if (url && state) {
-            const link = document.createElement("a")
-            link.className = "dl-card-state dl-card-live"
-            link.href = url.href
-            link.setAttribute("data-download-platform", key)
-            link.dataset.downloadRelease = url.releaseId
-            link.dataset.downloadArtifact = url.artifactId
-            link.dataset.downloadArchitecture = url.architecture
-            link.textContent = "Download"
-            state.replaceWith(link)
-          }
-          if (!isMobile && key === platform) card.classList.add("dl-card-recommended")
-        })
-      })()
-    </script>
+
   </body>
 </html>

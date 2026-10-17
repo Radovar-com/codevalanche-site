@@ -1,7 +1,8 @@
-import { LOCALES, localizedMarketingPath, resolveMarketingRoute } from './manifest.js';
+import { LOCALES, MARKETING_PAGES, localizedMarketingPath, resolveMarketingRoute } from './manifest.js';
 
 const LANGUAGE_COOKIE = 'codevalanche_language';
 const initialization = new WeakMap();
+const marketingPageIds = new Set(MARKETING_PAGES.map(page => page.pageId));
 
 function localeByValue(value) {
   const key = String(value ?? '').trim().toLowerCase();
@@ -19,7 +20,7 @@ function cookieValue(cookieHeader, name) {
 
 export function getPreferredLocale(cookieHeader = '', pathname = '') {
   const route = resolveMarketingRoute(pathname);
-  if (route && ['home', 'changelog', 'privacy', 'terms'].includes(route.pageId)) return localeByValue(route.locale) ?? LOCALES[0];
+  if (route && marketingPageIds.has(route.pageId)) return localeByValue(route.locale) ?? LOCALES[0];
   const saved = localeByValue(cookieValue(cookieHeader, LANGUAGE_COOKIE));
   if (saved) return saved;
   const firstSegment = String(pathname).split('/').filter(Boolean)[0] ?? '';
@@ -64,7 +65,7 @@ export function localizeDocument(document, catalog, locale, root = document?.doc
       if (link.hasAttribute('data-locale') || link.getAttribute('href').startsWith('#')) continue;
       const url = new URL(link.href, origin);
       const route = url.origin === origin ? resolveMarketingRoute(url.pathname) : null;
-      if (!route || !['home', 'changelog', 'privacy', 'terms'].includes(route.pageId)) continue;
+      if (!route || !marketingPageIds.has(route.pageId)) continue;
       url.pathname = localizedMarketingPath(url.pathname, locale.tag);
       link.href = `${url.pathname}${url.search}${url.hash}`;
     } catch {}
@@ -79,10 +80,10 @@ export function initializeLocale(document = globalThis.document, fetcher = globa
   const promise = (async () => {
     const preferred = getPreferredLocale(document.cookie, document.location?.pathname);
     const route = resolveMarketingRoute(document.location?.pathname ?? '');
-    const localizedMarketingPage = route && route.locale !== 'en' && ['home', 'changelog', 'privacy', 'terms'].includes(route.pageId);
+    const localizedMarketingPage = route && route.locale !== 'en' && marketingPageIds.has(route.pageId);
     document.documentElement.lang = preferred.tag;
     document.documentElement.dir = preferred.dir;
-    if (route && ['home', 'changelog', 'privacy', 'terms'].includes(route.pageId)) {
+    if (route && marketingPageIds.has(route.pageId)) {
       try {
         const secure = document.location?.protocol === 'https:' ? '; Secure' : '';
         document.cookie = `${LANGUAGE_COOKIE}=${encodeURIComponent(preferred.slug || 'en')}; Max-Age=31536000; Path=/; SameSite=Lax${secure}`;

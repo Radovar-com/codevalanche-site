@@ -7,6 +7,13 @@ The English site is available at `/`. Localized versions are generated for the l
 ## Public pages
 
 - [Home](/)
+- [How Codevalanche works](/how-it-works/)
+- [Agents and connections](/agents/)
+- [Multiple Claude Code and Codex accounts](/features/multiple-accounts/)
+- [Local AI in Codevalanche](/local-ai/)
+- [Getting started](/docs/)
+- [Download and release status](/download/)
+- [Security and data boundaries](/security/)
 - [Changelog](/changelog.html)
 - [Privacy and cookies](/privacy.html)
 - [Terms](/terms.html)

@@ -1,6 +1,6 @@
 # Codevalanche product website redesign
 
-**Status:** The user approved the visual direction, product-first presentation and eight-page scope on 17 October 2026. This written specification awaits review before implementation planning. No product code or production configuration has been changed for this redesign.
+**Status:** The user approved the visual direction and this written specification on 17 October 2026, then authorized autonomous implementation. A later explicit instruction, “aprob publica direct”, authorizes publication after the final checks through the existing deployment path. DNS, Cloudflare and account-provider changes remain outside this release.
 
 ## Purpose and success
 
@@ -187,4 +187,4 @@ Build final HTML before CSP hashes, retaining charset and all existing approved 
 
 ## Design review
 
-The user-approved concept is fully represented: Radovar-related identity, visible product on the first screen, demonstrative task flow and the eight specified pages. The written specification makes availability, source-versus-release proof, localization, route normalization and analytics continuity explicit. Implementation planning starts after review of this document.
+The user-approved concept is fully represented: Radovar-related identity, visible product on the first screen, demonstrative task flow and the eight specified pages. The written specification makes availability, source-versus-release proof, localization, route normalization and analytics continuity explicit. The user approved this document and the autonomous execution method; direct publication was subsequently authorized without a DNS/provider cutover.

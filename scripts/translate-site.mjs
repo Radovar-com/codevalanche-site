@@ -3,13 +3,14 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { extractTranslationUnits } from './localization.mjs';
 import { ensureLanguagePicker } from './locale-export.mjs';
-import { LOCALES } from '../src/locales/manifest.js';
+import { LOCALES, MARKETING_PAGES } from '../src/locales/manifest.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCE_PAGES = [
-  'index.html', 'changelog.html', 'privacy.html', 'terms.html', 'account.html',
+  ...MARKETING_PAGES.map(page => page.file), 'account.html',
   'account/index.html', 'account/authorize/index.html', 'account/signed-in/index.html',
 ];
+const MARKETING_SOURCE_FILES = new Set(MARKETING_PAGES.map(page => page.file));
 
 export async function collectSiteStrings(root = ROOT) {
   const source = path.join(root, 'src');
@@ -22,7 +23,7 @@ export async function collectSiteStrings(root = ROOT) {
   for (const relativePath of SOURCE_PAGES) {
     let html = await readFile(path.join(source, relativePath), 'utf8');
     html = html.replace('<!-- site-header -->', sharedHeader).replace('<!-- site-footer -->', sharedFooter);
-    if (['privacy.html', 'terms.html'].includes(relativePath)) html = ensureLanguagePicker(html, footerPicker);
+    if (MARKETING_SOURCE_FILES.has(relativePath)) html = ensureLanguagePicker(html, footerPicker);
     for (const unit of extractTranslationUnits(html)) units.add(unit);
   }
   const runtimeStrings = JSON.parse(await readFile(path.join(source, 'locales', 'runtime-strings.en.json'), 'utf8'));

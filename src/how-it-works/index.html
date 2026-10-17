@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f5">
+  <meta name="description" content="One example: change trip durations from minutes to hours and minutes. Start with a narrow request, follow the activity and inspect what changed.">
+  <link rel="canonical" href="https://codevalanche.com/how-it-works/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://codevalanche.com/how-it-works/">
+  <meta property="og:title" content="How Codevalanche works | Codevalanche">
+  <meta property="og:description" content="One example: change trip durations from minutes to hours and minutes. Start with a narrow request, follow the activity and inspect what changed.">
+  <meta property="og:image" content="https://codevalanche.com/assets/codevalanche-social.png">
+  <meta property="og:image:alt" content="Codevalanche on Windows, showing a finished task in a sample project.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="How Codevalanche works | Codevalanche">
+  <meta name="twitter:description" content="One example: change trip durations from minutes to hours and minutes. Start with a narrow request, follow the activity and inspect what changed.">
+  <meta name="twitter:image" content="https://codevalanche.com/assets/codevalanche-social.png">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <script>(function(){var t="light";try{var s=localStorage.getItem("codevalanche_theme");if(s==="light"||s==="dark"){t=s}else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){t="dark"}}catch(e){}document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("js")})()</script>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/product-pages.css">
+  <title>How Codevalanche works | Codevalanche</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- site-header -->
+  <main class="product-page shell" id="main">
+    <section class="page-intro" id="hero" data-analytics-section="hero">
+      <div class="page-intro-copy"><p class="kicker">How Codevalanche works</p><h1>Give the task a brief. Follow it through.</h1><p class="page-lede">One example: change trip durations from minutes to hours and minutes. Start with a narrow request, follow the activity and inspect what changed.</p><div class="page-actions"><a class="button button-primary" href="/docs/">Getting started</a><a class="button" href="/download/">Windows release status</a></div></div>
+      <figure class="page-figure"><a class="page-image-link" href="/assets/shots/task-review-light.webp"><picture><source media="(max-width: 760px)" srcset="/assets/shots/task-review-detail-light-640.webp 640w, /assets/shots/task-review-detail-light-960.webp 960w, /assets/shots/task-review-detail-light.webp 1200w" sizes="100vw" width="1200" height="1068"><img src="/assets/shots/task-review-light.webp" width="2000" height="1250" alt="Codevalanche on Windows: a finished task in a sample project. The agent lists its steps and a summary, and two changed files wait for review." fetchpriority="high" decoding="async"></picture></a><figcaption>The sample task, after execution. The assistant summary is not independent test evidence.</figcaption></figure>
+    </section>
+    <div class="page-body"><section class="page-section" id="workflow" data-analytics-section="workflow"><div class="page-grid"><h2>From the first message to the diff.</h2><div class="page-copy"><ol class="page-steps"><li><h3>Open the project</h3><p>Use a small example repository on disk. Check its starting state so you can distinguish existing edits from the task’s changes.</p></li><li><h3>Choose the connection and write the brief</h3><p>Select an available agent or local model. For Claude Code and Codex, check the chosen account. Ask for durations above one hour to use hours and minutes, and request tests.</p></li><li><h3>Follow the activity</h3><p>Read the agent’s steps and any request for input. When a command needs permission, inspect the command and its scope before allowing or denying it.</p></li><li><h3>Inspect the changes</h3><p>Open the changed files and read the diff. Check the duration examples yourself and run the project’s relevant tests before accepting the result.</p></li></ol></div></div></section><section class="page-section" id="showcase" data-analytics-section="showcase"><div class="page-grid"><h2>Three views of the same example.</h2><div class="page-copy"><p>These are separate application captures, not a live demonstration or a verified continuous recording. Open an image to inspect the full view.</p></div></div><div class="page-evidence"><figure class="page-figure page-figure-brief"><a class="page-image-link" href="/assets/shots/task-brief.webp"><picture><img src="/assets/shots/task-brief.webp" width="2000" height="1250" alt="A new task in Codevalanche with a written brief in the message box, ready to send." loading="lazy" decoding="async"></picture></a><figcaption>The brief names the desired output: 90 minutes becomes 1 h 30 min.</figcaption></figure><figure class="page-figure"><a class="page-image-link" href="/assets/shots/approval.webp"><picture><source media="(max-width: 760px)" srcset="/assets/shots/approval-detail-640.webp 640w, /assets/shots/approval-detail-960.webp 960w, /assets/shots/approval-detail.webp 1400w" sizes="100vw" width="1400" height="1256"><img src="/assets/shots/approval.webp" width="2000" height="1250" alt="An approval request in Codevalanche: the agent asks to run npm test, with Allow once and Deny buttons." loading="lazy" decoding="async"></picture></a><figcaption>This permission request concerns running a command; it does not approve every edit.</figcaption></figure><figure class="page-figure"><a class="page-image-link" href="/assets/shots/changes.webp"><picture><source media="(max-width: 760px)" srcset="/assets/shots/changes-detail-640.webp 640w, /assets/shots/changes-detail-960.webp 960w, /assets/shots/changes-detail.webp 1000w" sizes="100vw" width="1000" height="1092"><img src="/assets/shots/changes.webp" width="2000" height="1250" alt="The changes view in Codevalanche, showing the diff of two edited files." loading="lazy" decoding="async"></picture></a><figcaption>Two changed files are available for review. Read the diff and check the behavior.</figcaption></figure></div><aside class="page-aside"><h3>When the task stops</h3><p>Answer a request for input in the conversation. Review a pending permission request before continuing. If the result needs another pass, describe the remaining problem and inspect the next diff. Resume and Undo depend on the runtime and supported operation.</p><a href="/agents/">Agents and connections</a></aside></section></div>
+    <nav class="page-next" aria-label="Next steps"><a href="/docs/">Getting started</a><a href="/download/">Windows release status</a></nav>
+  </main>
+  <!-- site-footer -->
+  <script src="/config.js"></script>
+  <script src="/downloads.js"></script>
+  <script type="module" src="/site.js"></script>
+</body>
+</html>

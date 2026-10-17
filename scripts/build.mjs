@@ -12,6 +12,7 @@ import { validateEnglishSourceCatalog, validateLocaleCatalogs } from "./translat
 import { renderTranslatedHtml } from "./localization.mjs"
 import { validateSeoExport } from "./seo-export-test.mjs"
 import { LOCALES, MARKETING_PAGES } from "../src/locales/manifest.js"
+import { prepareMarketingPartial } from "./marketing-partials.mjs"
 await buildAnalytics()
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
@@ -34,12 +35,9 @@ const sharedFooter = await readFile(path.join(source, "partials/footer.html"), "
 for (const page of MARKETING_PAGES) {
   const output = path.join(destination, page.file)
   const html = await readFile(output, "utf8")
-  const header = page.file === "changelog.html"
-    ? sharedHeader.replaceAll('href="/changelog.html"', 'href="/changelog.html" aria-current="page"')
-    : sharedHeader
-  // On the homepage, links to its own sections stay in-page fragments so they never reload the page.
-  const inPage = (partial) => page.path === "/" ? partial.replaceAll('href="/#', 'href="#') : partial
-  await writeFile(output, html.replace("<!-- site-header -->", inPage(header)).replace("<!-- site-footer -->", inPage(sharedFooter)))
+  const header = prepareMarketingPartial(sharedHeader, page.path)
+  const footer = prepareMarketingPartial(sharedFooter, page.path)
+  await writeFile(output, html.replace("<!-- site-header -->", header).replace("<!-- site-footer -->", footer))
 }
 
 const homeHtml = await readFile(path.join(destination, "index.html"), "utf8")

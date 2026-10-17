@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox syntax for tracking.
 
-**Goal:** Deliver the approved eight-page, product-first Codevalanche website as a fully checked local preview, preserving accounts, 17 locales and analytics semantics.
+**Goal:** Deliver and publish the approved eight-page, product-first Codevalanche website after full checks, preserving accounts, 17 locales and analytics semantics.
 
 **Architecture:** Extend the existing static marketing registry, shared partials and locale pipeline. Keep the same download manifest, account service and consent-gated SDK; share a first-party download renderer between home and the download page. Workstreams own disjoint files; root coordinates English-content freeze, generated catalogs, integrated builds and preview.
 
@@ -18,7 +18,7 @@
 - Preserve wave logo, self-hosted fonts, warm paper/teal identity, footer language/theme controls, reduced-motion behavior and keyboard access. No decorative diagonal-arrow button styling.
 - All 17 locales stay complete; fail on missing/stale catalog entries. Do not contact translation APIs or silently fall back to English. Arabic remains RTL.
 - Existing valid empty embedded manifest means installer in preparation. Missing/invalid embedded manifest means release information unavailable. Do not publish local developer installers, invent release metadata or create a release lookup service.
-- No Supabase/account service changes, DNS/Cloudflare activation, publication, new tracker or analytics activation. No new product dependencies. Keep website W and account A/P4 independent.
+- No Supabase/account service changes, DNS/Cloudflare activation, new tracker or analytics activation. No new product dependencies. Keep website W and account A/P4 independent. The user's later direct-publication instruction authorizes the existing deployment path after verification.
 - Preserve other workers' changes. Workers do not build shared dist or commit concurrently; root performs integrated builds and serial commits after ownership-scoped verification.
 
 ## Review focus
@@ -31,7 +31,7 @@
 
 ## Execution
 
-The user explicitly authorized writing the plan and autonomous implementation through preview. Independent tasks 1–3 run in parallel on disjoint ownership, while root handles task 4. Task 5 starts only when English source freezes. Root serializes Git staging/commits and final generation to avoid shared-index/output races.
+The user explicitly authorized writing the plan and autonomous implementation through preview, then requested direct publication. Independent tasks 1–3 run in parallel on disjoint ownership, while root handles task 4. Task 5 starts only when English source freezes. Root serializes Git staging/commits and final generation to avoid shared-index/output races. Publication uses the canonical company source repository and the existing personal Pages deployment mirror; the domain attachment and DNS remain intact.
 
 ### Task 1: Directory routes and locale plumbing
 
@@ -101,4 +101,4 @@ The user explicitly authorized writing the plan and autonomous implementation th
 - [ ] Run owned website analytics regression with explicit local-only fixtures and check C/R generated SDK identity. Do not send real analytics or auth mutations to production.
 - [ ] Capture desktop/mobile light/dark evidence and representative Lighthouse results. Report actual scores; fix material findings and broken actions rather than chasing noise.
 - [ ] Request an independent review of the exact branch diff from starting commit0588481, with spec and test evidence. Resolve important findings, then commit final coordinated sources/catalogs/tests serially.
-- [ ] Start the loopback preview at port4280 using scripts/serve.mjs, open the homepage in the in-app browser and mark it as a deliverable. Report what is ready, tested and still unavailable. Do not publish, merge main, change DNS or activate external services.
+- [ ] Keep the loopback preview at port4280 available. After verified checks and review, integrate the source through a company-repository PR and fast-forward the existing personal deployment mirror to the same main commit; verify its Pages workflow and live domain. Open the published result in the in-app browser. Report what is ready, tested and still unavailable. Do not change DNS or activate external services.
