@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "projectRef": "hvevaxsfeyiikjhcsafi",
+  "function": "codevalanche-account",
+  "phase": "preflight",
+  "observedAt": "2026-10-18T06:24:05.151Z",
+  "authenticatedSessionsUsed": false,
+  "realAccountsUsed": false,
+  "accountOrEventWritesAttempted": false,
+  "emailsSent": false,
+  "publicAccountContractV1": true,
+  "websiteAnalyticsDisabled": true,
+  "passed": 6,
+  "total": 6,
+  "checks": [
+    {
+      "name": "missing_authorization_get",
+      "method": "GET",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "noSensitiveData": true,
+      "noStore": true,
+      "expectedCors": true,
+      "denialShape": true,
+      "pass": true
+    },
+    {
+      "name": "missing_authorization_post",
+      "method": "POST",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "noSensitiveData": true,
+      "noStore": true,
+      "expectedCors": true,
+      "denialShape": true,
+      "pass": true
+    },
+    {
+      "name": "invalid_synthetic_token",
+      "method": "GET",
+      "expectedStatus": 401,
+      "actualStatus": 401,
+      "noSensitiveData": true,
+      "noStore": true,
+      "expectedCors": true,
+      "denialShape": true,
+      "pass": true
+    },
+    {
+      "name": "disallowed_origin",
+      "method": "GET",
+      "expectedStatus": 403,
+      "actualStatus": 403,
+      "noSensitiveData": true,
+      "noStore": true,
+      "expectedCors": true,
+      "denialShape": true,
+      "pass": true
+    },
+    {
+      "name": "unsupported_method",
+      "method": "PUT",
+      "expectedStatus": 405,
+      "actualStatus": 405,
+      "noSensitiveData": true,
+      "noStore": true,
+      "expectedCors": true,
+      "denialShape": true,
+      "pass": true
+    },
+    {
+      "name": "canonical_preflight",
+      "method": "OPTIONS",
+      "expectedStatus": 204,
+      "actualStatus": 204,
+      "noSensitiveData": true,
+      "noStore": true,
+      "expectedCors": true,
+      "denialShape": true,
+      "pass": true
+    }
+  ]
+}

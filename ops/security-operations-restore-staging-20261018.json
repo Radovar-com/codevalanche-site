@@ -1,0 +1,14 @@
+{
+    "version":  1,
+    "environment":  "staging",
+    "target":  "isolated_native_postgresql_17_loopback",
+    "status":  "local_restore_failed",
+    "archiveAuthenticationVerified":  true,
+    "restoreVerified":  false,
+    "fullProjectRecoveryVerified":  false,
+    "offDeviceRecoveryVerified":  false,
+    "cleanupComplete":  false,
+    "reason":  "postgres_role_unavailable",
+    "localServerStopped":  true,
+    "localClusterPreserved":  true
+}

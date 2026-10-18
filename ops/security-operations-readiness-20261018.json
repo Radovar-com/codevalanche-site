@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "mode": "read_only_metadata",
+  "environments": [
+    {
+      "environment": "production",
+      "projectRef": "hvevaxsfeyiikjhcsafi",
+      "observedAt": "2026-10-18T06:03:56.457Z",
+      "status": "observed",
+      "recoveryQualified": false,
+      "externalAlertDeliveryVerified": false,
+      "projectStatus": "ACTIVE_HEALTHY",
+      "backups": {
+        "status": "no_restore_point_observed",
+        "completedRestorePoints": 0,
+        "latestCompletedAt": null,
+        "pitrEnabled": false,
+        "walEnabled": true,
+        "recoveryQualified": false
+      },
+      "catalog": {
+        "serverVersion": "17.6",
+        "migrationLedgerPresent": false,
+        "analyticsMaintenancePresent": false,
+        "cronPresent": false,
+        "publicTableCount": 5
+      },
+      "migrations": {
+        "status": "no_ledger_observed",
+        "appliedCount": null
+      },
+      "maintenance": {
+        "status": "not_installed",
+        "externalAlertDeliveryVerified": false
+      }
+    },
+    {
+      "environment": "staging",
+      "projectRef": "umpybznthsfehmdvmfly",
+      "observedAt": "2026-10-18T06:04:00.033Z",
+      "status": "observed",
+      "recoveryQualified": false,
+      "externalAlertDeliveryVerified": false,
+      "projectStatus": "ACTIVE_HEALTHY",
+      "backups": {
+        "status": "no_restore_point_observed",
+        "completedRestorePoints": 0,
+        "latestCompletedAt": null,
+        "pitrEnabled": false,
+        "walEnabled": true,
+        "recoveryQualified": false
+      },
+      "catalog": {
+        "serverVersion": "17.11",
+        "migrationLedgerPresent": true,
+        "analyticsMaintenancePresent": true,
+        "cronPresent": true,
+        "publicTableCount": 41
+      },
+      "migrations": {
+        "appliedCount": 41,
+        "localCount": 43,
+        "missingLocalVersions": [
+          "202610160301",
+          "202610180001"
+        ],
+        "unexpectedAppliedVersions": []
+      },
+      "maintenance": {
+        "status": "observed_healthy",
+        "reasons": [],
+        "lastSuccessAt": "2026-10-18T02:17:00.549Z",
+        "latestSchedulerStatus": "succeeded",
+        "externalAlertDeliveryVerified": false
+      }
+    }
+  ],
+  "externalAlertDeliveryVerified": false,
+  "offDeviceRecoveryVerified": false,
+  "fullProjectRecoveryVerified": false
+}

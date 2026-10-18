@@ -1,0 +1,9 @@
+{
+  "projectRef": "hvevaxsfeyiikjhcsafi",
+  "mode": "read_only_postdeploy_catalog",
+  "publicTableCount": 5,
+  "migrationLedgerPresent": false,
+  "analyticsMaintenancePresent": false,
+  "cronPresent": false,
+  "serverVersion": "17.6"
+}

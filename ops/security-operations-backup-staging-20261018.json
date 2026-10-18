@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "environment": "staging",
+  "projectRef": "umpybznthsfehmdvmfly",
+  "fullProjectRecoveryVerified": false,
+  "offDeviceRecoveryVerified": false,
+  "status": "encrypted_archive_captured",
+  "artifact": "staging-2026-10-18T05-46-06-529Z-a7d2ed4b.cvbak",
+  "encryptedSha256": "8aa4609709c13889b8a69fdc3c985a65ac0a387efd39ab153fb2e4ded8df0a48",
+  "encryptedBytes": 832081,
+  "restoreVerified": false
+}

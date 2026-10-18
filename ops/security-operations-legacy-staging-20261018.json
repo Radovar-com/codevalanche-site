@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "projectRef": "umpybznthsfehmdvmfly",
+  "environment": "staging",
+  "observedAt": "2026-10-18T05:43:58.128Z",
+  "providerOnly": false,
+  "checks": [
+    {
+      "name": "unauthenticated_request_denied",
+      "pass": true,
+      "httpStatus": 401
+    },
+    {
+      "name": "password_provider_claims_verified",
+      "pass": true
+    },
+    {
+      "name": "own_profile_session_boundary",
+      "pass": true,
+      "httpStatus": 200
+    },
+    {
+      "name": "foreign_session_revoke_denied",
+      "pass": true,
+      "httpStatus": 404
+    },
+    {
+      "name": "admin_password_aal1_denied",
+      "pass": true,
+      "httpStatus": 401,
+      "mfaRequired": true
+    },
+    {
+      "name": "fresh_password_synthetic_deletion_requested",
+      "pass": true,
+      "httpStatus": 200
+    },
+    {
+      "name": "synthetic_deletion_canceled",
+      "pass": true,
+      "httpStatus": 200
+    },
+    {
+      "name": "totp_provider_claims_verified",
+      "pass": true
+    },
+    {
+      "name": "fresh_totp_admin_aal2_allowed",
+      "pass": true,
+      "httpStatus": 200
+    },
+    {
+      "name": "synthetic_recovery_otp_claims_verified",
+      "pass": true
+    },
+    {
+      "name": "otp_only_deletion_denied",
+      "pass": true,
+      "httpStatus": 403
+    }
+  ],
+  "claims": {
+    "password": {
+      "audType": "string",
+      "audienceAuthenticatedOnly": true,
+      "audienceValue": "authenticated",
+      "issuerMatchesStaging": true,
+      "role": "authenticated",
+      "tokenUsePresent": false,
+      "tokenUse": null,
+      "aal": "aal1",
+      "amr": [
+        {
+          "method": "password",
+          "ageSeconds": 2
+        }
+      ]
+    },
+    "totp": {
+      "audType": "string",
+      "audienceAuthenticatedOnly": true,
+      "audienceValue": "authenticated",
+      "issuerMatchesStaging": true,
+      "role": "authenticated",
+      "tokenUsePresent": false,
+      "tokenUse": null,
+      "aal": "aal2",
+      "amr": [
+        {
+          "method": "totp",
+          "ageSeconds": 1
+        },
+        {
+          "method": "password",
+          "ageSeconds": 6
+        }
+      ]
+    },
+    "recoveryOtp": {
+      "audType": "string",
+      "audienceAuthenticatedOnly": true,
+      "audienceValue": "authenticated",
+      "issuerMatchesStaging": true,
+      "role": "authenticated",
+      "tokenUsePresent": false,
+      "tokenUse": null,
+      "aal": "aal1",
+      "amr": [
+        {
+          "method": "otp",
+          "ageSeconds": 2
+        }
+      ]
+    }
+  },
+  "cleanupComplete": true,
+  "productionTouched": false,
+  "emailDeliveryTested": false,
+  "status": "passed",
+  "passed": 11,
+  "total": 11
+}

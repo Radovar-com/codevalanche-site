@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "projectRef": "hvevaxsfeyiikjhcsafi",
+  "mode": "read_only_live_effective_authorization",
+  "assertions": {
+    "fiveLegacyTablesPresent": true,
+    "allTablesRlsEnabled": true,
+    "allClientTablePrivilegesDenied": true,
+    "noPublicTablePolicies": true,
+    "twoOwnedServerFunctionsPresent": true,
+    "functionsExecuteDeniedToPublicAndClients": true,
+    "functionsServerOnlyDefinerFixedSearchPath": true,
+    "clientRolesNotSuperuserOrRlsBypass": true
+  },
+  "metadata": {
+    "client_roles": [
+      {
+        "bypass_rls": false,
+        "role": "anon",
+        "superuser": false
+      },
+      {
+        "bypass_rls": false,
+        "role": "authenticated",
+        "superuser": false
+      }
+    ],
+    "functions": [
+      {
+        "anon_execute": false,
+        "authenticated_execute": false,
+        "empty_search_path": true,
+        "function": "codevalanche_rate_limit(text,integer)",
+        "public_execute": false,
+        "security_definer": true,
+        "service_role_execute": true
+      },
+      {
+        "anon_execute": false,
+        "authenticated_execute": false,
+        "empty_search_path": true,
+        "function": "codevalanche_sessions(uuid)",
+        "public_execute": false,
+        "security_definer": true,
+        "service_role_execute": true
+      }
+    ],
+    "observed_at": "2026-10-18T09:04:46.149106+03:00",
+    "policies": [],
+    "tables": [
+      {
+        "anon_delete": false,
+        "anon_insert": false,
+        "anon_select": false,
+        "anon_update": false,
+        "authenticated_delete": false,
+        "authenticated_insert": false,
+        "authenticated_select": false,
+        "authenticated_update": false,
+        "force_rls": false,
+        "rls": true,
+        "table": "codevalanche_account_state"
+      },
+      {
+        "anon_delete": false,
+        "anon_insert": false,
+        "anon_select": false,
+        "anon_update": false,
+        "authenticated_delete": false,
+        "authenticated_insert": false,
+        "authenticated_select": false,
+        "authenticated_update": false,
+        "force_rls": false,
+        "rls": true,
+        "table": "codevalanche_events"
+      },
+      {
+        "anon_delete": false,
+        "anon_insert": false,
+        "anon_select": false,
+        "anon_update": false,
+        "authenticated_delete": false,
+        "authenticated_insert": false,
+        "authenticated_select": false,
+        "authenticated_update": false,
+        "force_rls": false,
+        "rls": true,
+        "table": "codevalanche_feedback"
+      },
+      {
+        "anon_delete": false,
+        "anon_insert": false,
+        "anon_select": false,
+        "anon_update": false,
+        "authenticated_delete": false,
+        "authenticated_insert": false,
+        "authenticated_select": false,
+        "authenticated_update": false,
+        "force_rls": false,
+        "rls": true,
+        "table": "codevalanche_rate_limits"
+      },
+      {
+        "anon_delete": false,
+        "anon_insert": false,
+        "anon_select": false,
+        "anon_update": false,
+        "authenticated_delete": false,
+        "authenticated_insert": false,
+        "authenticated_select": false,
+        "authenticated_update": false,
+        "force_rls": false,
+        "rls": true,
+        "table": "codevalanche_revoked_sessions"
+      }
+    ]
+  }
+}
