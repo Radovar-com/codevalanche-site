@@ -75,7 +75,7 @@ export type WebsiteReport = {[V in ReportView]:ReportForView<V>}[ReportView];
 export type AccountOutcomeReport = ReportForView<'accounts'>;
 
 // Registries are build-owned; never take their overrides from the browser/request body.
-export const PAGE_REGISTRY:Record<SiteId,readonly string[]> = Object.freeze({radovar:['home','docs','security','privacy','terms','press','releases_archive','changelog_archive','company','codevalanche','not_found'],codevalanche:['home','how_it_works','agents','multiple_accounts','local_ai','docs','download','security','changelog','privacy','terms','account_entry_legacy','account','account_authorize','not_found']});
+export const PAGE_REGISTRY:Record<SiteId,readonly string[]> = Object.freeze({radovar:['home','docs','security','privacy','terms','press','releases_archive','changelog_archive','company','codevalanche','research','research_wave_ai','not_found'],codevalanche:['home','how_it_works','agents','multiple_accounts','local_ai','docs','download','security','changelog','privacy','terms','account_entry_legacy','account','account_authorize','not_found']});
 export const SECTION_REGISTRY:Record<SiteId,readonly string[]> = Object.freeze({radovar:['intro','codevalanche','company','resources','footer'],codevalanche:['hero','product_principle','product','accounts','parallel','workflow','details','showcase','companion','privacy_principles','download','proof','faq','footer']});
 export type RegistryKind = 'page'|'section'|'cta'|'action'|'feature'|'error'|'navigation'|'selection'|'faq'|'contact'|'entryPoint'|'editArea'|'accountSurface'|'component'|'resource'|'release'|'artifact';
 export type BuildRegistry = Partial<Record<RegistryKind,readonly string[]>>;

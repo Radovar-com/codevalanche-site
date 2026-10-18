@@ -3,3 +3,8 @@ dist/
 node_modules/
 .server-pid*
 supabase/.temp/
+# Generated CLI metadata for the isolated legacy deployment package.
+deploy/legacy-security/supabase/.temp/
+.env*
+*.env
+.superpowers/

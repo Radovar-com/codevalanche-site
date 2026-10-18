@@ -1,0 +1,194 @@
+{
+  "version": 1,
+  "projectRef": "umpybznthsfehmdvmfly",
+  "environment": "staging",
+  "observedAt": "2026-10-18T05:56:23.887Z",
+  "providerOnly": false,
+  "checks": [
+    {
+      "name": "unauthenticated_request_denied",
+      "pass": true,
+      "httpStatus": 401
+    },
+    {
+      "name": "password_provider_claims_verified",
+      "pass": true
+    },
+    {
+      "name": "own_profile_session_boundary",
+      "pass": true,
+      "httpStatus": 200
+    },
+    {
+      "name": "foreign_session_revoke_denied",
+      "pass": true,
+      "httpStatus": 404
+    },
+    {
+      "name": "admin_password_aal1_denied",
+      "pass": true,
+      "httpStatus": 401,
+      "mfaRequired": true
+    },
+    {
+      "name": "fresh_password_synthetic_deletion_requested",
+      "pass": true,
+      "httpStatus": 200
+    },
+    {
+      "name": "synthetic_deletion_canceled",
+      "pass": true,
+      "httpStatus": 200
+    },
+    {
+      "name": "totp_provider_claims_verified",
+      "pass": true
+    },
+    {
+      "name": "fresh_totp_admin_aal2_allowed",
+      "pass": false,
+      "httpStatus": 401
+    },
+    {
+      "name": "replacement_totp_claims_verified",
+      "pass": true
+    },
+    {
+      "name": "old_aal2_token_after_factor_replacement_denied",
+      "pass": true,
+      "httpStatus": 401
+    },
+    {
+      "name": "replacement_factor_fresh_aal2_allowed",
+      "pass": false,
+      "httpStatus": 401
+    },
+    {
+      "name": "session_rpc_exact_count_supported",
+      "pass": true
+    },
+    {
+      "name": "synthetic_user_blocked_with_session_cut",
+      "pass": false,
+      "httpStatus": 401
+    },
+    {
+      "name": "blocked_old_session_denied",
+      "pass": false,
+      "httpStatus": 200
+    },
+    {
+      "name": "synthetic_user_unblocked",
+      "pass": false,
+      "httpStatus": 401
+    },
+    {
+      "name": "old_session_1_stays_denied_after_unblock",
+      "pass": false,
+      "httpStatus": 200
+    },
+    {
+      "name": "old_session_2_stays_denied_after_unblock",
+      "pass": false,
+      "httpStatus": 200
+    },
+    {
+      "name": "fresh_post_unblock_session_allowed",
+      "pass": true,
+      "httpStatus": 200
+    },
+    {
+      "name": "synthetic_recovery_otp_claims_verified",
+      "pass": true
+    },
+    {
+      "name": "otp_only_deletion_denied",
+      "pass": true,
+      "httpStatus": 403
+    }
+  ],
+  "claims": {
+    "password": {
+      "audType": "string",
+      "audienceAuthenticatedOnly": true,
+      "audienceValue": "authenticated",
+      "issuerMatchesStaging": true,
+      "role": "authenticated",
+      "tokenUsePresent": false,
+      "tokenUse": null,
+      "aal": "aal1",
+      "amr": [
+        {
+          "method": "password",
+          "ageSeconds": 2
+        }
+      ]
+    },
+    "totp": {
+      "audType": "string",
+      "audienceAuthenticatedOnly": true,
+      "audienceValue": "authenticated",
+      "issuerMatchesStaging": true,
+      "role": "authenticated",
+      "tokenUsePresent": false,
+      "tokenUse": null,
+      "aal": "aal2",
+      "amr": [
+        {
+          "method": "totp",
+          "ageSeconds": 1
+        },
+        {
+          "method": "password",
+          "ageSeconds": 7
+        }
+      ]
+    },
+    "replacementTotp": {
+      "audType": "string",
+      "audienceAuthenticatedOnly": true,
+      "audienceValue": "authenticated",
+      "issuerMatchesStaging": true,
+      "role": "authenticated",
+      "tokenUsePresent": false,
+      "tokenUse": null,
+      "aal": "aal2",
+      "amr": [
+        {
+          "method": "totp",
+          "ageSeconds": 2
+        },
+        {
+          "method": "password",
+          "ageSeconds": 5
+        }
+      ]
+    },
+    "recoveryOtp": {
+      "audType": "string",
+      "audienceAuthenticatedOnly": true,
+      "audienceValue": "authenticated",
+      "issuerMatchesStaging": true,
+      "role": "authenticated",
+      "tokenUsePresent": false,
+      "tokenUse": null,
+      "aal": "aal1",
+      "amr": [
+        {
+          "method": "otp",
+          "ageSeconds": 2
+        }
+      ]
+    }
+  },
+  "cleanupComplete": true,
+  "productionTouched": false,
+  "emailDeliveryTested": false,
+  "factorReplacement": {
+    "oldAal2TokenStillAcceptedByProvider": false,
+    "replacementVerifiedTotpPresent": false
+  },
+  "status": "failed",
+  "passed": 14,
+  "total": 21
+}

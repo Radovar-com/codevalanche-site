@@ -17,17 +17,25 @@ const source=await readFile(new URL('../functions/codevalanche-account/index.ts'
 
 // A signed-in user; the recovery-code RPCs keep their codes in memory.
 async function userFixture({env={}}={}) {
- const f=fixture(); f.user.factors=[]; f.calls=[]; f.recovery=new Map();
+ const f=fixture(); f.user.factors=[]; f.calls=[]; f.recovery=new Map(); f.attempts=new Map();
  const base=f.db.rpc;
  f.db.rpc=async(name,args)=>{
   f.calls.push(['rpc',name,args]);
-  if(name==='codevalanche_mfa_recovery_replace'){f.recovery=new Map(args.p_code_hashes.map(h=>[h,false]));return {data:args.p_code_hashes.length,error:null}}
+  if(name==='codevalanche_mfa_recovery_replace'){f.recovery=new Map(args.p_code_hashes.map(h=>[h,false]));f.attempts.clear();return {data:args.p_code_hashes.length,error:null}}
   if(name==='codevalanche_mfa_recovery_consume'){const ok=f.recovery.get(args.p_code_hash)===false;if(ok)f.recovery.set(args.p_code_hash,true);return {data:ok,error:null}}
   if(name==='codevalanche_mfa_recovery_remaining')return {data:[...f.recovery.values()].filter(v=>!v).length,error:null};
   if(name==='codevalanche_mfa_recovery_clear'){const n=f.recovery.size;f.recovery.clear();return {data:n,error:null}}
+  if(name==='codevalanche_mfa_recovery_prepare'){
+   if(!f.recovery.has(args.p_code_hash))return {data:[],error:null};
+   if(!f.attempts.has(args.p_code_hash))f.attempts.set(args.p_code_hash,f.user.factors.filter(x=>x.factor_type==='totp').map(x=>x.id));
+   return {data:[{attempt_status:f.recovery.get(args.p_code_hash)?'completed':'pending',target_factor_ids:f.attempts.get(args.p_code_hash)}],error:null};
+  }
+  if(name==='codevalanche_mfa_recovery_complete'){f.recovery=new Map([[args.p_code_hash,true]]);return {data:true,error:null}}
+  if(name==='codevalanche_credential_evidence')return {data:[{qualified:true,verified_factor_count:f.user.factors.filter(x=>x.status==='verified').length,credential_changed_at:null,recovery_only:false,session_active:true,current_status:'active',blocked:false}],error:null};
   return base(name,args);
  };
- f.db.auth.admin.mfa={deleteFactor:async({id,userId:owner})=>{f.calls.push(['deleteFactor',id,owner]);return {data:{id},error:null}}};
+ f.db.auth.admin.getUserById=async()=>({data:{user:structuredClone(f.user)},error:null});
+ f.db.auth.admin.mfa={deleteFactor:async({id,userId:owner})=>{f.calls.push(['deleteFactor',id,owner]);f.user.factors=f.user.factors.filter(x=>x.id!==id);return {data:{id},error:null}}};
  f.handler=await loadHandler(f.db,{env});
  return f;
 }
@@ -86,8 +94,10 @@ test('a recovery code removes the authenticator once, from an aal1 session',asyn
  const ok=await f.handler(request('mfa-recovery-redeem',{code:typed}));
  assert.equal(ok.status,200); assert.deepEqual(await ok.json(),{ok:true,mfa:{enabled:false}});
  assert.deepEqual(f.calls.filter(c=>c[0]==='deleteFactor').map(c=>[c[1],c[2]]),[[factorId,userId],['66666666-6666-4666-8666-666666666666',userId]]);
- assert.ok(f.calls.some(c=>c[1]==='codevalanche_mfa_recovery_clear'),'the other codes belonged to the removed authenticator');
- assert.equal((await f.handler(request('mfa-recovery-redeem',{code:codes[3]}))).status,400,'a code works once');
+ assert.ok(f.calls.some(c=>c[1]==='codevalanche_mfa_recovery_complete'),'proof becomes terminal after provider confirmation');
+ const deletions=f.calls.filter(c=>c[0]==='deleteFactor').length;
+ assert.equal((await f.handler(request('mfa-recovery-redeem',{code:codes[3]}))).status,200,'completed retries acknowledge only the original result');
+ assert.equal(f.calls.filter(c=>c[0]==='deleteFactor').length,deletions,'terminal proof cannot perform another deletion');
 });
 
 test('recovery attempts are rate limited per user',async()=>{
@@ -104,6 +114,17 @@ test('turning two-step verification off needs aal2 and the user own factor',asyn
  const r=await f.handler(request('mfa-disable',{factorId},aal2()));
  assert.equal(r.status,200); assert.deepEqual(f.calls.filter(c=>c[0]==='deleteFactor').map(c=>c[1]),[factorId]);
  assert.ok(f.calls.some(c=>c[1]==='codevalanche_mfa_recovery_clear'));
+});
+
+test('MFA removal and recovery-code replacement refuse old or missing authenticator time before any change',async()=>{
+ for(const action of ['mfa-disable','mfa-recovery-codes'])for(const age of [3600,null]){
+  const f=await userFixture(); f.user.factors=[verifiedFactor];
+  const claims=aal2();claims.amr=age===null?[{method:'password',timestamp:seconds()-2}]:[{method:'password',timestamp:seconds()-age-1},{method:'totp',timestamp:seconds()-age}];
+  const response=await f.handler(request(action,action==='mfa-disable'?{factorId}:{},claims));
+  assert.equal(response.status,401,`${action}: old/missing MFA must require reauthentication`);
+  assert.equal((await response.json()).code,'reauthentication_required');
+  assert.equal(f.calls.filter(c=>c[0]==='deleteFactor'||c[1]==='codevalanche_mfa_recovery_replace').length,0);
+ }
 });
 
 // Administrators: membership, credential evidence and readouts are the real SQL.
@@ -214,5 +235,5 @@ test('migration: recovery codes and journal are service-only; the session cut de
   assert.ok(sql.includes(`grant execute on function public.${fn} to service_role;`),fn);
  }
  assert.match(sql,/code_hash ~ '\^\[0-9a-f\]\{64\}\$'/,'only hashes fit the column');
- for(const name of ['codevalanche_mfa_recovery_replace','codevalanche_mfa_recovery_consume','codevalanche_mfa_recovery_remaining','codevalanche_mfa_recovery_clear','codevalanche_revoke_all_sessions'])assert.match(source,new RegExp(`["']${name}["']`),`handler uses ${name}`);
+ for(const name of ['codevalanche_mfa_recovery_replace','codevalanche_mfa_recovery_remaining','codevalanche_mfa_recovery_clear','codevalanche_revoke_all_sessions'])assert.match(source,new RegExp(`["']${name}["']`),`handler uses ${name}`);
 });

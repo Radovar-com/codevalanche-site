@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "projectRef": "hvevaxsfeyiikjhcsafi",
+  "source": "production",
+  "scope": "legacy_application_data",
+  "fullAuthBackup": false,
+  "authCredentialsIncluded": false,
+  "storageObjectsIncluded": false,
+  "fullProjectRecoveryVerified": false,
+  "offDeviceRecoveryVerified": false,
+  "status": "encrypted_application_snapshot_captured",
+  "readOnlySingleStatementSnapshot": true,
+  "sizeAndRowBoundsChecked": true,
+  "tableScope": [
+    "codevalanche_account_state",
+    "codevalanche_events",
+    "codevalanche_feedback",
+    "codevalanche_rate_limits",
+    "codevalanche_revoked_sessions"
+  ],
+  "artifact": "production-application-2026-10-18T05-53-09-950Z-9ed1106e.cvbak",
+  "encryptedBytes": 15425,
+  "encryptedSha256": "bd2b25df806c86b7c088c336f3666c7021ae66cf4214082d12514a3b0b0c2392",
+  "restoreVerified": false
+}

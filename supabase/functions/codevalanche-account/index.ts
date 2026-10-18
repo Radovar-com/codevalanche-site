@@ -34,6 +34,7 @@ import { persistProfileWithOutcome, readOwnedProfile } from "../_shared/profileO
 import { operatorOAuthConsent, operatorOAuthEvidence } from "../_shared/operatorOAuthProof.ts";
 import { validateAccountRequest } from "./schemas.mjs";
 import { generateRecoveryCodes, hashRecoveryCode, mfaGate, normalizeRecoveryCode, verifiedTotpFactors } from "./mfa.mjs";
+import { redeemMfaRecovery } from "../_shared/mfaRecovery.ts";
 
 const url = Deno.env.get("SUPABASE_URL")!;
 const service = createClient(url, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
@@ -521,6 +522,7 @@ Deno.serve(async (req) => {
       case "mfa-recovery-codes": {
         // Shown once; only hashes are stored. Replaces any earlier codes.
         if (!totpFactors.length) return respond({ error: "MFA not enabled" }, 400);
+        assertAssurance(principal, { purpose: "mfa.recovery.replace", evidence: await readCredentialStamp(service, principal) });
         const codes = generateRecoveryCodes();
         const hashes = await Promise.all(codes.map((code: string) => hashRecoveryCode(user.id, normalizeRecoveryCode(code))));
         checked(await service.rpc("codevalanche_mfa_recovery_replace", { p_user_id: user.id, p_code_hashes: hashes }));
@@ -530,18 +532,13 @@ Deno.serve(async (req) => {
         // Lost authenticator: one unused recovery code removes the authenticator from this account.
         if (!checked(await service.rpc("codevalanche_rate_limit", { p_bucket: `mfa-recovery:${user.id}`, p_limit: 5 }))) return respond({ error: "Too many requests" }, 429);
         const code = normalizeRecoveryCode(body.code);
-        if (!code || !totpFactors.length) return respond({ error: "Invalid recovery code" }, 400);
-        if (!checked(await service.rpc("codevalanche_mfa_recovery_consume", { p_user_id: user.id, p_code_hash: await hashRecoveryCode(user.id, code) }))) return respond({ error: "Invalid recovery code" }, 400);
-        for (const factor of (user.factors || []).filter((f: { factor_type: string }) => f.factor_type === "totp")) {
-          const result = await service.auth.admin.mfa.deleteFactor({ id: factor.id, userId: user.id });
-          if (result.error) throw new Error("Factor removal failed");
-        }
-        checked(await service.rpc("codevalanche_mfa_recovery_clear", { p_user_id: user.id }));
+        if (!code || !await redeemMfaRecovery(service, user.id, await hashRecoveryCode(user.id, code))) return respond({ error: "Invalid recovery code" }, 400);
         return respond({ ok: true, mfa: { enabled: false } });
       }
       case "mfa-disable": {
         const factor = (user.factors || []).find((f: { id: string; factor_type: string }) => f.id === body.factorId && f.factor_type === "totp");
         if (!factor) return respond({ error: "Factor not found" }, 404);
+        assertAssurance(principal, { purpose: "mfa.remove", evidence: await readCredentialStamp(service, principal) });
         const result = await service.auth.admin.mfa.deleteFactor({ id: factor.id, userId: user.id });
         if (result.error) throw new Error("Factor removal failed");
         if (!totpFactors.some((f) => f.id !== factor.id)) checked(await service.rpc("codevalanche_mfa_recovery_clear", { p_user_id: user.id }));

@@ -1,0 +1,43 @@
+{
+    "version":  1,
+    "environment":  "production_application_snapshot_local_drill",
+    "target":  "isolated_native_postgresql_17_loopback",
+    "status":  "selected_application_scope_restored",
+    "archiveAuthenticationVerified":  true,
+    "restoreVerified":  true,
+    "fullProjectRecoveryVerified":  false,
+    "offDeviceRecoveryVerified":  false,
+    "cleanupComplete":  false,
+    "productionDatabaseMutated":  false,
+    "verification":  {
+                         "version":  1,
+                         "projectRef":  "hvevaxsfeyiikjhcsafi",
+                         "source":  "production",
+                         "scope":  "legacy_application_data",
+                         "fullAuthBackup":  false,
+                         "authCredentialsIncluded":  false,
+                         "storageObjectsIncluded":  false,
+                         "fullProjectRecoveryVerified":  false,
+                         "offDeviceRecoveryVerified":  false,
+                         "status":  "selected_application_scope_restored",
+                         "archiveAuthenticationVerified":  true,
+                         "tableCount":  5,
+                         "allRowDigestsMatched":  true,
+                         "ownedSchemaPrivilegesFunctionsMatched":  true,
+                         "schemaDifferenceCategories":  [
+
+                                                        ],
+                         "dataDifferenceTables":  [
+
+                                                  ],
+                         "comparisonNormalizations":  [
+                                                          "UTC timestamp presentation",
+                                                          "SQL function CRLF to LF only"
+                                                      ],
+                         "authScaffolding":  "ID-only users and empty sessions; no actual Auth credentials, identities, factors or sessions",
+                         "restoreVerified":  true,
+                         "fullAuthRestoreVerified":  false
+                     },
+    "localServerStopped":  true,
+    "localClusterPreserved":  true
+}

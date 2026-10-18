@@ -23,7 +23,16 @@ async function until(page, check) {
   for (let i = 0; i < 24; i++) { if (await page.evaluate(check)) return; await page.clock.runFor(4000); await new Promise(resolve => setTimeout(resolve, 10)) }
   throw new Error('actual SDK lifecycle did not settle')
 }
-async function fixture(t, { status = 200, expired = false, query = '', authorizePage = false } = {}) {
+async function untilIO(page, check) {
+  // Healthy asynchronous responses must settle in real time. Advancing the page
+  // clock can otherwise fire an eight-second request deadline during fixture I/O.
+  const deadline = Date.now() + 5000
+  while (!await page.evaluate(check)) {
+    assert.ok(Date.now() < deadline, 'actual SDK I/O did not settle within five real seconds')
+    await new Promise(resolve => setTimeout(resolve, 10))
+  }
+}
+async function fixture(t, { status = 200, expired = false, query = '', authorizePage = false, responseDelayMs = 0 } = {}) {
   const [html, source] = await Promise.all([readFile(authorizePage ? 'src/account/authorize/index.html' : 'src/account/index.html', 'utf8'), bundle()])
   const server = createServer((request, response) => {
     if (request.url.startsWith('/account/app.js')) { response.setHeader('Content-Type', 'text/javascript'); response.end(source) }
@@ -60,6 +69,7 @@ async function fixture(t, { status = 200, expired = false, query = '', authorize
       result = accountStatus === 200 ? body.action === 'operator.oauth.details' ? {apiVersion:2,ok:true,requestId:body.requestId,data:{operator:false}} : { user: { displayName: user.user_metadata.display_name, bio: '' }, sessions: [], deletion: null }
         : { error: accountStatus === 401 ? 'Session revoked' : accountStatus === 403 ? 'Account blocked' : 'Account service unavailable' }
     } else result = {}
+    if (responseDelayMs) await new Promise(resolve => setTimeout(resolve, responseDelayMs))
     await route.fulfill({ status: responseStatus, contentType: 'application/json', body: JSON.stringify(result) })
   })
   const origin = `http://127.0.0.1:${server.address().port}`
@@ -182,18 +192,19 @@ test('self deletion with an incomplete acceptance remains unconfirmed and offers
   await f.page.route('https://account.fixture.invalid/functions/**', async route => {
     const { action } = route.request().postDataJSON()
     if (action === 'request-deletion') mutationCount++
+    await new Promise(resolve => setTimeout(resolve, 150))
     await route.fulfill({ status: action === 'request-deletion' ? 202 : 200, contentType: 'application/json', body: JSON.stringify(action === 'get-account'
       ? { user: { id: USER_A.id, displayName: 'A', bio: '' }, sessions: [], deletion: null } : { ok: true }) })
   })
-  await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
+  await f.load(); await untilIO(f.page, () => !document.getElementById('profile').hidden)
   await f.page.locator('#delete-form').evaluate(form => form.closest('details').open = true)
   await f.page.locator('#delete-confirm').fill('DELETE'); await f.page.locator('#delete-form button').click()
-  await until(f.page, () => document.getElementById('status').textContent.length > 0 && !document.getElementById('account-state-retry').disabled)
+  await untilIO(f.page, () => document.getElementById('status').textContent.length > 0 && !document.getElementById('account-state-retry').disabled)
   assert.equal(await f.page.locator('#profile').isVisible(), false, 'an unconfirmed deletion must gate further mutations')
   assert.equal(await f.page.locator('#status').getAttribute('data-error'), 'true')
   assert.doesNotMatch(await f.page.locator('#status').innerText(), /recorded|deleted|cancelled/i)
   await f.page.locator('#account-state-retry').click()
-  await until(f.page, () => !document.getElementById('profile').hidden)
+  await untilIO(f.page, () => !document.getElementById('profile').hidden)
   assert.equal(mutationCount, 1, 'retry reads account state and must not submit deletion again')
 })
 
@@ -203,17 +214,18 @@ test('deletion cancellation without a cancelled state cannot claim that deletion
   await f.page.route('https://account.fixture.invalid/functions/**', async route => {
     const { action } = route.request().postDataJSON()
     if (action === 'cancel-deletion') cancels++
+    await new Promise(resolve => setTimeout(resolve, 150))
     await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(action === 'get-account'
       ? { user: { id: USER_A.id, displayName: 'A', bio: '' }, sessions: [], policy: { status: 'deletion_pending' }, deletion: { scheduledFor: '2026-11-10T00:00:00Z' } } : { ok: true }) })
   })
-  await f.load(); await until(f.page, () => document.getElementById('account-state-title').textContent === 'Account deletion pending')
+  await f.load(); await untilIO(f.page, () => document.getElementById('account-state-title').textContent === 'Account deletion pending')
   await f.page.locator('#account-state-cancel').click()
-  await until(f.page, () => document.getElementById('status').textContent.length > 0 && !document.getElementById('account-state-retry').disabled)
+  await untilIO(f.page, () => document.getElementById('status').textContent.length > 0 && !document.getElementById('account-state-retry').disabled)
   assert.equal(await f.page.locator('#status').getAttribute('data-error'), 'true', 'cancellation needs a confirmed cancelled state')
   assert.doesNotMatch(await f.page.locator('#status').innerText(), /deletion cancelled/i)
   assert.equal(await f.page.locator('#profile').isVisible(), false)
   await f.page.locator('#account-state-retry').click()
-  await until(f.page, () => document.getElementById('account-state-title').textContent === 'Account deletion pending')
+  await untilIO(f.page, () => document.getElementById('account-state-title').textContent === 'Account deletion pending')
   assert.equal(cancels, 1, 'retry must only read current deletion state')
 })
 
@@ -310,10 +322,10 @@ test('actual SDK explicit PKCE callback consumes the code and retains authorizat
 })
 
 for (const view of ['profile', 'consent']) test(`actual SDK peer logout immediately withdraws the other tab's ${view} through pending and complete cleanup`, async t => {
-  const f = await fixture(t)
-  await f.load(); await until(f.page, () => !document.getElementById('profile').hidden)
+  const f = await fixture(t, { responseDelayMs: 150 })
+  await f.load(); await untilIO(f.page, () => !document.getElementById('profile').hidden)
   const peer = await f.openPeer(view === 'consent' ? '?authorization_id=fixture-consent' : '')
-  await until(peer, () => !document.getElementById(location.search ? 'consent' : 'profile').hidden)
+  await untilIO(peer, () => !document.getElementById(location.search ? 'consent' : 'profile').hidden)
   const release = f.holdLogout()
   await f.page.locator('#logout').click()
   await peer.waitForFunction(() => localStorage.getItem('codevalanche-account-logout-intent') === 'pending')
@@ -321,7 +333,7 @@ for (const view of ['profile', 'consent']) test(`actual SDK peer logout immediat
   assert.equal(await peer.locator(`#${view}`).isVisible(), false, 'peer must withdraw the account view while SDK logout is still pending')
   assert.equal(await peer.locator('#profile-form button').isEnabled(), false, 'peer profile mutations must be disabled immediately')
   release()
-  await until(f.page, () => document.getElementById('status').textContent === 'Signed out.')
+  await untilIO(f.page, () => document.getElementById('status').textContent === 'Signed out.')
   for (let i = 0; i < 3; i++) { await peer.clock.runFor(0); await new Promise(resolve => setTimeout(resolve, 10)) }
   assert.equal(await peer.evaluate(() => localStorage.getItem('sb-account-auth-token')), null)
   assert.equal(await peer.locator('#profile').isVisible(), false)

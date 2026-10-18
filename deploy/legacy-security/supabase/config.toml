@@ -1,0 +1,5 @@
+project_id = "codevalanche-legacy-security"
+
+[functions.codevalanche-account]
+enabled = true
+verify_jwt = false

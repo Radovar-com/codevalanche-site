@@ -1,0 +1,49 @@
+{
+    "projectRef":  "umpybznthsfehmdvmfly",
+    "observedAt":  "2026-10-18T05:38:33.7027404Z",
+    "status":  "observed",
+    "settings":  {
+                     "jwt_exp":  3600,
+                     "password_min_length":  12,
+                     "mailer_otp_exp":  3600,
+                     "sms_otp_exp":  60,
+                     "security_refresh_token_reuse_interval":  10,
+                     "mfa_max_enrolled_factors":  10,
+                     "rate_limit_email_sent":  2,
+                     "rate_limit_sms_sent":  30,
+                     "rate_limit_token_refresh":  150,
+                     "rate_limit_verify":  30,
+                     "rate_limit_anonymous_users":  30,
+                     "rate_limit_web3":  30,
+                     "refresh_token_rotation_enabled":  true,
+                     "mailer_autoconfirm":  false,
+                     "mailer_secure_email_change_enabled":  true,
+                     "security_update_password_require_reauthentication":  false,
+                     "security_captcha_enabled":  false,
+                     "mfa_totp_enroll_enabled":  true,
+                     "mfa_totp_verify_enabled":  true,
+                     "mfa_phone_enroll_enabled":  false,
+                     "mfa_phone_verify_enabled":  false,
+                     "password_hibp_enabled":  false,
+                     "site_url":  [
+                                      "https://codevalanche.com/"
+                                  ],
+                     "uri_allow_list":  [
+
+                                        ]
+                 },
+    "mutation":  {
+                     "onlyField":  "password_min_length",
+                     "before":  12,
+                     "after":  12,
+                     "readbackVerified":  true
+                 },
+    "shortPasswordProbe":  {
+                               "stagingOnly":  true,
+                               "httpStatus":  422,
+                               "errorCode":  "weak_password",
+                               "weakPasswordRejected":  true,
+                               "accountCreationExpected":  false,
+                               "mailExpected":  false
+                           }
+}

@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "environments": [
+    { "name": "production", "projectRef": "hvevaxsfeyiikjhcsafi", "projectName": "Codevalanche" },
+    { "name": "staging", "projectRef": "umpybznthsfehmdvmfly", "projectName": "codevalanche-analytics-test-20261015" }
+  ],
+  "externalAlertDeliveryVerified": false,
+  "offDeviceRecoveryVerified": false,
+  "fullProjectRecoveryVerified": false
+}

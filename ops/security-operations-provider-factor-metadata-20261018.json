@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "projectRef": "umpybznthsfehmdvmfly",
+  "environment": "staging",
+  "observedAt": "2026-10-18T05:59:14.262Z",
+  "providerOnly": true,
+  "checks": [
+    {
+      "name": "password_provider_claims_verified",
+      "pass": true
+    },
+    {
+      "name": "totp_provider_claims_verified",
+      "pass": true
+    },
+    {
+      "name": "replacement_totp_claims_verified",
+      "pass": true
+    },
+    {
+      "name": "synthetic_recovery_otp_claims_verified",
+      "pass": true
+    }
+  ],
+  "claims": {
+    "password": {
+      "audType": "string",
+      "audienceAuthenticatedOnly": true,
+      "audienceValue": "authenticated",
+      "issuerMatchesStaging": true,
+      "role": "authenticated",
+      "tokenUsePresent": false,
+      "tokenUse": null,
+      "aal": "aal1",
+      "amr": [
+        {
+          "method": "password",
+          "ageSeconds": 2
+        }
+      ]
+    },
+    "totp": {
+      "audType": "string",
+      "audienceAuthenticatedOnly": true,
+      "audienceValue": "authenticated",
+      "issuerMatchesStaging": true,
+      "role": "authenticated",
+      "tokenUsePresent": false,
+      "tokenUse": null,
+      "aal": "aal2",
+      "amr": [
+        {
+          "method": "totp",
+          "ageSeconds": 2
+        },
+        {
+          "method": "password",
+          "ageSeconds": 3
+        }
+      ]
+    },
+    "replacementTotp": {
+      "audType": "string",
+      "audienceAuthenticatedOnly": true,
+      "audienceValue": "authenticated",
+      "issuerMatchesStaging": true,
+      "role": "authenticated",
+      "tokenUsePresent": false,
+      "tokenUse": null,
+      "aal": "aal2",
+      "amr": [
+        {
+          "method": "totp",
+          "ageSeconds": 1
+        },
+        {
+          "method": "password",
+          "ageSeconds": 3
+        }
+      ]
+    },
+    "recoveryOtp": {
+      "audType": "string",
+      "audienceAuthenticatedOnly": true,
+      "audienceValue": "authenticated",
+      "issuerMatchesStaging": true,
+      "role": "authenticated",
+      "tokenUsePresent": false,
+      "tokenUse": null,
+      "aal": "aal1",
+      "amr": [
+        {
+          "method": "otp",
+          "ageSeconds": 1
+        }
+      ]
+    }
+  },
+  "cleanupComplete": true,
+  "productionTouched": false,
+  "emailDeliveryTested": false,
+  "initialEnrollmentFactorOrdering": [
+    {
+      "createdAtPresent": true,
+      "updatedAtPresent": true,
+      "createdStrictlyBeforeMfa": true,
+      "updatedStrictlyBeforeMfa": false,
+      "updatedMinusMfaMilliseconds": 337
+    }
+  ],
+  "factorVerificationMetadata": {
+    "sameFactorAcrossChallenges": true,
+    "createdAtStable": true,
+    "updatedAtChangedOnNormalVerification": true,
+    "statusRemainsVerified": true,
+    "typeRemainsTotp": true,
+    "amrAfterCreatedAt": true,
+    "amrAtOrBeforeUpdatedAt": true
+  },
+  "factorReplacement": {
+    "oldAal2TokenStillAcceptedByProvider": false,
+    "replacementVerifiedTotpPresent": false
+  },
+  "status": "passed",
+  "passed": 4,
+  "total": 4
+}

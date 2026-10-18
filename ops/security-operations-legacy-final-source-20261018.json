@@ -1,0 +1,10 @@
+{
+  "environment": "staging",
+  "function": "codevalanche-account-security-qualification-20261018",
+  "version": 2,
+  "files": {
+    "index.ts": "cd74d5d55b4490405cfb4414443cf269471c3e9fc745ec2c0307ff85c720a1eb",
+    "validation.mjs": "c35a2e8c52e247e0574e497c21e65cdb4d3945bf97893b475bbb0348c75a0679",
+    "security.mjs": "cf688be3a96d3de0d3c8533a8f610187ee60147ee2d9830d3350c48e9236a1b5"
+  }
+}

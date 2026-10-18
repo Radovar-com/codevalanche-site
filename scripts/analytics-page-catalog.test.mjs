@@ -66,8 +66,24 @@ test('Radovar company and product observations survive SDK sanitization and coll
  assert.equal(validateWebsiteEvent(validWebsiteEvent({page_id:'company'}),eventContext()).accepted,false,'Radovar company does not become a Codevalanche page');
 });
 
+test('Radovar research pages preserve site isolation and exact source section opportunities',()=>{
+ assert.deepEqual(PAGES.radovar,PAGE_REGISTRY.radovar,'browser and collector catalogs remain identical');
+ const context=eventContext({origin:'https://radovar.com',receipt:validConsentReceipt({siteId:'radovar'})});
+ const scopes={research:['intro','resources','company','footer'],research_wave_ai:['footer']};
+ for(const [pageId,scope] of Object.entries(scopes)){
+  assert.ok(PAGES.radovar.includes(pageId),`${pageId} is registered`);
+  assert.deepEqual(PAGE_SECTION_SCOPE.radovar[pageId],scope);
+  for(const [name,properties] of [['page_viewed',{navigation_type:'route'}],['session_started',{landing_page_id:pageId,attribution_kind:'unknown'}],['navigation_used',{navigation_id:'anchor',target_page_id:pageId,placement:'inline'}],...scope.map(section_id=>['section_viewed',{section_id}])]){
+   const result=sanitizeEvent(name,properties,{},'radovar');assert.ok(result,`${pageId}/${name} survives SDK sanitation`);
+   assert.equal(validateWebsiteEvent(validWebsiteEvent({site_id:'radovar',page_id:pageId,event_name:name,properties:result.properties}),context).accepted,true);
+  }
+  assert.equal(sanitizeEvent('navigation_used',{navigation_id:'header',target_page_id:pageId,placement:'header'},{},'codevalanche'),null);
+  assert.equal(validateWebsiteEvent(validWebsiteEvent({page_id:pageId}),eventContext()).accepted,false);
+ }
+});
+
 test('section reports retain exact C/R opportunities including unexposed shared footers',async()=>{
- const cases=[['radovar','company','company',true],['radovar','codevalanche','codevalanche',true],['radovar','press','company',true],['radovar','company','resources',false],...['changelog','privacy','terms',...Object.keys(productScopes)].map(pageId=>['codevalanche',pageId,'footer',false])];
+ const cases=[['radovar','company','company',true],['radovar','codevalanche','codevalanche',true],['radovar','press','company',true],['radovar','company','resources',false],['radovar','research','company',false],['radovar','research_wave_ai','footer',false],...['changelog','privacy','terms',...Object.keys(productScopes)].map(pageId=>['codevalanche',pageId,'footer',false])];
  for(const [siteId,pageId,sectionId,exposed] of cases){
   const page={site_id:siteId,event_id:crypto.randomUUID(),event_name:'page_viewed',event_at:'2026-10-14T10:00:00.000Z',received_at:'2026-10-14T10:00:00.000Z',page_id:pageId,page_version:'local_fixture',page_instance_id:crypto.randomUUID(),session_id:crypto.randomUUID(),anonymous_id:crypto.randomUUID(),event_source:'W',properties:{navigation_type:'initial'},context:{},traffic_class:'external',clock_quality:'original'};
   const events=[page,...(exposed?[{...page,event_id:crypto.randomUUID(),event_name:'section_viewed',event_at:'2026-10-14T10:00:02.000Z',properties:{section_id:sectionId}}]:[])];

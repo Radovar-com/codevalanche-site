@@ -36,7 +36,11 @@ export function headersFile() {
 /** Adds the security headers to a response that passes through Cloudflare. */
 export function withSecurityHeaders(response) {
   const result = new Response(response.body, response)
-  for (const [name, value] of Object.entries(SECURITY_HEADERS)) result.headers.set(name, value)
+  for (const [name, value] of Object.entries(SECURITY_HEADERS)) {
+    // Browsers enforce both policies; retain any stricter upstream script rules.
+    if (name === 'Content-Security-Policy' && result.headers.has(name)) result.headers.append(name, value)
+    else result.headers.set(name, value)
+  }
   return result
 }
 

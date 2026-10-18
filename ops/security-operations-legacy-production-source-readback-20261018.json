@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "projectRef": "hvevaxsfeyiikjhcsafi",
+  "function": "codevalanche-account",
+  "deployedFunctionVersion": 3,
+  "observedAt": "2026-10-18T06:25:57.646Z",
+  "protectedStorageRoot": "%LOCALAPPDATA%/Codex/security-20261018",
+  "protectedReadbackDirectory": "production-function-readback-v3-eaf232f414e74a248d0ddedfc642254e",
+  "sourceReadbackMatchesCandidate": true,
+  "sourceReadbackByteExact": true,
+  "files": {
+    "index.ts": {
+      "deployedRawSha256": "d5b2ab81974f8396c05b68eaa585c73993a43252cf99c172a237818ab0535a94",
+      "candidateRawSha256": "d5b2ab81974f8396c05b68eaa585c73993a43252cf99c172a237818ab0535a94",
+      "canonicalSha256": "2b7d8507200af2b4beffd5942dd0d8f3b8b48abe7a53159376cfa8614d73aaa4"
+    },
+    "security.mjs": {
+      "deployedRawSha256": "172c76569a28cb4a756d62bea9cee667a02048a6999ec0115afb568171a6ca3f",
+      "candidateRawSha256": "172c76569a28cb4a756d62bea9cee667a02048a6999ec0115afb568171a6ca3f",
+      "canonicalSha256": "40391cd943abb5e5d2d31c76d21d5c027920cc9c4dae5a467f8b538100eafb4d"
+    },
+    "validation.mjs": {
+      "deployedRawSha256": "c35a2e8c52e247e0574e497c21e65cdb4d3945bf97893b475bbb0348c75a0679",
+      "candidateRawSha256": "c35a2e8c52e247e0574e497c21e65cdb4d3945bf97893b475bbb0348c75a0679",
+      "canonicalSha256": "c206976d0794a91737acaaa4636b7c5bb97b195f56c94666286b6e7d46292600"
+    }
+  }
+}
