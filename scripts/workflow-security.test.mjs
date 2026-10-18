@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { Script } from 'node:vm';
 
 const workflow = await readFile(new URL('../.github/workflows/deploy-pages.yml', import.meta.url), 'utf8');
 
@@ -15,7 +16,7 @@ function block(source, key, indent) {
   return lines.slice(start + 1, end).join('\n');
 }
 
-test('pull requests run a read-only build while only trusted personal-main runs can publish', () => {
+test('pull requests run a read-only build while only trusted organization-main runs can publish', () => {
   assert.match(block(workflow, 'on', 0), /pull_request:\s*\n\s+branches: \[main\]/);
   assert.match(block(workflow, 'permissions', 0), /contents: read/);
   assert.doesNotMatch(block(workflow, 'permissions', 0), /pages: write|id-token: write/);
@@ -29,12 +30,29 @@ test('pull requests run a read-only build while only trusted personal-main runs 
   assert.match(build, /actions\/upload-pages-artifact@/);
   assert.doesNotMatch(build, /actions\/deploy-pages@/);
   assert.match(deploy, /needs: build/);
-  assert.match(deploy, /if: github\.repository == 'cata009\/codevalanche-site' && github\.ref == 'refs\/heads\/main' && \(github\.event_name == 'push' \|\| github\.event_name == 'workflow_dispatch'\)/);
+  assert.match(deploy, /if: github\.repository == 'Radovar-com\/codevalanche-site' && github\.ref == 'refs\/heads\/main' && \(github\.event_name == 'push' \|\| github\.event_name == 'workflow_dispatch'\)/);
   assert.match(block(deploy, 'permissions', 4), /pages: write/);
   assert.match(block(deploy, 'permissions', 4), /id-token: write/);
   assert.match(deploy, /environment:\s*\n\s+name: github-pages/);
   assert.match(deploy, /actions\/deploy-pages@/);
   assert.match(build, /persist-credentials: false/);
+});
+
+test('actual deployment condition allows only organization main push/manual across repository, ref and event combinations', () => {
+  const deploy = block(block(workflow, 'jobs', 0), 'deploy', 2);
+  const expression = deploy.match(/^\s*if:\s*(.+)$/m)?.[1];
+  assert.ok(expression, 'the deployment job has a condition');
+  const condition = new Script(expression);
+  for (const repository of ['Radovar-com/codevalanche-site', 'cata009/codevalanche-site', 'someone/codevalanche-site', 'Radovar-com/codevalanche-site-fork']) {
+    for (const ref of ['refs/heads/main', 'refs/heads/feature', 'refs/pull/7/merge']) {
+      for (const event_name of ['push', 'workflow_dispatch', 'pull_request', 'schedule']) {
+        const actual = condition.runInNewContext({ github: { repository, ref, event_name } }, { timeout: 100 });
+        const expected = repository === 'Radovar-com/codevalanche-site' && ref === 'refs/heads/main'
+          && ['push', 'workflow_dispatch'].includes(event_name);
+        assert.equal(actual, expected, JSON.stringify({ repository, ref, event_name }));
+      }
+    }
+  }
 });
 
 test('Pages workflow pins each third-party action to a reviewed full commit SHA', () => {
