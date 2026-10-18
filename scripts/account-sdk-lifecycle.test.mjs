@@ -84,16 +84,20 @@ async function fixture(t, { status = 200, expired = false, query = '', authorize
 }
 
 test('actual SDK late logout cannot clear a newer sign-in', async t => {
-  const f = await fixture(t, { status: 401 }), release = f.holdLogout()
-  await f.load(); await until(f.page, () => !document.getElementById('auth').hidden || !document.getElementById('account-state').hidden)
-  await until(f.page, () => window.__sdkClient != null)
+  const f = await fixture(t, { status: 401, responseDelayMs: 150 }), release = f.holdLogout()
+  // Initial loading also shows account-state; observe the held SDK logout before
+  // asserting the cleanup fence, without advancing healthy request deadlines.
+  const logoutStarted = f.page.waitForRequest(request => new URL(request.url()).pathname === '/auth/v1/logout', { timeout: 5000 })
+  await f.load(); await logoutStarted
+  await untilIO(f.page, () => !document.getElementById('auth').hidden || !document.getElementById('account-state').hidden)
+  await untilIO(f.page, () => window.__sdkClient != null)
   await f.page.clock.runFor(0)
   assert.equal(await f.page.locator('#auth-submit').isEnabled(), false, 'signin must wait until destructive SDK cleanup settles')
   release(); f.status(200)
-  await until(f.page, () => !document.getElementById('auth').hidden && !document.getElementById('auth-submit').disabled)
+  await untilIO(f.page, () => !document.getElementById('auth').hidden && !document.getElementById('auth-submit').disabled)
   await f.page.locator('#email').fill(USER_B.email); await f.page.locator('#password').fill('fixture-password')
   await f.page.locator('#auth-submit').click()
-  await until(f.page, () => !document.getElementById('profile').hidden)
+  await untilIO(f.page, () => !document.getElementById('profile').hidden)
   assert.equal(await f.page.locator('#profile-email').innerText(), USER_B.email)
 })
 
@@ -312,12 +316,12 @@ test('actual SDK refresh after failed expired-token logout cannot resurrect the 
 })
 
 test('actual SDK explicit PKCE callback consumes the code and retains authorization context on reload', async t => {
-  const f = await fixture(t, { query: '?code=fixture-pkce&authorization_id=fixture-consent' })
-  await f.load(); await until(f.page, () => !document.getElementById('consent').hidden)
+  const f = await fixture(t, { query: '?code=fixture-pkce&authorization_id=fixture-consent', responseDelayMs: 150 })
+  await f.load(); await untilIO(f.page, () => !document.getElementById('consent').hidden)
   assert.equal(f.calls.some(call => call.grant === 'pkce'), true)
   assert.equal(new URL(f.page.url()).searchParams.get('code'), null)
   assert.equal(new URL(f.page.url()).searchParams.get('authorization_id'), 'fixture-consent')
-  await f.page.reload(); await until(f.page, () => !document.getElementById('consent').hidden)
+  await f.page.reload(); await untilIO(f.page, () => !document.getElementById('consent').hidden)
   assert.equal(f.calls.filter(call => call.grant === 'pkce').length, 1)
 })
 
