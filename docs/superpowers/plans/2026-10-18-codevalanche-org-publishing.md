@@ -41,24 +41,24 @@ Files: `.github/workflows/deploy-pages.yml`, `scripts/workflow-security.test.mjs
 
 - [x] Add a failing repository/ref/event matrix: organization main push/manual may deploy; personal, PR, fork and non-main may not.
 - [x] Run focused tests red, change only the deployment repository guard to `Radovar-com/codevalanche-site`, run green and inspect the two-file diff.
-- [ ] Root commits source/spec/plan/runbook, creates and attaches the organization PR; merge only after exact-head required checks pass. No personal mirror synchronization.
+- [x] Root commits source/spec/plan/runbook, creates and attaches the organization PR; merge only after exact-head required checks pass. No personal mirror synchronization.
 
 ### Task3: Bootstrap and predeploy organization Pages — root
 
 - [x] With existing authorized admin access, POST organization `/pages` with `build_type:workflow`, without cname. Create `github-pages` environment restricted to main; no custom deployment secret.
-- [ ] Let the reviewed organization main workflow publish once; check successful deployment ID and built artifact identity.
-- [ ] Verify default project URL HTML and each required asset at its project-prefixed path, documenting expected root-relative preview limitations.
+- [x] Let the reviewed organization main workflow publish once; check successful deployment ID and built artifact identity.
+- [x] Verify default project URL HTML and each required asset at its project-prefixed path, documenting expected root-relative preview limitations.
 
 ### Task4: Domain handoff and acceptance — root
 
-- [ ] Read back original binding and rollback preimage immediately before cutover. Clear personal cname, assign organization cname consecutively.
-- [ ] Change only Cloudflare www target from `cata009.github.io` to `Radovar-com.github.io`; preserve proxy and all other record values.
-- [ ] Verify trusted origin TLS and custom-domain response identity, then enable organization HTTPS enforcement when eligible. Roll back on failed origin/TLS acceptance without weakening validation.
-- [ ] Check homepage, account, security/privacy and native links; compare SDK/config and account function version/source. Recheck public mail RRsets and address links without claiming SMTP delivery.
-- [ ] Run strict public monitor from the canonical organization and regional no-injection proof; save sanitized readback.
+- [x] Read back original binding and rollback preimage immediately before cutover. Clear personal cname, assign organization cname consecutively.
+- [x] Change only Cloudflare www target from `cata009.github.io` to `Radovar-com.github.io`; preserve proxy and all other record values.
+- [x] Verify trusted origin TLS and custom-domain response identity; organization HTTPS enforcement remained enabled with an approved certificate. No rollback needed and no validation weakened.
+- [x] Check homepage, account, security/privacy and native paths; compare SDK/config and account function version/source. Recheck public mail RRsets without claiming authenticated production flows or SMTP delivery.
+- [x] Run strict public monitor from the canonical organization; all five pages passed with zero injected external scripts. Save sanitized readback and fresh public-DNS proof after retirement.
 
 ### Task5: Retire personal publishing and report — root/reviewer
 
-- [ ] Only after Task4 succeeds, disable personal Pages and Actions, then archive `cata009/codevalanche-site`; verify archived/read-only. Preserve code/history and rollback settings.
-- [ ] Search active website configuration for remaining personal publishing dependencies; document historical references, archive links and excluded desktop dependencies without modifying them.
-- [ ] Deliver a plain Romanian report: what moved, what remains, proof of the real publisher and exact rollback. No later automatic deletion.
+- [x] Only after Task4 succeeds, disable personal Pages and its publishing workflow, then archive `cata009/codevalanche-site`; verify archived/read-only. Preserve code/history and rollback settings.
+- [x] Search active website configuration for remaining personal publishing dependencies; document historical references, archive links and excluded desktop dependencies without modifying them.
+- [x] Prepare the plain Romanian operational report: what moved, what remains, proof of the real publisher, exact rollback and verification limits. No later automatic deletion. Root delivers its link with the final response after documentation closure checks.
