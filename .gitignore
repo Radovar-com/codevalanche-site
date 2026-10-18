@@ -3,3 +3,6 @@ dist/
 node_modules/
 .server-pid*
 supabase/.temp/
+.env*
+*.env
+.superpowers/
