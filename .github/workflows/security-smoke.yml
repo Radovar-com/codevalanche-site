@@ -1,74 +1,101 @@
-name: Public security smoke
+name: Temporary public edge response diagnostic
 
 on:
   workflow_dispatch:
-    inputs:
-      mode:
-        description: Live header enforcement or diagnostic source inventory
-        type: choice
-        required: true
-        default: require-headers
-        options:
-          - require-headers
-          - inventory
-  schedule:
-    - cron: '29 */6 * * *'
 
 permissions:
   contents: read
 
 concurrency:
-  group: security-public-smoke
-  cancel-in-progress: true
+  group: edge-response-diagnostic-20261018
+  cancel-in-progress: false
 
 jobs:
-  public-smoke:
-    # Missing/false variable keeps scheduled traffic off. Manual diagnostics remain
-    # available on reviewed canonical main without claiming the headers are live.
+  edge-inventory:
     if: >-
+      github.event_name == 'workflow_dispatch' &&
       github.repository == 'Radovar-com/codevalanche-site' &&
-      github.ref == 'refs/heads/main' &&
-      ((github.event_name == 'schedule' && vars.SECURITY_PUBLIC_MONITOR_ENABLED == 'true') ||
-       github.event_name == 'workflow_dispatch')
+      github.ref == 'refs/heads/codex/edge-response-diagnostic-20261018'
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 3
     permissions:
       contents: read
     steps:
-      - name: Enforce canonical main and literal scheduled opt-in
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          MONITOR_ENABLED: ${{ vars.SECURITY_PUBLIC_MONITOR_ENABLED }}
+      - name: Enforce diagnostic repository and branch
         run: |
-          # GitHub expression string equality ignores case; these checks do not.
-          if [ "$GITHUB_REF" != 'refs/heads/main' ]; then
-            echo 'Refused: reviewed canonical main is required.'
-            exit 1
-          fi
-          if [ "$EVENT_NAME" = 'schedule' ] && [ "$MONITOR_ENABLED" != 'true' ]; then
-            echo 'Refused: scheduled monitoring requires literal lowercase true.'
-            exit 1
-          fi
-      - name: Check out reviewed source
+          test "$GITHUB_EVENT_NAME" = 'workflow_dispatch'
+          test "$GITHUB_REPOSITORY" = 'Radovar-com/codevalanche-site'
+          test "$GITHUB_REF" = 'refs/heads/codex/edge-response-diagnostic-20261018'
+      - name: Check out exact diagnostic commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: refs/heads/main
+          ref: ${{ github.sha }}
           persist-credentials: false
+      - name: Verify immutable checkout
+        run: test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
       - name: Set up pinned Node
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24.18.1
-          cache: npm
-      - name: Install locked dependencies without lifecycle scripts
+      - name: Install locked parser without lifecycle scripts
         run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify the monitor's failure boundaries
-        run: node --test scripts/security-public-smoke.test.mjs
-      - name: Check fixed public pages
-        env:
-          MONITOR_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'require-headers' }}
+      - name: Inventory fixed public HTML script origins and paths
         run: |
-          if [ "$MONITOR_MODE" = 'inventory' ]; then
-            node scripts/security-public-smoke.mjs
-          else
-            node scripts/security-public-smoke.mjs --require-headers
-          fi
+          node --input-type=module <<'NODE'
+          import {parse} from 'parse5';
+          const targets = ['https://codevalanche.com/', 'https://radovar.com/'];
+          const maximumBytes = 1024 * 1024;
+          for (const target of targets) {
+            const report = {target, status: null, edgePop: null, externalScripts: []};
+            try {
+              const response = await fetch(target, {
+                method: 'GET', redirect: 'manual', credentials: 'omit', cache: 'no-store',
+                referrerPolicy: 'no-referrer', signal: AbortSignal.timeout(15000),
+                headers: {accept: 'text/html', 'user-agent': 'Codevalanche-public-security-smoke/1.0'},
+              });
+              report.status = response.status;
+              report.edgePop = response.headers.get('cf-ray')?.match(/-([A-Z]{3})$/)?.[1] ?? null;
+              if (response.status !== 200 || !/^text\/html(?:\s*;|$)/i.test(response.headers.get('content-type') ?? '')) {
+                await response.body?.cancel();
+                report.issue = 'unexpected_status_or_content_type';
+              } else {
+                const reader = response.body.getReader();
+                const chunks = [];
+                let size = 0;
+                try {
+                  for (;;) {
+                    const {done, value} = await reader.read();
+                    if (done) break;
+                    size += value.byteLength;
+                    if (size > maximumBytes) { await reader.cancel(); throw new Error('response_too_large'); }
+                    chunks.push(value);
+                  }
+                } finally { reader.releaseLock(); }
+                const document = parse(new TextDecoder().decode(Buffer.concat(chunks)));
+                const found = new Set();
+                const visit = node => {
+                  if (node.tagName === 'script') {
+                    const src = node.attrs?.find(attribute => attribute.name === 'src')?.value;
+                    if (src) {
+                      try {
+                        const url = new URL(src, target);
+                        if (['https:', 'http:'].includes(url.protocol) && url.origin !== new URL(target).origin) {
+                          // Intentionally omit query, fragment, credentials and inline code.
+                          found.add(JSON.stringify({origin: url.origin, pathname: url.pathname.slice(0, 512)}));
+                        }
+                      } catch {}
+                    }
+                  }
+                  for (const child of node.childNodes ?? []) visit(child);
+                  if (node.content) visit(node.content);
+                };
+                visit(document);
+                report.externalScripts = [...found].slice(0, 20).map(value => JSON.parse(value));
+              }
+            } catch {
+              report.issue = 'bounded_request_failed';
+            }
+            console.log(JSON.stringify(report));
+            if (report.issue) process.exitCode = 1;
+          }
+          NODE
