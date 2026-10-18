@@ -1,74 +1,39 @@
-name: Public security smoke
+# Proposal only: outside .github/workflows, so it cannot run or change monitoring.
+# After explicit approval, use ONLY on a dedicated organization test branch,
+# temporarily replacing that branch's existing security-smoke.yml. Never merge it.
+name: '[TEST] Personal notification delivery'
+run-name: '[TEST] Personal notification delivery ${{ github.run_id }}'
 
 on:
   workflow_dispatch:
     inputs:
-      mode:
-        description: Live header enforcement or diagnostic source inventory
-        type: choice
+      confirm_test:
+        description: 'Explicitly approved single failure test; no site outage'
+        type: boolean
         required: true
-        default: require-headers
-        options:
-          - require-headers
-          - inventory
-  schedule:
-    - cron: '29 */6 * * *'
+        default: false
 
 permissions:
   contents: read
 
-concurrency:
-  group: security-public-smoke
-  cancel-in-progress: true
-
 jobs:
-  public-smoke:
-    # Missing/false variable keeps scheduled traffic off. Manual diagnostics remain
-    # available on reviewed canonical main without claiming the headers are live.
+  notification-test:
     if: >-
       github.repository == 'Radovar-com/codevalanche-site' &&
-      github.ref == 'refs/heads/main' &&
-      ((github.event_name == 'schedule' && vars.SECURITY_PUBLIC_MONITOR_ENABLED == 'true') ||
-       github.event_name == 'workflow_dispatch')
+      startsWith(github.ref, 'refs/heads/codex/notification-proof-') &&
+      github.event_name == 'workflow_dispatch' && inputs.confirm_test == true
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 1
     permissions:
       contents: read
     steps:
-      - name: Enforce canonical main and literal scheduled opt-in
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          MONITOR_ENABLED: ${{ vars.SECURITY_PUBLIC_MONITOR_ENABLED }}
+      - name: Produce the explicitly labelled test failure
+        shell: bash
         run: |
-          # GitHub expression string equality ignores case; these checks do not.
-          if [ "$GITHUB_REF" != 'refs/heads/main' ]; then
-            echo 'Refused: reviewed canonical main is required.'
-            exit 1
-          fi
-          if [ "$EVENT_NAME" = 'schedule' ] && [ "$MONITOR_ENABLED" != 'true' ]; then
-            echo 'Refused: scheduled monitoring requires literal lowercase true.'
-            exit 1
-          fi
-      - name: Check out reviewed source
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: refs/heads/main
-          persist-credentials: false
-      - name: Set up pinned Node
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: 24.18.1
-          cache: npm
-      - name: Install locked dependencies without lifecycle scripts
-        run: npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify the monitor's failure boundaries
-        run: node --test scripts/security-public-smoke.test.mjs
-      - name: Check fixed public pages
-        env:
-          MONITOR_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'require-headers' }}
-        run: |
-          if [ "$MONITOR_MODE" = 'inventory' ]; then
-            node scripts/security-public-smoke.mjs
-          else
-            node scripts/security-public-smoke.mjs --require-headers
-          fi
+          case "$GITHUB_REF" in
+            refs/heads/codex/notification-proof-*) ;;
+            *) echo 'Refused: isolated notification-test branch required.'; exit 2 ;;
+          esac
+          echo 'TEST ONLY: intentionally failed job to verify personal inbox delivery.'
+          echo 'No checkout, secrets, site requests, provider mutations or deployment.'
+          exit 1
