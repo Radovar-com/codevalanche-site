@@ -108,8 +108,3 @@ Deno.serve(async (req) => {
   }
  } catch { return respond({error:'Account service unavailable'},503); }
 });
-
-
-
-
-
