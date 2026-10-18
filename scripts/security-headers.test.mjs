@@ -45,6 +45,15 @@ test('the Worker keeps the origin response and adds the headers', async () => {
   assert.doesNotMatch(wrangler, /^\s*\[vars\]|api_token|secret\s*=|account_id\s*=\s*"[0-9a-f]{32}"/m, 'no secrets or account ids in wrangler config')
 })
 
+test('the edge never replaces a stricter origin CSP or changes redirects and caching', async () => {
+  const original = "default-src 'none'; script-src 'self'";
+  const response = withSecurityHeaders(new Response(null, {status:302,headers:{'Content-Security-Policy':original,Location:'/account/','Cache-Control':'no-store'}}));
+  assert.equal(response.status,302);
+  assert.equal(response.headers.get('location'),'/account/');
+  assert.equal(response.headers.get('cache-control'),'no-store');
+  assert.equal(response.headers.get('content-security-policy'),`${original}, ${SECURITY_HEADERS['Content-Security-Policy']}`);
+});
+
 test('every page gets a meta CSP that allows exactly its own inline scripts', () => {
   const supabaseUrl = publicConfigValue(config, 'supabaseUrl')
   assert.match(supabaseUrl, /^https:\/\//)

@@ -24,7 +24,7 @@ const mfaLocale = /^ro(?:-|$)/i.test(localeState.locale?.tag || '') ? 'ro' : 'en
 const T = (key, vars = {}) => mfaLocale === 'ro' ? mfaText('ro', key, vars) : t(MFA_STRINGS.en[key] ?? '', vars)
 document.querySelectorAll('[data-mfa]').forEach(element => { element.textContent = T(element.dataset.mfa) })
 if ($('mfa-qr')) $('mfa-qr').alt = T('qrAlt')
-let pendingFactorId = null, mfaFactors = []
+let pendingFactorId = null, mfaFactors = [], pendingRecoveryEnrollment = null
 const accountAnalytics = createAccountAnalytics({ config: window.CODEVALANCHE_ANALYTICS })
 // Cloudflare Turnstile: inert until config.turnstileSiteKey is set (one key for
 // every account form). Tokens are single-use, so each widget is reset after each attempt.
@@ -111,6 +111,7 @@ function setAccountStatus(next) {
 }
 function invalidateAccountView() {
   security.clear()
+  pendingRecoveryEnrollment = null
   renderGeneration++
   currentSession = null; user = null
   setAccountStatus('signed-out'); setMode('signin')
@@ -228,7 +229,7 @@ function showMfaChallenge() {
   $('mfa-challenge-code').value = ''; $('mfa-recovery-code').value = ''; $('mfa-challenge-code').focus()
 }
 function clearMfaPanels() {
-  pendingFactorId = null; mfaFactors = []
+  pendingFactorId = null; mfaFactors = []; pendingRecoveryEnrollment = null
   $('mfa-enroll').hidden = true; $('mfa-qr').removeAttribute('src'); $('mfa-secret').textContent = ''; $('mfa-enroll-code').value = ''
   $('mfa-codes').replaceChildren(); $('mfa-codes-panel').hidden = true
 }
@@ -478,14 +479,26 @@ $('mfa-step-up')?.addEventListener('click', () => void action(async () => {
   $('mfa-factor-id').value = factors[0].id; $('authenticator-verify').hidden = false; $('authenticator-secret').textContent = ''
 }))
 $('mfa-form')?.addEventListener('submit', event => { event.preventDefault(); void action(async () => {
-  await security.verify($('mfa-code').value, $('mfa-factor-id').value)
+  const factorId = $('mfa-factor-id').value
+  await security.verify($('mfa-code').value, factorId)
   $('mfa-code').value = ''; $('authenticator-secret').textContent = ''; $('authenticator-verify').hidden = true
   const needsFreshVerification=security.state().requiresFreshVerification
   await readCurrentSession()
   if (authorizationId && accountStatus !== 'ready') return
+  if (pendingRecoveryEnrollment?.userId === currentSession?.user?.id && pendingRecoveryEnrollment.factorId === factorId && accountStatus === 'ready') {
+    try {
+      const { codes } = await api('mfa-recovery-codes')
+      pendingRecoveryEnrollment = null
+      showRecoveryCodes(codes); await readCurrentSession(); noticeTranslated(T('enabled'))
+    } catch (error) {
+      if (error?.code !== 'reauthentication_required') throw error
+      promptInitialRecoveryVerification()
+    }
+    return
+  }
   notice(needsFreshVerification?'Authenticator verified and added. Verify again with a new code before sensitive access.':'Authenticator verified. Sensitive operations still verify your current account access.')
 }) })
-$('mfa-cancel')?.addEventListener('click', () => void action(async () => { await security.cancel(); $('authenticator-secret').textContent = ''; $('mfa-code').value = ''; $('authenticator-verify').hidden = true }))
+$('mfa-cancel')?.addEventListener('click', () => void action(async () => { await security.cancel(); pendingRecoveryEnrollment = null; $('authenticator-secret').textContent = ''; $('mfa-code').value = ''; $('authenticator-verify').hidden = true }))
 $('mfa-remove')?.addEventListener('click', () => void action(async () => { const factors = await security.factors(); if (!factors.length) { notice('No verified authenticator is enrolled.'); return }; await security.remove(factors[0].id); notice('Authenticator removed. Earlier remote approvals have been withdrawn.'); await readCurrentSession() }))
 $('analytics-save')?.addEventListener('click', () => void action(async () => { accountAnalytics.suspend(); const result = await apiV2('analytics.consent', { analytics: $('analytics-consent').checked }); void accountAnalytics.update({ session: currentSession, account: result }); notice(result.analyticsConsent ? 'Account activity analytics accepted.' : 'Account activity analytics stopped. Queued events from earlier consent are refused.'); }))
 $('activity-load')?.addEventListener('click', () => void action(async () => { const result = await apiV2('security.activity', { limit: 20 }); list('security-activity', result.events.map(e => `${new Intl.DateTimeFormat(localeState.locale.tag, { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(e.occurredAt))} · ${e.eventName} · ${e.outcome} · ${e.source}`)); $('activity-coverage').textContent = t(result.coverage.status === 'qualified' ? 'Configured sources are current.' : 'Some provider sources are missing or delayed. An empty list does not establish zero attempts.') }))
@@ -524,6 +537,13 @@ $('mfa-enable').addEventListener('click', () => void action(async () => {
   $('mfa-enroll').hidden = false; $('mfa-enable').hidden = true; $('mfa-enroll-code').value = ''; $('mfa-enroll-code').focus()
 }))
 function closeEnrollment() { pendingFactorId = null; $('mfa-enroll').hidden = true; $('mfa-qr').removeAttribute('src'); $('mfa-secret').textContent = ''; $('mfa-enroll-code').value = '' }
+function promptInitialRecoveryVerification() {
+  if (!pendingRecoveryEnrollment || pendingRecoveryEnrollment.userId !== currentSession?.user?.id || accountStatus !== 'ready') return
+  $('mfa-factor-id').value = pendingRecoveryEnrollment.factorId
+  $('authenticator-secret').textContent = ''; $('mfa-code').value = ''; $('authenticator-verify').hidden = false
+  notice('Authenticator verified and added. Verify again with a new code before sensitive access.')
+  $('mfa-code').focus()
+}
 $('mfa-enroll-cancel').addEventListener('click', () => void action(async () => {
   const factorId = pendingFactorId; closeEnrollment(); $('mfa-enable').hidden = false
   if (factorId) await client.auth.mfa.unenroll({ factorId })
@@ -531,13 +551,16 @@ $('mfa-enroll-cancel').addEventListener('click', () => void action(async () => {
 $('mfa-enroll-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => {
   const code = totpCodeFrom($('mfa-enroll-code').value)
   if (!code || !pendingFactorId) { noticeTranslated(T('codeInvalid'), true); return }
-  const verified = await client.auth.mfa.challengeAndVerify({ factorId: pendingFactorId, code })
+  const factorId = pendingFactorId, ownerId = currentSession?.user?.id
+  const verified = await client.auth.mfa.challengeAndVerify({ factorId, code })
   if (verified.error) { $('mfa-enroll-code').value = ''; noticeTranslated(T('codeWrong'), true); return }
   closeEnrollment()
-  // The session is aal2 now: open it, then create the recovery codes and show them once.
+  // Enrollment changes the credential stamp after the whole-second MFA claim.
+  // Preserve that fence: ask explicitly for a new verification before backups.
   await readCurrentSession()
-  const { codes } = await api('mfa-recovery-codes')
-  showRecoveryCodes(codes); await readCurrentSession(); noticeTranslated(T('enabled'))
+  if (!ownerId || ownerId !== currentSession?.user?.id || accountStatus !== 'ready') return
+  pendingRecoveryEnrollment = { userId: ownerId, factorId }
+  promptInitialRecoveryVerification()
 }) })
 $('mfa-regenerate').addEventListener('click', () => void action(async () => {
   try { const { codes } = await api('mfa-recovery-codes'); showRecoveryCodes(codes); await readCurrentSession(); noticeTranslated(T('codesRegenerated')) } catch (error) { noticeTranslated(mfaFailure(error, 'reverify'), true) }
