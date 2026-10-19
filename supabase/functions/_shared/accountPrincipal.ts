@@ -3,6 +3,14 @@ import { readClaims } from "../codevalanche-account/validation.mjs";
 import type { Principal } from "./accountContract.ts";
 import { isRestrictedRecovery } from "./recoveryPolicy.ts";
 // getUser validates this exact access token remotely; decoding never substitutes signature verification.
+// Same accepted shapes as the legacy function: the string "authenticated", or
+// an array of strings that contains it. getUser has already verified the token.
+function authenticatedAudience(aud: unknown) {
+  return aud === "authenticated" ||
+    (Array.isArray(aud) && aud.every((value) => typeof value === "string") &&
+      aud.includes("authenticated"));
+}
+
 export async function authenticateAccount(
   req: Request,
   options: any,
@@ -43,7 +51,7 @@ export async function authenticateAccountContext(
   if (
     !uuid.test(user.id) || claims.sub !== user.id ||
     !uuid.test(claims.session_id || "") || claims.iss !== issuer ||
-    claims.aud !== "authenticated" || claims.role !== "authenticated" ||
+    !authenticatedAudience(claims.aud) || claims.role !== "authenticated" ||
     !Number.isFinite(claims.exp) || claims.exp <= currentTime() / 1000 ||
     (claims.token_use !== undefined && claims.token_use !== "access") ||
     (claims.client_id !== undefined &&

@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-18T09:25:00.160Z",
+  "status": "local_corrective_proposals_only_not_promotable",
+  "proposal": {
+    "path": "ops/proposals/20261018-modern-account-safety.sql",
+    "sha256": "e2a069c4232a43ef1f276e5b001e892ae8744e9fff99fb4f4865a73e5ec695dc",
+    "hashNormalization": "UTF-8 with CRLF converted to LF, trailing whitespace removed and one final LF",
+    "recoveryReplaceStatementSha256": "7cd14b33f2470ae2290d03f1c9d1a6146bb1806a7173e63c0766a3f24904fecf",
+    "counterStatementSha256": "5135f6ad2ab3ea15a0c49ca90f7016bb7ac7a58f48020484b85989c2bf9b2151",
+    "requiresModernFoundation": true,
+    "canonicalMigrationFilesUnchanged": 43,
+    "automaticallyApplied": false
+  },
+  "counter": {
+    "originalReportsTokensDeleted": 1,
+    "correctedReportsTokensDeleted": 0,
+    "correctedReportsSessionsDeleted": 0,
+    "authRevoked": false,
+    "actualTokensRetained": 1,
+    "actualSessionsRetained": 1,
+    "applicationDenylistRows": 1,
+    "ownerGrantsDefinerAndSearchPathPreserved": true,
+    "testScope": "Fresh local PGlite with synthetic Auth tables; deliberately denied session DELETE."
+  },
+  "native": {
+    "postgresqlVersion": "17.11",
+    "independentWorkerConnections": 2,
+    "originalMigrationSha256": "0b43c51c4272ddf4aca531a80bce933ee82cd373bbcf398f325ba9781d84cfdb",
+    "serializedCandidateRawSha256": "7cd14b33f2470ae2290d03f1c9d1a6146bb1806a7173e63c0766a3f24904fecf",
+    "red": {
+      "initialCodeCount": 0,
+      "finalCodeCount": 20,
+      "firstSetCount": 10,
+      "secondSetCount": 10,
+      "firstCallReturned": 10,
+      "secondCallReturned": 10,
+      "barrier": "Second caller waits at a fixture-only INSERT barrier after its zero-row DELETE; first caller commits ten."
+    },
+    "green": {
+      "initialCodeCount": 0,
+      "finalCodeCount": 10,
+      "firstSetCount": 0,
+      "secondSetCount": 10,
+      "firstCallReturned": 10,
+      "secondCallReturned": 10,
+      "secondCallBlockedBeforeDelete": true,
+      "barrier": "First outer transaction holds the per-user transaction lock; second caller waits before DELETE, then replaces the committed first set."
+    },
+    "ownerAclAndSecurityAttributesPreserved": true,
+    "newLocalServerStopped": true,
+    "sourceFunctionMatchedOriginal": true,
+    "existingClusterDataAccessed": false,
+    "existingFilesDeleted": false,
+    "failedRunnerAttemptsPreserved": true
+  },
+  "providerDeploymentPerformed": false,
+  "promotionReady": false,
+  "limits": [
+    "Not installed in the canonical migration chain or any hosted project.",
+    "Native concurrency evidence covers the serialized replacement component; local SQL tests cover the combined proposal and transactional rollback.",
+    "No full legacy-to-modern production migration, hosted Auth/recovery qualification or production rollback is established.",
+    "No identities, raw recovery codes, machine paths, ports or process identifiers are included."
+  ]
+}
