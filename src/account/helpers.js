@@ -40,6 +40,9 @@ export function safeError(error) {
     remote_quota_exceeded: 'Your remote limit is reached. Stop and revoke remain available.', account_deletion_pending: 'Account deletion is pending. Sign in again to cancel before deletion starts.', email_verification_required: 'Verify your email before using sensitive online access.',
     operation_conflict: 'The request was refused because another account operation is pending or deletion has started. Refresh your account before trying again.',
     account_operation_unknown: 'The account request result could not be confirmed. Refresh your account to check its current state. Local projects are preserved.' }
+  messages.email_link_invalid_or_expired = 'This email link is invalid or expired. Request a new link.'
+  messages.email_link_outdated = 'This email link is no longer supported. Request a new link.'
+  messages.email_change_unavailable = 'This email address cannot be used for your account. Check it and try again.'
   messages.captcha_required = 'Complete the verification challenge to continue. Try again if it expired.'
   return Object.hasOwn(messages, error?.code) ? messages[error.code] : 'Unable to complete this request. Please try again.'
 }
