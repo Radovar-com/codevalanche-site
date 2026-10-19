@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import { safeError, identityLabels, authCallback, normalizeAccountError, normalizeAccountProfile, passwordProblem, MIN_PASSWORD_LENGTH, captchaModes, turnstileSiteKey, emailLocaleFor, accountServerVersion, V1_ACCOUNT_ACTIONS } from './helpers.js'
 import { createAccountSessionLifecycle, accountAuthFetch } from './sessionLifecycle.js'
 import { createAccountSecurity } from './security.js'
-import { recoveryCallback, exchangeRecovery, validateNewPassword, recoveryNotice } from './recovery.js'
+import { emailLinkCallback, exchangeEmailLink, emailLinkFragment, validateNewPassword, recoveryNotice } from './recovery.js'
 import { loadTurnstile } from './captcha.js'
 import { createAccountAnalytics } from './analytics.js'
 import { MFA_STRINGS, mfaText, totpCodeFrom } from './mfa-i18n.js'
@@ -71,7 +71,9 @@ if (authorizationId && !$('operator-reauth')) {
   $('account-state-logout').before(button)
 }
 const recoveryRedirect = new URL(redirectTo); recoveryRedirect.searchParams.set('flow', 'recovery')
-let mode = 'signin', user = null, recovery = new URL(location.href).searchParams.get('flow') === 'recovery', busy = false
+const initialFlow = new URL(location.href).searchParams.get('flow')
+// An accepted invitation sets the account's first password through the recovery-mode form.
+let mode = 'signin', user = null, recovery = ['recovery', 'invite'].includes(initialFlow), invite = initialFlow === 'invite', busy = false
 let accountStatus = 'signed-out', renderGeneration = 0, currentSession = null, operatorConsent = false
 let cleanupPromise = null, cleanupPending = false, ownedSignin = false
 const security = createAccountSecurity(client, { isRecovery: () => recovery, assertRemoval: () => apiV2('security.mfa.remove-authorize') })
@@ -170,7 +172,7 @@ async function completeExplicitSignin(work, unprotected = false) {
 function setMode(next) {
   mode = next
   const reset = next === 'reset', signup = next === 'signup', update = next === 'update'
-  $('auth-title').textContent = t(reset ? 'Reset password' : signup ? 'Create your account' : update ? 'Choose a new password' : 'Sign in')
+  $('auth-title').textContent = t(reset ? 'Reset password' : signup ? 'Create your account' : update ? (invite ? 'Set your password' : 'Choose a new password') : 'Sign in')
   $('auth-submit').textContent = t(reset ? 'Send reset link' : signup ? 'Create account' : update ? 'Save password' : 'Sign in')
   $('auth-description').textContent = reset ? t('We’ll email you a link to choose a new password.') : signup ? t(`Your Codevalanche account. Use a password with at least ${MIN_PASSWORD_LENGTH} characters.`) : update ? t(`Choose a password with at least ${MIN_PASSWORD_LENGTH} characters.`) : t('Welcome back to Codevalanche.')
   void showCaptcha('captcha', captchaModes.has(next))
@@ -323,7 +325,7 @@ $('auth-form').addEventListener('submit', event => { if (!user && ['signin','sig
   $('password').value = ''
   if (mode === 'signup' && !result.data.session) { notice('Check your email to confirm your account, then return here to sign in.'); $('resend').hidden = false }
   else if (mode === 'reset') notice(recoveryNotice())
-  else if (mode === 'update') { recovery = false; history.replaceState(null, '', redirectTo.pathname + redirectTo.search); await cleanUpLocalSession(); notice('Password updated. Sign in again to continue.') }
+  else if (mode === 'update') { const invited = invite; recovery = false; invite = false; history.replaceState(null, '', redirectTo.pathname + redirectTo.search); await cleanUpLocalSession(); notice(invited ? 'Your account is ready. Sign in with your new password.' : 'Password updated. Sign in again to continue.') }
 }) })
 $('resend').addEventListener('click', () => void action(async () => {
   const email = $('email').value.trim(), captchaToken = captchaFor('captcha')
@@ -334,6 +336,18 @@ $('resend').addEventListener('click', () => void action(async () => {
 }))
 $('profile-form').addEventListener('focusin', () => { accountAnalytics.startProfileEdit() })
 $('profile-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => { const requestId = crypto.randomUUID(); const changes = normalizeAccountProfile({ displayName: $('display-name').value.trim(), bio: $('bio').value.trim() }); accountAnalytics.track('profile_save_submitted', { operation_id: requestId }); if (v2) await apiV2('profile.update', { requestId, ...changes }); else await api('update-profile', changes); notice('Profile saved.') }) })
+// Secure email change: Supabase sends a link to the current and to the new
+// address (double_confirm_changes); the address changes after both are opened.
+$('email-change-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => {
+  const email = $('new-email').value.trim()
+  if (!email || email.toLowerCase() === String(user?.email || '').toLowerCase()) { notice('Enter a different email address.', true); $('new-email').focus(); return }
+  // The SDK applies the request to its own current session; the USER_UPDATED
+  // event that follows re-reads the account, so no render generation is compared.
+  const { error } = await client.auth.updateUser({ email }, { emailRedirectTo: redirectTo.href })
+  if (error) throw ['email_exists', 'email_address_invalid', 'validation_failed'].includes(error.code) ? { code: 'email_change_unavailable' } : error
+  $('new-email').value = ''
+  notice('Check both inboxes. Open the link sent to your current address and the one sent to the new address to finish the change.')
+}) })
 // Logout immediately fences the optional queue and receipt. It must not wait
 // for a collector; logout-click analytics therefore stays explicitly unmeasured.
 async function signOut() { await cleanUpLocalSession(); notice('Signed out.') }
@@ -393,12 +407,23 @@ client.auth.onAuthStateChange((event, session) => {
 })
 const initialGeneration = renderGeneration
 try {
+  // Auth material is removed from the address bar before anything else runs.
+  // A fragment from an older link is never adopted as a session.
+  const fragment = emailLinkFragment(location.hash)
+  if (location.hash) history.replaceState(null, '', location.pathname + location.search)
   const callbackUrl = new URL(location.href)
+  let emailChange = null
   if (callbackUrl.searchParams.has('token_hash')) {
-    const callback = recoveryCallback(location.href, { allowLoopback: true })
-    recovery = true
+    const callback = emailLinkCallback(location.href, { allowLoopback: true })
     history.replaceState(null, '', callback.cleanUrl)
-    await completeExplicitSignin(async () => ({ data: await exchangeRecovery(client, callback.tokenHash), error: null }), true)
+    if (callback.type === 'email_change') {
+      await completeExplicitSignin(async () => { emailChange = await exchangeEmailLink(client, 'email_change', callback.tokenHash); return { data: emailChange.data, error: null } }, true)
+      // First of the two confirmations: no session and nothing to update yet.
+      if (emailChange.state === 'pending') await readCurrentSession()
+    } else {
+      recovery = true; invite = callback.type === 'invite'
+      await completeExplicitSignin(async () => ({ data: (await exchangeEmailLink(client, callback.type, callback.tokenHash)).data, error: null }), true)
+    }
   }
   const callbackCode = new URL(location.href).searchParams.get('code')
   if (callbackCode) {
@@ -408,8 +433,11 @@ try {
     history.replaceState(null, '', completedCallback.pathname + completedCallback.search)
   }
   else if (initialGeneration === renderGeneration) { notice(); await readCurrentSession() }
-  if (new URL(location.href).searchParams.has('error')) notice('This email link is invalid or expired. Request a new link.', true)
-} catch (error) { if (initialGeneration === renderGeneration) { if(error?.code==='recovery_invalid_or_expired'){setAccountStatus('signed-out');notice(safeError(error),true)}else{handleAccountRefusal(sdkSessionError(error)); notice(safeError(sdkSessionError(error)), true)} } }
+  if (new URL(location.href).searchParams.has('error') || fragment === 'invalid') notice('This email link is invalid or expired. Request a new link.', true)
+  else if (fragment === 'outdated') notice(safeError({ code: 'email_link_outdated' }), true)
+  else if (emailChange?.state === 'pending' || fragment === 'pending') notice('Confirmed. Now open the link sent to your other email address to finish the change.')
+  else if (emailChange?.state === 'session') notice('Your email address is updated.')
+} catch (error) { if (initialGeneration === renderGeneration) { if(['recovery_invalid_or_expired','email_link_invalid_or_expired'].includes(error?.code)){if(error.stored)await cleanUpLocalSession().catch(()=>undefined);setAccountStatus('signed-out');notice(safeError(error),true)}else{handleAccountRefusal(sdkSessionError(error)); notice(safeError(sdkSessionError(error)), true)} } }
 
 async function cancelAccountDeletion() {
   const expected = currentSession
