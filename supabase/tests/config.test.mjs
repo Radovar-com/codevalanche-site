@@ -45,25 +45,26 @@ test('config holds no secret values', () => {
   assert.equal(section('functions.codevalanche-account').verify_jwt, 'false', 'matches README deployment note');
 });
 
-test('every email template is configured, generated from its source and translated', async () => {
+test('every email template is configured, generated from its source and English-only', async () => {
   const files = (await readdir(new URL('supabase/templates/', root))).filter(f => f.endsWith('.html')).sort();
   assert.deepEqual(files, TEMPLATE_KINDS.map(k => `${k}.html`).sort());
-  assert.deepEqual(Object.keys(STRINGS).sort(), [...EMAIL_LOCALES].sort(), 'the account page sends only locales that have templates');
+  assert.deepEqual(Object.keys(STRINGS), ['en'], 'the owner requested English-only account emails');
   for (const kind of TEMPLATE_KINDS) {
     const entry = section(`auth.email.template.${kind}`);
     assert.equal(entry.content_path, `"./supabase/templates/${kind}.html"`);
     assert.equal(entry.subject, JSON.stringify(SUBJECTS[kind]));
     const html = (await readFile(new URL(`supabase/templates/${kind}.html`, root), 'utf8')).replace(/\r\n/g, '\n');
     assert.equal(html, renderTemplate(kind), `${kind}.html is regenerated (node supabase/templates/email-templates.mjs)`);
-    assert.match(html, kind === 'reauthentication' ? /\{\{ \.Token \}\}/ : /href="\{\{ \.ConfirmationURL \}\}"/);
+    if (['invite', 'email_change'].includes(kind)) assert.ok(html.includes(`href="{{ .SiteURL }}?token_hash={{ .TokenHash }}&amp;type=${kind}"`), `${kind} links to the account page with a token hash`);
+    else assert.match(html, kind === 'reauthentication' ? /\{\{ \.Token \}\}/ : /href="\{\{ \.ConfirmationURL \}\}"/);
     for (const locale of Object.keys(STRINGS)) assert.ok(html.includes(STRINGS[locale][kind].title), `${kind} has ${locale}`);
   }
 });
 
-// Mini evaluator for the subset of Go templates used here, to prove that a user
-// without metadata gets English and a Romanian user gets Romanian.
+// Mini evaluator for the supported Go actions, proving that existing account
+// locale metadata cannot change the owner-requested English-only email output.
 function render(html, data) {
-  const vars = { '.ConfirmationURL': 'https://x.test/c', '.Token': '123456', '.Email': 'a@x.test', '.NewEmail': 'b@x.test' };
+  const vars = { '.ConfirmationURL': 'https://x.test/c', '.SiteURL': 'https://x.test/account/', '.TokenHash': 'hash', '.Token': '123456', '.Email': 'a@x.test', '.NewEmail': 'b@x.test' };
   let locale;
   const tokens = html.split(/(\{\{.*?\}\})/s);
   const out = []; const stack = [];
@@ -84,14 +85,15 @@ function render(html, data) {
   return out.join('');
 }
 
-test('templates pick the language from metadata and fall back to English', () => {
+test('templates remain English for all existing account locale metadata', () => {
   for (const kind of TEMPLATE_KINDS) {
     const html = renderTemplate(kind);
-    for (const [data, expected] of [[undefined, 'en'], [{}, 'en'], [{ locale: 'de' }, 'en'], [{ locale: 'ro' }, 'ro']]) {
+    for (const data of [undefined, {}, {locale:'de'}, ...EMAIL_LOCALES.map(locale => ({locale}))]) {
+      const expected = 'en';
       const text = render(html, data);
       assert.ok(text.includes(STRINGS[expected][kind].title.replace(/&/g, '&amp;')), `${kind} ${JSON.stringify(data)} -> ${expected}`);
       for (const other of Object.keys(STRINGS).filter(l => l !== expected)) assert.ok(!text.includes(STRINGS[other][kind].title), `${kind} has no ${other} text for ${expected}`);
-      assert.ok(text.includes(kind === 'reauthentication' ? '123456' : 'https://x.test/c'));
+      assert.ok(text.includes(kind === 'reauthentication' ? '123456' : ['invite', 'email_change'].includes(kind) ? `https://x.test/account/?token_hash=hash&amp;type=${kind}` : 'https://x.test/c'));
     }
   }
 });
