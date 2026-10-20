@@ -7,7 +7,7 @@ test('shared release state distinguishes unavailable configuration from an empty
  assert.equal(typeof module.releaseState,'function','shared release state is implemented');
  for(const manifest of [undefined,null,{}, {...approvedManifest,version:2},{...approvedManifest,assets:{}},{...approvedManifest,assets:[null]},{...approvedManifest,assets:[{}]},{...approvedManifest,gatewayBaseUrl:'javascript:alert(1)'}])assert.equal(module.releaseState(manifest).status,'unavailable');
  assert.equal(module.releaseState({...approvedManifest,assets:[]}).status,'preparation');
- assert.equal(module.releaseState(checkedInManifest).status,'preparation','the actual empty embedded manifest is valid even before a gateway is configured');
+ assert.notEqual(module.releaseState(checkedInManifest).status,'unavailable','the actual embedded manifest is valid');
  assert.equal(module.releaseState(approvedManifest).status,'available');
  assert.equal(module.releaseState({...approvedManifest,assets:[{...approvedManifest.assets[0],qualified:false}]}).status,'preparation');
 });

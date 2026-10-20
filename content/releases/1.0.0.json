@@ -7,9 +7,14 @@
       "summary": "Your coding agents and local models in one app, in early access.",
       "sections": [
         {
+          "title": "Before you install",
+          "body": "The installer is not yet signed with a company certificate, so Windows may show “Windows protected your PC”.",
+          "detail": "Choose More info, then Run anyway."
+        },
+        {
           "title": "Your agents, side by side",
-          "body": "Work with Claude Code, Codex and Gemini CLI side by side, or with models running on your own PC.",
-          "detail": "Switch agent or model in the middle of a conversation and keep the history, steering and attachments."
+          "body": "Work with Claude Code, Codex and models running on your own PC, side by side.",
+          "detail": "Gemini CLI is included and works with a Gemini API key. Switch agent or model in the middle of a conversation and keep the history, steering and attachments."
         },
         {
           "title": "Local models that fit your PC",
@@ -34,11 +39,6 @@
           "title": "Private and safe by default",
           "body": "Keys and sign-ins are stored encrypted on your PC, and in a new project agents ask before acting outside its folder.",
           "detail": "Updates are signed and checked before they install. Feedback you send from the app leaves without your keys or personal paths."
-        },
-        {
-          "title": "Good to know",
-          "body": "The installer is not yet signed with a company certificate, so Windows may show “Windows protected your PC”.",
-          "detail": "Choose More info, then Run anyway."
         }
       ]
     },
@@ -47,9 +47,14 @@
       "summary": "وكلاء البرمجة والنماذج المحلية في تطبيق واحد، ضمن الوصول المبكر.",
       "sections": [
         {
+          "title": "قبل التثبيت",
+          "body": "برنامج التثبيت غير موقّع بعد بشهادة شركة، لذلك قد يعرض ⁦Windows⁩ رسالة «قام ⁦Windows⁩ بحماية الكمبيوتر».",
+          "detail": "اختر «مزيد من المعلومات»، ثم «تشغيل على أي حال»."
+        },
+        {
           "title": "وكلاؤك جنبًا إلى جنب",
-          "body": "اعمل مع ⁦Claude Code⁩ و⁦Codex⁩ و⁦Gemini CLI⁩ جنبًا إلى جنب، أو مع نماذج تعمل على حاسوبك.",
-          "detail": "بدّل الوكيل أو النموذج في منتصف المحادثة واحتفظ بالسجل والتوجيهات والمرفقات."
+          "body": "اعمل مع ⁦Claude Code⁩ و⁦Codex⁩ ومع نماذج تعمل على حاسوبك، جنبًا إلى جنب.",
+          "detail": "يتضمن التطبيق ⁦Gemini CLI⁩ ويعمل بمفتاح ⁦API⁩ من ⁦Gemini⁩. بدّل الوكيل أو النموذج في منتصف المحادثة واحتفظ بالسجل والتوجيهات والمرفقات."
         },
         {
           "title": "نماذج محلية تناسب حاسوبك",
@@ -74,11 +79,6 @@
           "title": "خصوصية وأمان منذ البداية",
           "body": "تُحفظ المفاتيح وبيانات تسجيل الدخول مشفّرة على حاسوبك، وفي المشروع الجديد يسألك الوكلاء قبل العمل خارج مجلده.",
           "detail": "التحديثات موقّعة ويُتحقق منها قبل التثبيت. والملاحظات التي ترسلها من التطبيق تخرج دون مفاتيحك ومساراتك الشخصية."
-        },
-        {
-          "title": "من المفيد أن تعرف",
-          "body": "برنامج التثبيت غير موقّع بعد بشهادة شركة، لذلك قد يعرض ⁦Windows⁩ رسالة «قام ⁦Windows⁩ بحماية الكمبيوتر».",
-          "detail": "اختر «مزيد من المعلومات»، ثم «تشغيل على أي حال»."
         }
       ]
     },
@@ -87,9 +87,14 @@
       "summary": "Deine Coding-Agenten und lokalen Modelle in einer App, im Early Access.",
       "sections": [
         {
+          "title": "Vor der Installation",
+          "body": "Das Installationsprogramm ist noch nicht mit einem Firmenzertifikat signiert, daher zeigt Windows eventuell „Der Computer wurde durch Windows geschützt“.",
+          "detail": "Wähle Weitere Informationen und dann Trotzdem ausführen."
+        },
+        {
           "title": "Deine Agenten, Seite an Seite",
-          "body": "Arbeite mit Claude Code, Codex und Gemini CLI nebeneinander oder mit Modellen, die auf deinem eigenen PC laufen.",
-          "detail": "Wechsle Agent oder Modell mitten im Gespräch und behalte Verlauf, Anweisungen und Anhänge."
+          "body": "Arbeite mit Claude Code, Codex und Modellen, die auf deinem eigenen PC laufen, Seite an Seite.",
+          "detail": "Gemini CLI ist enthalten und funktioniert mit einem Gemini-API-Schlüssel. Wechsle Agent oder Modell mitten im Gespräch und behalte Verlauf, Anweisungen und Anhänge."
         },
         {
           "title": "Lokale Modelle, passend zu deinem PC",
@@ -114,11 +119,6 @@
           "title": "Privat und sicher von Anfang an",
           "body": "Schlüssel und Anmeldungen werden verschlüsselt auf deinem PC gespeichert, und in einem neuen Projekt fragen Agenten, bevor sie außerhalb seines Ordners handeln.",
           "detail": "Updates sind signiert und werden vor der Installation geprüft. Feedback aus der App wird ohne deine Schlüssel und persönlichen Pfade gesendet."
-        },
-        {
-          "title": "Gut zu wissen",
-          "body": "Das Installationsprogramm ist noch nicht mit einem Firmenzertifikat signiert, daher zeigt Windows eventuell „Der Computer wurde durch Windows geschützt“.",
-          "detail": "Wähle Weitere Informationen und dann Trotzdem ausführen."
         }
       ]
     },
@@ -127,9 +127,14 @@
       "summary": "Tus agentes de programación y modelos locales en una sola app, en acceso anticipado.",
       "sections": [
         {
+          "title": "Antes de instalar",
+          "body": "El instalador aún no está firmado con un certificado de empresa, así que Windows puede mostrar «Windows protegió su PC».",
+          "detail": "Elige Más información y después Ejecutar de todas formas."
+        },
+        {
           "title": "Tus agentes, uno junto a otro",
-          "body": "Trabaja con Claude Code, Codex y Gemini CLI uno junto a otro, o con modelos que se ejecutan en tu propio PC.",
-          "detail": "Cambia de agente o de modelo en mitad de una conversación y conserva el historial, las indicaciones y los adjuntos."
+          "body": "Trabaja con Claude Code, Codex y modelos que se ejecutan en tu propio PC, uno junto a otro.",
+          "detail": "Gemini CLI viene incluido y funciona con una clave de API de Gemini. Cambia de agente o de modelo en mitad de una conversación y conserva el historial, las indicaciones y los adjuntos."
         },
         {
           "title": "Modelos locales a la medida de tu PC",
@@ -154,11 +159,6 @@
           "title": "Privado y seguro desde el principio",
           "body": "Las claves y los inicios de sesión se guardan cifrados en tu PC, y en un proyecto nuevo los agentes preguntan antes de actuar fuera de su carpeta.",
           "detail": "Las actualizaciones están firmadas y se comprueban antes de instalarse. Los comentarios que envías desde la app salen sin tus claves ni tus rutas personales."
-        },
-        {
-          "title": "Conviene saber",
-          "body": "El instalador aún no está firmado con un certificado de empresa, así que Windows puede mostrar «Windows protegió su PC».",
-          "detail": "Elige Más información y después Ejecutar de todas formas."
         }
       ]
     },
@@ -167,9 +167,14 @@
       "summary": "Vos agents de code et vos modèles locaux dans une seule application, en accès anticipé.",
       "sections": [
         {
+          "title": "Avant d’installer",
+          "body": "Le programme d’installation n’est pas encore signé par un certificat d’entreprise, Windows peut donc afficher « Windows a protégé votre ordinateur ».",
+          "detail": "Choisissez Informations complémentaires, puis Exécuter quand même."
+        },
+        {
           "title": "Vos agents, côte à côte",
-          "body": "Travaillez avec Claude Code, Codex et Gemini CLI côte à côte, ou avec des modèles qui tournent sur votre propre PC.",
-          "detail": "Changez d’agent ou de modèle en pleine conversation en gardant l’historique, les consignes et les pièces jointes."
+          "body": "Travaillez avec Claude Code, Codex et des modèles qui tournent sur votre propre PC, côte à côte.",
+          "detail": "Gemini CLI est inclus et fonctionne avec une clé API Gemini. Changez d’agent ou de modèle en pleine conversation en gardant l’historique, les consignes et les pièces jointes."
         },
         {
           "title": "Des modèles locaux adaptés à votre PC",
@@ -194,11 +199,6 @@
           "title": "Privé et sûr par défaut",
           "body": "Les clés et les connexions sont stockées chiffrées sur votre PC, et dans un nouveau projet les agents demandent avant d’agir hors de son dossier.",
           "detail": "Les mises à jour sont signées et vérifiées avant l’installation. Les commentaires envoyés depuis l’application partent sans vos clés ni vos chemins personnels."
-        },
-        {
-          "title": "Bon à savoir",
-          "body": "Le programme d’installation n’est pas encore signé par un certificat d’entreprise, Windows peut donc afficher « Windows a protégé votre ordinateur ».",
-          "detail": "Choisissez Informations complémentaires, puis Exécuter quand même."
         }
       ]
     },
@@ -207,9 +207,14 @@
       "summary": "आपके कोडिंग एजेंट और लोकल मॉडल एक ही ऐप में, अर्ली एक्सेस में।",
       "sections": [
         {
+          "title": "इंस्टॉल करने से पहले",
+          "body": "इंस्टॉलर अभी किसी कंपनी प्रमाणपत्र से साइन नहीं है, इसलिए Windows “Windows ने आपके PC को सुरक्षित रखा” दिखा सकता है।",
+          "detail": "अधिक जानकारी चुनें, फिर फिर भी चलाएँ चुनें।"
+        },
+        {
           "title": "आपके एजेंट, साथ-साथ",
-          "body": "Claude Code, Codex और Gemini CLI के साथ एक साथ काम करें, या अपने PC पर चलने वाले मॉडल के साथ।",
-          "detail": "बातचीत के बीच में एजेंट या मॉडल बदलें, और इतिहास, निर्देश और अटैचमेंट वैसे ही रहें।"
+          "body": "Claude Code, Codex और अपने PC पर चलने वाले मॉडल के साथ एक साथ काम करें।",
+          "detail": "Gemini CLI भी शामिल है और Gemini API कुंजी से काम करता है। बातचीत के बीच में एजेंट या मॉडल बदलें, और इतिहास, निर्देश और अटैचमेंट वैसे ही रहें।"
         },
         {
           "title": "आपके PC के हिसाब से लोकल मॉडल",
@@ -234,11 +239,6 @@
           "title": "शुरू से निजी और सुरक्षित",
           "body": "कुंजियाँ और साइन-इन आपके PC पर एन्क्रिप्ट करके रखे जाते हैं, और नए प्रोजेक्ट में एजेंट उसके फ़ोल्डर से बाहर कुछ करने से पहले पूछते हैं।",
           "detail": "अपडेट साइन किए होते हैं और इंस्टॉल से पहले जाँचे जाते हैं। ऐप से भेजा गया फ़ीडबैक आपकी कुंजियों और निजी पाथ के बिना जाता है।"
-        },
-        {
-          "title": "जानने लायक",
-          "body": "इंस्टॉलर अभी किसी कंपनी प्रमाणपत्र से साइन नहीं है, इसलिए Windows “Windows ने आपके PC को सुरक्षित रखा” दिखा सकता है।",
-          "detail": "अधिक जानकारी चुनें, फिर फिर भी चलाएँ चुनें।"
         }
       ]
     },
@@ -247,9 +247,14 @@
       "summary": "Agen coding dan model lokal Anda dalam satu aplikasi, dalam akses awal.",
       "sections": [
         {
+          "title": "Sebelum memasang",
+          "body": "Penginstal belum ditandatangani dengan sertifikat perusahaan, jadi Windows mungkin menampilkan “Windows melindungi PC Anda”.",
+          "detail": "Pilih Info selengkapnya, lalu Tetap jalankan."
+        },
+        {
           "title": "Agen Anda, berdampingan",
-          "body": "Bekerja dengan Claude Code, Codex, dan Gemini CLI secara berdampingan, atau dengan model yang berjalan di PC Anda sendiri.",
-          "detail": "Ganti agen atau model di tengah percakapan dan tetap simpan riwayat, arahan, dan lampiran."
+          "body": "Bekerja dengan Claude Code, Codex, dan model yang berjalan di PC Anda sendiri secara berdampingan.",
+          "detail": "Gemini CLI sudah termasuk dan berfungsi dengan kunci API Gemini. Ganti agen atau model di tengah percakapan dan tetap simpan riwayat, arahan, dan lampiran."
         },
         {
           "title": "Model lokal yang pas dengan PC Anda",
@@ -274,11 +279,6 @@
           "title": "Privat dan aman sejak awal",
           "body": "Kunci dan info masuk disimpan terenkripsi di PC Anda, dan di proyek baru agen bertanya dulu sebelum bertindak di luar foldernya.",
           "detail": "Pembaruan ditandatangani dan diperiksa sebelum dipasang. Masukan yang Anda kirim dari aplikasi keluar tanpa kunci dan path pribadi Anda."
-        },
-        {
-          "title": "Perlu diketahui",
-          "body": "Penginstal belum ditandatangani dengan sertifikat perusahaan, jadi Windows mungkin menampilkan “Windows melindungi PC Anda”.",
-          "detail": "Pilih Info selengkapnya, lalu Tetap jalankan."
         }
       ]
     },
@@ -287,9 +287,14 @@
       "summary": "I tuoi agenti di programmazione e i modelli locali in un’unica app, in accesso anticipato.",
       "sections": [
         {
+          "title": "Prima di installare",
+          "body": "Il programma di installazione non è ancora firmato con un certificato aziendale, quindi Windows potrebbe mostrare «PC protetto da Windows».",
+          "detail": "Scegli Ulteriori informazioni, poi Esegui comunque."
+        },
+        {
           "title": "I tuoi agenti, fianco a fianco",
-          "body": "Lavora con Claude Code, Codex e Gemini CLI fianco a fianco, o con modelli che girano sul tuo PC.",
-          "detail": "Cambia agente o modello a metà conversazione e conserva cronologia, indicazioni e allegati."
+          "body": "Lavora con Claude Code, Codex e modelli che girano sul tuo PC, fianco a fianco.",
+          "detail": "Gemini CLI è incluso e funziona con una chiave API Gemini. Cambia agente o modello a metà conversazione e conserva cronologia, indicazioni e allegati."
         },
         {
           "title": "Modelli locali su misura per il tuo PC",
@@ -314,11 +319,6 @@
           "title": "Privato e sicuro fin dall’inizio",
           "body": "Chiavi e accessi sono salvati cifrati sul tuo PC e, in un nuovo progetto, gli agenti chiedono prima di agire fuori dalla sua cartella.",
           "detail": "Gli aggiornamenti sono firmati e verificati prima dell’installazione. Il feedback inviato dall’app parte senza le tue chiavi e i tuoi percorsi personali."
-        },
-        {
-          "title": "Da sapere",
-          "body": "Il programma di installazione non è ancora firmato con un certificato aziendale, quindi Windows potrebbe mostrare «PC protetto da Windows».",
-          "detail": "Scegli Ulteriori informazioni, poi Esegui comunque."
         }
       ]
     },
@@ -327,9 +327,14 @@
       "summary": "コーディングエージェントとローカルモデルをひとつのアプリで。早期アクセス版です。",
       "sections": [
         {
+          "title": "インストールの前に",
+          "body": "インストーラーはまだ企業の証明書で署名されていないため、Windows に「Windows によって PC が保護されました」と表示されることがあります。",
+          "detail": "「詳細情報」を選び、「実行」を選んでください。"
+        },
+        {
           "title": "エージェントを並べて",
-          "body": "Claude Code、Codex、Gemini CLI を並べて使えます。PC 上で動くモデルも使えます。",
-          "detail": "会話の途中でエージェントやモデルを切り替えても、履歴・指示・添付ファイルはそのまま残ります。"
+          "body": "Claude Code、Codex、PC 上で動くモデルを並べて使えます。",
+          "detail": "Gemini CLI も含まれ、Gemini の API キーで動作します。会話の途中でエージェントやモデルを切り替えても、履歴・指示・添付ファイルはそのまま残ります。"
         },
         {
           "title": "PC に合ったローカルモデル",
@@ -354,11 +359,6 @@
           "title": "最初からプライベートで安全",
           "body": "キーとサインイン情報は PC に暗号化して保存されます。新しいプロジェクトでは、フォルダーの外で作業する前にエージェントが確認します。",
           "detail": "アップデートは署名され、インストール前に検証されます。アプリから送るフィードバックには、キーや個人のパスは含まれません。"
-        },
-        {
-          "title": "知っておいてほしいこと",
-          "body": "インストーラーはまだ企業の証明書で署名されていないため、Windows に「Windows によって PC が保護されました」と表示されることがあります。",
-          "detail": "「詳細情報」を選び、「実行」を選んでください。"
         }
       ]
     },
@@ -367,9 +367,14 @@
       "summary": "코딩 에이전트와 로컬 모델을 하나의 앱에서. 얼리 액세스입니다.",
       "sections": [
         {
+          "title": "설치 전에",
+          "body": "설치 프로그램은 아직 회사 인증서로 서명되지 않아 Windows에 “Windows의 PC 보호” 화면이 나타날 수 있습니다.",
+          "detail": "추가 정보를 누른 다음 실행을 선택하세요."
+        },
+        {
           "title": "에이전트를 나란히",
-          "body": "Claude Code, Codex, Gemini CLI를 나란히 쓰거나 내 PC에서 실행되는 모델로 작업하세요.",
-          "detail": "대화 중에 에이전트나 모델을 바꿔도 기록, 지시, 첨부 파일이 그대로 유지됩니다."
+          "body": "Claude Code, Codex, 그리고 내 PC에서 실행되는 모델을 나란히 사용하세요.",
+          "detail": "Gemini CLI도 포함되어 있으며 Gemini API 키로 작동합니다. 대화 중에 에이전트나 모델을 바꿔도 기록, 지시, 첨부 파일이 그대로 유지됩니다."
         },
         {
           "title": "내 PC에 맞는 로컬 모델",
@@ -394,11 +399,6 @@
           "title": "처음부터 비공개, 안전하게",
           "body": "키와 로그인 정보는 PC에 암호화되어 저장되고, 새 프로젝트에서는 에이전트가 폴더 밖에서 작업하기 전에 먼저 묻습니다.",
           "detail": "업데이트는 서명되어 설치 전에 확인됩니다. 앱에서 보내는 피드백에는 키와 개인 경로가 빠집니다."
-        },
-        {
-          "title": "알아 두세요",
-          "body": "설치 프로그램은 아직 회사 인증서로 서명되지 않아 Windows에 “Windows의 PC 보호” 화면이 나타날 수 있습니다.",
-          "detail": "추가 정보를 누른 다음 실행을 선택하세요."
         }
       ]
     },
@@ -407,9 +407,14 @@
       "summary": "Seus agentes de programação e modelos locais em um só app, em acesso antecipado.",
       "sections": [
         {
+          "title": "Antes de instalar",
+          "body": "O instalador ainda não é assinado com um certificado de empresa, então o Windows pode mostrar “O Windows protegeu o computador”.",
+          "detail": "Escolha Mais informações e depois Executar assim mesmo."
+        },
+        {
           "title": "Seus agentes, lado a lado",
-          "body": "Trabalhe com Claude Code, Codex e Gemini CLI lado a lado, ou com modelos rodando no seu próprio PC.",
-          "detail": "Troque de agente ou de modelo no meio da conversa e mantenha o histórico, as orientações e os anexos."
+          "body": "Trabalhe com Claude Code, Codex e modelos rodando no seu próprio PC, lado a lado.",
+          "detail": "O Gemini CLI vem incluído e funciona com uma chave de API do Gemini. Troque de agente ou de modelo no meio da conversa e mantenha o histórico, as orientações e os anexos."
         },
         {
           "title": "Modelos locais do tamanho do seu PC",
@@ -434,11 +439,6 @@
           "title": "Privado e seguro desde o início",
           "body": "Chaves e logins ficam guardados com criptografia no seu PC, e em um projeto novo os agentes perguntam antes de agir fora da pasta dele.",
           "detail": "As atualizações são assinadas e verificadas antes de instalar. O feedback enviado pelo app sai sem suas chaves e caminhos pessoais."
-        },
-        {
-          "title": "Bom saber",
-          "body": "O instalador ainda não é assinado com um certificado de empresa, então o Windows pode mostrar “O Windows protegeu o computador”.",
-          "detail": "Escolha Mais informações e depois Executar assim mesmo."
         }
       ]
     },
@@ -447,9 +447,14 @@
       "summary": "Agenții tăi de programare și modelele locale într-o singură aplicație, în acces timpuriu.",
       "sections": [
         {
+          "title": "Înainte să instalezi",
+          "body": "Programul de instalare nu e încă semnat cu un certificat de companie, așa că Windows poate afișa „Windows a protejat PC-ul”.",
+          "detail": "Alege Mai multe informații, apoi Rulează oricum."
+        },
+        {
           "title": "Agenții tăi, unul lângă altul",
-          "body": "Lucrează cu Claude Code, Codex și Gemini CLI unul lângă altul sau cu modele care rulează pe PC-ul tău.",
-          "detail": "Schimbi agentul sau modelul în mijlocul conversației și păstrezi istoricul, indicațiile și atașamentele."
+          "body": "Lucrează cu Claude Code, Codex și cu modele care rulează pe PC-ul tău, unul lângă altul.",
+          "detail": "Gemini CLI e inclus și funcționează cu o cheie API Gemini. Schimbi agentul sau modelul în mijlocul conversației și păstrezi istoricul, indicațiile și atașamentele."
         },
         {
           "title": "Modele locale pe măsura PC-ului tău",
@@ -474,11 +479,6 @@
           "title": "Privat și sigur din start",
           "body": "Cheile și conectările sunt păstrate criptat pe PC-ul tău, iar într-un proiect nou agenții te întreabă înainte să lucreze în afara folderului lui.",
           "detail": "Actualizările sunt semnate și verificate înainte de instalare. Feedbackul trimis din aplicație pleacă fără cheile și căile tale personale."
-        },
-        {
-          "title": "Bine de știut",
-          "body": "Programul de instalare nu e încă semnat cu un certificat de companie, așa că Windows poate afișa „Windows a protejat PC-ul”.",
-          "detail": "Alege Mai multe informații, apoi Rulează oricum."
         }
       ]
     },
@@ -487,9 +487,14 @@
       "summary": "Ваши агенты для программирования и локальные модели в одном приложении, в раннем доступе.",
       "sections": [
         {
+          "title": "Перед установкой",
+          "body": "Установщик пока не подписан сертификатом компании, поэтому Windows может показать «Система Windows защитила ваш компьютер».",
+          "detail": "Нажмите «Подробнее», затем «Выполнить в любом случае»."
+        },
+        {
           "title": "Ваши агенты рядом друг с другом",
-          "body": "Работайте с Claude Code, Codex и Gemini CLI параллельно или с моделями, которые запускаются на вашем ПК.",
-          "detail": "Меняйте агента или модель прямо посреди разговора, сохраняя историю, указания и вложения."
+          "body": "Работайте с Claude Code, Codex и моделями, которые запускаются на вашем ПК, параллельно.",
+          "detail": "Gemini CLI тоже входит в состав и работает с API-ключом Gemini. Меняйте агента или модель прямо посреди разговора, сохраняя историю, указания и вложения."
         },
         {
           "title": "Локальные модели под ваш ПК",
@@ -514,11 +519,6 @@
           "title": "Приватно и безопасно с самого начала",
           "body": "Ключи и входы хранятся на вашем ПК в зашифрованном виде, а в новом проекте агенты спрашивают, прежде чем действовать за пределами его папки.",
           "detail": "Обновления подписаны и проверяются перед установкой. Отзыв из приложения отправляется без ваших ключей и личных путей."
-        },
-        {
-          "title": "Полезно знать",
-          "body": "Установщик пока не подписан сертификатом компании, поэтому Windows может показать «Система Windows защитила ваш компьютер».",
-          "detail": "Нажмите «Подробнее», затем «Выполнить в любом случае»."
         }
       ]
     },
@@ -527,9 +527,14 @@
       "summary": "Kodlama ajanların ve yerel modellerin tek bir uygulamada, erken erişimde.",
       "sections": [
         {
+          "title": "Yüklemeden önce",
+          "body": "Yükleyici henüz bir şirket sertifikasıyla imzalanmadı; bu yüzden Windows “Windows bilgisayarınızı korudu” uyarısını gösterebilir.",
+          "detail": "Ek bilgi'yi, ardından Yine de çalıştır'ı seç."
+        },
+        {
           "title": "Ajanların yan yana",
-          "body": "Claude Code, Codex ve Gemini CLI ile yan yana ya da kendi bilgisayarında çalışan modellerle çalış.",
-          "detail": "Konuşmanın ortasında ajanı veya modeli değiştir; geçmiş, yönlendirmeler ve ekler korunur."
+          "body": "Claude Code, Codex ve kendi bilgisayarında çalışan modellerle yan yana çalış.",
+          "detail": "Gemini CLI da dahildir ve bir Gemini API anahtarıyla çalışır. Konuşmanın ortasında ajanı veya modeli değiştir; geçmiş, yönlendirmeler ve ekler korunur."
         },
         {
           "title": "Bilgisayarına uygun yerel modeller",
@@ -554,11 +559,6 @@
           "title": "Baştan gizli ve güvenli",
           "body": "Anahtarlar ve oturumlar bilgisayarında şifreli olarak saklanır; yeni bir projede ajanlar, klasörünün dışında işlem yapmadan önce sorar.",
           "detail": "Güncellemeler imzalıdır ve yüklenmeden önce doğrulanır. Uygulamadan gönderdiğin geri bildirim, anahtarların ve kişisel yolların olmadan gider."
-        },
-        {
-          "title": "Bilmekte fayda var",
-          "body": "Yükleyici henüz bir şirket sertifikasıyla imzalanmadı; bu yüzden Windows “Windows bilgisayarınızı korudu” uyarısını gösterebilir.",
-          "detail": "Ek bilgi'yi, ardından Yine de çalıştır'ı seç."
         }
       ]
     },
@@ -567,9 +567,14 @@
       "summary": "Các tác tử lập trình và mô hình cục bộ của bạn trong một ứng dụng, ở giai đoạn truy cập sớm.",
       "sections": [
         {
+          "title": "Trước khi cài đặt",
+          "body": "Trình cài đặt chưa được ký bằng chứng chỉ doanh nghiệp, nên Windows có thể hiện “Windows đã bảo vệ PC của bạn”.",
+          "detail": "Chọn Thông tin khác, rồi chọn Vẫn chạy."
+        },
+        {
           "title": "Các tác tử của bạn, cạnh nhau",
-          "body": "Làm việc với Claude Code, Codex và Gemini CLI cạnh nhau, hoặc với các mô hình chạy ngay trên máy tính của bạn.",
-          "detail": "Đổi tác tử hoặc mô hình giữa cuộc trò chuyện mà vẫn giữ lịch sử, chỉ dẫn và tệp đính kèm."
+          "body": "Làm việc với Claude Code, Codex và các mô hình chạy ngay trên máy tính của bạn, cạnh nhau.",
+          "detail": "Gemini CLI có sẵn và hoạt động với khóa API Gemini. Đổi tác tử hoặc mô hình giữa cuộc trò chuyện mà vẫn giữ lịch sử, chỉ dẫn và tệp đính kèm."
         },
         {
           "title": "Mô hình cục bộ vừa với máy tính của bạn",
@@ -594,11 +599,6 @@
           "title": "Riêng tư và an toàn ngay từ đầu",
           "body": "Khóa và thông tin đăng nhập được lưu mã hóa trên máy tính của bạn, và trong dự án mới, tác tử sẽ hỏi trước khi làm việc bên ngoài thư mục của dự án.",
           "detail": "Bản cập nhật được ký và kiểm tra trước khi cài. Phản hồi gửi từ ứng dụng không kèm khóa và đường dẫn cá nhân của bạn."
-        },
-        {
-          "title": "Điều nên biết",
-          "body": "Trình cài đặt chưa được ký bằng chứng chỉ doanh nghiệp, nên Windows có thể hiện “Windows đã bảo vệ PC của bạn”.",
-          "detail": "Chọn Thông tin khác, rồi chọn Vẫn chạy."
         }
       ]
     },
@@ -607,9 +607,14 @@
       "summary": "你的编程智能体和本地模型集中在一个应用中，现为抢先体验版。",
       "sections": [
         {
+          "title": "安装之前",
+          "body": "安装程序尚未使用公司证书签名，因此 Windows 可能会显示“Windows 已保护你的电脑”。",
+          "detail": "选择“更多信息”，然后选择“仍要运行”。"
+        },
+        {
           "title": "智能体并排工作",
-          "body": "让 Claude Code、Codex 和 Gemini CLI 并排工作，或使用在你自己电脑上运行的模型。",
-          "detail": "在对话中途切换智能体或模型，历史记录、指引和附件都会保留。"
+          "body": "让 Claude Code、Codex 和在你自己电脑上运行的模型并排工作。",
+          "detail": "内含 Gemini CLI，可使用 Gemini API 密钥运行。在对话中途切换智能体或模型，历史记录、指引和附件都会保留。"
         },
         {
           "title": "与你电脑匹配的本地模型",
@@ -634,11 +639,6 @@
           "title": "默认私密且安全",
           "body": "密钥和登录信息加密保存在你的电脑上；在新项目中，智能体在其文件夹之外操作前会先询问你。",
           "detail": "更新经过签名，并在安装前进行校验。从应用发送的反馈不会包含你的密钥和个人路径。"
-        },
-        {
-          "title": "温馨提示",
-          "body": "安装程序尚未使用公司证书签名，因此 Windows 可能会显示“Windows 已保护你的电脑”。",
-          "detail": "选择“更多信息”，然后选择“仍要运行”。"
         }
       ]
     },
@@ -647,9 +647,14 @@
       "summary": "你的程式設計代理和本機模型集中在一個應用程式中，目前為搶先體驗版。",
       "sections": [
         {
+          "title": "安裝之前",
+          "body": "安裝程式尚未使用公司憑證簽署，因此 Windows 可能會顯示「Windows 已保護您的電腦」。",
+          "detail": "選擇「其他資訊」，然後選擇「仍要執行」。"
+        },
+        {
           "title": "代理並排工作",
-          "body": "讓 Claude Code、Codex 和 Gemini CLI 並排工作，或使用在你自己電腦上執行的模型。",
-          "detail": "在對話途中切換代理或模型，歷史紀錄、指引和附件都會保留。"
+          "body": "讓 Claude Code、Codex 和在你自己電腦上執行的模型並排工作。",
+          "detail": "內含 Gemini CLI，可使用 Gemini API 金鑰執行。在對話途中切換代理或模型，歷史紀錄、指引和附件都會保留。"
         },
         {
           "title": "與你電腦相符的本機模型",
@@ -674,11 +679,6 @@
           "title": "預設私密且安全",
           "body": "金鑰和登入資訊加密儲存在你的電腦上；在新專案中，代理在其資料夾之外操作前會先詢問你。",
           "detail": "更新經過簽署，並在安裝前進行驗證。從應用程式傳送的意見回饋不會包含你的金鑰和個人路徑。"
-        },
-        {
-          "title": "貼心提醒",
-          "body": "安裝程式尚未使用公司憑證簽署，因此 Windows 可能會顯示「Windows 已保護您的電腦」。",
-          "detail": "選擇「其他資訊」，然後選擇「仍要執行」。"
         }
       ]
     }

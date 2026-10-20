@@ -4,7 +4,7 @@ import {build} from 'esbuild';
 import {createServer} from 'node:http';
 import {readFile} from 'node:fs/promises';
 import assert from 'node:assert/strict';
-import emptyManifest from '../supabase/functions/_shared/download-manifest.json' with {type:'json'};
+const emptyManifest={version:1,gatewayBaseUrl:'',allowedOrigins:[],assets:[]};
 const manifest={version:1,gatewayBaseUrl:'https://downloads.example.org/functions/v1/download-redirect/v1',allowedOrigins:['https://artifacts.example.org'],assets:[{siteId:'codevalanche',platform:'windows',architecture:'x64',releaseId:'fixture_release',artifactId:'fixture_windows',qualified:true,targetUrl:'https://artifacts.example.org/not-an-app-version-99.exe'}]};
 const bundle=(await build({entryPoints:['src/downloads.js'],bundle:true,write:false,format:'iife'})).outputFiles[0].text;
 const funnel=(await build({entryPoints:['src/account-funnel.js'],bundle:true,write:false,format:'esm'})).outputFiles[0].text;

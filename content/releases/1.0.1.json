@@ -18,7 +18,7 @@
         },
         {
           "title": "Smooth long answers, Stop always works",
-          "body": "Long answers from DeepSeek, ZCode and Gemini no longer make the app freeze for a few seconds.",
+          "body": "Long answers from DeepSeek, Z.ai (GLM) and Gemini no longer make the app freeze for a few seconds.",
           "detail": "Stop and the rest of the app respond right away, even while a fast answer is streaming."
         },
         {
@@ -49,7 +49,7 @@
         },
         {
           "title": "إجابات طويلة سلسة، والإيقاف يعمل دائمًا",
-          "body": "الإجابات الطويلة من DeepSeek وZCode وGemini لم تعد تجمّد التطبيق لبضع ثوانٍ.",
+          "body": "الإجابات الطويلة من DeepSeek وZ.ai (GLM) وGemini لم تعد تجمّد التطبيق لبضع ثوانٍ.",
           "detail": "يستجيب زر الإيقاف وبقية التطبيق فورًا، حتى أثناء تدفق إجابة سريعة."
         },
         {
@@ -80,7 +80,7 @@
         },
         {
           "title": "Flüssige lange Antworten, Stopp reagiert immer",
-          "body": "Lange Antworten von DeepSeek, ZCode und Gemini lassen die App nicht mehr für ein paar Sekunden einfrieren.",
+          "body": "Lange Antworten von DeepSeek, Z.ai (GLM) und Gemini lassen die App nicht mehr für ein paar Sekunden einfrieren.",
           "detail": "Stopp und der Rest der App reagieren sofort, auch während eine schnelle Antwort einläuft."
         },
         {
@@ -111,7 +111,7 @@
         },
         {
           "title": "Respuestas largas fluidas y Detener siempre responde",
-          "body": "Las respuestas largas de DeepSeek, ZCode y Gemini ya no congelan la app durante unos segundos.",
+          "body": "Las respuestas largas de DeepSeek, Z.ai (GLM) y Gemini ya no congelan la app durante unos segundos.",
           "detail": "Detener y el resto de la app responden al instante, incluso mientras llega una respuesta rápida."
         },
         {
@@ -142,7 +142,7 @@
         },
         {
           "title": "Des réponses longues fluides, Arrêter répond toujours",
-          "body": "Les longues réponses de DeepSeek, ZCode et Gemini ne figent plus l’app pendant quelques secondes.",
+          "body": "Les longues réponses de DeepSeek, Z.ai (GLM) et Gemini ne figent plus l’app pendant quelques secondes.",
           "detail": "Arrêter et le reste de l’app réagissent tout de suite, même pendant qu’une réponse rapide arrive."
         },
         {
@@ -173,7 +173,7 @@
         },
         {
           "title": "लंबे जवाब सहज, रोकें हमेशा काम करता है",
-          "body": "DeepSeek, ZCode और Gemini के लंबे जवाब अब ऐप को कुछ सेकंड के लिए नहीं रोकते।",
+          "body": "DeepSeek, Z.ai (GLM) और Gemini के लंबे जवाब अब ऐप को कुछ सेकंड के लिए नहीं रोकते।",
           "detail": "तेज़ जवाब आते समय भी रोकें बटन और बाकी ऐप तुरंत जवाब देते हैं।"
         },
         {
@@ -204,7 +204,7 @@
         },
         {
           "title": "Jawaban panjang lancar, Hentikan selalu berfungsi",
-          "body": "Jawaban panjang dari DeepSeek, ZCode, dan Gemini tidak lagi membuat aplikasi membeku beberapa detik.",
+          "body": "Jawaban panjang dari DeepSeek, Z.ai (GLM), dan Gemini tidak lagi membuat aplikasi membeku beberapa detik.",
           "detail": "Tombol Hentikan dan bagian lain aplikasi langsung merespons, bahkan saat jawaban cepat sedang mengalir."
         },
         {
@@ -235,7 +235,7 @@
         },
         {
           "title": "Risposte lunghe fluide, Interrompi funziona sempre",
-          "body": "Le risposte lunghe di DeepSeek, ZCode e Gemini non bloccano più l’app per qualche secondo.",
+          "body": "Le risposte lunghe di DeepSeek, Z.ai (GLM) e Gemini non bloccano più l’app per qualche secondo.",
           "detail": "Interrompi e il resto dell’app rispondono subito, anche mentre arriva una risposta veloce."
         },
         {
@@ -266,7 +266,7 @@
         },
         {
           "title": "長い回答もなめらか、停止はいつでも効く",
-          "body": "DeepSeek、ZCode、Gemini の長い回答で、アプリが数秒間固まることがなくなりました。",
+          "body": "DeepSeek、Z.ai (GLM)、Gemini の長い回答で、アプリが数秒間固まることがなくなりました。",
           "detail": "速い回答が流れている間も、停止ボタンやアプリの他の部分がすぐに反応します。"
         },
         {
@@ -297,7 +297,7 @@
         },
         {
           "title": "긴 답변도 매끄럽게, 중지는 언제나 작동",
-          "body": "DeepSeek, ZCode, Gemini의 긴 답변 때문에 앱이 몇 초씩 멈추는 일이 없어졌습니다.",
+          "body": "DeepSeek, Z.ai (GLM), Gemini의 긴 답변 때문에 앱이 몇 초씩 멈추는 일이 없어졌습니다.",
           "detail": "빠른 답변이 들어오는 중에도 중지 버튼과 앱의 나머지 부분이 바로 반응합니다."
         },
         {
@@ -328,7 +328,7 @@
         },
         {
           "title": "Respostas longas fluidas, Parar sempre funciona",
-          "body": "Respostas longas do DeepSeek, ZCode e Gemini não travam mais o app por alguns segundos.",
+          "body": "Respostas longas do DeepSeek, Z.ai (GLM) e Gemini não travam mais o app por alguns segundos.",
           "detail": "Parar e o resto do app respondem na hora, mesmo enquanto chega uma resposta rápida."
         },
         {
@@ -359,7 +359,7 @@
         },
         {
           "title": "Răspunsuri lungi fără sacadări, Stop merge mereu",
-          "body": "Răspunsurile lungi de la DeepSeek, ZCode și Gemini nu mai blochează aplicația câteva secunde.",
+          "body": "Răspunsurile lungi de la DeepSeek, Z.ai (GLM) și Gemini nu mai blochează aplicația câteva secunde.",
           "detail": "Stop și restul aplicației răspund imediat, chiar și cât curge un răspuns rapid."
         },
         {
@@ -390,7 +390,7 @@
         },
         {
           "title": "Плавные длинные ответы, «Стоп» работает всегда",
-          "body": "Длинные ответы DeepSeek, ZCode и Gemini больше не замораживают приложение на несколько секунд.",
+          "body": "Длинные ответы DeepSeek, Z.ai (GLM) и Gemini больше не замораживают приложение на несколько секунд.",
           "detail": "«Стоп» и всё остальное в приложении откликаются сразу, даже пока идёт быстрый ответ."
         },
         {
@@ -421,7 +421,7 @@
         },
         {
           "title": "Akıcı uzun yanıtlar, Durdur her zaman çalışır",
-          "body": "DeepSeek, ZCode ve Gemini'den gelen uzun yanıtlar artık uygulamayı birkaç saniye dondurmuyor.",
+          "body": "DeepSeek, Z.ai (GLM) ve Gemini'den gelen uzun yanıtlar artık uygulamayı birkaç saniye dondurmuyor.",
           "detail": "Hızlı bir yanıt akarken bile Durdur ve uygulamanın geri kalanı hemen yanıt verir."
         },
         {
@@ -452,7 +452,7 @@
         },
         {
           "title": "Câu trả lời dài mượt mà, nút Dừng luôn hoạt động",
-          "body": "Câu trả lời dài từ DeepSeek, ZCode và Gemini không còn làm ứng dụng đứng hình vài giây.",
+          "body": "Câu trả lời dài từ DeepSeek, Z.ai (GLM) và Gemini không còn làm ứng dụng đứng hình vài giây.",
           "detail": "Nút Dừng và phần còn lại của ứng dụng phản hồi ngay, kể cả khi một câu trả lời nhanh đang chạy."
         },
         {
@@ -483,7 +483,7 @@
         },
         {
           "title": "长回答更流畅，停止随时有效",
-          "body": "DeepSeek、ZCode 和 Gemini 的长回答不会再让应用卡住几秒。",
+          "body": "DeepSeek、Z.ai (GLM) 和 Gemini 的长回答不会再让应用卡住几秒。",
           "detail": "即使快速回答正在输出，停止按钮和应用的其他部分也会立即响应。"
         },
         {
@@ -514,7 +514,7 @@
         },
         {
           "title": "長回答更流暢，停止隨時有效",
-          "body": "DeepSeek、ZCode 和 Gemini 的長回答不會再讓應用程式卡住幾秒。",
+          "body": "DeepSeek、Z.ai (GLM) 和 Gemini 的長回答不會再讓應用程式卡住幾秒。",
           "detail": "即使快速回答正在輸出，停止按鈕和應用程式的其他部分也會立即回應。"
         },
         {

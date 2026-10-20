@@ -16,7 +16,7 @@ test('manifest maps native links and browser sanitizer to the same qualified reg
  assert.ok(sanitizeEvent('download_clicked',properties,{},'codevalanche',releaseRegistry(manifest)));
  assert.equal(sanitizeEvent('download_clicked',{...properties,artifact_id:'invented'}, {},'codevalanche',releaseRegistry(manifest)),null);
 });
-test('empty production manifest is honestly not configured',async()=>{
+test('the production manifest claims no measured redirects without the server gateway',async()=>{
  const handler=createDownloadRedirectHandler();const response=await handler(new Request(path));
  assert.equal(response.status,404);assert.equal((await response.json()).status,'not_configured');
  assert.deepEqual(downloadCoverage(),{redirects:'not_configured',releaseProvider:'not_configured',transferServed:'not_configured',firstObservedOpens:'not_configured',activations:'not_configured',guestActivation:'unmeasured'});
