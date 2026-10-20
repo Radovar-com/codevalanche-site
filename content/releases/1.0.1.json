@@ -1,0 +1,533 @@
+{
+  "version": "1.0.1",
+  "date": "2026-10-20",
+  "copy": {
+    "en": {
+      "headline": "Know what changed after every update",
+      "summary": "A short note after each update, and a clearer update check.",
+      "sections": [
+        {
+          "title": "What's new, after every update",
+          "body": "After an update, Codevalanche shows a short card with what changed, so no improvement passes you by.",
+          "detail": "It appears once per version and stays closed once you dismiss it. The full list of changes is always in Settings, under About."
+        },
+        {
+          "title": "A clear answer when no update is out yet",
+          "body": "Checking for updates now tells you plainly when no new version has been published yet.",
+          "detail": "Before, this looked like a connection problem and showed an error. A real connection problem is still reported as one."
+        },
+        {
+          "title": "Smooth long answers, Stop always works",
+          "body": "Long answers from DeepSeek, ZCode and Gemini no longer make the app freeze for a few seconds.",
+          "detail": "Stop and the rest of the app respond right away, even while a fast answer is streaming."
+        },
+        {
+          "title": "Clearer, calmer panels",
+          "body": "The access button under the message box now says “Full access”, the same words as its menu, instead of a technical code.",
+          "detail": "When a very large folder is slow to read, Activity shows one quiet line with Retry, instead of loading forever or red boxes. When the agent asks you to choose, each choice now shows its short explanation, so you know what you pick."
+        },
+        {
+          "title": "A livelier, tidier look",
+          "body": "The particles on the effort slider now move faster, and in Fast mode they move faster still, so you see at a glance how the agent is working.",
+          "detail": "Companion cards are smaller, so you see more of the collection at once without scrolling."
+        }
+      ]
+    },
+    "ar": {
+      "headline": "اعرف ما الذي تغيّر بعد كل تحديث",
+      "summary": "ملاحظة قصيرة بعد كل تحديث، وفحص تحديثات أوضح.",
+      "sections": [
+        {
+          "title": "الجديد بعد كل تحديث",
+          "body": "بعد التحديث، يعرض ⁦Codevalanche⁩ بطاقة قصيرة بما تغيّر، حتى لا يفوتك أي تحسين.",
+          "detail": "تظهر مرة واحدة لكل إصدار وتبقى مغلقة بعد أن تغلقها. القائمة الكاملة للتغييرات موجودة دائمًا في الإعدادات، ضمن حول."
+        },
+        {
+          "title": "إجابة واضحة عندما لا يتوفر تحديث بعد",
+          "body": "يخبرك فحص التحديثات الآن بوضوح عندما لم يُنشر أي إصدار جديد بعد.",
+          "detail": "في السابق كان هذا يبدو كمشكلة في الاتصال ويعرض خطأ. أما مشكلة الاتصال الحقيقية فما زالت تظهر كما هي."
+        },
+        {
+          "title": "إجابات طويلة سلسة، والإيقاف يعمل دائمًا",
+          "body": "الإجابات الطويلة من DeepSeek وZCode وGemini لم تعد تجمّد التطبيق لبضع ثوانٍ.",
+          "detail": "يستجيب زر الإيقاف وبقية التطبيق فورًا، حتى أثناء تدفق إجابة سريعة."
+        },
+        {
+          "title": "لوحات أوضح وأهدأ",
+          "body": "زر الوصول أسفل مربع الرسالة يعرض الآن «وصول كامل»، بنفس كلمات قائمته، بدلًا من رمز تقني.",
+          "detail": "عندما تكون قراءة مجلد كبير جدًا بطيئة، تعرض لوحة النشاط سطرًا هادئًا واحدًا مع «إعادة المحاولة»، بدلًا من التحميل بلا نهاية أو المربعات الحمراء. عندما يطلب منك الوكيل الاختيار، يعرض كل خيار الآن شرحه القصير، فتعرف ما الذي تختاره."
+        },
+        {
+          "title": "مظهر أكثر حيوية وترتيبًا",
+          "body": "تتحرك الجسيمات على شريط الجهد الآن بسرعة أكبر، وفي الوضع السريع تتحرك أسرع، فترى بنظرة كيف يعمل الوكيل.",
+          "detail": "أصبحت بطاقات الرفيق أصغر، فترى جزءًا أكبر من المجموعة دفعة واحدة دون تمرير."
+        }
+      ]
+    },
+    "de": {
+      "headline": "Nach jedem Update sehen, was sich geändert hat",
+      "summary": "Eine kurze Notiz nach jedem Update und eine klarere Update-Prüfung.",
+      "sections": [
+        {
+          "title": "Neuigkeiten nach jedem Update",
+          "body": "Nach einem Update zeigt Codevalanche eine kurze Karte mit den Änderungen, damit Ihnen keine Verbesserung entgeht.",
+          "detail": "Sie erscheint einmal pro Version und bleibt geschlossen, sobald Sie sie schließen. Die vollständige Liste der Änderungen finden Sie jederzeit unter Einstellungen, Über."
+        },
+        {
+          "title": "Eine klare Antwort, wenn noch kein Update da ist",
+          "body": "Die Update-Prüfung sagt jetzt deutlich, wenn noch keine neue Version veröffentlicht wurde.",
+          "detail": "Bisher sah das wie ein Verbindungsproblem aus und zeigte einen Fehler. Ein echtes Verbindungsproblem wird weiterhin als solches gemeldet."
+        },
+        {
+          "title": "Flüssige lange Antworten, Stopp reagiert immer",
+          "body": "Lange Antworten von DeepSeek, ZCode und Gemini lassen die App nicht mehr für ein paar Sekunden einfrieren.",
+          "detail": "Stopp und der Rest der App reagieren sofort, auch während eine schnelle Antwort einläuft."
+        },
+        {
+          "title": "Klarere, ruhigere Ansichten",
+          "body": "Die Zugriffsschaltfläche unter dem Nachrichtenfeld zeigt jetzt „Vollzugriff“, mit denselben Worten wie ihr Menü, statt eines technischen Codes.",
+          "detail": "Wenn ein sehr großer Ordner langsam gelesen wird, zeigt Aktivität eine ruhige Zeile mit „Erneut versuchen“, statt endlos zu laden oder rote Kästen zu zeigen. Wenn der Agent dich wählen lässt, zeigt jede Option jetzt ihre kurze Erklärung, damit du weißt, was du wählst."
+        },
+        {
+          "title": "Lebendiger und aufgeräumter",
+          "body": "Die Partikel auf dem Aufwand-Regler bewegen sich jetzt schneller, im Schnellmodus noch schneller. So sehen Sie auf einen Blick, wie der Agent arbeitet.",
+          "detail": "Die Begleiter-Karten sind kleiner, sodass Sie mehr von der Sammlung auf einmal sehen, ohne zu scrollen."
+        }
+      ]
+    },
+    "es": {
+      "headline": "Descubre qué ha cambiado tras cada actualización",
+      "summary": "Una nota breve tras cada actualización y una comprobación más clara.",
+      "sections": [
+        {
+          "title": "Novedades tras cada actualización",
+          "body": "Después de una actualización, Codevalanche muestra una tarjeta breve con lo que ha cambiado, para que no se te escape ninguna mejora.",
+          "detail": "Aparece una vez por versión y no vuelve a salir cuando la cierras. La lista completa de cambios está siempre en Configuración, en Acerca de."
+        },
+        {
+          "title": "Una respuesta clara cuando aún no hay actualización",
+          "body": "Al buscar actualizaciones, ahora se indica con claridad cuando todavía no se ha publicado ninguna versión nueva.",
+          "detail": "Antes parecía un problema de conexión y mostraba un error. Un problema de conexión real se sigue avisando como tal."
+        },
+        {
+          "title": "Respuestas largas fluidas y Detener siempre responde",
+          "body": "Las respuestas largas de DeepSeek, ZCode y Gemini ya no congelan la app durante unos segundos.",
+          "detail": "Detener y el resto de la app responden al instante, incluso mientras llega una respuesta rápida."
+        },
+        {
+          "title": "Paneles más claros y tranquilos",
+          "body": "El botón de acceso bajo el cuadro de mensaje ahora dice «Acceso completo», con las mismas palabras que su menú, en lugar de un código técnico.",
+          "detail": "Cuando una carpeta muy grande tarda en leerse, Actividad muestra una sola línea tranquila con «Reintentar», en lugar de cargar sin fin o mostrar cuadros rojos. Cuando el agente te pide elegir, cada opción muestra ahora su breve explicación, para que sepas qué eliges."
+        },
+        {
+          "title": "Un aspecto más vivo y ordenado",
+          "body": "Las partículas del control de esfuerzo ahora se mueven más rápido, y en el modo Rápido aún más, para que veas de un vistazo cómo trabaja el agente.",
+          "detail": "Las tarjetas de compañeros son más pequeñas, así ves más de la colección a la vez sin desplazarte."
+        }
+      ]
+    },
+    "fr": {
+      "headline": "Découvrez ce qui change à chaque mise à jour",
+      "summary": "Une courte note après chaque mise à jour et une vérification plus claire.",
+      "sections": [
+        {
+          "title": "Les nouveautés après chaque mise à jour",
+          "body": "Après une mise à jour, Codevalanche affiche une courte carte avec ce qui a changé, pour qu'aucune amélioration ne vous échappe.",
+          "detail": "Elle apparaît une fois par version et reste fermée une fois que vous l'avez fermée. La liste complète des changements se trouve toujours dans Paramètres, sous À propos."
+        },
+        {
+          "title": "Une réponse claire quand aucune mise à jour n'est encore sortie",
+          "body": "La recherche de mises à jour indique désormais clairement quand aucune nouvelle version n'a encore été publiée.",
+          "detail": "Avant, cela ressemblait à un problème de connexion et affichait une erreur. Un vrai problème de connexion est toujours signalé comme tel."
+        },
+        {
+          "title": "Des réponses longues fluides, Arrêter répond toujours",
+          "body": "Les longues réponses de DeepSeek, ZCode et Gemini ne figent plus l’app pendant quelques secondes.",
+          "detail": "Arrêter et le reste de l’app réagissent tout de suite, même pendant qu’une réponse rapide arrive."
+        },
+        {
+          "title": "Des panneaux plus clairs et plus calmes",
+          "body": "Le bouton d’accès sous la zone de message affiche désormais « Accès complet », avec les mêmes mots que son menu, au lieu d’un code technique.",
+          "detail": "Quand un très gros dossier est lent à lire, Activité affiche une seule ligne calme avec « Réessayer », au lieu de charger sans fin ou d’afficher des cadres rouges. Quand l’agent vous demande de choisir, chaque option affiche maintenant sa courte explication, pour savoir ce que vous choisissez."
+        },
+        {
+          "title": "Un aspect plus vivant et plus net",
+          "body": "Les particules du curseur d'effort bougent maintenant plus vite, et encore plus vite en mode Rapide, pour voir d'un coup d'œil comment l'agent travaille.",
+          "detail": "Les cartes des compagnons sont plus petites : vous voyez davantage de la collection d'un coup, sans faire défiler."
+        }
+      ]
+    },
+    "hi": {
+      "headline": "हर अपडेट के बाद जानें क्या बदला",
+      "summary": "हर अपडेट के बाद एक छोटा नोट, और अपडेट की ज़्यादा साफ़ जाँच।",
+      "sections": [
+        {
+          "title": "हर अपडेट के बाद नया क्या है",
+          "body": "अपडेट के बाद Codevalanche एक छोटा कार्ड दिखाता है कि क्या बदला, ताकि कोई सुधार आपसे छूट न जाए।",
+          "detail": "यह हर संस्करण के लिए एक बार दिखता है और बंद करने के बाद बंद ही रहता है। बदलावों की पूरी सूची हमेशा सेटिंग्स में, परिचय के अंदर मिलती है।"
+        },
+        {
+          "title": "जब अभी कोई अपडेट न हो, तो साफ़ जवाब",
+          "body": "अपडेट की जाँच अब साफ़ बताती है कि अभी तक कोई नया संस्करण प्रकाशित नहीं हुआ है।",
+          "detail": "पहले यह कनेक्शन की समस्या जैसा दिखता था और एक त्रुटि दिखाता था। असली कनेक्शन समस्या अब भी पहले की तरह बताई जाती है।"
+        },
+        {
+          "title": "लंबे जवाब सहज, रोकें हमेशा काम करता है",
+          "body": "DeepSeek, ZCode और Gemini के लंबे जवाब अब ऐप को कुछ सेकंड के लिए नहीं रोकते।",
+          "detail": "तेज़ जवाब आते समय भी रोकें बटन और बाकी ऐप तुरंत जवाब देते हैं।"
+        },
+        {
+          "title": "साफ़ और शांत पैनल",
+          "body": "संदेश बॉक्स के नीचे वाला पहुँच बटन अब तकनीकी कोड की जगह अपने मेनू जैसे ही शब्दों में “पूर्ण पहुँच” दिखाता है।",
+          "detail": "जब कोई बहुत बड़ा फ़ोल्डर धीरे पढ़ा जाता है, तो गतिविधि अंतहीन लोडिंग या लाल बॉक्स की जगह “फिर कोशिश करें” के साथ एक शांत पंक्ति दिखाती है। जब एजेंट आपसे चुनने को कहता है, तो अब हर विकल्प अपनी छोटी व्याख्या दिखाता है, ताकि आप जानें कि क्या चुन रहे हैं।"
+        },
+        {
+          "title": "ज़्यादा जीवंत, ज़्यादा सुथरा रूप",
+          "body": "प्रयास स्लाइडर के कण अब तेज़ चलते हैं, और तेज़ मोड में और भी तेज़, ताकि आप एक नज़र में देख सकें कि एजेंट कैसे काम कर रहा है।",
+          "detail": "साथी कार्ड अब छोटे हैं, इसलिए बिना स्क्रॉल किए आप संग्रह का ज़्यादा हिस्सा एक साथ देख सकते हैं।"
+        }
+      ]
+    },
+    "id": {
+      "headline": "Ketahui apa yang berubah setelah setiap pembaruan",
+      "summary": "Catatan singkat setelah setiap pembaruan, dan pemeriksaan pembaruan yang lebih jelas.",
+      "sections": [
+        {
+          "title": "Yang baru, setelah setiap pembaruan",
+          "body": "Setelah pembaruan, Codevalanche menampilkan kartu singkat berisi apa yang berubah, agar tidak ada peningkatan yang terlewat.",
+          "detail": "Kartu ini muncul sekali per versi dan tetap tertutup setelah Anda menutupnya. Daftar lengkap perubahan selalu ada di Pengaturan, bagian Tentang."
+        },
+        {
+          "title": "Jawaban jelas saat belum ada pembaruan",
+          "body": "Pemeriksaan pembaruan kini memberi tahu dengan jelas jika belum ada versi baru yang diterbitkan.",
+          "detail": "Sebelumnya ini tampak seperti masalah koneksi dan menampilkan galat. Masalah koneksi yang sebenarnya tetap dilaporkan seperti biasa."
+        },
+        {
+          "title": "Jawaban panjang lancar, Hentikan selalu berfungsi",
+          "body": "Jawaban panjang dari DeepSeek, ZCode, dan Gemini tidak lagi membuat aplikasi membeku beberapa detik.",
+          "detail": "Tombol Hentikan dan bagian lain aplikasi langsung merespons, bahkan saat jawaban cepat sedang mengalir."
+        },
+        {
+          "title": "Panel yang lebih jelas dan tenang",
+          "body": "Tombol akses di bawah kotak pesan kini menampilkan “Akses penuh”, sama seperti menunya, bukan kode teknis.",
+          "detail": "Saat folder yang sangat besar lambat dibaca, Aktivitas menampilkan satu baris tenang dengan “Coba lagi”, bukan memuat tanpa henti atau kotak merah. Saat agen memintamu memilih, setiap pilihan kini menampilkan penjelasan singkatnya, jadi kamu tahu apa yang kamu pilih."
+        },
+        {
+          "title": "Tampilan lebih hidup dan rapi",
+          "body": "Partikel pada penggeser upaya kini bergerak lebih cepat, dan di mode Cepat lebih cepat lagi, jadi Anda langsung melihat cara agen bekerja.",
+          "detail": "Kartu pendamping kini lebih kecil, jadi Anda melihat lebih banyak koleksi sekaligus tanpa menggulir."
+        }
+      ]
+    },
+    "it": {
+      "headline": "Scopri cosa cambia dopo ogni aggiornamento",
+      "summary": "Una breve nota dopo ogni aggiornamento e un controllo più chiaro.",
+      "sections": [
+        {
+          "title": "Le novità dopo ogni aggiornamento",
+          "body": "Dopo un aggiornamento, Codevalanche mostra una breve scheda con ciò che è cambiato, così nessun miglioramento ti sfugge.",
+          "detail": "Compare una volta per versione e resta chiusa dopo che l'hai chiusa. L'elenco completo delle modifiche è sempre in Impostazioni, sotto Informazioni."
+        },
+        {
+          "title": "Una risposta chiara quando non c'è ancora un aggiornamento",
+          "body": "Il controllo degli aggiornamenti ora dice chiaramente quando non è stata ancora pubblicata una nuova versione.",
+          "detail": "Prima sembrava un problema di connessione e mostrava un errore. Un vero problema di connessione viene ancora segnalato come tale."
+        },
+        {
+          "title": "Risposte lunghe fluide, Interrompi funziona sempre",
+          "body": "Le risposte lunghe di DeepSeek, ZCode e Gemini non bloccano più l’app per qualche secondo.",
+          "detail": "Interrompi e il resto dell’app rispondono subito, anche mentre arriva una risposta veloce."
+        },
+        {
+          "title": "Pannelli più chiari e tranquilli",
+          "body": "Il pulsante di accesso sotto la casella del messaggio ora dice «Accesso completo», con le stesse parole del suo menu, invece di un codice tecnico.",
+          "detail": "Quando una cartella molto grande è lenta da leggere, Attività mostra una sola riga tranquilla con «Riprova», invece di caricare all’infinito o mostrare riquadri rossi. Quando l’agente ti chiede di scegliere, ogni opzione ora mostra la sua breve spiegazione, così sai cosa scegli."
+        },
+        {
+          "title": "Un aspetto più vivace e ordinato",
+          "body": "Le particelle sul cursore dello sforzo ora si muovono più velocemente, e in modalità Veloce ancora di più, così vedi a colpo d'occhio come lavora l'agente.",
+          "detail": "Le schede dei compagni sono più piccole, così vedi più collezione in una volta senza scorrere."
+        }
+      ]
+    },
+    "ja": {
+      "headline": "アップデートのたびに変更点がわかります",
+      "summary": "アップデート後に短いお知らせを表示し、更新の確認もわかりやすくなりました。",
+      "sections": [
+        {
+          "title": "アップデートのたびに新機能をお知らせ",
+          "body": "アップデート後、Codevalanche が変更点を短いカードで表示するので、改善を見逃しません。",
+          "detail": "カードはバージョンごとに一度だけ表示され、閉じた後は再表示されません。変更の一覧はいつでも「設定」の「情報」で確認できます。"
+        },
+        {
+          "title": "まだアップデートがないときも明確に",
+          "body": "更新の確認で、新しいバージョンがまだ公開されていないことをはっきりお伝えするようになりました。",
+          "detail": "これまでは接続の問題のように見え、エラーが表示されていました。実際の接続の問題は、これまでどおりお知らせします。"
+        },
+        {
+          "title": "長い回答もなめらか、停止はいつでも効く",
+          "body": "DeepSeek、ZCode、Gemini の長い回答で、アプリが数秒間固まることがなくなりました。",
+          "detail": "速い回答が流れている間も、停止ボタンやアプリの他の部分がすぐに反応します。"
+        },
+        {
+          "title": "わかりやすく落ち着いたパネル",
+          "body": "メッセージ欄の下のアクセスボタンは、技術的なコードではなく、メニューと同じ「フルアクセス」と表示されるようになりました。",
+          "detail": "非常に大きなフォルダーの読み込みが遅いとき、活動は無限に読み込んだり赤い枠を出したりせず、「再試行」付きの静かな1行を表示します。エージェントが選択を求めるとき、各選択肢に短い説明が表示されるようになり、何を選ぶのかがわかります。"
+        },
+        {
+          "title": "より生き生きと、すっきりした見た目",
+          "body": "作業量スライダーの粒子がより速く動くようになり、高速モードではさらに速くなりました。エージェントの動きがひと目でわかります。",
+          "detail": "相棒のカードが小さくなり、スクロールせずに一度に多くのコレクションを見られます。"
+        }
+      ]
+    },
+    "ko": {
+      "headline": "업데이트할 때마다 무엇이 바뀌었는지 알 수 있습니다",
+      "summary": "업데이트 후 짧은 안내를 보여 주고, 업데이트 확인도 더 명확해졌습니다.",
+      "sections": [
+        {
+          "title": "업데이트할 때마다 새로운 기능 안내",
+          "body": "업데이트 후 Codevalanche가 바뀐 내용을 짧은 카드로 보여 주므로 개선 사항을 놓치지 않습니다.",
+          "detail": "카드는 버전마다 한 번만 나타나며, 닫으면 다시 나타나지 않습니다. 전체 변경 목록은 언제든 설정의 정보에서 볼 수 있습니다."
+        },
+        {
+          "title": "아직 업데이트가 없을 때도 분명한 안내",
+          "body": "업데이트 확인 시 아직 새 버전이 게시되지 않았다면 이제 그 사실을 분명하게 알려 줍니다.",
+          "detail": "이전에는 연결 문제처럼 보이고 오류가 표시되었습니다. 실제 연결 문제는 계속 그대로 알려 드립니다."
+        },
+        {
+          "title": "긴 답변도 매끄럽게, 중지는 언제나 작동",
+          "body": "DeepSeek, ZCode, Gemini의 긴 답변 때문에 앱이 몇 초씩 멈추는 일이 없어졌습니다.",
+          "detail": "빠른 답변이 들어오는 중에도 중지 버튼과 앱의 나머지 부분이 바로 반응합니다."
+        },
+        {
+          "title": "더 분명하고 차분한 패널",
+          "body": "메시지 상자 아래의 액세스 버튼이 이제 기술 코드 대신 메뉴와 같은 말로 “전체 액세스”를 표시합니다.",
+          "detail": "아주 큰 폴더를 읽는 데 오래 걸리면, 활동은 끝없이 로딩하거나 빨간 상자를 띄우는 대신 “다시 시도”가 있는 조용한 한 줄을 보여 줍니다.에이전트가 선택을 요청하면 이제 각 선택지에 짧은 설명이 함께 표시되어 무엇을 고르는지 알 수 있습니다."
+        },
+        {
+          "title": "더 생동감 있고 깔끔한 모습",
+          "body": "작업량 슬라이더의 입자가 이제 더 빠르게 움직이고, 빠른 모드에서는 더욱 빠릅니다. 에이전트가 어떻게 일하는지 한눈에 볼 수 있습니다.",
+          "detail": "친구 카드가 작아져 스크롤하지 않고도 컬렉션을 한 번에 더 많이 볼 수 있습니다."
+        }
+      ]
+    },
+    "pt-BR": {
+      "headline": "Saiba o que mudou a cada atualização",
+      "summary": "Uma nota curta após cada atualização e uma verificação mais clara.",
+      "sections": [
+        {
+          "title": "Novidades a cada atualização",
+          "body": "Depois de uma atualização, o Codevalanche mostra um cartão curto com o que mudou, para que nenhuma melhoria passe despercebida.",
+          "detail": "Ele aparece uma vez por versão e continua fechado depois que você o fecha. A lista completa de mudanças fica sempre em Configurações, em Sobre."
+        },
+        {
+          "title": "Uma resposta clara quando ainda não há atualização",
+          "body": "A verificação de atualizações agora informa com clareza quando nenhuma versão nova foi publicada ainda.",
+          "detail": "Antes, isso parecia um problema de conexão e mostrava um erro. Um problema de conexão real continua sendo avisado como tal."
+        },
+        {
+          "title": "Respostas longas fluidas, Parar sempre funciona",
+          "body": "Respostas longas do DeepSeek, ZCode e Gemini não travam mais o app por alguns segundos.",
+          "detail": "Parar e o resto do app respondem na hora, mesmo enquanto chega uma resposta rápida."
+        },
+        {
+          "title": "Painéis mais claros e calmos",
+          "body": "O botão de acesso abaixo da caixa de mensagem agora mostra “Acesso total”, com as mesmas palavras do menu, em vez de um código técnico.",
+          "detail": "Quando uma pasta muito grande demora para ser lida, Atividade mostra uma única linha tranquila com “Tentar novamente”, em vez de carregar sem fim ou mostrar caixas vermelhas. Quando o agente pede que você escolha, cada opção agora mostra sua breve explicação, para você saber o que está escolhendo."
+        },
+        {
+          "title": "Um visual mais vivo e organizado",
+          "body": "As partículas do controle de esforço agora se movem mais rápido, e no modo Rápido mais ainda, para você ver de relance como o agente está trabalhando.",
+          "detail": "Os cartões de companheiros estão menores, então você vê mais da coleção de uma vez, sem rolar."
+        }
+      ]
+    },
+    "ro": {
+      "headline": "Afli ce s-a schimbat după fiecare actualizare",
+      "summary": "O notă scurtă după fiecare actualizare și o verificare mai clară.",
+      "sections": [
+        {
+          "title": "Noutățile, după fiecare actualizare",
+          "body": "După o actualizare, Codevalanche îți arată un card scurt cu ce s-a schimbat, ca să nu-ți scape nicio îmbunătățire.",
+          "detail": "Apare o singură dată pentru fiecare versiune și nu mai revine după ce îl închizi. Lista completă a schimbărilor e mereu în Setări, la Despre."
+        },
+        {
+          "title": "Un răspuns clar când încă nu există o actualizare",
+          "body": "Verificarea actualizărilor îți spune acum direct când nu a fost publicată încă nicio versiune nouă.",
+          "detail": "Înainte, arăta ca o problemă de conexiune și afișa o eroare. O problemă reală de conexiune e semnalată în continuare ca atare."
+        },
+        {
+          "title": "Răspunsuri lungi fără sacadări, Stop merge mereu",
+          "body": "Răspunsurile lungi de la DeepSeek, ZCode și Gemini nu mai blochează aplicația câteva secunde.",
+          "detail": "Stop și restul aplicației răspund imediat, chiar și cât curge un răspuns rapid."
+        },
+        {
+          "title": "Panouri mai clare și mai liniștite",
+          "body": "Butonul de acces de sub caseta de mesaj arată acum „Acces complet”, cu aceleași cuvinte ca meniul lui, în loc de un cod tehnic.",
+          "detail": "Când un folder foarte mare se citește greu, Activitate arată un singur rând liniștit cu „Reîncearcă”, în loc să se încarce la nesfârșit sau să arate casete roșii. Când agentul îți cere să alegi, fiecare variantă arată acum și scurta ei explicație, ca să știi ce alegi."
+        },
+        {
+          "title": "Un aspect mai viu și mai ordonat",
+          "body": "Particulele de pe glisorul de efort se mișcă acum mai repede, iar în modul Rapid și mai repede, ca să vezi dintr-o privire cum lucrează agentul.",
+          "detail": "Cardurile însoțitorilor sunt mai mici, așa că vezi mai mult din colecție deodată, fără să derulezi."
+        }
+      ]
+    },
+    "ru": {
+      "headline": "Узнавайте, что изменилось, после каждого обновления",
+      "summary": "Короткая заметка после каждого обновления и более понятная проверка обновлений.",
+      "sections": [
+        {
+          "title": "Что нового — после каждого обновления",
+          "body": "После обновления Codevalanche показывает короткую карточку с изменениями, чтобы вы не пропустили ни одного улучшения.",
+          "detail": "Она появляется один раз для каждой версии и больше не показывается, если её закрыть. Полный список изменений всегда есть в Настройках, в разделе «О программе»."
+        },
+        {
+          "title": "Понятный ответ, когда обновления ещё нет",
+          "body": "Проверка обновлений теперь прямо сообщает, что новая версия ещё не опубликована.",
+          "detail": "Раньше это выглядело как проблема с подключением и показывало ошибку. О настоящей проблеме с подключением приложение по-прежнему сообщает."
+        },
+        {
+          "title": "Плавные длинные ответы, «Стоп» работает всегда",
+          "body": "Длинные ответы DeepSeek, ZCode и Gemini больше не замораживают приложение на несколько секунд.",
+          "detail": "«Стоп» и всё остальное в приложении откликаются сразу, даже пока идёт быстрый ответ."
+        },
+        {
+          "title": "Более понятные и спокойные панели",
+          "body": "Кнопка доступа под полем сообщения теперь показывает «Полный доступ», теми же словами, что и её меню, а не технический код.",
+          "detail": "Когда очень большая папка читается медленно, «Активность» показывает одну спокойную строку с кнопкой «Повторить» вместо бесконечной загрузки или красных рамок. Когда агент просит вас выбрать, у каждого варианта теперь видно его короткое пояснение, чтобы вы знали, что выбираете."
+        },
+        {
+          "title": "Живее и аккуратнее",
+          "body": "Частицы на ползунке усилия теперь двигаются быстрее, а в быстром режиме ещё быстрее, чтобы вы сразу видели, как работает агент.",
+          "detail": "Карточки спутников стали меньше, поэтому вы видите больше коллекции сразу, без прокрутки."
+        }
+      ]
+    },
+    "tr": {
+      "headline": "Her güncellemeden sonra nelerin değiştiğini öğrenin",
+      "summary": "Her güncellemeden sonra kısa bir not ve daha anlaşılır bir güncelleme denetimi.",
+      "sections": [
+        {
+          "title": "Her güncellemeden sonra yenilikler",
+          "body": "Bir güncellemeden sonra Codevalanche nelerin değiştiğini kısa bir kartla gösterir, böylece hiçbir iyileştirmeyi kaçırmazsınız.",
+          "detail": "Kart her sürüm için bir kez görünür ve kapattıktan sonra bir daha çıkmaz. Değişikliklerin tam listesi her zaman Ayarlar'da, Hakkında bölümündedir."
+        },
+        {
+          "title": "Henüz güncelleme yokken net bir yanıt",
+          "body": "Güncelleme denetimi artık henüz yeni bir sürüm yayımlanmadığını açıkça söylüyor.",
+          "detail": "Önceden bu bir bağlantı sorunu gibi görünüyor ve hata gösteriyordu. Gerçek bir bağlantı sorunu yine aynı şekilde bildirilir."
+        },
+        {
+          "title": "Akıcı uzun yanıtlar, Durdur her zaman çalışır",
+          "body": "DeepSeek, ZCode ve Gemini'den gelen uzun yanıtlar artık uygulamayı birkaç saniye dondurmuyor.",
+          "detail": "Hızlı bir yanıt akarken bile Durdur ve uygulamanın geri kalanı hemen yanıt verir."
+        },
+        {
+          "title": "Daha anlaşılır, daha sakin paneller",
+          "body": "Mesaj kutusunun altındaki erişim düğmesi artık teknik bir kod yerine menüsündekiyle aynı sözcüklerle “Tam erişim” yazıyor.",
+          "detail": "Çok büyük bir klasör yavaş okunduğunda Aktivite, sonsuz yükleme ya da kırmızı kutular yerine “Tekrar dene” ile tek bir sakin satır gösterir. Ajan senden seçim yapmanı istediğinde, her seçenek artık kısa açıklamasını gösterir; böylece neyi seçtiğini bilirsin."
+        },
+        {
+          "title": "Daha canlı, daha derli toplu bir görünüm",
+          "body": "Çaba kaydırıcısındaki parçacıklar artık daha hızlı hareket ediyor, Hızlı modda ise daha da hızlı. Böylece ajanın nasıl çalıştığını bir bakışta görürsünüz.",
+          "detail": "Arkadaş kartları artık daha küçük, böylece kaydırmadan koleksiyonun daha fazlasını tek seferde görürsünüz."
+        }
+      ]
+    },
+    "vi": {
+      "headline": "Biết ngay điều gì đã thay đổi sau mỗi bản cập nhật",
+      "summary": "Một ghi chú ngắn sau mỗi bản cập nhật và việc kiểm tra cập nhật rõ ràng hơn.",
+      "sections": [
+        {
+          "title": "Có gì mới sau mỗi bản cập nhật",
+          "body": "Sau khi cập nhật, Codevalanche hiển thị một thẻ ngắn về những gì đã thay đổi để bạn không bỏ lỡ cải tiến nào.",
+          "detail": "Thẻ chỉ xuất hiện một lần cho mỗi phiên bản và không hiện lại sau khi bạn đóng. Danh sách đầy đủ các thay đổi luôn có trong Cài đặt, mục Giới thiệu."
+        },
+        {
+          "title": "Câu trả lời rõ ràng khi chưa có bản cập nhật",
+          "body": "Khi kiểm tra cập nhật, giờ đây ứng dụng cho biết rõ khi chưa có phiên bản mới nào được phát hành.",
+          "detail": "Trước đây điều này trông giống lỗi kết nối và hiện thông báo lỗi. Lỗi kết nối thực sự vẫn được báo như trước."
+        },
+        {
+          "title": "Câu trả lời dài mượt mà, nút Dừng luôn hoạt động",
+          "body": "Câu trả lời dài từ DeepSeek, ZCode và Gemini không còn làm ứng dụng đứng hình vài giây.",
+          "detail": "Nút Dừng và phần còn lại của ứng dụng phản hồi ngay, kể cả khi một câu trả lời nhanh đang chạy."
+        },
+        {
+          "title": "Bảng rõ ràng và êm hơn",
+          "body": "Nút quyền truy cập dưới ô tin nhắn giờ hiển thị “Toàn quyền truy cập”, giống chữ trong menu của nó, thay vì một mã kỹ thuật.",
+          "detail": "Khi một thư mục rất lớn đọc chậm, Hoạt động hiển thị một dòng nhẹ nhàng kèm “Thử lại”, thay vì tải mãi hoặc hiện các ô đỏ. Khi tác nhân yêu cầu bạn chọn, mỗi lựa chọn giờ hiển thị lời giải thích ngắn, để bạn biết mình đang chọn gì."
+        },
+        {
+          "title": "Giao diện sinh động và gọn gàng hơn",
+          "body": "Các hạt trên thanh trượt nỗ lực giờ chuyển động nhanh hơn, và ở chế độ Nhanh còn nhanh hơn nữa, để bạn thấy ngay tác tử đang làm việc thế nào.",
+          "detail": "Các thẻ bạn đồng hành nhỏ hơn, nên bạn thấy được nhiều hơn trong bộ sưu tập cùng lúc mà không cần cuộn."
+        }
+      ]
+    },
+    "zh-Hans": {
+      "headline": "每次更新后，都能了解变化",
+      "summary": "每次更新后显示简短说明，检查更新的提示也更清楚。",
+      "sections": [
+        {
+          "title": "每次更新后的新功能",
+          "body": "更新后，Codevalanche 会用一张简短的卡片展示变化，让你不错过任何改进。",
+          "detail": "每个版本只显示一次，关闭后不会再出现。完整的更改列表随时可在“设置”的“关于”中查看。"
+        },
+        {
+          "title": "暂无更新时，给出明确答复",
+          "body": "检查更新时，如果还没有发布新版本，现在会直接告诉你。",
+          "detail": "以前这看起来像连接问题，并会显示错误。真正的连接问题仍会照常提示。"
+        },
+        {
+          "title": "长回答更流畅，停止随时有效",
+          "body": "DeepSeek、ZCode 和 Gemini 的长回答不会再让应用卡住几秒。",
+          "detail": "即使快速回答正在输出，停止按钮和应用的其他部分也会立即响应。"
+        },
+        {
+          "title": "更清楚、更平静的面板",
+          "body": "消息框下方的访问按钮现在显示“完全访问”，与其菜单用词一致，而不是技术代码。",
+          "detail": "当一个很大的文件夹读取缓慢时，活动面板会显示一行带“重试”的平静提示，而不是一直加载或显示红框。当智能体请你做选择时，每个选项现在都会显示简短说明，让你清楚自己选的是什么。"
+        },
+        {
+          "title": "更生动、更整洁的外观",
+          "body": "投入度滑块上的粒子现在移动得更快，在快速模式下还会更快，让你一眼看出智能体的工作状态。",
+          "detail": "伙伴卡片变小了，无需滚动就能一次看到更多收藏。"
+        }
+      ]
+    },
+    "zh-Hant": {
+      "headline": "每次更新後，都能了解變化",
+      "summary": "每次更新後顯示簡短說明，檢查更新的提示也更清楚。",
+      "sections": [
+        {
+          "title": "每次更新後的新功能",
+          "body": "更新後，Codevalanche 會用一張簡短的卡片呈現變化，讓你不錯過任何改進。",
+          "detail": "每個版本只顯示一次，關閉後不會再出現。完整的變更清單隨時可在「設定」的「關於」中查看。"
+        },
+        {
+          "title": "暫無更新時，給出明確答覆",
+          "body": "檢查更新時，如果還沒有發布新版本，現在會直接告訴你。",
+          "detail": "以前這看起來像連線問題，並會顯示錯誤。真正的連線問題仍會照常提示。"
+        },
+        {
+          "title": "長回答更流暢，停止隨時有效",
+          "body": "DeepSeek、ZCode 和 Gemini 的長回答不會再讓應用程式卡住幾秒。",
+          "detail": "即使快速回答正在輸出，停止按鈕和應用程式的其他部分也會立即回應。"
+        },
+        {
+          "title": "更清楚、更平靜的面板",
+          "body": "訊息框下方的存取按鈕現在顯示「完整存取」，與其選單用詞一致，而不是技術代碼。",
+          "detail": "當一個很大的資料夾讀取緩慢時，活動面板會顯示一行帶「重試」的平靜提示，而不是一直載入或顯示紅框。當代理請你做選擇時，每個選項現在都會顯示簡短說明，讓你清楚自己選的是什麼。"
+        },
+        {
+          "title": "更生動、更整潔的外觀",
+          "body": "投入度滑桿上的粒子現在移動得更快，在快速模式下還會更快，讓你一眼看出智慧代理的工作狀態。",
+          "detail": "夥伴卡片變小了，無需捲動就能一次看到更多收藏。"
+        }
+      ]
+    }
+  }
+}

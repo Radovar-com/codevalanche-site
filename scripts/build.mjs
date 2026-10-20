@@ -14,6 +14,7 @@ import { validateSeoExport } from "./seo-export-test.mjs"
 import { LOCALES, MARKETING_PAGES } from "../src/locales/manifest.js"
 import { prepareMarketingPartial } from "./marketing-partials.mjs"
 import { versionSiteAssets } from "./asset-cache.mjs"
+import { changelogTranslations, loadReleases, renderChangelog } from "./changelog.mjs"
 await buildAnalytics()
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
@@ -40,6 +41,12 @@ for (const page of MARKETING_PAGES) {
   const footer = prepareMarketingPartial(sharedFooter, page.path)
   await writeFile(output, html.replace("<!-- site-header -->", header).replace("<!-- site-footer -->", footer))
 }
+
+// Only published versions appear; until the first one, the page says it is on its way.
+// A local preview may point at other notes; a publishable build never sets this.
+const releases = await loadReleases(process.env.CODEVALANCHE_CHANGELOG_PREVIEW_RELEASES || path.join(root, "content/releases"))
+const changelogOutput = path.join(destination, "changelog.html")
+await writeFile(changelogOutput, renderChangelog(await readFile(changelogOutput, "utf8"), releases))
 
 const homeHtml = await readFile(path.join(destination, "index.html"), "utf8")
 const languagePicker = homeHtml.match(/<details class="lang-picker">[\s\S]*?<\/details>/)?.[0]
@@ -68,7 +75,7 @@ for (const page of MARKETING_PAGES) {
 }
 
 for (const locale of englishPreviewOnly ? [] : LOCALES.filter(item => item.slug)) {
-  const catalog = JSON.parse(await readFile(path.join(source, "locales", `${locale.slug}.json`), "utf8"))
+  const catalog = { ...JSON.parse(await readFile(path.join(source, "locales", `${locale.slug}.json`), "utf8")), ...changelogTranslations(releases, locale.tag) }
   for (const page of MARKETING_PAGES) {
     let html = renderTranslatedHtml(englishPages.get(page.file), catalog, locale.tag)
     html = rewriteLocalizedLinks(html, locale.tag)

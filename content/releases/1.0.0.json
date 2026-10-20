@@ -1,0 +1,686 @@
+{
+  "version": "1.0.0",
+  "date": "2026-10-20",
+  "copy": {
+    "en": {
+      "headline": "The first public version of Codevalanche for Windows",
+      "summary": "Your coding agents and local models in one app, in early access.",
+      "sections": [
+        {
+          "title": "Your agents, side by side",
+          "body": "Work with Claude Code, Codex and Gemini CLI side by side, or with models running on your own PC.",
+          "detail": "Switch agent or model in the middle of a conversation and keep the history, steering and attachments."
+        },
+        {
+          "title": "Local models that fit your PC",
+          "body": "Each local model gets its real context window, sized to the memory your PC has free.",
+          "detail": "Every local model has its own settings, all on Automatic to start."
+        },
+        {
+          "title": "Computer Use, in beta",
+          "body": "An agent can work in desktop apps across all your monitors.",
+          "detail": "It stays off until you turn it on."
+        },
+        {
+          "title": "Talk instead of typing",
+          "body": "Voice dictation and read-aloud run on your PC by default."
+        },
+        {
+          "title": "Your account and your limits",
+          "body": "Sign in with Google or email, and manage your sessions on the account page.",
+          "detail": "Settings shows how much of your Claude and Codex limits you have used."
+        },
+        {
+          "title": "Private and safe by default",
+          "body": "Keys and sign-ins are stored encrypted on your PC, and in a new project agents ask before acting outside its folder.",
+          "detail": "Updates are signed and checked before they install. Feedback you send from the app leaves without your keys or personal paths."
+        },
+        {
+          "title": "Good to know",
+          "body": "The installer is not yet signed with a company certificate, so Windows may show “Windows protected your PC”.",
+          "detail": "Choose More info, then Run anyway."
+        }
+      ]
+    },
+    "ar": {
+      "headline": "أول إصدار علني من ⁦Codevalanche⁩ لنظام ⁦Windows⁩",
+      "summary": "وكلاء البرمجة والنماذج المحلية في تطبيق واحد، ضمن الوصول المبكر.",
+      "sections": [
+        {
+          "title": "وكلاؤك جنبًا إلى جنب",
+          "body": "اعمل مع ⁦Claude Code⁩ و⁦Codex⁩ و⁦Gemini CLI⁩ جنبًا إلى جنب، أو مع نماذج تعمل على حاسوبك.",
+          "detail": "بدّل الوكيل أو النموذج في منتصف المحادثة واحتفظ بالسجل والتوجيهات والمرفقات."
+        },
+        {
+          "title": "نماذج محلية تناسب حاسوبك",
+          "body": "يحصل كل نموذج محلي على نافذة سياقه الحقيقية، بحجم يناسب الذاكرة الفارغة في حاسوبك.",
+          "detail": "لكل نموذج محلي إعداداته الخاصة، وكلها على «تلقائي» في البداية."
+        },
+        {
+          "title": "⁦Computer Use⁩، في النسخة التجريبية",
+          "body": "يمكن للوكيل العمل في تطبيقات سطح المكتب على كل شاشاتك.",
+          "detail": "يبقى متوقفًا حتى تشغّله بنفسك."
+        },
+        {
+          "title": "تحدّث بدل الكتابة",
+          "body": "الإملاء الصوتي والقراءة بصوت عالٍ يعملان على حاسوبك افتراضيًا."
+        },
+        {
+          "title": "حسابك وحدودك",
+          "body": "سجّل الدخول عبر ⁦Google⁩ أو البريد الإلكتروني، وأدر جلساتك من صفحة الحساب.",
+          "detail": "تعرض الإعدادات مقدار ما استخدمته من حدود ⁦Claude⁩ و⁦Codex⁩."
+        },
+        {
+          "title": "خصوصية وأمان منذ البداية",
+          "body": "تُحفظ المفاتيح وبيانات تسجيل الدخول مشفّرة على حاسوبك، وفي المشروع الجديد يسألك الوكلاء قبل العمل خارج مجلده.",
+          "detail": "التحديثات موقّعة ويُتحقق منها قبل التثبيت. والملاحظات التي ترسلها من التطبيق تخرج دون مفاتيحك ومساراتك الشخصية."
+        },
+        {
+          "title": "من المفيد أن تعرف",
+          "body": "برنامج التثبيت غير موقّع بعد بشهادة شركة، لذلك قد يعرض ⁦Windows⁩ رسالة «قام ⁦Windows⁩ بحماية الكمبيوتر».",
+          "detail": "اختر «مزيد من المعلومات»، ثم «تشغيل على أي حال»."
+        }
+      ]
+    },
+    "de": {
+      "headline": "Die erste öffentliche Version von Codevalanche für Windows",
+      "summary": "Deine Coding-Agenten und lokalen Modelle in einer App, im Early Access.",
+      "sections": [
+        {
+          "title": "Deine Agenten, Seite an Seite",
+          "body": "Arbeite mit Claude Code, Codex und Gemini CLI nebeneinander oder mit Modellen, die auf deinem eigenen PC laufen.",
+          "detail": "Wechsle Agent oder Modell mitten im Gespräch und behalte Verlauf, Anweisungen und Anhänge."
+        },
+        {
+          "title": "Lokale Modelle, passend zu deinem PC",
+          "body": "Jedes lokale Modell bekommt sein echtes Kontextfenster, abgestimmt auf den freien Speicher deines PCs.",
+          "detail": "Jedes lokale Modell hat eigene Einstellungen, zu Beginn alle auf Automatisch."
+        },
+        {
+          "title": "Computer Use, in der Beta",
+          "body": "Ein Agent kann in Desktop-Apps auf all deinen Monitoren arbeiten.",
+          "detail": "Es bleibt aus, bis du es einschaltest."
+        },
+        {
+          "title": "Sprechen statt tippen",
+          "body": "Diktieren und Vorlesen laufen standardmäßig auf deinem PC."
+        },
+        {
+          "title": "Dein Konto und deine Limits",
+          "body": "Melde dich mit Google oder E-Mail an und verwalte deine Sitzungen auf der Kontoseite.",
+          "detail": "In den Einstellungen siehst du, wie viel deiner Claude- und Codex-Limits du verbraucht hast."
+        },
+        {
+          "title": "Privat und sicher von Anfang an",
+          "body": "Schlüssel und Anmeldungen werden verschlüsselt auf deinem PC gespeichert, und in einem neuen Projekt fragen Agenten, bevor sie außerhalb seines Ordners handeln.",
+          "detail": "Updates sind signiert und werden vor der Installation geprüft. Feedback aus der App wird ohne deine Schlüssel und persönlichen Pfade gesendet."
+        },
+        {
+          "title": "Gut zu wissen",
+          "body": "Das Installationsprogramm ist noch nicht mit einem Firmenzertifikat signiert, daher zeigt Windows eventuell „Der Computer wurde durch Windows geschützt“.",
+          "detail": "Wähle Weitere Informationen und dann Trotzdem ausführen."
+        }
+      ]
+    },
+    "es": {
+      "headline": "La primera versión pública de Codevalanche para Windows",
+      "summary": "Tus agentes de programación y modelos locales en una sola app, en acceso anticipado.",
+      "sections": [
+        {
+          "title": "Tus agentes, uno junto a otro",
+          "body": "Trabaja con Claude Code, Codex y Gemini CLI uno junto a otro, o con modelos que se ejecutan en tu propio PC.",
+          "detail": "Cambia de agente o de modelo en mitad de una conversación y conserva el historial, las indicaciones y los adjuntos."
+        },
+        {
+          "title": "Modelos locales a la medida de tu PC",
+          "body": "Cada modelo local recibe su ventana de contexto real, ajustada a la memoria libre de tu PC.",
+          "detail": "Cada modelo local tiene su propia configuración, toda en Automático al empezar."
+        },
+        {
+          "title": "Computer Use, en beta",
+          "body": "Un agente puede trabajar en apps de escritorio en todos tus monitores.",
+          "detail": "Permanece desactivado hasta que lo actives."
+        },
+        {
+          "title": "Habla en lugar de escribir",
+          "body": "El dictado por voz y la lectura en voz alta funcionan en tu PC de forma predeterminada."
+        },
+        {
+          "title": "Tu cuenta y tus límites",
+          "body": "Inicia sesión con Google o con tu correo y gestiona tus sesiones en la página de la cuenta.",
+          "detail": "En Configuración ves cuánto has usado de tus límites de Claude y Codex."
+        },
+        {
+          "title": "Privado y seguro desde el principio",
+          "body": "Las claves y los inicios de sesión se guardan cifrados en tu PC, y en un proyecto nuevo los agentes preguntan antes de actuar fuera de su carpeta.",
+          "detail": "Las actualizaciones están firmadas y se comprueban antes de instalarse. Los comentarios que envías desde la app salen sin tus claves ni tus rutas personales."
+        },
+        {
+          "title": "Conviene saber",
+          "body": "El instalador aún no está firmado con un certificado de empresa, así que Windows puede mostrar «Windows protegió su PC».",
+          "detail": "Elige Más información y después Ejecutar de todas formas."
+        }
+      ]
+    },
+    "fr": {
+      "headline": "La première version publique de Codevalanche pour Windows",
+      "summary": "Vos agents de code et vos modèles locaux dans une seule application, en accès anticipé.",
+      "sections": [
+        {
+          "title": "Vos agents, côte à côte",
+          "body": "Travaillez avec Claude Code, Codex et Gemini CLI côte à côte, ou avec des modèles qui tournent sur votre propre PC.",
+          "detail": "Changez d’agent ou de modèle en pleine conversation en gardant l’historique, les consignes et les pièces jointes."
+        },
+        {
+          "title": "Des modèles locaux adaptés à votre PC",
+          "body": "Chaque modèle local reçoit sa vraie fenêtre de contexte, dimensionnée selon la mémoire libre de votre PC.",
+          "detail": "Chaque modèle local a ses propres réglages, tous sur Automatique au départ."
+        },
+        {
+          "title": "Computer Use, en bêta",
+          "body": "Un agent peut travailler dans les applications de bureau, sur tous vos écrans.",
+          "detail": "Il reste désactivé tant que vous ne l’activez pas."
+        },
+        {
+          "title": "Parlez au lieu de taper",
+          "body": "La dictée vocale et la lecture à voix haute fonctionnent sur votre PC par défaut."
+        },
+        {
+          "title": "Votre compte et vos limites",
+          "body": "Connectez-vous avec Google ou par e-mail, et gérez vos sessions sur la page du compte.",
+          "detail": "Les Paramètres indiquent la part de vos limites Claude et Codex déjà utilisée."
+        },
+        {
+          "title": "Privé et sûr par défaut",
+          "body": "Les clés et les connexions sont stockées chiffrées sur votre PC, et dans un nouveau projet les agents demandent avant d’agir hors de son dossier.",
+          "detail": "Les mises à jour sont signées et vérifiées avant l’installation. Les commentaires envoyés depuis l’application partent sans vos clés ni vos chemins personnels."
+        },
+        {
+          "title": "Bon à savoir",
+          "body": "Le programme d’installation n’est pas encore signé par un certificat d’entreprise, Windows peut donc afficher « Windows a protégé votre ordinateur ».",
+          "detail": "Choisissez Informations complémentaires, puis Exécuter quand même."
+        }
+      ]
+    },
+    "hi": {
+      "headline": "Windows के लिए Codevalanche का पहला सार्वजनिक संस्करण",
+      "summary": "आपके कोडिंग एजेंट और लोकल मॉडल एक ही ऐप में, अर्ली एक्सेस में।",
+      "sections": [
+        {
+          "title": "आपके एजेंट, साथ-साथ",
+          "body": "Claude Code, Codex और Gemini CLI के साथ एक साथ काम करें, या अपने PC पर चलने वाले मॉडल के साथ।",
+          "detail": "बातचीत के बीच में एजेंट या मॉडल बदलें, और इतिहास, निर्देश और अटैचमेंट वैसे ही रहें।"
+        },
+        {
+          "title": "आपके PC के हिसाब से लोकल मॉडल",
+          "body": "हर लोकल मॉडल को उसकी असली कॉन्टेक्स्ट विंडो मिलती है, जो आपके PC की खाली मेमोरी के अनुसार तय होती है।",
+          "detail": "हर लोकल मॉडल की अपनी सेटिंग्स हैं, शुरू में सभी स्वचालित पर।"
+        },
+        {
+          "title": "Computer Use, बीटा में",
+          "body": "एक एजेंट आपके सभी मॉनिटर पर डेस्कटॉप ऐप्स में काम कर सकता है।",
+          "detail": "जब तक आप इसे चालू न करें, यह बंद रहता है।"
+        },
+        {
+          "title": "टाइप करने के बजाय बोलें",
+          "body": "वॉइस डिक्टेशन और पढ़कर सुनाना डिफ़ॉल्ट रूप से आपके PC पर चलते हैं।"
+        },
+        {
+          "title": "आपका खाता और आपकी सीमाएँ",
+          "body": "Google या ईमेल से साइन इन करें, और खाता पेज पर अपने सेशन संभालें।",
+          "detail": "सेटिंग्स में दिखता है कि आपने Claude और Codex की सीमाओं का कितना हिस्सा इस्तेमाल किया है।"
+        },
+        {
+          "title": "शुरू से निजी और सुरक्षित",
+          "body": "कुंजियाँ और साइन-इन आपके PC पर एन्क्रिप्ट करके रखे जाते हैं, और नए प्रोजेक्ट में एजेंट उसके फ़ोल्डर से बाहर कुछ करने से पहले पूछते हैं।",
+          "detail": "अपडेट साइन किए होते हैं और इंस्टॉल से पहले जाँचे जाते हैं। ऐप से भेजा गया फ़ीडबैक आपकी कुंजियों और निजी पाथ के बिना जाता है।"
+        },
+        {
+          "title": "जानने लायक",
+          "body": "इंस्टॉलर अभी किसी कंपनी प्रमाणपत्र से साइन नहीं है, इसलिए Windows “Windows ने आपके PC को सुरक्षित रखा” दिखा सकता है।",
+          "detail": "अधिक जानकारी चुनें, फिर फिर भी चलाएँ चुनें।"
+        }
+      ]
+    },
+    "id": {
+      "headline": "Versi publik pertama Codevalanche untuk Windows",
+      "summary": "Agen coding dan model lokal Anda dalam satu aplikasi, dalam akses awal.",
+      "sections": [
+        {
+          "title": "Agen Anda, berdampingan",
+          "body": "Bekerja dengan Claude Code, Codex, dan Gemini CLI secara berdampingan, atau dengan model yang berjalan di PC Anda sendiri.",
+          "detail": "Ganti agen atau model di tengah percakapan dan tetap simpan riwayat, arahan, dan lampiran."
+        },
+        {
+          "title": "Model lokal yang pas dengan PC Anda",
+          "body": "Setiap model lokal mendapat jendela konteks yang sebenarnya, disesuaikan dengan memori kosong PC Anda.",
+          "detail": "Setiap model lokal punya pengaturannya sendiri, semuanya Otomatis di awal."
+        },
+        {
+          "title": "Computer Use, dalam beta",
+          "body": "Agen dapat bekerja di aplikasi desktop di semua monitor Anda.",
+          "detail": "Fitur ini tetap mati sampai Anda menyalakannya."
+        },
+        {
+          "title": "Bicara, bukan mengetik",
+          "body": "Dikte suara dan bacakan teks berjalan di PC Anda secara default."
+        },
+        {
+          "title": "Akun dan batas Anda",
+          "body": "Masuk dengan Google atau email, lalu kelola sesi Anda di halaman akun.",
+          "detail": "Pengaturan menampilkan berapa banyak batas Claude dan Codex yang sudah Anda pakai."
+        },
+        {
+          "title": "Privat dan aman sejak awal",
+          "body": "Kunci dan info masuk disimpan terenkripsi di PC Anda, dan di proyek baru agen bertanya dulu sebelum bertindak di luar foldernya.",
+          "detail": "Pembaruan ditandatangani dan diperiksa sebelum dipasang. Masukan yang Anda kirim dari aplikasi keluar tanpa kunci dan path pribadi Anda."
+        },
+        {
+          "title": "Perlu diketahui",
+          "body": "Penginstal belum ditandatangani dengan sertifikat perusahaan, jadi Windows mungkin menampilkan “Windows melindungi PC Anda”.",
+          "detail": "Pilih Info selengkapnya, lalu Tetap jalankan."
+        }
+      ]
+    },
+    "it": {
+      "headline": "La prima versione pubblica di Codevalanche per Windows",
+      "summary": "I tuoi agenti di programmazione e i modelli locali in un’unica app, in accesso anticipato.",
+      "sections": [
+        {
+          "title": "I tuoi agenti, fianco a fianco",
+          "body": "Lavora con Claude Code, Codex e Gemini CLI fianco a fianco, o con modelli che girano sul tuo PC.",
+          "detail": "Cambia agente o modello a metà conversazione e conserva cronologia, indicazioni e allegati."
+        },
+        {
+          "title": "Modelli locali su misura per il tuo PC",
+          "body": "Ogni modello locale ha la sua vera finestra di contesto, calibrata sulla memoria libera del tuo PC.",
+          "detail": "Ogni modello locale ha le sue impostazioni, tutte su Automatico all’inizio."
+        },
+        {
+          "title": "Computer Use, in beta",
+          "body": "Un agente può lavorare nelle app desktop su tutti i tuoi monitor.",
+          "detail": "Resta disattivato finché non lo attivi tu."
+        },
+        {
+          "title": "Parla invece di scrivere",
+          "body": "Dettatura vocale e lettura ad alta voce funzionano sul tuo PC per impostazione predefinita."
+        },
+        {
+          "title": "Il tuo account e i tuoi limiti",
+          "body": "Accedi con Google o con l’email e gestisci le tue sessioni nella pagina dell’account.",
+          "detail": "Nelle Impostazioni vedi quanto hai usato dei tuoi limiti di Claude e Codex."
+        },
+        {
+          "title": "Privato e sicuro fin dall’inizio",
+          "body": "Chiavi e accessi sono salvati cifrati sul tuo PC e, in un nuovo progetto, gli agenti chiedono prima di agire fuori dalla sua cartella.",
+          "detail": "Gli aggiornamenti sono firmati e verificati prima dell’installazione. Il feedback inviato dall’app parte senza le tue chiavi e i tuoi percorsi personali."
+        },
+        {
+          "title": "Da sapere",
+          "body": "Il programma di installazione non è ancora firmato con un certificato aziendale, quindi Windows potrebbe mostrare «PC protetto da Windows».",
+          "detail": "Scegli Ulteriori informazioni, poi Esegui comunque."
+        }
+      ]
+    },
+    "ja": {
+      "headline": "Windows 版 Codevalanche、最初の公開バージョン",
+      "summary": "コーディングエージェントとローカルモデルをひとつのアプリで。早期アクセス版です。",
+      "sections": [
+        {
+          "title": "エージェントを並べて",
+          "body": "Claude Code、Codex、Gemini CLI を並べて使えます。PC 上で動くモデルも使えます。",
+          "detail": "会話の途中でエージェントやモデルを切り替えても、履歴・指示・添付ファイルはそのまま残ります。"
+        },
+        {
+          "title": "PC に合ったローカルモデル",
+          "body": "各ローカルモデルには、PC の空きメモリに合わせた本来のコンテキストウィンドウが割り当てられます。",
+          "detail": "ローカルモデルごとに設定があり、最初はすべて「自動」です。"
+        },
+        {
+          "title": "Computer Use（ベータ）",
+          "body": "エージェントが、すべてのモニター上のデスクトップアプリで作業できます。",
+          "detail": "オンにするまではオフのままです。"
+        },
+        {
+          "title": "入力する代わりに話す",
+          "body": "音声入力と読み上げは、標準で PC 上で動作します。"
+        },
+        {
+          "title": "アカウントと利用上限",
+          "body": "Google またはメールでサインインし、アカウントページでセッションを管理できます。",
+          "detail": "Claude と Codex の上限をどれだけ使ったか、設定で確認できます。"
+        },
+        {
+          "title": "最初からプライベートで安全",
+          "body": "キーとサインイン情報は PC に暗号化して保存されます。新しいプロジェクトでは、フォルダーの外で作業する前にエージェントが確認します。",
+          "detail": "アップデートは署名され、インストール前に検証されます。アプリから送るフィードバックには、キーや個人のパスは含まれません。"
+        },
+        {
+          "title": "知っておいてほしいこと",
+          "body": "インストーラーはまだ企業の証明書で署名されていないため、Windows に「Windows によって PC が保護されました」と表示されることがあります。",
+          "detail": "「詳細情報」を選び、「実行」を選んでください。"
+        }
+      ]
+    },
+    "ko": {
+      "headline": "Windows용 Codevalanche 첫 공개 버전",
+      "summary": "코딩 에이전트와 로컬 모델을 하나의 앱에서. 얼리 액세스입니다.",
+      "sections": [
+        {
+          "title": "에이전트를 나란히",
+          "body": "Claude Code, Codex, Gemini CLI를 나란히 쓰거나 내 PC에서 실행되는 모델로 작업하세요.",
+          "detail": "대화 중에 에이전트나 모델을 바꿔도 기록, 지시, 첨부 파일이 그대로 유지됩니다."
+        },
+        {
+          "title": "내 PC에 맞는 로컬 모델",
+          "body": "각 로컬 모델은 PC의 남은 메모리에 맞춘 실제 컨텍스트 창을 받습니다.",
+          "detail": "로컬 모델마다 자체 설정이 있으며, 처음에는 모두 자동입니다."
+        },
+        {
+          "title": "Computer Use, 베타",
+          "body": "에이전트가 모든 모니터의 데스크톱 앱에서 작업할 수 있습니다.",
+          "detail": "직접 켜기 전까지는 꺼져 있습니다."
+        },
+        {
+          "title": "타이핑 대신 말하기",
+          "body": "음성 받아쓰기와 소리 내어 읽기는 기본적으로 내 PC에서 실행됩니다."
+        },
+        {
+          "title": "내 계정과 한도",
+          "body": "Google이나 이메일로 로그인하고 계정 페이지에서 세션을 관리하세요.",
+          "detail": "설정에서 Claude와 Codex 한도를 얼마나 썼는지 볼 수 있습니다."
+        },
+        {
+          "title": "처음부터 비공개, 안전하게",
+          "body": "키와 로그인 정보는 PC에 암호화되어 저장되고, 새 프로젝트에서는 에이전트가 폴더 밖에서 작업하기 전에 먼저 묻습니다.",
+          "detail": "업데이트는 서명되어 설치 전에 확인됩니다. 앱에서 보내는 피드백에는 키와 개인 경로가 빠집니다."
+        },
+        {
+          "title": "알아 두세요",
+          "body": "설치 프로그램은 아직 회사 인증서로 서명되지 않아 Windows에 “Windows의 PC 보호” 화면이 나타날 수 있습니다.",
+          "detail": "추가 정보를 누른 다음 실행을 선택하세요."
+        }
+      ]
+    },
+    "pt-BR": {
+      "headline": "A primeira versão pública do Codevalanche para Windows",
+      "summary": "Seus agentes de programação e modelos locais em um só app, em acesso antecipado.",
+      "sections": [
+        {
+          "title": "Seus agentes, lado a lado",
+          "body": "Trabalhe com Claude Code, Codex e Gemini CLI lado a lado, ou com modelos rodando no seu próprio PC.",
+          "detail": "Troque de agente ou de modelo no meio da conversa e mantenha o histórico, as orientações e os anexos."
+        },
+        {
+          "title": "Modelos locais do tamanho do seu PC",
+          "body": "Cada modelo local recebe sua janela de contexto real, ajustada à memória livre do seu PC.",
+          "detail": "Cada modelo local tem suas próprias configurações, todas em Automático no início."
+        },
+        {
+          "title": "Computer Use, em beta",
+          "body": "Um agente pode trabalhar em apps de desktop em todos os seus monitores.",
+          "detail": "Ele fica desligado até você ativá-lo."
+        },
+        {
+          "title": "Fale em vez de digitar",
+          "body": "O ditado por voz e a leitura em voz alta rodam no seu PC por padrão."
+        },
+        {
+          "title": "Sua conta e seus limites",
+          "body": "Entre com o Google ou com e-mail e gerencie suas sessões na página da conta.",
+          "detail": "Em Configurações você vê quanto já usou dos seus limites do Claude e do Codex."
+        },
+        {
+          "title": "Privado e seguro desde o início",
+          "body": "Chaves e logins ficam guardados com criptografia no seu PC, e em um projeto novo os agentes perguntam antes de agir fora da pasta dele.",
+          "detail": "As atualizações são assinadas e verificadas antes de instalar. O feedback enviado pelo app sai sem suas chaves e caminhos pessoais."
+        },
+        {
+          "title": "Bom saber",
+          "body": "O instalador ainda não é assinado com um certificado de empresa, então o Windows pode mostrar “O Windows protegeu o computador”.",
+          "detail": "Escolha Mais informações e depois Executar assim mesmo."
+        }
+      ]
+    },
+    "ro": {
+      "headline": "Prima versiune publică a Codevalanche pentru Windows",
+      "summary": "Agenții tăi de programare și modelele locale într-o singură aplicație, în acces timpuriu.",
+      "sections": [
+        {
+          "title": "Agenții tăi, unul lângă altul",
+          "body": "Lucrează cu Claude Code, Codex și Gemini CLI unul lângă altul sau cu modele care rulează pe PC-ul tău.",
+          "detail": "Schimbi agentul sau modelul în mijlocul conversației și păstrezi istoricul, indicațiile și atașamentele."
+        },
+        {
+          "title": "Modele locale pe măsura PC-ului tău",
+          "body": "Fiecare model local primește fereastra lui reală de context, pe măsura memoriei libere a PC-ului.",
+          "detail": "Fiecare model local are setările lui, toate pe Automat la început."
+        },
+        {
+          "title": "Computer Use, în beta",
+          "body": "Un agent poate lucra în aplicațiile de pe desktop, pe toate monitoarele tale.",
+          "detail": "Rămâne oprit până îl pornești tu."
+        },
+        {
+          "title": "Vorbește în loc să scrii",
+          "body": "Dictarea vocală și citirea cu voce tare rulează implicit pe PC-ul tău."
+        },
+        {
+          "title": "Contul tău și limitele tale",
+          "body": "Te conectezi cu Google sau cu emailul și îți gestionezi sesiunile pe pagina contului.",
+          "detail": "În Setări vezi cât ai folosit din limitele Claude și Codex."
+        },
+        {
+          "title": "Privat și sigur din start",
+          "body": "Cheile și conectările sunt păstrate criptat pe PC-ul tău, iar într-un proiect nou agenții te întreabă înainte să lucreze în afara folderului lui.",
+          "detail": "Actualizările sunt semnate și verificate înainte de instalare. Feedbackul trimis din aplicație pleacă fără cheile și căile tale personale."
+        },
+        {
+          "title": "Bine de știut",
+          "body": "Programul de instalare nu e încă semnat cu un certificat de companie, așa că Windows poate afișa „Windows a protejat PC-ul”.",
+          "detail": "Alege Mai multe informații, apoi Rulează oricum."
+        }
+      ]
+    },
+    "ru": {
+      "headline": "Первая публичная версия Codevalanche для Windows",
+      "summary": "Ваши агенты для программирования и локальные модели в одном приложении, в раннем доступе.",
+      "sections": [
+        {
+          "title": "Ваши агенты рядом друг с другом",
+          "body": "Работайте с Claude Code, Codex и Gemini CLI параллельно или с моделями, которые запускаются на вашем ПК.",
+          "detail": "Меняйте агента или модель прямо посреди разговора, сохраняя историю, указания и вложения."
+        },
+        {
+          "title": "Локальные модели под ваш ПК",
+          "body": "Каждая локальная модель получает настоящее окно контекста, рассчитанное по свободной памяти вашего ПК.",
+          "detail": "У каждой локальной модели свои настройки, и все они сначала стоят на «Автоматически»."
+        },
+        {
+          "title": "Computer Use, в бета-версии",
+          "body": "Агент может работать в настольных приложениях на всех ваших мониторах.",
+          "detail": "Функция выключена, пока вы её не включите."
+        },
+        {
+          "title": "Говорите вместо того, чтобы печатать",
+          "body": "Голосовой ввод и чтение вслух по умолчанию работают на вашем ПК."
+        },
+        {
+          "title": "Ваш аккаунт и ваши лимиты",
+          "body": "Входите через Google или по электронной почте и управляйте сеансами на странице аккаунта.",
+          "detail": "В настройках видно, какую часть лимитов Claude и Codex вы уже израсходовали."
+        },
+        {
+          "title": "Приватно и безопасно с самого начала",
+          "body": "Ключи и входы хранятся на вашем ПК в зашифрованном виде, а в новом проекте агенты спрашивают, прежде чем действовать за пределами его папки.",
+          "detail": "Обновления подписаны и проверяются перед установкой. Отзыв из приложения отправляется без ваших ключей и личных путей."
+        },
+        {
+          "title": "Полезно знать",
+          "body": "Установщик пока не подписан сертификатом компании, поэтому Windows может показать «Система Windows защитила ваш компьютер».",
+          "detail": "Нажмите «Подробнее», затем «Выполнить в любом случае»."
+        }
+      ]
+    },
+    "tr": {
+      "headline": "Windows için Codevalanche'ın ilk herkese açık sürümü",
+      "summary": "Kodlama ajanların ve yerel modellerin tek bir uygulamada, erken erişimde.",
+      "sections": [
+        {
+          "title": "Ajanların yan yana",
+          "body": "Claude Code, Codex ve Gemini CLI ile yan yana ya da kendi bilgisayarında çalışan modellerle çalış.",
+          "detail": "Konuşmanın ortasında ajanı veya modeli değiştir; geçmiş, yönlendirmeler ve ekler korunur."
+        },
+        {
+          "title": "Bilgisayarına uygun yerel modeller",
+          "body": "Her yerel model, bilgisayarının boş belleğine göre ayarlanmış gerçek bağlam penceresini alır.",
+          "detail": "Her yerel modelin kendi ayarları vardır ve başlangıçta hepsi Otomatik'tedir."
+        },
+        {
+          "title": "Computer Use, beta sürümünde",
+          "body": "Bir ajan, tüm monitörlerindeki masaüstü uygulamalarında çalışabilir.",
+          "detail": "Sen açana kadar kapalı kalır."
+        },
+        {
+          "title": "Yazmak yerine konuş",
+          "body": "Sesle yazdırma ve sesli okuma varsayılan olarak bilgisayarında çalışır."
+        },
+        {
+          "title": "Hesabın ve limitlerin",
+          "body": "Google veya e-posta ile giriş yap, oturumlarını hesap sayfasından yönet.",
+          "detail": "Ayarlar'da Claude ve Codex limitlerinin ne kadarını kullandığını görürsün."
+        },
+        {
+          "title": "Baştan gizli ve güvenli",
+          "body": "Anahtarlar ve oturumlar bilgisayarında şifreli olarak saklanır; yeni bir projede ajanlar, klasörünün dışında işlem yapmadan önce sorar.",
+          "detail": "Güncellemeler imzalıdır ve yüklenmeden önce doğrulanır. Uygulamadan gönderdiğin geri bildirim, anahtarların ve kişisel yolların olmadan gider."
+        },
+        {
+          "title": "Bilmekte fayda var",
+          "body": "Yükleyici henüz bir şirket sertifikasıyla imzalanmadı; bu yüzden Windows “Windows bilgisayarınızı korudu” uyarısını gösterebilir.",
+          "detail": "Ek bilgi'yi, ardından Yine de çalıştır'ı seç."
+        }
+      ]
+    },
+    "vi": {
+      "headline": "Phiên bản công khai đầu tiên của Codevalanche cho Windows",
+      "summary": "Các tác tử lập trình và mô hình cục bộ của bạn trong một ứng dụng, ở giai đoạn truy cập sớm.",
+      "sections": [
+        {
+          "title": "Các tác tử của bạn, cạnh nhau",
+          "body": "Làm việc với Claude Code, Codex và Gemini CLI cạnh nhau, hoặc với các mô hình chạy ngay trên máy tính của bạn.",
+          "detail": "Đổi tác tử hoặc mô hình giữa cuộc trò chuyện mà vẫn giữ lịch sử, chỉ dẫn và tệp đính kèm."
+        },
+        {
+          "title": "Mô hình cục bộ vừa với máy tính của bạn",
+          "body": "Mỗi mô hình cục bộ có cửa sổ ngữ cảnh thật, tính theo bộ nhớ còn trống của máy tính.",
+          "detail": "Mỗi mô hình cục bộ có cài đặt riêng, ban đầu đều ở chế độ Tự động."
+        },
+        {
+          "title": "Computer Use, bản beta",
+          "body": "Tác tử có thể làm việc trong các ứng dụng máy tính trên mọi màn hình của bạn.",
+          "detail": "Tính năng này tắt cho đến khi bạn bật."
+        },
+        {
+          "title": "Nói thay vì gõ",
+          "body": "Đọc chính tả bằng giọng nói và đọc to chạy trên máy tính của bạn theo mặc định."
+        },
+        {
+          "title": "Tài khoản và hạn mức của bạn",
+          "body": "Đăng nhập bằng Google hoặc email, và quản lý các phiên trên trang tài khoản.",
+          "detail": "Phần Cài đặt cho biết bạn đã dùng bao nhiêu hạn mức Claude và Codex."
+        },
+        {
+          "title": "Riêng tư và an toàn ngay từ đầu",
+          "body": "Khóa và thông tin đăng nhập được lưu mã hóa trên máy tính của bạn, và trong dự án mới, tác tử sẽ hỏi trước khi làm việc bên ngoài thư mục của dự án.",
+          "detail": "Bản cập nhật được ký và kiểm tra trước khi cài. Phản hồi gửi từ ứng dụng không kèm khóa và đường dẫn cá nhân của bạn."
+        },
+        {
+          "title": "Điều nên biết",
+          "body": "Trình cài đặt chưa được ký bằng chứng chỉ doanh nghiệp, nên Windows có thể hiện “Windows đã bảo vệ PC của bạn”.",
+          "detail": "Chọn Thông tin khác, rồi chọn Vẫn chạy."
+        }
+      ]
+    },
+    "zh-Hans": {
+      "headline": "Codevalanche Windows 版首个公开版本",
+      "summary": "你的编程智能体和本地模型集中在一个应用中，现为抢先体验版。",
+      "sections": [
+        {
+          "title": "智能体并排工作",
+          "body": "让 Claude Code、Codex 和 Gemini CLI 并排工作，或使用在你自己电脑上运行的模型。",
+          "detail": "在对话中途切换智能体或模型，历史记录、指引和附件都会保留。"
+        },
+        {
+          "title": "与你电脑匹配的本地模型",
+          "body": "每个本地模型都会获得真实的上下文窗口，大小取决于电脑的可用内存。",
+          "detail": "每个本地模型都有自己的设置，一开始全部为“自动”。"
+        },
+        {
+          "title": "Computer Use（测试版）",
+          "body": "智能体可以在你所有显示器上的桌面应用中工作。",
+          "detail": "在你开启之前，它一直处于关闭状态。"
+        },
+        {
+          "title": "说话代替打字",
+          "body": "语音输入和朗读默认在你的电脑上运行。"
+        },
+        {
+          "title": "你的账户和用量上限",
+          "body": "使用 Google 或邮箱登录，并在账户页面管理你的会话。",
+          "detail": "在设置中可以看到你已用掉多少 Claude 和 Codex 用量上限。"
+        },
+        {
+          "title": "默认私密且安全",
+          "body": "密钥和登录信息加密保存在你的电脑上；在新项目中，智能体在其文件夹之外操作前会先询问你。",
+          "detail": "更新经过签名，并在安装前进行校验。从应用发送的反馈不会包含你的密钥和个人路径。"
+        },
+        {
+          "title": "温馨提示",
+          "body": "安装程序尚未使用公司证书签名，因此 Windows 可能会显示“Windows 已保护你的电脑”。",
+          "detail": "选择“更多信息”，然后选择“仍要运行”。"
+        }
+      ]
+    },
+    "zh-Hant": {
+      "headline": "Codevalanche Windows 版首個公開版本",
+      "summary": "你的程式設計代理和本機模型集中在一個應用程式中，目前為搶先體驗版。",
+      "sections": [
+        {
+          "title": "代理並排工作",
+          "body": "讓 Claude Code、Codex 和 Gemini CLI 並排工作，或使用在你自己電腦上執行的模型。",
+          "detail": "在對話途中切換代理或模型，歷史紀錄、指引和附件都會保留。"
+        },
+        {
+          "title": "與你電腦相符的本機模型",
+          "body": "每個本機模型都會取得真實的上下文視窗，大小取決於電腦的可用記憶體。",
+          "detail": "每個本機模型都有自己的設定，一開始全部為「自動」。"
+        },
+        {
+          "title": "Computer Use（測試版）",
+          "body": "代理可以在你所有螢幕上的桌面應用程式中工作。",
+          "detail": "在你開啟之前，它會一直保持關閉。"
+        },
+        {
+          "title": "用說的代替打字",
+          "body": "語音輸入和朗讀預設在你的電腦上執行。"
+        },
+        {
+          "title": "你的帳號和用量上限",
+          "body": "使用 Google 或電子郵件登入，並在帳號頁面管理你的工作階段。",
+          "detail": "在設定中可以看到你已用掉多少 Claude 和 Codex 用量上限。"
+        },
+        {
+          "title": "預設私密且安全",
+          "body": "金鑰和登入資訊加密儲存在你的電腦上；在新專案中，代理在其資料夾之外操作前會先詢問你。",
+          "detail": "更新經過簽署，並在安裝前進行驗證。從應用程式傳送的意見回饋不會包含你的金鑰和個人路徑。"
+        },
+        {
+          "title": "貼心提醒",
+          "body": "安裝程式尚未使用公司憑證簽署，因此 Windows 可能會顯示「Windows 已保護您的電腦」。",
+          "detail": "選擇「其他資訊」，然後選擇「仍要執行」。"
+        }
+      ]
+    }
+  }
+}
