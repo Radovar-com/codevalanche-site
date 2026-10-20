@@ -32,7 +32,7 @@ test('actual account UI saves with both refused or capture unavailable, and emit
   });
   await page.goto(`http://127.0.0.1:${server.address().port}/account/`);await page.locator('#profile').waitFor({state:'visible'});
   if(mode==='granted')await page.waitForFunction(()=>!!localStorage.getItem('owned_analytics:codevalanche:account:receipt'));
-  await page.locator('#display-name').fill('Private edited name');await page.locator('#profile-form button').click();
+  await page.locator('#display-name').fill('Private edited name');await page.locator('#profile-form button[type=submit]').click();
   await page.waitForRequest(()=>false,{timeout:30}).catch(()=>{});
   while(!calls.some(c=>c.action==='profile.update'))await new Promise(r=>setTimeout(r,5));
   assert.notEqual(await page.locator('#status').textContent(),'Profile saved.');release();await page.getByText('Profile saved.',{exact:true}).waitFor();

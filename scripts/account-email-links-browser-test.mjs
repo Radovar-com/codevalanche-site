@@ -62,10 +62,10 @@ try {
   assert.equal(await t.page.locator('#profile-email').textContent(),'new@example.test')
   assert.equal(new URL(t.page.url()).search,'')
   // 4. The account page starts the next secure change; both addresses get a link.
-  await t.page.getByLabel('New email address',{exact:true}).fill('new@example.test')
-  await t.page.getByRole('button',{name:'Change email',exact:true}).click()
-  await t.page.getByText('Enter a different email address.',{exact:true}).waitFor()
-  await t.page.getByLabel('New email address',{exact:true}).fill('later@example.test')
+  // The row shows the current address; the change action appears only once it differs.
+  assert.equal(await t.page.getByLabel('Email address',{exact:true}).inputValue(),'new@example.test')
+  assert.equal(await t.page.getByRole('button',{name:'Change email',exact:true}).isVisible(),false)
+  await t.page.getByLabel('Email address',{exact:true}).fill('later@example.test')
   await t.page.getByRole('button',{name:'Change email',exact:true}).click()
   await t.page.getByText('Check both inboxes. Open the link sent to your current address and the one sent to the new address to finish the change.',{exact:true}).waitFor()
   const update=t.calls.filter(c=>c.path==='/auth/v1/user'&&c.method==='PUT')

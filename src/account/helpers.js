@@ -81,3 +81,26 @@ export function emailLocaleFor(languages = []) {
   }
   return 'en'
 }
+
+// A readable device name for a signed-in session ("Chrome on Windows"), from
+// the user agent the account server recorded. Null when nothing is recognised.
+export function deviceLabel(userAgent = '') {
+  const ua = String(userAgent)
+  const os = /Windows/i.test(ua) ? 'Windows' : /iPhone|iPad|iPod/i.test(ua) ? 'iOS' : /Mac OS X|Macintosh/i.test(ua) ? 'macOS'
+    : /Android/i.test(ua) ? 'Android' : /CrOS/i.test(ua) ? 'ChromeOS' : /Linux/i.test(ua) ? 'Linux' : ''
+  const browser = /Edg\//i.test(ua) ? 'Edge' : /OPR\/|Opera/i.test(ua) ? 'Opera'
+    : /Firefox\//i.test(ua) ? 'Firefox' : /Chrome\/|CriOS/i.test(ua) ? 'Chrome' : /Safari\//i.test(ua) ? 'Safari' : ''
+  if (!browser && !os) return null
+  return { browser, os }
+}
+
+// The visitor's desktop platform, for the download link: Windows has the app,
+// macOS follows after launch, anything else is shown the Windows app.
+export function desktopPlatform(navigatorLike = {}) {
+  const platform = navigatorLike.userAgentData?.platform || navigatorLike.platform || ''
+  const ua = navigatorLike.userAgent || ''
+  if (navigatorLike.userAgentData?.mobile || /Android|iPhone|iPad|iPod|Mobile/i.test(ua)) return 'mobile'
+  if (/^Win/i.test(platform) || /Windows NT/i.test(ua)) return 'windows'
+  if (/Mac/i.test(platform) || /Macintosh|Mac OS X/i.test(ua)) return 'mac'
+  return 'other'
+}
