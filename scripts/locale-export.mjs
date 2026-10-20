@@ -206,7 +206,8 @@ export function applyLocalizedMetadata(html, canonicalPath, targetLocale) {
   upsertMeta(document, 'property', 'og:url', canonicalUrl);
   upsertMeta(document, 'property', 'og:title', title);
   upsertMeta(document, 'property', 'og:description', description);
-  upsertMeta(document, 'name', 'twitter:card', 'summary');
+  const hasImage = Boolean(findElement(document, (node, attrs) => node.tagName === 'meta' && (attrs.get('property') ?? '').toLowerCase() === 'og:image'));
+  upsertMeta(document, 'name', 'twitter:card', hasImage ? 'summary_large_image' : 'summary');
   upsertMeta(document, 'name', 'twitter:title', title);
   upsertMeta(document, 'name', 'twitter:description', description);
 
