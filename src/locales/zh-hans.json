@@ -480,7 +480,7 @@
   "Requires an external installation and the runtime’s own authentication. Account selection and tools are not assumed to match Codex or Claude Code.": "需要单独安装，并使用该运行时自身的身份验证。不能假定账户选择和工具与 Codex 或 Claude Code 相同。",
   "Requires an external installation and the runtime’s own authentication. Available tools and permission behavior depend on that runtime.": "需要单独安装，并使用该运行时自身的身份验证。可用工具和权限行为取决于该运行时。",
   "Resend confirmation email": "重新发送确认邮件",
-  "Resend: sending account emails (confirmation, password reset).": "Resend：发送账户邮件（确认、重置密码）。",
+  "GoDaddy: sending account emails (confirmation, password reset).": "GoDaddy：发送账户邮件（确认、重置密码）。",
   "Reset password": "重置密码",
   "Reset password by email": "通过电子邮件重置密码",
   "Resolve the setup state you see.": "解决当前显示的设置问题。",

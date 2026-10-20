@@ -480,7 +480,7 @@
   "Requires an external installation and the runtime’s own authentication. Account selection and tools are not assumed to match Codex or Claude Code.": "Richiede un’installazione esterna e l’autenticazione propria dell’ambiente di esecuzione. Non si presume che selezione degli account e strumenti corrispondano a Codex o Claude Code.",
   "Requires an external installation and the runtime’s own authentication. Available tools and permission behavior depend on that runtime.": "Richiede un’installazione esterna e l’autenticazione propria dell’ambiente di esecuzione. Gli strumenti disponibili e il comportamento delle autorizzazioni dipendono da quell’ambiente.",
   "Resend confirmation email": "Invia di nuovo l’email di conferma",
-  "Resend: sending account emails (confirmation, password reset).": "Resend: invio delle email dell’account (conferma, reimpostazione della password).",
+  "GoDaddy: sending account emails (confirmation, password reset).": "GoDaddy: invio delle email dell’account (conferma, reimpostazione della password).",
   "Reset password": "Reimposta la password",
   "Reset password by email": "Reimposta la password via email",
   "Resolve the setup state you see.": "Risolvi lo stato di configurazione visualizzato.",

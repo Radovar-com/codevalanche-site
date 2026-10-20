@@ -480,7 +480,7 @@
   "Requires an external installation and the runtime’s own authentication. Account selection and tools are not assumed to match Codex or Claude Code.": "बाहरी इंस्टॉलेशन और रनटाइम का अपना प्रमाणीकरण चाहिए। खाते का चयन और टूल Codex या Claude Code जैसे हों, यह मानकर न चलें।",
   "Requires an external installation and the runtime’s own authentication. Available tools and permission behavior depend on that runtime.": "बाहरी इंस्टॉलेशन और रनटाइम का अपना प्रमाणीकरण चाहिए। उपलब्ध टूल और अनुमति व्यवहार उसी रनटाइम पर निर्भर हैं।",
   "Resend confirmation email": "पुष्टिकरण ईमेल फिर भेजें",
-  "Resend: sending account emails (confirmation, password reset).": "Resend: खाते के ईमेल भेजना (पुष्टि, पासवर्ड रीसेट)।",
+  "GoDaddy: sending account emails (confirmation, password reset).": "GoDaddy: खाते के ईमेल भेजना (पुष्टि, पासवर्ड रीसेट)।",
   "Reset password": "पासवर्ड रीसेट करें",
   "Reset password by email": "ईमेल से पासवर्ड रीसेट करें",
   "Resolve the setup state you see.": "दिख रही सेटअप स्थिति ठीक करें।",

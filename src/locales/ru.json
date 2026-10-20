@@ -480,7 +480,7 @@
   "Requires an external installation and the runtime’s own authentication. Account selection and tools are not assumed to match Codex or Claude Code.": "Требует внешней установки и собственной аутентификации среды выполнения. Выбор аккаунта и инструменты не считаются такими же, как у Codex или Claude Code.",
   "Requires an external installation and the runtime’s own authentication. Available tools and permission behavior depend on that runtime.": "Требует внешней установки и собственной аутентификации среды выполнения. Доступные инструменты и работа разрешений зависят от этой среды.",
   "Resend confirmation email": "Отправить письмо с подтверждением еще раз",
-  "Resend: sending account emails (confirmation, password reset).": "Resend: отправка писем по аккаунту (подтверждение, сброс пароля).",
+  "GoDaddy: sending account emails (confirmation, password reset).": "GoDaddy: отправка писем по аккаунту (подтверждение, сброс пароля).",
   "Reset password": "Сбросить пароль",
   "Reset password by email": "Сбросить пароль по электронной почте",
   "Resolve the setup state you see.": "Устраните показанную проблему настройки.",

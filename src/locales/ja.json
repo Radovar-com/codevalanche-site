@@ -480,7 +480,7 @@
   "Requires an external installation and the runtime’s own authentication. Account selection and tools are not assumed to match Codex or Claude Code.": "別途インストールし、そのランタイム独自の認証を行う必要があります。アカウント選択やツールがCodexやClaude Codeと同じとは限りません。",
   "Requires an external installation and the runtime’s own authentication. Available tools and permission behavior depend on that runtime.": "別途インストールし、そのランタイム独自の認証を行う必要があります。利用できるツールと権限の動作は、そのランタイムによって異なります。",
   "Resend confirmation email": "確認メールを再送信",
-  "Resend: sending account emails (confirmation, password reset).": "Resend: アカウントのメール(確認、パスワードのリセット)の送信。",
+  "GoDaddy: sending account emails (confirmation, password reset).": "GoDaddy: アカウントのメール(確認、パスワードのリセット)の送信。",
   "Reset password": "パスワードをリセット",
   "Reset password by email": "メールでパスワードをリセット",
   "Resolve the setup state you see.": "表示されている設定上の問題を解決する。",
