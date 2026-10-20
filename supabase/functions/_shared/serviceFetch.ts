@@ -44,3 +44,24 @@ export function createBoundedServiceFetch(
     }
   };
 }
+
+// The API gateway turns the secret key into a short-lived token for PostgREST.
+// Now and then PostgREST rejects that token at once (401, PGRST303) and accepts
+// the same call a moment later. That rejection comes before the database runs
+// anything, so one quiet retry is safe and keeps it from failing a sign-in.
+export function createGatewayRetryFetch(
+  { fetcher = fetch, delayMs = 150 }: any = {},
+) {
+  return async (input: any, init: any = {}) => {
+    const response = await fetcher(input, init);
+    if (
+      response.status !== 401 ||
+      !/PGRST303/.test(response.headers.get("proxy-status") || "") ||
+      !/\/rest\/v1\//.test(String(input?.url ?? input)) ||
+      (init.body != null && typeof init.body !== "string")
+    ) return response;
+    await response.body?.cancel().catch(() => undefined);
+    await new Promise((resolve) => setTimeout(resolve, delayMs));
+    return fetcher(input, init);
+  };
+}
