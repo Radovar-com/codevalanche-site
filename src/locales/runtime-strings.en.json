@@ -144,5 +144,19 @@
   "That code did not work. Check the time on your phone and try again.",
   "That recovery code is not valid or was already used.",
   "New recovery codes created. The old ones no longer work.",
-  "Sign in again and verify with your authenticator to change this."
+  "Sign in again and verify with your authenticator to change this.",
+  "By continuing, you agree to Radovar’s {terms} and acknowledge its {privacy}.",
+  "Privacy Policy",
+  "Terms",
+  "The Mac version comes after launch.",
+  "Codevalanche for Windows",
+  "Sign in to the app with this account.",
+  "{browser} on {os}",
+  "Signed in {date}",
+  "This device",
+  "Signing out…",
+  "Opening your account…",
+  "Signed-in session",
+  "No session details available.",
+  "Google"
 ]

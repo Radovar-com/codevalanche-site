@@ -72,7 +72,9 @@ try {
     await page.getByRole('button', { name: 'Sign in', exact: true }).click()
   }
   // 1. Sign-in with an authenticator: the challenge comes first, the account after the code.
-  await page.goto(`${origin}/account/`); await page.getByRole('heading', { name: 'Sign in', exact: true }).waitFor(); await signIn()
+  await page.goto(`${origin}/account/`); await page.getByRole('heading', { name: 'Sign in', exact: true }).waitFor()
+  // The analytics choice is fixed to the bottom of the window; answer it so it does not cover the authenticator form, now the last section of the account page.
+  await page.getByRole('button', { name: 'Decline', exact: true }).click(); await signIn()
   await page.getByRole('heading', { name: 'Two-step verification', exact: true }).waitFor()
   assert.equal(await page.locator('#profile').isHidden(), true, 'no account before the second step')
   await page.locator('#mfa-challenge-code').fill('12'); await page.getByRole('button', { name: 'Verify', exact: true }).click()

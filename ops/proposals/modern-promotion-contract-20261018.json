@@ -68,11 +68,11 @@
     },
     {
       "path": "src/account/app.js",
-      "sha256": "e7cd72e60c7ab57834e19257723d314be345397b0b88b63bcee56e1a05403970"
+      "sha256": "873555a1fc92373e72352f88827976e852b20838a836842f5e9a158ceccd3d99"
     },
     {
       "path": "src/account/helpers.js",
-      "sha256": "4ebe446960d33285ad7dab4a6fca8944f5d59b6ce6b5d513980d7c6a78113faa"
+      "sha256": "4c8dd9aacf83f245f7bf034d90a5fed3c20fd7c24262df1dcc98d552bb4b6f09"
     },
     {
       "path": "src/account/recovery.js",
