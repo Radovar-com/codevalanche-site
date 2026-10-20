@@ -71,7 +71,7 @@ try{
  // A configured native link also works when the optional SDK cannot load.
  const isolated=await localContext({reducedMotion:'reduce'});await isolated.route(sdkUrl,route=>route.abort());const isolatedPage=await isolated.newPage();await isolatedPage.goto(origin);const countBefore=downloadRequests.length;await isolatedPage.locator('[data-download-platform="windows"]').last().click();await isolatedPage.waitForURL(origin+'/fixture-download');assert.equal(downloadRequests.length,countBefore+1);downloadRequests.length=0;await isolated.close();
  if(!process.argv.includes('--analytics-failure-only')){
- const context=await localContext({reducedMotion:'reduce'}),page=await context.newPage();let google=0;
+ /* The download page offers its installer button to Windows PCs; CI runs on Linux. */const context=await localContext({reducedMotion:'reduce',userAgent:'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'}),page=await context.newPage();let google=0;
  await context.addCookies([{name:'codevalanche_consent',value:'accepted',url:origin}]);await context.addInitScript(()=>localStorage.setItem('codevalanche_analytics_installation','legacy-not-an-owned-id'));
  context.on('request',r=>{if(/google-analytics|googletagmanager/.test(r.url()))google++;});
  await ready(page,'/?utm_source=newsletter&utm_medium=email&utm_campaign=fall_launch&email=private%40example.com&gclid=secret#access_token=private');
