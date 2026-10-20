@@ -29,6 +29,8 @@ const server=createServer(async(req,res)=>{try{
  let pathname=url.pathname.endsWith('/')?url.pathname+'index.html':url.pathname;
  if(pathname==='/fixture-download'){res.setHeader('Content-Type','text/html');res.end('<h1>Local download fixture</h1>');return;}
  let data=await readFile(path.join('dist',pathname));
+ // The shipped config points at the production collector; local runs never use it.
+ if(pathname==='/config.js'&&!fixture)data=Buffer.from(data.toString()+"\nwindow.CODEVALANCHE_ANALYTICS={enabled:false,baseUrl:'',pageVersion:'codevalanche_product_20261017'};");
  if(pathname==='/config.js'&&fixture)data=Buffer.from(data.toString()+`\nwindow.CODEVALANCHE_ANALYTICS={enabled:true,baseUrl:'${origin}/collector',pageVersion:'local_fixture'};window.CODEVALANCHE_RELEASE_MANIFEST=${JSON.stringify(downloadManifest)};`);
  res.setHeader('Content-Type',pathname.endsWith('.js')?'text/javascript':pathname.endsWith('.css')?'text/css':pathname.endsWith('.svg')?'image/svg+xml':'text/html');res.end(data);
  }catch(error){if(req.url.startsWith('/collector'))errors.push(error.message);res.writeHead(404);res.end();}}).listen(0,'127.0.0.1');

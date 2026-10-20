@@ -14,7 +14,7 @@ test('missing/same-origin referrer and unsafe, oversized or ambiguous campaign v
  for(const value of ['person%40example.com','https%3A%2F%2Fprivate.example','access_token','a'.repeat(81),'1234567890','550e8400-e29b-41d4-a716-446655440000'])assert.equal(browserContext(host('https://codevalanche.com/?utm_campaign='+value),{acquisition:true}).campaign,undefined,value);
  assert.equal(browserContext(host('https://codevalanche.com/?utm_source=first&utm_source=second'),{acquisition:true}).acquisition_source,undefined);
 });
-test('public config ships collection disabled and legacy transport/GA code is absent',()=>{
- const config=readFileSync(new URL('../src/config.js',import.meta.url),'utf8');assert.match(config,/enabled: false/);
+test('public config ships only the first-party collector and legacy transport/GA code is absent',()=>{
+ const config=readFileSync(new URL('../src/config.js',import.meta.url),'utf8');assert.match(config,/CODEVALANCHE_ANALYTICS = \{ enabled: true, baseUrl: "https:\/\/hvevaxsfeyiikjhcsafi\.supabase\.co\/functions\/v1\/website-analytics\/v1"/);
  for(const file of ['account-funnel.js','site.js']){const source=readFileSync(new URL('../src/'+file,import.meta.url),'utf8');assert.doesNotMatch(source,/googletagmanager|gtag\(|\/api\/codevalanche\/accounts\/events|codevalanche_analytics_installation/);}
 });
