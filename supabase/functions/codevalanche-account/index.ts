@@ -35,10 +35,12 @@ import { operatorOAuthConsent, operatorOAuthEvidence } from "../_shared/operator
 import { validateAccountRequest } from "./schemas.mjs";
 import { generateRecoveryCodes, hashRecoveryCode, mfaGate, normalizeRecoveryCode, verifiedTotpFactors } from "./mfa.mjs";
 import { redeemMfaRecovery } from "../_shared/mfaRecovery.ts";
+import { createGatewayRetryFetch } from "../_shared/serviceFetch.ts";
 
 const url = Deno.env.get("SUPABASE_URL")!;
 const service = createClient(url, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, {
   auth: { persistSession: false, autoRefreshToken: false },
+  global: { fetch: createGatewayRetryFetch() },
 });
 const operatorOAuthClientIds = (Deno.env.get("ACCOUNT_OPERATOR_OAUTH_CLIENT_IDS") || "").split(",").filter(id =>
   id && (Deno.env.get("ACCOUNT_OAUTH_CLIENT_IDS") || "").split(",").includes(id));

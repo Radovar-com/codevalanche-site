@@ -172,7 +172,7 @@
     },
     {
       "path": "supabase/functions/codevalanche-account/index.ts",
-      "sha256": "0568bed831043b9eb82f94d9c62bc1f126952537f6273d8939699651abc2f5b0"
+      "sha256": "8eff98317a109e76813dd2a0edf9953bee0978dfd52a8bc4fc8fca1aa98306cc"
     },
     {
       "path": "supabase/functions/codevalanche-account/mfa.mjs",
