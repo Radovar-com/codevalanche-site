@@ -113,7 +113,9 @@ test('a suspension received while saving closes the previously verified profile'
   const f = await fixture(t), { page } = f
   await page.locator('#profile').waitFor({ state: 'visible' })
   f.mutationStatus(403)
-  await page.locator('#profile-form button').click()
+  // Save appears once a field differs from the saved profile.
+  await page.locator('#display-name').fill('Edited name')
+  await page.locator('#profile-form button[type=submit]').click()
   await page.waitForFunction(() => window.__fixtureState.completedReads >= 2)
   assert.equal(await page.locator('#profile').isVisible(), false)
   assert.equal(await page.locator('#account-state').isVisible(), true)

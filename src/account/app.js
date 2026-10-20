@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
-import { safeError, identityLabels, authCallback, normalizeAccountError, normalizeAccountProfile, passwordProblem, MIN_PASSWORD_LENGTH, captchaModes, turnstileSiteKey, emailLocaleFor, accountServerVersion, V1_ACCOUNT_ACTIONS } from './helpers.js'
+import { safeError, identityLabels, authCallback, normalizeAccountError, normalizeAccountProfile, passwordProblem, MIN_PASSWORD_LENGTH, captchaModes, turnstileSiteKey, emailLocaleFor, accountServerVersion, V1_ACCOUNT_ACTIONS, deviceLabel, desktopPlatform } from './helpers.js'
 import { createAccountSessionLifecycle, accountAuthFetch } from './sessionLifecycle.js'
 import { createAccountSecurity } from './security.js'
 import { emailLinkCallback, exchangeEmailLink, emailLinkFragment, validateNewPassword, recoveryNotice } from './recovery.js'
@@ -7,6 +7,7 @@ import { loadTurnstile } from './captcha.js'
 import { createAccountAnalytics } from './analytics.js'
 import { MFA_STRINGS, mfaText, totpCodeFrom } from './mfa-i18n.js'
 import { initializeLocale, localizeDocument } from '../locales/runtime.js'
+import { localizedMarketingPath } from '../locales/manifest.js'
 const localeState = await initializeLocale(document)
 localizeDocument(document, localeState.catalog, localeState.locale)
 const t = localeState.translate
@@ -77,8 +78,119 @@ let mode = 'signin', user = null, recovery = ['recovery', 'invite'].includes(ini
 let accountStatus = 'signed-out', renderGeneration = 0, currentSession = null, operatorConsent = false
 let cleanupPromise = null, cleanupPending = false, ownedSignin = false
 const security = createAccountSecurity(client, { isRecovery: () => recovery, assertRemoval: () => apiV2('security.mfa.remove-authorize') })
-function notice(message = '', error = false) { $('status').textContent = t(message); $('status').dataset.error = String(error) }
-function noticeTranslated(message = '', error = false) { $('status').textContent = message; $('status').dataset.error = String(error) }
+// Signed in, the status line is a toast: confirmations fade on their own after
+// a reading time that follows their length; errors stay until the next action.
+let noticeTimer = null
+function noticeTranslated(message = '', error = false) {
+  clearTimeout(noticeTimer)
+  $('status').textContent = message; $('status').dataset.error = String(error)
+  if (message && !error && $('stage').classList.contains('signed-in')) noticeTimer = setTimeout(() => { if ($('status').textContent === message) $('status').textContent = '' }, Math.min(10000, Math.max(4000, message.length * 60)))
+}
+function notice(message = '', error = false) { noticeTranslated(t(message), error) }
+// Profile rows: Save and Cancel appear only once a field differs from what is saved.
+let savedProfile = { displayName: '', bio: '' }
+function updateProfileDirty() {
+  $('profile-actions').hidden = $('display-name').value === savedProfile.displayName && $('bio').value === savedProfile.bio
+}
+function initials(value = '') {
+  const words = String(value).split('@')[0].split(/[\s._-]+/).filter(Boolean)
+  return (words.length > 1 ? words[0][0] + words[1][0] : (words[0] || '?')[0]).toUpperCase()
+}
+// The email row shows the current address; editing it reveals the change action.
+function resetEmailChange() {
+  $('new-email').value = user?.email || ''
+  updateEmailDirty()
+}
+function updateEmailDirty() {
+  const changed = $('new-email').value.trim().toLowerCase() !== String(user?.email || '').toLowerCase()
+  $('email-change-actions').hidden = !changed; $('email-change-hint').hidden = !changed
+}
+function renderSessions(sessions = []) {
+  if (!sessions?.length) { $('sessions').replaceChildren(sessionRow(t('No session details available.'), '', false)); return }
+  $('sessions').replaceChildren(...sessions.map(session => {
+    const device = deviceLabel(session.userAgent)
+    const name = device ? (device.browser && device.os ? t('{browser} on {os}', device) : device.browser || device.os) : session.label || t('Signed-in session')
+    const since = session.createdAt && Number.isFinite(Date.parse(session.createdAt)) ? t('Signed in {date}', { date: new Intl.DateTimeFormat(localeState.locale.tag, { dateStyle: 'medium' }).format(new Date(session.createdAt)) }) : ''
+    return sessionRow(name, since, session.current === true)
+  }))
+}
+function sessionRow(name, detail, current) {
+  const li = document.createElement('li'); li.className = 'pf-row pf-session'
+  const icon = document.createElement('span'); icon.className = 'pf-session-icon'; icon.setAttribute('aria-hidden', 'true'); icon.append(deviceIcon())
+  const text = document.createElement('div'); text.className = 'pf-control pf-control-wide'
+  const title = document.createElement('p'); title.className = 'pf-strong'; title.textContent = name
+  if (current) { const badge = document.createElement('span'); badge.className = 'pf-badge'; badge.textContent = t('This device'); title.append(' ', badge) }
+  text.append(title)
+  if (detail) { const sub = document.createElement('p'); sub.className = 'pf-text'; sub.textContent = detail; text.append(sub) }
+  li.append(icon, text)
+  return li
+}
+// "By continuing…" under the sign-in and sign-up forms. One sentence per language,
+// so the links are placed into the translated text, never glued from fragments.
+function legalLink(path, label) {
+  const link = document.createElement('a'); link.href = localizedMarketingPath(path, localeState.locale.tag); link.target = '_blank'; link.rel = 'noopener'; link.textContent = t(label)
+  return link
+}
+function renderLegalNote() {
+  const sentence = t('By continuing, you agree to Radovar’s {terms} and acknowledge its {privacy}.')
+  const parts = sentence.split(/(\{terms\}|\{privacy\})/)
+  $('legal-note').replaceChildren(...parts.filter(Boolean).map(part => part === '{terms}' ? legalLink('/terms.html', 'Terms') : part === '{privacy}' ? legalLink('/privacy.html', 'Privacy Policy') : document.createTextNode(part)))
+}
+// Desktop app link that follows the visitor's computer. The download page stays
+// the single honest source for whether the installer is public yet.
+// Icons are built as SVG nodes: the account page never renders HTML strings.
+function svgIcon(viewBox, size, paths, attributes = {}) {
+  const ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg')
+  for (const [name, value] of Object.entries({ viewBox, width: size, height: size, 'aria-hidden': 'true', ...attributes })) svg.setAttribute(name, value)
+  for (const d of paths) { const path = document.createElementNS(ns, 'path'); path.setAttribute('d', d); svg.append(path) }
+  return svg
+}
+const windowsIcon = () => svgIcon('0 0 16 16', 14, ['M0 2.3 6.5 1.4v6.2H0zM7.3 1.3 16 0v7.6H7.3zM0 8.4h6.5v6.2L0 13.7zM7.3 8.4H16V16l-8.7-1.2z'], { fill: 'currentColor' })
+const deviceIcon = () => svgIcon('0 0 24 24', 18, ['M5 4h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z', 'M8 20h8M12 16v4'], { fill: 'none', stroke: 'currentColor', 'stroke-width': '1.6', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' })
+function downloadLink(className) {
+  const link = document.createElement('a'); link.className = className; link.href = localizedMarketingPath('/download/', localeState.locale.tag)
+  link.append(windowsIcon(), document.createTextNode(t('Download for Windows')))
+  return link
+}
+function renderDesktopDownload() {
+  const platform = desktopPlatform(navigator)
+  const box = $('desktop-download'), row = $('profile-download')
+  // The desktop app's own sign-in (authorization_id) needs no download link.
+  if (platform === 'mobile' || authorizationId) { box.hidden = true; $('pf-desktop').hidden = true; return }
+  const pill = downloadLink('cr-desktop-link')
+  if (platform === 'mac') {
+    const note = document.createElement('span'); note.className = 'cr-desktop-note'; note.textContent = t('The Mac version comes after launch.')
+    box.replaceChildren(note, pill)
+  } else box.replaceChildren(pill)
+  box.hidden = false
+  const text = document.createElement('div'); text.className = 'pf-control pf-control-wide'
+  const title = document.createElement('p'); title.className = 'pf-strong'; title.textContent = t('Codevalanche for Windows')
+  const sub = document.createElement('p'); sub.className = 'pf-text'; sub.textContent = t(platform === 'mac' ? 'The Mac version comes after launch.' : 'Sign in to the app with this account.')
+  text.append(title, sub)
+  row.replaceChildren(text, downloadLink('cr-btn cr-btn-secondary pf-action'))
+  $('pf-desktop').hidden = false
+}
+// Benefits beside the sign-in form: a calm rotation that pauses while the visitor
+// points at or focuses it, stops when the tab is hidden, and never moves on its
+// own when reduced motion is preferred.
+function startBenefits() {
+  const slides = [...document.querySelectorAll('.cr-slide')], dots = [...document.querySelectorAll('.cr-dot')]
+  if (!slides.length) return
+  let index = 0, timer = null, paused = false
+  const reduced = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+  const show = next => {
+    index = (next + slides.length) % slides.length
+    slides.forEach((slide, i) => { slide.classList.toggle('is-active', i === index); slide.setAttribute('aria-hidden', String(i !== index)); slide.inert = i !== index })
+    dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === index)))
+  }
+  const schedule = () => { clearInterval(timer); timer = null; if (!reduced && !paused && !document.hidden) timer = setInterval(() => show(index + 1), 6500) }
+  dots.forEach((dot, i) => dot.addEventListener('click', () => { show(i); schedule() }))
+  const region = $('benefits')
+  region.addEventListener('pointerenter', () => { paused = true; schedule() }); region.addEventListener('pointerleave', () => { paused = false; schedule() })
+  region.addEventListener('focusin', () => { paused = true; schedule() }); region.addEventListener('focusout', () => { paused = false; schedule() })
+  document.addEventListener('visibilitychange', schedule)
+  show(0); schedule()
+}
 function applyControls() {
   [...document.querySelectorAll('button')].filter(button => !button.closest('[data-owned-consent]')).forEach(button => { button.disabled = busy || cleanupPending })
   document.querySelectorAll('#profile input, #profile textarea, #profile button').forEach(control => { control.disabled = busy || accountStatus !== 'ready' })
@@ -94,6 +206,13 @@ function setAccountStatus(next) {
   $('auth').hidden = (gated && next !== 'logout-failed') || (Boolean(user) && !recovery) || (recovery && user && next !== 'ready')
   $('profile').hidden = next !== 'ready' || Boolean(authorizationId) || recovery
   $('account-state').hidden = !gated
+  // Opening or signing out shows only a quiet spinner; the title and the Try
+  // again / Sign out buttons appear only when the account really cannot open.
+  const opening = next === 'loading' || next === 'signing-out'
+  $('account-state').classList.toggle('is-opening', opening)
+  $('opening').hidden = !opening
+  $('opening').lastElementChild.textContent = t(next === 'signing-out' ? 'Signing out…' : 'Opening your account…')
+  if (!opening) delete document.documentElement.dataset.accountOpening
   $('consent').hidden = true
   // The authenticator panel of the v2 server (security.js); v1 keeps it hidden.
   if ($('authenticator-section')) $('authenticator-section').hidden = !v2 || !user || recovery || !['ready', 'deletion-pending'].includes(next)
@@ -177,6 +296,7 @@ function setMode(next) {
   $('auth-description').textContent = reset ? t('We’ll email you a link to choose a new password.') : signup ? t(`Your Codevalanche account. Use a password with at least ${MIN_PASSWORD_LENGTH} characters.`) : update ? t(`Choose a password with at least ${MIN_PASSWORD_LENGTH} characters.`) : t('Welcome back to Codevalanche.')
   void showCaptcha('captcha', captchaModes.has(next))
   $('social-auth').hidden = reset || update
+  $('legal-note').hidden = reset || update
   $('forgot-row').hidden = next !== 'signin'; $('signup-prompt').hidden = next !== 'signin'
   $('password').type = 'password'; $('password-toggle').setAttribute('aria-label', t('Show password')); $('password-toggle').setAttribute('aria-pressed', 'false')
   $('name-field').hidden = !signup; $('email-field').hidden = update; $('email').required = !update
@@ -272,13 +392,16 @@ async function render(session) {
     if (authorizationId && !recovery) { await showConsent(generation); return }
     if (recovery) { setMode('update'); return }
     $('profile-email').textContent = user.email || ''
-    list('methods', identityLabels(user.identities))
+    list('methods', identityLabels(user.identities).map(label => t(label)))
     $('display-name').value = account.user?.displayName || ''; $('bio').value = account.user?.bio || ''; $('cancel-deletion').hidden = !account.deletion
+    savedProfile = { displayName: $('display-name').value, bio: $('bio').value }; updateProfileDirty()
+    $('profile-avatar').textContent = initials(savedProfile.displayName || user.email)
+    resetEmailChange()
     void showCaptcha('profile-captcha', true)
     renderMfa(account.mfa)
     if (v2 && $('analytics-consent')) $('analytics-consent').checked = account.analyticsConsent === true
     void accountAnalytics.update({ session, account })
-    list('sessions', account.sessions?.length ? account.sessions.map(s => `${s.current ? 'This session' : s.label || 'Signed-in session'}${s.userAgent ? ` · ${s.userAgent}` : ''}${s.createdAt ? ` · Started ${new Date(s.createdAt).toLocaleDateString()}` : ''}`) : ['No session details available.'])
+    renderSessions(account.sessions)
     if (account.deletion?.scheduledFor) {
       const date = new Intl.DateTimeFormat(localeState.locale.tag).format(new Date(account.deletion.scheduledFor))
       noticeTranslated(t('Account deletion requested for {date}.', { date }))
@@ -293,6 +416,11 @@ async function render(session) {
     notice(safeError(error), true)
   }
 }
+renderLegalNote(); renderDesktopDownload(); startBenefits()
+for (const id of ['display-name', 'bio']) $(id).addEventListener('input', updateProfileDirty)
+$('profile-cancel').addEventListener('click', () => { $('display-name').value = savedProfile.displayName; $('bio').value = savedProfile.bio; updateProfileDirty() })
+$('new-email').addEventListener('input', updateEmailDirty)
+$('email-change-cancel').addEventListener('click', resetEmailChange)
 $('password-toggle').addEventListener('click', () => {
   const show = $('password').type === 'password'; $('password').type = show ? 'text' : 'password'
   $('password-toggle').setAttribute('aria-label', t(show ? 'Hide password' : 'Show password')); $('password-toggle').setAttribute('aria-pressed', String(show))
@@ -335,7 +463,7 @@ $('resend').addEventListener('click', () => void action(async () => {
   notice('If confirmation is needed, a new email is on its way.')
 }))
 $('profile-form').addEventListener('focusin', () => { accountAnalytics.startProfileEdit() })
-$('profile-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => { const requestId = crypto.randomUUID(); const changes = normalizeAccountProfile({ displayName: $('display-name').value.trim(), bio: $('bio').value.trim() }); accountAnalytics.track('profile_save_submitted', { operation_id: requestId }); if (v2) await apiV2('profile.update', { requestId, ...changes }); else await api('update-profile', changes); notice('Profile saved.') }) })
+$('profile-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => { const requestId = crypto.randomUUID(); const changes = normalizeAccountProfile({ displayName: $('display-name').value.trim(), bio: $('bio').value.trim() }); accountAnalytics.track('profile_save_submitted', { operation_id: requestId }); if (v2) await apiV2('profile.update', { requestId, ...changes }); else await api('update-profile', changes); savedProfile = { displayName: $('display-name').value, bio: $('bio').value }; updateProfileDirty(); $('profile-avatar').textContent = initials(savedProfile.displayName || user?.email); notice('Profile saved.') }) })
 // Secure email change: Supabase sends a link to the current and to the new
 // address (double_confirm_changes); the address changes after both are opened.
 $('email-change-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => {
@@ -345,7 +473,7 @@ $('email-change-form').addEventListener('submit', event => { event.preventDefaul
   // event that follows re-reads the account, so no render generation is compared.
   const { error } = await client.auth.updateUser({ email }, { emailRedirectTo: redirectTo.href })
   if (error) throw ['email_exists', 'email_address_invalid', 'validation_failed'].includes(error.code) ? { code: 'email_change_unavailable' } : error
-  $('new-email').value = ''
+  resetEmailChange()
   notice('Check both inboxes. Open the link sent to your current address and the one sent to the new address to finish the change.')
 }) })
 // Logout immediately fences the optional queue and receipt. It must not wait

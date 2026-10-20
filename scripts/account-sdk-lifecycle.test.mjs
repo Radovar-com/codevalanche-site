@@ -181,7 +181,7 @@ test('accepted self deletion immediately closes profile mutations and cancellati
   await until(f.page, () => document.getElementById('status').textContent.length > 0 && !document.getElementById('account-state-logout').disabled)
   assert.equal(await f.page.locator('#profile').isVisible(), false, 'accepted deletion must withdraw editable profile immediately')
   assert.equal(await f.page.locator('#account-state-title').innerText(), 'Account deletion pending')
-  assert.equal(await f.page.locator('#profile-form button').isEnabled(), false)
+  assert.equal(await f.page.locator('#profile-form button[type=submit]').isEnabled(), false)
   assert.equal(await f.page.locator('#account-state-cancel').isVisible(), true)
   assert.match(await f.page.locator('#account-state-description').innerText(), /Local projects are preserved/)
   await f.page.locator('#account-state-cancel').click()
@@ -335,7 +335,7 @@ for (const view of ['profile', 'consent']) test(`actual SDK peer logout immediat
   await peer.waitForFunction(() => localStorage.getItem('codevalanche-account-logout-intent') === 'pending')
   for (let i = 0; i < 3; i++) { await peer.clock.runFor(0); await new Promise(resolve => setTimeout(resolve, 10)) }
   assert.equal(await peer.locator(`#${view}`).isVisible(), false, 'peer must withdraw the account view while SDK logout is still pending')
-  assert.equal(await peer.locator('#profile-form button').isEnabled(), false, 'peer profile mutations must be disabled immediately')
+  assert.equal(await peer.locator('#profile-form button[type=submit]').isEnabled(), false, 'peer profile mutations must be disabled immediately')
   release()
   await untilIO(f.page, () => document.getElementById('status').textContent === 'Signed out.')
   for (let i = 0; i < 3; i++) { await peer.clock.runFor(0); await new Promise(resolve => setTimeout(resolve, 10)) }
@@ -355,7 +355,7 @@ test('actual SDK logout event withdraws a peer account view when storage notific
   await until(f.page, () => document.getElementById('status').textContent === 'Signed out.')
   for (let i = 0; i < 3; i++) { await peer.clock.runFor(0); await new Promise(resolve => setTimeout(resolve, 10)) }
   assert.equal(await peer.locator('#profile').isVisible(), false, 'SDK SIGNED_OUT must withdraw a peer view independently of storage notifications')
-  assert.equal(await peer.locator('#profile-form button').isEnabled(), false)
+  assert.equal(await peer.locator('#profile-form button[type=submit]').isEnabled(), false)
   assert.equal(await peer.locator('#auth').isVisible(), true)
 })
 
