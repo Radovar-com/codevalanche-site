@@ -56,5 +56,5 @@ test('Turnstile turns on only with a well-formed public site key', async () => {
   const app = readFileSync(new URL('../src/account/app.js', import.meta.url), 'utf8')
   for (const call of ['signInWithPassword', 'signUp', 'resetPasswordForEmail', 'resend']) assert.match(app, new RegExp(`${call}\\([^)]*captchaToken`), `${call} forwards the CAPTCHA token`)
   const config = readFileSync(new URL('../src/config.js', import.meta.url), 'utf8')
-  assert.match(config, /turnstileSiteKey: ""/, 'the site key ships empty until Mihai creates it')
+  assert.match(config, /turnstileSiteKey: ""/, 'the site key ships empty until the operator creates it')
 })
