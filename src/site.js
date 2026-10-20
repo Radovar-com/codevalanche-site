@@ -188,5 +188,22 @@
         }
       })()
 
+// The changelog's version list marks the version being read.
+;(() => {
+  const links = [...document.querySelectorAll('.cl-rail-list a[href^="#"]')]
+  const releases = links.map((link) => document.getElementById(link.hash.slice(1))).filter(Boolean)
+  if (!links.length || releases.length !== links.length) return
+  const mark = (id) => links.forEach((link) => link.setAttribute('aria-current', String(link.hash.slice(1) === id)))
+  mark(location.hash && releases.some((release) => `#${release.id}` === location.hash) ? location.hash.slice(1) : releases[0].id)
+  const update = () => {
+    const line = Math.min(innerHeight * 0.35, 260)
+    let current = releases[0]
+    for (const release of releases) if (release.getBoundingClientRect().top <= line) current = release
+    mark(current.id)
+  }
+  let frame = 0
+  window.addEventListener('scroll', () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(update) }, { passive: true })
+})()
+
 // Optional telemetry cannot delay control initialization or fail its module graph.
 void import('./account-funnel.js').catch(() => { /* Browsing remains usable without analytics. */ });

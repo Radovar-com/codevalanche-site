@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#faf9f5">
-    <meta name="description" content="What's new in Codevalanche. Preview notes ahead of the first public build.">
+    <meta name="description" content="Every public version of the Codevalanche desktop app, with its date and what really changed.">
     <link rel="canonical" href="https://codevalanche.com/changelog.html">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://codevalanche.com/changelog.html">
     <meta property="og:title" content="Changelog | Codevalanche">
-    <meta property="og:description" content="What's new in Codevalanche. Preview notes ahead of the first public build.">
+    <meta property="og:description" content="Every public version of the Codevalanche desktop app, with its date and what really changed.">
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
     <script>(function(){var t="light";try{var s=localStorage.getItem("codevalanche_theme");if(s==="light"||s==="dark"){t=s}else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){t="dark"}}catch(e){}document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("js")})()</script>
     <link rel="stylesheet" href="/styles.css">
@@ -22,95 +22,22 @@
 
     <main id="main" class="shell changelog-layout">
       <aside class="cl-rail" aria-label="Release list">
-        <p class="mono-label">RELEASES</p>
-        <nav class="cl-rail-list">
-          <a href="#note-2026-08-29-site"><span>Website v3</span><em>Aug 29</em></a>
-          <a href="#note-2026-08-29-local"><span>Local models</span><em>Aug 29</em></a>
-          <a href="#note-2026-08-17"><span>Accounts</span><em>Aug 17</em></a>
-          <a href="#note-2026-08-12"><span>Organizer</span><em>Aug 12</em></a>
-          <a href="#note-2026-08-11"><span>Import</span><em>Aug 11</em></a>
-          <a href="#note-2026-08-10"><span>Companion</span><em>Aug 10</em></a>
-        </nav>
+        <p class="mono-label">Versions</p>
+        <!-- changelog-rail:start -->
+        <p class="cl-rail-empty">Coming soon</p>
+        <!-- changelog-rail:end -->
       </aside>
 
       <div class="cl-main">
         <p class="eyebrow"><span class="eyebrow-line"></span> Changelog</p>
         <h1>What's new in Codevalanche.</h1>
-        <p class="cl-lede">Codevalanche is in preview ahead of its first public build. These notes track what landed in the preview builds and on this site, in the same plain language the product uses.</p>
-
-        <article class="cl-entry" id="note-2026-08-29-site">
-          <header class="cl-entry-head">
-            <span class="cl-tag cl-tag-site">Website</span>
-            <h2>codevalanche.com v3</h2>
-            <time datetime="2026-08-29">Aug 29, 2026</time>
-          </header>
-          <div class="cl-body">
-            <p><strong>The page now knows your machine.</strong> The download section detects Windows, macOS, and Linux, recommends the matching build, and shows a dedicated note on phones. Buttons stay honestly in preparation until the first installers ship, then activate in place.</p>
-            <p><strong>Accounts got their own story.</strong> A new section explains first-class accounts: subscription runtimes, local models, and more than one plan per provider, with a live usage-handoff illustration.</p>
-            <p><strong>This changelog went live.</strong> Along with a footer language picker showing the 17 languages the app ships in.</p>
-          </div>
-        </article>
-
-        <article class="cl-entry" id="note-2026-08-29-local">
-          <header class="cl-entry-head">
-            <span class="cl-tag">Preview build</span>
-            <h2>Local models: discover, fit, run</h2>
-            <time datetime="2026-08-29">Aug 29, 2026</time>
-          </header>
-          <div class="cl-body">
-            <p><strong>Browse the open-model world live.</strong> The local catalog now discovers models directly from their upstream source instead of a frozen list, so new releases appear without waiting for an app update.</p>
-            <p><strong>Fit before you download.</strong> Every model is checked against your actual hardware first. A model that will not run on your machine says so before it costs you the gigabytes.</p>
-            <p><strong>Pull and run on device.</strong> Download, start, and talk to a model entirely on your hardware, with the native engine doing the heavy lifting.</p>
-          </div>
-        </article>
-
-        <article class="cl-entry" id="note-2026-08-17">
-          <header class="cl-entry-head">
-            <span class="cl-tag">Preview build</span>
-            <h2>Accounts become first-class</h2>
-            <time datetime="2026-08-17">Aug 17, 2026</time>
-          </header>
-          <div class="cl-body">
-            <p><strong>Connect more than one plan per provider.</strong> A personal and a work Claude subscription can live side by side, each with its own session, identity, and usage view.</p>
-            <p><strong>Pick the account per task.</strong> The account picker pairs any signed-in account with any compatible runtime, so the same objective can run on whichever plan has room.</p>
-          </div>
-        </article>
-
-        <article class="cl-entry" id="note-2026-08-12">
-          <header class="cl-entry-head">
-            <span class="cl-tag">Preview build</span>
-            <h2>The sidebar learns to organize</h2>
-            <time datetime="2026-08-12">Aug 12, 2026</time>
-          </header>
-          <div class="cl-body">
-            <p><strong>Groups, projects, and tasks.</strong> Work is arranged the way you think about it, and drag and drop puts a conversation where it belongs.</p>
-            <p><strong>Usage where you type.</strong> The composer warns about an approaching plan limit before it interrupts the work, not after.</p>
-          </div>
-        </article>
-
-        <article class="cl-entry" id="note-2026-08-11">
-          <header class="cl-entry-head">
-            <span class="cl-tag">Preview build</span>
-            <h2>Bring your history</h2>
-            <time datetime="2026-08-11">Aug 11, 2026</time>
-          </header>
-          <div class="cl-body">
-            <p><strong>Import existing agent conversations.</strong> Sessions you already ran elsewhere on your machine can be imported and kept in sync next to the projects they belong to.</p>
-            <p><strong>No silent merges.</strong> When an imported conversation continues in two places, Codevalanche forks it instead of guessing which side wins.</p>
-          </div>
-        </article>
-
-        <article class="cl-entry" id="note-2026-08-10">
-          <header class="cl-entry-head">
-            <span class="cl-tag">Preview build</span>
-            <h2>The companion writes back</h2>
-            <time datetime="2026-08-10">Aug 10, 2026</time>
-          </header>
-          <div class="cl-body">
-            <p><strong>Start runs from your phone.</strong> The paired companion is no longer read-only: a task can be started away from the desk and reviewed when you return.</p>
-            <p><strong>Approve diffs from anywhere.</strong> Read the change, then approve or decline, while execution and code stay on your machine.</p>
-          </div>
-        </article>
+        <p class="cl-lede">Every public version of the desktop app, newest first, with what really changed in plain words.</p>
+        <!-- changelog-releases:start -->
+        <section class="cl-empty" aria-labelledby="cl-empty-title">
+          <h2 id="cl-empty-title">The first public version is on its way.</h2>
+          <p>The day it is published, its notes appear here: the version number, the date and what it brings.</p>
+        </section>
+        <!-- changelog-releases:end -->
       </div>
     </main>
 

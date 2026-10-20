@@ -14,6 +14,8 @@ import { validateSeoExport } from "./seo-export-test.mjs"
 import { LOCALES, MARKETING_PAGES } from "../src/locales/manifest.js"
 import { prepareMarketingPartial } from "./marketing-partials.mjs"
 import { versionSiteAssets } from "./asset-cache.mjs"
+import { changelogTranslations, loadReleases, renderChangelog } from "./changelog.mjs"
+import { downloadTranslations, fillDownload, redirectPage, selectDownloadVariant, windowsDownload } from "./download-page.mjs"
 await buildAnalytics()
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
@@ -25,7 +27,9 @@ await mkdir(destination, { recursive: true })
 await cp(source, destination, { recursive: true, errorOnExist: false })
 
 // Public link configuration and server gateway/collector share a reviewed manifest.
-const downloadManifest = JSON.parse(await readFile(path.join(root, "supabase/functions/_shared/download-manifest.json"), "utf8"))
+// A local preview may point at another manifest; a publishable build never sets this.
+const downloadManifest = JSON.parse(await readFile(process.env.CODEVALANCHE_DOWNLOAD_PREVIEW_MANIFEST || path.join(root, "supabase/functions/_shared/download-manifest.json"), "utf8"))
+const windowsInstaller = windowsDownload(downloadManifest)
 const publicConfig = await readFile(path.join(destination, "config.js"), "utf8")
 await writeFile(path.join(destination, "config.js"), publicConfig.replace(/window\.CODEVALANCHE_RELEASE_MANIFEST = [^\r\n]+/, () => `window.CODEVALANCHE_RELEASE_MANIFEST = ${JSON.stringify(downloadManifest)}`))
 await build({entryPoints:[path.join(source,"downloads.js")],outfile:path.join(destination,"downloads.js"),bundle:true,format:"iife",target:["es2022"],minify:true})
@@ -39,6 +43,20 @@ for (const page of MARKETING_PAGES) {
   const header = prepareMarketingPartial(sharedHeader, page.path)
   const footer = prepareMarketingPartial(sharedFooter, page.path)
   await writeFile(output, html.replace("<!-- site-header -->", header).replace("<!-- site-footer -->", footer))
+}
+
+// Only published versions appear; until the first one, the page says it is on its way.
+// A local preview may point at other notes; a publishable build never sets this.
+const releases = await loadReleases(process.env.CODEVALANCHE_CHANGELOG_PREVIEW_RELEASES || path.join(root, "content/releases"))
+const changelogOutput = path.join(destination, "changelog.html")
+await writeFile(changelogOutput, renderChangelog(await readFile(changelogOutput, "utf8"), releases))
+
+const downloadOutput = path.join(destination, "download/index.html")
+await writeFile(downloadOutput, fillDownload(selectDownloadVariant(await readFile(downloadOutput, "utf8"), windowsInstaller), windowsInstaller))
+if (windowsInstaller) {
+  const redirect = path.join(destination, windowsInstaller.path, "index.html")
+  await mkdir(path.dirname(redirect), { recursive: true })
+  await writeFile(redirect, redirectPage(windowsInstaller))
 }
 
 const homeHtml = await readFile(path.join(destination, "index.html"), "utf8")
@@ -68,7 +86,7 @@ for (const page of MARKETING_PAGES) {
 }
 
 for (const locale of englishPreviewOnly ? [] : LOCALES.filter(item => item.slug)) {
-  const catalog = JSON.parse(await readFile(path.join(source, "locales", `${locale.slug}.json`), "utf8"))
+  const catalog = { ...JSON.parse(await readFile(path.join(source, "locales", `${locale.slug}.json`), "utf8")), ...changelogTranslations(releases, locale.tag), ...downloadTranslations(windowsInstaller) }
   for (const page of MARKETING_PAGES) {
     let html = renderTranslatedHtml(englishPages.get(page.file), catalog, locale.tag)
     html = rewriteLocalizedLinks(html, locale.tag)

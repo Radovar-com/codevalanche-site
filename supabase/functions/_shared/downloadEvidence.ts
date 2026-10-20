@@ -5,5 +5,7 @@ export function createDownloadEvidenceStore(service:any){return async(e:Download
  if(error)throw new Error('source_unavailable');return data;
 };}
 export function downloadCoverage({manifest=trustedDownloadManifest,providerConfigured=false,providerAvailable=true,nativeQualified=false,nativeAvailable=true,deliveryQualified=false,deliveryAvailable=true}={}){
- return {redirects:qualifiedAssets(manifest).length?'measured':'not_configured',releaseProvider:providerConfigured?(providerAvailable?'measured':'unavailable'):'not_configured',transferServed:deliveryQualified?(deliveryAvailable?'measured':'unavailable'):'not_configured',firstObservedOpens:nativeQualified?(nativeAvailable?'measured':'unavailable'):'not_configured',activations:nativeQualified?(nativeAvailable?'measured':'unavailable'):'not_configured',guestActivation:'unmeasured'};
+ // Only the server gateway records redirects; the website's own forwarding pages count nothing.
+ const gatewayRecords=(()=>{try{return new URL(manifest.gatewayBaseUrl).pathname.startsWith('/functions/v1/');}catch{return false;}})();
+ return {redirects:gatewayRecords&&qualifiedAssets(manifest).length?'measured':'not_configured',releaseProvider:providerConfigured?(providerAvailable?'measured':'unavailable'):'not_configured',transferServed:deliveryQualified?(deliveryAvailable?'measured':'unavailable'):'not_configured',firstObservedOpens:nativeQualified?(nativeAvailable?'measured':'unavailable'):'not_configured',activations:nativeQualified?(nativeAvailable?'measured':'unavailable'):'not_configured',guestActivation:'unmeasured'};
 }
