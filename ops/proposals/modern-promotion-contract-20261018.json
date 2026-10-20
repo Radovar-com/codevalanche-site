@@ -84,7 +84,7 @@
     },
     {
       "path": "src/config.js",
-      "sha256": "246a7d74e29a59db2b551a36b83b5a42c288ede64571ebc2adb62137be16196b"
+      "sha256": "d7f014283f3b33b511fa5673ee5b9a1b369bcc1296aad9940daa08d0be9abae5"
     },
     {
       "path": "supabase/functions/_shared/accountContract.ts",
