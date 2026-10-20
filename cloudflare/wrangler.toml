@@ -2,7 +2,7 @@
 # to codevalanche.com while the site itself stays on GitHub Pages.
 # No secrets: this Worker needs none.
 #
-# Operator steps (Mihai), only after the domain is proxied by Cloudflare:
+# Operator steps, only after the domain is proxied by Cloudflare:
 #   1. uncomment the routes below;
 #   2. `npx wrangler deploy --config cloudflare/wrangler.toml --dry-run`, then without --dry-run;
 #   3. check the headers: `curl -sI https://codevalanche.com/ | findstr /i "strict-transport content-security x-frame"`.
