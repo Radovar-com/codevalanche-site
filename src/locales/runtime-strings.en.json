@@ -158,5 +158,15 @@
   "Opening your account…",
   "Signed-in session",
   "No session details available.",
-  "Google"
+  "Google",
+  "Coming soon for Mac",
+  "Coming soon for phones",
+  "See download options",
+  "We detected Windows. The recommended download is highlighted below.",
+  "We detected a Mac. The Mac app is coming soon; the Windows app is ready today.",
+  "You are on a phone. Codevalanche runs on a Windows PC, and the phone app is coming soon.",
+  "Codevalanche is available for Windows 11 today.",
+  "Link copied. Open it on your PC to download.",
+  "Downloaded {count} times.",
+  "Latest"
 ]

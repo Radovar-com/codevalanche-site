@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
-import { MARKETING_PAGES } from '../src/locales/manifest.js';
+import { DOWNLOAD_STARTED_PAGE, MARKETING_PAGES } from '../src/locales/manifest.js';
 import { collectSiteStrings } from './translate-site.mjs';
 
 const moduleUnderTest = await import('./localization.mjs').catch(() => null);
@@ -51,7 +51,7 @@ test('source extraction includes every registered product page, shared partial a
     await writeFile(output, content);
   };
   try {
-    const files = new Set([...MARKETING_PAGES.map(page => page.file), 'agents/index.html', 'features/multiple-accounts/index.html', 'account.html', 'account/index.html', 'account/authorize/index.html', 'account/signed-in/index.html']);
+    const files = new Set([...MARKETING_PAGES.map(page => page.file), DOWNLOAD_STARTED_PAGE.file, 'agents/index.html', 'features/multiple-accounts/index.html', 'account.html', 'account/index.html', 'account/authorize/index.html', 'account/signed-in/index.html']);
     for (const file of files) await write(file, `<html><head><title>Source ${file}</title></head><body><!-- site-header --><p>Repeated shared text.</p><!-- site-footer --></body></html>`);
     await write('partials/header.html', '<header><nav>Shared header text.</nav></header>');
     await write('partials/footer.html', '<footer><div class="footer-bottom">Shared footer text.<details class="lang-picker"><summary>Language</summary><ul class="lang-grid"><li>English <em>this site</em></li></ul></details></div></footer>');

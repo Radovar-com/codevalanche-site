@@ -41,6 +41,12 @@ const routes = new Map(MARKETING_PAGES.flatMap(page => {
       : [page.path, `${page.path}/`];
   return aliases.map(alias => [alias, { pathname: page.path, pageId: page.pageId }]);
 }));
+// The page that starts a download belongs to the download page: it is
+// translated like it, but it is not a separate public route in the sitemap.
+export const DOWNLOAD_STARTED_PAGE = Object.freeze({ path: '/download/started/', file: 'download/started/index.html', pageId: 'download' });
+for (const alias of [DOWNLOAD_STARTED_PAGE.path, DOWNLOAD_STARTED_PAGE.path.slice(0, -1), `${DOWNLOAD_STARTED_PAGE.path}index.html`]) {
+  routes.set(alias, { pathname: DOWNLOAD_STARTED_PAGE.path, pageId: DOWNLOAD_STARTED_PAGE.pageId });
+}
 routes.set('/account.html', { pathname: '/account.html', pageId: 'account_entry_legacy' });
 routes.set('/account.html/', routes.get('/account.html'));
 

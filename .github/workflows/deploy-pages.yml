@@ -41,6 +41,10 @@ jobs:
       - name: Check production dependency advisories
         run: npm audit --audit-level=high
       - name: Build static site
+        env:
+          # Reads the real public download count; the page shows it only from the minimum in content/download-page.json.
+          CODEVALANCHE_PUBLIC_DOWNLOAD_COUNT: "1"
+          GITHUB_TOKEN: ${{ github.token }}
         run: npm run build
       - name: Verify website consent, native navigation and localized pages
         timeout-minutes: 5

@@ -13,7 +13,7 @@ const RELEASES = /<!-- changelog-releases:start -->[\s\S]*?<!-- changelog-releas
 
 const escape = value => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const normalized = value => String(value).trim().replace(/\s+/g, ' ');
-const anchor = version => `v${version.replace(/\./g, '-')}`;
+export const anchor = version => `v${version.replace(/\./g, '-')}`;
 const compareVersions = (a, b) => {
   const left = a.split('.').map(Number);
   const right = b.split('.').map(Number);
@@ -21,7 +21,7 @@ const compareVersions = (a, b) => {
   return 0;
 };
 
-function formatDate(date, tag, withYear) {
+export function formatDate(date, tag, withYear) {
   return new Intl.DateTimeFormat(tag, { month: 'short', day: 'numeric', ...(withYear ? { year: 'numeric' } : {}), timeZone: 'UTC' })
     .format(new Date(`${date}T12:00:00Z`));
 }

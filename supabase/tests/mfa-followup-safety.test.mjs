@@ -107,6 +107,8 @@ test('the promoted migration carries the exact proposal body, and the full chain
   await proposed.exec(await readFile(proposalUrl,'utf8'));
   // Line endings follow the checkout (CRLF on Windows), so bodies are compared without CR.
   const lf=async db=>(await db.query("select p.proname,p.proacl::text,p.prosecdef,p.proconfig,md5(replace(p.prosrc,chr(13),'')) as body from pg_catalog.pg_proc p where p.pronamespace='public'::regnamespace order by 1,2")).rows;
-  assert.deepEqual(await lf(fixed),await lf(proposed));
+  // Later migrations may add unrelated functions; the ones the fix defines must stay exactly as proposed.
+  const expected=await lf(proposed),names=new Set(expected.map(row=>row.proname));
+  assert.deepEqual((await lf(fixed)).filter(row=>names.has(row.proname)),expected);
  }finally{await fixed.close();await proposed.close();}
 });

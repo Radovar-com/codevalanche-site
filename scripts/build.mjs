@@ -11,11 +11,11 @@ import { buildLlmsFull } from "./build-llms-full.mjs"
 import { validateEnglishSourceCatalog, validateLocaleCatalogs } from "./translate-site.mjs"
 import { renderTranslatedHtml } from "./localization.mjs"
 import { validateSeoExport } from "./seo-export-test.mjs"
-import { LOCALES, MARKETING_PAGES } from "../src/locales/manifest.js"
+import { DOWNLOAD_STARTED_PAGE, LOCALES, MARKETING_PAGES, localizedMarketingPath } from "../src/locales/manifest.js"
 import { prepareMarketingPartial } from "./marketing-partials.mjs"
 import { versionSiteAssets } from "./asset-cache.mjs"
 import { changelogTranslations, loadReleases, renderChangelog } from "./changelog.mjs"
-import { downloadTranslations, fillDownload, redirectPage, selectDownloadVariant, windowsDownload } from "./download-page.mjs"
+import { downloadTranslations, fillDownload, publicDownloadCount, redirectPage, selectDownloadVariant, windowsDownload } from "./download-page.mjs"
 await buildAnalytics()
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
@@ -35,9 +35,11 @@ await writeFile(path.join(destination, "config.js"), publicConfig.replace(/windo
 await build({entryPoints:[path.join(source,"downloads.js")],outfile:path.join(destination,"downloads.js"),bundle:true,format:"iife",target:["es2022"],minify:true})
 
 // Render the same navigation on every marketing page so account access cannot drift.
+// The thank-you page after a download click shares it, but is not indexed.
+const PAGES_WITH_NAVIGATION = [...MARKETING_PAGES, DOWNLOAD_STARTED_PAGE]
 const sharedHeader = await readFile(path.join(source, "partials/header.html"), "utf8")
 const sharedFooter = await readFile(path.join(source, "partials/footer.html"), "utf8")
-for (const page of MARKETING_PAGES) {
+for (const page of PAGES_WITH_NAVIGATION) {
   const output = path.join(destination, page.file)
   const html = await readFile(output, "utf8")
   const header = prepareMarketingPartial(sharedHeader, page.path)
@@ -51,8 +53,16 @@ const releases = await loadReleases(process.env.CODEVALANCHE_CHANGELOG_PREVIEW_R
 const changelogOutput = path.join(destination, "changelog.html")
 await writeFile(changelogOutput, renderChangelog(await readFile(changelogOutput, "utf8"), releases))
 
-const downloadOutput = path.join(destination, "download/index.html")
-await writeFile(downloadOutput, fillDownload(selectDownloadVariant(await readFile(downloadOutput, "utf8"), windowsInstaller), windowsInstaller))
+// The public download count is the real number from the release host, read only
+// when the publishing workflow asks for it, and shown only from a minimum upward.
+const downloadPageSettings = JSON.parse(await readFile(path.join(root, "content/download-page.json"), "utf8"))
+const publicCount = windowsInstaller && process.env.CODEVALANCHE_PUBLIC_DOWNLOAD_COUNT === "1"
+  ? await publicDownloadCount(downloadManifest, { token: process.env.GITHUB_TOKEN ?? "" }) : null
+const downloadFill = { releases, count: publicCount, minimum: downloadPageSettings.publicCountMinimum }
+for (const page of ["download/index.html", DOWNLOAD_STARTED_PAGE.file]) {
+  const output = path.join(destination, page)
+  await writeFile(output, fillDownload(selectDownloadVariant(await readFile(output, "utf8"), windowsInstaller), windowsInstaller, downloadFill))
+}
 if (windowsInstaller) {
   const redirect = path.join(destination, windowsInstaller.path, "index.html")
   await mkdir(path.dirname(redirect), { recursive: true })
@@ -73,11 +83,20 @@ const englishPages = new Map()
 const includeLocaleBootstrap = html => html.includes('src="/locales/bootstrap.js"')
   ? html
   : html.replace("</body>", '<script type="module" src="/locales/bootstrap.js"></script></body>')
-for (const page of MARKETING_PAGES) {
+// The thank-you page is not a public route: its language links and canonical
+// address lead to the download page, so switching language never downloads again.
+const localizeStartedPage = (html, tag) => rewriteFooterLanguageLinks(html, "/download/", tag)
+  .replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="https://codevalanche.com${localizedMarketingPath("/download/", tag)}">`)
+for (const page of PAGES_WITH_NAVIGATION) {
   const output = path.join(destination, page.file)
   let html = await readFile(output, "utf8")
   html = ensureLanguagePicker(html, languagePicker)
   html = rewriteLocalizedLinks(html, "en")
+  if (page === DOWNLOAD_STARTED_PAGE) {
+    await writeFile(output, includeLocaleBootstrap(localizeStartedPage(html, "en")))
+    englishPages.set(page.file, await readFile(output, "utf8"))
+    continue
+  }
   html = rewriteFooterLanguageLinks(html, page.path, "en")
   html = applyLocalizedMetadata(html, page.path, "en")
   html = includeLocaleBootstrap(html)
@@ -86,10 +105,17 @@ for (const page of MARKETING_PAGES) {
 }
 
 for (const locale of englishPreviewOnly ? [] : LOCALES.filter(item => item.slug)) {
-  const catalog = { ...JSON.parse(await readFile(path.join(source, "locales", `${locale.slug}.json`), "utf8")), ...changelogTranslations(releases, locale.tag), ...downloadTranslations(windowsInstaller) }
-  for (const page of MARKETING_PAGES) {
+  const localeCatalog = JSON.parse(await readFile(path.join(source, "locales", `${locale.slug}.json`), "utf8"))
+  const catalog = { ...localeCatalog, ...changelogTranslations(releases, locale.tag), ...downloadTranslations(windowsInstaller, { ...downloadFill, tag: locale.tag, catalog: localeCatalog }) }
+  for (const page of PAGES_WITH_NAVIGATION) {
     let html = renderTranslatedHtml(englishPages.get(page.file), catalog, locale.tag)
     html = rewriteLocalizedLinks(html, locale.tag)
+    if (page === DOWNLOAD_STARTED_PAGE) {
+      const output = path.join(destination, locale.slug, page.file)
+      await mkdir(path.dirname(output), { recursive: true })
+      await writeFile(output, includeLocaleBootstrap(localizeStartedPage(html, locale.tag)))
+      continue
+    }
     html = rewriteFooterLanguageLinks(html, page.path, locale.tag)
     html = applyLocalizedMetadata(html, page.path, locale.tag)
     html = includeLocaleBootstrap(html)

@@ -3,14 +3,14 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { extractTranslationUnits } from './localization.mjs';
 import { ensureLanguagePicker } from './locale-export.mjs';
-import { LOCALES, MARKETING_PAGES } from '../src/locales/manifest.js';
+import { DOWNLOAD_STARTED_PAGE, LOCALES, MARKETING_PAGES } from '../src/locales/manifest.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCE_PAGES = [
-  ...MARKETING_PAGES.map(page => page.file), 'account.html',
+  ...MARKETING_PAGES.map(page => page.file), DOWNLOAD_STARTED_PAGE.file, 'account.html',
   'account/index.html', 'account/authorize/index.html', 'account/signed-in/index.html',
 ];
-const MARKETING_SOURCE_FILES = new Set(MARKETING_PAGES.map(page => page.file));
+const MARKETING_SOURCE_FILES = new Set([...MARKETING_PAGES.map(page => page.file), DOWNLOAD_STARTED_PAGE.file]);
 
 export async function collectSiteStrings(root = ROOT) {
   const source = path.join(root, 'src');
