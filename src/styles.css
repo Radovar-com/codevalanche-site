@@ -88,6 +88,9 @@ p { text-wrap: pretty; }
 .button-primary, .nav-cta { border-color: var(--ink); background: var(--ink); color: var(--paper); }
 .button-primary:hover, .nav-cta:hover { border-color: var(--ink-soft); background: var(--ink-soft); color: var(--paper); }
 .button:active, .nav-cta:active { transform: translateY(1px); }
+.button[hidden] { display: none; }
+.button-icon { display: inline-flex; flex: none; margin-inline-end: 9px; }
+.button-icon svg { display: block; }
 .section a:not(.button), .faq-list a, .dl-footnote a, .legal-content a, .cl-main a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 
 /* Header */

@@ -33,3 +33,10 @@ test('malformed or insecure asset targets are unavailable independently of relea
  assert.equal(module.releaseState(validUnapproved).status,'preparation','syntactically secure targets still require server-owned origin qualification');
  assert.deepEqual(module.releaseState(validUnapproved).links,{});
 });
+
+test('the visitor platform names the system each download button speaks to',()=>{
+ const cases=[['Mozilla/5.0 (Windows NT 10.0; Win64; x64)','Win32',0,'windows'],['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)','MacIntel',0,'macos'],['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)','MacIntel',5,'ios'],['Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)','iPhone',5,'ios'],['Mozilla/5.0 (Linux; Android 14; Pixel 8)','Linux armv8l',5,'android'],['Mozilla/5.0 (X11; Linux x86_64)','Linux x86_64',0,'linux'],['Mozilla/5.0 (Windows Phone 10.0; Android 6.0.1)','Win32',5,'other'],['unknown','',0,'other']];
+ for(const [userAgent,platform,maxTouchPoints,expected] of cases)assert.equal(module.visitorPlatform({userAgent,platform,maxTouchPoints}),expected,userAgent);
+ assert.equal(module.startedPath({documentElement:{lang:'pt-BR'}}),'/pt-br/download/started/?platform=windows-x64');
+ assert.equal(module.downloadPagePath({documentElement:{lang:'en'}},'#platforms'),'/download/#platforms');
+});

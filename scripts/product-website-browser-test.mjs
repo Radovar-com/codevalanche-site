@@ -27,7 +27,9 @@ const errors = [], checks = [];
 const englishOnly = process.env.CODEVALANCHE_TEST_ENGLISH_ONLY === '1';
 try {
   for (const width of [1440, 390]) for (const theme of ['light','dark']) {
-    const context = await browser.newContext({ viewport:{width,height:width === 1440 ? 900 : 844}, reducedMotion:'reduce' });
+    // A Linux visitor, the same on every machine that runs this test.
+    const context = await browser.newContext({ viewport:{width,height:width === 1440 ? 900 : 844}, reducedMotion:'reduce', userAgent:'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36' });
+    await context.addInitScript(() => { Object.defineProperty(navigator, 'platform', {get: () => 'Linux x86_64'}); Object.defineProperty(navigator, 'userAgentData', {get: () => undefined}); });
     await context.route('https://**/*', route => route.abort());
     await context.addInitScript(theme => localStorage.setItem('codevalanche_theme', theme), theme);
     const page = await context.newPage();
@@ -43,8 +45,8 @@ try {
     const box = await image.boundingBox();
     assert.ok(box.y < (width === 1440 ? 550 : 720), `Product visible near primary action, ${width}/${theme}, y=${box.y}`);
     const primary = page.locator('.hero .hero-actions [data-release-primary]');
-    assert.equal(new URL(await primary.getAttribute('href'), origin).pathname, '/how-it-works/');
-    assert.equal(await page.locator('.hero [data-download-platform]').count(), 0, 'Unqualified release is not presented as a download');
+    assert.equal(new URL(await primary.getAttribute('href'), origin).pathname, '/download/', 'Other systems see the download options');
+    assert.equal(await page.locator('.hero [data-download-platform]').count(), 0, 'Only Windows PCs get the installer in the hero');
     for (const id of ['top','product-principle','product','accounts','parallel','workflow','showcase','details','companion','privacy','download','proof','faq','footer']) {
       assert.equal(await page.locator(`[id="${id}"]`).count(),1,`Existing fragment ${id} preserved exactly once`);
     }
@@ -103,7 +105,8 @@ try {
     if (['ro','ar','hi','ja'].includes(locale.slug)) await page.screenshot({path:path.join(output,`home-390-${locale.slug}.png`)});
   }
   await context.close();
-  const failed = await browser.newContext({reducedMotion:'reduce'});
+  const failed = await browser.newContext({reducedMotion:'reduce', userAgent:'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36'});
+  await failed.addInitScript(() => { Object.defineProperty(navigator, 'platform', {get: () => 'Linux x86_64'}); Object.defineProperty(navigator, 'userAgentData', {get: () => undefined}); });
   await failed.route('https://**/*', route => route.abort());
   await failed.route('**/account-funnel.js', route => route.abort());
   const pageWithoutAnalytics = await failed.newPage();
@@ -111,7 +114,7 @@ try {
   await pageWithoutAnalytics.locator('.feature-tab').nth(1).click();
   assert.equal(await pageWithoutAnalytics.locator('.feature-tab').nth(1).getAttribute('aria-selected'),'true');
   await pageWithoutAnalytics.locator('.hero .hero-actions [data-release-primary]').click();
-  await pageWithoutAnalytics.waitForURL(origin + '/how-it-works/');
+  await pageWithoutAnalytics.waitForURL(origin + '/download/#platforms');
   await failed.close();
   assert.deepEqual(errors,[],'No ordinary browser exceptions');
   await writeFile(path.join(output,'product-browser-results.json'),JSON.stringify({status:'passed',checks,routes:8,localeDeepLinks:englishOnly ? 0 : 4,renderedLanguages:englishOnly ? 1 : LOCALES.length,sdkFailure:'pass',englishPreviewOnly:englishOnly},null,2));

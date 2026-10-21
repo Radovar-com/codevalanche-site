@@ -49,7 +49,7 @@ try{
  }
  for(const mode of ['approved','late']){
   const {context,page}=await visit(mode);await page.waitForFunction(()=>document.querySelector('#primary').hasAttribute('data-download-platform'));
-  const link=page.locator('#primary');assert.equal(await link.textContent(),'Download for Windows');assert.equal(await link.getAttribute('href'),manifest.gatewayBaseUrl+'/codevalanche/windows/fixture_release/fixture_windows');
+  const link=page.locator('#primary');assert.equal(await link.textContent(),'Download for Windows');assert.equal(await link.getAttribute('href'),'/download/started/?platform=windows-x64','Windows visitors go to the thank-you page that starts the download');assert.equal(await link.locator('.button-icon svg').count(),1);
   for(const [key,value] of Object.entries({platform:'windows',release:'fixture_release',artifact:'fixture_windows',architecture:'x64'}))assert.equal(await link.getAttribute('data-download-'+key),value);
   assert.equal(await page.locator('[data-dl-platform=windows] a.dl-card-state').count(),1);assert.equal(await page.locator('[data-dl-platform=mac-arm] a').count(),0);
   assert.equal(await page.locator('[data-dl-platform=windows] [data-release-details]').textContent(),'Windows · x64 · downloads.example.org');
@@ -60,7 +60,8 @@ try{
   assert.equal(recorded.filter(e=>e.event_name==='download_clicked').length,before+1,'one real click produces one semantic download intent');await context.close();
  }
  for(const ua of ['unknown','Mozilla/5.0 (Macintosh; Intel Mac OS X)','Mozilla/5.0 (Linux x86_64)','Mozilla/5.0 (iPhone)','Mozilla/5.0 (Linux; Android 14)','Mozilla/5.0 (Windows Phone; Android)']){
-  const {context,page}=await visit('approved',ua);assert.equal(await page.locator('#primary').getAttribute('href'),'/how-it-works/#example');assert.equal(await page.locator('#primary').getAttribute('data-download-platform'),null);assert.equal(await page.locator('[data-dl-platform=windows] a').count(),1,'other visitors can inspect explicitly identified Windows release information');await context.close();
+  const {context,page}=await visit('approved',ua);const expected=/Macintosh/.test(ua)?'Coming soon for Mac':/iPhone|Android 14/.test(ua)&&!/Windows Phone/.test(ua)?'Coming soon for phones':'See download options';
+  assert.equal(await page.locator('#primary').textContent(),expected,ua);assert.equal(await page.locator('#primary').getAttribute('href'),'/download/#platforms',ua);assert.equal(await page.locator('#primary').getAttribute('data-download-platform'),null);assert.equal(await page.locator('[data-dl-platform=windows] a').count(),1,'other visitors can inspect explicitly identified Windows release information');await context.close();
  }
  const {context,page}=await visit('approved',undefined,'ro');await page.waitForFunction(()=>window.CodevalancheLocale?.locale.tag==='ro');assert.equal(await page.locator('#primary').textContent(),'Descarcă pentru Windows');assert.equal(await page.locator('p[data-release-status]').textContent(),'Instalator Windows disponibil.');await context.close();
  const broken=await visit('brokenanalytics');assert.equal(await broken.page.locator('#primary').getAttribute('data-download-platform'),'windows');assert.equal(await broken.page.evaluate(()=>window.CodevalancheAnalytics),undefined);await broken.context.close();
