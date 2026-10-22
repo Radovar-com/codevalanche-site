@@ -58,6 +58,23 @@ test('the account page challenges before the account, consent and password chang
 // TOTP state machine used by the v2 account page (security.js).
 test('TOTP enrollment is pending until provider verifies a challenge',async()=>{const calls=[];const client={auth:{mfa:{enroll:async()=>({data:{id:'factor',totp:{qr_code:'qr',secret:'secret'}},error:null}),challenge:async o=>{calls.push(o);return {data:{id:'challenge'},error:null}},verify:async o=>{calls.push(o);return {data:{session:'provider'},error:null}},unenroll:async()=>({error:null})}}};const s=createAccountSecurity(client);await s.enroll();assert.equal(s.state().verified,false);await s.verify('123456');assert.equal(s.state().verified,true);assert.deepEqual(calls,[{factorId:'factor'},{factorId:'factor',challengeId:'challenge',code:'123456'}])});
 test('cancel removes only unverified pending enrollment and clears secret',async()=>{let factor;const s=createAccountSecurity({auth:{mfa:{enroll:async()=>({data:{id:'pending',totp:{secret:'secret'}},error:null}),unenroll:async o=>{factor=o.factorId;return {error:null}}}}});await s.enroll();await s.cancel();assert.equal(factor,'pending');assert.equal(s.state().factor,null)});
+
+test('explicit fresh setup replaces only this interface unfinished TOTP factors before enrollment',async()=>{
+ const calls=[];const s=createAccountSecurity({auth:{mfa:{
+  listFactors:async()=>({data:{all:[{id:'old-pending',factor_type:'totp',status:'unverified',friendly_name:'Codevalanche authenticator'},{id:'verified',factor_type:'totp',status:'verified',friendly_name:'Codevalanche authenticator'},{id:'other-pending',factor_type:'totp',status:'unverified',friendly_name:'Other device'}]}}),
+  unenroll:async({factorId})=>{calls.push(['remove',factorId]);return {error:null}},
+  enroll:async()=>{calls.push(['enroll']);return {data:{id:'new-pending'}}}
+ }}});await s.enroll({replacePending:true});assert.deepEqual(calls,[['remove','old-pending'],['enroll']]);assert.equal(s.state().factor.id,'new-pending');
+});
+test('fresh setup refuses enrollment if unfinished factor removal fails',async()=>{
+ let enrolls=0;const s=createAccountSecurity({auth:{mfa:{listFactors:async()=>({data:{all:[{id:'old',factor_type:'totp',status:'unverified',friendly_name:'Codevalanche authenticator'}]}}),unenroll:async()=>({error:new Error('cleanup_failed')}),enroll:async()=>{enrolls++;return {data:{id:'new'}}}}}});
+ await assert.rejects(s.enroll({replacePending:true}),/cleanup_failed/);assert.equal(enrolls,0);
+});
+test('logout while pending cleanup is held prevents a new enrollment',{timeout:2000},async()=>{
+ let release,started,enrolls=0;const held=new Promise(r=>release=r),observed=new Promise(r=>started=r);
+ const s=createAccountSecurity({auth:{mfa:{listFactors:async()=>({data:{all:[{id:'old',factor_type:'totp',status:'unverified',friendly_name:'Codevalanche authenticator'}]}}),unenroll:async()=>{started();await held;return {error:null}},enroll:async()=>{enrolls++;return {data:{id:'new'}}}}}});
+ const pending=s.enroll({replacePending:true});await observed;s.clear();release();await assert.rejects(pending,/account_request_superseded/);assert.equal(enrolls,0);assert.equal(s.state().factor,null);
+});
 test('recovery cannot enroll or unenroll a factor',async()=>{let calls=0;const s=createAccountSecurity({auth:{mfa:{enroll:async()=>{calls++},unenroll:async()=>{calls++}}}},{isRecovery:()=>true});await assert.rejects(()=>s.enroll(),/recovery_restricted/);await assert.rejects(()=>s.remove('factor'),/recovery_restricted/);assert.equal(calls,0)});
 test('wrong code leaves factor unverified and offers retry',async()=>{const s=createAccountSecurity({auth:{mfa:{enroll:async()=>({data:{id:'pending'},error:null}),challenge:async()=>({data:{id:'c'},error:null}),verify:async()=>({error:{code:'mfa_verification_failed'}})}}});await s.enroll();await assert.rejects(()=>s.verify('000000'));assert.equal(s.state().verified,false)});
 test('first enrollment verification tells UI a distinct fresh step-up is still required',async()=>{const s=createAccountSecurity({auth:{mfa:{enroll:async()=>({data:{id:'pending'},error:null}),challenge:async()=>({data:{id:'c'},error:null}),verify:async()=>({data:{},error:null})}}});await s.enroll();await s.verify('123456');assert.equal(s.state().requiresFreshVerification,true);await s.verify('234567','pending');assert.equal(s.state().requiresFreshVerification,false)});

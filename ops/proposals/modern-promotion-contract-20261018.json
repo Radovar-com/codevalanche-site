@@ -68,7 +68,7 @@
     },
     {
       "path": "src/account/app.js",
-      "sha256": "904d7a82edc3b255fd7c4351c961390c2e16e8dd992ae0b858a4e6c2e7489e70"
+      "sha256": "1b7325d0ff780a23f6c99f11489979e70a1b99126c506b3a0ca9e724a3bd0ba5"
     },
     {
       "path": "src/account/helpers.js",
@@ -80,7 +80,11 @@
     },
     {
       "path": "src/account/security.js",
-      "sha256": "dac2ea8868901cadb5e07abf728d899bba55e1b3ed02a5e132a7934acccfad7a"
+      "sha256": "1bb1fc17844becce3b80fbb66dc7ae1bb2fd592f6c768c55558025e2485fc572"
+    },
+    {
+      "path": "src/account/authenticatorQr.js",
+      "sha256": "00d5954728cae81d7aebc90526b2606fb0e5246528bfce0fd327cced63ef176e"
     },
     {
       "path": "src/config.js",
@@ -6236,7 +6240,8 @@
       "src/account/app.js",
       "src/account/helpers.js",
       "src/account/security.js",
-      "src/account/recovery.js"
+      "src/account/recovery.js",
+      "src/account/authenticatorQr.js"
     ],
     "configurationSource": "src/config.js",
     "currentContractMustRemainV1UntilSeparateApproval": true,
