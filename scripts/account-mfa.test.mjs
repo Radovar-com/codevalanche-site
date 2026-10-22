@@ -62,16 +62,18 @@ test('recovery cannot enroll or unenroll a factor',async()=>{let calls=0;const s
 test('wrong code leaves factor unverified and offers retry',async()=>{const s=createAccountSecurity({auth:{mfa:{enroll:async()=>({data:{id:'pending'},error:null}),challenge:async()=>({data:{id:'c'},error:null}),verify:async()=>({error:{code:'mfa_verification_failed'}})}}});await s.enroll();await assert.rejects(()=>s.verify('000000'));assert.equal(s.state().verified,false)});
 test('first enrollment verification tells UI a distinct fresh step-up is still required',async()=>{const s=createAccountSecurity({auth:{mfa:{enroll:async()=>({data:{id:'pending'},error:null}),challenge:async()=>({data:{id:'c'},error:null}),verify:async()=>({data:{},error:null})}}});await s.enroll();await s.verify('123456');assert.equal(s.state().requiresFreshVerification,true);await s.verify('234567','pending');assert.equal(s.state().requiresFreshVerification,false)});
 
-test('the published config talks to the current (v1) account server with one Turnstile key', async () => {
+test('the published config retains v1 and its exact legacy actions alongside scoped operator consent', async () => {
   const { accountServerVersion, V1_ACCOUNT_ACTIONS } = await import('../src/account/helpers.js')
   const config = read('../src/config.js')
   assert.match(config, /accountServer:\s*"v1"/)
+  assert.match(config, /operatorOAuth:\s*true/)
   assert.match(config, /turnstileSiteKey:\s*""/)
   assert.doesNotMatch(config, /captchaSiteKey|measurementId|CODEVALANCHE_DOWNLOADS/)
   assert.equal(accountServerVersion({}), 'v1'); assert.equal(accountServerVersion({ accountServer: 'v2' }), 'v2'); assert.equal(accountServerVersion({ accountServer: 'v3' }), 'v1')
   // Exactly the user actions the live account function answers (its switch on main).
   assert.deepEqual([...V1_ACCOUNT_ACTIONS].sort(), ['cancel-deletion', 'consent', 'event', 'feedback', 'get-account', 'request-deletion', 'revoke-session', 'sign-out-current', 'sign-out-others', 'update-profile'])
   const app = read('../src/account/app.js')
-  assert.match(app, /if \(!v2 && !V1_ACCOUNT_ACTIONS\.includes\(action\)\)|!V1_ACCOUNT_ACTIONS\.includes/, 'v1 never sends another action')
+  // account-sdk-lifecycle.test.mjs exercises the real guard before and after
+  // classification: only details and classified approve are exceptions to v1.
   for (const id of ['analytics-section', 'activity-section']) assert.match(app, new RegExp(`'${id}'`), `${id} is gated on v2`)
 })

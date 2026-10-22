@@ -10,11 +10,12 @@ after(async () => { if (browserPromise) await (await browserPromise).close() })
 const USER_A = { id: '11111111-1111-4111-8111-111111111111', email: 'a@example.test', aud: 'authenticated', role: 'authenticated',
   user_metadata: { display_name: 'A' }, app_metadata: { provider: 'email' }, identities: [{ provider: 'email' }] }
 const USER_B = { ...USER_A, id: '22222222-2222-4222-8222-222222222222', email: 'b@example.test', user_metadata: { display_name: 'B' } }
+const canonicalActions = ['account.overview','profile.update','sessions.revoke','sessions.revoke-others','account.deletion.request','account.deletion.cancel','feedback.submit','security.activity','security.mfa.remove-authorize','analytics.consent','operator.oauth.claim','remote.policy.evidence','admin.operator.session','mfa-recovery-codes','mfa-recovery-redeem','mfa-disable','unrecognized.canonical']
 const sessionFor = (user, expired = false) => ({ access_token: `fixture-${user.id}`, refresh_token: `refresh-${user.id}`,
   token_type: 'bearer', expires_in: 3600, expires_at: Math.floor(Date.now() / 1000) + (expired ? -60 : 3600), user })
 async function bundle() {
   return bundlePromise ??= readFile('src/account/app.js', 'utf8').then(source => build({
-    stdin: { contents: source.replace('const client = createClient(', 'const client = window.__sdkClient = createClient('),
+    stdin: { contents: source.replace('const client = createClient(', 'const client = window.__sdkClient = createClient(') + '\nwindow.__accountApi = api;\n',
       resolveDir: new URL('../src/account/', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'), sourcefile: 'app.js' },
     bundle: true, write: false, format: 'esm', target: 'es2022',
   }).then(result => result.outputFiles[0].text))
@@ -32,7 +33,7 @@ async function untilIO(page, check) {
     await new Promise(resolve => setTimeout(resolve, 10))
   }
 }
-async function fixture(t, { status = 200, expired = false, query = '', authorizePage = false, responseDelayMs = 0 } = {}) {
+async function fixture(t, { status = 200, expired = false, query = '', authorizePage = false, responseDelayMs = 0, accountServer = 'v2', operatorOAuth = false } = {}) {
   const [html, source] = await Promise.all([readFile(authorizePage ? 'src/account/authorize/index.html' : 'src/account/index.html', 'utf8'), bundle()])
   const server = createServer((request, response) => {
     if (request.url.startsWith('/account/app.js')) { response.setHeader('Content-Type', 'text/javascript'); response.end(source) }
@@ -43,11 +44,11 @@ async function fixture(t, { status = 200, expired = false, query = '', authorize
   browserPromise ??= chromium.launch({ headless: true })
   const context = await (await browserPromise).newContext(), page = await context.newPage()
   t.after(async () => { await context.close(); server.closeAllConnections(); await new Promise(resolve => server.close(resolve)) })
-  await context.addInitScript(session => {
-    window.CODEVALANCHE_CONFIG = { supabaseUrl: 'https://account.fixture.invalid', supabasePublishableKey: 'fixture-public', accountServer: 'v2' }
+  await context.addInitScript(({session, accountServer, operatorOAuth}) => {
+    window.CODEVALANCHE_CONFIG = { supabaseUrl: 'https://account.fixture.invalid', supabasePublishableKey: 'fixture-public', accountServer, operatorOAuth }
     if (!localStorage.getItem('fixture-seeded')) { localStorage.setItem('sb-account-auth-token', JSON.stringify(session)); localStorage.setItem('fixture-seeded', 'yes') }
     if (location.search.includes('code=')) localStorage.setItem('sb-account-auth-token-code-verifier', JSON.stringify('fixture-pkce-verifier'))
-  }, sessionFor(USER_A, expired))
+  }, {session:sessionFor(USER_A, expired), accountServer, operatorOAuth})
   await page.clock.install()
   let accountStatus = status, refreshStatus = 200, releaseLogout, heldLogout
   const calls = []
@@ -437,8 +438,129 @@ test('actual app Google settings deadline includes a streamed partial body and p
   assert.equal(settingsRequests, 2, 'a new click must finish a fresh settings request after timeout')
 })
 
-test('operator consent preflight observes autoapproval before any browser provider details call',async t=>{
- const f=await fixture(t,{query:'?authorization_id=fixture-consent'});
+test('scoped v1 exact canonical guard permits only details before backend operator classification', async t => {
+ const f=await fixture(t,{accountServer:'v1',operatorOAuth:true,query:'?authorization_id=fixture-consent'});
+ await f.load();await untilIO(f.page,()=>!document.getElementById('consent').hidden);
+ const result=await f.page.evaluate(async actions=>{
+  const results=[];for(const action of actions)try{await window.__accountApi(action,{apiVersion:2,requestId:crypto.randomUUID(),authorizationId:'fixture-consent'});results.push('allowed')}catch(e){results.push(e.code)}return results;
+ },['operator.oauth.details','operator.oauth.approve',...canonicalActions]);
+ assert.deepEqual(result,['allowed',...Array(canonicalActions.length+1).fill('feature_unavailable')]);
+ assert.equal(await f.page.locator('#authenticator-section').isVisible(),false);
+});
+
+for(const options of [
+ {name:'ordinary account',query:'',operatorOAuth:true},
+ {name:'flag off',query:'?authorization_id=fixture-consent',operatorOAuth:false},
+ {name:'recovery',query:'?authorization_id=fixture-consent&flow=recovery',operatorOAuth:true}
+])test(`scoped v1 ${options.name} preserves legacy behavior and refuses forged native MFA controls`,async t=>{
+ const f=await fixture(t,{accountServer:'v1',...options});await f.load();
+ await untilIO(f.page,()=>window.__accountApi!=null);
+ assert.equal(f.calls.some(c=>c.body.apiVersion===2),false);
+ for(const id of ['authenticator-section','mfa-section','analytics-section','activity-section'])assert.equal(await f.page.locator('#'+id).isVisible(),false,id);
+ await f.page.evaluate(()=>{document.getElementById('authenticator-add').dispatchEvent(new MouseEvent('click'));});
+ await untilIO(f.page,()=>!document.getElementById('auth-submit').disabled);
+ assert.equal(f.calls.some(c=>c.path.includes('/factors')),false);
+ const result=await f.page.evaluate(async()=>{try{await window.__accountApi('operator.oauth.details');return 'allowed'}catch(e){return e.code}});
+ assert.equal(result,'feature_unavailable');
+});
+
+test('scoped v1 nonoperator preflight precedes ordinary Desktop SDK approval without exposing enrollment',async t=>{
+ const f=await fixture(t,{accountServer:'v1',operatorOAuth:true,query:'?authorization_id=fixture-consent&operator=true'});
+ await f.load();await untilIO(f.page,()=>!document.getElementById('consent').hidden);
+ const details=f.calls.findIndex(c=>c.body.action==='operator.oauth.details'),provider=f.calls.findIndex(c=>c.path.includes('/oauth/authorizations/'));
+ assert.ok(details>=0&&provider>details);
+ await f.page.locator('#approve').click();await untilIO(f.page,()=>!document.getElementById('approve').disabled);
+ assert.ok(f.calls.some(c=>c.path.endsWith('/consent')));
+ assert.equal(f.calls.some(c=>c.body.action==='operator.oauth.approve'),false);
+ assert.equal(await f.page.locator('#authenticator-section').isVisible(),false);
+});
+
+for(const data of [null,{}, {operator:'true'}, {operator:false,parentMfaRequired:true}])test(`scoped v1 malformed preflight ${JSON.stringify(data)} cannot fall back to provider approval`,async t=>{
+ const f=await fixture(t,{accountServer:'v1',operatorOAuth:true,query:'?authorization_id=fixture-consent'});
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data})});
+ });
+ await f.load();await untilIO(f.page,()=>window.__accountApi!=null);
+ assert.equal(f.calls.some(c=>c.path.includes('/oauth/authorizations/')),false);
+ assert.equal(await f.page.locator('#consent').isVisible(),false);
+ assert.equal(await f.page.locator('#authenticator-section').isVisible(),false);
+});
+
+test('scoped v1 failed preflight also refuses a forged approve event',async t=>{
+ const f=await fixture(t,{accountServer:'v1',operatorOAuth:true,query:'?authorization_id=fixture-consent'});
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
+  await route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:false,requestId:body.requestId,error:{code:'account_service_unavailable'}})});
+ });
+ await f.load();await untilIO(f.page,()=>window.__accountApi!=null);
+ await f.page.evaluate(()=>document.getElementById('approve').dispatchEvent(new MouseEvent('click')));
+ await untilIO(f.page,()=>!document.getElementById('approve').disabled);
+ assert.equal(f.calls.some(c=>c.path.includes('/oauth/authorizations/')),false);
+});
+
+test('scoped v1 classified operator enables only the two canonical operations and native enrollment',async t=>{
+ const f=await fixture(t,{accountServer:'v1',operatorOAuth:true,query:'?authorization_id=fixture-consent'});const observed=[];
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  const body=route.request().postDataJSON();observed.push(body.action);if(!body.action.startsWith('operator.oauth.'))return route.fallback();
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data:{operator:true,parentMfaRequired:true}})});
+ });
+ await f.load();await untilIO(f.page,()=>window.__accountApi!=null);
+ assert.deepEqual(observed,['get-account','operator.oauth.details']);
+ assert.equal(f.calls.some(c=>c.path.includes('/factors')),false,'enrollment requires the human action');
+ assert.equal(await f.page.locator('#authenticator-section').isVisible(),true);
+ for(const id of ['mfa-remove','mfa-section','analytics-section','activity-section'])assert.equal(await f.page.locator('#'+id).isVisible(),false,id);
+ const result=await f.page.evaluate(async actions=>{
+  const results=[];for(const action of actions)try{await window.__accountApi(action,{apiVersion:2,requestId:crypto.randomUUID(),authorizationId:'fixture-consent'});results.push('allowed')}catch(e){results.push(e.code)}return results;
+ },['operator.oauth.details','operator.oauth.approve',...canonicalActions]);
+ assert.deepEqual(result,['allowed','allowed',...Array(canonicalActions.length).fill('feature_unavailable')]);
+ await f.page.evaluate(()=>document.getElementById('mfa-remove').dispatchEvent(new MouseEvent('click')));
+ await untilIO(f.page,()=>!document.getElementById('authenticator-add').disabled);
+ assert.equal(f.calls.some(c=>c.path.includes('/factors')),false,'forged removal never contacts provider');
+});
+
+for(const transition of ['logout','user switch'])test(`scoped v1 late backend classification cannot survive ${transition}`,async t=>{
+ const f=await fixture(t,{accountServer:'v1',operatorOAuth:true,query:'?authorization_id=fixture-consent'});let release,started;
+ const held=new Promise(resolve=>{release=resolve}),observed=new Promise(resolve=>{started=resolve});
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
+  started();await held;
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data:route.request().headers().authorization.includes(USER_B.id)?{operator:false}:{operator:true,parentMfaRequired:true}})});
+ });
+ const loading=f.load();await observed;
+ await f.page.evaluate(async({transition,email})=>{if(transition==='logout')await window.__sdkClient.auth.signOut({scope:'local'});else await window.__sdkClient.auth.signInWithPassword({email,password:'fixture-password'})},{transition,email:USER_B.email});
+ release();await loading;await f.page.clock.runFor(0);
+ await untilIO(f.page,()=>window.__accountApi!=null);
+ if(transition==='user switch')await untilIO(f.page,()=>!document.getElementById('consent').hidden);
+ assert.equal(await f.page.locator('#authenticator-section').isVisible(),false);
+ const result=await f.page.evaluate(async()=>{try{await window.__accountApi('operator.oauth.approve');return 'allowed'}catch(e){return e.code}});
+ assert.equal(result,'feature_unavailable');
+});
+
+for(const transition of ['logout','user switch'])test(`scoped v1 pending native enrollment is canceled by ${transition}`,async t=>{
+ const f=await fixture(t,{accountServer:'v1',operatorOAuth:true,query:'?authorization_id=fixture-consent'});let release,started;
+ const held=new Promise(resolve=>{release=resolve}),observed=new Promise(resolve=>{started=resolve});
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data:route.request().headers().authorization.includes(USER_B.id)?{operator:false}:{operator:true,parentMfaRequired:true}})});
+ });
+ await f.page.route('https://account.fixture.invalid/auth/v1/factors',async route=>{
+  started();await held;await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({id:'fixture-factor',totp:{secret:'synthetic-enrollment-secret'}})});
+ });
+ await f.load();await f.page.locator('#authenticator-add').click();await observed;
+ await f.page.evaluate(async({transition,email})=>{if(transition==='logout')await window.__sdkClient.auth.signOut({scope:'local'});else await window.__sdkClient.auth.signInWithPassword({email,password:'fixture-password'})},{transition,email:USER_B.email});
+ release();await f.page.clock.runFor(0);
+ await untilIO(f.page,()=>!document.getElementById('auth-submit').disabled);
+ assert.equal(await f.page.locator('#authenticator-secret').textContent(),'');
+ assert.equal(await f.page.locator('#authenticator-verify').isVisible(),false);
+ assert.equal(await f.page.locator('#authenticator-section').isVisible(),false);
+ assert.equal(await f.page.locator('#status').textContent(),'','stale enrollment must not publish an error into the next view');
+});
+
+for (const capability of [{accountServer:'v2'}, {accountServer:'v1',operatorOAuth:true}]) {
+const prefix = capability.accountServer === 'v1' ? 'scoped v1: ' : 'v2: '
+test(prefix+'operator consent preflight observes autoapproval before any browser provider details call',async t=>{
+ const f=await fixture(t,{...capability,query:'?authorization_id=fixture-consent'});
  await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
   const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data:{operator:true,redirect_url:f.origin+'/api/operator-test-callback?code=synthetic'}})});
@@ -448,8 +570,8 @@ test('operator consent preflight observes autoapproval before any browser provid
  assert.equal(f.calls.some(c=>c.path.includes('/oauth/authorizations/')),false);
 });
 
-test('operator manual approval stays server mediated',async t=>{
- const f=await fixture(t,{query:'?authorization_id=fixture-consent'});let approve=0;
+test(prefix+'operator manual approval stays server mediated',async t=>{
+ const f=await fixture(t,{...capability,query:'?authorization_id=fixture-consent'});let approve=0;
  await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
   const body=route.request().postDataJSON();if(!body.action.startsWith('operator.oauth.'))return route.fallback();
   if(body.action==='operator.oauth.approve')approve++;
@@ -460,8 +582,8 @@ test('operator manual approval stays server mediated',async t=>{
  assert.equal(approve,1);assert.equal(f.calls.some(c=>c.path.includes('/oauth/authorizations/')),false);
 });
 
-test('failed operator preflight cannot fall back to browser autoapproval',async t=>{
- const f=await fixture(t,{query:'?authorization_id=fixture-consent'});
+test(prefix+'failed operator preflight cannot fall back to browser autoapproval',async t=>{
+ const f=await fixture(t,{...capability,query:'?authorization_id=fixture-consent'});
  await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
   const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
   await route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:false,requestId:body.requestId,error:{code:'account_service_unavailable'}})});
@@ -470,8 +592,8 @@ test('failed operator preflight cannot fall back to browser autoapproval',async 
  assert.equal(await f.page.locator('#consent').isVisible(),false);assert.equal(f.calls.some(c=>c.path.includes('/oauth/authorizations/')),false);
 });
 
-test('actual authorize page exposes parent MFA and resumes consent after a rejected code and a valid retry',async t=>{
- const f=await fixture(t,{query:'?authorization_id=fixture-consent',authorizePage:true});let parentVerified=false,verifyCalls=0,providerDetails=0;
+test(prefix+'actual authorize page exposes parent MFA and resumes consent after a rejected code and a valid retry',async t=>{
+ const f=await fixture(t,{...capability,query:'?authorization_id=fixture-consent',authorizePage:true});let parentVerified=false,verifyCalls=0,providerDetails=0;
  await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
   const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data:parentVerified?{operator:true,client:{name:'Company OS'},scope:'openid'}:{operator:true,parentMfaRequired:true}})});
@@ -492,8 +614,8 @@ test('actual authorize page exposes parent MFA and resumes consent after a rejec
  assert.equal(verifyCalls,2);assert.equal(providerDetails,0);assert.equal(new URL(f.page.url()).searchParams.get('authorization_id'),'fixture-consent');
 });
 
-for(const authorizePage of [false,true])test(`${authorizePage?'authorize':'main social callback'} enrollment explains the credential change and offers explicit sign-in again without losing the request`,async t=>{
- const f=await fixture(t,{query:'?authorization_id=fixture-consent',authorizePage});let enrolled=false,freshPrimary=false,parentVerified=false;
+for(const authorizePage of [false,true])test(prefix+`${authorizePage?'authorize':'main social callback'} enrollment explains the credential change and offers explicit sign-in again without losing the request`,async t=>{
+ const f=await fixture(t,{...capability,query:'?authorization_id=fixture-consent',authorizePage});let enrolled=false,freshPrimary=false,parentVerified=false;
  await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
   const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
   const stale=enrolled&&!freshPrimary;
@@ -509,6 +631,9 @@ for(const authorizePage of [false,true])test(`${authorizePage?'authorize':'main 
  await f.load();await f.page.locator('#authenticator-add').waitFor({state:'visible'});await f.page.locator('#authenticator-add').click();await f.page.locator('#mfa-code').fill('123456');await f.page.locator('#mfa-form button[type=submit]').click();
  await f.page.locator('#operator-reauth').waitFor({state:'visible'});assert.match(await f.page.locator('#account-state-description').textContent(),/security settings changed/i);assert.doesNotMatch(await f.page.locator('#status').textContent(),/Verify again with a new code/);
  await f.page.locator('#operator-reauth').click();await f.page.locator('#auth').waitFor({state:'visible'});assert.equal(new URL(f.page.url()).searchParams.get('authorization_id'),'fixture-consent');
+ assert.equal(await f.page.locator('#authenticator-secret').textContent(),'');assert.equal(await f.page.locator('#mfa-code').inputValue(),'');assert.equal(await f.page.locator('#password').inputValue(),'');
+ assert.equal(await f.page.evaluate(()=>JSON.stringify(localStorage).includes('synthetic-enrollment-secret')),false);
  await f.page.locator('#email').fill(USER_A.email);await f.page.locator('#password').fill('fixture-password');await f.page.locator('#auth-submit').click();await f.page.locator('#mfa-step-up').waitFor({state:'visible'});
  await f.page.locator('#mfa-step-up').click();await f.page.locator('#mfa-code').fill('123456');await f.page.locator('#mfa-form button[type=submit]').click();await f.page.locator('#consent').waitFor({state:'visible'});assert.equal(parentVerified,true);
 });
+}
