@@ -18,6 +18,8 @@ const config = window.CODEVALANCHE_CONFIG
 // keeps the features that need newer server actions hidden. "v2" enables
 // everything (API v2 operations, recovery codes, activity, analytics consent).
 const v2 = accountServerVersion(config) === 'v2'
+// This capability exposes only server-classified operator consent, not account v2.
+const operatorOAuth = v2 || config.operatorOAuth === true
 for (const id of ['analytics-section', 'activity-section']) if ($(id)) $(id).hidden = !v2
 // Two-step verification texts follow the page language: Romanian has its own
 // reviewed texts (mfa-i18n.js); every other language goes through the site catalog.
@@ -75,9 +77,30 @@ const recoveryRedirect = new URL(redirectTo); recoveryRedirect.searchParams.set(
 const initialFlow = new URL(location.href).searchParams.get('flow')
 // An accepted invitation sets the account's first password through the recovery-mode form.
 let mode = 'signin', user = null, recovery = ['recovery', 'invite'].includes(initialFlow), invite = initialFlow === 'invite', busy = false
-let accountStatus = 'signed-out', renderGeneration = 0, currentSession = null, operatorConsent = false
+let accountStatus = 'signed-out', renderGeneration = 0, currentSession = null, operatorConsent = null
 let cleanupPromise = null, cleanupPending = false, ownedSignin = false
 const security = createAccountSecurity(client, { isRecovery: () => recovery, assertRemoval: () => apiV2('security.mfa.remove-authorize') })
+const operatorContext = () => operatorOAuth && Boolean(authorizationId) && !recovery
+const nativeAuthenticatorAllowed = () => !recovery && accountStatus === 'ready' && (v2 || (operatorContext() && operatorConsent === true))
+async function nativeAuthenticatorRequest(work) {
+  const generation = renderGeneration
+  try {
+    const result = await work()
+    if (generation !== renderGeneration || !nativeAuthenticatorAllowed()) throw { code: 'account_request_superseded' }
+    return result
+  } catch (error) { if (generation !== renderGeneration) throw { code: 'account_request_superseded' }; throw error }
+}
+function clearNativeAuthenticator() {
+  security.clear()
+  if ($('authenticator-secret')) {
+    $('authenticator-secret').textContent = ''; $('authenticator-verify').hidden = true
+    $('mfa-code').value = ''; $('mfa-factor-id').value = ''
+  }
+}
+function updateAuthenticatorPanel() {
+  if ($('authenticator-section')) $('authenticator-section').hidden = !user || recovery || !(v2 ? ['ready', 'deletion-pending'].includes(accountStatus) : nativeAuthenticatorAllowed())
+  if ($('mfa-remove')) $('mfa-remove').hidden = !v2
+}
 // Signed in, the status line is a toast: confirmations fade on their own after
 // a reading time that follows their length; errors stay until the next action.
 let noticeTimer = null
@@ -195,12 +218,13 @@ function applyControls() {
   [...document.querySelectorAll('button')].filter(button => !button.closest('[data-owned-consent]')).forEach(button => { button.disabled = busy || cleanupPending })
   document.querySelectorAll('#profile input, #profile textarea, #profile button').forEach(control => { control.disabled = busy || accountStatus !== 'ready' })
   $('account-state-retry').disabled = busy || cleanupPending || accountStatus === 'loading'
-  if ($('authenticator-add')) $('authenticator-add').disabled = busy || cleanupPending || accountStatus !== 'ready'
-  if ($('mfa-remove')) $('mfa-remove').disabled = busy || cleanupPending || accountStatus !== 'ready'
+  for (const id of ['authenticator-add', 'mfa-step-up']) if ($(id)) $(id).disabled = busy || cleanupPending || !nativeAuthenticatorAllowed()
+  if ($('mfa-remove')) $('mfa-remove').disabled = busy || cleanupPending || accountStatus !== 'ready' || !v2
   if (mode === 'update') $('auth-submit').disabled = busy || cleanupPending || accountStatus !== 'ready'
 }
 function setAccountStatus(next) {
   if (next !== 'ready') accountAnalytics.suspend()
+  if (next !== 'ready') { operatorConsent = null; if (!v2) clearNativeAuthenticator() }
   accountStatus = next
   const gated = ['loading', 'suspended', 'deletion-pending', 'unavailable', 'signing-out', 'logout-failed'].includes(next)
   $('auth').hidden = (gated && next !== 'logout-failed') || (Boolean(user) && !recovery) || (recovery && user && next !== 'ready')
@@ -214,8 +238,7 @@ function setAccountStatus(next) {
   $('opening').lastElementChild.textContent = t(next === 'signing-out' ? 'Signing out…' : 'Opening your account…')
   if (!opening) delete document.documentElement.dataset.accountOpening
   $('consent').hidden = true
-  // The authenticator panel of the v2 server (security.js); v1 keeps it hidden.
-  if ($('authenticator-section')) $('authenticator-section').hidden = !v2 || !user || recovery || !['ready', 'deletion-pending'].includes(next)
+  updateAuthenticatorPanel()
   // The sign-in second step is shown only by render(), after this reset.
   $('mfa-challenge').hidden = true
   if ($('account-state-cancel')) $('account-state-cancel').hidden = next !== 'deletion-pending'
@@ -231,7 +254,7 @@ function setAccountStatus(next) {
   applyControls()
 }
 function invalidateAccountView() {
-  security.clear()
+  operatorConsent = null; clearNativeAuthenticator()
   pendingRecoveryEnrollment = null
   renderGeneration++
   currentSession = null; user = null
@@ -308,8 +331,10 @@ function setMode(next) {
 }
 async function api(action, data = {}) {
   const generation = renderGeneration, expected = currentSession
-  // v1: the live account function answers only its own actions; nothing else is ever sent.
-  if (!v2 && !V1_ACCOUNT_ACTIONS.includes(action)) throw { code: 'feature_unavailable' }
+  // v1 keeps its legacy action list; only this authorization's operator preflight
+  // and a backend-classified approval may use the canonical contract.
+  const operatorAction = operatorContext() && (action === 'operator.oauth.details' || (action === 'operator.oauth.approve' && operatorConsent === true))
+  if (!v2 && !V1_ACCOUNT_ACTIONS.includes(action) && !operatorAction) throw { code: 'feature_unavailable' }
   // A recovery code is redeemed from the sign-in second step, before the account opens.
   if (action !== 'get-account' && action !== 'mfa-recovery-redeem' && accountStatus !== 'ready' && !(action === 'cancel-deletion' && accountStatus === 'deletion-pending')) throw { code: user ? 'account_service_unavailable' : 'session_not_found' }
   const { data: { session }, error } = await client.auth.getSession()
@@ -375,7 +400,7 @@ function mfaFailure(error, wrongCodeKey) {
 }
 function list(id, values) { $(id).replaceChildren(...values.map(value => { const li = document.createElement('li'); li.textContent = value; return li })) }
 async function render(session) {
-  if (currentSession?.user?.id !== session?.user?.id) { security.clear(); clearMfaPanels(); if ($('authenticator-secret')) { $('authenticator-secret').textContent = ''; $('authenticator-verify').hidden = true } }
+  if (currentSession?.user?.id !== session?.user?.id) { clearNativeAuthenticator(); clearMfaPanels() }
   const generation = ++renderGeneration
   currentSession = session || null
   user = session?.user || null
@@ -580,13 +605,16 @@ async function cancelAccountDeletion() {
 }
 $('cancel-deletion').addEventListener('click', () => void action(cancelAccountDeletion))
 async function showConsent(generation) {
+  operatorConsent = null
+  updateAuthenticatorPanel()
   try {
-    // v1: the consent is read and decided with Supabase Auth directly (client.auth.oauth).
-    // v2: operator autoapproval must be observed server-side under the verified
-    // primary session before any provider SDK call can return a code redirect.
-    const prepared = v2 ? await apiV2('operator.oauth.details', { authorizationId }) : { operator: false }
+    // Observe operator autoapproval under the primary session before any provider
+    // SDK call can release a code. Errors are never evidence of a Desktop request.
+    const prepared = operatorContext() ? await apiV2('operator.oauth.details', { authorizationId }) : { operator: false }
     if (generation !== renderGeneration || accountStatus !== 'ready') return
+    if (!prepared || typeof prepared.operator !== 'boolean' || (prepared.parentMfaRequired !== undefined && typeof prepared.parentMfaRequired !== 'boolean') || (prepared.parentMfaRequired === true && !prepared.operator)) throw { code: 'account_service_unavailable' }
     operatorConsent = prepared.operator === true
+    updateAuthenticatorPanel(); applyControls()
     if (prepared.parentMfaRequired === true) {
       $('consent').hidden = true
       notice('Verify your authenticator here before connecting Company OS. If you have not added one yet, choose Add authenticator.')
@@ -600,6 +628,7 @@ async function showConsent(generation) {
     $('consent-scope').textContent = t('Requested access: {scope}', { scope: data.scope })
     $('consent').hidden = false
   } catch (error) { if (generation === renderGeneration && accountStatus === 'ready') {
+    operatorConsent = null; clearNativeAuthenticator(); updateAuthenticatorPanel(); $('consent').hidden = true
     if (error?.code === 'reauthentication_required') {
       setAccountStatus('unavailable')
       if ($('operator-reauth')) { $('operator-reauth').hidden = false; $('account-state-title').textContent = t('Sign in again to connect Company OS'); $('account-state-description').textContent = t('Your security settings changed. Sign in again with the same account, then verify your authenticator. This connection request will be kept.') }
@@ -610,11 +639,12 @@ async function showConsent(generation) {
 }
 for (const decision of ['approve','deny']) $(decision).addEventListener('click', () => void action(async () => {
   if (decision === 'approve' && accountStatus !== 'ready') return
+  if (decision === 'approve' && operatorContext() && operatorConsent === null) throw { code: 'account_service_unavailable' }
   const generation = renderGeneration
   if (decision === 'approve') await api('get-account')
   if (generation !== renderGeneration) throw { code: 'account_request_superseded' }
   const method = decision === 'approve' ? 'approveAuthorization' : 'denyAuthorization'
-  const { data, error } = v2 && decision === 'approve' && operatorConsent
+  const { data, error } = operatorContext() && decision === 'approve' && operatorConsent === true
     ? { data: await apiV2('operator.oauth.approve', { authorizationId }), error: null }
     : await client.auth.oauth[method](authorizationId, { skipBrowserRedirect: true })
   if (generation !== renderGeneration) throw { code: 'account_request_superseded' }
@@ -624,19 +654,22 @@ for (const decision of ['approve','deny']) $(decision).addEventListener('click',
 }))
 
 $('authenticator-add')?.addEventListener('click', () => void action(async () => {
-  const factor = await security.enroll()
+  if (!nativeAuthenticatorAllowed()) return
+  const factor = await nativeAuthenticatorRequest(() => security.enroll())
   $('authenticator-secret').textContent = factor.totp?.secret || ''
   $('authenticator-verify').hidden = false; $('mfa-factor-id').value = factor.id
   notice('Add this secret to your authenticator, then enter its six digit code.')
 }))
 $('mfa-step-up')?.addEventListener('click', () => void action(async () => {
-  const factors = await security.factors()
+  if (!nativeAuthenticatorAllowed()) return
+  const factors = await nativeAuthenticatorRequest(() => security.factors())
   if (!factors.length) { notice('Add an authenticator first.', true); return }
   $('mfa-factor-id').value = factors[0].id; $('authenticator-verify').hidden = false; $('authenticator-secret').textContent = ''
 }))
 $('mfa-form')?.addEventListener('submit', event => { event.preventDefault(); void action(async () => {
+  if (!nativeAuthenticatorAllowed()) return
   const factorId = $('mfa-factor-id').value
-  await security.verify($('mfa-code').value, factorId)
+  await nativeAuthenticatorRequest(() => security.verify($('mfa-code').value, factorId))
   $('mfa-code').value = ''; $('authenticator-secret').textContent = ''; $('authenticator-verify').hidden = true
   const needsFreshVerification=security.state().requiresFreshVerification
   await readCurrentSession()
@@ -654,8 +687,8 @@ $('mfa-form')?.addEventListener('submit', event => { event.preventDefault(); voi
   }
   notice(needsFreshVerification?'Authenticator verified and added. Verify again with a new code before sensitive access.':'Authenticator verified. Sensitive operations still verify your current account access.')
 }) })
-$('mfa-cancel')?.addEventListener('click', () => void action(async () => { await security.cancel(); pendingRecoveryEnrollment = null; $('authenticator-secret').textContent = ''; $('mfa-code').value = ''; $('authenticator-verify').hidden = true }))
-$('mfa-remove')?.addEventListener('click', () => void action(async () => { const factors = await security.factors(); if (!factors.length) { notice('No verified authenticator is enrolled.'); return }; await security.remove(factors[0].id); notice('Authenticator removed. Earlier remote approvals have been withdrawn.'); await readCurrentSession() }))
+$('mfa-cancel')?.addEventListener('click', () => void action(async () => { if (!nativeAuthenticatorAllowed()) return; await nativeAuthenticatorRequest(() => security.cancel()); pendingRecoveryEnrollment = null; $('authenticator-secret').textContent = ''; $('mfa-code').value = ''; $('authenticator-verify').hidden = true }))
+$('mfa-remove')?.addEventListener('click', () => void action(async () => { if (!v2 || recovery || accountStatus !== 'ready') return; const factors = await security.factors(); if (!factors.length) { notice('No verified authenticator is enrolled.'); return }; await security.remove(factors[0].id); notice('Authenticator removed. Earlier remote approvals have been withdrawn.'); await readCurrentSession() }))
 $('analytics-save')?.addEventListener('click', () => void action(async () => { accountAnalytics.suspend(); const result = await apiV2('analytics.consent', { analytics: $('analytics-consent').checked }); void accountAnalytics.update({ session: currentSession, account: result }); notice(result.analyticsConsent ? 'Account activity analytics accepted.' : 'Account activity analytics stopped. Queued events from earlier consent are refused.'); }))
 $('activity-load')?.addEventListener('click', () => void action(async () => { const result = await apiV2('security.activity', { limit: 20 }); list('security-activity', result.events.map(e => `${new Intl.DateTimeFormat(localeState.locale.tag, { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(e.occurredAt))} · ${e.eventName} · ${e.outcome} · ${e.source}`)); $('activity-coverage').textContent = t(result.coverage.status === 'qualified' ? 'Configured sources are current.' : 'Some provider sources are missing or delayed. An empty list does not establish zero attempts.') }))
 $('account-state-cancel')?.addEventListener('click', () => void action(cancelAccountDeletion))

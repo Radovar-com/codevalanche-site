@@ -68,7 +68,7 @@
     },
     {
       "path": "src/account/app.js",
-      "sha256": "873555a1fc92373e72352f88827976e852b20838a836842f5e9a158ceccd3d99"
+      "sha256": "904d7a82edc3b255fd7c4351c961390c2e16e8dd992ae0b858a4e6c2e7489e70"
     },
     {
       "path": "src/account/helpers.js",
@@ -84,7 +84,7 @@
     },
     {
       "path": "src/config.js",
-      "sha256": "d7f014283f3b33b511fa5673ee5b9a1b369bcc1296aad9940daa08d0be9abae5"
+      "sha256": "ead1dd4525ea2a61449db52cc52e236c02ea38a58e99ac7239648598f680688f"
     },
     {
       "path": "supabase/functions/_shared/accountContract.ts",
