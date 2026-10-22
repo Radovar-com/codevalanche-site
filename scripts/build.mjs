@@ -15,7 +15,7 @@ import { DOWNLOAD_STARTED_PAGE, LOCALES, MARKETING_PAGES, localizedMarketingPath
 import { prepareMarketingPartial } from "./marketing-partials.mjs"
 import { versionSiteAssets } from "./asset-cache.mjs"
 import { changelogTranslations, loadReleases, renderChangelog } from "./changelog.mjs"
-import { downloadTranslations, fillDownload, publicDownloadCount, redirectPage, selectDownloadVariant, windowsDownload } from "./download-page.mjs"
+import { describeRelease, downloadTranslations, fillDownload, publicDownloadCount, redirectPage, selectDownloadVariant, windowsDownload } from "./download-page.mjs"
 await buildAnalytics()
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
@@ -59,10 +59,13 @@ const downloadPageSettings = JSON.parse(await readFile(path.join(root, "content/
 const publicCount = windowsInstaller && process.env.CODEVALANCHE_PUBLIC_DOWNLOAD_COUNT === "1"
   ? await publicDownloadCount(downloadManifest, { token: process.env.GITHUB_TOKEN ?? "" }) : null
 const downloadFill = { releases, count: publicCount, minimum: downloadPageSettings.publicCountMinimum }
-for (const page of ["download/index.html", DOWNLOAD_STARTED_PAGE.file]) {
+// The homepage follows the same manifest, so it never says "in preparation" after a release.
+for (const page of ["index.html", "download/index.html", DOWNLOAD_STARTED_PAGE.file]) {
   const output = path.join(destination, page)
   await writeFile(output, fillDownload(selectDownloadVariant(await readFile(output, "utf8"), windowsInstaller), windowsInstaller, downloadFill))
 }
+const homepage = path.join(destination, "index.html")
+await writeFile(homepage, describeRelease(await readFile(homepage, "utf8"), windowsInstaller))
 if (windowsInstaller) {
   const redirect = path.join(destination, windowsInstaller.path, "index.html")
   await mkdir(path.dirname(redirect), { recursive: true })

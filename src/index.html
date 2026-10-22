@@ -41,8 +41,10 @@
       <p class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Early access for Windows</p>
       <h1 id="hero-title">From prompt to a change you understand.</h1>
       <p class="hero-lede">Work with Claude Code, Codex and supported local models in one Windows app. Choose a connected account, follow progress and inspect the changes.</p>
-      <div class="hero-actions"><a class="button button-primary" data-release-primary href="/how-it-works/">See how it works</a><a class="hero-release-link" href="/download/">Windows release status</a></div>
-      <p class="hero-availability" data-release-status>Public installer in preparation.</p>
+      <!-- download:preparation --><div class="hero-actions"><a class="button button-primary" data-release-primary href="/how-it-works/">See how it works</a><a class="hero-release-link" href="/download/">Windows release status</a></div>
+      <p class="hero-availability" data-release-status>Public installer in preparation.</p><!-- /download:preparation -->
+      <!-- download:release --><div class="hero-actions"><a class="button button-primary" data-release-primary href="/download/">Download for Windows</a><a class="hero-release-link" href="/how-it-works/">See how it works</a></div>
+      <p class="hero-availability"><span>Version</span> <span data-fill="version"></span> <span aria-hidden="true">·</span> <span>Windows 11, 64-bit</span> <span aria-hidden="true">·</span> <span data-fill="size"></span></p><!-- /download:release -->
     </div>
     <figure class="shot hero-product">
             <div class="shot-window shot-themed">
@@ -273,8 +275,13 @@
       </section>
 
 <section class="section download-section" id="download" data-analytics-section="download" aria-labelledby="download-title"><div class="shell release-overview">
+<!-- download:preparation -->
   <div><p class="kicker">Get Codevalanche</p><h2 id="download-title">Start with one small change.</h2><p data-release-status>Codevalanche is in early access for Windows. Public downloads are in preparation.</p><div class="hero-actions"><a class="button button-primary" data-release-primary href="/how-it-works/">See how it works</a><a class="button" href="/docs/">Getting started</a></div></div>
   <div class="release-status-card" data-dl-platform="windows"><p class="kicker">Windows release status</p><h3>Codevalanche for Windows.</h3><p class="dl-card-state" data-release-status>Public installer in preparation.</p><p>Only a qualified public release can provide a download here.</p><a href="/download/">Available releases</a></div>
+  <!-- /download:preparation --><!-- download:release -->
+  <div><p class="kicker">Get Codevalanche</p><h2 id="download-title">Start with one small change.</h2><p>Install it on your Windows PC, connect the agent you already use and try it on a small task.</p><div class="hero-actions"><a class="button button-primary" data-release-primary href="/download/">Download for Windows</a><a class="button" href="/docs/">Getting started</a></div></div>
+  <div class="release-status-card"><p class="kicker">Windows</p><h3>Codevalanche for Windows.</h3><p class="release-card-meta"><span>Version</span> <span data-fill="version"></span> <span aria-hidden="true">·</span> <span>Windows 11, 64-bit</span> <span aria-hidden="true">·</span> <span data-fill="size"></span></p><p>Codevalanche updates itself, so the latest installer is all you need.</p><p class="release-card-links"><a href="#download" data-fill-download-card>Download for Windows</a> <a href="/changelog.html">What's new</a></p></div>
+  <!-- /download:release -->
 </div></section>
 
 <section class="section shell proof-section" id="proof" aria-labelledby="proof-title" data-analytics-section="proof">
@@ -295,11 +302,13 @@
           <div class="faq-list reveal">
             <details data-analytics-faq="product"><summary>What is Codevalanche?</summary><p>A desktop app for Windows for coding with AI agents. It opens a project on your computer, lets you give a task to an agent or a local model, keeps the conversation for each task together and shows the changed files and diffs for review. It is made by Radovar.</p></details>
             <details data-analytics-faq="agents"><summary>How is it different from using Claude Code or Codex directly?</summary><p>Claude Code and Codex are agents. Codevalanche is the workspace around them: your projects, the choice of agent or local model for each task, the conversation that guided the work and the review of what changed, in one window.</p></details>
-            <details data-analytics-faq="accounts"><summary>Which agents and accounts can I connect?</summary><p>Your installed build determines the supported integrations. Claude Code and Codex support separate connected accounts; local models and API providers have different setup requirements.</p></details>
+            <details data-analytics-faq="accounts"><summary>Which agents and accounts can I connect?</summary><p>Claude Code and Codex with your own accounts, more than one of each if you want. You can also use Gemini CLI with your own API key, or a supported local model that runs on your PC.</p></details>
             <details data-analytics-faq="guest"><summary>Do I need a Codevalanche account?</summary><p>No. You can use the app as a guest. A Codevalanche account lets you sign in on the desktop app and manage your profile and sessions on this website.</p></details>
             <details data-analytics-faq="privacy"><summary>Does my code leave my computer?</summary><p>Your repository stays on disk. A hosted model can still receive prompts and relevant file context, so the provider and runtime you choose determine those boundaries. A supported local model runs on your own hardware.</p></details>
-            <details data-analytics-faq="platforms"><summary>Which platforms are supported?</summary><p>Codevalanche is built for Windows. No public macOS or Linux download is currently offered. Check the release page for qualified availability.</p></details>
-            <details data-analytics-faq="download"><summary>When can I download it?</summary><p data-release-status>Codevalanche is in early access for Windows, and public downloads are in preparation. This page will carry them as soon as they ship.</p></details>
+            <!-- download:preparation --><details data-analytics-faq="platforms"><summary>Which platforms are supported?</summary><p>Codevalanche is built for Windows. No public macOS or Linux download is currently offered. Check the release page for qualified availability.</p></details>
+            <details data-analytics-faq="download"><summary>When can I download it?</summary><p data-release-status>Codevalanche is in early access for Windows, and public downloads are in preparation. This page will carry them as soon as they ship.</p></details><!-- /download:preparation -->
+            <!-- download:release --><details data-analytics-faq="platforms"><summary>Which platforms are supported?</summary><p>Codevalanche runs on Windows 11, 64-bit. The Mac and phone apps are on their way.</p></details>
+            <details data-analytics-faq="download"><summary>When can I download it?</summary><p>Now. The Windows installer is on the download page, and after you install it Codevalanche updates itself.</p><p><a href="/download/">See download options</a></p></details><!-- /download:release -->
           </div>
         </div>
       </section>
