@@ -68,7 +68,7 @@
     },
     {
       "path": "src/account/app.js",
-      "sha256": "1b7325d0ff780a23f6c99f11489979e70a1b99126c506b3a0ca9e724a3bd0ba5"
+      "sha256": "e6b970974396f2463abec180e68173358504e4aa126fbd346f3513644d394907"
     },
     {
       "path": "src/account/helpers.js",
@@ -84,7 +84,7 @@
     },
     {
       "path": "src/account/authenticatorQr.js",
-      "sha256": "00d5954728cae81d7aebc90526b2606fb0e5246528bfce0fd327cced63ef176e"
+      "sha256": "f24ebe905b413ea7477eb052e05b30cd65323e561047add57bf86a7d2f7723b5"
     },
     {
       "path": "src/config.js",
