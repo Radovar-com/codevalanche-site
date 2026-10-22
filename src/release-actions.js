@@ -153,5 +153,8 @@ export function renderReleaseActions(document, manifest, visitor = {}, translate
       if (!metadata.parentNode) card.append(metadata);
     }
   }
+  // Native rendering can finish after the optional analytics bootstrap snapshot.
+  const download = document.querySelector('#download');
+  if (download) download.dataset.downloadStatus = download.querySelector('[data-download-platform]') ? 'configured' : 'not_configured';
   return {...state, platform};
 }

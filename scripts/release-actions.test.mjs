@@ -3,6 +3,19 @@ import assert from 'node:assert/strict';
 import checkedInManifest from '../supabase/functions/_shared/download-manifest.json' with {type:'json'};
 const module=await import('../src/release-actions.js').catch(()=>({}));
 export const approvedManifest={version:1,gatewayBaseUrl:'https://downloads.example.org/functions/v1/download-redirect/v1',allowedOrigins:['https://artifacts.example.org'],assets:[{siteId:'codevalanche',platform:'windows',architecture:'x64',releaseId:'fixture_release',artifactId:'fixture_windows',qualified:true,targetUrl:'https://artifacts.example.org/not-an-app-version-99.exe'}]};
+
+test('download status follows native button hydration even when analytics initialized before DOM ready',()=>{
+ const link={dataset:{},textContent:'',append(){}};
+ const owner={createElement:()=>({className:'',innerHTML:''}),createTextNode:text=>({textContent:text})};link.ownerDocument=owner;
+ const root={dataset:{downloadStatus:'not_configured'},querySelector:()=>link.dataset.downloadPlatform?link:null};
+ const document={documentElement:{lang:'en'},querySelector:selector=>selector==='#download'?root:null,querySelectorAll:selector=>selector==='a[data-release-primary]'?[link]:[]};
+ module.renderReleaseActions(document,approvedManifest,{userAgent:'Windows NT 10.0; Win64; x64',platform:'Win32'});
+ assert.equal(link.dataset.downloadPlatform,'windows');
+ assert.equal(root.dataset.downloadStatus,'configured','late native rendering must correct the early not-configured snapshot');
+ module.renderReleaseActions(document,approvedManifest,{userAgent:'Mozilla/5.0 (Macintosh)',platform:'MacIntel'});
+ assert.equal(link.dataset.downloadPlatform,undefined);
+ assert.equal(root.dataset.downloadStatus,'not_configured','a contextual navigation link does not claim an installer action');
+});
 test('shared release state distinguishes unavailable configuration from an empty approved manifest',()=>{
  assert.equal(typeof module.releaseState,'function','shared release state is implemented');
  for(const manifest of [undefined,null,{}, {...approvedManifest,version:2},{...approvedManifest,assets:{}},{...approvedManifest,assets:[null]},{...approvedManifest,assets:[{}]},{...approvedManifest,gatewayBaseUrl:'javascript:alert(1)'}])assert.equal(module.releaseState(manifest).status,'unavailable');
