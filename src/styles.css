@@ -386,6 +386,17 @@ p { text-wrap: pretty; }
 [data-owned-consent] .cmp-actions button:first-child { border-color: var(--ink) !important; background: var(--ink) !important; color: var(--paper) !important; }
 [data-owned-consent] .cmp-overlay { background: rgba(20, 20, 19, .45) !important; }
 [data-owned-consent] button:focus-visible, [data-owned-consent] input:focus-visible { outline: 2px solid var(--accent) !important; }
+/* A small corner card, so the first screen still shows the product and the download button. */
+[data-owned-consent] .cmp-banner { max-width: min(380px, calc(100vw - 2rem)) !important; padding: 16px 18px !important; }
+[data-owned-consent] .cmp-banner h2 { margin: 0 0 4px; font-family: var(--font-sans) !important; font-size: 15px !important; font-weight: 600 !important; letter-spacing: 0; }
+[data-owned-consent] .cmp-banner p { margin: 0; font-size: 13px !important; line-height: 1.45; }
+[data-owned-consent] .cmp-banner .cmp-actions { gap: 8px !important; margin-top: 12px !important; }
+[data-owned-consent] .cmp-banner button { min-height: 34px; padding: 6px 12px !important; font-size: 13px !important; }
+@media (max-width: 640px) {
+  [data-owned-consent] .cmp-banner { right: 12px !important; bottom: 12px !important; left: 12px; max-width: none !important; padding: 12px 14px !important; }
+  [data-owned-consent] .cmp-banner .cmp-actions { flex-wrap: nowrap; }
+  [data-owned-consent] .cmp-banner .cmp-actions button { flex: 1 1 auto; padding-inline: 8px !important; }
+}
 
 /* Right-to-left locales */
 [dir="rtl"] .feature-tab { border-left: 0; border-right: 2px solid var(--line); border-radius: 8px 0 0 8px; text-align: right; }
@@ -547,6 +558,9 @@ p { text-wrap: pretty; }
 .release-status-card p { margin-block: 12px; font-size: 14px; }
 .release-status-card .dl-card-state { display: block; margin-block: 12px; color: var(--accent); font-weight: 500; }
 .release-status-card a { display: inline-flex; margin-top: 16px; font-size: 14px; }
+.release-status-card .release-card-meta { color: var(--ink-muted); font-size: 13px; }
+.release-status-card .release-card-links { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+.release-status-card .release-card-links a { margin-top: 4px; }
 :root:not(.js) .feature-tabs { display: none; }
 :root:not(.js) .feature-panel[hidden] { display: grid; margin-top: 36px; }
 [dir="rtl"] .task-tour .feature-tab { border-right: 0; border-left: 0; border-radius: 0; }

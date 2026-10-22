@@ -77,6 +77,28 @@ export function fillDownload(html, download, { releases = [], count = null, mini
   return result;
 }
 
+/**
+ * Adds the published version to the homepage's SoftwareApplication data, so search
+ * engines read the same release the page offers. No price: nothing about price is public.
+ */
+export function describeRelease(html, download) {
+  if (!download) return html;
+  return html.replace(/(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/, (match, open, json, close) => {
+    const schema = JSON.parse(json);
+    const app = schema['@graph']?.find(node => node['@type'] === 'SoftwareApplication');
+    if (!app) return match;
+    Object.assign(app, {
+      description: 'A Windows desktop app for coding with Claude Code, Codex and local models in one window: give a task to an agent, follow every step and review the changes.',
+      operatingSystem: 'Windows 11 (64-bit)',
+      softwareVersion: download.version,
+      fileSize: download.size,
+      downloadUrl: `${SITE}/download/`,
+      screenshot: `${SITE}/assets/shots/task-review-light.webp`,
+    });
+    return `${open}${JSON.stringify(schema)}${close}`;
+  });
+}
+
 /** Text the download pages show that is the same, or only formatted, in every language. */
 export function downloadTranslations(download, { count = null, minimum = null, tag = 'en', catalog = {} } = {}) {
   if (!download) return {};
