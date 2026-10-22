@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js'
 import { safeError, identityLabels, authCallback, normalizeAccountError, normalizeAccountProfile, passwordProblem, MIN_PASSWORD_LENGTH, captchaModes, turnstileSiteKey, emailLocaleFor, accountServerVersion, V1_ACCOUNT_ACTIONS, deviceLabel, desktopPlatform } from './helpers.js'
 import { createAccountSessionLifecycle, accountAuthFetch } from './sessionLifecycle.js'
 import { createAccountSecurity } from './security.js'
+import { authenticatorQrSource } from './authenticatorQr.js'
 import { emailLinkCallback, exchangeEmailLink, emailLinkFragment, validateNewPassword, recoveryNotice } from './recovery.js'
 import { loadTurnstile } from './captcha.js'
 import { createAccountAnalytics } from './analytics.js'
@@ -90,16 +91,26 @@ async function nativeAuthenticatorRequest(work) {
     return result
   } catch (error) { if (generation !== renderGeneration) throw { code: 'account_request_superseded' }; throw error }
 }
-function clearNativeAuthenticator() {
-  security.clear()
+function clearNativePresentation() {
   if ($('authenticator-secret')) {
     $('authenticator-secret').textContent = ''; $('authenticator-verify').hidden = true
     $('mfa-code').value = ''; $('mfa-factor-id').value = ''
+    $('authenticator-qr')?.removeAttribute('src')
+    if ($('authenticator-manual')) $('authenticator-manual').open = false
+    if ($('authenticator-setup')) $('authenticator-setup').hidden = true
+    if ($('authenticator-qr-error')) $('authenticator-qr-error').hidden = true
+    if ($('authenticator-restart')) $('authenticator-restart').hidden = true
+    if ($('native-mfa-feedback')) $('native-mfa-feedback').textContent = ''
+    if ($('authenticator-start')) $('authenticator-start').hidden = false
+    if ($('native-mfa-code-title')) $('native-mfa-code-title').textContent = t('2. Enter the code')
   }
 }
+function clearNativeAuthenticator() { security.clear(); clearNativePresentation() }
 function updateAuthenticatorPanel() {
   if ($('authenticator-section')) $('authenticator-section').hidden = !user || recovery || !(v2 ? ['ready', 'deletion-pending'].includes(accountStatus) : nativeAuthenticatorAllowed())
   if ($('mfa-remove')) $('mfa-remove').hidden = !v2
+  if ($('native-mfa-title')) $('native-mfa-title').textContent = t(operatorContext() && operatorConsent === true ? 'Connect Company OS securely' : 'Set up your authenticator')
+  if ($('native-mfa-intro')) $('native-mfa-intro').textContent = t(operatorContext() && operatorConsent === true ? 'Company OS needs a security code before it can open account administration.' : 'Open your authenticator app, add an account, and scan this code.')
 }
 // Signed in, the status line is a toast: confirmations fade on their own after
 // a reading time that follows their length; errors stay until the next action.
@@ -218,7 +229,7 @@ function applyControls() {
   [...document.querySelectorAll('button')].filter(button => !button.closest('[data-owned-consent]')).forEach(button => { button.disabled = busy || cleanupPending })
   document.querySelectorAll('#profile input, #profile textarea, #profile button').forEach(control => { control.disabled = busy || accountStatus !== 'ready' })
   $('account-state-retry').disabled = busy || cleanupPending || accountStatus === 'loading'
-  for (const id of ['authenticator-add', 'mfa-step-up']) if ($(id)) $(id).disabled = busy || cleanupPending || !nativeAuthenticatorAllowed()
+  for (const id of ['authenticator-add', 'authenticator-restart', 'mfa-step-up']) if ($(id)) $(id).disabled = busy || cleanupPending || !nativeAuthenticatorAllowed()
   if ($('mfa-remove')) $('mfa-remove').disabled = busy || cleanupPending || accountStatus !== 'ready' || !v2
   if (mode === 'update') $('auth-submit').disabled = busy || cleanupPending || accountStatus !== 'ready'
 }
@@ -617,7 +628,7 @@ async function showConsent(generation) {
     updateAuthenticatorPanel(); applyControls()
     if (prepared.parentMfaRequired === true) {
       $('consent').hidden = true
-      notice('Verify your authenticator here before connecting Company OS. If you have not added one yet, choose Add authenticator.')
+      notice('Company OS needs a security code before it can open account administration.')
       return
     }
     let data = prepared
@@ -653,27 +664,43 @@ for (const decision of ['approve','deny']) $(decision).addEventListener('click',
   if (data.redirect_url) location.assign(data.redirect_url)
 }))
 
-$('authenticator-add')?.addEventListener('click', () => void action(async () => {
+async function startNativeEnrollment() {
   if (!nativeAuthenticatorAllowed()) return
-  const factor = await nativeAuthenticatorRequest(() => security.enroll())
+  clearNativePresentation()
+  const factor = await nativeAuthenticatorRequest(() => security.enroll({replacePending:true}))
   $('authenticator-secret').textContent = factor.totp?.secret || ''
+  const qr = authenticatorQrSource(factor.totp?.qr_code)
+  if (qr) $('authenticator-qr').src = qr
+  $('authenticator-qr').hidden = !qr
+  $('authenticator-setup').hidden = false; $('authenticator-start').hidden = true
+  $('authenticator-restart').hidden = false; $('authenticator-qr-error').hidden = Boolean(qr)
   $('authenticator-verify').hidden = false; $('mfa-factor-id').value = factor.id
-  notice('Add this secret to your authenticator, then enter its six digit code.')
-}))
+  $('mfa-code').value = ''; $('mfa-code').focus({preventScroll:true})
+}
+for (const id of ['authenticator-add', 'authenticator-restart']) $(id)?.addEventListener('click', () => void action(startNativeEnrollment))
+$('authenticator-qr')?.addEventListener('error', () => { if ($('authenticator-qr').hasAttribute('src') && !$('authenticator-setup').hidden) { $('authenticator-qr').hidden = true; $('authenticator-qr-error').hidden = false } })
 $('mfa-step-up')?.addEventListener('click', () => void action(async () => {
   if (!nativeAuthenticatorAllowed()) return
   const factors = await nativeAuthenticatorRequest(() => security.factors())
   if (!factors.length) { notice('Add an authenticator first.', true); return }
-  $('mfa-factor-id').value = factors[0].id; $('authenticator-verify').hidden = false; $('authenticator-secret').textContent = ''
+  clearNativePresentation(); $('authenticator-start').hidden = true
+  $('native-mfa-code-title').textContent = T('challengeTitle')
+  $('mfa-factor-id').value = factors[0].id; $('authenticator-verify').hidden = false
+  notice('Enter a code from your existing authenticator to continue.'); $('mfa-code').focus()
 }))
 $('mfa-form')?.addEventListener('submit', event => { event.preventDefault(); void action(async () => {
   if (!nativeAuthenticatorAllowed()) return
   const factorId = $('mfa-factor-id').value
-  await nativeAuthenticatorRequest(() => security.verify($('mfa-code').value, factorId))
-  $('mfa-code').value = ''; $('authenticator-secret').textContent = ''; $('authenticator-verify').hidden = true
+  const code = totpCodeFrom($('mfa-code').value)
+  if (!code) { noticeTranslated(T('codeInvalid'), true); return }
+  await nativeAuthenticatorRequest(() => security.verify(code, factorId))
+  clearNativePresentation()
   const needsFreshVerification=security.state().requiresFreshVerification
   await readCurrentSession()
-  if (authorizationId && accountStatus !== 'ready') return
+  if (authorizationId && accountStatus !== 'ready') {
+    if (needsFreshVerification && $('operator-reauth') && !$('operator-reauth').hidden) $('account-state-description').textContent = t('Your authenticator is ready. Sign in again to finish connecting Company OS.')
+    return
+  }
   if (pendingRecoveryEnrollment?.userId === currentSession?.user?.id && pendingRecoveryEnrollment.factorId === factorId && accountStatus === 'ready') {
     try {
       const { codes } = await api('mfa-recovery-codes')
@@ -687,7 +714,7 @@ $('mfa-form')?.addEventListener('submit', event => { event.preventDefault(); voi
   }
   notice(needsFreshVerification?'Authenticator verified and added. Verify again with a new code before sensitive access.':'Authenticator verified. Sensitive operations still verify your current account access.')
 }) })
-$('mfa-cancel')?.addEventListener('click', () => void action(async () => { if (!nativeAuthenticatorAllowed()) return; await nativeAuthenticatorRequest(() => security.cancel()); pendingRecoveryEnrollment = null; $('authenticator-secret').textContent = ''; $('mfa-code').value = ''; $('authenticator-verify').hidden = true }))
+$('mfa-cancel')?.addEventListener('click', () => void action(async () => { if (!nativeAuthenticatorAllowed()) return; clearNativePresentation(); await nativeAuthenticatorRequest(() => security.cancel()); pendingRecoveryEnrollment = null }))
 $('mfa-remove')?.addEventListener('click', () => void action(async () => { if (!v2 || recovery || accountStatus !== 'ready') return; const factors = await security.factors(); if (!factors.length) { notice('No verified authenticator is enrolled.'); return }; await security.remove(factors[0].id); notice('Authenticator removed. Earlier remote approvals have been withdrawn.'); await readCurrentSession() }))
 $('analytics-save')?.addEventListener('click', () => void action(async () => { accountAnalytics.suspend(); const result = await apiV2('analytics.consent', { analytics: $('analytics-consent').checked }); void accountAnalytics.update({ session: currentSession, account: result }); notice(result.analyticsConsent ? 'Account activity analytics accepted.' : 'Account activity analytics stopped. Queued events from earlier consent are refused.'); }))
 $('activity-load')?.addEventListener('click', () => void action(async () => { const result = await apiV2('security.activity', { limit: 20 }); list('security-activity', result.events.map(e => `${new Intl.DateTimeFormat(localeState.locale.tag, { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(e.occurredAt))} · ${e.eventName} · ${e.outcome} · ${e.source}`)); $('activity-coverage').textContent = t(result.coverage.status === 'qualified' ? 'Configured sources are current.' : 'Some provider sources are missing or delayed. An empty list does not establish zero attempts.') }))
@@ -728,6 +755,7 @@ $('mfa-enable').addEventListener('click', () => void action(async () => {
 function closeEnrollment() { pendingFactorId = null; $('mfa-enroll').hidden = true; $('mfa-qr').removeAttribute('src'); $('mfa-secret').textContent = ''; $('mfa-enroll-code').value = '' }
 function promptInitialRecoveryVerification() {
   if (!pendingRecoveryEnrollment || pendingRecoveryEnrollment.userId !== currentSession?.user?.id || accountStatus !== 'ready') return
+  clearNativePresentation(); $('authenticator-start').hidden = true; $('native-mfa-code-title').textContent = T('challengeTitle')
   $('mfa-factor-id').value = pendingRecoveryEnrollment.factorId
   $('authenticator-secret').textContent = ''; $('mfa-code').value = ''; $('authenticator-verify').hidden = false
   notice('Authenticator verified and added. Verify again with a new code before sensitive access.')

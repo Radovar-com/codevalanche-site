@@ -168,5 +168,22 @@
   "Codevalanche is available for Windows 11 today.",
   "Link copied. Open it on your PC to download.",
   "Downloaded {count} times.",
-  "Latest"
+  "Latest",
+  "Connect Company OS securely",
+  "Set up your authenticator",
+  "Company OS needs a security code before it can open account administration.",
+  "Create a QR code",
+  "Any unfinished Codevalanche authenticator setup will be replaced.",
+  "Use an existing authenticator",
+  "1. Scan the QR code",
+  "Open your authenticator app, add an account, and scan this code.",
+  "Cannot scan? Enter the key manually",
+  "2. Enter the code",
+  "Enter the six-digit code shown for Codevalanche in your authenticator app.",
+  "Verify and continue",
+  "Create a new QR code",
+  "Cancel setup",
+  "The QR code could not be displayed. Create a new code or use the manual key.",
+  "Enter a code from your existing authenticator to continue.",
+  "Your authenticator is ready. Sign in again to finish connecting Company OS."
 ]

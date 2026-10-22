@@ -84,6 +84,31 @@ async function fixture(t, { status = 200, expired = false, query = '', authorize
     holdLogout() { heldLogout = new Promise(resolve => { releaseLogout = resolve }); return () => { heldLogout = null; releaseLogout() } } }
 }
 
+for(const authorizePage of [false,true])test(`operator ${authorizePage?'authorize':'social callback'} setup displays the provider QR and keeps the manual key collapsed`,async t=>{
+ const f=await fixture(t,{accountServer:'v1',operatorOAuth:true,query:'?authorization_id=fixture-consent',authorizePage});
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data:{operator:true,parentMfaRequired:true}})});
+ });
+ await f.page.route('https://account.fixture.invalid/auth/v1/factors',async route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({id:'synthetic-qr-factor',type:'totp',totp:{secret:'SYNTHETICSETUPKEY',qr_code:'<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192"><rect width="192" height="192" fill="#fff"/><path fill="#000" d="M16 16h64v64H16zM112 16h64v64h-64zM16 112h64v64H16z"/></svg>'}})}));
+ await f.load();await f.page.locator('#authenticator-add').click();
+ await f.page.locator('#authenticator-qr').waitFor({state:'visible',timeout:5000});
+ await untilIO(f.page,()=>document.getElementById('authenticator-qr').complete&&document.getElementById('authenticator-qr').naturalWidth>0);
+ assert.equal(await f.page.locator('#authenticator-secret').isVisible(),false,'key requires an explicit manual-setup choice');
+ assert.equal(await f.page.locator('#authenticator-manual').getAttribute('open'),null);
+ assert.equal(await f.page.locator('#authenticator-add').isVisible(),false,'setup does not show conflicting create/verify actions');
+ assert.equal(await f.page.locator('#mfa-step-up').isVisible(),false);
+ assert.match(await f.page.locator('#authenticator-section').innerText(),/1\. Scan the QR code/);
+ assert.match(await f.page.locator('#authenticator-section').innerText(),/2\. Enter the code/);
+ await f.page.locator('#authenticator-manual summary').click();assert.equal(await f.page.locator('#authenticator-secret').textContent(),'SYNTHETICSETUPKEY');
+ await f.page.locator('#mfa-code').fill('123456');await f.page.locator('#mfa-cancel').click();
+ await untilIO(f.page,()=>document.getElementById('authenticator-verify').hidden);
+ assert.equal(await f.page.locator('#authenticator-qr').getAttribute('src'),null);
+ assert.equal(await f.page.locator('#authenticator-secret').textContent(),'');assert.equal(await f.page.locator('#mfa-code').inputValue(),'');
+ assert.equal(await f.page.locator('#authenticator-manual').getAttribute('open'),null);
+ assert.equal(await f.page.locator('#authenticator-add').isVisible(),true);
+});
+
 test('actual SDK late logout cannot clear a newer sign-in', async t => {
   const f = await fixture(t, { status: 401, responseDelayMs: 150 }), release = f.holdLogout()
   // Initial loading also shows account-state; observe the held SDK logout before
@@ -629,7 +654,7 @@ for(const authorizePage of [false,true])test(prefix+`${authorizePage?'authorize'
   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(data)});
  });
  await f.load();await f.page.locator('#authenticator-add').waitFor({state:'visible'});await f.page.locator('#authenticator-add').click();await f.page.locator('#mfa-code').fill('123456');await f.page.locator('#mfa-form button[type=submit]').click();
- await f.page.locator('#operator-reauth').waitFor({state:'visible'});assert.match(await f.page.locator('#account-state-description').textContent(),/security settings changed/i);assert.doesNotMatch(await f.page.locator('#status').textContent(),/Verify again with a new code/);
+ await f.page.locator('#operator-reauth').waitFor({state:'visible'});assert.match(await f.page.locator('#account-state-description').textContent(),/authenticator is ready.*Sign in again/i);assert.doesNotMatch(await f.page.locator('#status').textContent(),/Verify again with a new code/);
  await f.page.locator('#operator-reauth').click();await f.page.locator('#auth').waitFor({state:'visible'});assert.equal(new URL(f.page.url()).searchParams.get('authorization_id'),'fixture-consent');
  assert.equal(await f.page.locator('#authenticator-secret').textContent(),'');assert.equal(await f.page.locator('#mfa-code').inputValue(),'');assert.equal(await f.page.locator('#password').inputValue(),'');
  assert.equal(await f.page.evaluate(()=>JSON.stringify(localStorage).includes('synthetic-enrollment-secret')),false);
