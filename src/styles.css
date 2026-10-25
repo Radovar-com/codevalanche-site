@@ -423,6 +423,11 @@ p { text-wrap: pretty; }
   .dl-grid { grid-template-columns: 1fr 1fr; }
   .footer-hero { grid-template-columns: 1fr; }
 }
+/* The five-link navigation needs the compact menu before labels collide. */
+@media (max-width: 1000px) {
+  .desktop-nav { display: none; }
+  .mobile-nav { display: block; }
+}
 @media (max-width: 860px) {
   .desktop-nav { display: none; }
   .nav-signin { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 4px; }

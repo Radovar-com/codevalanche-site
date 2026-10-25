@@ -1,0 +1,33 @@
+/* The tour loads only on its own route. */
+.tour-page { padding-block: clamp(32px, 5vw, 64px) 64px; }
+.tour-intro { max-width: 78ch; margin-block-end: 32px; }
+.tour-intro h1 { font-size: clamp(38px, 5vw, 64px); margin-block: 12px 18px; }
+.tour-lede { color: var(--ink-soft); font-size: 18px; }
+.tour-note, .tour-help { color: var(--ink-muted); font-size: 14px; margin-block-start: 14px; }
+.tour-tabs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; margin-block-end: 24px; }
+.tour-tabs button { display: flex; flex-direction: column; gap: 8px; padding: 12px; min-height: 84px; border: 1px solid var(--line-strong); border-radius: 8px; color: var(--ink-soft); background: var(--paper-raised); text-align: start; font-size: 14px; line-height: 1.4; cursor: pointer; }
+.tour-number, .tour-position, .tour-progress { font: 13px/1.6 var(--font-mono); color: var(--ink-muted); }
+.tour-tabs [aria-selected="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); box-shadow: inset 0 -3px var(--accent); }
+.tour-panel { display: grid; grid-template-columns: minmax(0, .65fr) minmax(0, 1.5fr); align-items: start; gap: clamp(24px, 4vw, 56px); padding-block: 24px; border-block-start: 1px solid var(--line); scroll-margin-block-start: 90px; }
+.tour-copy h2 { font-size: clamp(30px, 3vw, 42px); line-height: 1.12; margin-block: 12px 18px; }
+.tour-copy p { color: var(--ink-soft); max-width: 48ch; }
+.tour-image-link { touch-action: pan-y pinch-zoom; display: block; border: 1px solid var(--line-strong); border-radius: 10px; overflow: hidden; background: var(--paper-raised); text-decoration: none; }
+.tour-image-link picture, .tour-image-link img { display: block; width: 100%; }
+.tour-image-caption { display: block; padding: 10px 14px; color: var(--ink-soft); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+.tour-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-block-start: 16px; }
+.tour-controls .button { cursor: pointer; min-height: 44px; background: var(--paper-raised); color: var(--ink); text-align: center; }
+.tour-controls .button[aria-disabled="true"] { cursor: default; color: var(--ink-muted); border-style: dashed; }
+.tour-download { margin-block-start: 32px; padding-block-start: 32px; border-block-start: 1px solid var(--line); text-align: center; }
+.tour [hidden] { display: none; }
+@media (max-width: 1100px) { .tour-tabs { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 760px) {
+  .tour-intro { margin-block-end: 24px; }
+  .tour-tabs { display: flex; overflow-x: auto; padding: 4px; margin-inline: -4px; scroll-snap-type: x proximity; }
+  .tour-tabs button { flex: 0 0 150px; scroll-snap-align: start; }
+  .tour-panel { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .tour-copy h2 { margin-block: 8px 12px; }
+  .tour-controls .button { padding-inline: 12px; }
+  .tour-progress { flex: none; }
+}
+
+.tour-status { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
