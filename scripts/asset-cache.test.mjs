@@ -83,3 +83,16 @@ test('asset stamping preserves external URLs, missing files, query/hash, and non
     assert.ok(script.includes(`./locales/manifest.js?source=edges&v=${revision}#part`));
   });
 });
+test('font revisions match CSS and preload URLs and invalidate when font bytes change', async () => {
+  const revisions = [];
+  for (const bytes of ['first font', 'updated font']) await fixture(async (root, put) => {
+    await put('assets/fonts/heading.woff2', bytes);
+    await put('styles.css', '@font-face{font-family:Heading;src:url(/assets/fonts/heading.woff2) format("woff2")}');
+    await put('index.html', '<html><head><link rel="preload" href="/assets/fonts/heading.woff2" as="font" crossorigin><link rel="stylesheet" href="/styles.css"></head></html>');
+    const { revision } = await cache.versionSiteAssets(root);
+    revisions.push(revision);
+    assert.ok((await readFile(path.join(root, 'styles.css'), 'utf8')).includes(`/assets/fonts/heading.woff2?v=${revision}`));
+    assert.ok((await readFile(path.join(root, 'index.html'), 'utf8')).includes(`/assets/fonts/heading.woff2?v=${revision}`));
+  });
+  assert.notEqual(revisions[0], revisions[1]);
+});

@@ -44,3 +44,29 @@ test('sitemap validation keeps exact canonical membership and count checks', () 
   assert.throws(() => seo.validateSitemapLocations(sitemapWith([home, `${origin}/unexpected/`]), canonicalUrls), /sitemap is missing/);
   assert.doesNotThrow(() => seo.validateSitemapLocations(sitemapWith([agents, home]), canonicalUrls));
 });
+
+test('complete export validation rejects a removed alternate, sitemap route, or untranslated route schema', async () => {
+  const { mkdtemp, mkdir, writeFile, readFile, rm } = await import('node:fs/promises');
+  const { tmpdir } = await import('node:os');
+  const path = await import('node:path');
+  const { applyLocalizedMetadata } = await import('./locale-export.mjs');
+  const root = await mkdtemp(path.join(tmpdir(), 'seo-export-'));
+  const put = async (file, html) => { await mkdir(path.dirname(path.join(root, file)), {recursive:true}); await writeFile(path.join(root, file), html); };
+  try {
+    for (const page of MARKETING_PAGES) for (const locale of LOCALES) {
+      const html = `<html><head><title>${locale.tag} ${page.pageId}</title><meta name="description" content="${locale.tag} ${page.pageId}"><link rel="canonical" href="${origin}${page.path}"><meta http-equiv="Content-Security-Policy" content="script-src 'self'"></head><body><script src="/locales/bootstrap.js"></script></body></html>`;
+      await put(path.join(locale.slug, page.file), applyLocalizedMetadata(html, page.path, locale.tag));
+    }
+    await put('sitemap.xml', buildLocalizedSitemap());
+    await put('robots.txt', 'Disallow: /account/\nDisallow: /admin-accounts/\nDisallow: /insights/\nSitemap: https://codevalanche.com/sitemap.xml');
+    await put('llms.txt', '/llms-full.txt /sitemap.xml');
+    await put('llms-full.txt', '## page\n'.repeat(MARKETING_PAGES.length * LOCALES.length));
+    assert.equal((await seo.validateSeoExport(root)).publicPages, MARKETING_PAGES.length * LOCALES.length);
+    const home = await readFile(path.join(root, 'index.html'), 'utf8');
+    await put('index.html', home.replace(/<link rel="alternate" hreflang="ar"[^>]+>/, ''));
+    await assert.rejects(seo.validateSeoExport(root), /hreflang links/);
+    await put('index.html', home);
+    await put('sitemap.xml', buildLocalizedSitemap().replace(/\s*<url>[\s\S]*?<\/url>/, ''));
+    await assert.rejects(seo.validateSeoExport(root), /sitemap route count/);
+  } finally { await rm(root, {recursive:true,force:true}); }
+});
