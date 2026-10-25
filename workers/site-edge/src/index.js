@@ -1,3 +1,4 @@
+import { withAssetCache } from '../../../cloudflare/cache-policy.mjs';
 import { LOCALES, MARKETING_PAGES, localizedMarketingPath, resolveMarketingRoute } from '../../../src/locales/manifest.js';
 
 const ROUTE_COOKIE = 'codevalanche_route_checked';
@@ -145,6 +146,6 @@ export default {
     }
 
     const response = await (env.fetch ?? fetch)(originRequest(request, requestUrl, env));
-    return addResponseHeaders(response, request, env);
+    return withAssetCache(await addResponseHeaders(response, request, env), request);
   },
 };

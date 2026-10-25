@@ -5,7 +5,7 @@ import {build} from 'esbuild';
 import {chromium} from 'playwright';
 import {LOCALES} from '../src/locales/manifest.js';
 
-const bundle = await build({entryPoints:['src/account-funnel.js'], bundle:true, write:false, format:'iife'});
+const bundle = await build({entryPoints:['src/account-funnel.js'], bundle:true, write:false, format:'esm'});
 test('the actual website consent integration refuses, grants and withdraws in every supported language', async () => {
   const browser = await chromium.launch();
   try {
@@ -25,7 +25,7 @@ test('the actual website consent integration refuses, grants and withdraws in ev
           if (url.pathname.startsWith('/locales/')) return route.fulfill({json:catalog});
           if (url.pathname === '/fixture.js') return route.fulfill({body:bundle.outputFiles[0].text,contentType:'text/javascript'});
           if (url.origin !== 'https://codevalanche.com') throw new Error('Unexpected external request');
-          return route.fulfill({body:`<!doctype html><html lang="${locale.tag}"><body><h1>Fixture</h1><script>window.CODEVALANCHE_ANALYTICS={enabled:true,baseUrl:'https://collector.example.test/v1',pageVersion:'fixture'};</script><script src="/fixture.js"></script></body></html>`,contentType:'text/html'});
+          return route.fulfill({body:`<!doctype html><html lang="${locale.tag}"><body><h1>Fixture</h1><script>window.CODEVALANCHE_ANALYTICS={enabled:true,baseUrl:'https://collector.example.test/v1',pageVersion:'fixture'};</script><script type="module" src="/fixture.js"></script></body></html>`,contentType:'text/html'});
         });
         const page = await context.newPage();page.on('pageerror', e=>errors.push(e.message));
         await page.goto(`https://codevalanche.com/${locale.slug ? locale.slug+'/' : ''}`);
