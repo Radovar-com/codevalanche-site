@@ -30,6 +30,12 @@ export async function importReleaseNotes(appRoot, version, { date, outputDirecto
   const release = validateRelease({ version, date: releaseDate, copy }, `v${version}.ts`);
   await mkdir(outputDirectory, { recursive: true });
   const output = path.join(outputDirectory, `${version}.json`);
+  try {
+    const previous = JSON.parse(await readFile(output, 'utf8'));
+    if (previous.installer) release.installer = previous.installer;
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+  }
   await writeFile(output, `${JSON.stringify(release, null, 2)}\n`);
   return output;
 }
