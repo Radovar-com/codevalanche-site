@@ -108,3 +108,16 @@ test('edge Worker refuses to proxy through an unverified or missing static origi
     /SITE_ORIGIN must be configured to a verified static origin/,
   );
 });
+
+test('personalized HTML cannot inherit the static origin shared cache policy', async () => {
+  for (const method of ['GET', 'HEAD']) {
+    const env = makeEnv([]);
+    env.fetch = async () => new Response(method === 'HEAD' ? null : '<html lang="ro">fixture</html>', {
+      headers: {'content-type': 'text/html', 'cache-control': 'public, max-age=600', 'cdn-cache-control': 'public, max-age=600', 'cloudflare-cdn-cache-control': 'public, max-age=600'},
+    });
+    const response = await workerModule.default.fetch(makeRequest('/ro/', {method}), env);
+    for (const header of ['cache-control', 'cdn-cache-control', 'cloudflare-cdn-cache-control']) {
+      assert.equal(response.headers.get(header), 'private, no-store', header);
+    }
+  }
+});
