@@ -13,6 +13,9 @@ export async function requestErasure(
     p_actor_id: actorId,
     p_operation_id: operationId,
   });
+  if (!["queued", "purging"].includes(row.state)) {
+    throw new AccountError("operation_conflict", 409);
+  }
   return { jobId: row.job_id, dueAt: row.due_at, state: row.state };
 }
 export async function cancelErasure(principal: any, service: any) {
