@@ -251,7 +251,7 @@
   "de": "de",
   "Decline": "拒否",
   "Delete account": "アカウントを削除",
-  "Describe the change in the message box: show trip durations in hours and minutes.": "メッセージ欄に変更内容を記述します。例では、旅行の所要時間を時間と分で表示するよう依頼します。",
+  "Describe the change in the message box: show trip durations in hours and minutes.": "メッセージ欄に、旅行の所要時間を時間と分で表示するという変更内容を記述します。",
   "Describe the current behavior, the change you want and how to check it. The walkthrough uses trip durations: show 90 minutes as 1 h 30 min and add tests.": "現在の動作、希望する変更、確認方法を説明してください。この操作ガイドでは移動時間を例に、90分を1時間30分で表示し、テストを追加するよう依頼します。",
   "Describe the setup step, runtime and visible error. Remove credentials and private project content from screenshots or logs.": "設定の手順、ランタイム、表示されるエラーを説明してください。スクリーンショットやログからは、認証情報と非公開のプロジェクト内容を取り除いてください。",
   "Describe what you want in plain words and choose the agent or local model for this task. Follow every step it takes.": "やりたいことを普通の言葉で説明し、このタスクのエージェントまたはローカルモデルを選びます。エージェントの一手一手を追いかけられます。",

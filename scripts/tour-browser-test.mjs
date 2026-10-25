@@ -124,6 +124,21 @@ try {
     await page.close();
   }
   if (!baseline) {
+    // A delayed enhancement must not push the first capture down after paint.
+    const delayed = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    let releaseModule;
+    const moduleReady = new Promise(resolve => { releaseModule = resolve; });
+    await delayed.route('**/tour/tour.js*', async route => { await moduleReady; await route.continue(); });
+    const navigation = delayed.goto(origin + '/tour/');
+    await delayed.locator('.tour-panel').first().waitFor();
+    await delayed.evaluate(() => document.fonts.ready);
+    const before = await delayed.locator('.tour-panels').boundingBox();
+    releaseModule();
+    await navigation;
+    await delayed.locator('[role="tab"]').first().waitFor();
+    const after = await delayed.locator('.tour-panels').boundingBox();
+    assert.ok(Math.abs(before.y - after.y) <= 1, 'enhancement reserves step-navigation space');
+    await delayed.close();
     const page = await browser.newPage({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
     await page.goto(origin + '/tour/');
     assert.equal(await page.locator('[data-tour-panel]:visible').count(), 6);

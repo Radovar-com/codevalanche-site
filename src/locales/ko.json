@@ -251,7 +251,7 @@
   "de": "de",
   "Decline": "거부",
   "Delete account": "계정 삭제",
-  "Describe the change in the message box: show trip durations in hours and minutes.": "메시지 입력란에 변경 사항을 설명하세요. 예제에서는 여행 소요 시간을 시간과 분으로 표시하도록 요청합니다.",
+  "Describe the change in the message box: show trip durations in hours and minutes.": "메시지 입력란에 여행 소요 시간을 시간과 분으로 표시하도록 변경 사항을 설명하세요.",
   "Describe the current behavior, the change you want and how to check it. The walkthrough uses trip durations: show 90 minutes as 1 h 30 min and add tests.": "현재 동작, 원하는 변경, 확인 방법을 설명하세요. 예시에서는 이동 시간을 다룹니다. 90분을 1시간 30분으로 표시하고 테스트를 추가하도록 요청합니다.",
   "Describe the setup step, runtime and visible error. Remove credentials and private project content from screenshots or logs.": "설정 단계, 런타임, 표시된 오류를 설명하세요. 스크린샷이나 로그에서 인증 정보와 비공개 프로젝트 내용을 제거하세요.",
   "Describe what you want in plain words and choose the agent or local model for this task. Follow every step it takes.": "원하는 내용을 일상적인 말로 설명하고, 이 작업을 맡을 에이전트나 로컬 모델을 선택하세요. 에이전트가 거치는 모든 단계를 따라갈 수 있습니다.",
