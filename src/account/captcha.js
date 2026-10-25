@@ -3,7 +3,7 @@ export function loadTurnstile() {
   if (globalThis.turnstile) return Promise.resolve(globalThis.turnstile)
   return widgetPromise ??= new Promise((resolve, reject) => {
     const script = document.createElement('script'); script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'; script.async = true
-    script.onload = () => globalThis.turnstile ? resolve(globalThis.turnstile) : reject({ code: 'captcha_required' })
+    script.onload = () => { if (globalThis.turnstile) resolve(globalThis.turnstile); else { widgetPromise = null; reject({ code: 'captcha_required' }) } }
     script.onerror = () => { widgetPromise = null; reject({ code: 'captcha_required' }) }
     document.head.append(script)
   })
