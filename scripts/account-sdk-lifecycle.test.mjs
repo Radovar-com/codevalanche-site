@@ -531,6 +531,9 @@ test('scoped v1 classified operator enables only the two canonical operations an
   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data:{operator:true,parentMfaRequired:true}})});
  });
  await f.load();await untilIO(f.page,()=>window.__accountApi!=null);
+ // SDK startup can queue the account render on the installed fake clock.
+ await f.page.clock.runFor(0);
+ await untilIO(f.page,()=>!document.getElementById('authenticator-section').hidden);
  assert.deepEqual(observed,['get-account','operator.oauth.details']);
  assert.equal(f.calls.some(c=>c.path.includes('/factors')),false,'enrollment requires the human action');
  assert.equal(await f.page.locator('#authenticator-section').isVisible(),true);

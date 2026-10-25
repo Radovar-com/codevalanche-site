@@ -55,6 +55,7 @@ export function assertAccountOperation(
     policy.status === "deletion_pending" &&
     ![
       "account.overview",
+      "export-account",
       "account.deletion.cancel",
       "security.activity",
       "get-account",

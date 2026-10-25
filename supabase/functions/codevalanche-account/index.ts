@@ -35,6 +35,7 @@ import { operatorOAuthConsent, operatorOAuthEvidence } from "../_shared/operator
 import { validateAccountRequest } from "./schemas.mjs";
 import { generateRecoveryCodes, hashRecoveryCode, mfaGate, normalizeRecoveryCode, verifiedTotpFactors } from "./mfa.mjs";
 import { redeemMfaRecovery } from "../_shared/mfaRecovery.ts";
+import { exportAccount } from "../_shared/accountExport.ts";
 import { createGatewayRetryFetch } from "../_shared/serviceFetch.ts";
 
 const url = Deno.env.get("SUPABASE_URL")!;
@@ -148,6 +149,9 @@ Deno.serve(async (req) => {
     // (schemas.mjs); a refusal touches no account table and no Auth admin API.
     const invalid = validateAccountRequest(body);
     if (invalid) return respond({ error: invalid.error }, invalid.status);
+    if (body.action === "export-account" && Object.keys(body).some(key => !["action", "apiVersion", "requestId"].includes(key))) {
+      throw new AccountError("invalid_fields", 400);
+    }
     // Two-step verification: a user with a verified authenticator needs an aal2 session (mfa.mjs).
     const mfaRefusal = mfaGate({ user, claims, action: body.action, enforceOAuth: Deno.env.get("CODEVALANCHE_MFA_ENFORCE_OAUTH_AAL2") === "true" });
     if (mfaRefusal) return respond(v2 ? { ...mfaRefusal.body, code: "mfa_required" } : mfaRefusal.body, mfaRefusal.status);
@@ -442,6 +446,16 @@ Deno.serve(async (req) => {
       service,
     });
     if (binding !== null) return respond(binding);
+    if (body.action === "export-account") {
+      try { return respond(await exportAccount(service, principal)); }
+      catch (error) {
+        if (error instanceof AccountError && error.code === "rate_limited") {
+          headers["Retry-After"] = "300";
+          return respond({ code: "rate_limited", retryAfterSeconds: 300 }, 429);
+        }
+        throw error;
+      }
+    }
     switch (body.action) {
       case "get-account": {
         const profile = await readOwnedProfile(service, user);
@@ -479,6 +493,7 @@ Deno.serve(async (req) => {
           deletion: state?.deletion_scheduled_for
             ? { scheduledFor: state.deletion_scheduled_for, status: "pending" }
             : null,
+          dataExport: { schemaVersion: 1, cooldownSeconds: 300 },
           analyticsConsent: state?.analytics_consent || false,
           consentGeneration: state?.consent_generation || 1,
           policy,

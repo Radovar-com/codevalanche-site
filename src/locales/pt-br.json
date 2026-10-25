@@ -824,5 +824,9 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Your data": "Seus dados",
+  "Download a copy of your account data as JSON.": "Baixe uma cópia dos dados da sua conta em formato JSON.",
+  "Download my data": "Baixar meus dados",
+  "Your data file has been downloaded.": "O arquivo com seus dados foi baixado."
 }

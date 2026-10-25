@@ -824,5 +824,9 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Your data": "Verileriniz",
+  "Download a copy of your account data as JSON.": "Hesap verilerinizin bir kopyasını JSON biçiminde indirin.",
+  "Download my data": "Verilerimi indir",
+  "Your data file has been downloaded.": "Veri dosyanız indirildi."
 }
