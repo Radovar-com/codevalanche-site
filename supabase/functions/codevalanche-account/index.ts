@@ -151,6 +151,14 @@ Deno.serve(async (req) => {
     // Two-step verification: a user with a verified authenticator needs an aal2 session (mfa.mjs).
     const mfaRefusal = mfaGate({ user, claims, action: body.action, enforceOAuth: Deno.env.get("CODEVALANCHE_MFA_ENFORCE_OAUTH_AAL2") === "true" });
     if (mfaRefusal) return respond(v2 ? { ...mfaRefusal.body, code: "mfa_required" } : mfaRefusal.body, mfaRefusal.status);
+    if (
+      !checked(
+        await service.rpc("codevalanche_rate_limit", {
+          p_bucket: `account:${user.id}`,
+          p_limit: 60,
+        }),
+      )
+    ) return respond({ code: "rate_limited" }, 429);
     const totpFactors = verifiedTotpFactors(user) as { id: string; friendly_name?: string; created_at?: string }[];
     // Every administrator read or change is journaled first; without the journal entry nothing is returned.
     const journal = async (action: string, rowCount: number | null, targetUserId: string | null = null, detail: Record<string, unknown> = {}) => {
@@ -175,6 +183,12 @@ Deno.serve(async (req) => {
       );
     }
     const policy = policyFromState(state);
+    const restrictedCancellation = state?.status === "deletion_pending" &&
+      ["account.deletion.cancel", "cancel-deletion"].includes(body.action);
+    if (
+      user.banned_until && new Date(user.banned_until) > new Date() &&
+      !restrictedCancellation
+    ) throw new AccountError("account_suspended", 403);
     const operatorConsent = ["operator.oauth.details", "operator.oauth.approve"].includes(body.action);
     const operatorClaim = body.action === "operator.oauth.claim";
     const operatorRead = body.action.startsWith("admin.") && !isAdminMutation(body.action);
@@ -204,12 +218,6 @@ Deno.serve(async (req) => {
         decision:body.action === "operator.oauth.approve" ? "approve" : "details",url,
         apikey:Deno.env.get("SUPABASE_ANON_KEY"),clientIds:(Deno.env.get("ACCOUNT_OAUTH_CLIENT_IDS") || "").split(",").filter(Boolean),operatorClientIds:operatorOAuthClientIds,origin,fetchImpl:fetch}));
     }
-    const restrictedCancellation = state?.status === "deletion_pending" &&
-      ["account.deletion.cancel", "cancel-deletion"].includes(body.action);
-    if (
-      user.banned_until && new Date(user.banned_until) > new Date() &&
-      !restrictedCancellation
-    ) throw new AccountError("account_suspended", 403);
     if (body.action === "remote.policy.evidence") {
       const evidence = await readCredentialStamp(service, principal);
       if (
@@ -240,14 +248,6 @@ Deno.serve(async (req) => {
       body.userId !== undefined && !body.action.startsWith("admin") &&
       body.userId !== user.id
     ) return respond({ code: "account_forbidden" }, 403);
-    if (
-      !checked(
-        await service.rpc("codevalanche_rate_limit", {
-          p_bucket: `account:${user.id}`,
-          p_limit: 60,
-        }),
-      )
-    ) return respond({ code: "rate_limited" }, 429);
     const aliases: Record<string, string> = {
       "account.overview": "get-account",
       "profile.update": "update-profile",
@@ -257,7 +257,7 @@ Deno.serve(async (req) => {
       "account.deletion.cancel": "cancel-deletion",
       "feedback.submit": "feedback",
     };
-    if (v2) body.action = aliases[body.action] || body.action;
+    if (v2 && Object.hasOwn(aliases, body.action)) body.action = aliases[body.action];
     if (
       v2 && body.action === "update-profile" &&
       Object.keys(body).some((k) =>
@@ -287,7 +287,7 @@ Deno.serve(async (req) => {
       "admin-feedback": "admin.feedback.list",
       "admin-analytics": "admin.analytics.summary",
     };
-    const operation = adminAliases[body.action] || body.action;
+    const operation = Object.hasOwn(adminAliases, body.action) ? adminAliases[body.action] : body.action;
     if (operation.startsWith("admin.")) {
       const rowCount = (result: any) => {
         for (const key of ["rows", "users", "feedback", "events", "items"]) if (Array.isArray(result?.[key])) return result[key].length;

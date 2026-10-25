@@ -68,7 +68,7 @@
     },
     {
       "path": "src/account/app.js",
-      "sha256": "1b7325d0ff780a23f6c99f11489979e70a1b99126c506b3a0ca9e724a3bd0ba5"
+      "sha256": "6a269542bac95f61221c68bd7f058c93d07ede505f535f673a367645a1a0b801"
     },
     {
       "path": "src/account/helpers.js",
@@ -132,7 +132,7 @@
     },
     {
       "path": "supabase/functions/_shared/erasureJob.ts",
-      "sha256": "bece40948d609177609679d2eb34fbaa0af6123fb03e738302ac28b9cf53a75c"
+      "sha256": "a6149b327081848282fbd28123940f511afa8b2a64eb5d37618694629a739ba8"
     },
     {
       "path": "supabase/functions/_shared/mfaRecovery.ts",
@@ -176,7 +176,7 @@
     },
     {
       "path": "supabase/functions/codevalanche-account/index.ts",
-      "sha256": "8eff98317a109e76813dd2a0edf9953bee0978dfd52a8bc4fc8fca1aa98306cc"
+      "sha256": "9aac44a307fe8ed128ea95395c80f06dbfeaec655c482f149beb5ac4931ef9dc"
     },
     {
       "path": "supabase/functions/codevalanche-account/mfa.mjs",
