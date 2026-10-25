@@ -13,6 +13,9 @@ import { renderTranslatedHtml } from "./localization.mjs"
 import { validateSeoExport } from "./seo-export-test.mjs"
 import { DOWNLOAD_STARTED_PAGE, LOCALES, MARKETING_PAGES, localizedMarketingPath } from "../src/locales/manifest.js"
 import { prepareMarketingPartial } from "./marketing-partials.mjs"
+import { prepareDownloadLayout } from "./download-layout.mjs"
+import { optimizeRendering } from "./optimize-rendering.mjs"
+import { checkInternalLinks } from "./check-internal-links.mjs"
 import { versionSiteAssets } from "./asset-cache.mjs"
 import { changelogTranslations, loadReleases, renderChangelog } from "./changelog.mjs"
 import { describeRelease, downloadTranslations, fillDownload, publicDownloadCount, redirectPage, selectDownloadVariant, windowsDownload } from "./download-page.mjs"
@@ -158,11 +161,17 @@ for (const page of ["account/index.html", "account/authorize/index.html"]) {
   for (const [asset, version] of versions) html = html.replaceAll(`"${asset}"`, `"${asset}?v=${version}"`)
   await writeFile(output, html)
 }
+await prepareDownloadLayout(destination, downloadManifest)
+await optimizeRendering(destination)
 await versionSiteAssets(destination)
 const security = await applyPostbuildSecurity(destination)
 // Cloudflare Pages reads security headers from dist/_headers; GitHub Pages would
 // only publish it as a file, so it is written on request. The header CSP carries
 // only frame-ancestors/base-uri/object-src/form-action; scripts stay with the meta CSP.
 if (process.env.CODEVALANCHE_HEADERS_FILE === "1") await writeFile(path.join(destination, "_headers"), headersFile())
+if (!englishPreviewOnly) {
+  const links = await checkInternalLinks(destination)
+  if (links.broken.length) throw new Error(`Broken internal references: ${JSON.stringify(links.broken)}`)
+}
 const seo = englishPreviewOnly ? { publicPages: "English preview only, not" } : await validateSeoExport(destination)
 console.log(`Built static site to ${destination} (${security.htmlFiles} HTML pages passed CSP; ${seo.publicPages} public routes; ${llms.pages} discovery pages)`)
