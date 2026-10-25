@@ -131,3 +131,24 @@
   .dl-history-link time { grid-column: 1 / -1; grid-row: 3; }
   .dl-history li:not(:first-child) .dl-history-link time { grid-column: 2; grid-row: 1; justify-self: start; }
 }
+
+/* Installer verification keeps commands selectable and legible in every locale. */
+.verify-page { max-width: 900px; }
+.verify-intro { padding-block: clamp(32px, 5vw, 64px) 32px; }
+.verify-intro h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.12; margin-block-start: 16px; }
+.verify-intro > p:last-child { margin-block-start: 18px; }
+.verify-section { border-block-start: 1px solid var(--line); padding-block: 32px; }
+.verify-section h2 { font-size: clamp(24px, 3vw, 32px); line-height: 1.3; }
+.verify-section > p, .verify-steps { margin-block-start: 16px; color: var(--ink-soft); line-height: 1.7; }
+.verify-limit { border-inline-start: 2px solid var(--line-strong); padding-inline-start: 16px; }
+.verify-release { margin-block-start: 24px; padding: clamp(16px, 3vw, 24px); background: var(--panel); border: 1px solid var(--line-strong); border-radius: 10px; min-width: 0; }
+.verify-release h3 { font-size: 20px; }
+.verify-release > p { margin-block-start: 14px; }
+.verify-value { display: block; text-align: start; overflow-wrap: anywhere; white-space: pre-wrap; user-select: text; line-height: 1.7; margin-block-start: 6px; }
+.verify-command { margin-block-start: 18px; }
+.verify-command code { padding: 14px; background: var(--paper); border: 1px solid var(--line); border-radius: 6px; }
+.verify-command button { margin-block-start: 12px; }
+.verify-status { color: var(--ink-soft); font-size: 14px; }
+.verify-status:has([data-copy-ok][hidden]):has([data-copy-failed][hidden]) { display: none; }
+.verify-steps { padding-inline-start: 24px; }
+.verify-steps li + li { margin-block-start: 12px; }

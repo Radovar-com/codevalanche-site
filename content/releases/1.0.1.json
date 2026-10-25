@@ -529,5 +529,9 @@
         }
       ]
     }
+  },
+  "installer": {
+    "fileName": "Codevalanche-Desktop-Setup-1.0.1-stable-9ad060323d65.exe",
+    "sha256": "a8aebea40ef71cf1684523a793370beb53af25204171f69b06aca20126ab1dff"
   }
 }

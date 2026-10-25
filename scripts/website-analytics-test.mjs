@@ -98,6 +98,10 @@ try{
  await page.locator('footer a[href="/download/"]').click();await page.waitForURL(origin+'/download/');await page.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager);await flush(page);
  assert.ok([...events.values()].some(e=>e.event_name==='page_viewed'&&e.page_id==='download'));
  for(const placement of ['header','hero','footer'])assert.ok([...events.values()].some(e=>e.event_name==='navigation_used'&&e.properties.placement===placement));
+ const beforeVerify=[...events.values()].filter(e=>e.event_name==='navigation_used'&&e.properties.target_page_id==='download'&&e.properties.placement==='inline').length;
+ await page.locator('a[href="/download/verify/"]').click();await page.waitForURL(origin+'/download/verify/');await page.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager);await flush(page);
+ assert.equal([...events.values()].filter(e=>e.event_name==='navigation_used'&&e.properties.target_page_id==='download'&&e.properties.placement==='inline').length,beforeVerify+1,'verification link retains the existing optional download journey attribution');
+ await page.locator('main a[href="/download/"]').click();await page.waitForURL(origin+'/download/');await page.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager);await flush(page);
  const beforeDownload=[...events.values()].filter(e=>e.event_name==='download_clicked').length;
  // Real link + ordinary native document navigation. No queue/flush barrier on this path.
  await page.locator('[data-download-platform="windows"]').last().click();await page.waitForURL(origin+'/fixture-download');
