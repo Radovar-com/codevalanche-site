@@ -34,6 +34,7 @@ const none = {}
 
 export const ACCOUNT_REQUEST_SCHEMAS = Object.freeze({
   'get-account': { fields: none },
+  'export-account': { fields: none },
   'update-profile': { status: 400, error: 'Invalid profile', fields: { displayName: text({ max: 80, singleLine: true, optional: true }), bio: text({ max: 500, optional: true }) } },
   'sign-out-current': { fields: none },
   'sign-out-others': { fields: none },

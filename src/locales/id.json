@@ -824,5 +824,9 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Your data": "Data Anda",
+  "Download a copy of your account data as JSON.": "Unduh salinan data akun Anda dalam format JSON.",
+  "Download my data": "Unduh data saya",
+  "Your data file has been downloaded.": "File data Anda telah diunduh."
 }

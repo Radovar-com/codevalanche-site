@@ -824,5 +824,9 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Your data": "Dữ liệu của bạn",
+  "Download a copy of your account data as JSON.": "Tải xuống bản sao dữ liệu tài khoản của bạn ở định dạng JSON.",
+  "Download my data": "Tải dữ liệu của tôi xuống",
+  "Your data file has been downloaded.": "Đã tải xuống tệp dữ liệu của bạn."
 }
