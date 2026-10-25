@@ -112,7 +112,7 @@ export function renderReleaseActions(document, manifest, visitor = {}, translate
   // Windows PCs start the download, everyone else sees what is coming for them.
   if (state.status === 'available') for (const link of document.querySelectorAll('a[data-release-primary]')) {
     if (state.primary) {
-      applyDownload(link, 'windows', state.primary, startedPath(document));
+      applyDownload(link, 'windows', state.primary, startedPath(document, `windows-${state.primary.architecture}`));
       setLabel(link, translate('Download for Windows'), 'windows');
       continue;
     }
@@ -130,7 +130,7 @@ export function renderReleaseActions(document, manifest, visitor = {}, translate
   }
   // The download page's Windows card follows the same manifest as every other button.
   if (state.links.windows) for (const link of document.querySelectorAll('a[data-download-card]')) {
-    applyDownload(link, 'windows', state.links.windows, startedPath(document));
+    applyDownload(link, 'windows', state.links.windows, startedPath(document, `windows-${state.links.windows.architecture}`));
   }
   for (const card of document.querySelectorAll('[data-dl-platform]')) {
     const cardPlatform = card.dataset.dlPlatform;
@@ -143,7 +143,7 @@ export function renderReleaseActions(document, manifest, visitor = {}, translate
     }
     const link = previous.tagName === 'A' ? previous : document.createElement('a');
     link.className = 'dl-card-state dl-card-live';
-    applyDownload(link, cardPlatform, asset, cardPlatform === 'windows' ? startedPath(document) : asset.href);
+    applyDownload(link, cardPlatform, asset, cardPlatform === 'windows' ? startedPath(document, `windows-${asset.architecture}`) : asset.href);
     link.textContent = translate('Download');
     if (link !== previous) previous.replaceWith(link);
     if (cardPlatform === 'windows') {
