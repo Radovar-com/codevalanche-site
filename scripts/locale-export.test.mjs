@@ -34,8 +34,8 @@ test('sitemap lists all 17 locale routes for public pages and omits account path
   const xml = moduleUnderTest.buildLocalizedSitemap();
   const locations = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
   assert.equal(locations.length, MARKETING_PAGES.length * LOCALES.length);
-  assert.equal(locations.length, 187);
-  assert.equal(new Set(locations).size, 187);
+  assert.equal(locations.length, 510);
+  assert.equal(new Set(locations).size, 510);
   for (const route of ['/how-it-works/', '/agents/', '/features/multiple-accounts/', '/local-ai/', '/docs/', '/download/', '/security/']) {
     for (const locale of LOCALES) assert.ok(locations.includes(`https://codevalanche.com${locale.slug ? `/${locale.slug}` : ''}${route}`));
   }

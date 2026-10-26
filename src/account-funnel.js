@@ -1,6 +1,6 @@
 import {createAnalyticsClient,createConsentManager,createConsentTransport} from './analytics/owned-analytics.js';
 import {mountConsentUI} from './analytics/consent-ui.js';
-import {resolveMarketingRoute} from './locales/manifest.js';
+import {marketingAnalyticsPageId} from './marketing-analytics.js';
 import {initializeLocale,localizeDocument} from './locales/runtime.js';
 
 // One first-party client/CMP per document. Collection is a separately qualified release switch.
@@ -14,8 +14,8 @@ const consent=createConsentManager({siteId:'codevalanche',window:consentHost,tra
 const client=createAnalyticsClient({siteId:'codevalanche',downloadManifest:window.CODEVALANCHE_RELEASE_MANIFEST,baseUrl,consentManager:baseUrl?consent:{...consent,getCollectionContext:()=>null,acceptAck:()=>false},pageVersion:config.pageVersion??'owned_analytics_1'});
 const manager=client.consentManager;
 const path=location.pathname;
-const marketingRoute=resolveMarketingRoute(path);
-const pageId=path.startsWith('/account/authorize')?'account_authorize':path.startsWith('/account/')?'account':(marketingRoute?.pageId??'not_found');
+const marketingPageId=marketingAnalyticsPageId(path);
+const pageId=path.startsWith('/account/authorize')?'account_authorize':path.startsWith('/account/')?'account':(marketingPageId??'not_found');
 const account=['account','account_authorize'].includes(pageId);
 const download=document.querySelector('#download');if(download)download.dataset.downloadStatus=download.querySelector('[data-download-platform]')?'configured':'not_configured';
 const page=client.startPage({pageId,surface:account?'pre_auth':'marketing'});
@@ -47,7 +47,7 @@ document.addEventListener('click',event=>{
  let url;try{url=new URL(link.href,location.href);}catch{return;}
  if(url.origin===location.origin&&['/account/','/account.html'].includes(url.pathname)){track('account_entry_clicked',{placement:place,entry_mode:'signin'});return;}
  if(url.protocol==='mailto:'){const id=link.dataset.contactId;if(['info','press','security'].includes(id))track('contact_clicked',{contact_id:id,placement:place});return;}
- const target=resolveMarketingRoute(url.pathname)?.pageId;
+ const target=marketingAnalyticsPageId(url.pathname);
  if(url.origin===location.origin&&target)track('navigation_used',{navigation_id:url.hash?'anchor':place==='header'?'header':place==='footer'?'footer':'anchor',target_page_id:target,placement:place});
 });
 for(const detail of document.querySelectorAll('details[data-analytics-faq]'))detail.addEventListener('toggle',()=>track('faq_toggled',{faq_id:detail.dataset.analyticsFaq,expanded:detail.open}));

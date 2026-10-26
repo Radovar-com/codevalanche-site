@@ -16,6 +16,7 @@ import { prepareMarketingPartial } from "./marketing-partials.mjs"
 import { versionSiteAssets } from "./asset-cache.mjs"
 import { changelogTranslations, loadReleases, renderChangelog } from "./changelog.mjs"
 import { describeRelease, downloadTranslations, fillDownload, publicDownloadCount, redirectPage, selectDownloadVariant, windowsDownload } from "./download-page.mjs"
+import { buildGuide } from "./docs.mjs"
 await buildAnalytics()
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
@@ -128,6 +129,7 @@ for (const locale of englishPreviewOnly ? [] : LOCALES.filter(item => item.slug)
     await writeFile(output, html)
   }
 }
+await buildGuide(destination, { englishOnly: englishPreviewOnly })
 await writeFile(path.join(destination, "sitemap.xml"), buildLocalizedSitemap())
 for (const privateSource of ["en.json", "glossary.json", "runtime-strings.en.json"]) {
   await rm(path.join(destination, "locales", privateSource), { force: true })

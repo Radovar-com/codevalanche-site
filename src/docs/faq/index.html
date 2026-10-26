@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f5">
+  <meta name="description" content="The product walkthrough and setup guidance are public. Agent authentication is separate from the website account.">
+  <link rel="canonical" href="https://codevalanche.com/docs/faq/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <script>(function(){var t="light";try{var s=localStorage.getItem("codevalanche_theme");if(s==="light"||s==="dark"){t=s}else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){t="dark"}}catch(e){}document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("js")})()</script>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/product-pages.css">
+  <link rel="stylesheet" href="/docs/guide.css">
+  <title>Questions and answers.</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- site-header -->
+  <main class="product-page shell guide" id="main">
+    <header class="guide-heading" id="hero"><p class="kicker"><a href="/docs/">User guide</a></p><h1>Questions and answers.</h1><p class="page-lede">The product walkthrough and setup guidance are public. Agent authentication is separate from the website account.</p><p class="guide-version"><a href="/changelog.html">Release notes</a> · <code>1.0.1</code></p></header>
+    <div class="guide-layout">
+      <aside class="guide-sidebar">
+        <section class="guide-search" data-doc-search hidden>
+          <label for="guide-query">Search the guide</label>
+          <input id="guide-query" type="search" maxlength="160" autocomplete="off" aria-describedby="guide-search-help" aria-controls="guide-results">
+          <p id="guide-search-help">Search runs in your browser. Use the contents if search is unavailable.</p>
+          <p role="status" data-doc-status></p>
+          <span data-doc-empty hidden>No results. Try another word.</span><span data-doc-error hidden>Search is unavailable. Use the contents below.</span><span data-doc-count hidden>Results: {count}</span>
+          <ul id="guide-results" data-doc-results hidden></ul>
+        </section>
+        <details class="guide-contents" data-doc-contents open><summary>Contents</summary><nav aria-label="User guide"><ol><li><a href="/docs/">User guide</a></li>
+<li><a href="/docs/installation/">Installation</a></li>
+<li><a href="/docs/first-start/">First launch</a></li>
+<li><a href="/docs/claude-code/">Set up Claude Code</a></li>
+<li><a href="/docs/codex/">Set up Codex</a></li>
+<li><a href="/docs/first-task/">Your first task.</a></li>
+<li><a href="/docs/approvals/">Approvals</a></li>
+<li><a href="/docs/stop-resume/">Stop and resume</a></li>
+<li><a href="/docs/files/">Files and changes</a></li>
+<li><a href="/docs/git/">Git</a></li>
+<li><a href="/docs/terminal/">Terminal</a></li>
+<li><a href="/docs/browser/">Internal browser</a></li>
+<li><a href="/docs/conversations/">Conversations and search</a></li>
+<li><a href="/docs/import/">Import from other apps</a></li>
+<li><a href="/docs/automations/">Automations</a></li>
+<li><a href="/docs/settings/">Settings</a></li>
+<li><a href="/docs/updates/">Updates</a></li>
+<li><a href="/docs/uninstall/">Uninstalling</a></li>
+<li><a href="/docs/faq/" aria-current="page">Questions and answers.</a></li>
+<li><a href="/docs/troubleshooting/">Troubleshooting</a></li></ol></nav></details>
+      </aside>
+      <article class="guide-article">
+        <section id="steps"><h2>Steps</h2><ol class="guide-steps"><li><h3>Do I need a Codevalanche account?</h3><p>No. You can use the app as a guest. A Codevalanche account lets you sign in on the desktop app and manage your profile and sessions on this website.</p></li><li><h3>Which agents and accounts can I connect?</h3><p>Claude Code and Codex with your own accounts, more than one of each if you want. You can also use Gemini CLI with your own API key, or a supported local model that runs on your PC.</p></li><li><h3>Does my code leave my computer?</h3><p>Your repository stays on disk. A hosted model can still receive prompts and relevant file context, so the provider and runtime you choose determine those boundaries. A supported local model runs on your own hardware.</p></li><li><h3>Can I resume or undo any operation?</h3><p>Resume depends on the runtime and retained conversation state. Undo is available only for supported guarded operations; inspect the current files before retrying or reverting.</p></li></ol></section>
+        <template data-doc-screenshot="faq"><!-- Capture pending: add a real, relevant application screenshot before replacing this inert slot. --></template>
+        <nav class="guide-related" aria-label="Related pages"><h2>Related pages</h2><ul><li><a href="/docs/claude-code/">Set up Claude Code</a></li><li><a href="/docs/codex/">Set up Codex</a></li><li><a href="/docs/troubleshooting/">Troubleshooting</a></li></ul></nav>
+
+
+
+        <nav class="page-next guide-next" aria-label="Next steps"><a rel="prev" href="/docs/uninstall/"><span>Previous page</span><strong>Uninstalling</strong></a><a rel="next" href="/docs/troubleshooting/"><span>Next page</span><strong>Troubleshooting</strong></a></nav>
+      </article>
+    </div>
+  </main>
+  <!-- site-footer -->
+  <script src="/config.js"></script>
+  <script src="/downloads.js"></script>
+  <script type="module" src="/site.js"></script>
+  <script type="module" src="/docs/search.js"></script>
+</body>
+</html>

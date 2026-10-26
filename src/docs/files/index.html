@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f5">
+  <meta name="description" content="When the agent finishes, Codevalanche lists the changed files. Open the diff and decide what belongs in your codebase.">
+  <link rel="canonical" href="https://codevalanche.com/docs/files/">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <script>(function(){var t="light";try{var s=localStorage.getItem("codevalanche_theme");if(s==="light"||s==="dark"){t=s}else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){t="dark"}}catch(e){}document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("js")})()</script>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/product-pages.css">
+  <link rel="stylesheet" href="/docs/guide.css">
+  <title>Files and changes</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- site-header -->
+  <main class="product-page shell guide" id="main">
+    <header class="guide-heading" id="hero"><p class="kicker"><a href="/docs/">User guide</a></p><h1>Files and changes</h1><p class="page-lede">When the agent finishes, Codevalanche lists the changed files. Open the diff and decide what belongs in your codebase.</p><p class="guide-version"><a href="/changelog.html">Release notes</a> · <code>1.0.1</code></p></header>
+    <div class="guide-layout">
+      <aside class="guide-sidebar">
+        <section class="guide-search" data-doc-search hidden>
+          <label for="guide-query">Search the guide</label>
+          <input id="guide-query" type="search" maxlength="160" autocomplete="off" aria-describedby="guide-search-help" aria-controls="guide-results">
+          <p id="guide-search-help">Search runs in your browser. Use the contents if search is unavailable.</p>
+          <p role="status" data-doc-status></p>
+          <span data-doc-empty hidden>No results. Try another word.</span><span data-doc-error hidden>Search is unavailable. Use the contents below.</span><span data-doc-count hidden>Results: {count}</span>
+          <ul id="guide-results" data-doc-results hidden></ul>
+        </section>
+        <details class="guide-contents" data-doc-contents open><summary>Contents</summary><nav aria-label="User guide"><ol><li><a href="/docs/">User guide</a></li>
+<li><a href="/docs/installation/">Installation</a></li>
+<li><a href="/docs/first-start/">First launch</a></li>
+<li><a href="/docs/claude-code/">Set up Claude Code</a></li>
+<li><a href="/docs/codex/">Set up Codex</a></li>
+<li><a href="/docs/first-task/">Your first task.</a></li>
+<li><a href="/docs/approvals/">Approvals</a></li>
+<li><a href="/docs/stop-resume/">Stop and resume</a></li>
+<li><a href="/docs/files/" aria-current="page">Files and changes</a></li>
+<li><a href="/docs/git/">Git</a></li>
+<li><a href="/docs/terminal/">Terminal</a></li>
+<li><a href="/docs/browser/">Internal browser</a></li>
+<li><a href="/docs/conversations/">Conversations and search</a></li>
+<li><a href="/docs/import/">Import from other apps</a></li>
+<li><a href="/docs/automations/">Automations</a></li>
+<li><a href="/docs/settings/">Settings</a></li>
+<li><a href="/docs/updates/">Updates</a></li>
+<li><a href="/docs/uninstall/">Uninstalling</a></li>
+<li><a href="/docs/faq/">Questions and answers.</a></li>
+<li><a href="/docs/troubleshooting/">Troubleshooting</a></li></ol></nav></details>
+      </aside>
+      <article class="guide-article">
+        <section id="steps"><h2>Steps</h2><ol class="guide-steps"><li><p>Open the changed files and read the diff. Check the duration examples yourself and run the project’s relevant tests before accepting the result.</p></li><li><p>Inspect each changed file, run the relevant project checks and verify the requested behavior. Treat the assistant’s summary as guidance to verify.</p></li><li><p>Resume depends on the runtime and retained conversation state. Undo is available only for supported guarded operations; inspect the current files before retrying or reverting.</p></li></ol></section>
+        <figure class="page-figure"><a class="page-image-link" href="/assets/shots/changes.webp"><picture><source media="(max-width: 760px)" srcset="/assets/shots/changes-detail-640.webp 640w, /assets/shots/changes-detail-960.webp 960w, /assets/shots/changes-detail.webp 1000w" sizes="100vw" width="1000" height="1092"><img src="/assets/shots/changes.webp" alt="The changes view in Codevalanche, showing the diff of two edited files." width="2000" height="1250" loading="lazy" decoding="async"></picture></a><figcaption>The changes view in Codevalanche, showing the diff of two edited files.</figcaption></figure>
+        <nav class="guide-related" aria-label="Related pages"><h2>Related pages</h2><ul><li><a href="/docs/git/">Git</a></li><li><a href="/docs/terminal/">Terminal</a></li><li><a href="/docs/stop-resume/">Stop and resume</a></li></ul></nav>
+
+
+
+        <nav class="page-next guide-next" aria-label="Next steps"><a rel="prev" href="/docs/stop-resume/"><span>Previous page</span><strong>Stop and resume</strong></a><a rel="next" href="/docs/git/"><span>Next page</span><strong>Git</strong></a></nav>
+      </article>
+    </div>
+  </main>
+  <!-- site-footer -->
+  <script src="/config.js"></script>
+  <script src="/downloads.js"></script>
+  <script type="module" src="/site.js"></script>
+  <script type="module" src="/docs/search.js"></script>
+</body>
+</html>

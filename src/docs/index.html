@@ -4,42 +4,66 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#faf9f5">
-  <meta name="description" content="A practical first task: connect an agent or local model, open an example project and inspect a narrow change from request to result.">
+  <meta name="description" content="Start with one small change.">
   <link rel="canonical" href="https://codevalanche.com/docs/">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://codevalanche.com/docs/">
-  <meta property="og:title" content="Getting started | Codevalanche">
-  <meta property="og:description" content="A practical first task: connect an agent or local model, open an example project and inspect a narrow change from request to result.">
-  <meta property="og:image" content="https://codevalanche.com/assets/codevalanche-link-preview.png">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="The Codevalanche logo.">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Getting started | Codevalanche">
-  <meta name="twitter:description" content="A practical first task: connect an agent or local model, open an example project and inspect a narrow change from request to result.">
-  <meta name="twitter:image" content="https://codevalanche.com/assets/codevalanche-link-preview.png">
-  <meta name="twitter:image:alt" content="The Codevalanche logo.">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <script>(function(){var t="light";try{var s=localStorage.getItem("codevalanche_theme");if(s==="light"||s==="dark"){t=s}else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){t="dark"}}catch(e){}document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("js")})()</script>
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/product-pages.css">
-  <title>Getting started | Codevalanche</title>
+  <link rel="stylesheet" href="/docs/guide.css">
+  <title>User guide</title>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
   <!-- site-header -->
-  <main class="product-page shell" id="main">
-    <section class="page-intro" id="hero" data-analytics-section="hero">
-      <div class="page-intro-copy"><p class="kicker">Getting started</p><h1>Start with one small change.</h1><p class="page-lede">A practical first task: connect an agent or local model, open an example project and inspect a narrow change from request to result.</p><div class="page-actions"><a class="button button-primary" href="#workflow">Getting started</a><a class="button" href="/download/">Download for Windows</a></div></div>
-      <figure class="page-figure"><a class="page-image-link" href="/assets/shots/changes.webp"><picture><source media="(max-width: 760px)" srcset="/assets/shots/changes-detail-640.webp 640w, /assets/shots/changes-detail-960.webp 960w, /assets/shots/changes-detail.webp 1000w" sizes="100vw" width="1000" height="1092"><img src="/assets/shots/changes.webp" width="2000" height="1250" alt="The changes view in Codevalanche, showing the diff of two edited files." fetchpriority="high" decoding="async"></picture></a><figcaption>Review the actual diff in the sample project, then check the result yourself.</figcaption></figure>
-    </section>
-    <div class="page-body"><section class="page-section" id="workflow" data-analytics-section="workflow"><div class="page-grid"><h2>Your first task.</h2><div class="page-copy"><ol class="page-steps"><li><h3>Install</h3><p>Open the installer from your Downloads folder. If Windows SmartScreen appears, choose “More info”, then “Run anyway”.</p><a href="/download/">Download for Windows</a></li><li><h3>Connect an agent</h3><p>Sign in to Claude Code or Codex with your own account, or choose a local model that runs on your PC.</p><p><a href="/agents/#codex">Set up Codex</a> · <a href="/agents/#claude-code">Set up Claude Code</a> · <a href="/local-ai/">Local models</a></p></li><li><h3>Open an example project</h3><p>Use a disposable project or a repository with a clean starting point. Check the selected account, model and permission mode.</p></li><li><h3>Write a narrow request</h3><p>Describe the current behavior, the change you want and how to check it. The walkthrough uses trip durations: show 90 minutes as 1 h 30 min and add tests.</p></li><li><h3>Follow the task</h3><p>Read progress, answer requests for input and inspect any permission request. Approval applies to the operation shown; keep checking the changes.</p></li><li><h3>Read the diff and test</h3><p>Inspect each changed file, run the relevant project checks and verify the requested behavior. Treat the assistant’s summary as guidance to verify.</p></li></ol></div></div></section><section class="page-section" id="details" data-analytics-section="details"><div class="page-grid"><h2>Resolve the setup state you see.</h2><div class="page-copy"><dl class="page-reference"><div><dt>External runtime missing</dt><dd>Claude Code, Gemini CLI and ZCode require an external installation. Install the appropriate runtime and check detection in the app.</dd></div><div><dt>Provider sign-in incomplete</dt><dd>Finish the provider’s authentication flow and check connection status. Website sign-in does not connect an agent account.</dd></div><div><dt>Provider limit reached</dt><dd>Read the provider’s message and account limits. Account quotas are separate; switching or handoff is an explicit decision.</dd></div><div><dt>Local server connection failed</dt><dd>Check server reachability, the loaded model and the configured endpoint. Then check memory and model compatibility.</dd></div><div><dt>Waiting for approval</dt><dd>Open the pending request and inspect its command and scope. Allow or deny it deliberately; waiting is not proof of a stalled runtime.</dd></div></dl></div></div></section><section class="page-section" id="faq" data-analytics-section="faq"><div class="page-grid"><h2>Recovery and support.</h2><div class="page-copy"><h3>Can I resume or undo any operation?</h3><p>Resume depends on the runtime and retained conversation state. Undo is available only for supported guarded operations; inspect the current files before retrying or reverting.</p><h3>What should I include in a support request?</h3><p>Describe the setup step, runtime and visible error. Remove credentials and private project content from screenshots or logs.</p><a href="mailto:info@radovar.com" data-contact-id="info">info@radovar.com</a></div></div></section></div>
-    <nav class="page-next" aria-label="Next steps"><a href="/how-it-works/">See how it works</a><a href="/download/">Download for Windows</a></nav>
+  <main class="product-page shell guide" id="main">
+    <header class="guide-heading" id="hero" data-analytics-section="hero"><p class="kicker"><a href="/docs/">User guide</a></p><h1>User guide</h1><p class="page-lede">Start with one small change.</p><p class="guide-version"><a href="/changelog.html">Release notes</a> · <code>1.0.1</code></p></header>
+    <div class="guide-layout">
+      <aside class="guide-sidebar">
+        <section class="guide-search" data-doc-search hidden>
+          <label for="guide-query">Search the guide</label>
+          <input id="guide-query" type="search" maxlength="160" autocomplete="off" aria-describedby="guide-search-help" aria-controls="guide-results">
+          <p id="guide-search-help">Search runs in your browser. Use the contents if search is unavailable.</p>
+          <p role="status" data-doc-status></p>
+          <span data-doc-empty hidden>No results. Try another word.</span><span data-doc-error hidden>Search is unavailable. Use the contents below.</span><span data-doc-count hidden>Results: {count}</span>
+          <ul id="guide-results" data-doc-results hidden></ul>
+        </section>
+        <details class="guide-contents" data-doc-contents open><summary>Contents</summary><nav aria-label="User guide"><ol><li><a href="/docs/" aria-current="page">User guide</a></li>
+<li><a href="/docs/installation/">Installation</a></li>
+<li><a href="/docs/first-start/">First launch</a></li>
+<li><a href="/docs/claude-code/">Set up Claude Code</a></li>
+<li><a href="/docs/codex/">Set up Codex</a></li>
+<li><a href="/docs/first-task/">Your first task.</a></li>
+<li><a href="/docs/approvals/">Approvals</a></li>
+<li><a href="/docs/stop-resume/">Stop and resume</a></li>
+<li><a href="/docs/files/">Files and changes</a></li>
+<li><a href="/docs/git/">Git</a></li>
+<li><a href="/docs/terminal/">Terminal</a></li>
+<li><a href="/docs/browser/">Internal browser</a></li>
+<li><a href="/docs/conversations/">Conversations and search</a></li>
+<li><a href="/docs/import/">Import from other apps</a></li>
+<li><a href="/docs/automations/">Automations</a></li>
+<li><a href="/docs/settings/">Settings</a></li>
+<li><a href="/docs/updates/">Updates</a></li>
+<li><a href="/docs/uninstall/">Uninstalling</a></li>
+<li><a href="/docs/faq/">Questions and answers.</a></li>
+<li><a href="/docs/troubleshooting/">Troubleshooting</a></li></ol></nav></details>
+      </aside>
+      <article class="guide-article">
+        <section id="workflow" data-analytics-section="workflow"><h2>Steps</h2><ol class="guide-steps"><li><p>Install it on your Windows PC, connect the agent you already use and try it on a small task.</p></li><li><p>Use a disposable project or a repository with a clean starting point. Check the selected account, model and permission mode.</p></li><li><p>Inspect each changed file, run the relevant project checks and verify the requested behavior. Treat the assistant’s summary as guidance to verify.</p></li></ol></section>
+        <figure class="page-figure" id="details" data-analytics-section="details"><a class="page-image-link" href="/assets/shots/changes.webp"><picture><source media="(max-width: 760px)" srcset="/assets/shots/changes-detail-640.webp 640w, /assets/shots/changes-detail-960.webp 960w, /assets/shots/changes-detail.webp 1000w" sizes="100vw" width="1000" height="1092"><img src="/assets/shots/changes.webp" alt="The changes view in Codevalanche, showing the diff of two edited files." width="2000" height="1250" loading="lazy" decoding="async"></picture></a><figcaption>The changes view in Codevalanche, showing the diff of two edited files.</figcaption></figure>
+        <nav class="guide-related" id="faq" data-analytics-section="faq" aria-label="Related pages"><h2>Questions and answers.</h2><ul><li><a href="/docs/faq/">Questions and answers.</a></li><li><a href="/docs/troubleshooting/">Troubleshooting</a></li><li><a href="/docs/settings/">Settings</a></li></ul></nav>
+
+
+
+        <nav class="page-next guide-next" aria-label="Next steps"><a rel="next" href="/docs/installation/"><span>Next page</span><strong>Installation</strong></a></nav>
+      </article>
+    </div>
   </main>
   <!-- site-footer -->
   <script src="/config.js"></script>
   <script src="/downloads.js"></script>
   <script type="module" src="/site.js"></script>
+  <script type="module" src="/docs/search.js"></script>
 </body>
 </html>
