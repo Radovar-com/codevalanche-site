@@ -51,6 +51,18 @@ jobs:
         run: |
           node scripts/website-analytics-test.mjs
           node scripts/locale-browser-test.mjs
+      - name: Verify guide and capture desktop and phone views
+        env:
+          CODEVALANCHE_DOCS_CAPTURES: ${{ runner.temp }}/docs-captures
+        run: node scripts/docs-browser-test.mjs
+      - name: Upload guide review captures
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: docs-review-captures
+          path: ${{ runner.temp }}/docs-captures
+          if-no-files-found: error
+          retention-days: 14
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:

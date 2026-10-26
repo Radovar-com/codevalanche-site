@@ -531,6 +531,8 @@ test('scoped v1 classified operator enables only the two canonical operations an
   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data:{operator:true,parentMfaRequired:true}})});
  });
  await f.load();await untilIO(f.page,()=>window.__accountApi!=null);
+ // Module initialization precedes the asynchronous operator classification.
+ await f.page.locator('#authenticator-section').waitFor({state:'visible'});
  assert.deepEqual(observed,['get-account','operator.oauth.details']);
  assert.equal(f.calls.some(c=>c.path.includes('/factors')),false,'enrollment requires the human action');
  assert.equal(await f.page.locator('#authenticator-section').isVisible(),true);
@@ -634,7 +636,7 @@ test(prefix+'actual authorize page exposes parent MFA and resumes consent after 
  await f.load();assert.equal(await f.page.locator('#authenticator-section').count(),1);
  await f.page.locator('#mfa-step-up').waitFor({state:'visible'});assert.equal(await f.page.locator('#consent').isVisible(),false);assert.equal(providerDetails,0);
  await f.page.locator('#mfa-step-up').click();await f.page.locator('#mfa-code').fill('000000');await f.page.locator('#mfa-form button[type=submit]').click();
- try{await until(f.page,()=>document.getElementById('status').textContent.includes('could not be verified'))}catch{throw new Error(`MFA retry status: ${await f.page.locator('#status').textContent()}; verify calls ${verifyCalls}`)}assert.equal(await f.page.locator('#consent').isVisible(),false);
+ try{await untilIO(f.page,()=>document.getElementById('status').textContent.includes('could not be verified'))}catch{throw new Error(`MFA retry status: ${await f.page.locator('#status').textContent()}; verify calls ${verifyCalls}`)}assert.equal(await f.page.locator('#consent').isVisible(),false);
  await f.page.locator('#mfa-code').fill('123456');await f.page.locator('#mfa-form button[type=submit]').click();await f.page.locator('#consent').waitFor({state:'visible'});
  assert.equal(verifyCalls,2);assert.equal(providerDetails,0);assert.equal(new URL(f.page.url()).searchParams.get('authorization_id'),'fixture-consent');
 });

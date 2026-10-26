@@ -72,9 +72,9 @@ test('directory routes and index aliases retain their canonical slash in every l
   }
 });
 
-test('page registry lists exactly eleven unique canonical public routes and source files', () => {
+test('page registry lists exactly thirty unique canonical public routes and source files', () => {
   const pages = routeModule.MARKETING_PAGES;
-  assert.equal(pages.length, 11);
+  assert.equal(pages.length, 30);
   for (const key of ['path', 'file', 'pageId']) assert.equal(new Set(pages.map(page => page[key])).size, pages.length, `unique ${key}`);
   for (const [pathname, pageId] of directoryPages) {
     assert.deepEqual(pages.find(page => page.pageId === pageId), { path: pathname, file: `${pathname.slice(1)}index.html`, pageId, priority: '0.8' });
