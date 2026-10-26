@@ -52,6 +52,7 @@ async function fixture(t, initialStatus = 200, errorOverride) {
     window.__fixtureState = state
     window.CODEVALANCHE_CONFIG = { supabaseUrl: 'https://account.fixture.invalid', supabasePublishableKey: 'fixture-public', accountServer: 'v2' }
     window.__fixtureClient = { auth: {
+      initialize: async () => ({ error: null }),
       getSession: async () => ({ data: { session: state.session }, error: null }),
       onAuthStateChange(listener) { state.listener = listener },
       signOut: async () => { state.signOuts++; state.session = null; state.listener?.('SIGNED_OUT', null); return { error: null } },

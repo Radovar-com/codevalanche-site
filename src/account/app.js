@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { safeError, identityLabels, authCallback, normalizeAccountError, normalizeAccountProfile, passwordProblem, MIN_PASSWORD_LENGTH, captchaModes, turnstileSiteKey, emailLocaleFor, accountServerVersion, V1_ACCOUNT_ACTIONS, deviceLabel, desktopPlatform } from './helpers.js'
-import { createAccountSessionLifecycle, accountAuthFetch } from './sessionLifecycle.js'
+import { createAccountSessionLifecycle, accountAuthFetch, readAccountSession } from './sessionLifecycle.js'
+import { downloadAccountData } from './dataExport.js'
 import { createAccountSecurity } from './security.js'
 import { authenticatorQrSource } from './authenticatorQr.js'
 import { emailLinkCallback, exchangeEmailLink, emailLinkFragment, validateNewPassword, recoveryNotice } from './recovery.js'
@@ -65,7 +66,10 @@ function emailLocale() {
 }
 const storageKey = `sb-${new URL(config.supabaseUrl).hostname.split('.')[0]}-auth-token`
 const lifecycle = createAccountSessionLifecycle(storageKey)
-const client = createClient(config.supabaseUrl, config.supabasePublishableKey, { auth: { flowType: 'pkce', detectSessionInUrl: false, persistSession: true, autoRefreshToken: true, storageKey, lock: lifecycle.lock }, global: { fetch: accountAuthFetch } })
+const client = createClient(config.supabaseUrl, config.supabasePublishableKey, { auth: { flowType: 'pkce', detectSessionInUrl: false, persistSession: true, autoRefreshToken: true, skipAutoInitialize: true, storageKey, lock: lifecycle.lock }, global: { fetch: accountAuthFetch } })
+// Keep a held initial credential lock resumable without poisoning the SDK's
+// cached initialization promise. Reads still expose a bounded, retryable state.
+void lifecycle.initialize(() => client.auth.initialize()).catch(() => undefined)
 const redirectTo = authCallback(location.href)
 const authorizationId = redirectTo.searchParams.get('authorization_id')
 // Social sign-in returns to /account/?authorization_id. Give that preserved
@@ -79,6 +83,8 @@ const initialFlow = new URL(location.href).searchParams.get('flow')
 // An accepted invitation sets the account's first password through the recovery-mode form.
 let mode = 'signin', user = null, recovery = ['recovery', 'invite'].includes(initialFlow), invite = initialFlow === 'invite', busy = false
 let accountStatus = 'signed-out', renderGeneration = 0, currentSession = null, operatorConsent = null
+let exportCapability = false, exportTimer = null
+const exportCooldowns = new Map()
 let cleanupPromise = null, cleanupPending = false, ownedSignin = false
 const security = createAccountSecurity(client, { isRecovery: () => recovery, assertRemoval: () => apiV2('security.mfa.remove-authorize') })
 const operatorContext = () => operatorOAuth && Boolean(authorizationId) && !recovery
@@ -225,16 +231,27 @@ function startBenefits() {
   document.addEventListener('visibilitychange', schedule)
   show(0); schedule()
 }
+function updateExportControl() {
+  if (!$('export-data')) return
+  clearTimeout(exportTimer)
+  const remaining = (exportCooldowns.get(user?.id) || 0) - Date.now()
+  const available = exportCapability && accountStatus === 'ready' && !recovery && !authorizationId
+  $('data-export-section').hidden = !available
+  $('export-data').hidden = !available || busy || cleanupPending || remaining > 0
+  $('export-data').disabled = false
+  if (available && remaining > 0) exportTimer = setTimeout(updateExportControl, remaining + 20)
+}
 function applyControls() {
-  [...document.querySelectorAll('button')].filter(button => !button.closest('[data-owned-consent]')).forEach(button => { button.disabled = busy || cleanupPending })
-  document.querySelectorAll('#profile input, #profile textarea, #profile button').forEach(control => { control.disabled = busy || accountStatus !== 'ready' })
+  [...document.querySelectorAll('button')].filter(button => button.id !== 'export-data' && !button.closest('[data-owned-consent]')).forEach(button => { button.disabled = busy || cleanupPending })
+  document.querySelectorAll('#profile input, #profile textarea, #profile button').forEach(control => { if (control.id !== 'export-data') control.disabled = busy || accountStatus !== 'ready' })
   $('account-state-retry').disabled = busy || cleanupPending || accountStatus === 'loading'
   for (const id of ['authenticator-add', 'authenticator-restart', 'mfa-step-up']) if ($(id)) $(id).disabled = busy || cleanupPending || !nativeAuthenticatorAllowed()
   if ($('mfa-remove')) $('mfa-remove').disabled = busy || cleanupPending || accountStatus !== 'ready' || !v2
   if (mode === 'update') $('auth-submit').disabled = busy || cleanupPending || accountStatus !== 'ready'
+  updateExportControl()
 }
 function setAccountStatus(next) {
-  if (next !== 'ready') accountAnalytics.suspend()
+  if (next !== 'ready') { exportCapability = false; accountAnalytics.suspend() }
   if (next !== 'ready') { operatorConsent = null; if (!v2) clearNativeAuthenticator() }
   accountStatus = next
   const gated = ['loading', 'suspended', 'deletion-pending', 'unavailable', 'signing-out', 'logout-failed'].includes(next)
@@ -265,7 +282,7 @@ function setAccountStatus(next) {
   applyControls()
 }
 function invalidateAccountView() {
-  operatorConsent = null; clearNativeAuthenticator()
+  operatorConsent = null; clearNativeAuthenticator(); clearMfaPanels()
   pendingRecoveryEnrollment = null
   renderGeneration++
   currentSession = null; user = null
@@ -275,7 +292,7 @@ function handleAccountRefusal(error) {
   if (error?.code === 'account_request_superseded') return
   if (error?.code === 'session_not_found') {
     void cleanUpLocalSession().catch(() => undefined)
-  } else if (error?.code === 'account_suspended') setAccountStatus('suspended')
+  } else if (['account_suspended', 'user_banned'].includes(error?.code)) setAccountStatus('suspended')
   else if (error?.code === 'account_deletion_pending') setAccountStatus('deletion-pending')
   else if (['account_service_unavailable', 'account_forbidden', 'account_operation_unknown', 'operation_conflict'].includes(error?.code)) setAccountStatus('unavailable')
 }
@@ -307,10 +324,15 @@ async function readCurrentSession() {
   const generation = renderGeneration
   if (lifecycle.logoutIntent()) { invalidateAccountView(); setAccountStatus(lifecycle.logoutIntent() === 'pending' ? 'logout-failed' : 'signed-out'); return }
   setAccountStatus('loading')
-  const { data, error } = await client.auth.getSession()
-  if (generation !== renderGeneration) return
-  if (error) { const refusal = sdkSessionError(error); handleAccountRefusal(refusal); notice(safeError(refusal), true); return }
-  await render(data.session)
+  try {
+    const { data, error } = await readAccountSession(client)
+    if (generation !== renderGeneration) return
+    if (error) throw error
+    await render(data.session)
+  } catch (error) {
+    if (generation !== renderGeneration) return
+    const refusal = sdkSessionError(error); handleAccountRefusal(refusal); notice(safeError(refusal), true)
+  }
 }
 async function completeExplicitSignin(work, unprotected = false) {
   if (cleanupPromise) await cleanupPromise
@@ -345,10 +367,10 @@ async function api(action, data = {}) {
   // v1 keeps its legacy action list; only this authorization's operator preflight
   // and a backend-classified approval may use the canonical contract.
   const operatorAction = operatorContext() && (action === 'operator.oauth.details' || (action === 'operator.oauth.approve' && operatorConsent === true))
-  if (!v2 && !V1_ACCOUNT_ACTIONS.includes(action) && !operatorAction) throw { code: 'feature_unavailable' }
+  if (!v2 && !V1_ACCOUNT_ACTIONS.includes(action) && !operatorAction && !(action === 'export-account' && exportCapability)) throw { code: 'feature_unavailable' }
   // A recovery code is redeemed from the sign-in second step, before the account opens.
   if (action !== 'get-account' && action !== 'mfa-recovery-redeem' && accountStatus !== 'ready' && !(action === 'cancel-deletion' && accountStatus === 'deletion-pending')) throw { code: user ? 'account_service_unavailable' : 'session_not_found' }
-  const { data: { session }, error } = await client.auth.getSession()
+  const { data: { session }, error } = await readAccountSession(client)
   if (generation !== renderGeneration) throw { code: 'account_request_superseded' }
   if (error) throw { code: error.status === 401 ? 'session_not_found' : 'account_service_unavailable' }
   if (!session) throw { code: 'session_not_found' }
@@ -370,8 +392,9 @@ async function apiV2(operation, fields = {}) {
 }
 async function action(work) {
   if (busy || cleanupPending) return
-  busy = true; [...document.querySelectorAll('button')].filter(button => !button.closest('[data-owned-consent]')).forEach(b => b.disabled = true); notice()
-  try { await work() } catch (error) { if (error?.code !== 'account_request_superseded') { handleAccountRefusal(error); notice(safeError(error), true) } }
+  const generation = renderGeneration
+  busy = true; updateExportControl(); [...document.querySelectorAll('button')].filter(button => button.id !== 'export-data' && !button.closest('[data-owned-consent]')).forEach(b => b.disabled = true); notice()
+  try { await work() } catch (error) { if (generation === renderGeneration && error?.code !== 'account_request_superseded') { handleAccountRefusal(error); notice(safeError(error), true) } }
   finally { busy = false; applyControls() }
 }
 // Sign-in second step (Supabase Auth MFA, TOTP): true when this session still has
@@ -390,6 +413,7 @@ function clearMfaPanels() {
   pendingFactorId = null; mfaFactors = []; pendingRecoveryEnrollment = null
   $('mfa-enroll').hidden = true; $('mfa-qr').removeAttribute('src'); $('mfa-secret').textContent = ''; $('mfa-enroll-code').value = ''
   $('mfa-codes').replaceChildren(); $('mfa-codes-panel').hidden = true
+  $('mfa-challenge-code').value = ''; $('mfa-recovery-code').value = ''
 }
 function renderMfa(state) {
   // Recovery codes and turning it off need the v2 account function; the v1 server sends no mfa state.
@@ -434,6 +458,8 @@ async function render(session) {
     $('profile-avatar').textContent = initials(savedProfile.displayName || user.email)
     resetEmailChange()
     void showCaptcha('profile-captcha', true)
+    exportCapability = account.dataExport?.schemaVersion === 1 && account.dataExport?.cooldownSeconds === 300
+    updateExportControl()
     renderMfa(account.mfa)
     if (v2 && $('analytics-consent')) $('analytics-consent').checked = account.analyticsConsent === true
     void accountAnalytics.update({ session, account })
@@ -505,9 +531,14 @@ $('profile-form').addEventListener('submit', event => { event.preventDefault(); 
 $('email-change-form').addEventListener('submit', event => { event.preventDefault(); void action(async () => {
   const email = $('new-email').value.trim()
   if (!email || email.toLowerCase() === String(user?.email || '').toLowerCase()) { notice('Enter a different email address.', true); $('new-email').focus(); return }
-  // The SDK applies the request to its own current session; the USER_UPDATED
-  // event that follows re-reads the account, so no render generation is compared.
-  const { error } = await client.auth.updateUser({ email }, { emailRedirectTo: redirectTo.href })
+  // A successful USER_UPDATED event re-reads this account. A failed request
+  // emits no such event, so fence its error if another account view replaced it.
+  const generation = renderGeneration
+  let result
+  try { result = await client.auth.updateUser({ email }, { emailRedirectTo: redirectTo.href }) }
+  catch (error) { if (generation !== renderGeneration) throw { code: 'account_request_superseded' }; throw error }
+  const { error } = result
+  if (error && generation !== renderGeneration) throw { code: 'account_request_superseded' }
   if (error) throw ['email_exists', 'email_address_invalid', 'validation_failed'].includes(error.code) ? { code: 'email_change_unavailable' } : error
   resetEmailChange()
   notice('Check both inboxes. Open the link sent to your current address and the one sent to the new address to finish the change.')
@@ -525,7 +556,7 @@ $('operator-reauth')?.addEventListener('click', () => void action(async () => {
   $('email').focus()
 }))
 $('account-state-retry').addEventListener('click', () => void action(async () => { if (lifecycle.logoutIntent() === 'pending') await cleanUpLocalSession(); else await readCurrentSession() }))
-$('logout-others').addEventListener('click', () => void action(async () => { await api('sign-out-others'); await render((await client.auth.getSession()).data.session); notice('Other sessions signed out. Existing access tokens may remain valid until they expire.') }))
+$('logout-others').addEventListener('click', () => void action(async () => { await api('sign-out-others'); await render((await readAccountSession(client)).data.session); notice('Other sessions signed out. Existing access tokens may remain valid until they expire.') }))
 $('change-password').addEventListener('click', () => void action(async () => {
   const generation = renderGeneration
   const captchaToken = captchaFor('profile-captcha')
@@ -744,9 +775,9 @@ $('mfa-challenge-signout').addEventListener('click', () => void action(signOut))
 $('mfa-enable').addEventListener('click', () => void action(async () => {
   if (!v2) return
   // An enrolment left unfinished earlier would block a new one: remove it first.
-  const listed = await client.auth.mfa.listFactors()
-  for (const factor of (listed.data?.all || []).filter(f => f.factor_type === 'totp' && f.status !== 'verified')) await client.auth.mfa.unenroll({ factorId: factor.id })
-  const { data, error } = await client.auth.mfa.enroll({ factorType: 'totp', friendlyName: `Codevalanche ${Math.random().toString(36).slice(2, 8)}` })
+  const listed = await nativeAuthenticatorRequest(() => client.auth.mfa.listFactors())
+  for (const factor of (listed.data?.all || []).filter(f => f.factor_type === 'totp' && f.status !== 'verified')) await nativeAuthenticatorRequest(() => client.auth.mfa.unenroll({ factorId: factor.id }))
+  const { data, error } = await nativeAuthenticatorRequest(() => client.auth.mfa.enroll({ factorType: 'totp', friendlyName: `Codevalanche ${Math.random().toString(36).slice(2, 8)}` }))
   if (error) throw error
   pendingFactorId = data.id
   $('mfa-qr').src = data.totp?.qr_code || ''; $('mfa-secret').textContent = data.totp?.secret || ''
@@ -789,4 +820,22 @@ $('mfa-disable').addEventListener('click', () => void action(async () => {
   try { await api('mfa-disable', { factorId: factor.id }) } catch (error) { noticeTranslated(mfaFailure(error, 'reverify'), true); return }
   $('mfa-codes').replaceChildren(); $('mfa-codes-panel').hidden = true
   await client.auth.refreshSession(); await readCurrentSession(); noticeTranslated(T('disabled'))
+}))
+
+$('export-data')?.addEventListener('click', () => void action(async () => {
+  if (!exportCapability) return
+  const owner = user.id
+  try {
+    const data = await api('export-account')
+    downloadAccountData(data, owner)
+    exportCooldowns.set(owner, Date.now() + 300000)
+    notice('Your data file has been downloaded.')
+  } catch (error) {
+    if (error?.status === 429 || error?.code === 'rate_limited') {
+      exportCooldowns.set(owner, Date.now() + 300000)
+      notice('Too many attempts. Please try again shortly.', true)
+      return
+    }
+    throw error
+  }
 }))

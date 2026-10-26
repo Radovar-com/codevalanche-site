@@ -15,13 +15,17 @@ const client=createAnalyticsClient({siteId:'codevalanche',downloadManifest:windo
 const manager=client.consentManager;
 const path=location.pathname;
 const marketingRoute=resolveMarketingRoute(path);
-const pageId=path.startsWith('/account/authorize')?'account_authorize':path.startsWith('/account/')?'account':(marketingRoute?.pageId??'not_found');
+// Verification is part of the existing download journey for optional analytics.
+const analyticsPageId=id=>id==='download_verify'?'download':id;
+const pageId=path.startsWith('/account/authorize')?'account_authorize':path.startsWith('/account/')?'account':(analyticsPageId(marketingRoute?.pageId)??'not_found');
 const account=['account','account_authorize'].includes(pageId);
 const download=document.querySelector('#download');if(download)download.dataset.downloadStatus=download.querySelector('[data-download-platform]')?'configured':'not_configured';
 const page=client.startPage({pageId,surface:account?'pre_auth':'marketing'});
 for(const element of document.querySelectorAll('[data-analytics-section]'))page.observeSection(element,{sectionId:element.dataset.analyticsSection});
 let requestedGeneration=-1;
 const setConsent=async choice=>{const operation=client.setConsent(choice);requestedGeneration=choice?.websiteAnalytics===true?manager.getState().generation:-1;renderStatus();await operation;renderStatus();};
+// Mount only after native labels are ready; a later translation must not resize the fixed banner.
+await initializeLocale(document);
 const ui=mountConsentUI({manager:{getState:manager.getState,subscribe:manager.subscribe,setConsent}});
 const status=document.createElement('p');status.dataset.ownedStatus='';status.setAttribute('role','status');document.querySelector('[data-owned-consent] .cmp-card').append(status);
 const bannerStatus=status.cloneNode();document.querySelector('[data-owned-consent] .cmp-banner').append(bannerStatus);
@@ -47,7 +51,7 @@ document.addEventListener('click',event=>{
  let url;try{url=new URL(link.href,location.href);}catch{return;}
  if(url.origin===location.origin&&['/account/','/account.html'].includes(url.pathname)){track('account_entry_clicked',{placement:place,entry_mode:'signin'});return;}
  if(url.protocol==='mailto:'){const id=link.dataset.contactId;if(['info','press','security'].includes(id))track('contact_clicked',{contact_id:id,placement:place});return;}
- const target=resolveMarketingRoute(url.pathname)?.pageId;
+ const target=analyticsPageId(resolveMarketingRoute(url.pathname)?.pageId);
  if(url.origin===location.origin&&target)track('navigation_used',{navigation_id:url.hash?'anchor':place==='header'?'header':place==='footer'?'footer':'anchor',target_page_id:target,placement:place});
 });
 for(const detail of document.querySelectorAll('details[data-analytics-faq]'))detail.addEventListener('toggle',()=>track('faq_toggled',{faq_id:detail.dataset.analyticsFaq,expanded:detail.open}));

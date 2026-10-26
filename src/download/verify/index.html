@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f5">
+  <meta name="description" content="Compare your Windows installer with the published SHA-256 and understand the SmartScreen warning.">
+  <link rel="canonical" href="https://codevalanche.com/download/verify/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://codevalanche.com/download/verify/">
+  <meta property="og:title" content="Verify your Windows download | Codevalanche">
+  <meta property="og:description" content="Compare your Windows installer with the published SHA-256 and understand the SmartScreen warning.">
+  <meta property="og:image" content="https://codevalanche.com/assets/codevalanche-link-preview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The Codevalanche logo.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Verify your Windows download | Codevalanche">
+  <meta name="twitter:description" content="Compare your Windows installer with the published SHA-256 and understand the SmartScreen warning.">
+  <meta name="twitter:image" content="https://codevalanche.com/assets/codevalanche-link-preview.png">
+  <meta name="twitter:image:alt" content="The Codevalanche logo.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <script>(function(){var t="light";try{var s=localStorage.getItem("codevalanche_theme");if(s==="light"||s==="dark"){t=s}else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){t="dark"}}catch(e){}document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("js")})()</script>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/product-pages.css">
+  <title>Verify your Windows download | Codevalanche</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <!-- site-header -->
+  <main class="product-page shell verify-page" id="main">
+    <section class="verify-intro">
+      <p class="kicker">Before you install</p>
+      <h1>Verify your Windows download.</h1>
+      <p class="page-lede">The installer has no Windows code-signing certificate. Here is how to check the file and understand the warning.</p>
+      <p><a href="/download/">Back to downloads</a></p>
+    </section>
+    <section class="verify-section" aria-labelledby="check-title">
+      <h2 id="check-title">1. Check the file.</h2>
+      <p>In File Explorer, open the folder containing the EXE. Click the address bar, type powershell and press Enter. Paste the command for your version below.</p>
+      <p>Compare the result with the SHA-256 shown here, ignoring letter case. Every character must match. If it differs, do not run the file; delete it and download it again from this site.</p>
+      <p class="verify-limit">A matching hash confirms the file matches this published installer. It does not prove the software is harmless or identify its publisher.</p>
+      <!-- download:verification -->
+    </section>
+    <section class="verify-section" aria-labelledby="warning-title">
+      <h2 id="warning-title">2. Understand the Windows warning.</h2>
+      <p>Windows SmartScreen may show “Windows protected your PC” because this EXE has no code-signing certificate and SmartScreen may not recognize it. The SHA-256 check does not remove that warning.</p>
+      <p>Only continue if the hash matches and you trust this download.</p>
+      <ol class="verify-steps">
+        <li>Open the checked EXE. On “Windows protected your PC”, select “More info”.</li>
+        <li>Check that the file name matches your download. “Unknown publisher” is expected for this unsigned installer. Select “Run anyway” if you choose to continue.</li>
+        <li>If Windows asks whether to allow changes to your device, approve only if you want to install this app.</li>
+      </ol>
+      <p>If “Run anyway” is missing or your organization blocks the app, stop and contact your administrator. Do not turn off Windows security protections.</p>
+    </section>
+  </main>
+  <!-- site-footer -->
+  <script src="/config.js"></script>
+  <script type="module" src="/download-verify.js"></script>
+  <script type="module" src="/site.js"></script>
+</body>
+</html>

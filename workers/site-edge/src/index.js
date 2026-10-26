@@ -1,3 +1,4 @@
+import { withAssetCache } from '../../../cloudflare/cache-policy.mjs';
 import { LOCALES, MARKETING_PAGES, localizedMarketingPath, resolveMarketingRoute } from '../../../src/locales/manifest.js';
 
 const ROUTE_COOKIE = 'codevalanche_route_checked';
@@ -136,12 +137,15 @@ export default {
       const response = await (env.fetch ?? fetch)(originRequest(request, requestUrl, env));
       const secured = await addResponseHeaders(response, request, env);
       const headers = new Headers(secured.headers);
+      // These responses set a language preference and depend on routing cookies.
+      // Override origin CDN policies as well as the browser cache policy.
+      for (const name of ['cache-control', 'cdn-cache-control', 'cloudflare-cdn-cache-control']) headers.set(name, 'private, no-store');
       appendCookie(headers, requestUrl, ROUTE_COOKIE, '1');
       appendCookie(headers, requestUrl, LANGUAGE_COOKIE, selectedLocale, false);
       return new Response(secured.body, { status: secured.status, statusText: secured.statusText, headers });
     }
 
     const response = await (env.fetch ?? fetch)(originRequest(request, requestUrl, env));
-    return addResponseHeaders(response, request, env);
+    return withAssetCache(await addResponseHeaders(response, request, env), request);
   },
 };

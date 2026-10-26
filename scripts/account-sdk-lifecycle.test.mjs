@@ -15,7 +15,7 @@ const sessionFor = (user, expired = false) => ({ access_token: `fixture-${user.i
   token_type: 'bearer', expires_in: 3600, expires_at: Math.floor(Date.now() / 1000) + (expired ? -60 : 3600), user })
 async function bundle() {
   return bundlePromise ??= readFile('src/account/app.js', 'utf8').then(source => build({
-    stdin: { contents: source.replace('const client = createClient(', 'const client = window.__sdkClient = createClient(') + '\nwindow.__accountApi = api;\n',
+    stdin: { contents: source.replace('const client = createClient(', 'const client = window.__sdkClient = createClient(') + '\nwindow.__accountApi = api; window.__accountLifecycle = lifecycle;\n',
       resolveDir: new URL('../src/account/', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'), sourcefile: 'app.js' },
     bundle: true, write: false, format: 'esm', target: 'es2022',
   }).then(result => result.outputFiles[0].text))
@@ -530,7 +530,10 @@ test('scoped v1 classified operator enables only the two canonical operations an
   const body=route.request().postDataJSON();observed.push(body.action);if(!body.action.startsWith('operator.oauth.'))return route.fallback();
   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data:{operator:true,parentMfaRequired:true}})});
  });
- await f.load();await untilIO(f.page,()=>window.__accountApi!=null);
+  await f.load();await untilIO(f.page,()=>window.__accountApi!=null);
+  // SDK startup can queue the account render on the installed fake clock.
+  await f.page.clock.runFor(0);
+  await untilIO(f.page,()=>!document.getElementById('authenticator-section').hidden && !document.getElementById('authenticator-add').disabled);
  assert.deepEqual(observed,['get-account','operator.oauth.details']);
  assert.equal(f.calls.some(c=>c.path.includes('/factors')),false,'enrollment requires the human action');
  assert.equal(await f.page.locator('#authenticator-section').isVisible(),true);
@@ -662,3 +665,239 @@ for(const authorizePage of [false,true])test(prefix+`${authorizePage?'authorize'
  await f.page.locator('#mfa-step-up').click();await f.page.locator('#mfa-code').fill('123456');await f.page.locator('#mfa-form button[type=submit]').click();await f.page.locator('#consent').waitFor({state:'visible'});assert.equal(parentVerified,true);
 });
 }
+
+test('logout removes already displayed recovery codes from the DOM before local cleanup completes',async t=>{
+ const f=await fixture(t);
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  if(route.request().postDataJSON().action!=='mfa-recovery-codes')return route.fallback();
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({codes:['00000-00000']})});
+ });
+ // Keep the verified MFA response across the account reread after generation.
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  if(route.request().postDataJSON().action!=='get-account')return route.fallback();
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({user:{displayName:'A',bio:''},sessions:[],deletion:null,mfa:{enabled:true,factors:[{id:'fixture-factor'}],recoveryCodesRemaining:10}})});
+ });
+ await f.load();await f.page.locator('#profile').waitFor({state:'visible'});
+ await f.page.locator('#mfa-regenerate').click();await f.page.locator('#mfa-codes-panel').waitFor({state:'visible'});
+ assert.equal(await f.page.locator('#mfa-codes').textContent(),'00000-00000');
+ const release=f.holdLogout();await f.page.locator('#logout').click();
+ try { await f.page.waitForFunction(()=>localStorage.getItem('codevalanche-account-logout-intent')==='pending');
+ assert.equal(await f.page.locator('#mfa-codes').textContent(),'');
+ assert.equal(await f.page.locator('#mfa-secret').textContent(),'');
+ } finally { release() }
+});
+
+test('late email change failure cannot publish into a different tab account',async t=>{
+ const f=await fixture(t);let release,started;
+ const held=new Promise(r=>release=r),observed=new Promise(r=>started=r);
+ await f.page.route('https://account.fixture.invalid/auth/v1/user**',async route=>{
+  if(route.request().method()!=='PUT')return route.fallback();
+  started();await held;await route.fulfill({status:422,contentType:'application/json',headers:{'x-supabase-api-version':'2024-01-01','access-control-expose-headers':'x-supabase-api-version'},body:JSON.stringify({code:'email_exists',msg:'Synthetic refusal'})});
+ });
+ await f.load();await f.page.locator('#profile').waitFor({state:'visible'});
+ await f.page.locator('#new-email').fill('changed@example.test');
+ await f.page.locator('#email-change-form button[type=submit]').click();await observed;
+ // A different tab has replaced the stored session while this provider call is in flight.
+ await f.page.evaluate(session=>{
+  localStorage.setItem('sb-account-auth-token',JSON.stringify(session));
+  const peer=new BroadcastChannel('sb-account-auth-token');peer.postMessage({event:'SIGNED_IN',session});setTimeout(()=>peer.close(),1000);
+ },sessionFor(USER_B));
+ await f.page.clock.runFor(0);release();
+ await until(f.page,()=>document.getElementById('profile-email').textContent==='b@example.test');await f.page.waitForFunction(()=>!document.getElementById('logout').disabled);
+ assert.doesNotMatch(await f.page.locator('#status').textContent(),/cannot be used/);
+ assert.equal(await f.page.locator('#profile-email').textContent(),USER_B.email);
+});
+
+test('signup requires email confirmation and then permits a fresh password login',async t=>{
+ const f=await fixture(t);let registered=false,confirmed=false,confirmations=0,passwordLogins=0;
+ const headers={'x-supabase-api-version':'2024-01-01','access-control-expose-headers':'x-supabase-api-version'};
+ await f.page.route('https://account.fixture.invalid/auth/v1/signup**',async route=>{
+  const body=route.request().postDataJSON();assert.equal(body.email,'a@example.test');assert.equal(body.password,'new-password-123');
+  registered=true;await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({...USER_A,identities:[{provider:'email'}],email_confirmed_at:null})});
+ });
+ await f.page.route('https://account.fixture.invalid/auth/v1/token**',async route=>{
+  const req=route.request(),grant=new URL(req.url()).searchParams.get('grant_type');
+  if(grant==='pkce'){
+   assert.equal(registered,true);assert.equal(req.postDataJSON().auth_code,'confirmation-code');confirmed=true;confirmations++;
+  }else if(grant==='password'){
+   passwordLogins++;
+   if(!confirmed)return route.fulfill({status:400,headers,contentType:'application/json',body:JSON.stringify({code:'email_not_confirmed',msg:'Synthetic unconfirmed email'})});
+  }else return route.fallback();
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(sessionFor({...USER_A,email_confirmed_at:new Date().toISOString()}))});
+ });
+ await f.load();await f.page.locator('#profile').waitFor({state:'visible'});await f.page.locator('#logout').click();
+ await until(f.page,()=>document.getElementById('status').textContent==='Signed out.');
+ await f.page.getByRole('button',{name:'Create account',exact:true}).click();
+ await f.page.locator('#email').fill(USER_A.email);await f.page.locator('#name').fill('A');await f.page.locator('#password').fill('new-password-123');await f.page.locator('#auth-submit').click();
+ await f.page.waitForFunction(()=>document.getElementById('status').textContent.includes('Check your email'));
+ assert.equal(await f.page.locator('#profile').isVisible(),false);
+ await f.page.getByRole('button',{name:'Back to sign in'}).click();await f.page.locator('#password').fill('new-password-123');await f.page.locator('#auth-submit').click();
+ await f.page.waitForFunction(()=>document.getElementById('status').textContent==='Confirm your email before signing in.');
+ assert.equal(await f.page.locator('#profile').isVisible(),false);
+ await f.page.goto(f.origin+'/account/?code=confirmation-code');await f.page.locator('#profile').waitFor({state:'visible'});
+ assert.equal(confirmations,1);assert.equal(new URL(f.page.url()).search,'');
+ await f.page.locator('#logout').click();await until(f.page,()=>document.getElementById('status').textContent==='Signed out.');
+ await f.page.locator('#email').fill(USER_A.email);await f.page.locator('#password').fill('new-password-123');await f.page.locator('#auth-submit').click();await f.page.locator('#profile').waitFor({state:'visible'});
+ assert.equal(passwordLogins,2);
+});
+
+for(const reason of ['expired','reused'])test(`a ${reason} recovery link cannot authorize a password change`,async t=>{
+ const f=await fixture(t,{query:`?token_hash=${reason}-hash&type=recovery`});
+ await f.page.route('https://account.fixture.invalid/auth/v1/verify',route=>route.fulfill({status:403,contentType:'application/json',body:JSON.stringify({code:'otp_expired',msg:'Synthetic invalid proof'})}));
+ await f.load();await f.page.waitForFunction(()=>document.getElementById('status').textContent.includes('recovery link is invalid or expired'));
+ assert.equal(new URL(f.page.url()).search,'?flow=recovery');assert.equal(await f.page.locator('#profile').isVisible(),false);
+ assert.equal(await f.page.locator('#auth-submit').textContent(),'Sign in');
+ assert.equal(f.calls.some(c=>c.path.endsWith('/user')&&c.body.password),false);
+});
+
+test('five rejected MFA attempts including a provider rate refusal never open the account; a valid retry does',async t=>{
+ const f=await fixture(t);let verified=false,attempts=0;
+ const factor={id:'55555555-5555-4555-8555-555555555555',factor_type:'totp',status:'verified'};
+ await f.page.route('https://account.fixture.invalid/auth/v1/user**',route=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({...USER_A,factors:[factor]})}));
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  const body=route.request().postDataJSON();if(body.action!=='get-account'||verified)return route.fallback();
+  await route.fulfill({status:401,contentType:'application/json',body:JSON.stringify({error:'MFA required',mfaRequired:true})});
+ });
+ await f.page.route('https://account.fixture.invalid/auth/v1/factors/**',async route=>{
+  if(!route.request().url().endsWith('/verify'))return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({id:'fixture-challenge'})});
+  attempts++;const correct=route.request().postDataJSON().code==='123456';verified=correct;
+  await route.fulfill({status:correct?200:attempts===5?429:400,headers:{'x-supabase-api-version':'2024-01-01','access-control-expose-headers':'x-supabase-api-version'},contentType:'application/json',body:JSON.stringify(correct?sessionFor({...USER_A,factors:[factor]}):{code:attempts===5?'over_request_rate_limit':'mfa_verification_failed',msg:'Synthetic MFA refusal'})});
+ });
+ await f.load();await f.page.locator('#mfa-challenge').waitFor({state:'visible'});
+ for(let n=1;n<=5;n++){
+  await f.page.locator('#mfa-challenge-code').fill('000000');await f.page.locator('#mfa-challenge-form button[type=submit]').click();
+  await f.page.waitForFunction(()=>!document.getElementById('mfa-challenge-form').querySelector('button').disabled);
+  assert.equal(attempts,n);assert.equal(await f.page.locator('#profile').isVisible(),false);assert.equal(await f.page.locator('#consent').isVisible(),false);assert.equal(await f.page.locator('#mfa-challenge-code').inputValue(),'');
+ }
+ await f.page.locator('#mfa-challenge-code').fill('123456');await f.page.locator('#mfa-challenge-form button[type=submit]').click();await f.page.locator('#profile').waitFor({state:'visible'});
+ assert.equal(attempts,6);assert.equal(await f.page.locator('#mfa-challenge').isVisible(),false);
+});
+
+for(const state of ['wrong','reused'])test(`Desktop consent stays closed for a provider-refused ${state} authorization state`,async t=>{
+ const f=await fixture(t,{authorizePage:true,query:`?authorization_id=${state}-state`});let approvals=0;
+ await f.page.route('https://account.fixture.invalid/auth/v1/oauth/authorizations/**',async route=>{
+  if(route.request().method()!=='GET')approvals++;
+  await route.fulfill({status:state==='wrong'?403:410,contentType:'application/json',body:JSON.stringify({code:'validation_failed',msg:'Synthetic refused authorization'})});
+ });
+ await f.load();await f.page.waitForFunction(()=>document.getElementById('status').textContent.includes('connection request is invalid or expired'));
+ assert.equal(await f.page.locator('#consent').isVisible(),false);
+ await f.page.locator('#approve').dispatchEvent('click');await f.page.waitForFunction(()=>!document.getElementById('account-state-logout').disabled);
+ assert.equal(approvals,0);assert.equal(new URL(f.page.url()).pathname,'/account/authorize/');
+});
+
+test('a credential lock held by another tab respects a positive acquisition deadline',async t=>{
+ const f=await fixture(t);await f.load();await f.page.locator('#profile').waitFor({state:'visible'});
+ const peer=await f.openPeer();await peer.locator('#profile').waitFor({state:'visible'});
+ await peer.evaluate(()=>{
+  window.heldCredentialLock=navigator.locks.request('fixture-held-credentials',async()=>{
+   window.lockHeld=true;await new Promise(resolve=>window.releaseCredentialLock=resolve);
+  });
+ });
+ await peer.waitForFunction(()=>window.lockHeld===true);
+ try{
+  const result=await f.page.evaluate(()=>Promise.race([
+   window.__accountLifecycle.lock('fixture-held-credentials',50,()=> 'incorrectly-acquired').catch(error=>error.isAcquireTimeout?'acquisition-timeout':error.name),
+   new Promise(resolve=>setTimeout(()=>resolve('still-waiting'),500))
+  ]));
+  assert.equal(result,'acquisition-timeout');
+ }finally{await peer.evaluate(async()=>{window.releaseCredentialLock();await window.heldCredentialLock})}
+ assert.equal(await f.page.evaluate(()=>window.__accountLifecycle.lock('fixture-held-credentials',50,()=> 'acquired')),'acquired');
+});
+
+test('an Auth suspension received during email change closes all profile mutations',async t=>{
+ const f=await fixture(t);
+ await f.page.route('https://account.fixture.invalid/auth/v1/user**',async route=>{
+  if(route.request().method()!=='PUT')return route.fallback();
+  await route.fulfill({status:403,headers:{'x-supabase-api-version':'2024-01-01','access-control-expose-headers':'x-supabase-api-version'},contentType:'application/json',body:JSON.stringify({code:'user_banned',msg:'Synthetic ban'})});
+ });
+ await f.load();await f.page.locator('#profile').waitFor({state:'visible'});
+ await f.page.locator('#new-email').fill('changed@example.test');await f.page.locator('#email-change-form button[type=submit]').click();
+ await f.page.waitForFunction(()=>!document.getElementById('account-state-logout').disabled);
+ assert.equal(await f.page.locator('#profile').isVisible(),false);
+ assert.equal(await f.page.locator('#account-state-title').textContent(),'Account suspended');
+ assert.equal(await f.page.locator('#account-state-logout').isEnabled(),true);
+});
+
+test('logout erases an unsubmitted MFA recovery code',async t=>{
+ const f=await fixture(t);
+ await f.page.route('https://account.fixture.invalid/functions/**',route=>route.fulfill({status:401,contentType:'application/json',body:JSON.stringify({error:'MFA required',mfaRequired:true})}));
+ await f.load();await f.page.locator('#mfa-challenge').waitFor({state:'visible'});
+ await f.page.locator('#mfa-use-recovery').click();await f.page.locator('#mfa-recovery-code').fill('00000-00000');
+ await f.page.locator('#mfa-challenge-signout').click();await until(f.page,()=>document.getElementById('status').textContent==='Signed out.');
+ assert.equal(await f.page.locator('#mfa-recovery-code').inputValue(),'');
+});
+
+test('the in-page credential lock fallback times out without running the expired writer later',async t=>{
+ const f=await fixture(t);await f.load();await f.page.locator('#profile').waitFor({state:'visible'});
+ const result=await f.page.evaluate(async()=>{
+  Object.defineProperty(navigator,'locks',{value:undefined,configurable:true});
+  let release,started,writes=0;const held=new Promise(r=>release=r),observed=new Promise(r=>started=r);
+  const owner=window.__accountLifecycle.lock('fixture-fallback',-1,async()=>{started();await held});await observed;
+  const waiting=window.__accountLifecycle.lock('fixture-fallback',50,()=>{writes++;return 'incorrectly-acquired'}).catch(error=>error.isAcquireTimeout?'acquisition-timeout':error.name);
+  const result=await Promise.race([waiting,new Promise(r=>setTimeout(()=>r('still-waiting'),500))]);
+  release();await owner;await waiting;delete navigator.locks;
+  return {result,writes};
+ });
+ assert.deepEqual(result,{result:'acquisition-timeout',writes:0});
+});
+
+test('a recovery token changes the password once, signs out, and cannot be reused by the page',async t=>{
+ const query='?token_hash=single-use-recovery&type=recovery',f=await fixture(t,{query});let used=false,passwordWrites=0;
+ await f.page.route('https://account.fixture.invalid/auth/v1/verify',async route=>{
+  const body=route.request().postDataJSON();assert.equal(body.type,'recovery');assert.equal(body.token_hash,'single-use-recovery');
+  const replay=used;used=true;await route.fulfill({status:replay?403:200,contentType:'application/json',body:JSON.stringify(replay?{code:'otp_expired',msg:'Synthetic consumed token'}:sessionFor(USER_A))});
+ });
+ await f.page.route('https://account.fixture.invalid/auth/v1/user**',async route=>{
+  if(route.request().method()==='PUT'&&route.request().postDataJSON().password)passwordWrites++;
+  return route.fallback();
+ });
+ await f.load();await f.page.waitForFunction(()=>document.getElementById('auth-submit').textContent==='Save password');
+ assert.equal(new URL(f.page.url()).search,'?flow=recovery');
+ await f.page.locator('#password').fill('new-recovery-password-123');await f.page.locator('#auth-submit').click();
+ await until(f.page,()=>document.getElementById('status').textContent==='Password updated. Sign in again to continue.');
+ assert.equal(await f.page.evaluate(()=>localStorage.getItem('sb-account-auth-token')),null);
+ await f.page.goto(f.origin+'/account/'+query);await f.page.waitForFunction(()=>document.getElementById('status').textContent.includes('recovery link is invalid or expired'));
+ assert.equal(passwordWrites,1);assert.equal(await f.page.locator('#auth-submit').textContent(),'Sign in');
+ assert.equal(await f.page.evaluate(()=>localStorage.getItem('sb-account-auth-token')),null);
+});
+
+test('an initial credential lock timeout remains retryable after the other tab releases it',async t=>{
+ const f=await fixture(t),errors=[];f.page.on('pageerror',error=>errors.push(error.message));
+ const peer=await f.openPeer();await peer.locator('#profile').waitFor({state:'visible'});
+ await peer.evaluate(()=>{window.heldCredentialLock=navigator.locks.request('lock:sb-account-auth-token',async()=>{window.lockHeld=true;await new Promise(r=>window.releaseCredentialLock=r)})});
+ await peer.waitForFunction(()=>window.lockHeld===true);
+ try{
+  await f.load();await f.page.waitForFunction(()=>window.__sdkClient!=null);await f.page.clock.runFor(8100);
+  await f.page.locator('#account-state-retry').waitFor({state:'visible'});
+  assert.equal(await f.page.locator('#account-state-retry').isEnabled(),true);
+ }finally{await peer.evaluate(async()=>{window.releaseCredentialLock();await window.heldCredentialLock})}
+ assert.deepEqual(errors,[],'SDK initialization and event reads must not publish unhandled lock errors');
+ await until(f.page,()=>!document.getElementById('profile').hidden || (!document.getElementById('account-state').hidden && !document.getElementById('account-state-retry').disabled));
+ if(!await f.page.locator('#profile').isVisible())await f.page.locator('#account-state-retry').click();
+ await f.page.locator('#profile').waitFor({state:'visible'});
+ assert.equal(await f.page.locator('#profile-email').textContent(),USER_A.email);
+ assert.deepEqual(errors,[]);
+});
+
+for(const outcome of ['refusal','enrollment'])test(`late MFA ${outcome} from one account cannot change the next account view`,async t=>{
+ const f=await fixture(t);let release,started;
+ const held=new Promise(r=>release=r),observed=new Promise(r=>started=r);
+ await f.page.route('https://account.fixture.invalid/functions/**',async route=>{
+  if(route.request().postDataJSON().action!=='get-account')return route.fallback();
+  await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({user:{displayName:'Fixture',bio:''},sessions:[],deletion:null,mfa:{enabled:false,factors:[],recoveryCodesRemaining:0}})});
+ });
+ await f.page.route('https://account.fixture.invalid/auth/v1/factors',async route=>{
+  started();await held;
+  await route.fulfill({status:outcome==='refusal'?403:200,headers:{'x-supabase-api-version':'2024-01-01','access-control-expose-headers':'x-supabase-api-version'},contentType:'application/json',body:JSON.stringify(outcome==='refusal'?{code:'user_banned',msg:'Synthetic prior-account ban'}:{id:'old-factor',totp:{secret:'prior-account-secret'}})});
+ });
+ await f.load();await f.page.locator('#profile').waitFor({state:'visible'});await f.page.locator('#mfa-enable').click();await observed;
+ try{
+  await f.page.evaluate(async()=>window.__accountLifecycle.writeUnprotectedSdkSession(()=>window.__sdkClient.auth.signInWithPassword({email:'b@example.test',password:'fixture-password'})));
+  await until(f.page,()=>document.getElementById('profile-email').textContent==='b@example.test');
+ }finally{release()}
+ await f.page.waitForFunction(()=>!document.getElementById('account-state-logout').disabled);
+ assert.equal(await f.page.locator('#profile').isVisible(),true);
+ assert.equal(await f.page.locator('#profile-email').textContent(),USER_B.email);
+ assert.equal(await f.page.locator('#mfa-secret').textContent(),'');
+ assert.equal(await f.page.locator('#mfa-enroll').isVisible(),false);
+});

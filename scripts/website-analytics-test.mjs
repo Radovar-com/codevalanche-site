@@ -82,8 +82,8 @@ try{
  await context.addCookies([{name:'codevalanche_consent',value:'accepted',url:origin}]);await context.addInitScript(()=>localStorage.setItem('codevalanche_analytics_installation','legacy-not-an-owned-id'));
  context.on('request',r=>{if(/google-analytics|googletagmanager/.test(r.url()))google++;});
  await ready(page,'/?utm_source=newsletter&utm_medium=email&utm_campaign=fall_launch&email=private%40example.com&gclid=secret#access_token=private');
- // With a qualified installer the homepage is built in its release state: no "in preparation" text anywhere.
- assert.match(await page.locator('.hero-availability').textContent(),/^Version /);assert.equal(await page.locator('[data-release-status]').count(),0);assert.doesNotMatch(await page.locator('main').textContent(),/in preparation/i);
+ // With a qualified installer the homepage is built in its release state: no visible "in preparation" text.
+ assert.match(await page.locator('.hero-availability').textContent(),/^Version /);assert.equal(await page.locator('[data-release-status]').count(),0);assert.doesNotMatch(await page.locator('main').innerText(),/in preparation/i);
  assert.equal(requests.length,0);assert.equal(await page.evaluate(()=>CodevalancheAnalytics.consentManager.getState().state),'unknown');assert.equal(await page.evaluate(()=>localStorage.getItem('owned_analytics:codevalanche:identity')),null);
  await page.getByRole('button',{name:'Decline',exact:true}).click();await flush(page);assert.equal(requests.length,0);
  await page.locator('.cmp-manage').click();await page.getByRole('button',{name:'Accept analytics',exact:true}).click();await page.waitForFunction(()=>CodevalancheAnalytics.getStatus()==='ready');await flush(page);const session=[...events.values()].find(e=>e.event_name==='session_started');assert.equal(session.properties.attribution_kind,'campaign');assert.equal(session.context.acquisition_source,'newsletter');assert.equal(session.context.campaign,'fall_launch');assert.ok(!JSON.stringify([...events.values()]).includes('private'));
@@ -98,6 +98,10 @@ try{
  await page.locator('footer a[href="/download/"]').click();await page.waitForURL(origin+'/download/');await page.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager);await flush(page);
  assert.ok([...events.values()].some(e=>e.event_name==='page_viewed'&&e.page_id==='download'));
  for(const placement of ['header','hero','footer'])assert.ok([...events.values()].some(e=>e.event_name==='navigation_used'&&e.properties.placement===placement));
+ const beforeVerify=[...events.values()].filter(e=>e.event_name==='navigation_used'&&e.properties.target_page_id==='download'&&e.properties.placement==='inline').length;
+ await page.locator('a[href="/download/verify/"]').click();await page.waitForURL(origin+'/download/verify/');await page.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager);await flush(page);
+ assert.equal([...events.values()].filter(e=>e.event_name==='navigation_used'&&e.properties.target_page_id==='download'&&e.properties.placement==='inline').length,beforeVerify+1,'verification link retains the existing optional download journey attribution');
+ await page.locator('main a[href="/download/"]').click();await page.waitForURL(origin+'/download/');await page.waitForFunction(()=>window.CodevalancheAnalytics?.consentManager);await flush(page);
  const beforeDownload=[...events.values()].filter(e=>e.event_name==='download_clicked').length;
  // Real link + ordinary native document navigation. No queue/flush barrier on this path.
  await page.locator('[data-download-platform="windows"]').last().click();await page.waitForURL(origin+'/fixture-download');

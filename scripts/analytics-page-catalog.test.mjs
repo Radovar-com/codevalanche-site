@@ -10,9 +10,9 @@ import {PAGE_SECTION_SCOPE} from '../supabase/functions/_shared/metricDefinition
 import {readFile} from 'node:fs/promises';
 import {parse} from 'parse5';
 
-const productScopes={how_it_works:['hero','workflow','showcase','footer'],agents:['hero','accounts','details','showcase','footer'],multiple_accounts:['hero','accounts','workflow','faq','footer'],local_ai:['hero','accounts','showcase','privacy_principles','faq','footer'],docs:['hero','workflow','details','faq','footer'],download:['hero','download','faq','footer'],security:['hero','privacy_principles','details','faq','footer']};
+const productScopes={tour:['hero','workflow','download','footer'],how_it_works:['hero','workflow','showcase','footer'],agents:['hero','accounts','details','showcase','footer'],multiple_accounts:['hero','accounts','workflow','faq','footer'],local_ai:['hero','accounts','showcase','privacy_principles','faq','footer'],docs:['hero','workflow','details','faq','footer'],download:['hero','download','faq','footer'],security:['hero','privacy_principles','details','faq','footer']};
 test('product page source markers exactly match measured section opportunities',async()=>{
- const sources={how_it_works:'how-it-works',agents:'agents',multiple_accounts:'features/multiple-accounts',local_ai:'local-ai',docs:'docs',download:'download',security:'security'};
+ const sources={tour:'tour',how_it_works:'how-it-works',agents:'agents',multiple_accounts:'features/multiple-accounts',local_ai:'local-ai',docs:'docs',download:'download',security:'security'};
  for(const [pageId,source] of Object.entries({...Object.fromEntries(Object.entries(sources).map(([pageId,source])=>[pageId,`${source}/index.html`])),changelog:'changelog.html',privacy:'privacy.html',terms:'terms.html'})){
   const document=parse(await readFile(new URL(`../src/${source}`,import.meta.url),'utf8'));
   const actual=[];const walk=node=>{const section=node.attrs?.find(attribute=>attribute.name==='data-analytics-section');if(section)actual.push(section.value);for(const child of node.childNodes??[])walk(child);};walk(document);walk(parse(await readFile(new URL('../src/partials/footer.html',import.meta.url),'utf8')));

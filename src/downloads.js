@@ -3,7 +3,7 @@ import {renderReleaseActions} from './release-actions.js';
 import {renderDownloadLanding,startRequestedDownload} from './download-experience.js';
 // Core download links initialize independently of the optional analytics SDK.
 window.CODEVALANCHE_DOWNLOAD_LINKS=downloadLinks(window.CODEVALANCHE_RELEASE_MANIFEST);
-const translate=(text,variables={})=>window.CodevalancheLocale?.translate(text,variables)??text.replace(/\{(\w+)\}/g,(_,name)=>variables[name]??`{${name}}`);
+const translate=(text,variables={})=>(window.CodevalancheLocale?.status!=='unavailable'?window.CodevalancheLocale?.translate(text,variables):undefined)??window.CodevalancheDownloadTranslate?.(text,variables)??text.replace(/\{(\w+)\}/g,(_,name)=>variables[name]??`{${name}}`);
 const visitor={userAgent:navigator.userAgent,userAgentData:navigator.userAgentData,platform:navigator.platform,maxTouchPoints:navigator.maxTouchPoints};
 const render=()=>{
  renderReleaseActions(document,window.CODEVALANCHE_RELEASE_MANIFEST,visitor,translate);

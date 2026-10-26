@@ -68,7 +68,7 @@
     },
     {
       "path": "src/account/app.js",
-      "sha256": "1b7325d0ff780a23f6c99f11489979e70a1b99126c506b3a0ca9e724a3bd0ba5"
+      "sha256": "ba47eb4e7a5396e43f19a4526fffae7788349393fe393f475777796d70a8c6a8"
     },
     {
       "path": "src/account/helpers.js",
@@ -92,7 +92,7 @@
     },
     {
       "path": "supabase/functions/_shared/accountContract.ts",
-      "sha256": "5cbc8cd22c891fe047c2cf363a0f06ec7096691c8404f5a0893b910c59598b3c"
+      "sha256": "1fa60b38a217e0e7b1b102692303d6468139f62ff94dd2a503aed6d040318be1"
     },
     {
       "path": "supabase/functions/_shared/accountLifecycle.ts",
@@ -100,7 +100,7 @@
     },
     {
       "path": "supabase/functions/_shared/accountPolicy.ts",
-      "sha256": "ac11feeb1f8875168dfbd039ce3f9cd86f3f72e04195c1833efef0d7cd855619"
+      "sha256": "b94c2bf5f08bf6b84be5d90acc75365e40fdf87badd3098249775f693fc132a7"
     },
     {
       "path": "supabase/functions/_shared/accountPrincipal.ts",
@@ -132,7 +132,7 @@
     },
     {
       "path": "supabase/functions/_shared/erasureJob.ts",
-      "sha256": "bece40948d609177609679d2eb34fbaa0af6123fb03e738302ac28b9cf53a75c"
+      "sha256": "a6149b327081848282fbd28123940f511afa8b2a64eb5d37618694629a739ba8"
     },
     {
       "path": "supabase/functions/_shared/mfaRecovery.ts",
@@ -176,15 +176,15 @@
     },
     {
       "path": "supabase/functions/codevalanche-account/index.ts",
-      "sha256": "8eff98317a109e76813dd2a0edf9953bee0978dfd52a8bc4fc8fca1aa98306cc"
+      "sha256": "f19c36535526926df83861172bedc03d0425785dc83317fcd7734ce762fa89b9"
     },
     {
       "path": "supabase/functions/codevalanche-account/mfa.mjs",
-      "sha256": "77a95d8d3b503ba3e5c94043c4e021c0fdf09409b6ddf616200bd39e262b4db8"
+      "sha256": "6f799d714acab6f9882dffbca91087838a94a5d1a170000492a3fb447238d082"
     },
     {
       "path": "supabase/functions/codevalanche-account/schemas.mjs",
-      "sha256": "b1d4f7fd2f08be5adde18465a59630dc92cc280b739b15724a72d86e42361e17"
+      "sha256": "24812c427274e360a571f55dc7d0de0f48ecd328f4d4d1557e33334737daa903"
     },
     {
       "path": "supabase/functions/codevalanche-account/validation.mjs",

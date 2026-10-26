@@ -9,7 +9,8 @@
     "locales:check": "node scripts/translate-site.mjs check",
     "test": "node --test --test-concurrency=1 scripts/*.test.mjs supabase/tests/*.test.mjs",
     "test:locale": "node scripts/locale-browser-test.mjs",
-    "test:browser": "node scripts/account-browser-test.mjs && node scripts/account-email-links-browser-test.mjs",
+    "test:browser": "node scripts/account-browser-test.mjs && node scripts/account-email-links-browser-test.mjs && node scripts/account-export-browser-test.mjs",
+    "test:tour": "node scripts/tour-browser-test.mjs",
     "test:marketing": "node scripts/marketing-browser-test.mjs",
     "test:remote:browser": "node scripts/remote-browser-test.mjs"
   },
@@ -18,8 +19,10 @@
     "jose": "6.2.12"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
     "@electric-sql/pglite": "0.5.8",
     "esbuild": "0.28.2",
+    "lighthouse": "13.5.0",
     "parse5": "8.0.1",
     "playwright": "1.62.0"
   },

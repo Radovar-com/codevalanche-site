@@ -23,11 +23,13 @@ const localeByTag = new Map(LOCALES.map(locale => [locale.tag.toLowerCase(), loc
 export const MARKETING_PAGES = Object.freeze([
   { path: '/', file: 'index.html', pageId: 'home', priority: '1.0' },
   { path: '/how-it-works/', file: 'how-it-works/index.html', pageId: 'how_it_works', priority: '0.8' },
+  { path: '/tour/', file: 'tour/index.html', pageId: 'tour', priority: '0.8' },
   { path: '/agents/', file: 'agents/index.html', pageId: 'agents', priority: '0.8' },
   { path: '/features/multiple-accounts/', file: 'features/multiple-accounts/index.html', pageId: 'multiple_accounts', priority: '0.8' },
   { path: '/local-ai/', file: 'local-ai/index.html', pageId: 'local_ai', priority: '0.8' },
   { path: '/docs/', file: 'docs/index.html', pageId: 'docs', priority: '0.8' },
   { path: '/download/', file: 'download/index.html', pageId: 'download', priority: '0.8' },
+  { path: '/download/verify/', file: 'download/verify/index.html', pageId: 'download_verify', priority: '0.8' },
   { path: '/security/', file: 'security/index.html', pageId: 'security', priority: '0.8' },
   { path: '/changelog.html', file: 'changelog.html', pageId: 'changelog', priority: '0.7' },
   { path: '/privacy.html', file: 'privacy.html', pageId: 'privacy', priority: '0.5' },

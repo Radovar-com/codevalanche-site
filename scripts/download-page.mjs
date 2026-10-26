@@ -11,6 +11,41 @@ const MARKER = /<!-- \/?download:(?:preparation|release) -->/g;
 export const STARTED_HREF = '/download/started/?platform=windows-x64';
 const escape = value => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+/** Build-time verification data: never omit a published version without a hash. */
+export function fillVerification(html, releases, current = null) {
+  const marker = '<!-- download:verification -->';
+  if (!html.includes(marker)) throw new Error('The verification page has lost its marker');
+  const versions = new Set();
+  const cards = releases.map(release => {
+    const { version, installer } = release;
+    if (versions.has(version)) throw new Error(`Duplicate verification release: ${version}`);
+    versions.add(version);
+    if (!/^\d+\.\d+\.\d+$/.test(version) || !installer
+      || !/^[a-f0-9]{64}$/.test(installer.sha256 ?? '')
+      || !/^[^<>:"/\\|?*\x00-\x1f\u2018\u2019]+\.exe$/.test(installer.fileName ?? '')) {
+      throw new Error(`${version}: installer filename and lowercase SHA-256 are required`);
+    }
+    const command = `Get-FileHash -Algorithm SHA256 -LiteralPath '.\\${installer.fileName.replaceAll("'", "''")}' | Select-Object -ExpandProperty Hash`;
+    const id = `verify-${anchor(version)}`;
+    return `<article class="verify-release" aria-labelledby="${id}" data-verify-version="${version}">
+      <h3 id="${id}"><span>Codevalanche</span> <code>${version}</code></h3>
+      <p><code class="verify-value" dir="ltr">${escape(installer.fileName)}</code></p>
+      <p><span>SHA-256</span><code class="verify-value verify-hash" dir="ltr">${installer.sha256}</code></p>
+      <div class="verify-command"><code id="${id}-command" class="verify-value" dir="ltr">${escape(command)}</code>
+        <button class="button" type="button" data-copy-command="${id}-command" hidden>Copy command</button>
+      </div>
+      <p class="verify-status" role="status"><span data-copy-ok hidden>Command copied.</span><span data-copy-failed hidden>Select and copy the command manually.</span></p>
+    </article>`;
+  });
+  if (current) {
+    const installer = releases.find(release => release.version === current.version)?.installer;
+    if (!installer || installer.sha256 !== current.sha256 || installer.fileName !== current.fileName) {
+      throw new Error('The current download does not match its release verification data');
+    }
+  }
+  return html.replace(marker, () => cards.join('') || '<p>No published Windows installers yet.</p>');
+}
+
 export function windowsDownload(manifest) {
   const link = downloadLinks(manifest).windows;
   if (!link) return null;
@@ -51,14 +86,15 @@ export function releaseHistory(releases) {
   return `<ol class="dl-history">${items.join('')}</ol>`;
 }
 
-/** The public download count, shown only once it is at least the minimum. */
+/** Publish only above the threshold, with a non-configurable publication floor. */
 export function countLine(count, minimum) {
-  return Number.isInteger(count) && Number.isInteger(minimum) && count >= minimum
+  return Number.isSafeInteger(count) && Number.isSafeInteger(minimum) && count > Math.max(500, minimum)
     ? `<p class="dl-count">${COUNT_TEXT.replace('{count}', formatCount(count, 'en'))}</p>` : '';
 }
 
 export function fillDownload(html, download, { releases = [], count = null, minimum = null } = {}) {
   if (!download) return html;
+  const startedHref = `/download/started/?platform=windows-${download.architecture}`;
   const attributes = `data-download-platform="windows" data-download-release="${escape(download.releaseId)}" data-download-artifact="${escape(download.artifactId)}" data-download-architecture="${escape(download.architecture)}"`;
   const values = {
     version: download.version,
@@ -67,8 +103,8 @@ export function fillDownload(html, download, { releases = [], count = null, mini
     'hash-command': `Get-FileHash .\\${download.fileName}`,
   };
   let result = html
-    .replace(/href="#download" data-fill-download-card/g, `href="${STARTED_HREF}" ${attributes} data-download-card`)
-    .replace(/href="#download" data-fill-download/g, `href="${STARTED_HREF}" ${attributes} data-release-primary`)
+    .replace(/href="#download" data-fill-download-card/g, `href="${startedHref}" ${attributes} data-download-card`)
+    .replace(/href="#download" data-fill-download/g, `href="${startedHref}" ${attributes} data-release-primary`)
     .replace(/href="#download" data-download-retry/g, `href="${escape(download.path)}" data-download-retry`)
     .replace('<!-- download:history -->', () => releaseHistory(releases))
     .replace('<!-- download:count -->', () => countLine(count, minimum));
@@ -117,17 +153,40 @@ export async function publicDownloadCount(manifest, { fetch = globalThis.fetch, 
   const match = host && /^https:\/\/github\.com\/([\w.-]+)\/([\w.-]+)\/releases\/download\//.exec(host.targetUrl);
   if (!match) return null;
   try {
-    const response = await fetch(`https://api.github.com/repos/${match[1]}/${match[2]}/releases?per_page=100`, {
-      headers: { accept: 'application/vnd.github+json', ...(token ? { authorization: `Bearer ${token}` } : {}) },
-      signal: AbortSignal.timeout(15000),
-    });
-    if (!response.ok) return null;
-    const releases = await response.json();
-    if (!Array.isArray(releases)) return null;
-    return releases.filter(release => !release.draft && !release.prerelease)
-      .flatMap(release => release.assets ?? [])
-      .filter(asset => /^Codevalanche-Desktop-Setup-.+-stable-.+\.exe$/.test(asset.name ?? '') && Number.isInteger(asset.download_count))
-      .reduce((total, asset) => total + asset.download_count, 0);
+    let total = 0;
+    const releaseIds = new Set(), assetIds = new Set();
+    // Fetch every page; never publish a partial total if a later page fails.
+    // Bound work and elapsed time even if a provider repeatedly sends full pages.
+    const signal = AbortSignal.timeout(15000);
+    for (let page = 1; page <= 100; page++) {
+      const response = await fetch(`https://api.github.com/repos/${match[1]}/${match[2]}/releases?per_page=100${page === 1 ? '' : `&page=${page}`}`, {
+        headers: { accept: 'application/vnd.github+json', ...(token ? { authorization: `Bearer ${token}` } : {}) },
+        signal,
+      });
+      if (!response.ok) return null;
+      const releases = await response.json();
+      if (!Array.isArray(releases)) return null;
+      for (const release of releases) {
+        // Offset pages can shift during publication. An overlap is not a snapshot.
+        if (release.id !== undefined) {
+          if (releaseIds.has(release.id)) return null;
+          releaseIds.add(release.id);
+        }
+        if (release.draft || release.prerelease) continue;
+        for (const asset of release.assets ?? []) {
+          if (!/^Codevalanche-Desktop-Setup-.+-stable-.+\.exe$/.test(asset.name ?? '')) continue;
+          if (asset.id !== undefined) {
+            if (assetIds.has(asset.id)) return null;
+            assetIds.add(asset.id);
+          }
+          if (!Number.isSafeInteger(asset.download_count) || asset.download_count < 0) return null;
+          total += asset.download_count;
+          if (!Number.isSafeInteger(total)) return null;
+        }
+      }
+      if (releases.length < 100) return total;
+    }
+    return null;
   } catch {
     return null;
   }

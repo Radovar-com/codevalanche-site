@@ -92,7 +92,7 @@ export function startRequestedDownload(document, manifest, {window: host = globa
     && item.releaseId === link.releaseId && item.artifactId === link.artifactId);
   const ok = document.querySelector('[data-started-ok]');
   const missing = document.querySelector('[data-started-missing]');
-  if (requested !== `windows-${asset?.architecture}` || !ok) {
+  if (!asset || requested !== `windows-${asset.architecture}` || !ok) {
     if (ok) ok.hidden = true;
     for (const element of document.querySelectorAll('.page-body > :not(#while-you-wait)')) element.hidden = true;
     if (missing) missing.hidden = false;
@@ -101,11 +101,13 @@ export function startRequestedDownload(document, manifest, {window: host = globa
   // Straight to the file: the site's gateway is a page of its own and would
   // replace this one, while a file download leaves this page on screen.
   const start = () => host.location.assign(asset.targetUrl);
-  countDownload('download_started', requested, {window: host});
+  // Preserve the existing aggregate vocabulary for other qualified architectures.
+  const countPlatform = requested === 'windows-x64' ? requested : 'windows';
+  countDownload('download_started', countPlatform, {window: host});
   host.setTimeout(start, delay);
   document.querySelector('[data-download-retry]')?.addEventListener('click', event => {
     event.preventDefault();
-    countDownload('download_retry', requested, {window: host});
+    countDownload('download_retry', countPlatform, {window: host});
     start();
   });
   return requested;

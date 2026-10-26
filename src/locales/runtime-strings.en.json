@@ -185,5 +185,11 @@
   "Cancel setup",
   "The QR code could not be displayed. Create a new code or use the manual key.",
   "Enter a code from your existing authenticator to continue.",
-  "Your authenticator is ready. Sign in again to finish connecting Company OS."
+  "Your authenticator is ready. Sign in again to finish connecting Company OS.",
+  "Your data file has been downloaded.",
+  "Copy command",
+  "Command copied.",
+  "Select and copy the command manually.",
+  "No published Windows installers yet.",
+  "SHA-256"
 ]
