@@ -7,12 +7,12 @@ import * as seo from './seo-export-test.mjs';
 const origin = 'https://codevalanche.com';
 const sitemapWith = locations => `<urlset>${locations.map(location => `<url><loc>${location}</loc></url>`).join('')}</urlset>`;
 
-test('sitemap validation accepts all 204 public locations including localized multiple-accounts', () => {
+test('sitemap validation accepts all 221 public locations including localized multiple-accounts', () => {
   const sitemap = buildLocalizedSitemap();
   assert.equal(/account|authorize|signed-in/i.test(sitemap), true, 'the historical whole-XML guard reproduces the false positive');
   assert.equal(typeof seo.validateSitemapLocations, 'function');
   const canonicalUrls = new Set(MARKETING_PAGES.flatMap(page => LOCALES.map(locale => new URL(localizedMarketingPath(page.path, locale.tag), origin).href)));
-  assert.equal(canonicalUrls.size, 204);
+  assert.equal(canonicalUrls.size, 221);
   assert.doesNotThrow(() => seo.validateSitemapLocations(sitemap, canonicalUrls));
 });
 

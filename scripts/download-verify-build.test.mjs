@@ -48,6 +48,16 @@ test('built verification pages expose every release hash unchanged in all 17 lan
     const scripts = security.split(';').find(directive => directive.trim().startsWith('script-src '));
     assert.ok(!scripts.includes("'unsafe-inline'") && !scripts.includes("'unsafe-eval'"));
     const downloadCsp = nodes(parse(download), node => node.tagName === 'meta' && attr(node, 'http-equiv')?.toLowerCase() === 'content-security-policy');
-    assert.equal(security, attr(downloadCsp[0], 'content'), 'verification inherits the existing download CSP unchanged');
+    // Script hashes are computed per page: the download page also hashes its own
+    // inline download script. Every other directive is inherited unchanged and
+    // verification allows no script the download page does not.
+    const directives = policy => Object.fromEntries(policy.split(';').map(part => part.trim()).filter(Boolean).map(part => [part.split(/\s+/)[0], part.split(/\s+/).slice(1)]));
+    const own = directives(security);
+    const inherited = directives(attr(downloadCsp[0], 'content'));
+    assert.deepEqual(Object.keys(own), Object.keys(inherited), 'verification keeps every download CSP directive');
+    for (const [name, sources] of Object.entries(own)) {
+      if (name === 'script-src') assert.ok(sources.every(source => inherited[name].includes(source)), 'verification allows no extra script');
+      else assert.deepEqual(sources, inherited[name], `verification inherits ${name} unchanged`);
+    }
   }
 });
