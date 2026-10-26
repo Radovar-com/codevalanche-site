@@ -11,6 +11,41 @@ const MARKER = /<!-- \/?download:(?:preparation|release) -->/g;
 export const STARTED_HREF = '/download/started/?platform=windows-x64';
 const escape = value => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+/** Build-time verification data: never omit a published version without a hash. */
+export function fillVerification(html, releases, current = null) {
+  const marker = '<!-- download:verification -->';
+  if (!html.includes(marker)) throw new Error('The verification page has lost its marker');
+  const versions = new Set();
+  const cards = releases.map(release => {
+    const { version, installer } = release;
+    if (versions.has(version)) throw new Error(`Duplicate verification release: ${version}`);
+    versions.add(version);
+    if (!/^\d+\.\d+\.\d+$/.test(version) || !installer
+      || !/^[a-f0-9]{64}$/.test(installer.sha256 ?? '')
+      || !/^[^<>:"/\\|?*\x00-\x1f\u2018\u2019]+\.exe$/.test(installer.fileName ?? '')) {
+      throw new Error(`${version}: installer filename and lowercase SHA-256 are required`);
+    }
+    const command = `Get-FileHash -Algorithm SHA256 -LiteralPath '.\\${installer.fileName.replaceAll("'", "''")}' | Select-Object -ExpandProperty Hash`;
+    const id = `verify-${anchor(version)}`;
+    return `<article class="verify-release" aria-labelledby="${id}" data-verify-version="${version}">
+      <h3 id="${id}"><span>Codevalanche</span> <code>${version}</code></h3>
+      <p><code class="verify-value" dir="ltr">${escape(installer.fileName)}</code></p>
+      <p><span>SHA-256</span><code class="verify-value verify-hash" dir="ltr">${installer.sha256}</code></p>
+      <div class="verify-command"><code id="${id}-command" class="verify-value" dir="ltr">${escape(command)}</code>
+        <button class="button" type="button" data-copy-command="${id}-command" hidden>Copy command</button>
+      </div>
+      <p class="verify-status" role="status"><span data-copy-ok hidden>Command copied.</span><span data-copy-failed hidden>Select and copy the command manually.</span></p>
+    </article>`;
+  });
+  if (current) {
+    const installer = releases.find(release => release.version === current.version)?.installer;
+    if (!installer || installer.sha256 !== current.sha256 || installer.fileName !== current.fileName) {
+      throw new Error('The current download does not match its release verification data');
+    }
+  }
+  return html.replace(marker, () => cards.join('') || '<p>No published Windows installers yet.</p>');
+}
+
 export function windowsDownload(manifest) {
   const link = downloadLinks(manifest).windows;
   if (!link) return null;

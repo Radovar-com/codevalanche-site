@@ -80,6 +80,10 @@ test('the importer copies the app notes and the CHANGELOG date', async () => {
     await writeFile(path.join(app, 'CHANGELOG.md'), '# Changelog\n\n## v1.0.2 — 2026-10-21\n\n### Improvements\n- Something.\n');
     const file = await importReleaseNotes(app, '1.0.2', { outputDirectory: output });
     const imported = JSON.parse(await readFile(file, 'utf8'));
+    const installer = { fileName: 'setup.exe', sha256: 'a'.repeat(64) };
+    await writeFile(file, JSON.stringify({ ...imported, installer }));
+    await importReleaseNotes(app, '1.0.2', { outputDirectory: output });
+    assert.deepEqual(JSON.parse(await readFile(file, 'utf8')).installer, installer, 'refreshing notes preserves installer verification');
     assert.equal(imported.date, '2026-10-21');
     assert.equal(imported.copy.ro.sections[0].title, 'First ro');
     assert.deepEqual((await loadReleases(output)).map(item => item.version), ['1.0.2']);

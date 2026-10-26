@@ -18,7 +18,7 @@ import { optimizeRendering } from "./optimize-rendering.mjs"
 import { checkInternalLinks } from "./check-internal-links.mjs"
 import { versionSiteAssets } from "./asset-cache.mjs"
 import { changelogTranslations, loadReleases, renderChangelog } from "./changelog.mjs"
-import { describeRelease, downloadTranslations, fillDownload, publicDownloadCount, redirectPage, selectDownloadVariant, windowsDownload } from "./download-page.mjs"
+import { describeRelease, downloadTranslations, fillDownload, fillVerification, publicDownloadCount, redirectPage, selectDownloadVariant, windowsDownload } from "./download-page.mjs"
 await buildAnalytics()
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
@@ -53,6 +53,8 @@ for (const page of PAGES_WITH_NAVIGATION) {
 // Only published versions appear; until the first one, the page says it is on its way.
 // A local preview may point at other notes; a publishable build never sets this.
 const releases = await loadReleases(process.env.CODEVALANCHE_CHANGELOG_PREVIEW_RELEASES || path.join(root, "content/releases"))
+const verificationOutput = path.join(destination, "download/verify/index.html")
+await writeFile(verificationOutput, fillVerification(await readFile(verificationOutput, "utf8"), releases, windowsInstaller))
 const changelogOutput = path.join(destination, "changelog.html")
 await writeFile(changelogOutput, renderChangelog(await readFile(changelogOutput, "utf8"), releases))
 

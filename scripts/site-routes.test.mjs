@@ -56,7 +56,7 @@ test('footer locale targets preserve the current route and English strips the lo
 const directoryPages = [
   ['/how-it-works/', 'how_it_works'], ['/tour/', 'tour'], ['/agents/', 'agents'],
   ['/features/multiple-accounts/', 'multiple_accounts'], ['/local-ai/', 'local_ai'],
-  ['/docs/', 'docs'], ['/download/', 'download'], ['/security/', 'security'],
+  ['/docs/', 'docs'], ['/download/', 'download'], ['/download/verify/', 'download_verify'], ['/security/', 'security'],
 ];
 
 test('directory routes and index aliases retain their canonical slash in every locale', () => {
