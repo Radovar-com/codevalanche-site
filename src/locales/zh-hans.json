@@ -824,5 +824,9 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Your data": "你的数据",
+  "Download a copy of your account data as JSON.": "以 JSON 格式下载你的账户数据副本。",
+  "Download my data": "下载我的数据",
+  "Your data file has been downloaded.": "你的数据文件已下载。"
 }

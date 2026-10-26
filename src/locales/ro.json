@@ -824,5 +824,9 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Your data": "Datele tale",
+  "Download a copy of your account data as JSON.": "Descarcă o copie a datelor contului tău în format JSON.",
+  "Download my data": "Descarcă datele mele",
+  "Your data file has been downloaded.": "Fișierul cu datele tale a fost descărcat."
 }

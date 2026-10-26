@@ -68,7 +68,7 @@
     },
     {
       "path": "src/account/app.js",
-      "sha256": "6a269542bac95f61221c68bd7f058c93d07ede505f535f673a367645a1a0b801"
+      "sha256": "ba47eb4e7a5396e43f19a4526fffae7788349393fe393f475777796d70a8c6a8"
     },
     {
       "path": "src/account/helpers.js",
@@ -92,7 +92,7 @@
     },
     {
       "path": "supabase/functions/_shared/accountContract.ts",
-      "sha256": "5cbc8cd22c891fe047c2cf363a0f06ec7096691c8404f5a0893b910c59598b3c"
+      "sha256": "1fa60b38a217e0e7b1b102692303d6468139f62ff94dd2a503aed6d040318be1"
     },
     {
       "path": "supabase/functions/_shared/accountLifecycle.ts",
@@ -100,7 +100,7 @@
     },
     {
       "path": "supabase/functions/_shared/accountPolicy.ts",
-      "sha256": "ac11feeb1f8875168dfbd039ce3f9cd86f3f72e04195c1833efef0d7cd855619"
+      "sha256": "b94c2bf5f08bf6b84be5d90acc75365e40fdf87badd3098249775f693fc132a7"
     },
     {
       "path": "supabase/functions/_shared/accountPrincipal.ts",
@@ -176,15 +176,15 @@
     },
     {
       "path": "supabase/functions/codevalanche-account/index.ts",
-      "sha256": "9aac44a307fe8ed128ea95395c80f06dbfeaec655c482f149beb5ac4931ef9dc"
+      "sha256": "f19c36535526926df83861172bedc03d0425785dc83317fcd7734ce762fa89b9"
     },
     {
       "path": "supabase/functions/codevalanche-account/mfa.mjs",
-      "sha256": "77a95d8d3b503ba3e5c94043c4e021c0fdf09409b6ddf616200bd39e262b4db8"
+      "sha256": "6f799d714acab6f9882dffbca91087838a94a5d1a170000492a3fb447238d082"
     },
     {
       "path": "supabase/functions/codevalanche-account/schemas.mjs",
-      "sha256": "b1d4f7fd2f08be5adde18465a59630dc92cc280b739b15724a72d86e42361e17"
+      "sha256": "24812c427274e360a571f55dc7d0de0f48ecd328f4d4d1557e33334737daa903"
     },
     {
       "path": "supabase/functions/codevalanche-account/validation.mjs",

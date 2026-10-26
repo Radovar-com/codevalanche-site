@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 import { safeError, identityLabels, authCallback, normalizeAccountError, normalizeAccountProfile, passwordProblem, MIN_PASSWORD_LENGTH, captchaModes, turnstileSiteKey, emailLocaleFor, accountServerVersion, V1_ACCOUNT_ACTIONS, deviceLabel, desktopPlatform } from './helpers.js'
 import { createAccountSessionLifecycle, accountAuthFetch, readAccountSession } from './sessionLifecycle.js'
+import { downloadAccountData } from './dataExport.js'
 import { createAccountSecurity } from './security.js'
 import { authenticatorQrSource } from './authenticatorQr.js'
 import { emailLinkCallback, exchangeEmailLink, emailLinkFragment, validateNewPassword, recoveryNotice } from './recovery.js'
@@ -82,6 +83,8 @@ const initialFlow = new URL(location.href).searchParams.get('flow')
 // An accepted invitation sets the account's first password through the recovery-mode form.
 let mode = 'signin', user = null, recovery = ['recovery', 'invite'].includes(initialFlow), invite = initialFlow === 'invite', busy = false
 let accountStatus = 'signed-out', renderGeneration = 0, currentSession = null, operatorConsent = null
+let exportCapability = false, exportTimer = null
+const exportCooldowns = new Map()
 let cleanupPromise = null, cleanupPending = false, ownedSignin = false
 const security = createAccountSecurity(client, { isRecovery: () => recovery, assertRemoval: () => apiV2('security.mfa.remove-authorize') })
 const operatorContext = () => operatorOAuth && Boolean(authorizationId) && !recovery
@@ -228,16 +231,27 @@ function startBenefits() {
   document.addEventListener('visibilitychange', schedule)
   show(0); schedule()
 }
+function updateExportControl() {
+  if (!$('export-data')) return
+  clearTimeout(exportTimer)
+  const remaining = (exportCooldowns.get(user?.id) || 0) - Date.now()
+  const available = exportCapability && accountStatus === 'ready' && !recovery && !authorizationId
+  $('data-export-section').hidden = !available
+  $('export-data').hidden = !available || busy || cleanupPending || remaining > 0
+  $('export-data').disabled = false
+  if (available && remaining > 0) exportTimer = setTimeout(updateExportControl, remaining + 20)
+}
 function applyControls() {
-  [...document.querySelectorAll('button')].filter(button => !button.closest('[data-owned-consent]')).forEach(button => { button.disabled = busy || cleanupPending })
-  document.querySelectorAll('#profile input, #profile textarea, #profile button').forEach(control => { control.disabled = busy || accountStatus !== 'ready' })
+  [...document.querySelectorAll('button')].filter(button => button.id !== 'export-data' && !button.closest('[data-owned-consent]')).forEach(button => { button.disabled = busy || cleanupPending })
+  document.querySelectorAll('#profile input, #profile textarea, #profile button').forEach(control => { if (control.id !== 'export-data') control.disabled = busy || accountStatus !== 'ready' })
   $('account-state-retry').disabled = busy || cleanupPending || accountStatus === 'loading'
   for (const id of ['authenticator-add', 'authenticator-restart', 'mfa-step-up']) if ($(id)) $(id).disabled = busy || cleanupPending || !nativeAuthenticatorAllowed()
   if ($('mfa-remove')) $('mfa-remove').disabled = busy || cleanupPending || accountStatus !== 'ready' || !v2
   if (mode === 'update') $('auth-submit').disabled = busy || cleanupPending || accountStatus !== 'ready'
+  updateExportControl()
 }
 function setAccountStatus(next) {
-  if (next !== 'ready') accountAnalytics.suspend()
+  if (next !== 'ready') { exportCapability = false; accountAnalytics.suspend() }
   if (next !== 'ready') { operatorConsent = null; if (!v2) clearNativeAuthenticator() }
   accountStatus = next
   const gated = ['loading', 'suspended', 'deletion-pending', 'unavailable', 'signing-out', 'logout-failed'].includes(next)
@@ -353,7 +367,7 @@ async function api(action, data = {}) {
   // v1 keeps its legacy action list; only this authorization's operator preflight
   // and a backend-classified approval may use the canonical contract.
   const operatorAction = operatorContext() && (action === 'operator.oauth.details' || (action === 'operator.oauth.approve' && operatorConsent === true))
-  if (!v2 && !V1_ACCOUNT_ACTIONS.includes(action) && !operatorAction) throw { code: 'feature_unavailable' }
+  if (!v2 && !V1_ACCOUNT_ACTIONS.includes(action) && !operatorAction && !(action === 'export-account' && exportCapability)) throw { code: 'feature_unavailable' }
   // A recovery code is redeemed from the sign-in second step, before the account opens.
   if (action !== 'get-account' && action !== 'mfa-recovery-redeem' && accountStatus !== 'ready' && !(action === 'cancel-deletion' && accountStatus === 'deletion-pending')) throw { code: user ? 'account_service_unavailable' : 'session_not_found' }
   const { data: { session }, error } = await readAccountSession(client)
@@ -379,7 +393,7 @@ async function apiV2(operation, fields = {}) {
 async function action(work) {
   if (busy || cleanupPending) return
   const generation = renderGeneration
-  busy = true; [...document.querySelectorAll('button')].filter(button => !button.closest('[data-owned-consent]')).forEach(b => b.disabled = true); notice()
+  busy = true; updateExportControl(); [...document.querySelectorAll('button')].filter(button => button.id !== 'export-data' && !button.closest('[data-owned-consent]')).forEach(b => b.disabled = true); notice()
   try { await work() } catch (error) { if (generation === renderGeneration && error?.code !== 'account_request_superseded') { handleAccountRefusal(error); notice(safeError(error), true) } }
   finally { busy = false; applyControls() }
 }
@@ -444,6 +458,8 @@ async function render(session) {
     $('profile-avatar').textContent = initials(savedProfile.displayName || user.email)
     resetEmailChange()
     void showCaptcha('profile-captcha', true)
+    exportCapability = account.dataExport?.schemaVersion === 1 && account.dataExport?.cooldownSeconds === 300
+    updateExportControl()
     renderMfa(account.mfa)
     if (v2 && $('analytics-consent')) $('analytics-consent').checked = account.analyticsConsent === true
     void accountAnalytics.update({ session, account })
@@ -804,4 +820,22 @@ $('mfa-disable').addEventListener('click', () => void action(async () => {
   try { await api('mfa-disable', { factorId: factor.id }) } catch (error) { noticeTranslated(mfaFailure(error, 'reverify'), true); return }
   $('mfa-codes').replaceChildren(); $('mfa-codes-panel').hidden = true
   await client.auth.refreshSession(); await readCurrentSession(); noticeTranslated(T('disabled'))
+}))
+
+$('export-data')?.addEventListener('click', () => void action(async () => {
+  if (!exportCapability) return
+  const owner = user.id
+  try {
+    const data = await api('export-account')
+    downloadAccountData(data, owner)
+    exportCooldowns.set(owner, Date.now() + 300000)
+    notice('Your data file has been downloaded.')
+  } catch (error) {
+    if (error?.status === 429 || error?.code === 'rate_limited') {
+      exportCooldowns.set(owner, Date.now() + 300000)
+      notice('Too many attempts. Please try again shortly.', true)
+      return
+    }
+    throw error
+  }
 }))

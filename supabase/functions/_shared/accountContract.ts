@@ -70,7 +70,7 @@ export function resultEnvelope(
     error: {
       code,
       message: body.message || "Account request could not be completed",
-      ...(status === 429 ? { retryAfterSeconds: 60 } : {}),
+      ...(status === 429 ? { retryAfterSeconds: body.retryAfterSeconds || 60 } : {}),
     },
     requestId,
   };

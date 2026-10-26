@@ -57,6 +57,7 @@ const MFA_MANAGEMENT = new Set(['mfa-recovery-codes', 'mfa-disable'])
  */
 export function mfaGate({ user, claims, action, enforceOAuth = false }) {
   const aal2 = claims?.aal === 'aal2'
+  if (action === 'export-account' && (user?.factors || []).some(f => f.status === 'verified') && !aal2) return { status: 401, body: { error: 'MFA required', mfaRequired: true } }
   if (MFA_MANAGEMENT.has(action) && !aal2) return { status: 401, body: { error: 'MFA required', mfaRequired: true } }
   if (!verifiedTotpFactors(user).length || aal2 || BEFORE_AAL2.has(action)) return null
   const oauthClient = typeof claims?.client_id === 'string' && claims.client_id.length > 0
