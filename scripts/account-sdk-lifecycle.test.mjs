@@ -613,7 +613,7 @@ test(prefix+'failed operator preflight cannot fall back to browser autoapproval'
   const body=route.request().postDataJSON();if(body.action!=='operator.oauth.details')return route.fallback();
   await route.fulfill({status:503,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:false,requestId:body.requestId,error:{code:'account_service_unavailable'}})});
  });
- await f.load();await f.page.waitForFunction(()=>document.getElementById('status').textContent.includes('connection request'));
+ await f.load();await f.page.waitForFunction(()=>!document.getElementById('operator-failure').hidden&&document.getElementById('operator-failure-text').textContent.includes('connection request'));assert.equal(await f.page.locator('#status').textContent(),'');
  assert.equal(await f.page.locator('#consent').isVisible(),false);assert.equal(f.calls.some(c=>c.path.includes('/oauth/authorizations/')),false);
 });
 

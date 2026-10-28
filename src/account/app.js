@@ -3,6 +3,7 @@ import { safeError, identityLabels, authCallback, normalizeAccountError, normali
 import { createAccountSessionLifecycle, accountAuthFetch } from './sessionLifecycle.js'
 import { createAccountSecurity } from './security.js'
 import { authenticatorQrSource } from './authenticatorQr.js'
+import { operatorStep, accessSummary } from './operatorFlow.js'
 import { emailLinkCallback, exchangeEmailLink, emailLinkFragment, validateNewPassword, recoveryNotice } from './recovery.js'
 import { loadTurnstile } from './captcha.js'
 import { createAccountAnalytics } from './analytics.js'
@@ -107,11 +108,46 @@ function clearNativePresentation() {
 }
 function clearNativeAuthenticator() { security.clear(); clearNativePresentation() }
 function updateAuthenticatorPanel() {
-  if ($('authenticator-section')) $('authenticator-section').hidden = !user || recovery || !(v2 ? ['ready', 'deletion-pending'].includes(accountStatus) : nativeAuthenticatorAllowed())
+  // While Company OS asks for consent, the security-code setup is not the next step: the approval
+  // itself answers parentMfaRequired and only then is the consent card swapped for the setup.
+  const operatorConsentShown = operatorContext() && $('consent') && !$('consent').hidden
+  if ($('authenticator-section')) $('authenticator-section').hidden = !user || recovery || operatorConsentShown || !(v2 ? ['ready', 'deletion-pending'].includes(accountStatus) : nativeAuthenticatorAllowed())
   if ($('mfa-remove')) $('mfa-remove').hidden = !v2
-  if ($('native-mfa-title')) $('native-mfa-title').textContent = t(operatorContext() && operatorConsent === true ? 'Connect Company OS securely' : 'Set up your authenticator')
-  if ($('native-mfa-intro')) $('native-mfa-intro').textContent = t(operatorContext() && operatorConsent === true ? 'Company OS needs a security code before it can open account administration.' : 'Open your authenticator app, add an account, and scan this code.')
+  const companyOs = operatorContext() && operatorConsent === true
+  // An account that already has a verified authenticator continues with it; a new QR code is the secondary path.
+  const existing = companyOs && (user?.factors || []).some(factor => factor.factor_type === 'totp' && factor.status === 'verified')
+  if ($('native-mfa-title')) $('native-mfa-title').textContent = t(companyOs ? (existing ? 'Enter your security code' : 'Add a security code') : 'Set up your authenticator')
+  if ($('native-mfa-intro')) $('native-mfa-intro').textContent = t(companyOs ? (existing ? 'Company OS asks for the six-digit code from the authenticator app on your phone.' : 'Company OS asks for a six-digit code from an authenticator app on your phone, such as Google Authenticator or Microsoft Authenticator.') : 'Open your authenticator app, add an account, and scan this code.')
+  if ($('authenticator-add') && $('mfa-step-up')) {
+    $('authenticator-add').className = existing ? 'quiet' : 'cr-btn cr-btn-primary'; $('mfa-step-up').className = existing ? 'cr-btn cr-btn-primary' : 'quiet'
+    $('authenticator-add').textContent = t(existing ? 'Set up a new authenticator instead' : 'Create a QR code')
+    $('mfa-step-up').textContent = t(existing ? 'Enter code' : 'Use an existing authenticator')
+    if (existing) $('authenticator-add').before($('mfa-step-up')); else $('mfa-step-up').before($('authenticator-add'))
+    const note = $('authenticator-start').querySelector('.native-mfa-note'); if (note) note.hidden = existing
+  }
+  updateOperatorSteps()
 }
+// An app asking for this account (Company OS) gets one card at a time under a
+// three-step progress line; a failure replaces the card instead of floating as a toast.
+function updateOperatorSteps() {
+  const steps = $('operator-steps'); if (!steps) return
+  const active = operatorContext()
+  steps.hidden = !active; $('stage').classList.toggle('operator-flow', active)
+  if (!active) return
+  const current = operatorStep({ consent: !$('consent').hidden, securityCode: !$('mfa-challenge').hidden || !$('authenticator-section').hidden })
+  for (const item of steps.children) {
+    const step = Number(item.dataset.step)
+    item.dataset.state = step < current ? 'done' : step === current ? 'current' : 'next'
+    if (step === current) item.setAttribute('aria-current', 'step'); else item.removeAttribute('aria-current')
+  }
+}
+let operatorRestartSignsOut = false
+function showOperatorFailure(message, signOut = false) {
+  operatorRestartSignsOut = signOut
+  $('operator-failure-text').textContent = message
+  $('operator-failure').hidden = false; $('stage').classList.add('operator-failed'); notice()
+}
+function clearOperatorFailure() { if ($('operator-failure')) { $('operator-failure').hidden = true; $('stage').classList.remove('operator-failed') } }
 // Signed in, the status line is a toast: confirmations fade on their own after
 // a reading time that follows their length; errors stay until the next action.
 let noticeTimer = null
@@ -230,6 +266,7 @@ function applyControls() {
   document.querySelectorAll('#profile input, #profile textarea, #profile button').forEach(control => { control.disabled = busy || accountStatus !== 'ready' })
   $('account-state-retry').disabled = busy || cleanupPending || accountStatus === 'loading'
   for (const id of ['authenticator-add', 'authenticator-restart', 'mfa-step-up']) if ($(id)) $(id).disabled = busy || cleanupPending || !nativeAuthenticatorAllowed()
+  updateOperatorSteps()
   if ($('mfa-remove')) $('mfa-remove').disabled = busy || cleanupPending || accountStatus !== 'ready' || !v2
   if (mode === 'update') $('auth-submit').disabled = busy || cleanupPending || accountStatus !== 'ready'
 }
@@ -249,11 +286,13 @@ function setAccountStatus(next) {
   $('opening').lastElementChild.textContent = t(next === 'signing-out' ? 'Signing out…' : 'Opening your account…')
   if (!opening) delete document.documentElement.dataset.accountOpening
   $('consent').hidden = true
+  clearOperatorFailure()
   updateAuthenticatorPanel()
   // The sign-in second step is shown only by render(), after this reset.
   $('mfa-challenge').hidden = true
   if ($('account-state-cancel')) $('account-state-cancel').hidden = next !== 'deletion-pending'
   if ($('operator-reauth')) $('operator-reauth').hidden = true
+  $('account-state-retry').hidden = false; $('account-state-logout').hidden = false
   $('stage').classList.toggle('signed-in', Boolean(user) && !recovery)
   const content = next === 'signing-out' ? ['Signing out', 'Finishing local session cleanup…']
     : next === 'logout-failed' ? ['Sign-out incomplete', 'Your account view is closed. Try again to finish signing out, or sign in explicitly.']
@@ -327,7 +366,7 @@ function setMode(next) {
   const reset = next === 'reset', signup = next === 'signup', update = next === 'update'
   $('auth-title').textContent = t(reset ? 'Reset password' : signup ? 'Create your account' : update ? (invite ? 'Set your password' : 'Choose a new password') : 'Sign in')
   $('auth-submit').textContent = t(reset ? 'Send reset link' : signup ? 'Create account' : update ? 'Save password' : 'Sign in')
-  $('auth-description').textContent = reset ? t('We’ll email you a link to choose a new password.') : signup ? t(`Your Codevalanche account. Use a password with at least ${MIN_PASSWORD_LENGTH} characters.`) : update ? t(`Choose a password with at least ${MIN_PASSWORD_LENGTH} characters.`) : t('Welcome back to Codevalanche.')
+  $('auth-description').textContent = reset ? t('We’ll email you a link to choose a new password.') : signup ? t(`Your Codevalanche account. Use a password with at least ${MIN_PASSWORD_LENGTH} characters.`) : update ? t(`Choose a password with at least ${MIN_PASSWORD_LENGTH} characters.`) : operatorContext() ? t('Sign in with your Codevalanche account to connect it.') : t('Welcome back to Codevalanche.')
   void showCaptcha('captcha', captchaModes.has(next))
   $('social-auth').hidden = reset || update
   $('legal-note').hidden = reset || update
@@ -385,6 +424,7 @@ function showMfaChallenge() {
   $('stage').classList.remove('signed-in')
   $('mfa-challenge').hidden = false; $('mfa-recovery-form').hidden = true; $('mfa-use-recovery').hidden = !v2
   $('mfa-challenge-code').value = ''; $('mfa-recovery-code').value = ''; $('mfa-challenge-code').focus()
+  updateOperatorSteps()
 }
 function clearMfaPanels() {
   pendingFactorId = null; mfaFactors = []; pendingRecoveryEnrollment = null
@@ -525,6 +565,10 @@ $('operator-reauth')?.addEventListener('click', () => void action(async () => {
   $('email').focus()
 }))
 $('account-state-retry').addEventListener('click', () => void action(async () => { if (lifecycle.logoutIntent() === 'pending') await cleanUpLocalSession(); else await readCurrentSession() }))
+$('operator-restart')?.addEventListener('click', () => void action(async () => {
+  clearOperatorFailure()
+  if (operatorRestartSignsOut) { await cleanUpLocalSession(); setMode('signin') } else await readCurrentSession()
+}))
 $('logout-others').addEventListener('click', () => void action(async () => { await api('sign-out-others'); await render((await client.auth.getSession()).data.session); notice('Other sessions signed out. Existing access tokens may remain valid until they expire.') }))
 $('change-password').addEventListener('click', () => void action(async () => {
   const generation = renderGeneration
@@ -626,26 +670,28 @@ async function showConsent(generation) {
     if (!prepared || typeof prepared.operator !== 'boolean' || (prepared.parentMfaRequired !== undefined && typeof prepared.parentMfaRequired !== 'boolean') || (prepared.parentMfaRequired === true && !prepared.operator)) throw { code: 'account_service_unavailable' }
     operatorConsent = prepared.operator === true
     updateAuthenticatorPanel(); applyControls()
-    if (prepared.parentMfaRequired === true) {
-      $('consent').hidden = true
-      notice('Company OS needs a security code before it can open account administration.')
-      return
-    }
+    if (prepared.parentMfaRequired === true) { $('consent').hidden = true; updateAuthenticatorPanel(); return }
     let data = prepared
     if (!operatorConsent) { const result = await client.auth.oauth.getAuthorizationDetails(authorizationId); if (result.error) throw result.error; data = result.data }
     if (generation !== renderGeneration || accountStatus !== 'ready') return
     if (data.redirect_url) { location.assign(data.redirect_url); return }
-    $('consent-client').textContent = t('{client} wants to access your Codevalanche account.', { client: data.client.name || 'This application' })
-    $('consent-scope').textContent = t('Requested access: {scope}', { scope: data.scope })
+    const clientName = data.client?.name || t('This application'), access = accessSummary(data.scope)
+    $('consent').querySelector('.cr-page-title').textContent = t('Connect {client}', { client: clientName })
+    $('consent-client').textContent = t(access.sentence, { client: clientName })
+    $('consent-scope').textContent = access.other.length ? t('It also asks for: {scope}', { scope: access.other.join(', ') }) : ''
+    $('consent-scope').hidden = !access.other.length
     $('consent').hidden = false
+    updateAuthenticatorPanel()
   } catch (error) { if (generation === renderGeneration && accountStatus === 'ready') {
     operatorConsent = null; clearNativeAuthenticator(); updateAuthenticatorPanel(); $('consent').hidden = true
     if (error?.code === 'reauthentication_required') {
       setAccountStatus('unavailable')
-      if ($('operator-reauth')) { $('operator-reauth').hidden = false; $('account-state-title').textContent = t('Sign in again to connect Company OS'); $('account-state-description').textContent = t('Your security settings changed. Sign in again with the same account, then verify your authenticator. This connection request will be kept.') }
-      notice('Sign in again with the same account to approve this connection after the security change.', true)
+      // One action: sign in again. The request is kept, so retry or sign-out would only lead back here.
+      if ($('operator-reauth')) { $('operator-reauth').hidden = false; $('account-state-retry').hidden = true; $('account-state-logout').hidden = true; $('account-state-title').textContent = t('Sign in again to connect Company OS'); $('account-state-description').textContent = t('Your security settings changed. Sign in again with the same account, then verify your authenticator. This connection request will be kept.') }
     }
-    else notice('This connection request is invalid or expired. Start sign-in again from the app.', true)
+    // A refused role starts again from a fresh sign-in; anything else re-reads this same request.
+    else if (error?.code === 'account_forbidden') showOperatorFailure(t('This account cannot connect here. Start again and sign in with an administrator account.'), true)
+    else showOperatorFailure(t('This connection request has expired or is no longer valid. Go back to the app and start connecting again.'))
   } }
 }
 for (const decision of ['approve','deny']) $(decision).addEventListener('click', () => void action(async () => {
@@ -686,7 +732,7 @@ $('mfa-step-up')?.addEventListener('click', () => void action(async () => {
   clearNativePresentation(); $('authenticator-start').hidden = true
   $('native-mfa-code-title').textContent = T('challengeTitle')
   $('mfa-factor-id').value = factors[0].id; $('authenticator-verify').hidden = false
-  notice('Enter a code from your existing authenticator to continue.'); $('mfa-code').focus()
+  $('mfa-code').focus()
 }))
 $('mfa-form')?.addEventListener('submit', event => { event.preventDefault(); void action(async () => {
   if (!nativeAuthenticatorAllowed()) return

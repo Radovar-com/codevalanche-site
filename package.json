@@ -9,7 +9,7 @@
     "locales:check": "node scripts/translate-site.mjs check",
     "test": "node --test --test-concurrency=1 scripts/*.test.mjs supabase/tests/*.test.mjs",
     "test:locale": "node scripts/locale-browser-test.mjs",
-    "test:browser": "node scripts/account-browser-test.mjs && node scripts/account-email-links-browser-test.mjs",
+    "test:browser": "node scripts/account-browser-test.mjs && node scripts/account-email-links-browser-test.mjs && node scripts/operator-signin-browser-test.mjs",
     "test:marketing": "node scripts/marketing-browser-test.mjs",
     "test:remote:browser": "node scripts/remote-browser-test.mjs"
   },

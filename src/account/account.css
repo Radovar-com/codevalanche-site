@@ -348,10 +348,7 @@ textarea.pf-input { min-height: 64px; resize: vertical; }
 .pf-group.danger form .cr-btn { justify-self: start; }
 .pf-standalone { margin-top: 0; }
 .native-authenticator { max-width: 760px; margin-inline: auto; }
-.native-mfa-head { margin-bottom: 24px; max-width: 58ch; }
-.native-mfa-kicker { margin: 0 0 10px; color: var(--cr-accent); font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
-.native-mfa-head h2 { margin: 0 0 12px; font-size: clamp(25px, 4vw, 34px); line-height: 1.18; letter-spacing: -.035em; font-weight: 600; text-wrap: balance; }
-.native-mfa-head p:last-child { color: var(--cr-muted); margin: 0; font-size: 16px; }
+.native-mfa-head { max-width: 58ch; }
 .native-mfa-card { padding: clamp(20px, 4vw, 32px); border: 1px solid var(--cr-hairline); border-radius: 16px; background: var(--cr-surface); }
 .native-mfa-note { margin: 0 0 18px; color: var(--cr-muted); font-size: 14px; }
 .native-mfa-setup { display: grid; grid-template-columns: 224px minmax(0, 1fr); align-items: start; gap: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--cr-hairline); }
@@ -381,3 +378,26 @@ textarea.pf-input { min-height: 64px; resize: vertical; }
   .pf-avatar { width: 48px; height: 48px; font-size: 18px; }
   .pf-signout { order: 3; }
 }
+
+/* Connecting an app (Company OS): one centred card with a three-step progress line in every
+   state, one primary action, and messages inside the card rather than as a toast. */
+.cr-split:has(#stage.signed-in.operator-flow) { grid-template-columns: minmax(0, 620px); justify-content: center; }
+#stage.signed-in.operator-flow .cr-card-surface { padding: clamp(22px, 4vw, 40px); border: 1px solid var(--cr-hairline); background: var(--cr-surface); box-shadow: var(--cr-shadow); }
+#stage.operator-flow #status { position: static; transform: none; width: auto; max-width: none; margin: 0 0 20px; padding: 12px 14px; border-radius: 8px; box-shadow: none; animation: none; }
+.op-steps { display: flex; gap: 10px; margin: 0 0 28px; padding: 0; list-style: none; }
+.op-steps li { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 8px; color: var(--cr-faint); font-size: 13px; font-weight: 500; line-height: 1.3; }
+.op-step-dot { display: block; height: 3px; border-radius: 999px; background: var(--cr-hairline); }
+.op-steps li[data-state=done] { color: var(--cr-muted); }
+.op-steps li[data-state=done] .op-step-dot { background: color-mix(in srgb, var(--cr-accent) 55%, transparent); }
+.op-steps li[data-state=current] { color: var(--cr-text); }
+.op-steps li[data-state=current] .op-step-dot { background: var(--cr-accent); }
+#stage.operator-failed section:not(#operator-failure), #stage.operator-failed .cr-opening { display: none !important; }
+.op-access { margin: 0 0 22px; color: var(--cr-soft); font-size: 14px; }
+.op-actions { display: grid; gap: 12px; justify-items: center; margin-top: 8px; }
+#stage.operator-flow .account-actions { flex-direction: column; }
+#stage.operator-flow .account-actions .cr-btn { width: 100%; }
+#stage.operator-flow .native-authenticator { max-width: none; }
+#stage.operator-flow .native-mfa-card { padding: 0; border: 0; background: none; }
+#stage.operator-flow .native-mfa-setup { grid-template-columns: 180px minmax(0, 1fr); gap: 24px; }
+#stage.operator-flow .native-mfa-qr img { width: 180px; padding: 10px; }
+@media (max-width: 580px) { #stage.operator-flow .native-mfa-setup { grid-template-columns: minmax(0, 1fr); } .op-steps li { font-size: 12px; } }
