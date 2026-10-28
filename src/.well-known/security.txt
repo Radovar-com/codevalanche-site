@@ -1,0 +1,7 @@
+# Codevalanche security contact. Policy and scope: https://codevalanche.com/security/#report
+Contact: mailto:security@radovar.com
+Expires: 2027-10-25T00:00:00.000Z
+Policy: https://codevalanche.com/security/#report
+Acknowledgments: https://codevalanche.com/security/#thanks
+Preferred-Languages: en, ro
+Canonical: https://codevalanche.com/.well-known/security.txt
