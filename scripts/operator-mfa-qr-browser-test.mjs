@@ -45,7 +45,7 @@ try{
   assert.equal(await page.locator('#authenticator-manual').getAttribute('open'),null);
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true,label+': no horizontal overflow');
   assert.ok(removed.includes('old-pending'),'explicit fresh setup invalidates the unfinished old factor');
-  if(locale==='ro'){assert.equal(await page.locator('#native-mfa-title').textContent(),'Conectează Company OS în siguranță');assert.match(await page.locator('#authenticator-setup').innerText(),/Scanează codul QR/);}
+  if(locale==='ro'){assert.equal(await page.locator('#native-mfa-title').textContent(),'Adaugă un cod de securitate');assert.match(await page.locator('#authenticator-setup').innerText(),/Scanează codul QR/);}
   await page.screenshot({path:path.join(output,label+'.png'),fullPage:true});
   await page.locator('#authenticator-restart').click();await page.waitForFunction(()=>document.getElementById('mfa-factor-id').value==='new-pending-2');
   assert.ok(removed.includes('new-pending-1'),'restart invalidates its predecessor');
