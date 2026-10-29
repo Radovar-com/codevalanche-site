@@ -7,9 +7,9 @@
       "summary": "A new home for your AIs, Coordinator mode, publishing from the chat and a lighter app.",
       "sections": [
         {
-          "title": "Your AIs, ready in a minute",
-          "body": "Settings has a new Your AIs page: it finds the AI tools already on your PC, and you sign in or add a key in a few clicks.",
-          "detail": "Paste a key and Codevalanche recognises which provider it belongs to. Each account or key has one clear row with its models and how much of its limit is left, and Say hello checks that it works before you start. You can also add Grok Build, OpenCode, Kimi Code and other agents from the public catalog; the app tells you when an agent comes from a third-party publisher."
+          "title": "Your AIs, all in one place",
+          "body": "Settings has a new Your AIs page where you sign in to your agents, add your keys and check that each connection works.",
+          "detail": "Add more than one account or key for the same provider, find any connection with search and filters, and pick Automatic to let the agent use the model it recommends. You can also add Grok Build, OpenCode, Kimi Code and other agents from the public catalog; the app tells you when an agent comes from a third-party publisher."
         },
         {
           "title": "Coordinator mode for projects (experimental)",
@@ -29,7 +29,7 @@
         {
           "title": "Lighter, and easier to undo",
           "body": "Much of Codevalanche now runs on its own built-in engine, so the app does less work in the background.",
-          "detail": "Agent runs and a few other parts still use the previous engine for now and move over in the next updates. You can undo all the changes of one agent turn at once, edit files in a real code editor and see every shortcut with Ctrl+/. Settings adds high contrast, text size and less motion, and the installer now speaks 17 languages."
+          "detail": "While the agent works, send a message to change its course or stop the answer; each message shows as its own bubble. Agent runs and a few other parts still use the previous engine for now and move over in the next updates. You can undo all the changes of one agent turn at once, edit files in a real code editor and see every shortcut with Ctrl+/. Settings adds high contrast, text size and less motion, and the installer now speaks 17 languages."
         },
         {
           "title": "How 1.1.1 came together",
@@ -43,9 +43,9 @@
       "summary": "مكان جديد لأدوات الذكاء الاصطناعي، ووضع المنسق، والنشر من المحادثة، وتطبيق أخف.",
       "sections": [
         {
-          "title": "أدوات الذكاء الاصطناعي لديك جاهزة في دقيقة",
-          "body": "في الإعدادات صفحة جديدة باسم «أدوات الذكاء الاصطناعي لديك»: تعثر على أدوات الذكاء الاصطناعي الموجودة على حاسوبك، فتسجّل الدخول أو تضيف مفتاحًا ببضع نقرات.",
-          "detail": "الصق مفتاحًا ويتعرّف ⁦Codevalanche⁩ على المزوّد الذي يتبع له. لكل حساب أو مفتاح سطر واضح واحد يعرض نماذجه وما تبقّى من حدّه، وزر «قل مرحبًا» يتحقق من أن كل شيء يعمل قبل أن تبدأ. يمكنك أيضًا إضافة ⁦Grok Build⁩ و⁦OpenCode⁩ و⁦Kimi Code⁩ ووكلاء آخرين من الدليل العام، ويخبرك التطبيق عندما يأتي وكيل من ناشر خارجي."
+          "title": "أدوات الذكاء الاصطناعي لديك، كلها في مكان واحد",
+          "body": "في الإعدادات صفحة جديدة باسم «أدوات الذكاء الاصطناعي لديك»، تسجّل فيها الدخول إلى وكلائك وتضيف مفاتيحك وتتحقق من أن كل اتصال يعمل.",
+          "detail": "أضف أكثر من حساب أو مفتاح للمزوّد نفسه، وابحث عن أي اتصال بالبحث والمرشّحات، واختر «تلقائي» ليستخدم الوكيل النموذج الذي يوصي به. يمكنك أيضًا إضافة ⁦Grok Build⁩ و⁦OpenCode⁩ و⁦Kimi Code⁩ ووكلاء آخرين من الدليل العام، ويخبرك التطبيق عندما يأتي وكيل من ناشر خارجي."
         },
         {
           "title": "وضع المنسق للمشاريع (تجريبي)",
@@ -65,7 +65,7 @@
         {
           "title": "أخف، والتراجع أسهل",
           "body": "يعمل جزء كبير من ⁦Codevalanche⁩ الآن على محرّكه المدمج الخاص، لذا يقوم التطبيق بعمل أقل في الخلفية.",
-          "detail": "ما زال تشغيل الوكلاء وبعض الأجزاء الأخرى يستخدم المحرّك السابق حاليًا، وستنتقل إلى الجديد في التحديثات القادمة. يمكنك التراجع دفعة واحدة عن كل تغييرات دورة واحدة للوكيل، وتحرير الملفات في محرر شيفرة حقيقي، ورؤية كل الاختصارات بـ ⁦Ctrl+/⁩. وتضيف الإعدادات التباين العالي وحجم النص وتقليل الحركة، وأصبح المثبّت يتحدث 17 لغة."
+          "detail": "أثناء عمل الوكيل، أرسل رسالة لتغيير مساره أو أوقف الإجابة، وتظهر كل رسالة في فقاعتها الخاصة. ما زال تشغيل الوكلاء وبعض الأجزاء الأخرى يستخدم المحرّك السابق حاليًا، وستنتقل إلى الجديد في التحديثات القادمة. يمكنك التراجع دفعة واحدة عن كل تغييرات دورة واحدة للوكيل، وتحرير الملفات في محرر شيفرة حقيقي، ورؤية كل الاختصارات بـ ⁦Ctrl+/⁩. وتضيف الإعدادات التباين العالي وحجم النص وتقليل الحركة، وأصبح المثبّت يتحدث 17 لغة."
         },
         {
           "title": "كيف وُلد الإصدار ⁦1.1.1⁩",
@@ -79,9 +79,9 @@
       "summary": "Ein neues Zuhause für Ihre KIs, Koordinator-Modus, Veröffentlichen aus dem Chat und eine leichtere App.",
       "sections": [
         {
-          "title": "Ihre KIs, in einer Minute bereit",
-          "body": "In den Einstellungen gibt es die neue Seite „Ihre KIs“: Sie findet die KI-Werkzeuge, die schon auf Ihrem PC sind, und Sie melden sich mit wenigen Klicks an oder fügen einen Schlüssel hinzu.",
-          "detail": "Fügen Sie einen Schlüssel ein, und Codevalanche erkennt, zu welchem Anbieter er gehört. Jedes Konto und jeder Schlüssel hat eine klare Zeile mit seinen Modellen und dem, was vom Limit noch übrig ist, und „Hallo sagen“ prüft vor dem Start, ob alles funktioniert. Sie können auch Grok Build, OpenCode, Kimi Code und weitere Agenten aus dem öffentlichen Katalog hinzufügen; die App sagt Ihnen, wenn ein Agent von einem fremden Herausgeber stammt."
+          "title": "Ihre KIs, alle an einem Ort",
+          "body": "In den Einstellungen gibt es die neue Seite „Ihre KIs“: Dort melden Sie sich bei Ihren Agenten an, fügen Ihre Schlüssel hinzu und prüfen, ob jede Verbindung funktioniert.",
+          "detail": "Fügen Sie mehrere Konten oder Schlüssel für denselben Anbieter hinzu, finden Sie jede Verbindung mit Suche und Filtern, und wählen Sie Automatisch, damit der Agent das Modell nutzt, das er empfiehlt. Sie können auch Grok Build, OpenCode, Kimi Code und weitere Agenten aus dem öffentlichen Katalog hinzufügen; die App sagt Ihnen, wenn ein Agent von einem fremden Herausgeber stammt."
         },
         {
           "title": "Koordinator-Modus für Projekte (experimentell)",
@@ -101,7 +101,7 @@
         {
           "title": "Leichter, und leichter rückgängig zu machen",
           "body": "Ein großer Teil von Codevalanche läuft jetzt auf seiner eigenen, eingebauten Engine, sodass die App im Hintergrund weniger Arbeit hat.",
-          "detail": "Agentenläufe und einige andere Teile nutzen vorerst noch die bisherige Engine und wechseln in den nächsten Updates. Sie können alle Änderungen eines Agentenschritts auf einmal rückgängig machen, Dateien in einem echten Code-Editor bearbeiten und mit Strg+/ alle Tastenkürzel sehen. Die Einstellungen bieten hohen Kontrast, Textgröße und weniger Bewegung, und das Installationsprogramm spricht jetzt 17 Sprachen."
+          "detail": "Während der Agent arbeitet, schicken Sie eine Nachricht, um ihn umzulenken, oder stoppen die Antwort; jede Nachricht erscheint als eigene Sprechblase. Agentenläufe und einige andere Teile nutzen vorerst noch die bisherige Engine und wechseln in den nächsten Updates. Sie können alle Änderungen eines Agentenschritts auf einmal rückgängig machen, Dateien in einem echten Code-Editor bearbeiten und mit Strg+/ alle Tastenkürzel sehen. Die Einstellungen bieten hohen Kontrast, Textgröße und weniger Bewegung, und das Installationsprogramm spricht jetzt 17 Sprachen."
         },
         {
           "title": "So ist 1.1.1 entstanden",
@@ -115,9 +115,9 @@
       "summary": "Un nuevo hogar para tus IA, el modo Coordinador, publicar desde el chat y una app más ligera.",
       "sections": [
         {
-          "title": "Tus IA, listas en un minuto",
-          "body": "Configuración tiene una nueva página, Tus IA: encuentra las herramientas de IA que ya están en tu PC y te conectas o añades una clave en pocos clics.",
-          "detail": "Pega una clave y Codevalanche reconoce de qué proveedor es. Cada cuenta o clave tiene una fila clara con sus modelos y lo que queda de su límite, y Saludar comprueba que funciona antes de empezar. También puedes añadir Grok Build, OpenCode, Kimi Code y otros agentes del catálogo público; la app te avisa cuando un agente viene de un editor externo."
+          "title": "Tus IA, todas en un solo lugar",
+          "body": "Configuración tiene una nueva página, Tus IA, donde inicias sesión en tus agentes, añades tus claves y compruebas que cada conexión funciona.",
+          "detail": "Añade más de una cuenta o clave para el mismo proveedor, encuentra cualquier conexión con la búsqueda y los filtros, y elige Automático para que el agente use el modelo que recomienda. También puedes añadir Grok Build, OpenCode, Kimi Code y otros agentes del catálogo público; la app te avisa cuando un agente viene de un editor externo."
         },
         {
           "title": "Modo Coordinador para proyectos (experimental)",
@@ -137,7 +137,7 @@
         {
           "title": "Más ligera y más fácil de deshacer",
           "body": "Gran parte de Codevalanche funciona ahora con su propio motor integrado, así que la app trabaja menos en segundo plano.",
-          "detail": "La ejecución de los agentes y algunas otras partes usan todavía el motor anterior y pasarán al nuevo en las próximas actualizaciones. Puedes deshacer de una vez todos los cambios de un turno del agente, editar archivos en un editor de código de verdad y ver todos los atajos con Ctrl+/. Configuración añade alto contraste, tamaño del texto y menos movimiento, y el instalador ya habla 17 idiomas."
+          "detail": "Mientras el agente trabaja, envía un mensaje para cambiar su rumbo o detén la respuesta; cada mensaje aparece como su propia burbuja. La ejecución de los agentes y algunas otras partes usan todavía el motor anterior y pasarán al nuevo en las próximas actualizaciones. Puedes deshacer de una vez todos los cambios de un turno del agente, editar archivos en un editor de código de verdad y ver todos los atajos con Ctrl+/. Configuración añade alto contraste, tamaño del texto y menos movimiento, y el instalador ya habla 17 idiomas."
         },
         {
           "title": "Cómo se hizo la 1.1.1",
@@ -151,9 +151,9 @@
       "summary": "Un nouvel espace pour vos IA, le mode Coordinateur, la publication depuis le chat et une app plus légère.",
       "sections": [
         {
-          "title": "Vos IA, prêtes en une minute",
-          "body": "Les Paramètres ont une nouvelle page, Vos IA : elle trouve les outils d’IA déjà présents sur votre PC, et vous vous connectez ou ajoutez une clé en quelques clics.",
-          "detail": "Collez une clé et Codevalanche reconnaît à quel fournisseur elle appartient. Chaque compte ou clé a une seule ligne claire avec ses modèles et ce qui reste de sa limite, et Dire bonjour vérifie que tout fonctionne avant de commencer. Vous pouvez aussi ajouter Grok Build, OpenCode, Kimi Code et d’autres agents du catalogue public ; l’app vous prévient quand un agent vient d’un éditeur tiers."
+          "title": "Vos IA, toutes au même endroit",
+          "body": "Les Paramètres ont une nouvelle page, Vos IA, où vous vous connectez à vos agents, ajoutez vos clés et vérifiez que chaque connexion fonctionne.",
+          "detail": "Ajoutez plusieurs comptes ou clés pour le même fournisseur, retrouvez n’importe quelle connexion avec la recherche et les filtres, et choisissez Automatique pour que l’agent utilise le modèle qu’il recommande. Vous pouvez aussi ajouter Grok Build, OpenCode, Kimi Code et d’autres agents du catalogue public ; l’app vous prévient quand un agent vient d’un éditeur tiers."
         },
         {
           "title": "Mode Coordinateur pour les projets (expérimental)",
@@ -173,7 +173,7 @@
         {
           "title": "Plus légère, et plus facile à annuler",
           "body": "Une grande partie de Codevalanche tourne désormais sur son propre moteur intégré, l’app travaille donc moins en arrière-plan.",
-          "detail": "L’exécution des agents et quelques autres parties utilisent encore l’ancien moteur pour l’instant et passeront au nouveau dans les prochaines mises à jour. Vous pouvez annuler d’un coup toutes les modifications d’un tour de l’agent, modifier vos fichiers dans un vrai éditeur de code et voir tous les raccourcis avec Ctrl+/. Les Paramètres ajoutent le contraste élevé, la taille du texte et moins d’animations, et le programme d’installation parle désormais 17 langues."
+          "detail": "Pendant que l’agent travaille, envoyez un message pour changer sa direction ou arrêtez la réponse ; chaque message s’affiche dans sa propre bulle. L’exécution des agents et quelques autres parties utilisent encore l’ancien moteur pour l’instant et passeront au nouveau dans les prochaines mises à jour. Vous pouvez annuler d’un coup toutes les modifications d’un tour de l’agent, modifier vos fichiers dans un vrai éditeur de code et voir tous les raccourcis avec Ctrl+/. Les Paramètres ajoutent le contraste élevé, la taille du texte et moins d’animations, et le programme d’installation parle désormais 17 langues."
         },
         {
           "title": "Comment la 1.1.1 a pris forme",
@@ -187,9 +187,9 @@
       "summary": "आपके AI के लिए नया ठिकाना, कोऑर्डिनेटर मोड, चैट से प्रकाशन और हल्का ऐप।",
       "sections": [
         {
-          "title": "आपके AI, एक मिनट में तैयार",
-          "body": "सेटिंग्स में नया पेज है, आपके AI: यह आपके PC पर पहले से मौजूद AI टूल ढूँढता है, और आप कुछ क्लिक में साइन इन करते हैं या कुंजी जोड़ते हैं।",
-          "detail": "कुंजी चिपकाइए और Codevalanche पहचान लेता है कि वह किस प्रदाता की है। हर खाते या कुंजी की एक साफ़ पंक्ति है, जिसमें उसके मॉडल और बची हुई सीमा दिखती है, और नमस्ते कहें शुरू करने से पहले जाँच लेता है कि सब काम कर रहा है। आप सार्वजनिक कैटलॉग से Grok Build, OpenCode, Kimi Code और दूसरे एजेंट भी जोड़ सकते हैं; अगर कोई एजेंट किसी बाहरी प्रकाशक का है तो ऐप बता देता है।"
+          "title": "आपके AI, सब एक जगह",
+          "body": "सेटिंग्स में नया पेज है, आपके AI: यहाँ आप अपने एजेंटों में साइन इन करते हैं, कुंजियाँ जोड़ते हैं और जाँचते हैं कि हर कनेक्शन काम कर रहा है।",
+          "detail": "एक ही प्रदाता के लिए एक से ज़्यादा खाते या कुंजियाँ जोड़ें, खोज और फ़िल्टर से कोई भी कनेक्शन ढूँढें, और स्वचालित चुनें ताकि एजेंट अपना सुझाया मॉडल इस्तेमाल करे। आप सार्वजनिक कैटलॉग से Grok Build, OpenCode, Kimi Code और दूसरे एजेंट भी जोड़ सकते हैं; अगर कोई एजेंट किसी बाहरी प्रकाशक का है तो ऐप बता देता है।"
         },
         {
           "title": "प्रोजेक्ट के लिए कोऑर्डिनेटर मोड (प्रायोगिक)",
@@ -209,7 +209,7 @@
         {
           "title": "हल्का, और पूर्ववत करना आसान",
           "body": "Codevalanche का बड़ा हिस्सा अब उसके अपने बिल्ट-इन इंजन पर चलता है, इसलिए ऐप बैकग्राउंड में कम काम करता है।",
-          "detail": "एजेंट चलाना और कुछ दूसरे हिस्से अभी पुराने इंजन पर हैं और अगले अपडेट में नए पर आएँगे। आप एजेंट की एक बारी के सारे बदलाव एक साथ पूर्ववत कर सकते हैं, असली कोड एडिटर में फ़ाइलें संपादित कर सकते हैं और Ctrl+/ से सारे शॉर्टकट देख सकते हैं। सेटिंग्स में हाई कंट्रास्ट, टेक्स्ट का आकार और कम हलचल जुड़े हैं, और इंस्टॉलर अब 17 भाषाओं में है।"
+          "detail": "एजेंट के काम करते समय उसकी दिशा बदलने के लिए संदेश भेजें या जवाब रोक दें; हर संदेश अपने अलग बबल में दिखता है। एजेंट चलाना और कुछ दूसरे हिस्से अभी पुराने इंजन पर हैं और अगले अपडेट में नए पर आएँगे। आप एजेंट की एक बारी के सारे बदलाव एक साथ पूर्ववत कर सकते हैं, असली कोड एडिटर में फ़ाइलें संपादित कर सकते हैं और Ctrl+/ से सारे शॉर्टकट देख सकते हैं। सेटिंग्स में हाई कंट्रास्ट, टेक्स्ट का आकार और कम हलचल जुड़े हैं, और इंस्टॉलर अब 17 भाषाओं में है।"
         },
         {
           "title": "1.1.1 कैसे बना",
@@ -223,9 +223,9 @@
       "summary": "Rumah baru untuk AI-mu, mode Koordinator, publikasi dari chat, dan aplikasi yang lebih ringan.",
       "sections": [
         {
-          "title": "AI-mu siap dalam semenit",
-          "body": "Pengaturan punya halaman baru, AI-mu: halaman ini menemukan alat AI yang sudah ada di PC-mu, lalu kamu masuk atau menambahkan kunci dalam beberapa klik.",
-          "detail": "Tempel sebuah kunci dan Codevalanche mengenali milik penyedia mana kunci itu. Setiap akun atau kunci punya satu baris yang jelas berisi modelnya dan sisa batasnya, dan Sapa memeriksa bahwa semuanya berfungsi sebelum kamu mulai. Kamu juga bisa menambahkan Grok Build, OpenCode, Kimi Code, dan agen lain dari katalog publik; aplikasi memberi tahu jika agen berasal dari penerbit pihak ketiga."
+          "title": "AI-mu, semua di satu tempat",
+          "body": "Pengaturan punya halaman baru, AI-mu, tempat kamu masuk ke agen, menambahkan kunci, dan memeriksa bahwa setiap koneksi berfungsi.",
+          "detail": "Tambahkan lebih dari satu akun atau kunci untuk penyedia yang sama, temukan koneksi apa pun dengan pencarian dan filter, dan pilih Otomatis agar agen memakai model yang direkomendasikannya. Kamu juga bisa menambahkan Grok Build, OpenCode, Kimi Code, dan agen lain dari katalog publik; aplikasi memberi tahu jika agen berasal dari penerbit pihak ketiga."
         },
         {
           "title": "Mode Koordinator untuk proyek (eksperimental)",
@@ -245,7 +245,7 @@
         {
           "title": "Lebih ringan, dan lebih mudah dibatalkan",
           "body": "Sebagian besar Codevalanche kini berjalan di mesin bawaannya sendiri, jadi aplikasi bekerja lebih sedikit di latar belakang.",
-          "detail": "Eksekusi agen dan beberapa bagian lain untuk sementara masih memakai mesin sebelumnya dan akan pindah di pembaruan berikutnya. Kamu bisa membatalkan semua perubahan satu giliran agen sekaligus, menyunting file di editor kode sungguhan, dan melihat semua pintasan dengan Ctrl+/. Pengaturan kini punya kontras tinggi, ukuran teks, dan gerakan dikurangi, dan penginstal kini tersedia dalam 17 bahasa."
+          "detail": "Saat agen bekerja, kirim pesan untuk mengubah arahnya atau hentikan jawabannya; setiap pesan tampil sebagai gelembungnya sendiri. Eksekusi agen dan beberapa bagian lain untuk sementara masih memakai mesin sebelumnya dan akan pindah di pembaruan berikutnya. Kamu bisa membatalkan semua perubahan satu giliran agen sekaligus, menyunting file di editor kode sungguhan, dan melihat semua pintasan dengan Ctrl+/. Pengaturan kini punya kontras tinggi, ukuran teks, dan gerakan dikurangi, dan penginstal kini tersedia dalam 17 bahasa."
         },
         {
           "title": "Bagaimana 1.1.1 terbentuk",
@@ -259,9 +259,9 @@
       "summary": "Una nuova casa per le tue IA, la modalità Coordinatore, la pubblicazione dalla chat e un’app più leggera.",
       "sections": [
         {
-          "title": "Le tue IA, pronte in un minuto",
-          "body": "In Impostazioni c’è la nuova pagina Le tue IA: trova gli strumenti di IA già presenti sul PC e ti colleghi o aggiungi una chiave in pochi clic.",
-          "detail": "Incolla una chiave e Codevalanche riconosce a quale fornitore appartiene. Ogni account o chiave ha una sola riga chiara con i suoi modelli e quanto resta del suo limite, e Saluta controlla che funzioni prima di iniziare. Puoi anche aggiungere Grok Build, OpenCode, Kimi Code e altri agenti dal catalogo pubblico; l’app ti avvisa quando un agente arriva da un editore esterno."
+          "title": "Le tue IA, tutte in un posto",
+          "body": "In Impostazioni c’è la nuova pagina Le tue IA, dove accedi ai tuoi agenti, aggiungi le tue chiavi e controlli che ogni connessione funzioni.",
+          "detail": "Aggiungi più account o chiavi per lo stesso fornitore, trova qualsiasi connessione con ricerca e filtri, e scegli Automatico perché l’agente usi il modello che consiglia. Puoi anche aggiungere Grok Build, OpenCode, Kimi Code e altri agenti dal catalogo pubblico; l’app ti avvisa quando un agente arriva da un editore esterno."
         },
         {
           "title": "Modalità Coordinatore per i progetti (sperimentale)",
@@ -281,7 +281,7 @@
         {
           "title": "Più leggera, e più facile da annullare",
           "body": "Gran parte di Codevalanche ora funziona con il suo motore integrato, quindi l’app lavora meno in background.",
-          "detail": "L’esecuzione degli agenti e poche altre parti usano ancora il motore precedente e passeranno al nuovo nei prossimi aggiornamenti. Puoi annullare in un colpo tutte le modifiche di un turno dell’agente, modificare i file in un vero editor di codice e vedere tutte le scorciatoie con Ctrl+/. Le Impostazioni aggiungono contrasto elevato, dimensione del testo e meno movimento, e il programma di installazione ora parla 17 lingue."
+          "detail": "Mentre l’agente lavora, invia un messaggio per cambiargli direzione o ferma la risposta; ogni messaggio appare nel suo fumetto. L’esecuzione degli agenti e poche altre parti usano ancora il motore precedente e passeranno al nuovo nei prossimi aggiornamenti. Puoi annullare in un colpo tutte le modifiche di un turno dell’agente, modificare i file in un vero editor di codice e vedere tutte le scorciatoie con Ctrl+/. Le Impostazioni aggiungono contrasto elevato, dimensione del testo e meno movimento, e il programma di installazione ora parla 17 lingue."
         },
         {
           "title": "Come è nata la 1.1.1",
@@ -295,9 +295,9 @@
       "summary": "AI の新しい置き場所、コーディネーターモード、チャットからの公開、そしてより軽いアプリ。",
       "sections": [
         {
-          "title": "あなたの AI、1 分で準備完了",
-          "body": "設定に新しいページ「あなたの AI」が加わりました。PC にすでにある AI ツールを見つけ、数回のクリックでサインインやキーの追加ができます。",
-          "detail": "キーを貼り付けるだけで、Codevalanche がどのプロバイダーのものかを判別します。アカウントやキーごとに、モデルと残りの利用枠が 1 行でわかり、「あいさつする」で始める前に動作を確認できます。公開カタログから Grok Build、OpenCode、Kimi Code などのエージェントも追加できます。外部の発行元によるエージェントの場合は、アプリがお知らせします。"
+          "title": "あなたの AI を、すべてひとつの場所に",
+          "body": "設定に新しいページ「あなたの AI」が加わりました。エージェントへのサインイン、キーの追加、各接続の動作確認をここで行えます。",
+          "detail": "同じプロバイダーに複数のアカウントやキーを追加でき、検索とフィルターでどの接続もすぐに見つかります。「自動」を選べば、エージェントがおすすめのモデルを使います。公開カタログから Grok Build、OpenCode、Kimi Code などのエージェントも追加できます。外部の発行元によるエージェントの場合は、アプリがお知らせします。"
         },
         {
           "title": "プロジェクト向けコーディネーターモード（試験運用）",
@@ -317,7 +317,7 @@
         {
           "title": "より軽く、元に戻すのも簡単に",
           "body": "Codevalanche の多くの部分が独自の内蔵エンジンで動くようになり、バックグラウンドでの処理が減りました。",
-          "detail": "エージェントの実行やほかのいくつかの部分は、今のところ以前のエンジンを使っており、今後のアップデートで移行します。エージェントの 1 ターン分の変更をまとめて元に戻したり、本格的なコードエディターでファイルを編集したり、Ctrl+/ ですべてのショートカットを確認したりできます。設定にはハイコントラスト、文字サイズ、動きを減らすが加わり、インストーラーは 17 言語に対応しました。"
+          "detail": "エージェントの作業中にメッセージを送って方向を変えたり、回答を止めたりできます。メッセージはそれぞれ別の吹き出しで表示されます。 エージェントの実行やほかのいくつかの部分は、今のところ以前のエンジンを使っており、今後のアップデートで移行します。エージェントの 1 ターン分の変更をまとめて元に戻したり、本格的なコードエディターでファイルを編集したり、Ctrl+/ ですべてのショートカットを確認したりできます。設定にはハイコントラスト、文字サイズ、動きを減らすが加わり、インストーラーは 17 言語に対応しました。"
         },
         {
           "title": "1.1.1 ができるまで",
@@ -331,9 +331,9 @@
       "summary": "AI를 위한 새 공간, 코디네이터 모드, 채팅에서 공개, 더 가벼워진 앱.",
       "sections": [
         {
-          "title": "내 AI, 1분이면 준비 완료",
-          "body": "설정에 새 페이지 '내 AI'가 생겼습니다. PC에 이미 있는 AI 도구를 찾아 주고, 몇 번의 클릭으로 로그인하거나 키를 추가할 수 있습니다.",
-          "detail": "키를 붙여 넣으면 Codevalanche가 어느 제공업체의 키인지 알아봅니다. 계정이나 키마다 모델과 남은 사용 한도를 보여 주는 깔끔한 한 줄이 있고, '인사하기'로 시작 전에 작동하는지 확인할 수 있습니다. 공개 카탈로그에서 Grok Build, OpenCode, Kimi Code 등 다른 에이전트도 추가할 수 있으며, 외부 게시자의 에이전트라면 앱이 알려 줍니다."
+          "title": "내 AI, 모두 한곳에",
+          "body": "설정에 새 페이지 '내 AI'가 생겼습니다. 여기서 에이전트에 로그인하고, 키를 추가하고, 각 연결이 작동하는지 확인합니다.",
+          "detail": "같은 제공업체에 계정이나 키를 여러 개 추가하고, 검색과 필터로 어떤 연결이든 찾고, '자동'을 선택하면 에이전트가 추천하는 모델을 사용합니다. 공개 카탈로그에서 Grok Build, OpenCode, Kimi Code 등 다른 에이전트도 추가할 수 있으며, 외부 게시자의 에이전트라면 앱이 알려 줍니다."
         },
         {
           "title": "프로젝트용 코디네이터 모드(실험적)",
@@ -353,7 +353,7 @@
         {
           "title": "더 가볍게, 되돌리기는 더 쉽게",
           "body": "이제 Codevalanche의 많은 부분이 자체 내장 엔진으로 실행되어 앱이 백그라운드에서 하는 일이 줄었습니다.",
-          "detail": "에이전트 실행과 일부 다른 기능은 당분간 이전 엔진을 사용하며 다음 업데이트에서 옮겨 갑니다. 에이전트 한 턴의 모든 변경을 한 번에 되돌리고, 제대로 된 코드 편집기에서 파일을 편집하고, Ctrl+/로 모든 단축키를 볼 수 있습니다. 설정에 고대비, 텍스트 크기, 움직임 줄이기가 추가되었고, 설치 프로그램은 이제 17개 언어를 지원합니다."
+          "detail": "에이전트가 작업하는 동안 메시지를 보내 방향을 바꾸거나 답변을 멈출 수 있으며, 메시지마다 별도의 말풍선으로 표시됩니다. 에이전트 실행과 일부 다른 기능은 당분간 이전 엔진을 사용하며 다음 업데이트에서 옮겨 갑니다. 에이전트 한 턴의 모든 변경을 한 번에 되돌리고, 제대로 된 코드 편집기에서 파일을 편집하고, Ctrl+/로 모든 단축키를 볼 수 있습니다. 설정에 고대비, 텍스트 크기, 움직임 줄이기가 추가되었고, 설치 프로그램은 이제 17개 언어를 지원합니다."
         },
         {
           "title": "1.1.1이 만들어진 과정",
@@ -367,9 +367,9 @@
       "summary": "Um novo lugar para suas IAs, o modo Coordenador, publicação pelo chat e um app mais leve.",
       "sections": [
         {
-          "title": "Suas IAs, prontas em um minuto",
-          "body": "As Configurações têm uma nova página, Suas IAs: ela encontra as ferramentas de IA que já estão no seu PC, e você entra na conta ou adiciona uma chave em poucos cliques.",
-          "detail": "Cole uma chave e o Codevalanche reconhece de qual provedor ela é. Cada conta ou chave tem uma linha clara com seus modelos e quanto resta do limite, e Dizer olá confere se funciona antes de você começar. Você também pode adicionar Grok Build, OpenCode, Kimi Code e outros agentes do catálogo público; o app avisa quando um agente vem de um publicador externo."
+          "title": "Suas IAs, todas em um só lugar",
+          "body": "As Configurações têm uma nova página, Suas IAs, onde você entra nos seus agentes, adiciona suas chaves e confere se cada conexão funciona.",
+          "detail": "Adicione mais de uma conta ou chave para o mesmo provedor, encontre qualquer conexão com a busca e os filtros, e escolha Automático para o agente usar o modelo que recomenda. Você também pode adicionar Grok Build, OpenCode, Kimi Code e outros agentes do catálogo público; o app avisa quando um agente vem de um publicador externo."
         },
         {
           "title": "Modo Coordenador para projetos (experimental)",
@@ -389,7 +389,7 @@
         {
           "title": "Mais leve e mais fácil de desfazer",
           "body": "Grande parte do Codevalanche agora roda no seu próprio motor integrado, então o app faz menos trabalho em segundo plano.",
-          "detail": "A execução dos agentes e algumas outras partes ainda usam o motor anterior por enquanto e passam para o novo nas próximas atualizações. Você pode desfazer de uma vez todas as mudanças de um turno do agente, editar arquivos em um editor de código de verdade e ver todos os atalhos com Ctrl+/. As Configurações ganham alto contraste, tamanho do texto e menos movimento, e o instalador agora fala 17 idiomas."
+          "detail": "Enquanto o agente trabalha, envie uma mensagem para mudar o rumo ou pare a resposta; cada mensagem aparece no seu próprio balão. A execução dos agentes e algumas outras partes ainda usam o motor anterior por enquanto e passam para o novo nas próximas atualizações. Você pode desfazer de uma vez todas as mudanças de um turno do agente, editar arquivos em um editor de código de verdade e ver todos os atalhos com Ctrl+/. As Configurações ganham alto contraste, tamanho do texto e menos movimento, e o instalador agora fala 17 idiomas."
         },
         {
           "title": "Como a 1.1.1 foi construída",
@@ -403,9 +403,9 @@
       "summary": "Un loc nou pentru AI-urile tale, Modul Coordonator, publicare din chat și o aplicație mai ușoară.",
       "sections": [
         {
-          "title": "AI-urile tale, gata într-un minut",
-          "body": "În Setări e o pagină nouă, AI-urile tale: găsește uneltele AI deja instalate pe calculator, iar tu te conectezi sau adaugi o cheie în câteva clicuri.",
-          "detail": "Lipești o cheie și Codevalanche recunoaște singur al cui furnizor e. Fiecare cont sau cheie are un singur rând clar, cu modelele lui și cât a mai rămas din limită, iar Spune salut verifică dacă merge înainte să începi. Poți adăuga și Grok Build, OpenCode, Kimi Code și alți agenți din catalogul public; aplicația îți spune când un agent vine de la un autor extern."
+          "title": "AI-urile tale, toate într-un loc",
+          "body": "În Setări e o pagină nouă, AI-urile tale, unde te conectezi la agenți, îți adaugi cheile și verifici că fiecare conexiune merge.",
+          "detail": "Poți avea mai multe conturi sau chei pentru același furnizor, găsești orice conexiune cu căutarea și filtrele, iar cu Automat agentul folosește modelul pe care îl recomandă. Poți adăuga și Grok Build, OpenCode, Kimi Code și alți agenți din catalogul public; aplicația îți spune când un agent vine de la un autor extern."
         },
         {
           "title": "Modul Coordonator pentru proiecte (experimental)",
@@ -425,7 +425,7 @@
         {
           "title": "Mai ușoară și mai ușor de anulat",
           "body": "O mare parte din Codevalanche merge acum pe motorul lui propriu, inclus în aplicație, așa că face mai puțină muncă în fundal.",
-          "detail": "Rularea agenților și câteva alte părți folosesc deocamdată motorul vechi și trec pe cel nou în actualizările următoare. Poți anula dintr-odată toate schimbările unei ture a agentului, editezi fișiere într-un editor de cod adevărat și vezi toate scurtăturile cu Ctrl+/. În Setări ai contrast mare, mărimea textului și mai puțină mișcare, iar installerul vorbește acum 17 limbi."
+          "detail": "În timp ce agentul lucrează, îi trimiți un mesaj ca să schimbe direcția sau oprești răspunsul; fiecare mesaj apare ca bulă separată. Rularea agenților și câteva alte părți folosesc deocamdată motorul vechi și trec pe cel nou în actualizările următoare. Poți anula dintr-odată toate schimbările unei ture a agentului, editezi fișiere într-un editor de cod adevărat și vezi toate scurtăturile cu Ctrl+/. În Setări ai contrast mare, mărimea textului și mai puțină mișcare, iar installerul vorbește acum 17 limbi."
         },
         {
           "title": "Cum s-a construit 1.1.1",
@@ -439,9 +439,9 @@
       "summary": "Новый дом для ваших ИИ, режим координатора, публикация из чата и более лёгкое приложение.",
       "sections": [
         {
-          "title": "Ваши ИИ готовы за минуту",
-          "body": "В настройках появилась страница «Ваши ИИ»: она находит ИИ-инструменты, которые уже есть на вашем ПК, а вы входите в аккаунт или добавляете ключ за пару кликов.",
-          "detail": "Вставьте ключ, и Codevalanche сам поймёт, какому поставщику он принадлежит. У каждого аккаунта или ключа одна понятная строка с его моделями и остатком лимита, а «Поздороваться» проверяет, что всё работает, ещё до начала. Можно добавить и Grok Build, OpenCode, Kimi Code и других агентов из открытого каталога; приложение предупредит, если агент от стороннего издателя."
+          "title": "Ваши ИИ — всё в одном месте",
+          "body": "В настройках появилась страница «Ваши ИИ»: здесь вы входите в своих агентов, добавляете ключи и проверяете, что каждое подключение работает.",
+          "detail": "Добавляйте несколько аккаунтов или ключей одного поставщика, находите любое подключение через поиск и фильтры и выбирайте «Автоматически», чтобы агент использовал рекомендуемую модель. Можно добавить и Grok Build, OpenCode, Kimi Code и других агентов из открытого каталога; приложение предупредит, если агент от стороннего издателя."
         },
         {
           "title": "Режим координатора для проектов (экспериментальный)",
@@ -461,7 +461,7 @@
         {
           "title": "Легче, и отменять проще",
           "body": "Большая часть Codevalanche теперь работает на собственном встроенном движке, поэтому приложение меньше нагружает компьютер в фоне.",
-          "detail": "Запуски агентов и несколько других частей пока работают на прежнем движке и перейдут на новый в следующих обновлениях. Можно разом отменить все изменения одного хода агента, править файлы в настоящем редакторе кода и увидеть все сочетания клавиш через Ctrl+/. В настройках появились высокий контраст, размер текста и меньше анимации, а установщик теперь говорит на 17 языках."
+          "detail": "Пока агент работает, отправьте сообщение, чтобы сменить курс, или остановите ответ; каждое сообщение показывается отдельным пузырём. Запуски агентов и несколько других частей пока работают на прежнем движке и перейдут на новый в следующих обновлениях. Можно разом отменить все изменения одного хода агента, править файлы в настоящем редакторе кода и увидеть все сочетания клавиш через Ctrl+/. В настройках появились высокий контраст, размер текста и меньше анимации, а установщик теперь говорит на 17 языках."
         },
         {
           "title": "Как создавалась 1.1.1",
@@ -475,9 +475,9 @@
       "summary": "Yapay zekâlarınız için yeni bir yer, Koordinatör modu, sohbetten yayınlama ve daha hafif bir uygulama.",
       "sections": [
         {
-          "title": "Yapay zekâlarınız bir dakikada hazır",
-          "body": "Ayarlar'da yeni bir sayfa var, Yapay zekâlarınız: bilgisayarınızda zaten olan yapay zekâ araçlarını bulur, siz de birkaç tıkla oturum açar veya anahtar eklersiniz.",
-          "detail": "Bir anahtar yapıştırın, Codevalanche hangi sağlayıcıya ait olduğunu tanısın. Her hesap veya anahtarın, modelleri ve limitinden ne kaldığıyla tek bir net satırı var; Merhaba de ise başlamadan önce çalıştığını kontrol eder. Herkese açık katalogdan Grok Build, OpenCode, Kimi Code ve başka ajanlar da ekleyebilirsiniz; bir ajan üçüncü taraf bir yayıncıdan geliyorsa uygulama size söyler."
+          "title": "Yapay zekâlarınız, hepsi tek yerde",
+          "body": "Ayarlar'da yeni bir sayfa var, Yapay zekâlarınız: ajanlarınızda oturum açar, anahtarlarınızı ekler ve her bağlantının çalıştığını kontrol edersiniz.",
+          "detail": "Aynı sağlayıcı için birden fazla hesap veya anahtar ekleyin, arama ve filtrelerle her bağlantıyı bulun, Otomatik'i seçerek ajanın önerdiği modeli kullanmasını sağlayın. Herkese açık katalogdan Grok Build, OpenCode, Kimi Code ve başka ajanlar da ekleyebilirsiniz; bir ajan üçüncü taraf bir yayıncıdan geliyorsa uygulama size söyler."
         },
         {
           "title": "Projeler için Koordinatör modu (deneysel)",
@@ -497,7 +497,7 @@
         {
           "title": "Daha hafif, geri alması daha kolay",
           "body": "Codevalanche'ın büyük bölümü artık kendi yerleşik motoruyla çalışıyor, bu yüzden uygulama arka planda daha az iş yapıyor.",
-          "detail": "Ajan çalıştırmaları ve birkaç başka bölüm şimdilik önceki motoru kullanıyor ve sonraki güncellemelerde yenisine geçecek. Bir ajan turunun tüm değişikliklerini tek seferde geri alabilir, dosyaları gerçek bir kod düzenleyicide düzenleyebilir ve tüm kısayolları Ctrl+/ ile görebilirsiniz. Ayarlar'a yüksek kontrast, metin boyutu ve daha az hareket eklendi; yükleyici artık 17 dil konuşuyor."
+          "detail": "Ajan çalışırken yönünü değiştirmek için mesaj gönderin ya da yanıtı durdurun; her mesaj kendi balonunda görünür. Ajan çalıştırmaları ve birkaç başka bölüm şimdilik önceki motoru kullanıyor ve sonraki güncellemelerde yenisine geçecek. Bir ajan turunun tüm değişikliklerini tek seferde geri alabilir, dosyaları gerçek bir kod düzenleyicide düzenleyebilir ve tüm kısayolları Ctrl+/ ile görebilirsiniz. Ayarlar'a yüksek kontrast, metin boyutu ve daha az hareket eklendi; yükleyici artık 17 dil konuşuyor."
         },
         {
           "title": "1.1.1 nasıl oluştu",
@@ -511,9 +511,9 @@
       "summary": "Ngôi nhà mới cho các AI của bạn, chế độ Điều phối, xuất bản từ khung chat và ứng dụng nhẹ hơn.",
       "sections": [
         {
-          "title": "AI của bạn, sẵn sàng trong một phút",
-          "body": "Cài đặt có trang mới, AI của bạn: trang này tìm các công cụ AI đã có trên máy, và bạn đăng nhập hoặc thêm khóa chỉ với vài cú nhấp.",
-          "detail": "Dán một khóa và Codevalanche nhận ra khóa đó thuộc nhà cung cấp nào. Mỗi tài khoản hoặc khóa có một dòng rõ ràng với các mô hình và phần hạn mức còn lại, và Chào một tiếng kiểm tra mọi thứ hoạt động trước khi bạn bắt đầu. Bạn cũng có thể thêm Grok Build, OpenCode, Kimi Code và các tác tử khác từ danh mục công khai; ứng dụng sẽ báo khi một tác tử đến từ nhà phát hành bên thứ ba."
+          "title": "AI của bạn, tất cả ở một nơi",
+          "body": "Cài đặt có trang mới, AI của bạn, nơi bạn đăng nhập vào các tác tử, thêm khóa và kiểm tra từng kết nối có hoạt động không.",
+          "detail": "Thêm nhiều tài khoản hoặc khóa cho cùng một nhà cung cấp, tìm mọi kết nối bằng ô tìm kiếm và bộ lọc, và chọn Tự động để tác tử dùng mô hình mà nó đề xuất. Bạn cũng có thể thêm Grok Build, OpenCode, Kimi Code và các tác tử khác từ danh mục công khai; ứng dụng sẽ báo khi một tác tử đến từ nhà phát hành bên thứ ba."
         },
         {
           "title": "Chế độ Điều phối cho dự án (thử nghiệm)",
@@ -533,7 +533,7 @@
         {
           "title": "Nhẹ hơn, và dễ hoàn tác hơn",
           "body": "Phần lớn Codevalanche giờ chạy trên công cụ tích hợp riêng, nên ứng dụng làm ít việc hơn ở chế độ nền.",
-          "detail": "Việc chạy tác tử và vài phần khác tạm thời vẫn dùng công cụ cũ và sẽ chuyển sang công cụ mới trong các bản cập nhật tới. Bạn có thể hoàn tác cùng lúc mọi thay đổi của một lượt tác tử, sửa tệp trong một trình soạn thảo mã thực thụ và xem mọi phím tắt bằng Ctrl+/. Cài đặt có thêm độ tương phản cao, cỡ chữ và giảm chuyển động, và trình cài đặt nay có 17 ngôn ngữ."
+          "detail": "Khi tác tử đang làm việc, hãy gửi tin nhắn để đổi hướng hoặc dừng câu trả lời; mỗi tin nhắn hiện trong bong bóng riêng. Việc chạy tác tử và vài phần khác tạm thời vẫn dùng công cụ cũ và sẽ chuyển sang công cụ mới trong các bản cập nhật tới. Bạn có thể hoàn tác cùng lúc mọi thay đổi của một lượt tác tử, sửa tệp trong một trình soạn thảo mã thực thụ và xem mọi phím tắt bằng Ctrl+/. Cài đặt có thêm độ tương phản cao, cỡ chữ và giảm chuyển động, và trình cài đặt nay có 17 ngôn ngữ."
         },
         {
           "title": "1.1.1 đã được làm ra thế nào",
@@ -547,9 +547,9 @@
       "summary": "AI 的新家、协调者模式、从聊天发布，以及更轻快的应用。",
       "sections": [
         {
-          "title": "你的 AI，一分钟就绪",
-          "body": "设置里新增了“你的 AI”页面：它会找到电脑上已有的 AI 工具，点几下就能登录或添加密钥。",
-          "detail": "粘贴一个密钥，Codevalanche 就能认出它属于哪个提供商。每个账户或密钥都有清晰的一行，显示它的模型和剩余额度；“打个招呼”会在开始前确认一切正常。你还可以从公共目录添加 Grok Build、OpenCode、Kimi Code 等代理；如果代理来自第三方发布者，应用会提醒你。"
+          "title": "你的 AI，全部集中一处",
+          "body": "设置里新增了“你的 AI”页面：在这里登录你的代理、添加密钥，并检查每个连接是否正常。",
+          "detail": "同一个提供商可以添加多个账户或密钥，用搜索和筛选快速找到任何连接，选择“自动”即可让代理使用它推荐的模型。你还可以从公共目录添加 Grok Build、OpenCode、Kimi Code 等代理；如果代理来自第三方发布者，应用会提醒你。"
         },
         {
           "title": "项目的协调者模式（实验性）",
@@ -569,7 +569,7 @@
         {
           "title": "更轻快，撤销更容易",
           "body": "Codevalanche 的大部分功能现在运行在它自己的内置引擎上，应用在后台做的事更少了。",
-          "detail": "代理运行和其他少数部分目前仍使用旧引擎，将在后续更新中迁移。你可以一次撤销代理某一轮的全部更改，在真正的代码编辑器中编辑文件，并用 Ctrl+/ 查看所有快捷键。设置新增高对比度、文字大小和减少动画，安装程序现在支持 17 种语言。"
+          "detail": "代理工作时，你可以发消息改变它的方向或停止回答；每条消息都显示为单独的气泡。 代理运行和其他少数部分目前仍使用旧引擎，将在后续更新中迁移。你可以一次撤销代理某一轮的全部更改，在真正的代码编辑器中编辑文件，并用 Ctrl+/ 查看所有快捷键。设置新增高对比度、文字大小和减少动画，安装程序现在支持 17 种语言。"
         },
         {
           "title": "1.1.1 是怎样完成的",
@@ -583,9 +583,9 @@
       "summary": "AI 的新家、協調者模式、從聊天發布，以及更輕快的應用程式。",
       "sections": [
         {
-          "title": "你的 AI，一分鐘就緒",
-          "body": "設定裡新增了「你的 AI」頁面：它會找到電腦上已有的 AI 工具，點幾下就能登入或新增金鑰。",
-          "detail": "貼上一個金鑰，Codevalanche 就能認出它屬於哪個供應商。每個帳戶或金鑰都有清楚的一行，顯示它的模型和剩餘額度；「打個招呼」會在開始前確認一切正常。你也可以從公開目錄新增 Grok Build、OpenCode、Kimi Code 等代理；如果代理來自第三方發行者，應用程式會提醒你。"
+          "title": "你的 AI，全部集中一處",
+          "body": "設定裡新增了「你的 AI」頁面：在這裡登入你的代理、新增金鑰，並檢查每個連線是否正常。",
+          "detail": "同一個供應商可以新增多個帳戶或金鑰，用搜尋和篩選快速找到任何連線，選擇「自動」即可讓代理使用它推薦的模型。你也可以從公開目錄新增 Grok Build、OpenCode、Kimi Code 等代理；如果代理來自第三方發行者，應用程式會提醒你。"
         },
         {
           "title": "專案的協調者模式（實驗性）",
@@ -605,7 +605,7 @@
         {
           "title": "更輕快，復原更容易",
           "body": "Codevalanche 的大部分功能現在執行在它自己的內建引擎上，應用程式在背景做的事更少了。",
-          "detail": "代理執行和其他少數部分目前仍使用舊引擎，將在後續更新中移轉。你可以一次復原代理某一輪的全部變更，在真正的程式碼編輯器中編輯檔案，並用 Ctrl+/ 查看所有快捷鍵。設定新增高對比、文字大小和減少動態效果，安裝程式現在支援 17 種語言。"
+          "detail": "代理工作時，你可以傳訊息改變它的方向或停止回答；每則訊息都顯示為單獨的氣泡。 代理執行和其他少數部分目前仍使用舊引擎，將在後續更新中移轉。你可以一次復原代理某一輪的全部變更，在真正的程式碼編輯器中編輯檔案，並用 Ctrl+/ 查看所有快捷鍵。設定新增高對比、文字大小和減少動態效果，安裝程式現在支援 17 種語言。"
         },
         {
           "title": "1.1.1 是怎樣完成的",
