@@ -149,3 +149,7 @@ verify_jwt = false
 
 [functions.download-redirect]
 verify_jwt = false
+
+# Owner token or a signed unsubscribe link; see functions/release-announcements.
+[functions.release-announcements]
+verify_jwt = false
