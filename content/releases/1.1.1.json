@@ -1,0 +1,533 @@
+{
+  "version": "1.1.1",
+  "date": "2026-10-29",
+  "copy": {
+    "en": {
+      "headline": "All your AIs in one place, your site online from the chat",
+      "summary": "A new home for your AIs, Coordinator mode, publishing from the chat and a lighter app.",
+      "sections": [
+        {
+          "title": "Your AIs, ready in a minute",
+          "body": "Settings has a new Your AIs page: it finds the AI tools already on your PC, and you sign in or add a key in a few clicks.",
+          "detail": "Paste a key and Codevalanche recognises which provider it belongs to. Each account or key has one clear row with its models and how much of its limit is left, and Say hello checks that it works before you start. You can also add Grok Build, OpenCode, Kimi Code and other agents from the public catalog; the app tells you when an agent comes from a third-party publisher."
+        },
+        {
+          "title": "Coordinator mode for projects (experimental)",
+          "body": "Turn it on from a project's menu: one agent plans the work and hands parts of it to other agents and models, each in its own chat.",
+          "detail": "Questions and approvals reach you in the right chat, and you can pause or stop the whole project at any time. It works while this computer is on."
+        },
+        {
+          "title": "From chat to a live site",
+          "body": "When your site is ready, publish it on GitHub Pages or Vercel right from the chat and share the link.",
+          "detail": "Connect Supabase, Notion, Vercel and Cloudflare, and the agent works with them for you, while changes to your database wait for your OK. The agent can show a before-and-after screenshot as proof that it works, start a task from a GitHub issue and draw diagrams in its answers. Save a good message as a recipe and reuse it in one click."
+        },
+        {
+          "title": "Keep working when a limit hits",
+          "body": "Codevalanche shows how much of your Claude and Codex plans is left and when each limit resets.",
+          "detail": "When a limit stops a task, continue with a model on your own PC or hand the task to another agent. Before a very long conversation, it suggests starting a new one with a summary. With a local model, it can also suggest your next message as you type."
+        },
+        {
+          "title": "Lighter, and easier to undo",
+          "body": "Much of Codevalanche now runs on its own built-in engine, so the app does less work in the background.",
+          "detail": "Agent runs and a few other parts still use the previous engine for now and move over in the next updates. You can undo all the changes of one agent turn at once, edit files in a real code editor and see every shortcut with Ctrl+/. Settings adds high contrast, text size and less motion, and the installer now speaks 17 languages."
+        }
+      ]
+    },
+    "ar": {
+      "headline": "كل أدوات الذكاء الاصطناعي لديك في مكان واحد، وموقعك على الإنترنت من المحادثة",
+      "summary": "مكان جديد لأدوات الذكاء الاصطناعي، ووضع المنسق، والنشر من المحادثة، وتطبيق أخف.",
+      "sections": [
+        {
+          "title": "أدوات الذكاء الاصطناعي لديك جاهزة في دقيقة",
+          "body": "في الإعدادات صفحة جديدة باسم «أدوات الذكاء الاصطناعي لديك»: تعثر على أدوات الذكاء الاصطناعي الموجودة على حاسوبك، فتسجّل الدخول أو تضيف مفتاحًا ببضع نقرات.",
+          "detail": "الصق مفتاحًا ويتعرّف ⁦Codevalanche⁩ على المزوّد الذي يتبع له. لكل حساب أو مفتاح سطر واضح واحد يعرض نماذجه وما تبقّى من حدّه، وزر «قل مرحبًا» يتحقق من أن كل شيء يعمل قبل أن تبدأ. يمكنك أيضًا إضافة ⁦Grok Build⁩ و⁦OpenCode⁩ و⁦Kimi Code⁩ ووكلاء آخرين من الدليل العام، ويخبرك التطبيق عندما يأتي وكيل من ناشر خارجي."
+        },
+        {
+          "title": "وضع المنسق للمشاريع (تجريبي)",
+          "body": "فعّله من قائمة المشروع: يخطط وكيل واحد للعمل ويوزّع أجزاءه على وكلاء ونماذج أخرى، كلٌّ في محادثته الخاصة.",
+          "detail": "تصلك الأسئلة والموافقات في المحادثة المناسبة، ويمكنك إيقاف المشروع كله مؤقتًا أو إيقافه في أي وقت. يعمل ما دام هذا الحاسوب قيد التشغيل."
+        },
+        {
+          "title": "من المحادثة إلى موقع منشور",
+          "body": "عندما يصبح موقعك جاهزًا، انشره على ⁦GitHub Pages⁩ أو ⁦Vercel⁩ مباشرة من المحادثة وشارك الرابط.",
+          "detail": "اربط ⁦Supabase⁩ و⁦Notion⁩ و⁦Vercel⁩ و⁦Cloudflare⁩، ويعمل الوكيل معها نيابةً عنك، بينما تنتظر التغييرات على قاعدة بياناتك موافقتك. يستطيع الوكيل عرض لقطة شاشة قبل وبعد دليلًا على أن كل شيء يعمل، وبدء مهمة من ⁦GitHub issue⁩، ورسم مخططات في إجاباته. احفظ رسالة جيدة كوصفة وأعد استخدامها بنقرة واحدة."
+        },
+        {
+          "title": "واصل العمل عند بلوغ الحد",
+          "body": "يعرض ⁦Codevalanche⁩ ما تبقّى من خطتي ⁦Claude⁩ و⁦Codex⁩ ومتى يُعاد ضبط كل حد.",
+          "detail": "عندما يوقف حدٌّ مهمة ما، تابع بنموذج على حاسوبك أو سلّم المهمة إلى وكيل آخر. وقبل محادثة طويلة جدًا، يقترح بدء محادثة جديدة مع ملخص. ومع نموذج محلي، يمكنه أيضًا اقتراح رسالتك التالية أثناء الكتابة."
+        },
+        {
+          "title": "أخف، والتراجع أسهل",
+          "body": "يعمل جزء كبير من ⁦Codevalanche⁩ الآن على محرّكه المدمج الخاص، لذا يقوم التطبيق بعمل أقل في الخلفية.",
+          "detail": "ما زال تشغيل الوكلاء وبعض الأجزاء الأخرى يستخدم المحرّك السابق حاليًا، وستنتقل إلى الجديد في التحديثات القادمة. يمكنك التراجع دفعة واحدة عن كل تغييرات دورة واحدة للوكيل، وتحرير الملفات في محرر شيفرة حقيقي، ورؤية كل الاختصارات بـ ⁦Ctrl+/⁩. وتضيف الإعدادات التباين العالي وحجم النص وتقليل الحركة، وأصبح المثبّت يتحدث 17 لغة."
+        }
+      ]
+    },
+    "de": {
+      "headline": "Alle Ihre KIs an einem Ort, Ihre Website direkt aus dem Chat online",
+      "summary": "Ein neues Zuhause für Ihre KIs, Koordinator-Modus, Veröffentlichen aus dem Chat und eine leichtere App.",
+      "sections": [
+        {
+          "title": "Ihre KIs, in einer Minute bereit",
+          "body": "In den Einstellungen gibt es die neue Seite „Ihre KIs“: Sie findet die KI-Werkzeuge, die schon auf Ihrem PC sind, und Sie melden sich mit wenigen Klicks an oder fügen einen Schlüssel hinzu.",
+          "detail": "Fügen Sie einen Schlüssel ein, und Codevalanche erkennt, zu welchem Anbieter er gehört. Jedes Konto und jeder Schlüssel hat eine klare Zeile mit seinen Modellen und dem, was vom Limit noch übrig ist, und „Hallo sagen“ prüft vor dem Start, ob alles funktioniert. Sie können auch Grok Build, OpenCode, Kimi Code und weitere Agenten aus dem öffentlichen Katalog hinzufügen; die App sagt Ihnen, wenn ein Agent von einem fremden Herausgeber stammt."
+        },
+        {
+          "title": "Koordinator-Modus für Projekte (experimentell)",
+          "body": "Sie schalten ihn im Menü eines Projekts ein: Ein Agent plant die Arbeit und gibt Teile davon an andere Agenten und Modelle weiter, jeden in seinem eigenen Chat.",
+          "detail": "Fragen und Freigaben erreichen Sie im richtigen Chat, und Sie können das ganze Projekt jederzeit pausieren oder stoppen. Er arbeitet, solange dieser Computer eingeschaltet ist."
+        },
+        {
+          "title": "Vom Chat zur fertigen Website",
+          "body": "Wenn Ihre Website fertig ist, veröffentlichen Sie sie direkt aus dem Chat auf GitHub Pages oder Vercel und teilen den Link.",
+          "detail": "Verbinden Sie Supabase, Notion, Vercel und Cloudflare, und der Agent arbeitet für Sie damit; Änderungen an Ihrer Datenbank warten auf Ihre Zustimmung. Der Agent kann mit einem Vorher-nachher-Bildschirmfoto zeigen, dass es funktioniert, eine Aufgabe aus einem GitHub-Issue starten und Diagramme in seine Antworten zeichnen. Eine gelungene Nachricht speichern Sie als Rezept und verwenden sie mit einem Klick wieder."
+        },
+        {
+          "title": "Weiterarbeiten, wenn ein Limit erreicht ist",
+          "body": "Codevalanche zeigt, wie viel von Ihren Claude- und Codex-Abos noch übrig ist und wann jedes Limit zurückgesetzt wird.",
+          "detail": "Stoppt ein Limit eine Aufgabe, machen Sie mit einem Modell auf Ihrem eigenen PC weiter oder übergeben die Aufgabe an einen anderen Agenten. Vor einer sehr langen Unterhaltung schlägt die App vor, eine neue mit einer Zusammenfassung zu beginnen. Mit einem lokalen Modell kann sie beim Tippen auch Ihre nächste Nachricht vorschlagen."
+        },
+        {
+          "title": "Leichter, und leichter rückgängig zu machen",
+          "body": "Ein großer Teil von Codevalanche läuft jetzt auf seiner eigenen, eingebauten Engine, sodass die App im Hintergrund weniger Arbeit hat.",
+          "detail": "Agentenläufe und einige andere Teile nutzen vorerst noch die bisherige Engine und wechseln in den nächsten Updates. Sie können alle Änderungen eines Agentenschritts auf einmal rückgängig machen, Dateien in einem echten Code-Editor bearbeiten und mit Strg+/ alle Tastenkürzel sehen. Die Einstellungen bieten hohen Kontrast, Textgröße und weniger Bewegung, und das Installationsprogramm spricht jetzt 17 Sprachen."
+        }
+      ]
+    },
+    "es": {
+      "headline": "Todas tus IA en un solo lugar y tu sitio en línea desde el chat",
+      "summary": "Un nuevo hogar para tus IA, el modo Coordinador, publicar desde el chat y una app más ligera.",
+      "sections": [
+        {
+          "title": "Tus IA, listas en un minuto",
+          "body": "Configuración tiene una nueva página, Tus IA: encuentra las herramientas de IA que ya están en tu PC y te conectas o añades una clave en pocos clics.",
+          "detail": "Pega una clave y Codevalanche reconoce de qué proveedor es. Cada cuenta o clave tiene una fila clara con sus modelos y lo que queda de su límite, y Saludar comprueba que funciona antes de empezar. También puedes añadir Grok Build, OpenCode, Kimi Code y otros agentes del catálogo público; la app te avisa cuando un agente viene de un editor externo."
+        },
+        {
+          "title": "Modo Coordinador para proyectos (experimental)",
+          "body": "Actívalo desde el menú de un proyecto: un agente planifica el trabajo y reparte partes a otros agentes y modelos, cada uno en su propio chat.",
+          "detail": "Las preguntas y aprobaciones te llegan en el chat correcto, y puedes pausar o detener todo el proyecto en cualquier momento. Funciona mientras este ordenador esté encendido."
+        },
+        {
+          "title": "Del chat a un sitio publicado",
+          "body": "Cuando tu sitio esté listo, publícalo en GitHub Pages o Vercel directamente desde el chat y comparte el enlace.",
+          "detail": "Conecta Supabase, Notion, Vercel y Cloudflare, y el agente trabaja con ellos por ti; los cambios en tu base de datos esperan tu aprobación. El agente puede mostrar una captura de antes y después como prueba de que funciona, empezar una tarea desde un issue de GitHub y dibujar diagramas en sus respuestas. Guarda un buen mensaje como receta y reutilízalo con un clic."
+        },
+        {
+          "title": "Sigue trabajando cuando llegas a un límite",
+          "body": "Codevalanche muestra cuánto te queda de tus planes de Claude y Codex y cuándo se reinicia cada límite.",
+          "detail": "Cuando un límite detiene una tarea, sigue con un modelo en tu propio PC o pasa la tarea a otro agente. Antes de una conversación muy larga, te sugiere empezar una nueva con un resumen. Con un modelo local, también puede sugerirte el siguiente mensaje mientras escribes."
+        },
+        {
+          "title": "Más ligera y más fácil de deshacer",
+          "body": "Gran parte de Codevalanche funciona ahora con su propio motor integrado, así que la app trabaja menos en segundo plano.",
+          "detail": "La ejecución de los agentes y algunas otras partes usan todavía el motor anterior y pasarán al nuevo en las próximas actualizaciones. Puedes deshacer de una vez todos los cambios de un turno del agente, editar archivos en un editor de código de verdad y ver todos los atajos con Ctrl+/. Configuración añade alto contraste, tamaño del texto y menos movimiento, y el instalador ya habla 17 idiomas."
+        }
+      ]
+    },
+    "fr": {
+      "headline": "Toutes vos IA au même endroit, votre site en ligne depuis le chat",
+      "summary": "Un nouvel espace pour vos IA, le mode Coordinateur, la publication depuis le chat et une app plus légère.",
+      "sections": [
+        {
+          "title": "Vos IA, prêtes en une minute",
+          "body": "Les Paramètres ont une nouvelle page, Vos IA : elle trouve les outils d’IA déjà présents sur votre PC, et vous vous connectez ou ajoutez une clé en quelques clics.",
+          "detail": "Collez une clé et Codevalanche reconnaît à quel fournisseur elle appartient. Chaque compte ou clé a une seule ligne claire avec ses modèles et ce qui reste de sa limite, et Dire bonjour vérifie que tout fonctionne avant de commencer. Vous pouvez aussi ajouter Grok Build, OpenCode, Kimi Code et d’autres agents du catalogue public ; l’app vous prévient quand un agent vient d’un éditeur tiers."
+        },
+        {
+          "title": "Mode Coordinateur pour les projets (expérimental)",
+          "body": "Activez-le depuis le menu d’un projet : un agent planifie le travail et en confie des parties à d’autres agents et modèles, chacun dans son propre chat.",
+          "detail": "Les questions et les validations vous arrivent dans le bon chat, et vous pouvez mettre en pause ou arrêter tout le projet à tout moment. Il fonctionne tant que cet ordinateur est allumé."
+        },
+        {
+          "title": "Du chat à un site en ligne",
+          "body": "Quand votre site est prêt, publiez-le sur GitHub Pages ou Vercel directement depuis le chat et partagez le lien.",
+          "detail": "Connectez Supabase, Notion, Vercel et Cloudflare, et l’agent travaille avec eux pour vous ; les modifications de votre base de données attendent votre accord. L’agent peut montrer une capture avant et après pour prouver que ça marche, démarrer une tâche depuis un ticket GitHub et dessiner des diagrammes dans ses réponses. Enregistrez un bon message comme recette et réutilisez-le en un clic."
+        },
+        {
+          "title": "Continuez quand une limite est atteinte",
+          "body": "Codevalanche indique ce qu’il reste de vos abonnements Claude et Codex et quand chaque limite se réinitialise.",
+          "detail": "Quand une limite arrête une tâche, continuez avec un modèle sur votre propre PC ou confiez la tâche à un autre agent. Avant une conversation très longue, l’app propose d’en commencer une nouvelle avec un résumé. Avec un modèle local, elle peut aussi suggérer votre prochain message pendant que vous écrivez."
+        },
+        {
+          "title": "Plus légère, et plus facile à annuler",
+          "body": "Une grande partie de Codevalanche tourne désormais sur son propre moteur intégré, l’app travaille donc moins en arrière-plan.",
+          "detail": "L’exécution des agents et quelques autres parties utilisent encore l’ancien moteur pour l’instant et passeront au nouveau dans les prochaines mises à jour. Vous pouvez annuler d’un coup toutes les modifications d’un tour de l’agent, modifier vos fichiers dans un vrai éditeur de code et voir tous les raccourcis avec Ctrl+/. Les Paramètres ajoutent le contraste élevé, la taille du texte et moins d’animations, et le programme d’installation parle désormais 17 langues."
+        }
+      ]
+    },
+    "hi": {
+      "headline": "आपके सारे AI एक जगह, आपकी साइट चैट से ही ऑनलाइन",
+      "summary": "आपके AI के लिए नया ठिकाना, कोऑर्डिनेटर मोड, चैट से प्रकाशन और हल्का ऐप।",
+      "sections": [
+        {
+          "title": "आपके AI, एक मिनट में तैयार",
+          "body": "सेटिंग्स में नया पेज है, आपके AI: यह आपके PC पर पहले से मौजूद AI टूल ढूँढता है, और आप कुछ क्लिक में साइन इन करते हैं या कुंजी जोड़ते हैं।",
+          "detail": "कुंजी चिपकाइए और Codevalanche पहचान लेता है कि वह किस प्रदाता की है। हर खाते या कुंजी की एक साफ़ पंक्ति है, जिसमें उसके मॉडल और बची हुई सीमा दिखती है, और नमस्ते कहें शुरू करने से पहले जाँच लेता है कि सब काम कर रहा है। आप सार्वजनिक कैटलॉग से Grok Build, OpenCode, Kimi Code और दूसरे एजेंट भी जोड़ सकते हैं; अगर कोई एजेंट किसी बाहरी प्रकाशक का है तो ऐप बता देता है।"
+        },
+        {
+          "title": "प्रोजेक्ट के लिए कोऑर्डिनेटर मोड (प्रायोगिक)",
+          "body": "इसे प्रोजेक्ट के मेन्यू से चालू करें: एक एजेंट काम की योजना बनाता है और उसके हिस्से दूसरे एजेंटों और मॉडलों को सौंपता है, हर एक अपनी चैट में।",
+          "detail": "सवाल और मंज़ूरियाँ आप तक सही चैट में पहुँचती हैं, और आप कभी भी पूरे प्रोजेक्ट को रोक या बंद कर सकते हैं। यह तब तक काम करता है जब तक यह कंप्यूटर चालू है।"
+        },
+        {
+          "title": "चैट से सीधे लाइव साइट तक",
+          "body": "साइट तैयार होते ही उसे चैट से सीधे GitHub Pages या Vercel पर प्रकाशित करें और लिंक साझा करें।",
+          "detail": "Supabase, Notion, Vercel और Cloudflare जोड़िए, और एजेंट आपके लिए उनके साथ काम करता है; आपके डेटाबेस में बदलाव आपकी मंज़ूरी का इंतज़ार करते हैं। एजेंट सबूत के तौर पर पहले और बाद का स्क्रीनशॉट दिखा सकता है, GitHub issue से काम शुरू कर सकता है और जवाबों में डायग्राम बना सकता है। अच्छे संदेश को रेसिपी के रूप में सहेजें और एक क्लिक में दोबारा इस्तेमाल करें।"
+        },
+        {
+          "title": "सीमा खत्म होने पर भी काम जारी",
+          "body": "Codevalanche दिखाता है कि आपके Claude और Codex प्लान में कितना बचा है और हर सीमा कब रीसेट होगी।",
+          "detail": "जब कोई सीमा काम रोक दे, तो अपने PC के मॉडल से आगे बढ़ें या काम किसी दूसरे एजेंट को सौंप दें। बहुत लंबी बातचीत से पहले यह सारांश के साथ नई बातचीत शुरू करने का सुझाव देता है। लोकल मॉडल के साथ यह टाइप करते समय आपका अगला संदेश भी सुझा सकता है।"
+        },
+        {
+          "title": "हल्का, और पूर्ववत करना आसान",
+          "body": "Codevalanche का बड़ा हिस्सा अब उसके अपने बिल्ट-इन इंजन पर चलता है, इसलिए ऐप बैकग्राउंड में कम काम करता है।",
+          "detail": "एजेंट चलाना और कुछ दूसरे हिस्से अभी पुराने इंजन पर हैं और अगले अपडेट में नए पर आएँगे। आप एजेंट की एक बारी के सारे बदलाव एक साथ पूर्ववत कर सकते हैं, असली कोड एडिटर में फ़ाइलें संपादित कर सकते हैं और Ctrl+/ से सारे शॉर्टकट देख सकते हैं। सेटिंग्स में हाई कंट्रास्ट, टेक्स्ट का आकार और कम हलचल जुड़े हैं, और इंस्टॉलर अब 17 भाषाओं में है।"
+        }
+      ]
+    },
+    "id": {
+      "headline": "Semua AI-mu di satu tempat, situsmu online langsung dari chat",
+      "summary": "Rumah baru untuk AI-mu, mode Koordinator, publikasi dari chat, dan aplikasi yang lebih ringan.",
+      "sections": [
+        {
+          "title": "AI-mu siap dalam semenit",
+          "body": "Pengaturan punya halaman baru, AI-mu: halaman ini menemukan alat AI yang sudah ada di PC-mu, lalu kamu masuk atau menambahkan kunci dalam beberapa klik.",
+          "detail": "Tempel sebuah kunci dan Codevalanche mengenali milik penyedia mana kunci itu. Setiap akun atau kunci punya satu baris yang jelas berisi modelnya dan sisa batasnya, dan Sapa memeriksa bahwa semuanya berfungsi sebelum kamu mulai. Kamu juga bisa menambahkan Grok Build, OpenCode, Kimi Code, dan agen lain dari katalog publik; aplikasi memberi tahu jika agen berasal dari penerbit pihak ketiga."
+        },
+        {
+          "title": "Mode Koordinator untuk proyek (eksperimental)",
+          "body": "Aktifkan dari menu proyek: satu agen merencanakan pekerjaan dan membagikan bagian-bagiannya ke agen dan model lain, masing-masing di chat sendiri.",
+          "detail": "Pertanyaan dan persetujuan sampai kepadamu di chat yang tepat, dan kamu bisa menjeda atau menghentikan seluruh proyek kapan saja. Mode ini berjalan selama komputer ini menyala."
+        },
+        {
+          "title": "Dari chat ke situs yang online",
+          "body": "Saat situsmu siap, publikasikan ke GitHub Pages atau Vercel langsung dari chat dan bagikan tautannya.",
+          "detail": "Hubungkan Supabase, Notion, Vercel, dan Cloudflare, dan agen bekerja dengannya untukmu; perubahan pada basis datamu menunggu persetujuanmu. Agen bisa menunjukkan tangkapan layar sebelum dan sesudah sebagai bukti bahwa semuanya berjalan, memulai tugas dari issue GitHub, dan menggambar diagram di jawabannya. Simpan pesan yang bagus sebagai resep dan gunakan lagi dengan satu klik."
+        },
+        {
+          "title": "Tetap bekerja saat batas tercapai",
+          "body": "Codevalanche menunjukkan sisa paket Claude dan Codex-mu dan kapan setiap batas direset.",
+          "detail": "Saat batas menghentikan tugas, lanjutkan dengan model di PC-mu sendiri atau serahkan tugas ke agen lain. Sebelum percakapan yang sangat panjang, aplikasi menyarankan memulai yang baru dengan ringkasan. Dengan model lokal, aplikasi juga bisa menyarankan pesan berikutnya saat kamu mengetik."
+        },
+        {
+          "title": "Lebih ringan, dan lebih mudah dibatalkan",
+          "body": "Sebagian besar Codevalanche kini berjalan di mesin bawaannya sendiri, jadi aplikasi bekerja lebih sedikit di latar belakang.",
+          "detail": "Eksekusi agen dan beberapa bagian lain untuk sementara masih memakai mesin sebelumnya dan akan pindah di pembaruan berikutnya. Kamu bisa membatalkan semua perubahan satu giliran agen sekaligus, menyunting file di editor kode sungguhan, dan melihat semua pintasan dengan Ctrl+/. Pengaturan kini punya kontras tinggi, ukuran teks, dan gerakan dikurangi, dan penginstal kini tersedia dalam 17 bahasa."
+        }
+      ]
+    },
+    "it": {
+      "headline": "Tutte le tue IA in un posto, il tuo sito online dalla chat",
+      "summary": "Una nuova casa per le tue IA, la modalità Coordinatore, la pubblicazione dalla chat e un’app più leggera.",
+      "sections": [
+        {
+          "title": "Le tue IA, pronte in un minuto",
+          "body": "In Impostazioni c’è la nuova pagina Le tue IA: trova gli strumenti di IA già presenti sul PC e ti colleghi o aggiungi una chiave in pochi clic.",
+          "detail": "Incolla una chiave e Codevalanche riconosce a quale fornitore appartiene. Ogni account o chiave ha una sola riga chiara con i suoi modelli e quanto resta del suo limite, e Saluta controlla che funzioni prima di iniziare. Puoi anche aggiungere Grok Build, OpenCode, Kimi Code e altri agenti dal catalogo pubblico; l’app ti avvisa quando un agente arriva da un editore esterno."
+        },
+        {
+          "title": "Modalità Coordinatore per i progetti (sperimentale)",
+          "body": "Attivala dal menu di un progetto: un agente pianifica il lavoro e ne affida parti ad altri agenti e modelli, ognuno nella sua chat.",
+          "detail": "Domande e approvazioni ti arrivano nella chat giusta, e puoi mettere in pausa o fermare l’intero progetto in qualsiasi momento. Funziona finché questo computer è acceso."
+        },
+        {
+          "title": "Dalla chat a un sito online",
+          "body": "Quando il sito è pronto, pubblicalo su GitHub Pages o Vercel direttamente dalla chat e condividi il link.",
+          "detail": "Collega Supabase, Notion, Vercel e Cloudflare e l’agente ci lavora per te; le modifiche al tuo database aspettano il tuo ok. L’agente può mostrare uno screenshot prima e dopo come prova che funziona, avviare un’attività da una issue di GitHub e disegnare diagrammi nelle risposte. Salva un buon messaggio come ricetta e riusalo con un clic."
+        },
+        {
+          "title": "Continua a lavorare quando arriva un limite",
+          "body": "Codevalanche mostra quanto resta dei tuoi piani Claude e Codex e quando si azzera ogni limite.",
+          "detail": "Quando un limite ferma un’attività, continua con un modello sul tuo PC o passa l’attività a un altro agente. Prima di una conversazione molto lunga, ti suggerisce di iniziarne una nuova con un riassunto. Con un modello locale può anche suggerirti il prossimo messaggio mentre scrivi."
+        },
+        {
+          "title": "Più leggera, e più facile da annullare",
+          "body": "Gran parte di Codevalanche ora funziona con il suo motore integrato, quindi l’app lavora meno in background.",
+          "detail": "L’esecuzione degli agenti e poche altre parti usano ancora il motore precedente e passeranno al nuovo nei prossimi aggiornamenti. Puoi annullare in un colpo tutte le modifiche di un turno dell’agente, modificare i file in un vero editor di codice e vedere tutte le scorciatoie con Ctrl+/. Le Impostazioni aggiungono contrasto elevato, dimensione del testo e meno movimento, e il programma di installazione ora parla 17 lingue."
+        }
+      ]
+    },
+    "ja": {
+      "headline": "すべての AI をひとつの場所に。サイトはチャットから公開",
+      "summary": "AI の新しい置き場所、コーディネーターモード、チャットからの公開、そしてより軽いアプリ。",
+      "sections": [
+        {
+          "title": "あなたの AI、1 分で準備完了",
+          "body": "設定に新しいページ「あなたの AI」が加わりました。PC にすでにある AI ツールを見つけ、数回のクリックでサインインやキーの追加ができます。",
+          "detail": "キーを貼り付けるだけで、Codevalanche がどのプロバイダーのものかを判別します。アカウントやキーごとに、モデルと残りの利用枠が 1 行でわかり、「あいさつする」で始める前に動作を確認できます。公開カタログから Grok Build、OpenCode、Kimi Code などのエージェントも追加できます。外部の発行元によるエージェントの場合は、アプリがお知らせします。"
+        },
+        {
+          "title": "プロジェクト向けコーディネーターモード（試験運用）",
+          "body": "プロジェクトのメニューからオンにします。1 つのエージェントが作業を計画し、その一部をほかのエージェントやモデルに、それぞれ専用のチャットで任せます。",
+          "detail": "質問や承認は適切なチャットに届き、プロジェクト全体をいつでも一時停止または停止できます。このコンピューターの電源が入っている間に動作します。"
+        },
+        {
+          "title": "チャットから公開サイトへ",
+          "body": "サイトができたら、チャットから直接 GitHub Pages や Vercel に公開して、リンクを共有できます。",
+          "detail": "Supabase、Notion、Vercel、Cloudflare をつなげば、エージェントがあなたの代わりに作業します。データベースへの変更はあなたの承認を待ちます。エージェントは動作の証拠として変更前と変更後のスクリーンショットを見せたり、GitHub の issue からタスクを始めたり、回答に図を描いたりできます。よいメッセージはレシピとして保存し、ワンクリックで再利用できます。"
+        },
+        {
+          "title": "利用上限に達しても作業を続ける",
+          "body": "Claude と Codex のプランの残りと、各上限がリセットされる時刻を Codevalanche が表示します。",
+          "detail": "上限でタスクが止まったら、自分の PC 上のモデルで続けるか、タスクを別のエージェントに引き継げます。とても長い会話の前には、要約付きで新しい会話を始めるよう提案します。ローカルモデルを使えば、入力中に次のメッセージを提案することもできます。"
+        },
+        {
+          "title": "より軽く、元に戻すのも簡単に",
+          "body": "Codevalanche の多くの部分が独自の内蔵エンジンで動くようになり、バックグラウンドでの処理が減りました。",
+          "detail": "エージェントの実行やほかのいくつかの部分は、今のところ以前のエンジンを使っており、今後のアップデートで移行します。エージェントの 1 ターン分の変更をまとめて元に戻したり、本格的なコードエディターでファイルを編集したり、Ctrl+/ ですべてのショートカットを確認したりできます。設定にはハイコントラスト、文字サイズ、動きを減らすが加わり、インストーラーは 17 言語に対応しました。"
+        }
+      ]
+    },
+    "ko": {
+      "headline": "모든 AI를 한곳에, 사이트는 채팅에서 바로 공개",
+      "summary": "AI를 위한 새 공간, 코디네이터 모드, 채팅에서 공개, 더 가벼워진 앱.",
+      "sections": [
+        {
+          "title": "내 AI, 1분이면 준비 완료",
+          "body": "설정에 새 페이지 '내 AI'가 생겼습니다. PC에 이미 있는 AI 도구를 찾아 주고, 몇 번의 클릭으로 로그인하거나 키를 추가할 수 있습니다.",
+          "detail": "키를 붙여 넣으면 Codevalanche가 어느 제공업체의 키인지 알아봅니다. 계정이나 키마다 모델과 남은 사용 한도를 보여 주는 깔끔한 한 줄이 있고, '인사하기'로 시작 전에 작동하는지 확인할 수 있습니다. 공개 카탈로그에서 Grok Build, OpenCode, Kimi Code 등 다른 에이전트도 추가할 수 있으며, 외부 게시자의 에이전트라면 앱이 알려 줍니다."
+        },
+        {
+          "title": "프로젝트용 코디네이터 모드(실험적)",
+          "body": "프로젝트 메뉴에서 켜세요. 한 에이전트가 작업을 계획하고, 일부를 다른 에이전트와 모델에게 각자의 채팅에서 맡깁니다.",
+          "detail": "질문과 승인은 알맞은 채팅으로 전달되며, 언제든 프로젝트 전체를 일시 중지하거나 중지할 수 있습니다. 이 컴퓨터가 켜져 있는 동안 작동합니다."
+        },
+        {
+          "title": "채팅에서 바로 공개 사이트로",
+          "body": "사이트가 완성되면 채팅에서 바로 GitHub Pages나 Vercel에 공개하고 링크를 공유하세요.",
+          "detail": "Supabase, Notion, Vercel, Cloudflare를 연결하면 에이전트가 대신 작업하고, 데이터베이스 변경은 사용자의 승인을 기다립니다. 에이전트는 작동한다는 증거로 변경 전후 스크린샷을 보여 주고, GitHub issue에서 작업을 시작하고, 답변에 다이어그램을 그릴 수 있습니다. 좋은 메시지는 레시피로 저장해 한 번의 클릭으로 다시 쓸 수 있습니다."
+        },
+        {
+          "title": "한도에 도달해도 작업은 계속",
+          "body": "Codevalanche가 Claude와 Codex 요금제의 남은 양과 각 한도가 초기화되는 시간을 보여 줍니다.",
+          "detail": "한도 때문에 작업이 멈추면 내 PC의 모델로 이어 가거나 작업을 다른 에이전트에게 넘길 수 있습니다. 대화가 아주 길어지기 전에는 요약과 함께 새 대화를 시작하도록 제안합니다. 로컬 모델을 쓰면 입력하는 동안 다음 메시지를 제안할 수도 있습니다."
+        },
+        {
+          "title": "더 가볍게, 되돌리기는 더 쉽게",
+          "body": "이제 Codevalanche의 많은 부분이 자체 내장 엔진으로 실행되어 앱이 백그라운드에서 하는 일이 줄었습니다.",
+          "detail": "에이전트 실행과 일부 다른 기능은 당분간 이전 엔진을 사용하며 다음 업데이트에서 옮겨 갑니다. 에이전트 한 턴의 모든 변경을 한 번에 되돌리고, 제대로 된 코드 편집기에서 파일을 편집하고, Ctrl+/로 모든 단축키를 볼 수 있습니다. 설정에 고대비, 텍스트 크기, 움직임 줄이기가 추가되었고, 설치 프로그램은 이제 17개 언어를 지원합니다."
+        }
+      ]
+    },
+    "pt-BR": {
+      "headline": "Todas as suas IAs em um só lugar, seu site no ar pelo chat",
+      "summary": "Um novo lugar para suas IAs, o modo Coordenador, publicação pelo chat e um app mais leve.",
+      "sections": [
+        {
+          "title": "Suas IAs, prontas em um minuto",
+          "body": "As Configurações têm uma nova página, Suas IAs: ela encontra as ferramentas de IA que já estão no seu PC, e você entra na conta ou adiciona uma chave em poucos cliques.",
+          "detail": "Cole uma chave e o Codevalanche reconhece de qual provedor ela é. Cada conta ou chave tem uma linha clara com seus modelos e quanto resta do limite, e Dizer olá confere se funciona antes de você começar. Você também pode adicionar Grok Build, OpenCode, Kimi Code e outros agentes do catálogo público; o app avisa quando um agente vem de um publicador externo."
+        },
+        {
+          "title": "Modo Coordenador para projetos (experimental)",
+          "body": "Ative no menu de um projeto: um agente planeja o trabalho e entrega partes dele a outros agentes e modelos, cada um no seu próprio chat.",
+          "detail": "Perguntas e aprovações chegam a você no chat certo, e você pode pausar ou parar o projeto inteiro a qualquer momento. Funciona enquanto este computador estiver ligado."
+        },
+        {
+          "title": "Do chat para um site no ar",
+          "body": "Quando o site estiver pronto, publique no GitHub Pages ou na Vercel direto do chat e compartilhe o link.",
+          "detail": "Conecte Supabase, Notion, Vercel e Cloudflare, e o agente trabalha com eles para você; mudanças no seu banco de dados esperam o seu ok. O agente pode mostrar uma captura de antes e depois como prova de que funciona, começar uma tarefa a partir de uma issue do GitHub e desenhar diagramas nas respostas. Salve uma boa mensagem como receita e reutilize com um clique."
+        },
+        {
+          "title": "Continue trabalhando quando um limite chega",
+          "body": "O Codevalanche mostra quanto resta dos seus planos do Claude e do Codex e quando cada limite é renovado.",
+          "detail": "Quando um limite para uma tarefa, continue com um modelo no seu próprio PC ou passe a tarefa para outro agente. Antes de uma conversa muito longa, ele sugere começar uma nova com um resumo. Com um modelo local, também pode sugerir sua próxima mensagem enquanto você digita."
+        },
+        {
+          "title": "Mais leve e mais fácil de desfazer",
+          "body": "Grande parte do Codevalanche agora roda no seu próprio motor integrado, então o app faz menos trabalho em segundo plano.",
+          "detail": "A execução dos agentes e algumas outras partes ainda usam o motor anterior por enquanto e passam para o novo nas próximas atualizações. Você pode desfazer de uma vez todas as mudanças de um turno do agente, editar arquivos em um editor de código de verdade e ver todos os atalhos com Ctrl+/. As Configurações ganham alto contraste, tamanho do texto e menos movimento, e o instalador agora fala 17 idiomas."
+        }
+      ]
+    },
+    "ro": {
+      "headline": "Toate AI-urile tale într-un loc, site-ul tău online din chat",
+      "summary": "Un loc nou pentru AI-urile tale, Modul Coordonator, publicare din chat și o aplicație mai ușoară.",
+      "sections": [
+        {
+          "title": "AI-urile tale, gata într-un minut",
+          "body": "În Setări e o pagină nouă, AI-urile tale: găsește uneltele AI deja instalate pe calculator, iar tu te conectezi sau adaugi o cheie în câteva clicuri.",
+          "detail": "Lipești o cheie și Codevalanche recunoaște singur al cui furnizor e. Fiecare cont sau cheie are un singur rând clar, cu modelele lui și cât a mai rămas din limită, iar Spune salut verifică dacă merge înainte să începi. Poți adăuga și Grok Build, OpenCode, Kimi Code și alți agenți din catalogul public; aplicația îți spune când un agent vine de la un autor extern."
+        },
+        {
+          "title": "Modul Coordonator pentru proiecte (experimental)",
+          "body": "Îl pornești din meniul proiectului: un agent planifică munca și împarte bucăți din ea altor agenți și modele, fiecare în chatul lui.",
+          "detail": "Întrebările și aprobările ajung la tine în chatul potrivit, iar tot proiectul se poate pune pe pauză sau opri oricând. Merge cât timp calculatorul e pornit."
+        },
+        {
+          "title": "Din chat, direct pe internet",
+          "body": "Când site-ul e gata, îl publici pe GitHub Pages sau Vercel direct din chat și trimiți linkul.",
+          "detail": "Conectezi Supabase, Notion, Vercel și Cloudflare, iar agentul lucrează cu ele pentru tine; schimbările din baza ta de date așteaptă acordul tău. Agentul poate arăta o captură înainte și după, ca dovadă că merge, poate porni o sarcină dintr-un issue GitHub și desenează diagrame în răspunsuri. Un mesaj reușit îl salvezi ca rețetă și îl refolosești dintr-un click."
+        },
+        {
+          "title": "Lucrul continuă când se termină limita",
+          "body": "Codevalanche îți arată cât a mai rămas din abonamentele Claude și Codex și când se resetează fiecare limită.",
+          "detail": "Când o limită oprește o sarcină, continui cu un model de pe calculatorul tău sau predai sarcina altui agent. Înaintea unei conversații foarte lungi, îți propune una nouă, pornită cu un rezumat. Cu un model local, îți poate sugera și următorul mesaj în timp ce scrii."
+        },
+        {
+          "title": "Mai ușoară și mai ușor de anulat",
+          "body": "O mare parte din Codevalanche merge acum pe motorul lui propriu, inclus în aplicație, așa că face mai puțină muncă în fundal.",
+          "detail": "Rularea agenților și câteva alte părți folosesc deocamdată motorul vechi și trec pe cel nou în actualizările următoare. Poți anula dintr-odată toate schimbările unei ture a agentului, editezi fișiere într-un editor de cod adevărat și vezi toate scurtăturile cu Ctrl+/. În Setări ai contrast mare, mărimea textului și mai puțină mișcare, iar installerul vorbește acum 17 limbi."
+        }
+      ]
+    },
+    "ru": {
+      "headline": "Все ваши ИИ в одном месте, ваш сайт в сети прямо из чата",
+      "summary": "Новый дом для ваших ИИ, режим координатора, публикация из чата и более лёгкое приложение.",
+      "sections": [
+        {
+          "title": "Ваши ИИ готовы за минуту",
+          "body": "В настройках появилась страница «Ваши ИИ»: она находит ИИ-инструменты, которые уже есть на вашем ПК, а вы входите в аккаунт или добавляете ключ за пару кликов.",
+          "detail": "Вставьте ключ, и Codevalanche сам поймёт, какому поставщику он принадлежит. У каждого аккаунта или ключа одна понятная строка с его моделями и остатком лимита, а «Поздороваться» проверяет, что всё работает, ещё до начала. Можно добавить и Grok Build, OpenCode, Kimi Code и других агентов из открытого каталога; приложение предупредит, если агент от стороннего издателя."
+        },
+        {
+          "title": "Режим координатора для проектов (экспериментальный)",
+          "body": "Включите его в меню проекта: один агент планирует работу и раздаёт её части другим агентам и моделям, каждому в своём чате.",
+          "detail": "Вопросы и подтверждения приходят вам в нужный чат, а весь проект можно в любой момент приостановить или остановить. Режим работает, пока этот компьютер включён."
+        },
+        {
+          "title": "Из чата сразу в интернет",
+          "body": "Когда сайт готов, опубликуйте его на GitHub Pages или Vercel прямо из чата и поделитесь ссылкой.",
+          "detail": "Подключите Supabase, Notion, Vercel и Cloudflare, и агент будет работать с ними за вас, а изменения в вашей базе данных ждут вашего согласия. Агент может показать снимок экрана «до и после» как доказательство, что всё работает, начать задачу из issue на GitHub и рисовать схемы в ответах. Удачное сообщение можно сохранить как рецепт и повторить в один клик."
+        },
+        {
+          "title": "Работа продолжается, когда кончается лимит",
+          "body": "Codevalanche показывает, сколько осталось от ваших подписок Claude и Codex и когда сбросится каждый лимит.",
+          "detail": "Если лимит остановил задачу, продолжите с моделью на своём ПК или передайте задачу другому агенту. Перед очень длинным разговором приложение предложит начать новый с кратким пересказом. С локальной моделью оно может подсказать и ваше следующее сообщение, пока вы печатаете."
+        },
+        {
+          "title": "Легче, и отменять проще",
+          "body": "Большая часть Codevalanche теперь работает на собственном встроенном движке, поэтому приложение меньше нагружает компьютер в фоне.",
+          "detail": "Запуски агентов и несколько других частей пока работают на прежнем движке и перейдут на новый в следующих обновлениях. Можно разом отменить все изменения одного хода агента, править файлы в настоящем редакторе кода и увидеть все сочетания клавиш через Ctrl+/. В настройках появились высокий контраст, размер текста и меньше анимации, а установщик теперь говорит на 17 языках."
+        }
+      ]
+    },
+    "tr": {
+      "headline": "Tüm yapay zekâlarınız tek yerde, siteniz sohbetten yayında",
+      "summary": "Yapay zekâlarınız için yeni bir yer, Koordinatör modu, sohbetten yayınlama ve daha hafif bir uygulama.",
+      "sections": [
+        {
+          "title": "Yapay zekâlarınız bir dakikada hazır",
+          "body": "Ayarlar'da yeni bir sayfa var, Yapay zekâlarınız: bilgisayarınızda zaten olan yapay zekâ araçlarını bulur, siz de birkaç tıkla oturum açar veya anahtar eklersiniz.",
+          "detail": "Bir anahtar yapıştırın, Codevalanche hangi sağlayıcıya ait olduğunu tanısın. Her hesap veya anahtarın, modelleri ve limitinden ne kaldığıyla tek bir net satırı var; Merhaba de ise başlamadan önce çalıştığını kontrol eder. Herkese açık katalogdan Grok Build, OpenCode, Kimi Code ve başka ajanlar da ekleyebilirsiniz; bir ajan üçüncü taraf bir yayıncıdan geliyorsa uygulama size söyler."
+        },
+        {
+          "title": "Projeler için Koordinatör modu (deneysel)",
+          "body": "Bir projenin menüsünden açın: bir ajan işi planlar ve parçalarını, her biri kendi sohbetinde olmak üzere başka ajanlara ve modellere verir.",
+          "detail": "Sorular ve onaylar size doğru sohbette ulaşır, tüm projeyi istediğiniz an duraklatabilir veya durdurabilirsiniz. Bu bilgisayar açık olduğu sürece çalışır."
+        },
+        {
+          "title": "Sohbetten yayındaki siteye",
+          "body": "Siteniz hazır olduğunda onu sohbetten doğrudan GitHub Pages veya Vercel'de yayınlayın ve bağlantıyı paylaşın.",
+          "detail": "Supabase, Notion, Vercel ve Cloudflare'i bağlayın, ajan sizin için onlarla çalışsın; veritabanınızdaki değişiklikler onayınızı bekler. Ajan, çalıştığının kanıtı olarak önce ve sonra ekran görüntüsü gösterebilir, bir GitHub issue'sundan görev başlatabilir ve yanıtlarında diyagram çizebilir. İyi bir mesajı tarif olarak kaydedin ve tek tıkla yeniden kullanın."
+        },
+        {
+          "title": "Limit dolduğunda da çalışmaya devam",
+          "body": "Codevalanche, Claude ve Codex planlarınızdan ne kadar kaldığını ve her limitin ne zaman sıfırlanacağını gösterir.",
+          "detail": "Bir limit görevi durdurduğunda, kendi bilgisayarınızdaki bir modelle devam edin ya da görevi başka bir ajana devredin. Çok uzun bir sohbetten önce, özetle yeni bir sohbet başlatmayı önerir. Yerel bir modelle, siz yazarken bir sonraki mesajınızı da önerebilir."
+        },
+        {
+          "title": "Daha hafif, geri alması daha kolay",
+          "body": "Codevalanche'ın büyük bölümü artık kendi yerleşik motoruyla çalışıyor, bu yüzden uygulama arka planda daha az iş yapıyor.",
+          "detail": "Ajan çalıştırmaları ve birkaç başka bölüm şimdilik önceki motoru kullanıyor ve sonraki güncellemelerde yenisine geçecek. Bir ajan turunun tüm değişikliklerini tek seferde geri alabilir, dosyaları gerçek bir kod düzenleyicide düzenleyebilir ve tüm kısayolları Ctrl+/ ile görebilirsiniz. Ayarlar'a yüksek kontrast, metin boyutu ve daha az hareket eklendi; yükleyici artık 17 dil konuşuyor."
+        }
+      ]
+    },
+    "vi": {
+      "headline": "Mọi AI của bạn ở một nơi, trang web lên mạng ngay từ khung chat",
+      "summary": "Ngôi nhà mới cho các AI của bạn, chế độ Điều phối, xuất bản từ khung chat và ứng dụng nhẹ hơn.",
+      "sections": [
+        {
+          "title": "AI của bạn, sẵn sàng trong một phút",
+          "body": "Cài đặt có trang mới, AI của bạn: trang này tìm các công cụ AI đã có trên máy, và bạn đăng nhập hoặc thêm khóa chỉ với vài cú nhấp.",
+          "detail": "Dán một khóa và Codevalanche nhận ra khóa đó thuộc nhà cung cấp nào. Mỗi tài khoản hoặc khóa có một dòng rõ ràng với các mô hình và phần hạn mức còn lại, và Chào một tiếng kiểm tra mọi thứ hoạt động trước khi bạn bắt đầu. Bạn cũng có thể thêm Grok Build, OpenCode, Kimi Code và các tác tử khác từ danh mục công khai; ứng dụng sẽ báo khi một tác tử đến từ nhà phát hành bên thứ ba."
+        },
+        {
+          "title": "Chế độ Điều phối cho dự án (thử nghiệm)",
+          "body": "Bật từ menu của dự án: một tác tử lên kế hoạch và giao từng phần việc cho các tác tử và mô hình khác, mỗi bên trong khung chat riêng.",
+          "detail": "Câu hỏi và yêu cầu phê duyệt đến với bạn trong đúng khung chat, và bạn có thể tạm dừng hoặc dừng cả dự án bất cứ lúc nào. Chế độ này chạy khi máy tính này đang bật."
+        },
+        {
+          "title": "Từ khung chat đến trang web trực tuyến",
+          "body": "Khi trang web đã xong, hãy xuất bản lên GitHub Pages hoặc Vercel ngay từ khung chat và chia sẻ liên kết.",
+          "detail": "Kết nối Supabase, Notion, Vercel và Cloudflare, tác tử sẽ làm việc với chúng thay bạn; mọi thay đổi trong cơ sở dữ liệu đều chờ bạn đồng ý. Tác tử có thể đưa ảnh chụp màn hình trước và sau làm bằng chứng là mọi thứ chạy được, bắt đầu một việc từ issue trên GitHub và vẽ sơ đồ trong câu trả lời. Lưu một tin nhắn hay thành công thức và dùng lại chỉ với một cú nhấp."
+        },
+        {
+          "title": "Vẫn làm việc khi chạm hạn mức",
+          "body": "Codevalanche cho biết gói Claude và Codex của bạn còn bao nhiêu và khi nào mỗi hạn mức được đặt lại.",
+          "detail": "Khi hạn mức làm dừng một việc, hãy tiếp tục với mô hình trên chính máy của bạn hoặc giao việc cho tác tử khác. Trước một cuộc trò chuyện quá dài, ứng dụng gợi ý bắt đầu cuộc mới kèm bản tóm tắt. Với mô hình cục bộ, ứng dụng còn có thể gợi ý tin nhắn tiếp theo khi bạn đang gõ."
+        },
+        {
+          "title": "Nhẹ hơn, và dễ hoàn tác hơn",
+          "body": "Phần lớn Codevalanche giờ chạy trên công cụ tích hợp riêng, nên ứng dụng làm ít việc hơn ở chế độ nền.",
+          "detail": "Việc chạy tác tử và vài phần khác tạm thời vẫn dùng công cụ cũ và sẽ chuyển sang công cụ mới trong các bản cập nhật tới. Bạn có thể hoàn tác cùng lúc mọi thay đổi của một lượt tác tử, sửa tệp trong một trình soạn thảo mã thực thụ và xem mọi phím tắt bằng Ctrl+/. Cài đặt có thêm độ tương phản cao, cỡ chữ và giảm chuyển động, và trình cài đặt nay có 17 ngôn ngữ."
+        }
+      ]
+    },
+    "zh-Hans": {
+      "headline": "所有 AI 集中一处，网站直接从聊天上线",
+      "summary": "AI 的新家、协调者模式、从聊天发布，以及更轻快的应用。",
+      "sections": [
+        {
+          "title": "你的 AI，一分钟就绪",
+          "body": "设置里新增了“你的 AI”页面：它会找到电脑上已有的 AI 工具，点几下就能登录或添加密钥。",
+          "detail": "粘贴一个密钥，Codevalanche 就能认出它属于哪个提供商。每个账户或密钥都有清晰的一行，显示它的模型和剩余额度；“打个招呼”会在开始前确认一切正常。你还可以从公共目录添加 Grok Build、OpenCode、Kimi Code 等代理；如果代理来自第三方发布者，应用会提醒你。"
+        },
+        {
+          "title": "项目的协调者模式（实验性）",
+          "body": "在项目菜单中开启：一个代理规划工作，并把其中的部分交给其他代理和模型，各自在自己的聊天中进行。",
+          "detail": "问题和审批会出现在对应的聊天里，你可以随时暂停或停止整个项目。只要这台电脑开着，它就会运行。"
+        },
+        {
+          "title": "从聊天到上线的网站",
+          "body": "网站做好后，直接在聊天中发布到 GitHub Pages 或 Vercel，然后分享链接。",
+          "detail": "连接 Supabase、Notion、Vercel 和 Cloudflare 后，代理会替你操作它们；对数据库的更改会等待你的同意。代理可以用前后对比截图证明一切正常，从 GitHub issue 开始任务，并在回答中绘制图表。好用的消息可以保存为配方，一键重复使用。"
+        },
+        {
+          "title": "额度用完，工作照常继续",
+          "body": "Codevalanche 会显示你的 Claude 和 Codex 套餐还剩多少，以及每个额度何时重置。",
+          "detail": "当额度让任务停下时，可以改用你电脑上的模型继续，或把任务交给另一个代理。在对话变得很长之前，它会建议你带着摘要开始新的对话。使用本地模型时，它还能在你输入时建议下一条消息。"
+        },
+        {
+          "title": "更轻快，撤销更容易",
+          "body": "Codevalanche 的大部分功能现在运行在它自己的内置引擎上，应用在后台做的事更少了。",
+          "detail": "代理运行和其他少数部分目前仍使用旧引擎，将在后续更新中迁移。你可以一次撤销代理某一轮的全部更改，在真正的代码编辑器中编辑文件，并用 Ctrl+/ 查看所有快捷键。设置新增高对比度、文字大小和减少动画，安装程序现在支持 17 种语言。"
+        }
+      ]
+    },
+    "zh-Hant": {
+      "headline": "所有 AI 集中一處，網站直接從聊天上線",
+      "summary": "AI 的新家、協調者模式、從聊天發布，以及更輕快的應用程式。",
+      "sections": [
+        {
+          "title": "你的 AI，一分鐘就緒",
+          "body": "設定裡新增了「你的 AI」頁面：它會找到電腦上已有的 AI 工具，點幾下就能登入或新增金鑰。",
+          "detail": "貼上一個金鑰，Codevalanche 就能認出它屬於哪個供應商。每個帳戶或金鑰都有清楚的一行，顯示它的模型和剩餘額度；「打個招呼」會在開始前確認一切正常。你也可以從公開目錄新增 Grok Build、OpenCode、Kimi Code 等代理；如果代理來自第三方發行者，應用程式會提醒你。"
+        },
+        {
+          "title": "專案的協調者模式（實驗性）",
+          "body": "在專案選單中開啟：一個代理規劃工作，並把其中的部分交給其他代理和模型，各自在自己的聊天中進行。",
+          "detail": "問題和核准會出現在對應的聊天裡，你可以隨時暫停或停止整個專案。只要這台電腦開著，它就會運作。"
+        },
+        {
+          "title": "從聊天到上線的網站",
+          "body": "網站做好後，直接在聊天中發布到 GitHub Pages 或 Vercel，然後分享連結。",
+          "detail": "連接 Supabase、Notion、Vercel 和 Cloudflare 後，代理會替你操作它們；對資料庫的變更會等待你的同意。代理可以用前後對比截圖證明一切正常，從 GitHub issue 開始任務，並在回答中繪製圖表。好用的訊息可以儲存為配方，一鍵重複使用。"
+        },
+        {
+          "title": "額度用完，工作照常繼續",
+          "body": "Codevalanche 會顯示你的 Claude 和 Codex 方案還剩多少，以及每個額度何時重置。",
+          "detail": "當額度讓任務停下時，可以改用你電腦上的模型繼續，或把任務交給另一個代理。在對話變得很長之前，它會建議你帶著摘要開始新的對話。使用本機模型時，它還能在你輸入時建議下一則訊息。"
+        },
+        {
+          "title": "更輕快，復原更容易",
+          "body": "Codevalanche 的大部分功能現在執行在它自己的內建引擎上，應用程式在背景做的事更少了。",
+          "detail": "代理執行和其他少數部分目前仍使用舊引擎，將在後續更新中移轉。你可以一次復原代理某一輪的全部變更，在真正的程式碼編輯器中編輯檔案，並用 Ctrl+/ 查看所有快捷鍵。設定新增高對比、文字大小和減少動態效果，安裝程式現在支援 17 種語言。"
+        }
+      ]
+    }
+  }
+}
