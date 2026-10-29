@@ -38,6 +38,10 @@ const capabilities: Record<
     role: "codevalanche_native_ledger_ingest_worker",
     databaseToken: "ACCOUNT_NATIVE_LEDGER_DATABASE_TOKEN",
   },
+  releaseEmail: {
+    role: "codevalanche_release_email_worker",
+    databaseToken: "RELEASE_EMAIL_DATABASE_TOKEN",
+  },
 };
 export function createScopedWorkerService(
   kind: string,

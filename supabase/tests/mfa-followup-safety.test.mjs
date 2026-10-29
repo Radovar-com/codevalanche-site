@@ -109,6 +109,8 @@ test('the promoted migration carries the exact proposal body, and the full chain
   const lf=async db=>(await db.query("select p.proname,p.proacl::text,p.prosecdef,p.proconfig,md5(replace(p.prosrc,chr(13),'')) as body from pg_catalog.pg_proc p where p.pronamespace='public'::regnamespace order by 1,2")).rows;
   // Later migrations may add unrelated functions; the ones the fix defines must stay exactly as proposed.
   const expected=await lf(proposed),names=new Set(expected.map(row=>row.proname));
-  assert.deepEqual((await lf(fixed)).filter(row=>names.has(row.proname)),expected);
+  // Later worker roles may be granted the capability probe (it only returns current_user).
+  const laterWorkers=/codevalanche_release_email_worker=X\/postgres,?/g;
+  assert.deepEqual((await lf(fixed)).filter(row=>names.has(row.proname)).map(row=>({...row,proacl:row.proacl?.replace(laterWorkers,'').replace(/,}$/,'}')})),expected);
  }finally{await fixed.close();await proposed.close();}
 });
