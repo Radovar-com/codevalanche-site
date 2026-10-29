@@ -30,6 +30,11 @@
           "title": "Lighter, and easier to undo",
           "body": "Much of Codevalanche now runs on its own built-in engine, so the app does less work in the background.",
           "detail": "Agent runs and a few other parts still use the previous engine for now and move over in the next updates. You can undo all the changes of one agent turn at once, edit files in a real code editor and see every shortcut with Ctrl+/. Settings adds high contrast, text size and less motion, and the installer now speaks 17 languages."
+        },
+        {
+          "title": "How 1.1.1 came together",
+          "body": "We built and tested this release in stages, starting right after 1.0.1.",
+          "detail": "23 October: the first test version, with the new connections, more agents and Coordinator mode. 27 October: publishing from the chat, connected services, limits and recipes ready for testing. 28 October: the built-in engine ready for testing. 29 October: Your AIs, and everything together in one release."
         }
       ]
     },
@@ -61,6 +66,11 @@
           "title": "أخف، والتراجع أسهل",
           "body": "يعمل جزء كبير من ⁦Codevalanche⁩ الآن على محرّكه المدمج الخاص، لذا يقوم التطبيق بعمل أقل في الخلفية.",
           "detail": "ما زال تشغيل الوكلاء وبعض الأجزاء الأخرى يستخدم المحرّك السابق حاليًا، وستنتقل إلى الجديد في التحديثات القادمة. يمكنك التراجع دفعة واحدة عن كل تغييرات دورة واحدة للوكيل، وتحرير الملفات في محرر شيفرة حقيقي، ورؤية كل الاختصارات بـ ⁦Ctrl+/⁩. وتضيف الإعدادات التباين العالي وحجم النص وتقليل الحركة، وأصبح المثبّت يتحدث 17 لغة."
+        },
+        {
+          "title": "كيف وُلد الإصدار ⁦1.1.1⁩",
+          "body": "بنينا هذا الإصدار واختبرناه على مراحل، مباشرة بعد ⁦1.0.1⁩.",
+          "detail": "23 أكتوبر: أول نسخة اختبار، مع الاتصالات الجديدة ووكلاء أكثر ووضع المنسق. 27 أكتوبر: النشر من المحادثة والخدمات المتصلة والحدود والوصفات جاهزة للاختبار. 28 أكتوبر: المحرّك المدمج جاهز للاختبار. 29 أكتوبر: «أدوات الذكاء الاصطناعي لديك»، وكل شيء معًا في إصدار واحد."
         }
       ]
     },
@@ -92,6 +102,11 @@
           "title": "Leichter, und leichter rückgängig zu machen",
           "body": "Ein großer Teil von Codevalanche läuft jetzt auf seiner eigenen, eingebauten Engine, sodass die App im Hintergrund weniger Arbeit hat.",
           "detail": "Agentenläufe und einige andere Teile nutzen vorerst noch die bisherige Engine und wechseln in den nächsten Updates. Sie können alle Änderungen eines Agentenschritts auf einmal rückgängig machen, Dateien in einem echten Code-Editor bearbeiten und mit Strg+/ alle Tastenkürzel sehen. Die Einstellungen bieten hohen Kontrast, Textgröße und weniger Bewegung, und das Installationsprogramm spricht jetzt 17 Sprachen."
+        },
+        {
+          "title": "So ist 1.1.1 entstanden",
+          "body": "Wir haben diese Version direkt nach 1.0.1 in Etappen gebaut und getestet.",
+          "detail": "23. Oktober: die erste Testversion mit den neuen Verbindungen, mehr Agenten und dem Koordinator-Modus. 27. Oktober: Veröffentlichen aus dem Chat, verbundene Dienste, Limits und Rezepte bereit zum Testen. 28. Oktober: die eingebaute Engine bereit zum Testen. 29. Oktober: Ihre KIs und alles zusammen in einer Version."
         }
       ]
     },
@@ -123,6 +138,11 @@
           "title": "Más ligera y más fácil de deshacer",
           "body": "Gran parte de Codevalanche funciona ahora con su propio motor integrado, así que la app trabaja menos en segundo plano.",
           "detail": "La ejecución de los agentes y algunas otras partes usan todavía el motor anterior y pasarán al nuevo en las próximas actualizaciones. Puedes deshacer de una vez todos los cambios de un turno del agente, editar archivos en un editor de código de verdad y ver todos los atajos con Ctrl+/. Configuración añade alto contraste, tamaño del texto y menos movimiento, y el instalador ya habla 17 idiomas."
+        },
+        {
+          "title": "Cómo se hizo la 1.1.1",
+          "body": "Construimos y probamos esta versión por etapas, justo después de la 1.0.1.",
+          "detail": "23 de octubre: la primera versión de prueba, con las nuevas conexiones, más agentes y el modo Coordinador. 27 de octubre: publicar desde el chat, servicios conectados, límites y recetas, listos para probar. 28 de octubre: el motor integrado, listo para probar. 29 de octubre: Tus IA y todo junto en una sola versión."
         }
       ]
     },
@@ -154,6 +174,11 @@
           "title": "Plus légère, et plus facile à annuler",
           "body": "Une grande partie de Codevalanche tourne désormais sur son propre moteur intégré, l’app travaille donc moins en arrière-plan.",
           "detail": "L’exécution des agents et quelques autres parties utilisent encore l’ancien moteur pour l’instant et passeront au nouveau dans les prochaines mises à jour. Vous pouvez annuler d’un coup toutes les modifications d’un tour de l’agent, modifier vos fichiers dans un vrai éditeur de code et voir tous les raccourcis avec Ctrl+/. Les Paramètres ajoutent le contraste élevé, la taille du texte et moins d’animations, et le programme d’installation parle désormais 17 langues."
+        },
+        {
+          "title": "Comment la 1.1.1 a pris forme",
+          "body": "Nous avons construit et testé cette version par étapes, juste après la 1.0.1.",
+          "detail": "23 octobre : la première version de test, avec les nouvelles connexions, plus d’agents et le mode Coordinateur. 27 octobre : publication depuis le chat, services connectés, limites et recettes prêts à être testés. 28 octobre : le moteur intégré prêt à être testé. 29 octobre : Vos IA, et tout réuni dans une seule version."
         }
       ]
     },
@@ -185,6 +210,11 @@
           "title": "हल्का, और पूर्ववत करना आसान",
           "body": "Codevalanche का बड़ा हिस्सा अब उसके अपने बिल्ट-इन इंजन पर चलता है, इसलिए ऐप बैकग्राउंड में कम काम करता है।",
           "detail": "एजेंट चलाना और कुछ दूसरे हिस्से अभी पुराने इंजन पर हैं और अगले अपडेट में नए पर आएँगे। आप एजेंट की एक बारी के सारे बदलाव एक साथ पूर्ववत कर सकते हैं, असली कोड एडिटर में फ़ाइलें संपादित कर सकते हैं और Ctrl+/ से सारे शॉर्टकट देख सकते हैं। सेटिंग्स में हाई कंट्रास्ट, टेक्स्ट का आकार और कम हलचल जुड़े हैं, और इंस्टॉलर अब 17 भाषाओं में है।"
+        },
+        {
+          "title": "1.1.1 कैसे बना",
+          "body": "हमने 1.0.1 के ठीक बाद से यह रिलीज़ चरणों में बनाई और जाँची।",
+          "detail": "23 अक्टूबर: नए कनेक्शन, ज़्यादा एजेंट और कोऑर्डिनेटर मोड के साथ पहला टेस्ट संस्करण। 27 अक्टूबर: चैट से प्रकाशन, जुड़ी सेवाएँ, सीमाएँ और रेसिपी टेस्ट के लिए तैयार। 28 अक्टूबर: बिल्ट-इन इंजन टेस्ट के लिए तैयार। 29 अक्टूबर: आपके AI, और सब कुछ एक ही रिलीज़ में।"
         }
       ]
     },
@@ -216,6 +246,11 @@
           "title": "Lebih ringan, dan lebih mudah dibatalkan",
           "body": "Sebagian besar Codevalanche kini berjalan di mesin bawaannya sendiri, jadi aplikasi bekerja lebih sedikit di latar belakang.",
           "detail": "Eksekusi agen dan beberapa bagian lain untuk sementara masih memakai mesin sebelumnya dan akan pindah di pembaruan berikutnya. Kamu bisa membatalkan semua perubahan satu giliran agen sekaligus, menyunting file di editor kode sungguhan, dan melihat semua pintasan dengan Ctrl+/. Pengaturan kini punya kontras tinggi, ukuran teks, dan gerakan dikurangi, dan penginstal kini tersedia dalam 17 bahasa."
+        },
+        {
+          "title": "Bagaimana 1.1.1 terbentuk",
+          "body": "Kami membangun dan menguji rilis ini secara bertahap, tepat setelah 1.0.1.",
+          "detail": "23 Oktober: versi uji pertama, dengan koneksi baru, lebih banyak agen, dan mode Koordinator. 27 Oktober: publikasi dari chat, layanan terhubung, batas, dan resep siap diuji. 28 Oktober: mesin bawaan siap diuji. 29 Oktober: AI-mu, dan semuanya bersama dalam satu rilis."
         }
       ]
     },
@@ -247,6 +282,11 @@
           "title": "Più leggera, e più facile da annullare",
           "body": "Gran parte di Codevalanche ora funziona con il suo motore integrato, quindi l’app lavora meno in background.",
           "detail": "L’esecuzione degli agenti e poche altre parti usano ancora il motore precedente e passeranno al nuovo nei prossimi aggiornamenti. Puoi annullare in un colpo tutte le modifiche di un turno dell’agente, modificare i file in un vero editor di codice e vedere tutte le scorciatoie con Ctrl+/. Le Impostazioni aggiungono contrasto elevato, dimensione del testo e meno movimento, e il programma di installazione ora parla 17 lingue."
+        },
+        {
+          "title": "Come è nata la 1.1.1",
+          "body": "Abbiamo costruito e testato questa versione per tappe, subito dopo la 1.0.1.",
+          "detail": "23 ottobre: la prima versione di prova, con le nuove connessioni, più agenti e la modalità Coordinatore. 27 ottobre: pubblicazione dalla chat, servizi collegati, limiti e ricette pronti per i test. 28 ottobre: il motore integrato pronto per i test. 29 ottobre: Le tue IA e tutto insieme in un’unica versione."
         }
       ]
     },
@@ -278,6 +318,11 @@
           "title": "より軽く、元に戻すのも簡単に",
           "body": "Codevalanche の多くの部分が独自の内蔵エンジンで動くようになり、バックグラウンドでの処理が減りました。",
           "detail": "エージェントの実行やほかのいくつかの部分は、今のところ以前のエンジンを使っており、今後のアップデートで移行します。エージェントの 1 ターン分の変更をまとめて元に戻したり、本格的なコードエディターでファイルを編集したり、Ctrl+/ ですべてのショートカットを確認したりできます。設定にはハイコントラスト、文字サイズ、動きを減らすが加わり、インストーラーは 17 言語に対応しました。"
+        },
+        {
+          "title": "1.1.1 ができるまで",
+          "body": "1.0.1 の直後から、このリリースを段階的に作り、テストしてきました。",
+          "detail": "10 月 23 日：新しい接続、エージェントの追加、コーディネーターモードを含む最初のテスト版。10 月 27 日：チャットからの公開、連携サービス、利用上限、レシピがテスト可能に。10 月 28 日：内蔵エンジンがテスト可能に。10 月 29 日：「あなたの AI」と、すべてをひとつのリリースに。"
         }
       ]
     },
@@ -309,6 +354,11 @@
           "title": "더 가볍게, 되돌리기는 더 쉽게",
           "body": "이제 Codevalanche의 많은 부분이 자체 내장 엔진으로 실행되어 앱이 백그라운드에서 하는 일이 줄었습니다.",
           "detail": "에이전트 실행과 일부 다른 기능은 당분간 이전 엔진을 사용하며 다음 업데이트에서 옮겨 갑니다. 에이전트 한 턴의 모든 변경을 한 번에 되돌리고, 제대로 된 코드 편집기에서 파일을 편집하고, Ctrl+/로 모든 단축키를 볼 수 있습니다. 설정에 고대비, 텍스트 크기, 움직임 줄이기가 추가되었고, 설치 프로그램은 이제 17개 언어를 지원합니다."
+        },
+        {
+          "title": "1.1.1이 만들어진 과정",
+          "body": "1.0.1 직후부터 이번 릴리스를 단계별로 만들고 테스트했습니다.",
+          "detail": "10월 23일: 새 연결, 더 많은 에이전트, 코디네이터 모드를 담은 첫 테스트 버전. 10월 27일: 채팅에서 공개, 연결된 서비스, 한도, 레시피 테스트 준비 완료. 10월 28일: 내장 엔진 테스트 준비 완료. 10월 29일: 내 AI, 그리고 모든 것을 하나의 릴리스로."
         }
       ]
     },
@@ -340,6 +390,11 @@
           "title": "Mais leve e mais fácil de desfazer",
           "body": "Grande parte do Codevalanche agora roda no seu próprio motor integrado, então o app faz menos trabalho em segundo plano.",
           "detail": "A execução dos agentes e algumas outras partes ainda usam o motor anterior por enquanto e passam para o novo nas próximas atualizações. Você pode desfazer de uma vez todas as mudanças de um turno do agente, editar arquivos em um editor de código de verdade e ver todos os atalhos com Ctrl+/. As Configurações ganham alto contraste, tamanho do texto e menos movimento, e o instalador agora fala 17 idiomas."
+        },
+        {
+          "title": "Como a 1.1.1 foi construída",
+          "body": "Construímos e testamos esta versão em etapas, logo depois da 1.0.1.",
+          "detail": "23 de outubro: a primeira versão de teste, com as novas conexões, mais agentes e o modo Coordenador. 27 de outubro: publicação pelo chat, serviços conectados, limites e receitas prontos para teste. 28 de outubro: o motor integrado pronto para teste. 29 de outubro: Suas IAs e tudo junto em uma só versão."
         }
       ]
     },
@@ -371,6 +426,11 @@
           "title": "Mai ușoară și mai ușor de anulat",
           "body": "O mare parte din Codevalanche merge acum pe motorul lui propriu, inclus în aplicație, așa că face mai puțină muncă în fundal.",
           "detail": "Rularea agenților și câteva alte părți folosesc deocamdată motorul vechi și trec pe cel nou în actualizările următoare. Poți anula dintr-odată toate schimbările unei ture a agentului, editezi fișiere într-un editor de cod adevărat și vezi toate scurtăturile cu Ctrl+/. În Setări ai contrast mare, mărimea textului și mai puțină mișcare, iar installerul vorbește acum 17 limbi."
+        },
+        {
+          "title": "Cum s-a construit 1.1.1",
+          "body": "Am construit și testat versiunea pe etape, imediat după 1.0.1.",
+          "detail": "23 octombrie: prima versiune de test, cu noile conexiuni, mai mulți agenți și Modul Coordonator. 27 octombrie: publicarea din chat, serviciile conectate, limitele și rețetele, gata de test. 28 octombrie: motorul propriu, gata de test. 29 octombrie: AI-urile tale și totul împreună, într-o singură versiune."
         }
       ]
     },
@@ -402,6 +462,11 @@
           "title": "Легче, и отменять проще",
           "body": "Большая часть Codevalanche теперь работает на собственном встроенном движке, поэтому приложение меньше нагружает компьютер в фоне.",
           "detail": "Запуски агентов и несколько других частей пока работают на прежнем движке и перейдут на новый в следующих обновлениях. Можно разом отменить все изменения одного хода агента, править файлы в настоящем редакторе кода и увидеть все сочетания клавиш через Ctrl+/. В настройках появились высокий контраст, размер текста и меньше анимации, а установщик теперь говорит на 17 языках."
+        },
+        {
+          "title": "Как создавалась 1.1.1",
+          "body": "Мы собирали и проверяли эту версию по этапам, сразу после 1.0.1.",
+          "detail": "23 октября: первая тестовая версия с новыми подключениями, новыми агентами и режимом координатора. 27 октября: публикация из чата, подключённые сервисы, лимиты и рецепты готовы к проверке. 28 октября: встроенный движок готов к проверке. 29 октября: «Ваши ИИ» и всё вместе в одной версии."
         }
       ]
     },
@@ -433,6 +498,11 @@
           "title": "Daha hafif, geri alması daha kolay",
           "body": "Codevalanche'ın büyük bölümü artık kendi yerleşik motoruyla çalışıyor, bu yüzden uygulama arka planda daha az iş yapıyor.",
           "detail": "Ajan çalıştırmaları ve birkaç başka bölüm şimdilik önceki motoru kullanıyor ve sonraki güncellemelerde yenisine geçecek. Bir ajan turunun tüm değişikliklerini tek seferde geri alabilir, dosyaları gerçek bir kod düzenleyicide düzenleyebilir ve tüm kısayolları Ctrl+/ ile görebilirsiniz. Ayarlar'a yüksek kontrast, metin boyutu ve daha az hareket eklendi; yükleyici artık 17 dil konuşuyor."
+        },
+        {
+          "title": "1.1.1 nasıl oluştu",
+          "body": "Bu sürümü 1.0.1'in hemen ardından aşama aşama geliştirip test ettik.",
+          "detail": "23 Ekim: yeni bağlantılar, daha fazla ajan ve Koordinatör modu ile ilk test sürümü. 27 Ekim: sohbetten yayınlama, bağlı hizmetler, limitler ve tarifler teste hazır. 28 Ekim: yerleşik motor teste hazır. 29 Ekim: Yapay zekâlarınız ve hepsi tek bir sürümde."
         }
       ]
     },
@@ -464,6 +534,11 @@
           "title": "Nhẹ hơn, và dễ hoàn tác hơn",
           "body": "Phần lớn Codevalanche giờ chạy trên công cụ tích hợp riêng, nên ứng dụng làm ít việc hơn ở chế độ nền.",
           "detail": "Việc chạy tác tử và vài phần khác tạm thời vẫn dùng công cụ cũ và sẽ chuyển sang công cụ mới trong các bản cập nhật tới. Bạn có thể hoàn tác cùng lúc mọi thay đổi của một lượt tác tử, sửa tệp trong một trình soạn thảo mã thực thụ và xem mọi phím tắt bằng Ctrl+/. Cài đặt có thêm độ tương phản cao, cỡ chữ và giảm chuyển động, và trình cài đặt nay có 17 ngôn ngữ."
+        },
+        {
+          "title": "1.1.1 đã được làm ra thế nào",
+          "body": "Chúng tôi xây dựng và kiểm thử bản này theo từng giai đoạn, ngay sau 1.0.1.",
+          "detail": "23 tháng 10: bản thử nghiệm đầu tiên, với các kết nối mới, thêm tác tử và chế độ Điều phối. 27 tháng 10: xuất bản từ khung chat, dịch vụ kết nối, hạn mức và công thức sẵn sàng để thử. 28 tháng 10: công cụ tích hợp sẵn sàng để thử. 29 tháng 10: AI của bạn, và tất cả gộp lại trong một bản phát hành."
         }
       ]
     },
@@ -495,6 +570,11 @@
           "title": "更轻快，撤销更容易",
           "body": "Codevalanche 的大部分功能现在运行在它自己的内置引擎上，应用在后台做的事更少了。",
           "detail": "代理运行和其他少数部分目前仍使用旧引擎，将在后续更新中迁移。你可以一次撤销代理某一轮的全部更改，在真正的代码编辑器中编辑文件，并用 Ctrl+/ 查看所有快捷键。设置新增高对比度、文字大小和减少动画，安装程序现在支持 17 种语言。"
+        },
+        {
+          "title": "1.1.1 是怎样完成的",
+          "body": "从 1.0.1 之后，我们就分阶段构建并测试这个版本。",
+          "detail": "10 月 23 日：第一个测试版，包含新的连接、更多代理和协调者模式。10 月 27 日：从聊天发布、连接的服务、额度和配方进入测试。10 月 28 日：内置引擎进入测试。10 月 29 日：“你的 AI”，以及所有内容合并为一个版本。"
         }
       ]
     },
@@ -526,6 +606,11 @@
           "title": "更輕快，復原更容易",
           "body": "Codevalanche 的大部分功能現在執行在它自己的內建引擎上，應用程式在背景做的事更少了。",
           "detail": "代理執行和其他少數部分目前仍使用舊引擎，將在後續更新中移轉。你可以一次復原代理某一輪的全部變更，在真正的程式碼編輯器中編輯檔案，並用 Ctrl+/ 查看所有快捷鍵。設定新增高對比、文字大小和減少動態效果，安裝程式現在支援 17 種語言。"
+        },
+        {
+          "title": "1.1.1 是怎樣完成的",
+          "body": "從 1.0.1 之後，我們就分階段建置並測試這個版本。",
+          "detail": "10 月 23 日：第一個測試版，包含新的連線、更多代理和協調者模式。10 月 27 日：從聊天發布、連接的服務、額度和配方進入測試。10 月 28 日：內建引擎進入測試。10 月 29 日：「你的 AI」，以及所有內容合併為一個版本。"
         }
       ]
     }
