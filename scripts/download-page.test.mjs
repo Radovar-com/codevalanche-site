@@ -87,3 +87,60 @@ test('an installer with missing details or another gateway is refused', () => {
   assert.throws(() => windowsDownload({ ...manifest, assets: [{ ...asset, display: { ...asset.display, sha256: 'xyz' } }] }), /sha256/);
   assert.throws(() => windowsDownload({ ...manifest, assets: [{ ...asset, display: { ...asset.display, fileName: 'other.exe' } }] }), /fileName/);
 });
+
+test('public count cannot be exposed at or below 500 even with a lower configured threshold', () => {
+  for (const minimum of [0, 1, 499, 500]) for (const count of [0, 499, 500]) {
+    assert.equal(countLine(count, minimum), '', `${count}/${minimum}`);
+    assert.equal(Object.keys(downloadTranslations(windowsDownload(manifest), {count, minimum})).length, 2);
+  }
+  assert.match(countLine(501, 500), /501/);
+});
+
+test('public count includes published installer history beyond the first 100 releases', async () => {
+  const github = {...manifest, allowedOrigins: ['https://github.com'], assets: [{...manifest.assets[0], targetUrl: 'https://github.com/example/fixture/releases/download/v1/fixture.exe'}]};
+  const requests = [];
+  const fetch = async url => {
+    requests.push(url);
+    const second = new URL(url).searchParams.get('page') === '2';
+    return {ok: true, json: async () => second ? [{assets: [{name: 'Codevalanche-Desktop-Setup-0.1.0-stable-abc.exe', download_count: 12}]}]
+      : Array.from({length: 100}, () => ({assets: [{name: 'Codevalanche-Desktop-Setup-1.0.0-stable-abc.exe', download_count: 5}]}))};
+  };
+  assert.equal(await publicDownloadCount(github, {fetch}), 512);
+  assert.equal(requests.length, 2);
+});
+
+test('static thank-you links keep the qualified Windows architecture before JavaScript runs', async () => {
+  const page = await readFile(path.join(root, 'src/download/index.html'), 'utf8');
+  for (const architecture of ['arm64','universal','x86']) {
+    const download = windowsDownload({...manifest,assets:[{...manifest.assets[0],architecture}]});
+    const html = fillDownload(selectDownloadVariant(page,download),download);
+    assert.match(html,new RegExp(`/download/started/\\?platform=windows-${architecture}`));
+    assert.doesNotMatch(html,/platform=windows-x64/);
+  }
+});
+
+test('provider outages or malformed counts hide the count but leave a usable qualified download page', async () => {
+  const github = {...manifest,allowedOrigins:['https://github.com'],assets:[{...manifest.assets[0],targetUrl:'https://github.com/example/fixture/releases/download/v1/fixture.exe'}]};
+  for (const fetch of [async()=>{throw new Error('offline');},async()=>({ok:false}),async()=>({ok:true,json:async()=>({message:'rate limit'})}),async()=>({ok:true,json:async()=>[{assets:[{name:'Codevalanche-Desktop-Setup-1-stable-abc.exe',download_count:-1}]}]})]) {
+    const count = await publicDownloadCount(github,{fetch});
+    assert.equal(count,null);
+    const download = windowsDownload(manifest);
+    const page = fillDownload(selectDownloadVariant(await readFile(path.join(root,'src/download/index.html'),'utf8'),download),download,{count,minimum:500});
+    assert.match(page,/data-download-card/);
+    assert.match(page,/Codevalanche for Windows/);
+    assert.doesNotMatch(page,/class="dl-count"/);
+  }
+});
+
+test('a failed later GitHub page never publishes a partial download total', async () => {
+  const github = {...manifest,allowedOrigins:['https://github.com'],assets:[{...manifest.assets[0],targetUrl:'https://github.com/example/fixture/releases/download/v1/fixture.exe'}]};
+  let calls = 0;
+  assert.equal(await publicDownloadCount(github,{fetch:async()=>++calls===1?{ok:true,json:async()=>Array(100).fill({assets:[{name:'Codevalanche-Desktop-Setup-1-stable-abc.exe',download_count:8}]})}:{ok:false}}),null);
+});
+
+test('overlapping GitHub pages fail closed instead of counting the same release twice', async () => {
+  const github = {...manifest,allowedOrigins:['https://github.com'],assets:[{...manifest.assets[0],targetUrl:'https://github.com/example/fixture/releases/download/v1/fixture.exe'}]};
+  const releases = Array.from({length:100},(_,index)=>({id:index+1,assets:[{id:index+1,name:'Codevalanche-Desktop-Setup-1-stable-abc.exe',download_count:6}]}));
+  let page = 0;
+  assert.equal(await publicDownloadCount(github,{fetch:async()=>({ok:true,json:async()=>++page===1?releases:[releases[99]]})}),null);
+});

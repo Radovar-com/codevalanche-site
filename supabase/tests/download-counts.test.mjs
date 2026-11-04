@@ -31,3 +31,19 @@ test('visitors can only add one to a known download count, never read or write t
     await db.close();
   }
 });
+
+test('10000 anonymous script calls are request counts, with no public table access or visitor identity', async () => {
+  const db = await createSqlFixture();
+  try {
+    await db.exec('set role anon');
+    await db.query("select public.codevalanche_count_download('download_started','windows-x64','en') from generate_series(1,10000)");
+    for (const table of ['codevalanche_download_counts', 'wa_download_requests', 'wa_download_daily', 'wa_daily_rollups', 'wa_source_snapshots']) {
+      await assert.rejects(() => db.query(`select * from public.${table}`), /permission denied/);
+    }
+    await db.exec('reset role');
+    assert.equal(Number((await db.query('select sum(count) n from codevalanche_download_counts')).rows[0].n), 10000);
+    assert.equal(Number((await db.query('select count(*) n from wa_source_snapshots')).rows[0].n), 0);
+    const columns = (await db.query("select column_name from information_schema.columns where table_name='codevalanche_download_counts' order by ordinal_position")).rows.map(r => r.column_name);
+    assert.deepEqual(columns, ['day', 'metric', 'platform', 'locale', 'count']);
+  } finally {await db.close();}
+});
