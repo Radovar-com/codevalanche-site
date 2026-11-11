@@ -22,7 +22,9 @@ const EFFECTIVE_ROLES=['anon','authenticated','service_role'];
 before(async()=>{
   assert.equal(process.env.ACCOUNT_PGLITE_MODULE,undefined,'This contract test uses the installed in-memory fixture only');
   for(const source of contract.sources)pins.set(source.path,sha(await readFile(new URL(source.path,root))));
-  modern=await createSqlFixture();
+  // The proposal pins the catalog before the explicit table-access repair.
+  // table-access.test.mjs guards the full current chain independently.
+  modern=await createSqlFixture({through:'202610210001_download_page_counts.sql'});
 });
 after(async()=>{await modern?.close();});
 
@@ -133,7 +135,7 @@ test('source pins survive the same text checked out with LF on CI while retainin
   assert.deepEqual(sourceFailures(contract,changed),['source_drift:'+entry]);
 });
 
-test('current full local fixture matches pinned RPC signatures/bodies/grants and application-table security',async()=>{
+test('historical pre-access-repair fixture matches pinned RPC signatures/bodies/grants and application-table security',async()=>{
   assert.deepEqual(objectFailures(contract,await catalog(modern)),[]);
   assert.equal(contract.managedAuth.schemaAndPrivilegesQualified,false,'Local catalog equality is not managed Auth qualification');
 });

@@ -25,3 +25,22 @@ Configuration in the repo: `supabase/config.toml` (no secrets; every secret is `
 Two-step verification (migration `202610160301_mfa_recovery_admin_audit_session_cut.sql`, `functions/codevalanche-account/mfa.mjs`): the authenticator is Supabase Auth MFA (TOTP, `[auth.mfa.totp]` in config.toml); the account page enrols it with supabase-js and verifies a code, which raises the session to aal2. For a user with a verified authenticator the function answers only aal2 sessions (401 `{error:'MFA required', mfaRequired:true}` otherwise), except `sign-out-current` and `mfa-recovery-redeem`. Recovery codes are the function's own: `mfa-recovery-codes` (aal2 only) returns 10 new codes once and stores only SHA-256 of "user id:code" in `codevalanche_mfa_recovery_codes` (service-only, RLS); `mfa-recovery-redeem {code}` (5 tries/min/user) uses one code once and removes the user's TOTP factors through the Auth admin API, so a user who lost the phone signs in with password + code and can turn the authenticator on again; `mfa-disable {factorId}` (aal2 only) removes the factor and the codes. `get-account` adds `mfa {enabled, factors[{id,friendlyName,createdAt}], recoveryCodesRemaining}`. Tokens issued to an OAuth client (claim `client_id`, the desktop app) are held to aal2 only when the function secret `CODEVALANCHE_MFA_ENFORCE_OAUTH_AAL2=true` is set; set it after checking that such a token carries `aal2` for a user who passed the authenticator on the consent page (the consent page asks for it before approving). Supabase Auth also has experimental native recovery codes (`auth.mfa.recoveryCodes`, client flag `experimental.recoveryCodes`); they are not used while experimental.
 
 Administrator journal: every admin-list-users, admin-feedback and admin-analytics read and every block/unblock writes a row to `codevalanche_admin_access_log` (actor, action, target, row count, time; the service can insert and read, never update or delete). If the row cannot be written, nothing is returned (503). Block also cuts every session: after the Auth ban, `codevalanche_revoke_all_sessions` marks all the user's sessions revoked for this function, then deletes their Auth sessions and refresh tokens, so no refresh can mint a new token and a later unblock does not revive old sessions. The answer reports `sessions {appRevoked, authSessionsDeleted, refreshTokensDeleted, authRevoked}`; `authRevoked:false` means the database refused the Auth delete and only the ban and the function's own refusal hold. An access token already issued stays cryptographically valid until it expires (at most `jwt_expiry` = 1 h) but this function refuses it at once; nothing else accepts these tokens (no anon/authenticated grants, no Realtime).
+
+<!-- Future public-table migration template (explicit grants + RLS are mandatory):
+BEGIN;
+CREATE TABLE public.example (id uuid PRIMARY KEY, user_id uuid NOT NULL);
+ALTER TABLE public.example ENABLE ROW LEVEL SECURITY;
+REVOKE ALL ON TABLE public.example FROM PUBLIC, anon, authenticated, service_role;
+GRANT SELECT, INSERT ON TABLE public.example TO service_role; -- only required operations
+-- Backend/RPC-only table: no client grants or policies; RLS defaults to deny.
+-- Only if code really reads the table directly as a signed-in user:
+-- GRANT SELECT ON TABLE public.example TO authenticated;
+-- CREATE POLICY example_own_read ON public.example FOR SELECT TO authenticated
+--   USING ((SELECT auth.uid()) = user_id);
+-- INSERT/UPDATE need their own minimal grants and WITH CHECK ownership checks.
+COMMIT;
+-- Update tests/tableAccessContract.mjs deliberately, including any new policy,
+-- and add role/ownership tests. Never rely on default grants or use GRANT ALL.
+-- SECURITY DEFINER callers need EXECUTE; its private tables need no caller DML grant.
+-- Run npm test (PGlite applies the full migration chain, including legacy defaults).
+-->
