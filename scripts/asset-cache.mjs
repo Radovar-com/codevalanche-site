@@ -21,7 +21,7 @@ async function listFiles(root, relative = '') {
 function stampUrl(value, base, assets, revision, overrides = new Map()) {
   try {
     const url = new URL(value, new URL(base, ORIGIN));
-    if (url.origin !== ORIGIN || !assets.has(url.pathname) || !/\.(?:js|css)$/.test(url.pathname)) return value;
+    if (url.origin !== ORIGIN || !assets.has(url.pathname) || !/\.(?:js|css|woff2)$/.test(url.pathname)) return value;
     url.searchParams.set('v', overrides.get(url.pathname) ?? revision);
     return `${value.split(/[?#]/)[0]}${url.search}${url.hash}`;
   } catch { return value; }
@@ -33,13 +33,18 @@ export async function versionSiteAssets(destination) {
   const files = await listFiles(destination);
   const assets = new Map();
   const digest = createHash('sha256');
-  for (const file of files.filter(file => /\.(?:css|js|json)$/.test(file))) {
+  for (const file of files.filter(file => /\.(?:css|js|json|woff2)$/.test(file))) {
     const bytes = await readFile(path.join(destination, file));
     assets.set(`/${file}`, bytes);
     digest.update(file).update('\0').update(bytes).update('\0');
   }
   const revision = digest.digest('hex').slice(0, 16);
   for (const [file, bytes] of assets) {
+    if (file.endsWith('.css')) {
+      const css = bytes.toString('utf8').replace(/url\(\s*(["']?)([^\s"')]+)\1\s*\)/g, (match, quote, url) => `url(${quote}${stampUrl(url, file, assets, revision)}${quote})`);
+      await writeFile(path.join(destination, file.slice(1)), css);
+      continue;
+    }
     if (!file.endsWith('.js') || PRESERVE_GENERATED.has(file)) continue;
     let changed = false;
     // esbuild parses actual import syntax; strings and comments that merely
@@ -73,7 +78,7 @@ export async function versionSiteAssets(destination) {
       }
       const attrs = new Map((node.attrs ?? []).map(attribute => [attribute.name, attribute]));
       const resource = node.tagName === 'script' ? attrs.get('src')
-        : node.tagName === 'link' && (attrs.get('rel')?.value ?? '').split(/\s+/).includes('stylesheet') ? attrs.get('href') : null;
+        : node.tagName === 'link' && ((attrs.get('rel')?.value ?? '').split(/\s+/).includes('stylesheet') || attrs.get('as')?.value === 'font') ? attrs.get('href') : null;
       if (resource) resource.value = stampUrl(resource.value, `/${file}`, assets, revision, overrides);
       for (const child of node.childNodes ?? []) walk(child);
     };

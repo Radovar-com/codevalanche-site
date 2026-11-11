@@ -38,8 +38,30 @@ export function validateSitemapLocations(sitemap, canonicalUrls) {
   for (const url of canonicalUrls) requireValue(locations.includes(url), `sitemap is missing ${url}`);
 }
 
+// Discover documents independently of the route manifest: a newly copied page
+// must never bypass the sitemap and reciprocal alternate checks below.
+export async function validatePublicPageInventory(destination) {
+  const registered = new Set(MARKETING_PAGES.flatMap(page => LOCALES.map(locale => path.posix.join(locale.slug, page.file))));
+  async function inspect(directory, relative = '') {
+    for (const entry of await readdir(directory, { withFileTypes: true })) {
+      const file = path.posix.join(relative, entry.name);
+      if (entry.isDirectory()) { await inspect(path.join(directory, entry.name), file); continue; }
+      if (!file.endsWith('.html')) continue;
+      const document = parse(await readFile(path.join(destination, file), 'utf8'));
+      const noindex = walk(document, node => node.tagName === 'meta' && /^(robots|googlebot)$/i.test(attrs(node).get('name') ?? ''))
+        .some(node => /(?:^|[\s,])(?:noindex|none)(?:$|[\s,])/i.test(attrs(node).get('content') ?? ''));
+      if (registered.has(file)) requireValue(!noindex, `public page ${file} has noindex`);
+      else requireValue(noindex, `unregistered indexable page ${file}: register it for sitemap and hreflang export`);
+    }
+  }
+  await inspect(destination);
+}
+
 export async function validateSeoExport(destination) {
+  await validatePublicPageInventory(destination);
   const canonicalUrls = new Set();
+  const titles = new Set();
+  const descriptions = new Set();
   for (const page of MARKETING_PAGES) {
     for (const locale of LOCALES) {
       const urlPath = localizedMarketingPath(page.path, locale.tag);
@@ -62,6 +84,12 @@ export async function validateSeoExport(destination) {
       const description = walk(document, node => node.tagName === 'meta' && attrs(node).get('name') === 'description')[0];
       requireValue(Boolean(text(title).trim()), `${relative} has no title`);
       requireValue(Boolean(attrs(description ?? {}).get('content')?.trim()), `${relative} has no description`);
+      const titleKey = `${locale.tag}:${text(title).trim()}`;
+      const descriptionKey = `${locale.tag}:${attrs(description).get('content').trim()}`;
+      requireValue(!titles.has(titleKey), `${relative} has a duplicate title within its language`);
+      requireValue(!descriptions.has(descriptionKey), `${relative} has a duplicate description within its language`);
+      titles.add(titleKey);
+      descriptions.add(descriptionKey);
       for (const [kind, key] of [['property', 'og:url'], ['property', 'og:title'], ['property', 'og:description'], ['name', 'twitter:card'], ['name', 'twitter:title'], ['name', 'twitter:description']]) {
         const meta = walk(document, node => node.tagName === 'meta' && (attrs(node).get(kind) ?? '').toLowerCase() === key)[0];
         requireValue(Boolean(attrs(meta ?? {}).get('content')?.trim()), `${relative} is missing ${key}`);

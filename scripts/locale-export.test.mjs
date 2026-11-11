@@ -75,7 +75,7 @@ test('footer picker links preserve page context and mark only the active locale'
   assert.match(html, /href="\/privacy\.html" data-locale="en"/);
   assert.match(html, /href="\/it\/privacy\.html" data-locale="it" aria-current="page"/);
   assert.match(html, /class="is-site">/);
-  assert.match(html, /aria-label="Italiano"/);
+  assert.match(html, /<summary><svg><\/svg> Italiano <b>17 in the app<\/b>/);
   assert.equal((html.match(/class="lang-picker"/g) ?? []).length, 1);
 });
 
@@ -87,4 +87,18 @@ test('rewriting an already-linked footer picker keeps exactly one link per local
   assert.equal((italian.match(/aria-current="page"/g) ?? []).length, 1);
   assert.match(italian, /href="\/it\/" data-locale="it" aria-current="page"/);
   assert.match(italian, /href="\/" data-locale="en"/);
+});
+
+test('reapplying metadata replaces alternates and the route schema instead of retaining English data', () => {
+  const english = moduleUnderTest.applyLocalizedMetadata(fixture, '/terms.html', 'en');
+  const arabic = moduleUnderTest.applyLocalizedMetadata(english, '/terms.html', 'ar');
+  assert.equal((arabic.match(/rel="alternate"/g) ?? []).length, LOCALES.length + 1);
+  const schemas = [...arabic.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/g)].flatMap(match => JSON.parse(match[1])['@graph']);
+  assert.deepEqual(schemas.filter(node => node['@type'] === 'WebPage').map(node => [node.url, node.inLanguage]), [['https://codevalanche.com/ar/terms.html', 'ar']]);
+});
+
+test('language picker accessible name contains its complete visible label for voice control', () => {
+  const html = moduleUnderTest.rewriteFooterLanguageLinks(pickerFixture, '/', 'ro');
+  assert.match(html, /<summary><svg><\/svg> Română <b>17 in the app<\/b>/);
+  assert.doesNotMatch(html, /<summary[^>]*aria-label/);
 });

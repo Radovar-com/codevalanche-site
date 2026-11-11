@@ -22,6 +22,8 @@ const page=client.startPage({pageId,surface:account?'pre_auth':'marketing'});
 for(const element of document.querySelectorAll('[data-analytics-section]'))page.observeSection(element,{sectionId:element.dataset.analyticsSection});
 let requestedGeneration=-1;
 const setConsent=async choice=>{const operation=client.setConsent(choice);requestedGeneration=choice?.websiteAnalytics===true?manager.getState().generation:-1;renderStatus();await operation;renderStatus();};
+// Mount only after native labels are ready; a later translation must not resize the fixed banner.
+await initializeLocale(document);
 const ui=mountConsentUI({manager:{getState:manager.getState,subscribe:manager.subscribe,setConsent}});
 const status=document.createElement('p');status.dataset.ownedStatus='';status.setAttribute('role','status');document.querySelector('[data-owned-consent] .cmp-card').append(status);
 const bannerStatus=status.cloneNode();document.querySelector('[data-owned-consent] .cmp-banner').append(bannerStatus);

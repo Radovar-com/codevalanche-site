@@ -25,6 +25,7 @@ const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage();
 const errors = [];
 page.on('pageerror', error => errors.push(error.message));
+await page.route('https://**/*', route => route.abort());
 await page.route('https://hvevaxsfeyiikjhcsafi.supabase.co/**', route => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({}) }));
 
 try {
@@ -34,7 +35,8 @@ try {
   await page.locator('.lang-picker a[data-locale="it"]').click();
   await page.waitForURL('**/it/');
   assert.equal(await page.locator('html').getAttribute('lang'), 'it');
-  assert.equal(await page.locator('.lang-picker summary').getAttribute('aria-label'), 'Italiano');
+  assert.equal(await page.locator('.lang-picker summary').getAttribute('aria-label'), null);
+  assert.match(await page.locator('.lang-picker summary').ariaSnapshot(), /Italiano/);
   assert.equal(await page.locator('.lang-picker a[data-locale="en"]').getAttribute('href'), '/');
   assert.equal((await page.context().cookies(origin)).find(cookie => cookie.name === 'codevalanche_language')?.value, 'it');
 
@@ -55,6 +57,7 @@ try {
 
   const firstVisitPage = await browser.newPage();
   firstVisitPage.on('pageerror', error => errors.push(error.message));
+  await firstVisitPage.route('https://**/*', route => route.abort());
   await firstVisitPage.goto(`${origin}/it/`);
   await firstVisitPage.getByRole('heading', { name: italian['Your analytics choice'], exact: true }).waitFor();
   await firstVisitPage.getByRole('button', { name: italian['Accept analytics'], exact: true }).waitFor();

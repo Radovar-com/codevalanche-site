@@ -101,7 +101,6 @@ export function rewriteFooterLanguageLinks(html, canonicalPath, currentLocale) {
   if (!picker) throw new Error(`Language picker is missing from ${canonicalPath}`);
   const summary = findElement(picker, node => node.tagName === 'summary');
   if (summary) {
-    setAttribute(summary, 'aria-label', locale.label);
     for (const child of summary.childNodes ?? []) {
       if (child.nodeName === '#text' && child.value?.trim()) {
         const leading = child.value.match(/^\s*/)?.[0] ?? '';
@@ -111,6 +110,7 @@ export function rewriteFooterLanguageLinks(html, canonicalPath, currentLocale) {
       }
     }
   }
+  if (summary) removeAttribute(summary, 'aria-label');
   const list = findElement(picker, (node, attrs) => node.tagName === 'ul' && (attrs.get('class') ?? '').split(/\s+/).includes('lang-grid'));
   if (!list) throw new Error('Language picker has no language list');
   for (const item of list.childNodes ?? []) {
@@ -167,7 +167,7 @@ function appendWebPageSchema(document, pageData) {
     if (Array.isArray(schema['@graph'])) graph = schema['@graph'];
     else if (schema['@type']) graph = [schema];
     else graph = [];
-    graph = graph.filter(item => item?.['@type'] !== 'WebPage' || item?.['@id'] !== pageData['@id']);
+    graph = graph.filter(item => item?.['@type'] !== 'WebPage');
     graph.push(pageData);
     schema['@context'] ??= 'https://schema.org';
     schema['@graph'] = graph;
@@ -214,7 +214,7 @@ export function applyLocalizedMetadata(html, canonicalPath, targetLocale) {
   walk(document, node => {
     if (node.tagName !== 'link') return;
     const attrs = attributes(node);
-    if ((attrs.get('rel') ?? '').split(/\s+/).includes('alternate') && attrs.has('hreflang')) removeAttribute(node, 'hreflang');
+    if ((attrs.get('rel') ?? '').split(/\s+/).includes('alternate') && attrs.has('hreflang')) node.parentNode.childNodes = node.parentNode.childNodes.filter(child => child !== node);
   });
   for (const language of LOCALES) {
     const href = new URL(localizedMarketingPath(route.pathname, language.tag), SITE_ORIGIN).href;
