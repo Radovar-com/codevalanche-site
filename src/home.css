@@ -342,3 +342,8 @@
 .page-evidence .cvx-fig .stage { min-height: 300px; padding: 28px 18px; }
 .page-evidence .cvx-fig .fg { zoom: .82; }
 .cvx-fig .stage.local { padding-bottom: 196px; }
+/* Hooks shared with the release scripts keep the homepage look. */
+.cvx .hero-release-link{min-height:0;text-decoration:none}
+.cvx .hero .hero-availability{line-height:inherit}
+.cvx .release-status-card{position:relative;margin:14px 0 0;padding:0;border:0;border-radius:0;background:none;max-width:none;font-size:inherit}
+.cvx .release-status-card a{margin-top:0}

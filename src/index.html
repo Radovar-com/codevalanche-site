@@ -22,7 +22,7 @@
     <meta name="twitter:image" content="https://codevalanche.com/assets/codevalanche-link-preview.png">
     <meta name="twitter:image:alt" content="The Codevalanche logo.">
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-    <script>(function(){var t="light";try{var s=localStorage.getItem("codevalanche_theme");if(s==="light"||s==="dark"){t=s}else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){t="dark"}}catch(e){}document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("js")})()</script>
+    <script>(function(){document.documentElement.setAttribute("data-theme","dark");document.documentElement.classList.add("js")})()</script>
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/home.css">
     <link rel="stylesheet" href="/home.css">
@@ -83,14 +83,14 @@
     <p class="sub">Say what you want. The Coordinator plans the work, hands each part to Claude Code, Codex or a local model, and reports back. You stay in control.</p>
     <!-- download:preparation --><div class="cta">
       <a class="btn btn-primary" data-release-primary href="/how-it-works/"><span>See how it works</span></a>
-      <a class="btn btn-ghost" href="/download/">Windows release status</a>
+      <a class="btn btn-ghost hero-release-link" href="/download/">Windows release status</a>
     </div>
-    <p class="meta" data-release-status>Public installer in preparation.</p><!-- /download:preparation -->
+    <p class="meta hero-availability" data-release-status>Public installer in preparation.</p><!-- /download:preparation -->
     <!-- download:release --><div class="cta">
       <a class="btn btn-primary" data-release-primary href="/download/"><svg class="ui"><use href="#u-win"/></svg><span>Download for Windows</span></a>
-      <a class="btn btn-ghost" href="/how-it-works/">See how it works</a>
+      <a class="btn btn-ghost hero-release-link" href="/how-it-works/">See how it works</a>
     </div>
-    <p class="meta"><span>Version</span> <span data-fill="version"></span> <span aria-hidden="true">·</span> <span>Windows 11, 64-bit</span> <span aria-hidden="true">·</span> <span data-fill="size"></span></p><!-- /download:release -->
+    <p class="meta hero-availability"><span>Version</span> <span data-fill="version"></span> <span aria-hidden="true">·</span> <span>Windows 11, 64-bit</span> <span aria-hidden="true">·</span> <span data-fill="size"></span></p><!-- /download:release -->
 
     <div class="winwrap" id="winwrap">
       <div class="win app" id="win">
@@ -309,7 +309,8 @@
     <!-- download:preparation --><a class="btn btn-primary" data-release-primary href="/how-it-works/"><span>See how it works</span></a>
     <p class="dlmeta" style="margin-bottom:0;max-width:none" data-release-status>Public installer in preparation.</p><!-- /download:preparation -->
     <!-- download:release --><a class="btn btn-primary" data-release-primary href="/download/"><svg class="ui"><use href="#u-win"/></svg><span>Download for Windows</span></a>
-    <p class="dlmeta" style="margin-bottom:0;max-width:none"><span>Version</span> <span data-fill="version"></span> <span aria-hidden="true">·</span> <span>Windows 11, 64-bit</span> <span aria-hidden="true">·</span> <span data-fill="size"></span> <span aria-hidden="true">·</span> <span>Updates itself</span></p><!-- /download:release -->
+    <p class="dlmeta" style="margin-bottom:0;max-width:none"><span>Version</span> <span data-fill="version"></span> <span aria-hidden="true">·</span> <span>Windows 11, 64-bit</span> <span aria-hidden="true">·</span> <span data-fill="size"></span> <span aria-hidden="true">·</span> <span>Updates itself</span></p>
+    <p class="release-status-card"><a class="more" href="#download" data-fill-download-card>.exe installer · Windows 11, 64-bit<svg class="ui"><use href="#u-dl"/></svg></a></p><!-- /download:release -->
     <div class="dllinks"><a class="more" href="/changelog.html">What's new<svg class="ui"><use href="#u-chevr"/></svg></a><a class="more" href="/docs/">Getting started<svg class="ui"><use href="#u-chevr"/></svg></a></div>
   </div>
 </section>

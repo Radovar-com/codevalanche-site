@@ -55,21 +55,14 @@
         const header = document.querySelector(".site-header")
         const onScroll = () => header?.classList.toggle("is-scrolled", window.scrollY > 8)
         window.addEventListener("scroll", onScroll, { passive: true }); onScroll()
-        const THEME_KEY = "codevalanche_theme"
-        const themeToggle = document.querySelector("[data-theme-toggle]")
-        const applyTheme = (theme, persist) => {
-          document.documentElement.setAttribute("data-theme", theme)
-          if (persist) { try { localStorage.setItem(THEME_KEY, theme) } catch {} }
-          const themeLabel = theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
-          themeToggle?.setAttribute("aria-label", window.CodevalancheLocale?.translate(themeLabel) ?? themeLabel)
+        // One dark theme for the whole site.
+        const applyTheme = () => {
+          document.documentElement.setAttribute("data-theme", "dark")
           document.querySelector("meta[name='theme-color']")?.setAttribute("content", "#0a0b0c")
           window.dispatchEvent(new CustomEvent("codevalanche-theme"))
         }
-        themeToggle?.addEventListener("click", () => { const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"; applyTheme(next, true) })
-        const darkQuery = window.matchMedia("(prefers-color-scheme: dark)")
-        darkQuery.addEventListener?.("change", () => { try { if (!localStorage.getItem(THEME_KEY)) applyTheme(darkQuery.matches ? "dark" : "light", false) } catch {} })
-        window.addEventListener("codevalanche-locale-ready", () => applyTheme(document.documentElement.getAttribute("data-theme") || "light", false))
-        applyTheme(document.documentElement.getAttribute("data-theme") || "light", false)
+        window.addEventListener("codevalanche-locale-ready", applyTheme)
+        applyTheme()
 
         // ---- Motion: reveal on scroll and contour lines, only when the visitor allows motion ----
         const motionOk = window.matchMedia("(prefers-reduced-motion: no-preference)").matches
