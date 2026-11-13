@@ -19,9 +19,11 @@ const pageId=path.startsWith('/account/authorize')?'account_authorize':path.star
 const account=['account','account_authorize'].includes(pageId);
 const download=document.querySelector('#download');if(download)download.dataset.downloadStatus=download.querySelector('[data-download-platform]')?'configured':'not_configured';
 const page=client.startPage({pageId,surface:account?'pre_auth':'marketing'});
+// Most visits are short: send the page view soon instead of waiting for the 15-second timer or the page exit.
+setTimeout(()=>{if(getStatus()==='ready')client.flush();},2000);
 for(const element of document.querySelectorAll('[data-analytics-section]'))page.observeSection(element,{sectionId:element.dataset.analyticsSection});
 let requestedGeneration=-1;
-const setConsent=async choice=>{const operation=client.setConsent(choice);requestedGeneration=choice?.websiteAnalytics===true?manager.getState().generation:-1;renderStatus();await operation;renderStatus();};
+const setConsent=async choice=>{const operation=client.setConsent(choice);requestedGeneration=choice?.websiteAnalytics===true?manager.getState().generation:-1;renderStatus();await operation;renderStatus();if(getStatus()==='ready')client.flush();};
 const ui=mountConsentUI({manager:{getState:manager.getState,subscribe:manager.subscribe,setConsent}});
 const status=document.createElement('p');status.dataset.ownedStatus='';status.setAttribute('role','status');document.querySelector('[data-owned-consent] .cmp-card').append(status);
 const bannerStatus=status.cloneNode();document.querySelector('[data-owned-consent] .cmp-banner').append(bannerStatus);
