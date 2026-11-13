@@ -1,0 +1,618 @@
+{
+  "version": "1.1.68",
+  "date": "2026-11-13",
+  "copy": {
+    "en": {
+      "headline": "Projects with a Coordinator, local models in conversations and a natural voice",
+      "summary": "Everything new since 1.0.1: projects led by a Coordinator, local models in conversations, a natural voice and a lighter app.",
+      "sections": [
+        {
+          "title": "Projects",
+          "body": "Each project has its own Coordinator that starts agents, follows their work and reports back.",
+          "detail": "Delegated tasks open beside the Coordinator, and you can write to an agent directly."
+        },
+        {
+          "title": "Local models in conversations",
+          "body": "Local models answer in conversations, one turn at a time, and say plainly why when they cannot."
+        },
+        {
+          "title": "Talk to your agents",
+          "body": "Voice mode answers with a natural voice that comes with the app, in your conversation's language."
+        },
+        {
+          "title": "Your AIs",
+          "body": "Your AIs shows each subscription's own limits, and Settings has a simpler, lighter look."
+        },
+        {
+          "title": "Lighter and faster",
+          "body": "The app uses much less memory with a long history and opens faster."
+        },
+        {
+          "title": "Attachments with every agent",
+          "body": "Attachments work with every agent, including files added while an agent is working."
+        },
+        {
+          "title": "Fixes",
+          "body": "A task whose agent could not start no longer stays queued for hours.",
+          "detail": "Settings › Computer use no longer turns the whole window into “This page couldn't load”, and dialogs opened from a menu no longer sit under their own dimmed background."
+        }
+      ]
+    },
+    "ar": {
+      "headline": "مشاريع مع منسّق، ونماذج محلية في المحادثات، وصوت طبيعي",
+      "summary": "كل الجديد منذ 1.0.1: مشاريع يقودها منسّق، ونماذج محلية في المحادثات، وصوت طبيعي، وتطبيق أخف.",
+      "sections": [
+        {
+          "title": "المشاريع",
+          "body": "لكل مشروع منسّقه الخاص الذي يشغّل الوكلاء ويتابع عملهم ويرفع إليك تقريرًا.",
+          "detail": "تُفتح المهام المفوّضة بجانب المنسّق، ويمكنك الكتابة إلى أي وكيل مباشرة."
+        },
+        {
+          "title": "النماذج المحلية في المحادثات",
+          "body": "تجيب النماذج المحلية في المحادثات، دورًا واحدًا في كل مرة، وتوضّح السبب بصراحة عندما لا تستطيع."
+        },
+        {
+          "title": "تحدّث إلى وكلائك",
+          "body": "يجيب وضع الصوت بصوت طبيعي يأتي مع التطبيق، وبلغة محادثتك."
+        },
+        {
+          "title": "أنظمة الذكاء الاصطناعي لديك",
+          "body": "تعرض صفحة «أنظمة الذكاء الاصطناعي لديك» حدود كل اشتراك، وأصبح مظهر الإعدادات أبسط وأخف."
+        },
+        {
+          "title": "أخف وأسرع",
+          "body": "يستخدم التطبيق ذاكرة أقل بكثير مع سجل طويل ويفتح أسرع."
+        },
+        {
+          "title": "المرفقات مع كل وكيل",
+          "body": "تعمل المرفقات مع كل وكيل، بما فيها الملفات التي تُضاف أثناء عمل الوكيل."
+        },
+        {
+          "title": "إصلاحات",
+          "body": "المهمة التي تعذّر تشغيل وكيلها لم تعد تبقى في قائمة الانتظار لساعات.",
+          "detail": "لم تعد صفحة الإعدادات › Computer use تحوّل النافذة كلها إلى «This page couldn't load»، ولم تعد مربعات الحوار المفتوحة من قائمة تظهر تحت خلفيتها المعتمة."
+        }
+      ]
+    },
+    "de": {
+      "headline": "Projekte mit einem Koordinator, lokale Modelle in Unterhaltungen und eine natürliche Stimme",
+      "summary": "Alles Neue seit 1.0.1: Projekte, die ein Koordinator leitet, lokale Modelle in Unterhaltungen, eine natürliche Stimme und eine leichtere App.",
+      "sections": [
+        {
+          "title": "Projekte",
+          "body": "Jedes Projekt hat seinen eigenen Koordinator, der Agenten startet, ihre Arbeit verfolgt und dir berichtet.",
+          "detail": "Delegierte Aufgaben öffnen sich neben dem Koordinator, und du kannst einem Agenten direkt schreiben."
+        },
+        {
+          "title": "Lokale Modelle in Unterhaltungen",
+          "body": "Lokale Modelle antworten in Unterhaltungen, einen Schritt nach dem anderen, und sagen klar, warum, wenn sie es nicht können."
+        },
+        {
+          "title": "Sprich mit deinen Agenten",
+          "body": "Der Sprachmodus antwortet mit einer natürlichen Stimme, die mit der App kommt, in der Sprache deiner Unterhaltung."
+        },
+        {
+          "title": "Deine KIs",
+          "body": "„Deine KIs“ zeigt die Limits jedes Abonnements, und die Einstellungen sehen einfacher und leichter aus."
+        },
+        {
+          "title": "Leichter und schneller",
+          "body": "Die App braucht mit langem Verlauf viel weniger Speicher und öffnet schneller."
+        },
+        {
+          "title": "Anhänge mit jedem Agenten",
+          "body": "Anhänge funktionieren mit jedem Agenten, auch Dateien, die du hinzufügst, während ein Agent arbeitet."
+        },
+        {
+          "title": "Korrekturen",
+          "body": "Eine Aufgabe, deren Agent nicht starten konnte, bleibt nicht mehr stundenlang in der Warteschlange.",
+          "detail": "Einstellungen › Computer use verwandelt nicht mehr das ganze Fenster in „This page couldn't load“, und Dialoge aus einem Menü liegen nicht mehr unter ihrem eigenen abgedunkelten Hintergrund."
+        }
+      ]
+    },
+    "es": {
+      "headline": "Proyectos con un Coordinador, modelos locales en las conversaciones y una voz natural",
+      "summary": "Todo lo nuevo desde 1.0.1: proyectos dirigidos por un Coordinador, modelos locales en las conversaciones, una voz natural y una app más ligera.",
+      "sections": [
+        {
+          "title": "Proyectos",
+          "body": "Cada proyecto tiene su propio Coordinador, que inicia agentes, sigue su trabajo y te informa.",
+          "detail": "Las tareas delegadas se abren junto al Coordinador, y puedes escribir directamente a un agente."
+        },
+        {
+          "title": "Modelos locales en las conversaciones",
+          "body": "Los modelos locales responden en las conversaciones, un turno cada vez, y dicen claramente por qué cuando no pueden."
+        },
+        {
+          "title": "Habla con tus agentes",
+          "body": "El modo de voz responde con una voz natural que viene con la app, en el idioma de tu conversación."
+        },
+        {
+          "title": "Tus IA",
+          "body": "Tus IA muestra los límites de cada suscripción, y Ajustes tiene un aspecto más sencillo y ligero."
+        },
+        {
+          "title": "Más ligera y más rápida",
+          "body": "La app usa mucha menos memoria con un historial largo y abre más rápido."
+        },
+        {
+          "title": "Adjuntos con cualquier agente",
+          "body": "Los adjuntos funcionan con cualquier agente, incluidos los archivos que añades mientras un agente trabaja."
+        },
+        {
+          "title": "Correcciones",
+          "body": "Una tarea cuyo agente no pudo iniciarse ya no se queda en cola durante horas.",
+          "detail": "Ajustes › Computer use ya no convierte toda la ventana en «This page couldn't load», y los diálogos abiertos desde un menú ya no quedan bajo su propio fondo atenuado."
+        }
+      ]
+    },
+    "fr": {
+      "headline": "Des projets avec un Coordinateur, des modèles locaux dans les conversations et une voix naturelle",
+      "summary": "Toutes les nouveautés depuis la 1.0.1 : des projets menés par un Coordinateur, des modèles locaux dans les conversations, une voix naturelle et une app plus légère.",
+      "sections": [
+        {
+          "title": "Projets",
+          "body": "Chaque projet a son propre Coordinateur, qui lance des agents, suit leur travail et vous fait son rapport.",
+          "detail": "Les tâches déléguées s'ouvrent à côté du Coordinateur, et vous pouvez écrire directement à un agent."
+        },
+        {
+          "title": "Les modèles locaux dans les conversations",
+          "body": "Les modèles locaux répondent dans les conversations, un tour à la fois, et disent clairement pourquoi quand ils ne le peuvent pas."
+        },
+        {
+          "title": "Parlez à vos agents",
+          "body": "Le mode vocal répond avec une voix naturelle fournie avec l'app, dans la langue de votre conversation."
+        },
+        {
+          "title": "Vos IA",
+          "body": "Vos IA affiche les limites de chaque abonnement, et les Paramètres ont un aspect plus simple et plus léger."
+        },
+        {
+          "title": "Plus légère et plus rapide",
+          "body": "L'app utilise beaucoup moins de mémoire avec un long historique et s'ouvre plus vite."
+        },
+        {
+          "title": "Des pièces jointes avec chaque agent",
+          "body": "Les pièces jointes fonctionnent avec chaque agent, y compris les fichiers ajoutés pendant qu'un agent travaille."
+        },
+        {
+          "title": "Corrections",
+          "body": "Une tâche dont l'agent n'a pas pu démarrer ne reste plus en file d'attente pendant des heures.",
+          "detail": "Paramètres › Computer use ne transforme plus toute la fenêtre en « This page couldn't load », et les boîtes de dialogue ouvertes depuis un menu ne restent plus sous leur propre fond assombri."
+        }
+      ]
+    },
+    "hi": {
+      "headline": "कोऑर्डिनेटर वाले प्रोजेक्ट, बातचीत में स्थानीय मॉडल और एक प्राकृतिक आवाज़",
+      "summary": "1.0.1 के बाद का सब कुछ नया: कोऑर्डिनेटर के नेतृत्व वाले प्रोजेक्ट, बातचीत में स्थानीय मॉडल, एक प्राकृतिक आवाज़ और एक हल्का ऐप।",
+      "sections": [
+        {
+          "title": "प्रोजेक्ट",
+          "body": "हर प्रोजेक्ट का अपना कोऑर्डिनेटर है, जो एजेंट शुरू करता है, उनके काम पर नज़र रखता है और आपको रिपोर्ट देता है।",
+          "detail": "सौंपे गए काम कोऑर्डिनेटर के बगल में खुलते हैं, और आप किसी एजेंट को सीधे लिख सकते हैं।"
+        },
+        {
+          "title": "बातचीत में स्थानीय मॉडल",
+          "body": "स्थानीय मॉडल बातचीत में जवाब देते हैं, एक बार में एक बारी, और जब नहीं दे पाते तो साफ़ बताते हैं कि क्यों।"
+        },
+        {
+          "title": "अपने एजेंटों से बात करें",
+          "body": "वॉइस मोड ऐप के साथ आने वाली प्राकृतिक आवाज़ में, आपकी बातचीत की भाषा में जवाब देता है।"
+        },
+        {
+          "title": "आपके AI",
+          "body": "“आपके AI” हर सदस्यता की अपनी सीमाएँ दिखाता है, और सेटिंग्स अब ज़्यादा सरल और हल्की दिखती हैं।"
+        },
+        {
+          "title": "हल्का और तेज़",
+          "body": "लंबे इतिहास के साथ ऐप बहुत कम मेमोरी लेता है और जल्दी खुलता है।"
+        },
+        {
+          "title": "हर एजेंट के साथ अटैचमेंट",
+          "body": "अटैचमेंट हर एजेंट के साथ काम करते हैं, उन फ़ाइलों समेत जो एजेंट के काम करते समय जोड़ी जाती हैं।"
+        },
+        {
+          "title": "सुधार",
+          "body": "जिस काम का एजेंट शुरू नहीं हो सका, वह अब घंटों कतार में नहीं रहता।",
+          "detail": "सेटिंग्स › Computer use अब पूरी विंडो को “This page couldn't load” में नहीं बदलता, और मेनू से खोले गए डायलॉग अब अपनी ही धुंधली पृष्ठभूमि के नीचे नहीं रहते।"
+        }
+      ]
+    },
+    "id": {
+      "headline": "Proyek dengan Koordinator, model lokal dalam percakapan, dan suara alami",
+      "summary": "Semua yang baru sejak 1.0.1: proyek yang dipimpin Koordinator, model lokal dalam percakapan, suara alami, dan aplikasi yang lebih ringan.",
+      "sections": [
+        {
+          "title": "Proyek",
+          "body": "Setiap proyek punya Koordinatornya sendiri yang memulai agen, mengikuti pekerjaan mereka, dan melapor kepada Anda.",
+          "detail": "Tugas yang didelegasikan terbuka di samping Koordinator, dan Anda bisa menulis langsung ke sebuah agen."
+        },
+        {
+          "title": "Model lokal dalam percakapan",
+          "body": "Model lokal menjawab dalam percakapan, satu giliran setiap kali, dan mengatakan alasannya dengan jelas saat tidak bisa."
+        },
+        {
+          "title": "Bicara dengan agen Anda",
+          "body": "Mode suara menjawab dengan suara alami yang disertakan dalam aplikasi, dalam bahasa percakapan Anda."
+        },
+        {
+          "title": "AI Anda",
+          "body": "AI Anda menampilkan batas tiap langganan, dan Pengaturan tampil lebih sederhana dan ringan."
+        },
+        {
+          "title": "Lebih ringan dan lebih cepat",
+          "body": "Aplikasi memakai jauh lebih sedikit memori dengan riwayat panjang dan terbuka lebih cepat."
+        },
+        {
+          "title": "Lampiran untuk setiap agen",
+          "body": "Lampiran berfungsi dengan setiap agen, termasuk file yang ditambahkan saat agen sedang bekerja."
+        },
+        {
+          "title": "Perbaikan",
+          "body": "Tugas yang agennya gagal dimulai tidak lagi tertahan di antrean selama berjam-jam.",
+          "detail": "Pengaturan › Computer use tidak lagi mengubah seluruh jendela menjadi “This page couldn't load”, dan dialog yang dibuka dari menu tidak lagi berada di bawah latar redupnya sendiri."
+        }
+      ]
+    },
+    "it": {
+      "headline": "Progetti con un Coordinatore, modelli locali nelle conversazioni e una voce naturale",
+      "summary": "Tutte le novità dalla 1.0.1: progetti guidati da un Coordinatore, modelli locali nelle conversazioni, una voce naturale e un'app più leggera.",
+      "sections": [
+        {
+          "title": "Progetti",
+          "body": "Ogni progetto ha il suo Coordinatore, che avvia gli agenti, segue il loro lavoro e ti riferisce.",
+          "detail": "Le attività delegate si aprono accanto al Coordinatore, e puoi scrivere direttamente a un agente."
+        },
+        {
+          "title": "Modelli locali nelle conversazioni",
+          "body": "I modelli locali rispondono nelle conversazioni, un turno alla volta, e dicono chiaramente perché quando non possono."
+        },
+        {
+          "title": "Parla con i tuoi agenti",
+          "body": "La modalità vocale risponde con una voce naturale inclusa nell'app, nella lingua della tua conversazione."
+        },
+        {
+          "title": "Le tue IA",
+          "body": "Le tue IA mostra i limiti di ogni abbonamento, e le Impostazioni hanno un aspetto più semplice e leggero."
+        },
+        {
+          "title": "Più leggera e più veloce",
+          "body": "L'app usa molta meno memoria con una cronologia lunga e si apre più in fretta."
+        },
+        {
+          "title": "Allegati con ogni agente",
+          "body": "Gli allegati funzionano con ogni agente, compresi i file aggiunti mentre un agente lavora."
+        },
+        {
+          "title": "Correzioni",
+          "body": "Un'attività il cui agente non è riuscito ad avviarsi non resta più in coda per ore.",
+          "detail": "Impostazioni › Computer use non trasforma più l'intera finestra in «This page couldn't load», e le finestre di dialogo aperte da un menu non restano più sotto il proprio sfondo oscurato."
+        }
+      ]
+    },
+    "ja": {
+      "headline": "コーディネーター付きのプロジェクト、会話で使えるローカルモデル、自然な声",
+      "summary": "1.0.1 以降の新機能: コーディネーターが率いるプロジェクト、会話で使えるローカルモデル、自然な声、より軽いアプリ。",
+      "sections": [
+        {
+          "title": "プロジェクト",
+          "body": "各プロジェクトに専用のコーディネーターがあり、エージェントを起動し、作業を見守り、結果を報告します。",
+          "detail": "委任したタスクはコーディネーターの横に開き、エージェントに直接メッセージを書けます。"
+        },
+        {
+          "title": "会話で使えるローカルモデル",
+          "body": "ローカルモデルは会話の中で 1 ターンずつ答え、できないときはその理由をはっきり伝えます。"
+        },
+        {
+          "title": "エージェントと話す",
+          "body": "音声モードは、アプリに同梱された自然な声で、会話の言語のまま答えます。"
+        },
+        {
+          "title": "あなたの AI",
+          "body": "「あなたの AI」に各サブスクリプションの上限が表示され、設定はよりシンプルで軽い見た目になりました。"
+        },
+        {
+          "title": "より軽く、より速く",
+          "body": "長い履歴があってもメモリ使用量が大幅に減り、起動も速くなりました。"
+        },
+        {
+          "title": "すべてのエージェントで添付ファイル",
+          "body": "添付ファイルはすべてのエージェントで使えます。エージェントの作業中に追加したファイルも含みます。"
+        },
+        {
+          "title": "修正",
+          "body": "エージェントを起動できなかったタスクが、何時間もキューに残ることはなくなりました。",
+          "detail": "設定 › Computer use でウィンドウ全体が「This page couldn't load」になることはなくなり、メニューから開いたダイアログが自身の暗い背景の下に隠れることもなくなりました。"
+        }
+      ]
+    },
+    "ko": {
+      "headline": "코디네이터가 있는 프로젝트, 대화 속 로컬 모델, 자연스러운 목소리",
+      "summary": "1.0.1 이후 새로워진 모든 것: 코디네이터가 이끄는 프로젝트, 대화 속 로컬 모델, 자연스러운 목소리, 더 가벼워진 앱.",
+      "sections": [
+        {
+          "title": "프로젝트",
+          "body": "프로젝트마다 전용 코디네이터가 있어 에이전트를 시작하고, 작업을 지켜보고, 결과를 보고합니다.",
+          "detail": "위임한 작업은 코디네이터 옆에 열리며, 에이전트에게 직접 메시지를 쓸 수 있습니다."
+        },
+        {
+          "title": "대화 속 로컬 모델",
+          "body": "로컬 모델이 대화에서 한 번에 한 턴씩 답하고, 답할 수 없을 때는 이유를 분명히 알려 줍니다."
+        },
+        {
+          "title": "에이전트와 대화하기",
+          "body": "음성 모드는 앱에 포함된 자연스러운 목소리로, 대화하는 언어 그대로 답합니다."
+        },
+        {
+          "title": "내 AI",
+          "body": "내 AI에서 구독별 한도를 볼 수 있고, 설정은 더 단순하고 가벼운 모습이 되었습니다."
+        },
+        {
+          "title": "더 가볍고 더 빠르게",
+          "body": "기록이 길어도 메모리를 훨씬 적게 쓰고 더 빨리 열립니다."
+        },
+        {
+          "title": "모든 에이전트에서 첨부 파일",
+          "body": "첨부 파일은 모든 에이전트에서 작동하며, 에이전트가 작업하는 동안 추가한 파일도 포함됩니다."
+        },
+        {
+          "title": "수정 사항",
+          "body": "에이전트를 시작하지 못한 작업이 더 이상 몇 시간씩 대기열에 남지 않습니다.",
+          "detail": "설정 › Computer use가 더 이상 창 전체를 “This page couldn't load”로 바꾸지 않으며, 메뉴에서 연 대화 상자가 자신의 어두운 배경 아래에 깔리지 않습니다."
+        }
+      ]
+    },
+    "pt-BR": {
+      "headline": "Projetos com um Coordenador, modelos locais nas conversas e uma voz natural",
+      "summary": "Tudo o que há de novo desde a 1.0.1: projetos conduzidos por um Coordenador, modelos locais nas conversas, uma voz natural e um app mais leve.",
+      "sections": [
+        {
+          "title": "Projetos",
+          "body": "Cada projeto tem seu próprio Coordenador, que inicia agentes, acompanha o trabalho deles e informa você.",
+          "detail": "As tarefas delegadas abrem ao lado do Coordenador, e você pode escrever diretamente para um agente."
+        },
+        {
+          "title": "Modelos locais nas conversas",
+          "body": "Os modelos locais respondem nas conversas, um turno por vez, e dizem claramente o motivo quando não conseguem."
+        },
+        {
+          "title": "Converse com seus agentes",
+          "body": "O modo de voz responde com uma voz natural que vem com o app, no idioma da sua conversa."
+        },
+        {
+          "title": "Suas IAs",
+          "body": "Suas IAs mostra os limites de cada assinatura, e as Configurações têm um visual mais simples e leve."
+        },
+        {
+          "title": "Mais leve e mais rápido",
+          "body": "O app usa muito menos memória com um histórico longo e abre mais rápido."
+        },
+        {
+          "title": "Anexos com todos os agentes",
+          "body": "Os anexos funcionam com todos os agentes, inclusive arquivos adicionados enquanto um agente trabalha."
+        },
+        {
+          "title": "Correções",
+          "body": "Uma tarefa cujo agente não conseguiu iniciar não fica mais na fila por horas.",
+          "detail": "Configurações › Computer use não transforma mais a janela inteira em “This page couldn't load”, e os diálogos abertos a partir de um menu não ficam mais sob o próprio fundo escurecido."
+        }
+      ]
+    },
+    "ro": {
+      "headline": "Proiecte cu un Coordonator, modele locale în conversații și o voce naturală",
+      "summary": "Tot ce e nou de la 1.0.1: proiecte conduse de un Coordonator, modele locale în conversații, o voce naturală și o aplicație mai ușoară.",
+      "sections": [
+        {
+          "title": "Proiecte",
+          "body": "Fiecare proiect are Coordonatorul lui, care pornește agenți, le urmărește lucrul și îți raportează.",
+          "detail": "Sarcinile delegate se deschid lângă Coordonator și îi poți scrie direct unui agent."
+        },
+        {
+          "title": "Modele locale în conversații",
+          "body": "Modelele locale răspund în conversații, câte un mesaj pe rând, și spun limpede de ce atunci când nu pot."
+        },
+        {
+          "title": "Vorbește cu agenții",
+          "body": "Modul vocal răspunde cu o voce naturală care vine cu aplicația, în limba conversației tale."
+        },
+        {
+          "title": "AI-urile tale",
+          "body": "AI-urile tale arată limitele fiecărui abonament, iar Setările au un aspect mai simplu și mai aerisit."
+        },
+        {
+          "title": "Mai ușoară și mai rapidă",
+          "body": "Aplicația folosește mult mai puțină memorie cu un istoric lung și pornește mai repede."
+        },
+        {
+          "title": "Atașamente cu orice agent",
+          "body": "Atașamentele merg cu orice agent, inclusiv fișierele adăugate în timp ce agentul lucrează."
+        },
+        {
+          "title": "Reparații",
+          "body": "O sarcină al cărei agent nu a putut porni nu mai rămâne în coadă ore întregi.",
+          "detail": "Setări › Computer use nu mai transformă toată fereastra în „This page couldn't load”, iar dialogurile deschise dintr-un meniu nu mai stau sub propriul fundal întunecat."
+        }
+      ]
+    },
+    "ru": {
+      "headline": "Проекты с координатором, локальные модели в разговорах и естественный голос",
+      "summary": "Всё новое с версии 1.0.1: проекты под управлением координатора, локальные модели в разговорах, естественный голос и более лёгкое приложение.",
+      "sections": [
+        {
+          "title": "Проекты",
+          "body": "У каждого проекта свой координатор: он запускает агентов, следит за их работой и отчитывается перед вами.",
+          "detail": "Делегированные задачи открываются рядом с координатором, и агенту можно написать напрямую."
+        },
+        {
+          "title": "Локальные модели в разговорах",
+          "body": "Локальные модели отвечают в разговорах, по одному ходу за раз, и прямо объясняют причину, когда не могут ответить."
+        },
+        {
+          "title": "Говорите с агентами",
+          "body": "Голосовой режим отвечает естественным голосом, который входит в приложение, на языке вашего разговора."
+        },
+        {
+          "title": "Ваши ИИ",
+          "body": "Раздел «Ваши ИИ» показывает лимиты каждой подписки, а настройки стали проще и легче на вид."
+        },
+        {
+          "title": "Легче и быстрее",
+          "body": "С длинной историей приложение занимает гораздо меньше памяти и открывается быстрее."
+        },
+        {
+          "title": "Вложения с любым агентом",
+          "body": "Вложения работают с любым агентом, включая файлы, добавленные во время работы агента."
+        },
+        {
+          "title": "Исправления",
+          "body": "Задача, агент которой не смог запуститься, больше не остаётся в очереди часами.",
+          "detail": "Настройки › Computer use больше не превращают всё окно в «This page couldn't load», а диалоги, открытые из меню, больше не оказываются под собственным затемнённым фоном."
+        }
+      ]
+    },
+    "tr": {
+      "headline": "Koordinatörlü projeler, konuşmalarda yerel modeller ve doğal bir ses",
+      "summary": "1.0.1'den bu yana gelen tüm yenilikler: bir Koordinatörün yönettiği projeler, konuşmalarda yerel modeller, doğal bir ses ve daha hafif bir uygulama.",
+      "sections": [
+        {
+          "title": "Projeler",
+          "body": "Her projenin kendi Koordinatörü var: ajanları başlatır, işlerini izler ve sana rapor verir.",
+          "detail": "Devredilen görevler Koordinatörün yanında açılır ve bir ajana doğrudan yazabilirsin."
+        },
+        {
+          "title": "Konuşmalarda yerel modeller",
+          "body": "Yerel modeller konuşmalarda her seferinde bir tur yanıt verir ve yanıt veremediğinde nedenini açıkça söyler."
+        },
+        {
+          "title": "Ajanlarınla konuş",
+          "body": "Ses modu, uygulamayla gelen doğal bir sesle ve konuşmanın dilinde yanıt verir."
+        },
+        {
+          "title": "Yapay zekâlarınız",
+          "body": "Yapay zekâlarınız sayfası her aboneliğin kendi limitlerini gösterir, Ayarlar ise daha sade ve hafif bir görünüme kavuştu."
+        },
+        {
+          "title": "Daha hafif ve daha hızlı",
+          "body": "Uygulama uzun bir geçmişle çok daha az bellek kullanır ve daha hızlı açılır."
+        },
+        {
+          "title": "Her ajanla ekler",
+          "body": "Ekler her ajanla çalışır; ajan çalışırken eklenen dosyalar da buna dahildir."
+        },
+        {
+          "title": "Düzeltmeler",
+          "body": "Ajanı başlatılamayan bir görev artık saatlerce kuyrukta kalmıyor.",
+          "detail": "Ayarlar › Computer use artık tüm pencereyi “This page couldn't load” ekranına çevirmiyor ve bir menüden açılan iletişim kutuları artık kendi karartılmış arka planının altında kalmıyor."
+        }
+      ]
+    },
+    "vi": {
+      "headline": "Dự án có Điều phối viên, mô hình cục bộ trong cuộc trò chuyện và giọng nói tự nhiên",
+      "summary": "Mọi điểm mới kể từ 1.0.1: dự án do một Điều phối viên dẫn dắt, mô hình cục bộ trong cuộc trò chuyện, giọng nói tự nhiên và ứng dụng nhẹ hơn.",
+      "sections": [
+        {
+          "title": "Dự án",
+          "body": "Mỗi dự án có Điều phối viên riêng, khởi động các tác nhân, theo dõi công việc của chúng và báo cáo lại cho bạn.",
+          "detail": "Các nhiệm vụ được giao mở ngay bên cạnh Điều phối viên, và bạn có thể viết trực tiếp cho một tác nhân."
+        },
+        {
+          "title": "Mô hình cục bộ trong cuộc trò chuyện",
+          "body": "Mô hình cục bộ trả lời trong cuộc trò chuyện, mỗi lần một lượt, và nói rõ lý do khi không thể trả lời."
+        },
+        {
+          "title": "Nói chuyện với các tác nhân",
+          "body": "Chế độ giọng nói trả lời bằng một giọng tự nhiên đi kèm ứng dụng, bằng ngôn ngữ của cuộc trò chuyện."
+        },
+        {
+          "title": "AI của bạn",
+          "body": "AI của bạn hiển thị hạn mức riêng của từng gói đăng ký, và Cài đặt có giao diện đơn giản, nhẹ nhàng hơn."
+        },
+        {
+          "title": "Nhẹ hơn và nhanh hơn",
+          "body": "Ứng dụng dùng ít bộ nhớ hơn nhiều với lịch sử dài và mở nhanh hơn."
+        },
+        {
+          "title": "Tệp đính kèm với mọi tác nhân",
+          "body": "Tệp đính kèm hoạt động với mọi tác nhân, kể cả các tệp được thêm khi tác nhân đang làm việc."
+        },
+        {
+          "title": "Sửa lỗi",
+          "body": "Nhiệm vụ có tác nhân không khởi động được sẽ không còn nằm trong hàng đợi suốt nhiều giờ.",
+          "detail": "Cài đặt › Computer use không còn biến cả cửa sổ thành “This page couldn't load”, và các hộp thoại mở từ menu không còn nằm dưới chính nền mờ của chúng."
+        }
+      ]
+    },
+    "zh-Hans": {
+      "headline": "带协调者的项目、对话中的本地模型，以及自然的声音",
+      "summary": "自 1.0.1 以来的全部新内容：由协调者带领的项目、对话中的本地模型、自然的声音，以及更轻快的应用。",
+      "sections": [
+        {
+          "title": "项目",
+          "body": "每个项目都有自己的协调者，负责启动智能体、跟进它们的工作并向你汇报。",
+          "detail": "委派的任务会在协调者旁边打开，你也可以直接给某个智能体写消息。"
+        },
+        {
+          "title": "对话中的本地模型",
+          "body": "本地模型可以在对话中回答，一次一轮；无法回答时会明确说明原因。"
+        },
+        {
+          "title": "与智能体对话",
+          "body": "语音模式使用应用自带的自然声音，并以你对话所用的语言回答。"
+        },
+        {
+          "title": "你的 AI",
+          "body": "“你的 AI”会显示每个订阅各自的额度，设置的外观也更简洁、更轻盈。"
+        },
+        {
+          "title": "更轻快，更迅速",
+          "body": "即使历史很长，应用也占用少得多的内存，启动更快。"
+        },
+        {
+          "title": "所有智能体都支持附件",
+          "body": "附件可用于所有智能体，包括在智能体工作时添加的文件。"
+        },
+        {
+          "title": "修复",
+          "body": "智能体无法启动的任务不会再在队列中滞留数小时。",
+          "detail": "“设置 › Computer use”不会再让整个窗口变成“This page couldn't load”，从菜单打开的对话框也不会再被自己的暗色背景遮住。"
+        }
+      ]
+    },
+    "zh-Hant": {
+      "headline": "有協調者的專案、對話中的本機模型，以及自然的聲音",
+      "summary": "自 1.0.1 以來的所有新內容：由協調者帶領的專案、對話中的本機模型、自然的聲音，以及更輕快的應用程式。",
+      "sections": [
+        {
+          "title": "專案",
+          "body": "每個專案都有自己的協調者，負責啟動代理、跟進它們的工作並向你回報。",
+          "detail": "委派的任務會在協調者旁邊開啟，你也可以直接寫訊息給某個代理。"
+        },
+        {
+          "title": "對話中的本機模型",
+          "body": "本機模型可以在對話中回答，一次一輪；無法回答時會清楚說明原因。"
+        },
+        {
+          "title": "與代理對話",
+          "body": "語音模式使用應用程式內建的自然聲音，並以你對話所用的語言回答。"
+        },
+        {
+          "title": "你的 AI",
+          "body": "「你的 AI」會顯示每個訂閱各自的額度，設定的外觀也更簡潔、更輕盈。"
+        },
+        {
+          "title": "更輕快，更迅速",
+          "body": "即使歷史很長，應用程式也使用少得多的記憶體，開啟更快。"
+        },
+        {
+          "title": "所有代理都支援附件",
+          "body": "附件可用於所有代理，包括在代理工作時加入的檔案。"
+        },
+        {
+          "title": "修正",
+          "body": "代理無法啟動的任務不會再在佇列中停留數小時。",
+          "detail": "「設定 › Computer use」不會再讓整個視窗變成「This page couldn't load」，從選單開啟的對話框也不會再被自己的暗色背景蓋住。"
+        }
+      ]
+    }
+  }
+}

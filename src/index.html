@@ -4,13 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#0a0b0c">
-    <meta name="description" content="Put AI agents to work on your projects. Follow every step and review every change, all in one window.">
+    <meta name="description" content="One Coordinator and a whole team of AI agents on your PC. Claude Code, Codex and local models work on your projects while you follow every step and review every change.">
     <link rel="canonical" href="https://codevalanche.com/">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://codevalanche.com/">
     <meta property="og:site_name" content="Codevalanche">
     <meta property="og:title" content="Codevalanche | Claude Code, Codex and local models in one Windows app">
-    <meta property="og:description" content="Put AI agents to work on your projects. Follow every step and review every change, all in one window.">
+    <meta property="og:description" content="One Coordinator and a whole team of AI agents on your PC. Claude Code, Codex and local models work on your projects while you follow every step and review every change.">
     <meta property="og:image" content="https://codevalanche.com/assets/codevalanche-link-preview.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
@@ -18,12 +18,14 @@
     <meta property="og:image:alt" content="The Codevalanche logo.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Codevalanche | Claude Code, Codex and local models in one Windows app">
-    <meta name="twitter:description" content="Put AI agents to work on your projects. Follow every step and review every change, all in one window.">
+    <meta name="twitter:description" content="One Coordinator and a whole team of AI agents on your PC. Claude Code, Codex and local models work on your projects while you follow every step and review every change.">
     <meta name="twitter:image" content="https://codevalanche.com/assets/codevalanche-link-preview.png">
     <meta name="twitter:image:alt" content="The Codevalanche logo.">
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
     <script>(function(){var t="light";try{var s=localStorage.getItem("codevalanche_theme");if(s==="light"||s==="dark"){t=s}else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){t="dark"}}catch(e){}document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("js")})()</script>
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/home.css">
+    <link rel="stylesheet" href="/home.css">
     <script type="application/ld+json">
       {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://radovar.com/#organization","name":"Radovar","url":"https://radovar.com/"},{"@type":"SoftwareApplication","@id":"https://radovar.com/#codevalanche","name":"Codevalanche","url":"https://codevalanche.com/","sameAs":["https://radovar.com/codevalanche/","https://x.com/Codevalanche"],"applicationCategory":"DeveloperApplication","operatingSystem":"Windows","publisher":{"@id":"https://radovar.com/#organization"}},{"@type":"WebSite","@id":"https://codevalanche.com/#website","name":"Codevalanche","url":"https://codevalanche.com/","publisher":{"@id":"https://radovar.com/#organization"},"about":{"@id":"https://radovar.com/#codevalanche"}}]}
     </script>
@@ -34,307 +36,293 @@
 
     <!-- site-header -->
 
-    <main id="main">
-<section class="hero" id="top" data-analytics-section="hero" aria-labelledby="hero-title">
-  <div class="shell hero-grid">
-    <div class="hero-copy">
-      <p class="kicker"><span class="kicker-dot" aria-hidden="true"></span>Early access for Windows</p>
-      <h1 id="hero-title">From prompt to a change you understand.</h1>
-      <p class="hero-lede">Work with Claude Code, Codex and supported local models in one Windows app. Choose a connected account, follow progress and inspect the changes.</p>
-      <!-- download:preparation --><div class="hero-actions"><a class="button button-primary" data-release-primary href="/how-it-works/">See how it works</a><a class="hero-release-link" href="/download/">Windows release status</a></div>
-      <p class="hero-availability" data-release-status>Public installer in preparation.</p><!-- /download:preparation -->
-      <!-- download:release --><div class="hero-actions"><a class="button button-primary" data-release-primary href="/download/">Download for Windows</a><a class="hero-release-link" href="/how-it-works/">See how it works</a></div>
-      <p class="hero-availability"><span>Version</span> <span data-fill="version"></span> <span aria-hidden="true">·</span> <span>Windows 11, 64-bit</span> <span aria-hidden="true">·</span> <span data-fill="size"></span></p><!-- /download:release -->
+    <main id="main" class="home">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="u-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="u-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+  <symbol id="u-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="u-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="u-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="u-dots" viewBox="0 0 24 24"><path d="M5 12h.01M12 12h.01M19 12h.01"/></symbol>
+  <symbol id="u-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2.2"/><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="8" r="2.2"/><path d="M6 7.2v9.6M18 10.2c0 4-6 3-11 5.6"/></symbol>
+  <symbol id="u-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="u-deny" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></symbol>
+  <symbol id="u-enter" viewBox="0 0 24 24"><path d="M20 5v7a3 3 0 0 1-3 3H5M9 11l-4 4 4 4"/></symbol>
+  <symbol id="u-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  <symbol id="u-home" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="u-side" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></symbol>
+  <symbol id="u-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17h.01"/></symbol>
+  <symbol id="u-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5"/></symbol>
+  <symbol id="u-term" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 9 3 3-3 3M13 15h4"/></symbol>
+  <symbol id="u-dl" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="u-disk" viewBox="0 0 24 24"><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M5.5 13 8 5h8l2.5 8M7 16.5h.01M11 16.5h6"/></symbol>
+  <symbol id="u-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v6c0 4.5 3.2 7.7 7.5 9 4.3-1.3 7.5-4.5 7.5-9V6z"/><path d="m9 12 2.2 2.2L15 10.4"/></symbol>
+  <symbol id="u-undo" viewBox="0 0 24 24"><path d="M4 9h10a5 5 0 0 1 0 10H9M8 5 4 9l4 4"/></symbol>
+  <symbol id="u-gauge" viewBox="0 0 24 24"><path d="M4 18a9 9 0 1 1 16 0M12 13l4-5"/></symbol>
+  <symbol id="u-win" viewBox="0 0 24 24"><path d="M3 5.5 10.5 4.4v7.100H3zM11.5 4.3 21 3v8.5h-9.5zM3 12.5h7.5v7.100L3 18.5zM11.5 12.5H21V21l-9.5-1.3z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="u-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+  <symbol id="u-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.100 2.100M16.3 16.3l2.100 2.100M5.6 18.4l2.100-2.100M16.3 7.7l2.100-2.100"/></symbol>
+  <symbol id="u-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="u-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.3 3 14.7 0 18M12 3c-3 3.3-3 14.7 0 18"/></symbol>
+  <symbol id="u-chat" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.800 7L4 20l1.2-4A8 8 0 1 1 20 12z"/></symbol>
+  <symbol id="u-tabs" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 9.5h18M8 5v4.5"/></symbol>
+  <symbol id="u-chevr" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="u-repeat" viewBox="0 0 24 24"><path d="M4 11V9a3 3 0 0 1 3-3h11M15 3l3 3-3 3M20 13v2a3 3 0 0 1-3 3H6M9 21l-3-3 3-3"/></symbol>
+  <symbol id="u-sun" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="u-lang" viewBox="0 0 24 24"><path d="M4 6h9M8.5 4v2M6 6c.5 3.5 3 6 6 7M11 6c-.5 3.5-3 6.5-7 8M13 20l4-9 4 9M14.5 17h5"/></symbol>
+  <symbol id="u-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+  <symbol id="u-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.5"/><rect x="10" y="10" width="4" height="4" rx="1"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></symbol>
+</defs></svg>
+<section class="hero" id="top" data-analytics-section="hero">
+  <canvas id="ridges" aria-hidden="true"></canvas>
+  <div class="frame">
+    <a class="pill" href="#product"><b>New</b>Projects with a Coordinator<svg class="ui"><use href="#u-right"/></svg></a>
+    <h1>One Coordinator.<br class="dbr"> A&nbsp;whole team of <span class="grad">AI&nbsp;agents.</span></h1>
+    <p class="sub">Say what you want. The Coordinator plans the work, hands each part to Claude Code, Codex or a local model, and reports back. You stay in control.</p>
+    <!-- download:preparation --><div class="cta">
+      <a class="btn btn-primary" data-release-primary href="/how-it-works/"><span>See how it works</span></a>
+      <a class="btn btn-ghost" href="/download/">Windows release status</a>
     </div>
-    <figure class="shot hero-product">
-            <div class="shot-window shot-themed">
-              <picture>
-                <source media="(max-width: 760px)" srcset="/assets/shots/task-review-detail-light-640.webp 640w, /assets/shots/task-review-detail-light-960.webp 960w, /assets/shots/task-review-detail-light.webp 1200w" sizes="100vw" width="1200" height="1068">
-                <img class="shot-img shot-img-light" src="/assets/shots/task-review-light.webp" width="2000" height="1250" alt="Codevalanche on Windows: a finished task in a sample project. The agent lists its steps and a summary, and two changed files wait for review." fetchpriority="high" decoding="async">
-              </picture>
-              <picture>
-                <source media="(max-width: 760px)" srcset="/assets/shots/task-review-detail-dark-640.webp 640w, /assets/shots/task-review-detail-dark-960.webp 960w, /assets/shots/task-review-detail-dark.webp 1200w" sizes="100vw" width="1200" height="1068">
-                <img class="shot-img shot-img-dark" src="/assets/shots/task-review-dark.webp" width="2000" height="1250" alt="Codevalanche on Windows in the dark theme: a finished task in a sample project, with two changed files waiting for review." loading="lazy" decoding="async">
-              </picture>
-            </div>
-            <figcaption>Codevalanche on Windows, working on a sample project.</figcaption>
-          </figure>
-  </div>
-  <div class="shell"><div class="hero-runtimes" aria-label="Agents and models you can use">
-          <span class="runtimes-label">Works with the agents you already use</span>
-          <span class="runtime-chip"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><use href="#mark-claude"/></svg> Claude Code</span>
-          <span class="runtime-chip"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><use href="#mark-codex"/></svg> Codex</span>
-          <span class="runtime-chip"><svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><use href="#mark-local"/></svg> Local models</span>
-          <span class="runtime-chip runtime-chip-soft">More providers in Settings</span>
-        </div></div>
-</section>
-
-<section class="section shell showcase task-tour" id="showcase" data-analytics-section="showcase" aria-labelledby="showcase-title">
-  <div class="section-head"><div><p class="kicker">Inside the app</p><h2 id="showcase-title">Follow one task, from brief to review.</h2></div><p>Real screenshots of Codevalanche on Windows, working on a sample project.</p></div>
-  <div class="showcase-layout">
-    <div class="feature-tabs" role="tablist" aria-orientation="horizontal" aria-label="A task in Codevalanche">
-      <button class="feature-tab is-active" role="tab" id="tab-brief" data-feature="brief" aria-controls="panel-brief" aria-selected="true"><span>01</span> Brief</button>
-      <button class="feature-tab" role="tab" id="tab-execution" data-feature="execution" aria-controls="panel-execution" aria-selected="false" tabindex="-1"><span>02</span> Execution</button>
-      <button class="feature-tab" role="tab" id="tab-approval" data-feature="approval" aria-controls="panel-approval" aria-selected="false" tabindex="-1"><span>03</span> Approval</button>
-      <button class="feature-tab" role="tab" id="tab-review" data-feature="review" aria-controls="panel-review" aria-selected="false" tabindex="-1"><span>04</span> Review</button>
+    <p class="meta" data-release-status>Public installer in preparation.</p><!-- /download:preparation -->
+    <!-- download:release --><div class="cta">
+      <a class="btn btn-primary" data-release-primary href="/download/"><svg class="ui"><use href="#u-win"/></svg><span>Download for Windows</span></a>
+      <a class="btn btn-ghost" href="/how-it-works/">See how it works</a>
     </div>
-    <div class="feature-content">
-      <div class="feature-panel is-active" id="panel-brief" role="tabpanel" aria-labelledby="tab-brief" data-panel="brief"><div class="feature-copy"><h3>Start with a brief.</h3><p>Projects and tasks sit in the sidebar. Open a task, describe what should change and send it to the agent.</p></div><figure class="shot"><div class="shot-window"><picture><img class="shot-img" src="/assets/shots/task-brief.webp" width="2000" height="1250" alt="A new task in Codevalanche with a written brief in the message box, ready to send." loading="lazy" decoding="async"></picture></div><figcaption>A new task in Codevalanche with a written brief in the message box, ready to send.</figcaption></figure></div>
-      <div class="feature-panel" id="panel-execution" role="tabpanel" aria-labelledby="tab-execution" data-panel="execution" hidden><div class="feature-copy"><h3>Follow the work.</h3><p>Each task keeps its own conversation, agent and changes. See which one is working, which one needs you and which one is ready for review.</p></div><figure class="shot">
-            <div class="shot-window shot-themed">
-              <picture>
-                <source media="(max-width: 760px)" srcset="/assets/shots/task-review-detail-light-640.webp 640w, /assets/shots/task-review-detail-light-960.webp 960w, /assets/shots/task-review-detail-light.webp 1200w" sizes="100vw" width="1200" height="1068">
-                <img class="shot-img shot-img-light" src="/assets/shots/task-review-light.webp" width="2000" height="1250" alt="Codevalanche on Windows: a finished task in a sample project. The agent lists its steps and a summary, and two changed files wait for review." loading="lazy" decoding="async">
-              </picture>
-              <picture>
-                <source media="(max-width: 760px)" srcset="/assets/shots/task-review-detail-dark-640.webp 640w, /assets/shots/task-review-detail-dark-960.webp 960w, /assets/shots/task-review-detail-dark.webp 1200w" sizes="100vw" width="1200" height="1068">
-                <img class="shot-img shot-img-dark" src="/assets/shots/task-review-dark.webp" width="2000" height="1250" alt="Codevalanche on Windows in the dark theme: a finished task in a sample project, with two changed files waiting for review." loading="lazy" decoding="async">
-              </picture>
-            </div>
-            <figcaption>Codevalanche on Windows: a finished task in a sample project. The agent lists its steps and a summary, and two changed files wait for review.</figcaption>
-          </figure></div>
-      <div class="feature-panel" id="panel-approval" role="tabpanel" aria-labelledby="tab-approval" data-panel="approval" hidden><div class="feature-copy"><h3>See the command before you allow it.</h3><p>Commands that need your permission stop and ask, with the exact command in view. Allow it once or deny it.</p></div><figure class="shot"><div class="shot-window"><picture><source media="(max-width: 760px)" srcset="/assets/shots/approval-detail-640.webp 640w, /assets/shots/approval-detail-960.webp 960w, /assets/shots/approval-detail.webp 1400w" sizes="100vw" width="1400" height="1256"><img class="shot-img" src="/assets/shots/approval.webp" width="2000" height="1250" alt="An approval request in Codevalanche: the agent asks to run npm test, with Allow once and Deny buttons." loading="lazy" decoding="async"></picture></div><figcaption>An approval request in Codevalanche: the agent asks to run npm test, with Allow once and Deny buttons.</figcaption></figure></div>
-      <div class="feature-panel" id="panel-review" role="tabpanel" aria-labelledby="tab-review" data-panel="review" hidden><div class="feature-copy"><h3>Inspect the changed files.</h3><p>When the agent finishes, Codevalanche lists the changed files. Open the diff and decide what belongs in your codebase.</p></div><figure class="shot"><div class="shot-window"><picture><source media="(max-width: 760px)" srcset="/assets/shots/changes-detail-640.webp 640w, /assets/shots/changes-detail-960.webp 960w, /assets/shots/changes-detail.webp 1000w" sizes="100vw" width="1000" height="1092"><img class="shot-img" src="/assets/shots/changes.webp" width="2000" height="1250" alt="The changes view in Codevalanche, showing the diff of two edited files." loading="lazy" decoding="async"></picture></div><figcaption>The changes view in Codevalanche, showing the diff of two edited files.</figcaption></figure></div>
-    </div>
-  </div>
-  <p class="tour-next"><a href="/how-it-works/">See the complete walkthrough</a></p>
-</section>
+    <p class="meta"><span>Version</span> <span data-fill="version"></span> <span aria-hidden="true">·</span> <span>Windows 11, 64-bit</span> <span aria-hidden="true">·</span> <span data-fill="size"></span></p><!-- /download:release -->
 
-<section class="principle-band" id="product-principle" data-analytics-section="product_principle" aria-label="Product principle">
-        <div class="shell principle-grid reveal">
-          <p class="principle-statement">Your project stays where it already is. <em>The agent comes to it.</em></p>
-          <p class="principle-aside">Your repository stays on disk. A hosted model can still receive prompts and relevant file context, so the provider and runtime you choose determine those boundaries. A supported local model runs on your own hardware.</p>
+    <div class="winwrap" id="winwrap">
+      <div class="win app" id="win">
+        <div class="win-bar">
+          <svg class="ui"><use href="#u-side"/></svg>&nbsp;&nbsp;<svg class="ui"><use href="#u-home"/></svg>&nbsp;
+          <span class="tab on"><span class="av">TR</span>Trailhead<span class="badge">1</span><span style="margin-left:6px;opacity:.6">&#10005;</span></span>
+          <span class="tab"><span class="av">FN</span>Field notes</span>
+          <span class="tab hide-s"><span class="av">SH</span>Shop</span>
+          <svg class="ui hide-s"><use href="#u-plus"/></svg>
+          <span class="win-ctl hide-s"><svg class="ui"><use href="#u-tabs"/></svg><svg class="ui"><use href="#u-chev"/></svg><span>&#8211;</span><span>&#9633;</span><span>&#10005;</span></span>
         </div>
-      </section>
-
-<section class="section shell" id="product" data-analytics-section="product" aria-labelledby="product-title">
-        <div class="section-head reveal">
-          <div>
-            <p class="kicker">The workspace</p>
-            <h2 id="product-title">Everything around the agent, in one window.</h2>
-          </div>
-          <p>Claude Code and Codex are agents. Codevalanche is the workspace around them: your projects, the choice of agent for each task, the conversation that guided the work and the review of what changed.</p>
-        </div>
-        <div class="cards product-overview">
-          <article class="card reveal">
-
-            <h3>Your project, where it already is.</h3>
-            <p>Open the repository that is already on your PC, with its files, folders and version control. Nothing to import or rebuild.</p><a href="/docs/">Getting started</a>
-          </article>
-          <article class="card reveal">
-
-            <h3>Several tasks at once.</h3>
-            <p>Each task keeps its own conversation, agent and changes. See which one is working, which one needs you and which one is ready for review.</p><a href="/how-it-works/">How a task works</a>
-          </article>
-          <article class="card reveal">
-
-            <h3>Inspect the result.</h3>
-            <p>Read the changed files and run the checks before deciding what belongs in your project.</p><a href="/security/">Permissions and review</a>
-          </article>
-        </div>
-      </section>
-
-<section class="section section-tint" id="accounts" data-analytics-section="accounts" aria-labelledby="accounts-title">
-        <div class="shell">
-          <div class="section-head reveal">
-            <div>
-              <p class="kicker">Your choice of agent</p>
-              <h2 id="accounts-title">In the cloud or on your PC. Per task.</h2>
-            </div>
-            <p>Choose a supported agent, API connection or local model. Connection requirements and capabilities differ.</p>
-          </div>
-          <div class="agents-layout">
-            <div class="agent-cards">
-              <article class="agent-card reveal">
-                <p class="agent-where">In the cloud</p>
-                <h3>Use the coding agents you already have.</h3>
-                <p>Sign in with your own accounts for supported agents such as Claude Code and Codex. They work on your project from inside Codevalanche, on the plans you already pay for.</p><a href="/agents/">Agents and connections</a>
-                <ul class="tag-list" aria-label="Examples of cloud agents"><li>Claude Code</li><li>Codex</li><li>More by build</li></ul>
-              </article>
-              <article class="agent-card reveal">
-                <p class="agent-where">On your PC</p>
-                <h3>Run a model on your own hardware.</h3>
-                <p>When a task should stay on your machine, give it to a supported local model. The app checks your hardware before you download a model.</p><a href="/local-ai/">Local AI in Codevalanche</a>
-                <ul class="tag-list" aria-label="Local model support"><li>Local models</li><li>Where supported</li></ul>
-              </article>
-              <article class="agent-card reveal">
-                <p class="agent-where">Accounts</p>
-                <h3>Keep work and personal accounts separate.</h3>
-                <p>Keep separate Claude Code and Codex accounts connected, then choose the account for a run. No pooled subscriptions or automatic account rotation.</p><a href="/features/multiple-accounts/">Multiple accounts</a>
-              </article>
-            </div>
-            <figure class="shot shot-side reveal">
-              <div class="shot-window">
-                <picture>
-                  <source media="(max-width: 760px)" srcset="/assets/shots/ai-providers-detail-640.webp 640w, /assets/shots/ai-providers-detail-960.webp 960w, /assets/shots/ai-providers-detail.webp 1000w" sizes="100vw" width="1000" height="1032">
-                  <img class="shot-img" src="/assets/shots/ai-providers.webp" width="2000" height="1250" alt="The AI Providers page in Codevalanche settings, listing providers such as OpenAI, Anthropic and Google with their connection status." loading="lazy" decoding="async">
-                </picture>
+        <div class="win-body">
+          <aside class="sb">
+            <div class="sb-head"><span class="av">TR</span>Trailhead<svg class="ui"><use href="#u-search"/></svg><svg class="ui" style="margin-left:6px"><use href="#u-dots"/></svg></div>
+            <div class="sb-label">COORDINATOR<svg class="ui" style="margin-left:2px;width:12px;height:12px"><use href="#u-chev"/></svg></div>
+            <div class="coord"><div class="r1"><svg class="ui"><use href="#u-compass"/></svg><b>Coordinator</b><span class="spin"></span></div>
+              <div class="r2"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"></path></svg>Opus 5.5</div></div>
+            <div class="sb-label">TASKS 3<svg class="ui" style="margin-left:2px;width:12px;height:12px"><use href="#u-chev"/></svg><svg class="ui" style="margin-left:auto"><use href="#u-plus"/></svg></div>
+            <div class="sb-group">Working 3</div>
+            <div class="task" data-h="1"><div class="r1"><span class="spin"></span><b>Show trip times in hours</b><small>now</small></div><div class="r2"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"></path></svg><svg class="ui"><use href="#u-branch"/></svg>main</div></div>
+            <div class="task" data-h="2"><div class="r1"><span class="dot wait" id="sd2"></span><b>Fix the map on small screens</b><small>now</small></div><div class="r2"><svg class="lg" aria-hidden="true" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"></path></svg><svg class="ui"><use href="#u-branch"/></svg>main</div></div>
+            <div class="task" data-h="3"><div class="r1"><span class="spin"></span><b>Add a packing list</b><small>now</small></div><div class="r2"><svg class="lg chipic" viewBox="0 0 24 24" aria-hidden="true"><use href="#u-cpu"/></svg><svg class="ui"><use href="#u-branch"/></svg>main</div></div>
+            <div class="sb-foot"><span class="av" style="border-radius:50%;width:24px;height:24px">G</span><svg class="ui" style="margin-left:auto"><use href="#u-gear"/></svg></div>
+          </aside>
+          <div class="chat">
+            <div class="chat-head"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"></path></svg>Coordinator · Trailhead<svg class="ui"><use href="#u-dots"/></svg></div>
+            <div class="chat-scroll">
+              <div class="bubble">Show trip times in hours, fix the map on phones and add a packing list.</div>
+              <div class="worked" data-h="0">Worked for 12s <svg class="ui" style="width:12px;height:12px"><use href="#u-chev"/></svg></div>
+              <div class="msg" data-h="0">I'm starting three threads, one for each part.</div>
+              <div class="cards">
+                <div class="tcard" data-h="1"><span class="spin"></span><b>Show trip times in hours</b><span class="st" id="st1">Editing src/format.ts</span></div>
+                <div class="tcard" data-h="2"><span class="dot wait" id="d2"></span><b>Fix the map on small screens</b><span class="st" id="st2">Needs your approval</span></div>
+                <div class="tcard" data-h="3"><span class="spin"></span><b>Add a packing list</b><span class="st" id="st3">Reading the trip model</span></div>
               </div>
-              <figcaption>Settings, AI Providers. Connect the ones you use.</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-<section class="section shell" id="parallel" data-analytics-section="parallel" aria-labelledby="parallel-title">
-        <div class="parallel-layout">
-          <div class="parallel-copy reveal">
-            <p class="kicker">Parallel work</p>
-            <h2 id="parallel-title">Several tasks, each in its own place.</h2>
-            <p>Every task keeps its conversation, agent and changed files together. The sidebar shows which task is working, which one is waiting for your approval and which one is done, so you can find the task that needs attention.</p><a href="/how-it-works/">Follow the workflow</a>
-          </div>
-          <figure class="shot shot-crop reveal">
-            <div class="shot-window">
-              <img class="shot-img" src="/assets/shots/sidebar-tasks.webp" width="372" height="270" alt="The Codevalanche sidebar: a project with three tasks, one of them marked Awaiting approval." loading="lazy" decoding="async">
             </div>
-            <figcaption>The sidebar marks the task that needs you.</figcaption>
-          </figure>
-        </div>
-      </section>
-
-<section class="section shell" id="workflow" data-analytics-section="workflow" aria-labelledby="workflow-title">
-        <div class="workflow-panel reveal" data-terrain>
-          <div class="section-head section-head-dark">
-            <div>
-              <p class="kicker">How a task works</p>
-              <h2 id="workflow-title">Open a project. Work through the task.</h2>
+            <div class="composer">
+              <div class="cbox"><span class="ph">Describe what to change in this project…</span><span class="send vm"><span class="wave"><i></i><i></i><i></i><i></i></span></span></div>
+              <div class="ctools"><svg class="ui"><use href="#u-plus"/></svg><svg class="ui"><use href="#u-mic"/></svg><svg class="ui" style="width:12px;height:12px;margin-left:-8px"><use href="#u-chev"/></svg><span class="model"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"></path></svg>Opus 5.5<svg class="ui" style="width:12px;height:12px"><use href="#u-chev"/></svg></span><span class="ctx"></span></div>
             </div>
-            <p>The steps stay visible. Review the result and use the permission modes your agent supports.</p>
           </div>
-          <ol class="steps">
-            <li class="step">
-              <span class="step-number">01</span>
-              <h3>Open your project.</h3>
-              <p>Point Codevalanche at the folder where the work already lives. The agent gets the context it needs without moving your repository anywhere.</p>
-            </li>
-            <li class="step">
-              <span class="step-number">02</span>
-              <h3>Give the task to an agent.</h3>
-              <p>Describe what you want in plain words and choose the agent or local model for this task. Follow every step it takes.</p>
-            </li>
-            <li class="step">
-              <span class="step-number">03</span>
-              <h3>Approve what needs approval.</h3>
-              <p>Commands that need your permission stop and ask, with the exact command in view. Allow it once or deny it.</p>
-            </li>
-            <li class="step">
-              <span class="step-number">04</span>
-              <h3>Review, then keep.</h3>
-              <p>See which files changed and read the diff. Check the result, or ask for another pass.</p>
-            </li>
-          </ol>
+<div class="rail"><svg class="ui"><use href="#u-folder"/></svg><svg class="ui"><use href="#u-file"/></svg><svg class="ui"><use href="#u-globe"/></svg><svg class="ui"><use href="#u-term"/></svg><svg class="ui"><use href="#u-chat"/></svg>
+            <span style="margin-top:auto" class="ring" title="Claude limit"><span><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"></path></svg></span></span><span class="ring" style="--c:#e8e8e4;--p:22%;margin-bottom:14px"><span><svg class="lg" aria-hidden="true" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"></path></svg></span></span></div>
         </div>
-      </section>
+      </div>
+      <div class="approve app hero-approve" id="happ" data-h="4">
+        <div class="top"><svg class="ui" style="color:var(--amber)"><use href="#u-term"/></svg><b id="happ-t">Needs approval</b><span class="dim" style="color:var(--app-dim)">Terminal command</span><span class="risk" id="happ-r">Medium risk</span></div>
+        <code>npm test -- map</code><div class="path">C:\code\trailhead</div>
+        <div class="acts"><button class="abtn solid" id="allow" type="button"><svg class="ui"><use href="#u-check"/></svg>Allow once</button><button class="abtn" type="button" id="deny"><svg class="ui"><use href="#u-deny"/></svg>Deny</button></div>
+      </div>
+      <div class="fade-b"></div>
+    </div>
+  </div>
+</section>
 
-<section class="section section-tint" id="details" data-analytics-section="details" aria-labelledby="details-title">
-        <div class="shell">
-          <div class="section-head reveal">
-            <div>
-              <p class="kicker">The small things</p>
-              <h2 id="details-title">Made for the everyday.</h2>
-            </div>
-            <p>Less switching between windows, more room for the work itself.</p>
-          </div>
-          <div class="details-grid">
-            <article class="detail reveal"><h3>Projects and groups</h3><p>Keep projects and their tasks in one sidebar, grouped the way you work.</p></article>
-            <article class="detail reveal"><h3>Terminal and browser</h3><p>A terminal and a browser preview sit next to the conversation that changed the code.</p></article>
-            <article class="detail reveal"><h3>Voice input</h3><p>Dictate a task instead of typing it, straight into the message box.</p></article>
-            <article class="detail reveal"><h3>Automations</h3><p>Set up recurring tasks so routine work runs without starting it by hand.</p></article>
-            <article class="detail reveal"><h3>Light and dark</h3><p>The app follows your system theme, or you choose one in Settings.</p></article>
-            <article class="detail reveal"><h3>Speaks your language</h3><p>The interface ships in 17 languages, right-to-left included, and follows your system by default.</p></article>
-          </div>
-        </div>
-      </section>
-
-<section class="section shell" id="companion" data-analytics-section="companion" aria-labelledby="companion-title">
-        <div class="companion reveal">
-          <div>
-            <p class="kicker">The companion <span class="status-pill">In development</span></p>
-            <h2 id="companion-title">Step away. Stay in the loop.</h2>
-          </div>
-          <div class="companion-copy">
-            <p>A phone companion that pairs with your desktop is in development. It is meant to show your running tasks and let you answer the one that needs you. The work itself stays on your PC.</p>
-          </div>
-        </div>
-      </section>
-
-<section class="section shell" id="privacy" data-analytics-section="privacy_principles" aria-labelledby="privacy-title">
-        <div class="section-head reveal">
-          <div>
-            <p class="kicker">Where your code goes</p>
-            <h2 id="privacy-title">Clear boundaries, stated plainly.</h2>
-          </div>
-          <p>Codevalanche keeps the workspace on your machine. What leaves it depends on the agent you pick, and you can see that choice for every task.</p>
-        </div>
-        <div class="principles">
-          <div class="principle reveal"><span>01</span><div><h3>Your repository stays on disk.</h3><p>Agents work on the project you opened. There is no upload step and no copy of your code on our servers.</p></div></div>
-          <div class="principle reveal"><span>02</span><div><h3>Cloud agents receive context.</h3><p>A hosted model receives your prompts and the file context it needs for the task. The provider you choose sets those terms.</p></div></div>
-          <div class="principle reveal"><span>03</span><div><h3>Local models stay local.</h3><p>A supported local model runs on your own hardware, so the task does not need a cloud provider.</p></div></div>
-          <div class="principle reveal"><span>04</span><div><h3>Permission modes have boundaries.</h3><p>Approval behavior depends on the agent and its mode. Some modes can write files directly; review and Undo have their own limits.</p></div></div>
-        </div><p class="section-link"><a href="/security/">Security and data boundaries</a></p>
-      </section>
-
-<section class="section download-section" id="download" data-analytics-section="download" aria-labelledby="download-title"><div class="shell release-overview">
-<!-- download:preparation -->
-  <div><p class="kicker">Get Codevalanche</p><h2 id="download-title">Start with one small change.</h2><p data-release-status>Codevalanche is in early access for Windows. Public downloads are in preparation.</p><div class="hero-actions"><a class="button button-primary" data-release-primary href="/how-it-works/">See how it works</a><a class="button" href="/docs/">Getting started</a></div></div>
-  <div class="release-status-card" data-dl-platform="windows"><p class="kicker">Windows release status</p><h3>Codevalanche for Windows.</h3><p class="dl-card-state" data-release-status>Public installer in preparation.</p><p>Only a qualified public release can provide a download here.</p><a href="/download/">Available releases</a></div>
-  <!-- /download:preparation --><!-- download:release -->
-  <div><p class="kicker">Get Codevalanche</p><h2 id="download-title">Start with one small change.</h2><p>Install it on your Windows PC, connect the agent you already use and try it on a small task.</p><div class="hero-actions"><a class="button button-primary" data-release-primary href="/download/">Download for Windows</a><a class="button" href="/docs/">Getting started</a></div></div>
-  <div class="release-status-card"><p class="kicker">Windows</p><h3>Codevalanche for Windows.</h3><p class="release-card-meta"><span>Version</span> <span data-fill="version"></span> <span aria-hidden="true">·</span> <span>Windows 11, 64-bit</span> <span aria-hidden="true">·</span> <span data-fill="size"></span></p><p>Codevalanche updates itself, so the latest installer is all you need.</p><p class="release-card-links"><a href="#download" data-fill-download-card>Download for Windows</a> <a href="/changelog.html">What's new</a></p></div>
-  <!-- /download:release -->
+<section class="band" id="agents" data-analytics-section="accounts"><div class="frame">
+  <div class="sec-head rev"><div><span class="eyebrow">Your AIs</span><h2><span class="lead">Bring your own.</span> Your subscriptions, your keys, your PC.</h2></div><p>Claude Code and Codex are agents. Codevalanche is the workspace around them, and it runs the ones you already use.</p></div>
+  <div class="logos rev">
+    <div class="logo" style="--c:217,119,87"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"></path></svg><b>Claude Code</b><span>Coding agent</span></div>
+    <div class="logo"><svg class="lg" aria-hidden="true" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"></path></svg><b>Codex</b><span>Coding agent · built in</span></div>
+    <div class="logo" style="--c:66,133,244"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 4.391A4.391 4.391 0 014.391 0h15.217A4.391 4.391 0 0124 4.391v15.217A4.391 4.391 0 0119.608 24H4.391A4.391 4.391 0 010 19.608V4.391z" fill="url(#lobe-icons-gemini-cli-_R_0_-10)"></path><path clip-rule="evenodd" d="M19.74 1.444a2.816 2.816 0 012.816 2.816v15.48a2.816 2.816 0 01-2.816 2.816H4.26a2.816 2.816 0 01-2.816-2.816V4.26A2.816 2.816 0 014.26 1.444h15.48zM7.236 8.564l7.752 3.728-7.752 3.727v2.802l9.557-4.596v-3.866L7.236 5.763v2.801z" fill="#1E1E2E" fill-rule="evenodd"></path><defs><linearGradient gradientUnits="userSpaceOnUse" id="lobe-icons-gemini-cli-_R_0_-10" x1="24" x2="0" y1="6.587" y2="16.494"><stop stop-color="#EE4D5D"></stop><stop offset=".328" stop-color="#B381DD"></stop><stop offset=".476" stop-color="#207CFE"></stop></linearGradient></defs></svg><b>Gemini CLI</b><span>Coding agent</span></div>
+    <div class="logo"><svg class="lg" aria-hidden="true" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.27 15.29l7.978-5.897c.391-.29.95-.177 1.137.272.98 2.369.542 5.215-1.41 7.169-1.951 1.954-4.667 2.382-7.149 1.406l-2.711 1.257c3.889 2.661 8.611 2.003 11.562-.953 2.341-2.344 3.066-5.539 2.388-8.42l.006.007c-.983-4.232.242-5.924 2.75-9.383.06-.082.12-.164.179-.248l-3.301 3.305v-.01L9.267 15.292M7.623 16.723c-2.792-2.67-2.31-6.801.071-9.184 1.761-1.763 4.647-2.483 7.166-1.425l2.705-1.25a7.808 7.808 0 00-1.829-1A8.975 8.975 0 005.984 5.83c-2.533 2.536-3.33 6.436-1.962 9.764 1.022 2.487-.653 4.246-2.34 6.022-.599.63-1.199 1.259-1.682 1.925l7.62-6.815"></path></svg><b>Grok Build</b><span>Coding agent</span></div>
+    <div class="logo"><svg class="lg" aria-hidden="true" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 6H8v12h8V6zm4 16H4V2h16v20z"></path></svg><b>OpenCode</b><span>Coding agent</span></div>
+    <div class="logo" style="--c:23,131,255"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21.846 0a1.923 1.923 0 110 3.846H20.15a.226.226 0 01-.227-.226V1.923C19.923.861 20.784 0 21.846 0z" fill="#1783FF"></path><path d="M11.065 11.199l7.257-7.2c.137-.136.06-.41-.116-.41H14.3a.164.164 0 00-.117.051l-7.82 7.756c-.122.12-.302.013-.302-.179V3.82c0-.127-.083-.23-.185-.23H3.186c-.103 0-.186.103-.186.23V19.77c0 .128.083.23.186.23h2.69c.103 0 .186-.102.186-.23v-3.25c0-.069.025-.135.069-.178l2.424-2.406a.158.158 0 01.205-.023l6.484 4.772a7.677 7.677 0 003.453 1.283c.108.012.2-.095.2-.23v-3.06c0-.117-.07-.212-.164-.227a5.028 5.028 0 01-2.027-.807l-5.613-4.064c-.117-.078-.132-.279-.028-.381z" fill="currentColor"></path></svg><b>Kimi Code</b><span>Coding agent</span></div>
+    <div class="logo" style="--c:77,107,254"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.748 4.482c-.254-.124-.364.113-.512.234-.051.039-.094.09-.137.136-.372.397-.806.657-1.373.626-.829-.046-1.537.214-2.163.848-.133-.782-.575-1.248-1.247-1.548-.352-.156-.708-.311-.955-.65-.172-.241-.219-.51-.305-.774-.055-.16-.11-.323-.293-.35-.2-.031-.278.136-.356.276-.313.572-.434 1.202-.422 1.84.027 1.436.633 2.58 1.838 3.393.137.093.172.187.129.323-.082.28-.18.552-.266.833-.055.179-.137.217-.329.14a5.526 5.526 0 01-1.736-1.18c-.857-.828-1.631-1.742-2.597-2.458a11.365 11.365 0 00-.689-.471c-.985-.957.13-1.743.388-1.836.27-.098.093-.432-.779-.428-.872.004-1.67.295-2.687.684a3.055 3.055 0 01-.465.137 9.597 9.597 0 00-2.883-.102c-1.885.21-3.39 1.102-4.497 2.623C.082 8.606-.231 10.684.152 12.85c.403 2.284 1.569 4.175 3.36 5.653 1.858 1.533 3.997 2.284 6.438 2.14 1.482-.085 3.133-.284 4.994-1.86.47.234.962.327 1.78.397.63.059 1.236-.03 1.705-.128.735-.156.684-.837.419-.961-2.155-1.004-1.682-.595-2.113-.926 1.096-1.296 2.746-2.642 3.392-7.003.05-.347.007-.565 0-.845-.004-.17.035-.237.23-.256a4.173 4.173 0 001.545-.475c1.396-.763 1.96-2.015 2.093-3.517.02-.23-.004-.467-.247-.588zM11.581 18c-2.089-1.642-3.102-2.183-3.52-2.16-.392.024-.321.471-.235.763.09.288.207.486.371.739.114.167.192.416-.113.603-.673.416-1.842-.14-1.897-.167-1.361-.802-2.5-1.86-3.301-3.307-.774-1.393-1.224-2.887-1.298-4.482-.02-.386.093-.522.477-.592a4.696 4.696 0 011.529-.039c2.132.312 3.946 1.265 5.468 2.774.868.86 1.525 1.887 2.202 2.891.72 1.066 1.494 2.082 2.48 2.914.348.292.625.514.891.677-.802.09-2.14.11-3.054-.614zm1-6.44a.306.306 0 01.415-.287.302.302 0 01.2.288.306.306 0 01-.31.307.303.303 0 01-.304-.308zm3.11 1.596c-.2.081-.399.151-.59.16a1.245 1.245 0 01-.798-.254c-.274-.23-.47-.358-.552-.758a1.73 1.73 0 01.016-.588c.07-.327-.008-.537-.239-.727-.187-.156-.426-.199-.688-.199a.559.559 0 01-.254-.078c-.11-.054-.2-.19-.114-.358.028-.054.16-.186.192-.21.356-.202.767-.136 1.146.016.352.144.618.408 1.001.782.391.451.462.576.685.914.176.265.336.537.445.848.067.195-.019.354-.25.452z" fill="#4D6BFE"></path></svg><b>DeepSeek</b><span>API provider</span></div>
+    <div class="logo"><svg class="lg" aria-hidden="true" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.105 2L9.927 4.953H.653L2.83 2h9.276zM23.254 19.048L21.078 22h-9.242l2.174-2.952h9.244zM24 2L9.264 22H0L14.736 2H24z"></path></svg><b>Z.ai</b><span>API provider</span></div>
+    <div class="logo" style="--c:150,120,255"><svg class="lg" aria-hidden="true" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M2.84 2a1.273 1.273 0 100 2.547h14.107a1.273 1.273 0 100-2.547H2.84zM7.935 5.33a1.273 1.273 0 000 2.548H22.04a1.274 1.274 0 000-2.547H7.935zM3.624 9.935c0-.704.57-1.274 1.274-1.274h14.106a1.274 1.274 0 010 2.547H4.898c-.703 0-1.274-.57-1.274-1.273zM1.273 12.188a1.273 1.273 0 100 2.547H15.38a1.274 1.274 0 000-2.547H1.273zM3.624 16.792c0-.704.57-1.274 1.274-1.274h14.106a1.273 1.273 0 110 2.547H4.898c-.703 0-1.274-.57-1.274-1.273zM13.029 18.849a1.273 1.273 0 100 2.547h9.698a1.273 1.273 0 100-2.547h-9.698z" fill-opacity=".3"></path><path d="M2.84 2a1.273 1.273 0 100 2.547h10.287a1.274 1.274 0 000-2.547H2.84zM7.935 5.33a1.273 1.273 0 000 2.548H18.22a1.274 1.274 0 000-2.547H7.935zM3.624 9.935c0-.704.57-1.274 1.274-1.274h10.286a1.273 1.273 0 010 2.547H4.898c-.703 0-1.274-.57-1.274-1.273zM1.273 12.188a1.273 1.273 0 100 2.547H11.56a1.274 1.274 0 000-2.547H1.273zM3.624 16.792c0-.704.57-1.274 1.274-1.274h10.286a1.273 1.273 0 110 2.547H4.898c-.703 0-1.274-.57-1.274-1.273zM13.029 18.849a1.273 1.273 0 100 2.547h5.78a1.273 1.273 0 100-2.547h-5.78z"></path></svg><b>LM Studio</b><span>Local server</span></div>
+    <div class="logo" style="--c:157,140,255"><svg class="lg chipic" viewBox="0 0 24 24" aria-hidden="true"><use href="#u-cpu"/></svg><b>Local models</b><span>On your PC</span></div>
+  </div>
+  <div class="facts rev" style="margin-top:0;border-top:0">
+    <div class="fact"><b>The plans you already pay for</b><p>Sign in with your own Claude and ChatGPT accounts. Your provider's limits still apply.</p></div>
+    <div class="fact"><b>Work and personal, kept apart</b><p>Keep several accounts connected and choose one for each run. No pooled subscriptions, no automatic rotation.</p></div>
+    <div class="fact"><b>Cloud or local, per task</b><p>Pick a coding agent, an API key or a local model for every task.</p></div>
+  </div>
+  <div class="morerow rev"><a class="more" href="/agents/">Agents and connections<svg class="ui"><use href="#u-chevr"/></svg></a><a class="more" href="/features/multiple-accounts/">Multiple accounts<svg class="ui"><use href="#u-chevr"/></svg></a></div>
 </div></section>
 
-<section class="section shell proof-section" id="proof" aria-labelledby="proof-title" data-analytics-section="proof">
-        <div class="proof reveal">
-          <p class="kicker">The standard we hold</p>
-          <h2 id="proof-title">A confident answer is where the review starts.</h2>
-          <p>Agents can write a lot of code quickly. Codevalanche exists so that you can see what they did and decide what to keep, with the project and its conversation in view.</p>
+<section class="band" id="product" data-analytics-section="product"><div class="frame">
+  <div class="sec-head rev"><div><span class="eyebrow">Projects</span><h2><span class="lead">Meet the Coordinator.</span> You lead. It runs the team.</h2></div><div class="side"><p class="dim">One conversation for the whole project. The Coordinator splits the work, starts the agents and keeps you posted.</p><div class="morerow" style="margin-top:14px"><a class="more" href="/how-it-works/">See the complete walkthrough<svg class="ui"><use href="#u-chevr"/></svg></a></div></div></div>
+  <div class="rows">
+    <div class="row rev">
+      <div class="copy"><span class="n">01</span><h3>Say it once</h3><p>Describe the goal in your own words, typed or spoken. The Coordinator turns it into a plan.</p></div>
+      <div class="stage"><div class="ghost"><div><i style="width:60%"></i><i></i><i style="width:80%"></i><i style="width:70%"></i></div><div><i style="width:40%"></i><i style="width:85%"></i><i style="width:65%"></i></div></div>
+        <div class="fg app"><div class="shadow" style="border-radius:14px">
+          <div class="cbox live" style="align-items:flex-start;padding:14px 10px 14px 16px;min-height:84px"><span class="ph" style="white-space:normal;color:var(--app-ink)"><span id="typed" class="typed">Show trip times in hours, fix the map on phones and add a packing list.</span></span><span class="send ready" id="send1"><svg class="ui"><use href="#u-enter"/></svg></span></div></div>
+          <div class="ctools"><svg class="ui"><use href="#u-plus"/></svg><svg class="ui"><use href="#u-mic"/></svg><svg class="ui" style="width:12px;height:12px;margin-left:-8px"><use href="#u-chev"/></svg><span class="model"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"></path></svg>Opus 5.5<svg class="ui" style="width:12px;height:12px"><use href="#u-chev"/></svg></span><span class="ctx"></span></div>
         </div>
-      </section>
+      </div>
+    </div>
+    <div class="row flip rev">
+      <div class="copy"><span class="n">02</span><h3>It builds the team</h3><p>Each part becomes its own thread with the right agent on it. They work in parallel while you watch.</p></div>
+      <div class="stage" style="--g:122,167,255"><div class="ghost"><div><i style="width:60%"></i><i></i><i style="width:80%"></i></div><div><i style="width:50%"></i><i style="width:75%"></i></div></div>
+        <div class="fg app" id="team" style="max-width:400px">
+          <div class="sb-label" style="padding:0 4px">TASKS 3<svg class="ui" style="margin-left:2px;width:12px;height:12px"><use href="#u-chev"/></svg><svg class="ui" style="margin-left:auto"><use href="#u-plus"/></svg></div>
+          <div class="task shadow"><div class="r1"><span class="spin" data-ic></span><b>Show trip times in hours</b><small data-st>Editing</small></div><div class="r2"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"></path></svg><span style="font-family:var(--app);font-size:12px">Claude Code</span><svg class="ui" style="margin-left:auto"><use href="#u-branch"/></svg>main</div></div>
+          <div class="task shadow"><div class="r1"><span class="spin" data-ic></span><b>Fix the map on small screens</b><small data-st>Testing</small></div><div class="r2"><svg class="lg" aria-hidden="true" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"></path></svg><span style="font-family:var(--app);font-size:12px">Codex</span><svg class="ui" style="margin-left:auto"><use href="#u-branch"/></svg>main</div></div>
+          <div class="task shadow"><div class="r1"><span class="spin" data-ic></span><b>Add a packing list</b><small data-st>Reading</small></div><div class="r2"><svg class="lg chipic" viewBox="0 0 24 24" aria-hidden="true"><use href="#u-cpu"/></svg><span style="font-family:var(--app);font-size:12px">Gemma 4 · on this PC</span><svg class="ui" style="margin-left:auto"><use href="#u-branch"/></svg>main</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="row rev">
+      <div class="copy"><span class="n">03</span><h3>You keep control</h3><p>Risky commands wait for your yes. Every change is yours to review, or to undo.</p></div>
+      <div class="stage" style="--g:255,180,107"><div class="ghost"><div><i style="width:60%"></i><i></i><i style="width:80%"></i></div><div><i style="width:50%"></i><i style="width:75%"></i></div></div>
+        <div class="fg app">
+          <div class="approve" id="app2">
+            <div class="top"><svg class="ui" style="color:var(--amber)"><use href="#u-term"/></svg><b>Needs approval</b><span style="color:var(--app-dim)">Terminal command</span><span class="risk">Medium risk</span></div>
+            <code>npm test -- map</code><div class="path">C:\code\trailhead</div>
+            <div class="acts"><button class="abtn solid" type="button" data-allow><svg class="ui"><use href="#u-check"/></svg>Allow once</button><button class="abtn" type="button" data-allow="deny"><svg class="ui"><use href="#u-deny"/></svg>Deny</button></div>
+          </div>
+          <div class="turn shadow"><b>Turn changes</b><span>Saved</span><span>Changed: 3</span><button class="abtn" type="button" id="undo"><svg class="ui"><use href="#u-undo"/></svg><span>Undo this turn's changes</span></button></div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div></section>
 
-<section class="section shell faq-section" id="faq" data-analytics-section="faq" aria-labelledby="faq-title">
-        <div class="faq-layout">
-          <div class="faq-head reveal">
-            <p class="kicker">Questions</p>
-            <h2 id="faq-title">Questions and answers.</h2>
-            <p>Something missing? Write to <a href="mailto:info@radovar.com" data-contact-id="info">info@radovar.com</a>.</p>
-          </div>
-          <div class="faq-list reveal">
-            <details data-analytics-faq="product"><summary>What is Codevalanche?</summary><p>A desktop app for Windows for coding with AI agents. It opens a project on your computer, lets you give a task to an agent or a local model, keeps the conversation for each task together and shows the changed files and diffs for review. It is made by Radovar.</p></details>
-            <details data-analytics-faq="agents"><summary>How is it different from using Claude Code or Codex directly?</summary><p>Claude Code and Codex are agents. Codevalanche is the workspace around them: your projects, the choice of agent or local model for each task, the conversation that guided the work and the review of what changed, in one window.</p></details>
-            <details data-analytics-faq="accounts"><summary>Which agents and accounts can I connect?</summary><p>Claude Code and Codex with your own accounts, more than one of each if you want. You can also use Gemini CLI with your own API key, or a supported local model that runs on your PC.</p></details>
-            <details data-analytics-faq="guest"><summary>Do I need a Codevalanche account?</summary><p>No. You can use the app as a guest. A Codevalanche account lets you sign in on the desktop app and manage your profile and sessions on this website.</p></details>
-            <details data-analytics-faq="privacy"><summary>Does my code leave my computer?</summary><p>Your repository stays on disk. A hosted model can still receive prompts and relevant file context, so the provider and runtime you choose determine those boundaries. A supported local model runs on your own hardware.</p></details>
-            <!-- download:preparation --><details data-analytics-faq="platforms"><summary>Which platforms are supported?</summary><p>Codevalanche is built for Windows. No public macOS or Linux download is currently offered. Check the release page for qualified availability.</p></details>
-            <details data-analytics-faq="download"><summary>When can I download it?</summary><p data-release-status>Codevalanche is in early access for Windows, and public downloads are in preparation. This page will carry them as soon as they ship.</p></details><!-- /download:preparation -->
-            <!-- download:release --><details data-analytics-faq="platforms"><summary>Which platforms are supported?</summary><p>Codevalanche runs on Windows 11, 64-bit. The Mac and phone apps are on their way.</p></details>
-            <details data-analytics-faq="download"><summary>When can I download it?</summary><p>Now. The Windows installer is on the download page, and after you install it Codevalanche updates itself.</p><p><a href="/download/">See download options</a></p></details><!-- /download:release -->
-          </div>
-        </div>
-      </section>
-</main>
+<section class="band voice" id="voice" data-analytics-section="showcase"><div class="frame">
+  <span class="eyebrow rev">Voice conversation</span>
+  <h2 class="rev"><span class="lead">Talk it through.</span> Your agents listen, and answer out loud.</h2>
+  <p class="lede rev">Hands on the coffee, eyes off the screen. Speak, interrupt, change your mind.</p>
+  <div class="vstage rev" id="vstage" data-s="listen">
+    <div class="vglow"></div>
+    <div class="vline" id="vline"><em>You</em>Make the header stay on top and run the tests.</div>
+    <div class="vbox"><span class="ph" id="vph">Listening…</span><span class="stop"><span class="wave"><i></i><i></i><i></i><i></i><i></i></span>Stop</span></div>
+    <div class="vtools"><svg class="ui"><use href="#u-plus"/></svg><span class="mic"><svg class="ui"><use href="#u-mic"/></svg></span><span class="model"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"></path></svg>Opus 5.5</span></div>
+  </div>
+  <div class="facts rev">
+    <div class="fact"><b>It knows your voice</b><p>Other people in the room are ignored.</p></div>
+    <div class="fact"><b>A natural voice, on your PC</b><p>Built in. No paid voice service.</p></div>
+    <div class="fact"><b>Your language, automatically</b><p>Speak the way you normally do.</p></div>
+  </div>
+</div></section>
+
+<section class="band" id="local" data-analytics-section="product_principle"><div class="frame">
+  <div class="row rev">
+    <div class="copy"><span class="eyebrow" style="color:var(--blue);display:block;margin-bottom:18px">Local agents</span><h2><span class="lead">Private by design.</span> Models that run on your own PC.</h2><p style="max-width:38ch;margin-top:18px">Download a model once and work without the cloud. Use it inside Claude Code or Codex, like any other model.</p>
+      <div class="tagrow" style="margin-top:22px"><span class="tag">Nothing leaves your PC</span><span class="tag">One-click setup</span><span class="tag">Checks your hardware first</span></div><div class="morerow"><a class="more" href="/local-ai/">Local AI in Codevalanche<svg class="ui"><use href="#u-chevr"/></svg></a></div></div>
+    <div class="stage local"><div class="ghost"><div><i style="width:60%"></i><i></i><i style="width:80%"></i></div><div><i style="width:50%"></i><i style="width:75%"></i></div></div>
+      <div class="fg app"><div class="lm shadow">
+        <div class="lm-top">Your models<small>29 GB used</small></div>
+        <div class="lm-row run" data-lm><svg class="lg chipic" viewBox="0 0 24 24" aria-hidden="true"><use href="#u-cpu"/></svg><div class="nm"><b>Gemma 4 26B-A4B</b><small>Thinks before it answers · 14 GB</small></div><span class="state"><i></i><span>Running</span></span><button class="abtn" type="button">Stop</button></div>
+        <div class="lm-row"><svg class="lg chipic" viewBox="0 0 24 24" aria-hidden="true"><use href="#u-cpu"/></svg><div class="nm"><b>LFM2.5 24B-A2B</b><small>Downloading · 15 GB · checked before use</small><div class="bar"><i></i></div></div><button class="abtn" type="button" tabindex="-1">Pause</button></div>
+      </div></div>
+      <div class="picker app shadow">
+        <div class="it"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"></path></svg><div>Opus 5.5<small>Claude subscription</small></div></div>
+        <div class="it"><svg class="lg" aria-hidden="true" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"></path></svg><div>GPT-6 Sol<small>ChatGPT subscription</small></div></div>
+        <div class="it on"><svg class="lg chipic" viewBox="0 0 24 24" aria-hidden="true"><use href="#u-cpu"/></svg><div>Gemma 4 26B-A4B<small>Local</small></div></div>
+        <div class="sg"><span class="on">Claude Code</span><span>Codex</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="band" id="details" data-analytics-section="details"><div class="frame">
+  <div class="sec-head rev"><div><span class="eyebrow">Control</span><h2><span class="lead">Fast agents.</span> Nothing behind your back.</h2></div><p>Agents write a lot of code quickly. Codevalanche exists so you can see what they did and decide what to keep.</p></div>
+  <div class="grid4 rev">
+    <div class="cell"><span class="ico"><svg class="ui"><use href="#u-shield"/></svg></span><b>Approvals you can read</b><p>Commands that need permission stop and ask, with the exact command in view.</p></div>
+    <div class="cell"><span class="ico"><svg class="ui"><use href="#u-eye"/></svg></span><b>Review every change</b><p>See which files changed and read the diff before you keep anything.</p></div>
+    <div class="cell"><span class="ico"><svg class="ui"><use href="#u-undo"/></svg></span><b>Undo any turn</b><p>An answer went the wrong way? Put the files back as they were.</p></div>
+    <div class="cell"><span class="ico"><svg class="ui"><use href="#u-gauge"/></svg></span><b>Real limits</b><p>How much of your plan is left, straight from your provider.</p></div>
+  </div>
+</div></section>
+
+<section class="band" id="privacy" data-analytics-section="privacy_principles"><div class="frame">
+  <div class="sec-head rev"><div><span class="eyebrow">Where your code goes</span><h2><span class="lead">Clear boundaries,</span> stated plainly.</h2></div><div class="side"><p class="dim">The workspace stays on your machine. What leaves it depends on the agent you pick, and you see that choice for every task.</p><div class="morerow" style="margin-top:14px"><a class="more" href="/security/">Security and data boundaries<svg class="ui"><use href="#u-chevr"/></svg></a></div></div></div>
+  <div class="gridx g2 rev" style="--n:2">
+    <div class="cell"><span class="num">01</span><b>Your repository stays on disk</b><p>Agents work on the project you opened. There is no upload step and no copy of your code on our servers.</p></div>
+    <div class="cell"><span class="num">02</span><b>Cloud agents receive context</b><p>A hosted model receives your prompts and the file context it needs for the task. The provider you choose sets those terms.</p></div>
+    <div class="cell"><span class="num">03</span><b>Local models stay local</b><p>A supported local model runs on your own hardware, so the task does not need a cloud provider.</p></div>
+    <div class="cell"><span class="num">04</span><b>Permission modes have boundaries</b><p>Approval behavior depends on the agent and its mode. Some modes can write files directly. Review and Undo have their own limits.</p></div>
+  </div>
+</div></section>
+
+<section class="band" id="workflow" data-analytics-section="workflow"><div class="frame">
+  <div class="sec-head rev"><div><span class="eyebrow">Every day</span><h2><span class="lead">Made for the everyday.</span> Less switching, more room for the work.</h2></div><div class="side"><div class="morerow" style="margin-top:0"><a class="more" href="/docs/">Getting started<svg class="ui"><use href="#u-chevr"/></svg></a></div></div></div>
+  <div class="gridx g3 rev" style="--n:3">
+    <div class="cell"><span class="ico"><svg class="ui"><use href="#u-folder"/></svg></span><b>Your project, where it already is</b><p>Open the repository that is already on your PC. Nothing to import or rebuild.</p></div>
+    <div class="cell"><span class="ico"><svg class="ui"><use href="#u-term"/></svg></span><b>Terminal and browser</b><p>A terminal and a browser preview sit next to the conversation that changed the code.</p></div>
+    <div class="cell"><span class="ico"><svg class="ui"><use href="#u-repeat"/></svg></span><b>Automations</b><p>Set up recurring tasks so routine work runs without starting it by hand.</p></div>
+    <div class="cell"><span class="ico"><svg class="ui"><use href="#u-mic"/></svg></span><b>Dictation</b><p>Dictate a task instead of typing it, straight into the message box.</p></div>
+    <div class="cell"><span class="ico"><svg class="ui"><use href="#u-sun"/></svg></span><b>Light and dark</b><p>The app follows your system theme, or you choose one in Settings.</p></div>
+    <div class="cell"><span class="ico"><svg class="ui"><use href="#u-lang"/></svg></span><b>Speaks your language</b><p>17 languages, right-to-left included. It follows your system by default.</p></div>
+  </div>
+  <div class="strip rev"><span class="badge2">In development</span><b>Step away. Stay in the loop.</b><p>A phone companion that pairs with your desktop: see your running tasks and answer the one that needs you. The work itself stays on your PC.</p></div>
+</div></section>
+
+<section class="band" id="proof" data-analytics-section="proof"><div class="frame">
+  <div class="sec-head rev"><div><span class="eyebrow">What's new</span><h2><span class="lead">Always moving.</span> The app updates itself.</h2></div><div class="side"><p class="dim">After every update, a short card in the app tells you what changed.</p><div class="morerow" style="margin-top:14px"><a class="more" href="/changelog.html">Full changelog<svg class="ui"><use href="#u-chevr"/></svg></a></div></div></div>
+  <div class="rev">
+    <div class="rel"><div class="v">1.1.68<small>Latest</small></div><div><b>Projects with a Coordinator, local models in conversations and a natural voice</b><p>Everything new since 1.0.1, in one update.</p><div class="tagrow"><span class="tag">Projects</span><span class="tag">Talk to your agents</span><span class="tag">Local models in conversations</span><span class="tag">Your AIs</span><span class="tag">Lighter and faster</span></div></div></div>
+    <div class="rel"><div class="v">1.0.1<small>20 Oct 2026</small></div><div><b>Know what changed after every update</b><p>A short note after each update, and a clearer update check.</p><div class="tagrow"><span class="tag">What's new card</span><span class="tag">Clear update check</span><span class="tag">Smooth long answers</span><span class="tag">Calmer panels</span></div></div></div>
+  </div>
+</div></section>
+
+<section class="band" id="faq" data-analytics-section="faq"><div class="frame">
+  <div class="sec-head rev"><div><span class="eyebrow">Questions</span><h2><span class="lead">Questions and answers.</span> Before you download.</h2></div></div>
+  <div class="faq rev">
+    <div><b>What is Codevalanche?</b><p>A desktop app for Windows for working with AI agents. It opens a project on your computer, lets a Coordinator or a single agent do the work, and shows you every change for review. It is made by Radovar.</p></div>
+    <div><b>How is it different from using Claude Code or Codex directly?</b><p>They are agents. Codevalanche is the workspace around them: your projects, the Coordinator, the choice of agent or local model for each task, and the review of what changed, in one window.</p></div>
+    <div><b>Which agents and accounts can I connect?</b><p>Claude Code and Codex with your own accounts, more than one of each if you want. Other agents and API keys in Your AIs, or a local model that runs on your PC.</p></div>
+    <div><b>Do I need another AI subscription?</b><p>No. Use your Claude or ChatGPT plan, an API key, or a local model.</p></div>
+    <div><b>Do I need a Codevalanche account?</b><p>No. You can use the app as a guest. An account lets you sign in on the desktop app and manage your profile and sessions on this website.</p></div>
+    <div><b>Does my code leave my computer?</b><p>Your repository stays on disk. A hosted model receives prompts and the file context it needs, on your provider's terms. A local model keeps the task on your PC.</p></div>
+    <div><b>Which platforms are supported?</b><p>Windows 11, 64-bit. The Mac and phone apps are on their way.</p></div>
+    <div><b>When can I download it?</b><p>Now. After you install it, Codevalanche updates itself.</p></div>
+  </div>
+  <div class="contact rev"><span>Something missing? Write to</span><a href="mailto:info@radovar.com" data-contact-id="info">info@radovar.com</a><span style="margin-left:auto"><a class="more" href="/download/">See download options<svg class="ui"><use href="#u-chevr"/></svg></a></span></div>
+</div></section>
+
+<section class="band final" id="download" data-analytics-section="download">
+  <div class="orbit" id="orbit" aria-hidden="true"></div>
+  <div class="frame">
+    <h2><span class="lead">Give your next project</span> a team.</h2>
+    <p>Install it on your Windows PC, connect the agent you already use and start with one small change.</p>
+    <!-- download:preparation --><a class="btn btn-primary" data-release-primary href="/how-it-works/"><span>See how it works</span></a>
+    <p class="dlmeta" style="margin-bottom:0;max-width:none" data-release-status>Public installer in preparation.</p><!-- /download:preparation -->
+    <!-- download:release --><a class="btn btn-primary" data-release-primary href="/download/"><svg class="ui"><use href="#u-win"/></svg><span>Download for Windows</span></a>
+    <p class="dlmeta" style="margin-bottom:0;max-width:none"><span>Version</span> <span data-fill="version"></span> <span aria-hidden="true">·</span> <span>Windows 11, 64-bit</span> <span aria-hidden="true">·</span> <span data-fill="size"></span> <span aria-hidden="true">·</span> <span>Updates itself</span></p><!-- /download:release -->
+    <div class="dllinks"><a class="more" href="/changelog.html">What's new<svg class="ui"><use href="#u-chevr"/></svg></a><a class="more" href="/docs/">Getting started<svg class="ui"><use href="#u-chevr"/></svg></a></div>
+  </div>
+</section>
+    </main>
 
     <!-- site-footer -->
 
-    <svg width="0" height="0" class="svg-defs" aria-hidden="true">
-      <defs>
-        <g id="mark-claude" fill="currentColor" fill-rule="evenodd">
-          <path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z"/>
-        </g>
-        <g id="mark-codex" fill="currentColor" fill-rule="evenodd">
-          <path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"/>
-        </g>
-        <g id="mark-local" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" fill="none">
-          <rect x="6.4" y="6.4" width="11.2" height="11.2" rx="2.4"/>
-          <rect x="10" y="10" width="4" height="4" rx="1"/>
-          <path d="M9.2 3.2v2M14.8 3.2v2M9.2 18.8v2M14.8 18.8v2M3.2 9.2h2M3.2 14.8h2M18.8 9.2h2M18.8 14.8h2"/>
-        </g>
-      </defs>
-    </svg>
-
+<template id="chips">
+  <span data-x="14" data-y="26"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" fill="#D97757" fill-rule="nonzero"></path></svg></span><span data-x="27" data-y="70"><svg class="lg" aria-hidden="true" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z"></path></svg></span><span data-x="9" data-y="62"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 4.391A4.391 4.391 0 014.391 0h15.217A4.391 4.391 0 0124 4.391v15.217A4.391 4.391 0 0119.608 24H4.391A4.391 4.391 0 010 19.608V4.391z" fill="url(#lobe-icons-gemini-cli-_R_0_-25)"></path><path clip-rule="evenodd" d="M19.74 1.444a2.816 2.816 0 012.816 2.816v15.48a2.816 2.816 0 01-2.816 2.816H4.26a2.816 2.816 0 01-2.816-2.816V4.26A2.816 2.816 0 014.26 1.444h15.48zM7.236 8.564l7.752 3.728-7.752 3.727v2.802l9.557-4.596v-3.866L7.236 5.763v2.801z" fill="#1E1E2E" fill-rule="evenodd"></path><defs><linearGradient gradientUnits="userSpaceOnUse" id="lobe-icons-gemini-cli-_R_0_-25" x1="24" x2="0" y1="6.587" y2="16.494"><stop stop-color="#EE4D5D"></stop><stop offset=".328" stop-color="#B381DD"></stop><stop offset=".476" stop-color="#207CFE"></stop></linearGradient></defs></svg></span>
+  <span data-x="86" data-y="24"><svg class="lg chipic" viewBox="0 0 24 24" aria-hidden="true"><use href="#u-cpu"/></svg></span><span data-x="74" data-y="72"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M21.846 0a1.923 1.923 0 110 3.846H20.15a.226.226 0 01-.227-.226V1.923C19.923.861 20.784 0 21.846 0z" fill="#1783FF"></path><path d="M11.065 11.199l7.257-7.2c.137-.136.06-.41-.116-.41H14.3a.164.164 0 00-.117.051l-7.82 7.756c-.122.12-.302.013-.302-.179V3.82c0-.127-.083-.23-.185-.23H3.186c-.103 0-.186.103-.186.23V19.77c0 .128.083.23.186.23h2.69c.103 0 .186-.102.186-.23v-3.25c0-.069.025-.135.069-.178l2.424-2.406a.158.158 0 01.205-.023l6.484 4.772a7.677 7.677 0 003.453 1.283c.108.012.2-.095.2-.23v-3.06c0-.117-.07-.212-.164-.227a5.028 5.028 0 01-2.027-.807l-5.613-4.064c-.117-.078-.132-.279-.028-.381z" fill="currentColor"></path></svg></span><span data-x="92" data-y="60"><svg class="lg" aria-hidden="true" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.748 4.482c-.254-.124-.364.113-.512.234-.051.039-.094.09-.137.136-.372.397-.806.657-1.373.626-.829-.046-1.537.214-2.163.848-.133-.782-.575-1.248-1.247-1.548-.352-.156-.708-.311-.955-.65-.172-.241-.219-.51-.305-.774-.055-.16-.11-.323-.293-.35-.2-.031-.278.136-.356.276-.313.572-.434 1.202-.422 1.84.027 1.436.633 2.58 1.838 3.393.137.093.172.187.129.323-.082.28-.18.552-.266.833-.055.179-.137.217-.329.14a5.526 5.526 0 01-1.736-1.18c-.857-.828-1.631-1.742-2.597-2.458a11.365 11.365 0 00-.689-.471c-.985-.957.13-1.743.388-1.836.27-.098.093-.432-.779-.428-.872.004-1.67.295-2.687.684a3.055 3.055 0 01-.465.137 9.597 9.597 0 00-2.883-.102c-1.885.21-3.39 1.102-4.497 2.623C.082 8.606-.231 10.684.152 12.85c.403 2.284 1.569 4.175 3.36 5.653 1.858 1.533 3.997 2.284 6.438 2.14 1.482-.085 3.133-.284 4.994-1.86.47.234.962.327 1.78.397.63.059 1.236-.03 1.705-.128.735-.156.684-.837.419-.961-2.155-1.004-1.682-.595-2.113-.926 1.096-1.296 2.746-2.642 3.392-7.003.05-.347.007-.565 0-.845-.004-.17.035-.237.23-.256a4.173 4.173 0 001.545-.475c1.396-.763 1.96-2.015 2.093-3.517.02-.23-.004-.467-.247-.588zM11.581 18c-2.089-1.642-3.102-2.183-3.52-2.16-.392.024-.321.471-.235.763.09.288.207.486.371.739.114.167.192.416-.113.603-.673.416-1.842-.14-1.897-.167-1.361-.802-2.5-1.86-3.301-3.307-.774-1.393-1.224-2.887-1.298-4.482-.02-.386.093-.522.477-.592a4.696 4.696 0 011.529-.039c2.132.312 3.946 1.265 5.468 2.774.868.86 1.525 1.887 2.202 2.891.72 1.066 1.494 2.082 2.48 2.914.348.292.625.514.891.677-.802.09-2.14.11-3.054-.614zm1-6.44a.306.306 0 01.415-.287.302.302 0 01.2.288.306.306 0 01-.31.307.303.303 0 01-.304-.308zm3.11 1.596c-.2.081-.399.151-.59.16a1.245 1.245 0 01-.798-.254c-.274-.23-.47-.358-.552-.758a1.73 1.73 0 01.016-.588c.07-.327-.008-.537-.239-.727-.187-.156-.426-.199-.688-.199a.559.559 0 01-.254-.078c-.11-.054-.2-.19-.114-.358.028-.054.16-.186.192-.21.356-.202.767-.136 1.146.016.352.144.618.408 1.001.782.391.451.462.576.685.914.176.265.336.537.445.848.067.195-.019.354-.25.452z" fill="#4D6BFE"></path></svg></span>
+  <span data-x="36" data-y="14"><svg class="lg" aria-hidden="true" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.27 15.29l7.978-5.897c.391-.29.95-.177 1.137.272.98 2.369.542 5.215-1.41 7.169-1.951 1.954-4.667 2.382-7.149 1.406l-2.711 1.257c3.889 2.661 8.611 2.003 11.562-.953 2.341-2.344 3.066-5.539 2.388-8.42l.006.007c-.983-4.232.242-5.924 2.75-9.383.06-.082.12-.164.179-.248l-3.301 3.305v-.01L9.267 15.292M7.623 16.723c-2.792-2.67-2.31-6.801.071-9.184 1.761-1.763 4.647-2.483 7.166-1.425l2.705-1.25a7.808 7.808 0 00-1.829-1A8.975 8.975 0 005.984 5.83c-2.533 2.536-3.33 6.436-1.962 9.764 1.022 2.487-.653 4.246-2.34 6.022-.599.63-1.199 1.259-1.682 1.925l7.62-6.815"></path></svg></span><span data-x="66" data-y="12"><svg class="lg" aria-hidden="true" fill="currentColor" fill-rule="evenodd" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 6H8v12h8V6zm4 16H4V2h16v20z"></path></svg></span>
+</template>
     <script src="/config.js"></script>
     <script src="/downloads.js"></script>
     <script type="module" src="/site.js"></script>
-
+    <script type="module" src="/home.js"></script>
   </body>
 </html>
