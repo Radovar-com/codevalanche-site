@@ -88,7 +88,8 @@ function renderRelease(release) {
           <header class="cl-release-head">
             <time datetime="${release.date}">${escape(formatDate(release.date, 'en', true))}</time>
             <h2 id="${id}-title"><span>Codevalanche</span> <span class="cl-version">${release.version}</span></h2>
-            <p class="cl-headline">${escape(copy.headline)}</p>
+            <p class="cl-headline">${escape(copy.headline)}</p>${copy.summary ? `
+            <p class="cl-summary">${escape(copy.summary)}</p>` : ''}
           </header>
           <ol class="cl-items">${items}
           </ol>
@@ -115,6 +116,7 @@ export function changelogTranslations(releases, tag) {
     add(formatDate(release.date, 'en', true), formatDate(release.date, tag, true));
     add(formatDate(release.date, 'en', false), formatDate(release.date, tag, false));
     add(english.headline, copy.headline);
+    if (english.summary) add(english.summary, copy.summary ?? english.summary);
     english.sections.forEach((section, index) => {
       add(section.title, copy.sections[index].title);
       add(section.body, copy.sections[index].body);

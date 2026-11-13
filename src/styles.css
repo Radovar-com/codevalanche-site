@@ -701,6 +701,7 @@ h3 { font-weight: 500; letter-spacing: -.02em; }
 .cl-release-head h2 { margin-top: 12px; font-size: clamp(28px, 3.2vw, 40px); }
 .cl-version { color: var(--ink-lead); }
 .cl-headline { margin-top: 12px; color: var(--ink-soft); font-size: 17.5px; line-height: 1.5; }
+.cl-summary { max-width: 62ch; margin-top: 14px; color: var(--ink-muted); font-size: 15.5px; line-height: 1.65; }
 .cl-items { gap: 0; margin-top: 28px; border-top: 1px solid var(--line); }
 .cl-items li { padding-block: 20px; border-bottom: 1px solid var(--line); }
 .cl-line { color: var(--ink-muted); font-size: 15px; line-height: 1.6; }
