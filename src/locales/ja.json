@@ -753,6 +753,7 @@
   "The app follows your system theme, or you choose one in Settings.": "アプリはシステムのテーマに従います。設定で好みのテーマを選ぶこともできます。",
   "The app updates itself.": "アプリは自動で更新されます。",
   "The app, redrawn with example content.": "サンプルの内容で描き直したアプリ画面です。",
+  "The Codevalanche changelog.": "Codevalanche の変更履歴。",
   "The Codevalanche logo.": "Codevalancheのロゴ。",
   "The Codevalanche website account is separate from agent authentication. Signing in on the website does not connect a provider account in the desktop app.": "Codevalancheのウェブサイトアカウントとエージェントの認証は別です。ウェブサイトにログインしても、デスクトップアプリでプロバイダーアカウントが接続されるわけではありません。",
   "The connection did not finish": "接続は完了しませんでした",
