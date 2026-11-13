@@ -848,7 +848,7 @@
   "Website analytics": "تحليلات الموقع",
   "Website analytics is available with your consent. Account activity has a separate signed-in choice.": "تتوفر تحليلات الموقع بموافقتك. ويتطلب نشاط الحساب اختيارًا منفصلًا بعد تسجيل الدخول.",
   "Website analytics is not enabled for this release. Your preference can be saved; no optional observations are sent.": "تحليلات الموقع غير مفعّلة في هذا الإصدار. يمكن حفظ تفضيلك، ولن تُرسل أي ملاحظات اختيارية.",
-  "Website analytics is unavailable. Your preference is saved, but collection needs a valid receipt.": "تحليلات الموقع غير متاحة. حُفظ تفضيلك، لكن الجمع يتطلب إيصال موافقة صالحًا.",
+  "Your preference is saved.": "تم حفظ تفضيلك.",
   "Website and accounts": "الموقع والحسابات",
   "Website statistics: as described in section 8.": "إحصاءات الموقع الإلكتروني: كما هو موضح في القسم 8.",
   "Weekly": "أسبوعيًا",

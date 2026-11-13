@@ -848,7 +848,7 @@
   "Website analytics": "웹사이트 분석",
   "Website analytics is available with your consent. Account activity has a separate signed-in choice.": "웹사이트 분석은 동의한 경우 사용할 수 있습니다. 계정 활동에는 로그인한 계정에서 별도의 선택이 필요합니다.",
   "Website analytics is not enabled for this release. Your preference can be saved; no optional observations are sent.": "이번 릴리스에서는 웹사이트 분석이 활성화되지 않았습니다. 선택은 저장할 수 있지만 선택적 관측값은 전송되지 않습니다.",
-  "Website analytics is unavailable. Your preference is saved, but collection needs a valid receipt.": "웹사이트 분석을 사용할 수 없습니다. 선택은 저장되지만 데이터를 수집하려면 유효한 동의 기록이 필요합니다.",
+  "Your preference is saved.": "설정이 저장되었습니다.",
   "Website and accounts": "웹사이트와 계정",
   "Website statistics: as described in section 8.": "웹사이트 통계: 8항에 설명된 대로.",
   "Weekly": "주간",
