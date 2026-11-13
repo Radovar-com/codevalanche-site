@@ -1,0 +1,1060 @@
+{
+  "version": "1.1.68",
+  "date": "2026-11-13",
+  "copy": {
+    "en": {
+      "headline": "Projects with a Coordinator, local models in conversations and a natural voice",
+      "summary": "The first public update since 1.0.1, and the biggest so far. Codevalanche grew from single conversations into whole projects led by a Coordinator, learned to talk, brought local models into conversations and became a much lighter app. Here is the whole road, step by step.",
+      "sections": [
+        {
+          "title": "Projects",
+          "body": "Each project has its own Coordinator that starts agents, follows their work and reports back.",
+          "detail": "Delegated tasks open beside the Coordinator, and you can write to an agent directly. Finishing a report keeps the project and its Coordinator open for your next message."
+        },
+        {
+          "title": "Approved access stays in place",
+          "body": "The Coordinator uses approved project access without extra command approvals and keeps approved extra folders when it wakes. Approvals for delegated work stay with that task.",
+          "detail": "Delegated agents appear in the project's Tasks list, and lists refresh when you reopen the sidebar."
+        },
+        {
+          "title": "Your AIs, all in one place",
+          "body": "Settings has a new Your AIs page where you sign in to your agents, add your keys and check that each connection works.",
+          "detail": "Add more than one account or key for the same provider, find any connection with search and filters, and pick Automatic to let the agent use the model it recommends. You can also add Grok Build, OpenCode, Kimi Code and other agents from the public catalog; the app tells you when an agent comes from a third-party publisher."
+        },
+        {
+          "title": "Automatic model choice",
+          "body": "Choose Automatic and each agent uses the model it recommends, so you do not have to pick one every time.",
+          "detail": "You can still choose an exact model for any chat."
+        },
+        {
+          "title": "Keep working when a limit hits",
+          "body": "Codevalanche shows how much of your Claude and Codex plans is left and when each limit resets.",
+          "detail": "Your AIs shows each subscription's own limits, and Settings has a simpler, lighter look."
+        },
+        {
+          "title": "Local models in conversations",
+          "body": "Local models answer in conversations, one turn at a time, and say plainly why when they cannot."
+        },
+        {
+          "title": "Talk to your agents",
+          "body": "Voice mode answers with a natural voice that comes with the app, with nothing to download. It thinks as hard as you chose, says when it is thinking, and stops at once when you no longer need the answer. Listening only to your own voice is experimental."
+        },
+        {
+          "title": "From chat to a live site",
+          "body": "When your site is ready, publish it on GitHub Pages or Vercel right from the chat and share the link."
+        },
+        {
+          "title": "Full access for your message",
+          "body": "Full access applies to the message you send, without extra approval prompts.",
+          "detail": "Keep working in the same chat while your dev server runs, until you stop the chat or close its workspace."
+        },
+        {
+          "title": "Attachments with every agent",
+          "body": "Attachments work with every agent, including files added while an agent is working."
+        },
+        {
+          "title": "Lighter and steadier",
+          "body": "The app uses far less memory with a long history and opens faster. On a fresh Windows it no longer stops with a missing VCRUNTIME140.dll error, and it warns you when the disk is nearly full.",
+          "detail": "Codevalanche starts and responds faster, with no Node installation needed. Undo, approvals and Codex continuation work reliably, even after a restart or crash."
+        },
+        {
+          "title": "Fixes",
+          "body": "A task whose agent could not start no longer stays queued for hours.",
+          "detail": "Settings › Computer use no longer turns the whole window into “This page couldn't load”, and dialogs opened from a menu no longer sit under their own dimmed background."
+        }
+      ]
+    },
+    "ar": {
+      "headline": "مشاريع مع منسّق، ونماذج محلية في المحادثات، وصوت طبيعي",
+      "summary": "أول تحديث عام منذ 1.0.1، والأكبر حتى الآن. انتقل Codevalanche من محادثات منفردة إلى مشاريع كاملة يقودها منسّق، وتعلّم التحدث، وأدخل النماذج المحلية إلى المحادثات، وأصبح تطبيقًا أخف بكثير. إليك الطريق كله، خطوة بخطوة.",
+      "sections": [
+        {
+          "title": "المشاريع",
+          "body": "لكل مشروع منسّقه الخاص الذي يشغّل الوكلاء ويتابع عملهم ويرفع إليك تقريرًا.",
+          "detail": "تُفتح المهام المفوّضة بجانب المنسّق، ويمكنك الكتابة إلى أي وكيل مباشرة. يبقى المشروع والمنسّق مفتوحين لرسالتك التالية بعد الانتهاء من التقرير."
+        },
+        {
+          "title": "الوصول المعتمد يبقى محفوظًا",
+          "body": "يستخدم المنسّق صلاحيات الوصول المعتمدة للمشروع دون موافقات إضافية على الأوامر، ويحتفظ بالمجلدات الإضافية المعتمدة عند استئناف نشاطه. وتبقى الموافقات الخاصة بالعمل المفوّض مع مهمته.",
+          "detail": "يظهر الوكلاء المفوّضون في قائمة مهام المشروع، وتتحدّث القوائم عند إعادة فتح الشريط الجانبي."
+        },
+        {
+          "title": "أدوات الذكاء الاصطناعي لديك، كلها في مكان واحد",
+          "body": "في الإعدادات صفحة جديدة باسم «أدوات الذكاء الاصطناعي لديك»، تسجّل فيها الدخول إلى وكلائك وتضيف مفاتيحك وتتحقق من أن كل اتصال يعمل.",
+          "detail": "أضف أكثر من حساب أو مفتاح للمزوّد نفسه، وابحث عن أي اتصال بالبحث والمرشّحات، واختر «تلقائي» ليستخدم الوكيل النموذج الذي يوصي به. يمكنك أيضًا إضافة ⁦Grok Build⁩ و⁦OpenCode⁩ و⁦Kimi Code⁩ ووكلاء آخرين من الدليل العام، ويخبرك التطبيق عندما يأتي وكيل من ناشر خارجي."
+        },
+        {
+          "title": "اختيار النموذج التلقائي",
+          "body": "اختر «تلقائي» ليستخدم كل وكيل النموذج الذي يوصي به، فلا تحتاج إلى الاختيار في كل مرة.",
+          "detail": "ما زال بإمكانك اختيار نموذج محدد لأي محادثة."
+        },
+        {
+          "title": "واصل العمل عند بلوغ الحد",
+          "body": "يعرض ⁦Codevalanche⁩ ما تبقّى من خطتي ⁦Claude⁩ و⁦Codex⁩ ومتى يُعاد ضبط كل حد.",
+          "detail": "تعرض صفحة «أنظمة الذكاء الاصطناعي لديك» حدود كل اشتراك، وأصبح مظهر الإعدادات أبسط وأخف."
+        },
+        {
+          "title": "النماذج المحلية في المحادثات",
+          "body": "تجيب النماذج المحلية في المحادثات، دورًا واحدًا في كل مرة، وتوضّح السبب بصراحة عندما لا تستطيع."
+        },
+        {
+          "title": "تحدّث إلى وكلائك",
+          "body": "يجيب وضع الصوت بصوت طبيعي يأتي مع التطبيق دون أي تنزيل. يفكر بالقدر الذي اخترته، ويقول متى يفكر، ويتوقف فورًا عندما لا تعود بحاجة إلى الإجابة. الاستماع إلى صوتك وحدك ميزة تجريبية."
+        },
+        {
+          "title": "من المحادثة إلى موقع منشور",
+          "body": "عندما يصبح موقعك جاهزًا، انشره على ⁦GitHub Pages⁩ أو ⁦Vercel⁩ مباشرة من المحادثة وشارك الرابط."
+        },
+        {
+          "title": "وصول كامل لرسالتك",
+          "body": "يُطبَّق الوصول الكامل على الرسالة التي ترسلها، دون طلبات موافقة إضافية.",
+          "detail": "واصل العمل في المحادثة نفسها مع بقاء خادم التطوير قيد التشغيل، حتى توقف المحادثة أو تغلق مساحة عملها."
+        },
+        {
+          "title": "المرفقات مع كل وكيل",
+          "body": "تعمل المرفقات مع كل وكيل، بما فيها الملفات التي تُضاف أثناء عمل الوكيل."
+        },
+        {
+          "title": "أخف وأكثر ثباتًا",
+          "body": "يستخدم التطبيق ذاكرة أقل بكثير مع سجل طويل ويفتح أسرع. على Windows مثبّت حديثًا لم يعد يتوقف بخطأ فقدان VCRUNTIME140.dll، وينبّهك عندما يكاد القرص يمتلئ.",
+          "detail": "يبدأ Codevalanche ويستجيب أسرع، من دون الحاجة إلى تثبيت Node. يعمل التراجع والموافقات ومتابعة Codex بموثوقية، حتى بعد إعادة التشغيل أو الإغلاق المفاجئ."
+        },
+        {
+          "title": "إصلاحات",
+          "body": "المهمة التي تعذّر تشغيل وكيلها لم تعد تبقى في قائمة الانتظار لساعات.",
+          "detail": "لم تعد صفحة الإعدادات › Computer use تحوّل النافذة كلها إلى «This page couldn't load»، ولم تعد مربعات الحوار المفتوحة من قائمة تظهر تحت خلفيتها المعتمة."
+        }
+      ]
+    },
+    "de": {
+      "headline": "Projekte mit einem Koordinator, lokale Modelle in Unterhaltungen und eine natürliche Stimme",
+      "summary": "Das erste öffentliche Update seit 1.0.1 und das bisher größte. Codevalanche ist von einzelnen Unterhaltungen zu ganzen Projekten gewachsen, die ein Koordinator leitet, hat sprechen gelernt, lokale Modelle in die Unterhaltungen gebracht und ist eine deutlich leichtere App geworden. Hier ist der ganze Weg, Schritt für Schritt.",
+      "sections": [
+        {
+          "title": "Projekte",
+          "body": "Jedes Projekt hat seinen eigenen Koordinator, der Agenten startet, ihre Arbeit verfolgt und dir berichtet.",
+          "detail": "Delegierte Aufgaben öffnen sich neben dem Koordinator, und du kannst einem Agenten direkt schreiben. Nach einem fertigen Bericht bleiben das Projekt und sein Koordinator für deine nächste Nachricht offen."
+        },
+        {
+          "title": "Freigegebener Zugriff bleibt erhalten",
+          "body": "Der Koordinator nutzt den freigegebenen Projektzugriff ohne zusätzliche Befehlsfreigaben und behält beim Aufwachen die freigegebenen zusätzlichen Ordner. Freigaben für delegierte Arbeit bleiben bei der jeweiligen Aufgabe.",
+          "detail": "Delegierte Agenten erscheinen in der Aufgabenliste des Projekts, und die Listen werden beim erneuten Öffnen der Seitenleiste aktualisiert."
+        },
+        {
+          "title": "Ihre KIs, alle an einem Ort",
+          "body": "In den Einstellungen gibt es die neue Seite „Ihre KIs“: Dort melden Sie sich bei Ihren Agenten an, fügen Ihre Schlüssel hinzu und prüfen, ob jede Verbindung funktioniert.",
+          "detail": "Fügen Sie mehrere Konten oder Schlüssel für denselben Anbieter hinzu, finden Sie jede Verbindung mit Suche und Filtern, und wählen Sie Automatisch, damit der Agent das Modell nutzt, das er empfiehlt. Sie können auch Grok Build, OpenCode, Kimi Code und weitere Agenten aus dem öffentlichen Katalog hinzufügen; die App sagt Ihnen, wenn ein Agent von einem fremden Herausgeber stammt."
+        },
+        {
+          "title": "Automatische Modellwahl",
+          "body": "Wählen Sie Automatisch, und jeder Agent nutzt das Modell, das er empfiehlt. So müssen Sie nicht jedes Mal eines aussuchen.",
+          "detail": "Sie können für jeden Chat weiterhin ein bestimmtes Modell wählen."
+        },
+        {
+          "title": "Weiterarbeiten, wenn ein Limit erreicht ist",
+          "body": "Codevalanche zeigt, wie viel von Ihren Claude- und Codex-Abos noch übrig ist und wann jedes Limit zurückgesetzt wird.",
+          "detail": "„Deine KIs“ zeigt die Limits jedes Abonnements, und die Einstellungen sehen einfacher und leichter aus."
+        },
+        {
+          "title": "Lokale Modelle in Unterhaltungen",
+          "body": "Lokale Modelle antworten in Unterhaltungen, einen Schritt nach dem anderen, und sagen klar, warum, wenn sie es nicht können."
+        },
+        {
+          "title": "Sprich mit deinen Agenten",
+          "body": "Der Sprachmodus antwortet mit einer natürlichen Stimme, die mit der App kommt, ohne Download. Er denkt so gründlich, wie du es gewählt hast, sagt, wenn er nachdenkt, und hört sofort auf, wenn du die Antwort nicht mehr brauchst. Nur auf deine eigene Stimme zu hören ist experimentell."
+        },
+        {
+          "title": "Vom Chat zur fertigen Website",
+          "body": "Wenn Ihre Website fertig ist, veröffentlichen Sie sie direkt aus dem Chat auf GitHub Pages oder Vercel und teilen den Link."
+        },
+        {
+          "title": "Vollzugriff für Ihre Nachricht",
+          "body": "Vollzugriff gilt für die Nachricht, die Sie senden, ohne zusätzliche Freigabeanfragen.",
+          "detail": "Arbeiten Sie im selben Chat weiter, während Ihr Entwicklungsserver läuft, bis Sie den Chat stoppen oder seinen Arbeitsbereich schließen."
+        },
+        {
+          "title": "Anhänge mit jedem Agenten",
+          "body": "Anhänge funktionieren mit jedem Agenten, auch Dateien, die du hinzufügst, während ein Agent arbeitet."
+        },
+        {
+          "title": "Leichter und stabiler",
+          "body": "Die App braucht mit langem Verlauf viel weniger Speicher und öffnet schneller. Auf einem frisch installierten Windows bricht sie nicht mehr mit dem Fehler „VCRUNTIME140.dll fehlt“ ab, und sie warnt dich, wenn die Festplatte fast voll ist.",
+          "detail": "Codevalanche startet und antwortet schneller, ohne dass Node installiert werden muss. Rückgängig, Freigaben und das Fortsetzen mit Codex funktionieren zuverlässig, auch nach einem Neustart oder Absturz."
+        },
+        {
+          "title": "Korrekturen",
+          "body": "Eine Aufgabe, deren Agent nicht starten konnte, bleibt nicht mehr stundenlang in der Warteschlange.",
+          "detail": "Einstellungen › Computer use verwandelt nicht mehr das ganze Fenster in „This page couldn't load“, und Dialoge aus einem Menü liegen nicht mehr unter ihrem eigenen abgedunkelten Hintergrund."
+        }
+      ]
+    },
+    "es": {
+      "headline": "Proyectos con un Coordinador, modelos locales en las conversaciones y una voz natural",
+      "summary": "La primera actualización pública desde la 1.0.1 y la mayor hasta ahora. Codevalanche pasó de conversaciones sueltas a proyectos completos dirigidos por un Coordinador, aprendió a hablar, llevó los modelos locales a las conversaciones y se convirtió en una app mucho más ligera. Este es todo el camino, paso a paso.",
+      "sections": [
+        {
+          "title": "Proyectos",
+          "body": "Cada proyecto tiene su propio Coordinador, que inicia agentes, sigue su trabajo y te informa.",
+          "detail": "Las tareas delegadas se abren junto al Coordinador, y puedes escribir directamente a un agente. Al terminar un informe, el proyecto y su Coordinador siguen abiertos para tu próximo mensaje."
+        },
+        {
+          "title": "El acceso aprobado se conserva",
+          "body": "El Coordinador usa el acceso aprobado del proyecto sin aprobaciones adicionales de comandos y conserva las carpetas adicionales aprobadas al reactivarse. Las aprobaciones del trabajo delegado permanecen en esa tarea.",
+          "detail": "Los agentes delegados aparecen en la lista de Tareas del proyecto y las listas se actualizan al volver a abrir la barra lateral."
+        },
+        {
+          "title": "Tus IA, todas en un solo lugar",
+          "body": "Configuración tiene una nueva página, Tus IA, donde inicias sesión en tus agentes, añades tus claves y compruebas que cada conexión funciona.",
+          "detail": "Añade más de una cuenta o clave para el mismo proveedor, encuentra cualquier conexión con la búsqueda y los filtros, y elige Automático para que el agente use el modelo que recomienda. También puedes añadir Grok Build, OpenCode, Kimi Code y otros agentes del catálogo público; la app te avisa cuando un agente viene de un editor externo."
+        },
+        {
+          "title": "Elección automática del modelo",
+          "body": "Elige Automático y cada agente usa el modelo que recomienda, así no tienes que escoger uno cada vez.",
+          "detail": "Sigues pudiendo elegir un modelo concreto para cualquier chat."
+        },
+        {
+          "title": "Sigue trabajando cuando llegas a un límite",
+          "body": "Codevalanche muestra cuánto te queda de tus planes de Claude y Codex y cuándo se reinicia cada límite.",
+          "detail": "Tus IA muestra los límites de cada suscripción, y Ajustes tiene un aspecto más sencillo y ligero."
+        },
+        {
+          "title": "Modelos locales en las conversaciones",
+          "body": "Los modelos locales responden en las conversaciones, un turno cada vez, y dicen claramente por qué cuando no pueden."
+        },
+        {
+          "title": "Habla con tus agentes",
+          "body": "El modo de voz responde con una voz natural que viene con la app, sin nada que descargar. Piensa tanto como elegiste, dice cuándo está pensando y se detiene en cuanto ya no necesitas la respuesta. Escuchar solo tu propia voz es experimental."
+        },
+        {
+          "title": "Del chat a un sitio publicado",
+          "body": "Cuando tu sitio esté listo, publícalo en GitHub Pages o Vercel directamente desde el chat y comparte el enlace."
+        },
+        {
+          "title": "Acceso completo para tu mensaje",
+          "body": "El acceso completo se aplica al mensaje que envías, sin solicitudes de permiso adicionales.",
+          "detail": "Continúa en el mismo chat mientras tu servidor de desarrollo sigue activo, hasta que detengas el chat o cierres su espacio de trabajo."
+        },
+        {
+          "title": "Adjuntos con cualquier agente",
+          "body": "Los adjuntos funcionan con cualquier agente, incluidos los archivos que añades mientras un agente trabaja."
+        },
+        {
+          "title": "Más ligera y más estable",
+          "body": "La app usa mucha menos memoria con un historial largo y abre más rápido. En un Windows recién instalado ya no se detiene con el error de VCRUNTIME140.dll ausente, y te avisa cuando el disco está casi lleno.",
+          "detail": "Codevalanche se inicia y responde más rápido, sin necesidad de instalar Node. Deshacer, los permisos y la continuación con Codex funcionan de forma fiable, incluso tras reiniciar o un cierre inesperado."
+        },
+        {
+          "title": "Correcciones",
+          "body": "Una tarea cuyo agente no pudo iniciarse ya no se queda en cola durante horas.",
+          "detail": "Ajustes › Computer use ya no convierte toda la ventana en «This page couldn't load», y los diálogos abiertos desde un menú ya no quedan bajo su propio fondo atenuado."
+        }
+      ]
+    },
+    "fr": {
+      "headline": "Des projets avec un Coordinateur, des modèles locaux dans les conversations et une voix naturelle",
+      "summary": "La première mise à jour publique depuis la 1.0.1, et la plus importante à ce jour. Codevalanche est passé de conversations isolées à des projets entiers menés par un Coordinateur, a appris à parler, a fait entrer les modèles locaux dans les conversations et est devenu une app bien plus légère. Voici tout le chemin, étape par étape.",
+      "sections": [
+        {
+          "title": "Projets",
+          "body": "Chaque projet a son propre Coordinateur, qui lance des agents, suit leur travail et vous fait son rapport.",
+          "detail": "Les tâches déléguées s'ouvrent à côté du Coordinateur, et vous pouvez écrire directement à un agent. Une fois un rapport terminé, le projet et son Coordinateur restent ouverts pour votre prochain message."
+        },
+        {
+          "title": "Les accès approuvés sont conservés",
+          "body": "Le Coordinateur utilise les accès approuvés du projet sans autorisations de commande supplémentaires et conserve les dossiers supplémentaires approuvés à son réveil. Les autorisations du travail délégué restent associées à cette tâche.",
+          "detail": "Les agents délégués apparaissent dans la liste des Tâches du projet, et les listes s'actualisent lorsque vous rouvrez la barre latérale."
+        },
+        {
+          "title": "Vos IA, toutes au même endroit",
+          "body": "Les Paramètres ont une nouvelle page, Vos IA, où vous vous connectez à vos agents, ajoutez vos clés et vérifiez que chaque connexion fonctionne.",
+          "detail": "Ajoutez plusieurs comptes ou clés pour le même fournisseur, retrouvez n’importe quelle connexion avec la recherche et les filtres, et choisissez Automatique pour que l’agent utilise le modèle qu’il recommande. Vous pouvez aussi ajouter Grok Build, OpenCode, Kimi Code et d’autres agents du catalogue public ; l’app vous prévient quand un agent vient d’un éditeur tiers."
+        },
+        {
+          "title": "Choix automatique du modèle",
+          "body": "Choisissez Automatique et chaque agent utilise le modèle qu’il recommande, sans que vous ayez à en choisir un à chaque fois.",
+          "detail": "Vous pouvez toujours choisir un modèle précis pour n’importe quelle conversation."
+        },
+        {
+          "title": "Continuez quand une limite est atteinte",
+          "body": "Codevalanche indique ce qu’il reste de vos abonnements Claude et Codex et quand chaque limite se réinitialise.",
+          "detail": "Vos IA affiche les limites de chaque abonnement, et les Paramètres ont un aspect plus simple et plus léger."
+        },
+        {
+          "title": "Les modèles locaux dans les conversations",
+          "body": "Les modèles locaux répondent dans les conversations, un tour à la fois, et disent clairement pourquoi quand ils ne le peuvent pas."
+        },
+        {
+          "title": "Parlez à vos agents",
+          "body": "Le mode vocal répond avec une voix naturelle fournie avec l'app, sans rien à télécharger. Il réfléchit autant que vous l'avez choisi, dit quand il réfléchit et s'arrête aussitôt que vous n'avez plus besoin de la réponse. N'écouter que votre propre voix est expérimental."
+        },
+        {
+          "title": "Du chat à un site en ligne",
+          "body": "Quand votre site est prêt, publiez-le sur GitHub Pages ou Vercel directement depuis le chat et partagez le lien."
+        },
+        {
+          "title": "Accès complet pour votre message",
+          "body": "L’accès complet s’applique au message que vous envoyez, sans demande d’autorisation supplémentaire.",
+          "detail": "Continuez dans le même chat pendant que votre serveur de développement fonctionne, jusqu’à l’arrêt du chat ou la fermeture de son espace de travail."
+        },
+        {
+          "title": "Des pièces jointes avec chaque agent",
+          "body": "Les pièces jointes fonctionnent avec chaque agent, y compris les fichiers ajoutés pendant qu'un agent travaille."
+        },
+        {
+          "title": "Plus légère et plus stable",
+          "body": "L'app utilise beaucoup moins de mémoire avec un long historique et s'ouvre plus vite. Sur un Windows fraîchement installé, elle ne s'arrête plus sur l'erreur VCRUNTIME140.dll manquant, et elle vous prévient quand le disque est presque plein.",
+          "detail": "Codevalanche démarre et répond plus vite, sans installation de Node. Annuler, les autorisations et la reprise avec Codex fonctionnent de façon fiable, même après un redémarrage ou un arrêt inattendu."
+        },
+        {
+          "title": "Corrections",
+          "body": "Une tâche dont l'agent n'a pas pu démarrer ne reste plus en file d'attente pendant des heures.",
+          "detail": "Paramètres › Computer use ne transforme plus toute la fenêtre en « This page couldn't load », et les boîtes de dialogue ouvertes depuis un menu ne restent plus sous leur propre fond assombri."
+        }
+      ]
+    },
+    "hi": {
+      "headline": "कोऑर्डिनेटर वाले प्रोजेक्ट, बातचीत में स्थानीय मॉडल और एक प्राकृतिक आवाज़",
+      "summary": "1.0.1 के बाद पहला सार्वजनिक अपडेट, और अब तक का सबसे बड़ा। Codevalanche अलग-अलग बातचीत से आगे बढ़कर कोऑर्डिनेटर के नेतृत्व वाले पूरे प्रोजेक्ट तक पहुँचा, बोलना सीखा, स्थानीय मॉडल को बातचीत में लाया और कहीं ज़्यादा हल्का ऐप बन गया। यह रहा पूरा सफ़र, कदम दर कदम।",
+      "sections": [
+        {
+          "title": "प्रोजेक्ट",
+          "body": "हर प्रोजेक्ट का अपना कोऑर्डिनेटर है, जो एजेंट शुरू करता है, उनके काम पर नज़र रखता है और आपको रिपोर्ट देता है।",
+          "detail": "सौंपे गए काम कोऑर्डिनेटर के बगल में खुलते हैं, और आप किसी एजेंट को सीधे लिख सकते हैं। रिपोर्ट पूरी होने के बाद भी प्रोजेक्ट और उसका कोऑर्डिनेटर आपके अगले संदेश के लिए खुले रहते हैं।"
+        },
+        {
+          "title": "मंज़ूर की हुई पहुँच बनी रहती है",
+          "body": "कोऑर्डिनेटर कमांड के लिए अतिरिक्त अनुमतियाँ माँगे बिना प्रोजेक्ट की मंज़ूर की हुई पहुँच इस्तेमाल करता है और दोबारा सक्रिय होने पर मंज़ूर किए गए अतिरिक्त फ़ोल्डर बनाए रखता है। सौंपे गए काम की अनुमतियाँ उसी कार्य के साथ रहती हैं।",
+          "detail": "काम सौंपे गए एजेंट प्रोजेक्ट की कार्य सूची में दिखते हैं, और साइडबार दोबारा खोलने पर सूचियाँ ताज़ा हो जाती हैं।"
+        },
+        {
+          "title": "आपके AI, सब एक जगह",
+          "body": "सेटिंग्स में नया पेज है, आपके AI: यहाँ आप अपने एजेंटों में साइन इन करते हैं, कुंजियाँ जोड़ते हैं और जाँचते हैं कि हर कनेक्शन काम कर रहा है।",
+          "detail": "एक ही प्रदाता के लिए एक से ज़्यादा खाते या कुंजियाँ जोड़ें, खोज और फ़िल्टर से कोई भी कनेक्शन ढूँढें, और स्वचालित चुनें ताकि एजेंट अपना सुझाया मॉडल इस्तेमाल करे। आप सार्वजनिक कैटलॉग से Grok Build, OpenCode, Kimi Code और दूसरे एजेंट भी जोड़ सकते हैं; अगर कोई एजेंट किसी बाहरी प्रकाशक का है तो ऐप बता देता है।"
+        },
+        {
+          "title": "स्वचालित मॉडल चुनाव",
+          "body": "स्वचालित चुनें, और हर एजेंट वही मॉडल इस्तेमाल करेगा जिसकी वह सलाह देता है, ताकि आपको हर बार मॉडल न चुनना पड़े।",
+          "detail": "आप अब भी किसी भी चैट के लिए कोई खास मॉडल चुन सकते हैं।"
+        },
+        {
+          "title": "सीमा खत्म होने पर भी काम जारी",
+          "body": "Codevalanche दिखाता है कि आपके Claude और Codex प्लान में कितना बचा है और हर सीमा कब रीसेट होगी।",
+          "detail": "“आपके AI” हर सदस्यता की अपनी सीमाएँ दिखाता है, और सेटिंग्स अब ज़्यादा सरल और हल्की दिखती हैं।"
+        },
+        {
+          "title": "बातचीत में स्थानीय मॉडल",
+          "body": "स्थानीय मॉडल बातचीत में जवाब देते हैं, एक बार में एक बारी, और जब नहीं दे पाते तो साफ़ बताते हैं कि क्यों।"
+        },
+        {
+          "title": "अपने एजेंटों से बात करें",
+          "body": "वॉइस मोड ऐप के साथ आने वाली प्राकृतिक आवाज़ में जवाब देता है, कुछ डाउनलोड नहीं करना पड़ता। वह उतना सोचता है जितना आपने चुना, बताता है कि वह सोच रहा है, और जवाब की ज़रूरत न रहने पर तुरंत रुक जाता है। सिर्फ़ आपकी आवाज़ सुनना प्रायोगिक है।"
+        },
+        {
+          "title": "चैट से सीधे लाइव साइट तक",
+          "body": "साइट तैयार होते ही उसे चैट से सीधे GitHub Pages या Vercel पर प्रकाशित करें और लिंक साझा करें।"
+        },
+        {
+          "title": "आपके संदेश के लिए पूर्ण पहुँच",
+          "body": "पूर्ण पहुँच आपके भेजे गए संदेश पर लागू होती है, बिना अतिरिक्त अनुमति माँगे।",
+          "detail": "उसी चैट में काम जारी रखें। चैट रोकने या उसका कार्यक्षेत्र बंद करने तक आपका डेवलपमेंट सर्वर चलता रहता है।"
+        },
+        {
+          "title": "हर एजेंट के साथ अटैचमेंट",
+          "body": "अटैचमेंट हर एजेंट के साथ काम करते हैं, उन फ़ाइलों समेत जो एजेंट के काम करते समय जोड़ी जाती हैं।"
+        },
+        {
+          "title": "हल्का और ज़्यादा स्थिर",
+          "body": "लंबे इतिहास के साथ ऐप बहुत कम मेमोरी लेता है और जल्दी खुलता है। नए इंस्टॉल किए गए Windows पर अब VCRUNTIME140.dll न मिलने की त्रुटि से नहीं रुकता, और डिस्क लगभग भर जाने पर चेतावनी देता है।",
+          "detail": "Codevalanche जल्दी शुरू होता है और तेज़ जवाब देता है। Node इंस्टॉल करने की ज़रूरत नहीं है। Undo, अनुमतियाँ और Codex के साथ आगे बढ़ना भरोसेमंद तरीके से काम करते हैं, रीस्टार्ट या अचानक बंद होने के बाद भी।"
+        },
+        {
+          "title": "सुधार",
+          "body": "जिस काम का एजेंट शुरू नहीं हो सका, वह अब घंटों कतार में नहीं रहता।",
+          "detail": "सेटिंग्स › Computer use अब पूरी विंडो को “This page couldn't load” में नहीं बदलता, और मेनू से खोले गए डायलॉग अब अपनी ही धुंधली पृष्ठभूमि के नीचे नहीं रहते।"
+        }
+      ]
+    },
+    "id": {
+      "headline": "Proyek dengan Koordinator, model lokal dalam percakapan, dan suara alami",
+      "summary": "Pembaruan publik pertama sejak 1.0.1, dan yang terbesar sejauh ini. Codevalanche berkembang dari percakapan tunggal menjadi proyek utuh yang dipimpin Koordinator, belajar berbicara, membawa model lokal ke dalam percakapan, dan menjadi aplikasi yang jauh lebih ringan. Inilah seluruh perjalanannya, langkah demi langkah.",
+      "sections": [
+        {
+          "title": "Proyek",
+          "body": "Setiap proyek punya Koordinatornya sendiri yang memulai agen, mengikuti pekerjaan mereka, dan melapor kepada Anda.",
+          "detail": "Tugas yang didelegasikan terbuka di samping Koordinator, dan Anda bisa menulis langsung ke sebuah agen. Setelah laporan selesai, proyek dan Koordinatornya tetap terbuka untuk pesan Anda berikutnya."
+        },
+        {
+          "title": "Akses yang disetujui tetap tersimpan",
+          "body": "Koordinator memakai akses proyek yang disetujui tanpa persetujuan perintah tambahan dan tetap memiliki akses ke folder tambahan yang disetujui saat aktif kembali. Persetujuan untuk pekerjaan yang didelegasikan tetap berada pada tugas tersebut.",
+          "detail": "Agen yang diberi tugas muncul dalam daftar Tugas proyek, dan daftar diperbarui saat Anda membuka kembali bilah samping."
+        },
+        {
+          "title": "AI-mu, semua di satu tempat",
+          "body": "Pengaturan punya halaman baru, AI-mu, tempat kamu masuk ke agen, menambahkan kunci, dan memeriksa bahwa setiap koneksi berfungsi.",
+          "detail": "Tambahkan lebih dari satu akun atau kunci untuk penyedia yang sama, temukan koneksi apa pun dengan pencarian dan filter, dan pilih Otomatis agar agen memakai model yang direkomendasikannya. Kamu juga bisa menambahkan Grok Build, OpenCode, Kimi Code, dan agen lain dari katalog publik; aplikasi memberi tahu jika agen berasal dari penerbit pihak ketiga."
+        },
+        {
+          "title": "Pilihan model Otomatis",
+          "body": "Pilih Otomatis dan setiap agen memakai model yang direkomendasikannya, jadi kamu tidak perlu memilih setiap kali.",
+          "detail": "Kamu tetap bisa memilih model tertentu untuk obrolan apa pun."
+        },
+        {
+          "title": "Tetap bekerja saat batas tercapai",
+          "body": "Codevalanche menunjukkan sisa paket Claude dan Codex-mu dan kapan setiap batas direset.",
+          "detail": "AI Anda menampilkan batas tiap langganan, dan Pengaturan tampil lebih sederhana dan ringan."
+        },
+        {
+          "title": "Model lokal dalam percakapan",
+          "body": "Model lokal menjawab dalam percakapan, satu giliran setiap kali, dan mengatakan alasannya dengan jelas saat tidak bisa."
+        },
+        {
+          "title": "Bicara dengan agen Anda",
+          "body": "Mode suara menjawab dengan suara alami yang disertakan dalam aplikasi, tanpa perlu mengunduh apa pun. Ia berpikir sedalam yang Anda pilih, memberi tahu saat sedang berpikir, dan langsung berhenti saat Anda tidak lagi membutuhkan jawabannya. Hanya mendengarkan suara Anda sendiri masih eksperimental."
+        },
+        {
+          "title": "Dari chat ke situs yang online",
+          "body": "Saat situsmu siap, publikasikan ke GitHub Pages atau Vercel langsung dari chat dan bagikan tautannya."
+        },
+        {
+          "title": "Akses penuh untuk pesan Anda",
+          "body": "Akses penuh berlaku untuk pesan yang Anda kirim, tanpa permintaan izin tambahan.",
+          "detail": "Lanjutkan di chat yang sama saat server pengembangan berjalan, hingga Anda menghentikan chat atau menutup ruang kerjanya."
+        },
+        {
+          "title": "Lampiran untuk setiap agen",
+          "body": "Lampiran berfungsi dengan setiap agen, termasuk file yang ditambahkan saat agen sedang bekerja."
+        },
+        {
+          "title": "Lebih ringan dan lebih stabil",
+          "body": "Aplikasi memakai jauh lebih sedikit memori dengan riwayat panjang dan terbuka lebih cepat. Di Windows yang baru dipasang, aplikasi tidak lagi berhenti dengan galat VCRUNTIME140.dll tidak ditemukan, dan memperingatkan saat disk hampir penuh.",
+          "detail": "Codevalanche lebih cepat dibuka dan merespons, tanpa perlu memasang Node. Urungkan, persetujuan, dan kelanjutan Codex bekerja dengan andal, bahkan setelah mulai ulang atau aplikasi tertutup mendadak."
+        },
+        {
+          "title": "Perbaikan",
+          "body": "Tugas yang agennya gagal dimulai tidak lagi tertahan di antrean selama berjam-jam.",
+          "detail": "Pengaturan › Computer use tidak lagi mengubah seluruh jendela menjadi “This page couldn't load”, dan dialog yang dibuka dari menu tidak lagi berada di bawah latar redupnya sendiri."
+        }
+      ]
+    },
+    "it": {
+      "headline": "Progetti con un Coordinatore, modelli locali nelle conversazioni e una voce naturale",
+      "summary": "Il primo aggiornamento pubblico dalla 1.0.1, e il più grande finora. Codevalanche è passato dalle singole conversazioni a interi progetti guidati da un Coordinatore, ha imparato a parlare, ha portato i modelli locali nelle conversazioni ed è diventato un'app molto più leggera. Ecco tutto il percorso, passo dopo passo.",
+      "sections": [
+        {
+          "title": "Progetti",
+          "body": "Ogni progetto ha il suo Coordinatore, che avvia gli agenti, segue il loro lavoro e ti riferisce.",
+          "detail": "Le attività delegate si aprono accanto al Coordinatore, e puoi scrivere direttamente a un agente. Al termine di un resoconto, il progetto e il suo Coordinatore restano aperti per il tuo prossimo messaggio."
+        },
+        {
+          "title": "L'accesso approvato viene mantenuto",
+          "body": "Il Coordinatore usa l'accesso approvato del progetto senza ulteriori approvazioni dei comandi e mantiene le cartelle aggiuntive approvate quando si riattiva. Le approvazioni per il lavoro delegato restano associate alla relativa attività.",
+          "detail": "Gli agenti delegati compaiono nell'elenco Attività del progetto e gli elenchi si aggiornano quando riapri la barra laterale."
+        },
+        {
+          "title": "Le tue IA, tutte in un posto",
+          "body": "In Impostazioni c’è la nuova pagina Le tue IA, dove accedi ai tuoi agenti, aggiungi le tue chiavi e controlli che ogni connessione funzioni.",
+          "detail": "Aggiungi più account o chiavi per lo stesso fornitore, trova qualsiasi connessione con ricerca e filtri, e scegli Automatico perché l’agente usi il modello che consiglia. Puoi anche aggiungere Grok Build, OpenCode, Kimi Code e altri agenti dal catalogo pubblico; l’app ti avvisa quando un agente arriva da un editore esterno."
+        },
+        {
+          "title": "Scelta automatica del modello",
+          "body": "Scegli Automatico e ogni agente usa il modello che consiglia, così non devi sceglierne uno ogni volta.",
+          "detail": "Puoi sempre scegliere un modello preciso per qualsiasi chat."
+        },
+        {
+          "title": "Continua a lavorare quando arriva un limite",
+          "body": "Codevalanche mostra quanto resta dei tuoi piani Claude e Codex e quando si azzera ogni limite.",
+          "detail": "Le tue IA mostra i limiti di ogni abbonamento, e le Impostazioni hanno un aspetto più semplice e leggero."
+        },
+        {
+          "title": "Modelli locali nelle conversazioni",
+          "body": "I modelli locali rispondono nelle conversazioni, un turno alla volta, e dicono chiaramente perché quando non possono."
+        },
+        {
+          "title": "Parla con i tuoi agenti",
+          "body": "La modalità vocale risponde con una voce naturale inclusa nell'app, senza nulla da scaricare. Ragiona quanto hai scelto, dice quando sta pensando e si ferma subito quando la risposta non ti serve più. Ascoltare solo la tua voce è sperimentale."
+        },
+        {
+          "title": "Dalla chat a un sito online",
+          "body": "Quando il sito è pronto, pubblicalo su GitHub Pages o Vercel direttamente dalla chat e condividi il link."
+        },
+        {
+          "title": "Accesso completo per il tuo messaggio",
+          "body": "L’accesso completo si applica al messaggio che invii, senza ulteriori richieste di autorizzazione.",
+          "detail": "Continua nella stessa chat mentre il server di sviluppo è attivo, finché non interrompi la chat o chiudi il suo spazio di lavoro."
+        },
+        {
+          "title": "Allegati con ogni agente",
+          "body": "Gli allegati funzionano con ogni agente, compresi i file aggiunti mentre un agente lavora."
+        },
+        {
+          "title": "Più leggera e più stabile",
+          "body": "L'app usa molta meno memoria con una cronologia lunga e si apre più in fretta. Su un Windows appena installato non si ferma più con l'errore VCRUNTIME140.dll mancante, e ti avvisa quando il disco è quasi pieno.",
+          "detail": "Codevalanche si avvia e risponde più velocemente, senza dover installare Node. Annulla, le autorizzazioni e la ripresa con Codex funzionano in modo affidabile, anche dopo un riavvio o una chiusura imprevista."
+        },
+        {
+          "title": "Correzioni",
+          "body": "Un'attività il cui agente non è riuscito ad avviarsi non resta più in coda per ore.",
+          "detail": "Impostazioni › Computer use non trasforma più l'intera finestra in «This page couldn't load», e le finestre di dialogo aperte da un menu non restano più sotto il proprio sfondo oscurato."
+        }
+      ]
+    },
+    "ja": {
+      "headline": "コーディネーター付きのプロジェクト、会話で使えるローカルモデル、自然な声",
+      "summary": "1.0.1 以来はじめての公開アップデートで、これまでで最大です。Codevalanche は単独の会話から、コーディネーターが率いるプロジェクト全体へと広がり、話せるようになり、ローカルモデルを会話に取り込み、ずっと軽いアプリになりました。その道のりを順番に紹介します。",
+      "sections": [
+        {
+          "title": "プロジェクト",
+          "body": "各プロジェクトに専用のコーディネーターがあり、エージェントを起動し、作業を見守り、結果を報告します。",
+          "detail": "委任したタスクはコーディネーターの横に開き、エージェントに直接メッセージを書けます。報告が完了しても、プロジェクトとコーディネーターは次のメッセージを受け付ける状態を保ちます。"
+        },
+        {
+          "title": "承認済みのアクセスを保持",
+          "body": "コーディネーターはコマンドへの追加承認を求めずに承認済みのプロジェクトへのアクセスを使い、再開時も承認済みの追加フォルダーを保持します。委任した作業への承認は、そのタスクに紐づいたままになります。",
+          "detail": "委任先のエージェントがプロジェクトのタスク一覧に表示され、サイドバーを開き直すと一覧が更新されます。"
+        },
+        {
+          "title": "あなたの AI を、すべてひとつの場所に",
+          "body": "設定に新しいページ「あなたの AI」が加わりました。エージェントへのサインイン、キーの追加、各接続の動作確認をここで行えます。",
+          "detail": "同じプロバイダーに複数のアカウントやキーを追加でき、検索とフィルターでどの接続もすぐに見つかります。「自動」を選べば、エージェントがおすすめのモデルを使います。公開カタログから Grok Build、OpenCode、Kimi Code などのエージェントも追加できます。外部の発行元によるエージェントの場合は、アプリがお知らせします。"
+        },
+        {
+          "title": "モデルの自動選択",
+          "body": "「自動」を選ぶと、各エージェントがおすすめのモデルを使うので、毎回モデルを選ぶ必要はありません。",
+          "detail": "どのチャットでも、引き続き特定のモデルを選べます。"
+        },
+        {
+          "title": "利用上限に達しても作業を続ける",
+          "body": "Claude と Codex のプランの残りと、各上限がリセットされる時刻を Codevalanche が表示します。",
+          "detail": "「あなたの AI」に各サブスクリプションの上限が表示され、設定はよりシンプルで軽い見た目になりました。"
+        },
+        {
+          "title": "会話で使えるローカルモデル",
+          "body": "ローカルモデルは会話の中で 1 ターンずつ答え、できないときはその理由をはっきり伝えます。"
+        },
+        {
+          "title": "エージェントと話す",
+          "body": "音声モードはアプリに同梱された自然な声で答え、ダウンロードは不要です。選んだ深さで考え、考えているときはそう伝え、答えが不要になるとすぐに止まります。あなたの声だけを聞く機能は試験的です。"
+        },
+        {
+          "title": "チャットから公開サイトへ",
+          "body": "サイトができたら、チャットから直接 GitHub Pages や Vercel に公開して、リンクを共有できます。"
+        },
+        {
+          "title": "送信するメッセージにフルアクセスを適用",
+          "body": "フルアクセスは送信するメッセージに適用され、追加の承認要求は表示されません。",
+          "detail": "同じチャットで作業を続けられます。チャットを停止するかワークスペースを閉じるまで、開発サーバーは動作を続けます。"
+        },
+        {
+          "title": "すべてのエージェントで添付ファイル",
+          "body": "添付ファイルはすべてのエージェントで使えます。エージェントの作業中に追加したファイルも含みます。"
+        },
+        {
+          "title": "より軽く、より安定",
+          "body": "長い履歴があってもメモリ使用量が大幅に減り、起動も速くなりました。新しくインストールした Windows でも VCRUNTIME140.dll が見つからないエラーで止まらなくなり、ディスクがいっぱいに近づくと知らせます。",
+          "detail": "Codevalanche の起動と応答が速くなり、Node のインストールも不要になりました。元に戻す操作、承認、Codex の続行が、再起動や予期しない終了の後も安定して使えます。"
+        },
+        {
+          "title": "修正",
+          "body": "エージェントを起動できなかったタスクが、何時間もキューに残ることはなくなりました。",
+          "detail": "設定 › Computer use でウィンドウ全体が「This page couldn't load」になることはなくなり、メニューから開いたダイアログが自身の暗い背景の下に隠れることもなくなりました。"
+        }
+      ]
+    },
+    "ko": {
+      "headline": "코디네이터가 있는 프로젝트, 대화 속 로컬 모델, 자연스러운 목소리",
+      "summary": "1.0.1 이후 첫 공개 업데이트이자 지금까지 가장 큰 업데이트입니다. Codevalanche는 개별 대화에서 코디네이터가 이끄는 프로젝트 전체로 넓어졌고, 말하는 법을 배웠으며, 로컬 모델을 대화 안으로 들여왔고, 훨씬 가벼운 앱이 되었습니다. 그 과정을 차례대로 소개합니다.",
+      "sections": [
+        {
+          "title": "프로젝트",
+          "body": "프로젝트마다 전용 코디네이터가 있어 에이전트를 시작하고, 작업을 지켜보고, 결과를 보고합니다.",
+          "detail": "위임한 작업은 코디네이터 옆에 열리며, 에이전트에게 직접 메시지를 쓸 수 있습니다. 보고가 끝나도 프로젝트와 코디네이터는 다음 메시지를 받을 수 있도록 열려 있습니다."
+        },
+        {
+          "title": "승인된 접근 권한 유지",
+          "body": "코디네이터는 추가 명령 승인 없이 승인된 프로젝트 접근 권한을 사용하며, 다시 활성화될 때도 승인된 추가 폴더를 유지합니다. 위임한 작업에 대한 승인은 해당 작업에 연결된 상태로 유지됩니다.",
+          "detail": "위임받은 에이전트가 프로젝트의 작업 목록에 표시되고, 사이드바를 다시 열면 목록이 새로고침됩니다."
+        },
+        {
+          "title": "내 AI, 모두 한곳에",
+          "body": "설정에 새 페이지 '내 AI'가 생겼습니다. 여기서 에이전트에 로그인하고, 키를 추가하고, 각 연결이 작동하는지 확인합니다.",
+          "detail": "같은 제공업체에 계정이나 키를 여러 개 추가하고, 검색과 필터로 어떤 연결이든 찾고, '자동'을 선택하면 에이전트가 추천하는 모델을 사용합니다. 공개 카탈로그에서 Grok Build, OpenCode, Kimi Code 등 다른 에이전트도 추가할 수 있으며, 외부 게시자의 에이전트라면 앱이 알려 줍니다."
+        },
+        {
+          "title": "자동 모델 선택",
+          "body": "자동을 선택하면 각 에이전트가 추천하는 모델을 사용하므로, 매번 모델을 고를 필요가 없습니다.",
+          "detail": "어떤 채팅에서든 원하는 모델을 직접 고를 수도 있습니다."
+        },
+        {
+          "title": "한도에 도달해도 작업은 계속",
+          "body": "Codevalanche가 Claude와 Codex 요금제의 남은 양과 각 한도가 초기화되는 시간을 보여 줍니다.",
+          "detail": "내 AI에서 구독별 한도를 볼 수 있고, 설정은 더 단순하고 가벼운 모습이 되었습니다."
+        },
+        {
+          "title": "대화 속 로컬 모델",
+          "body": "로컬 모델이 대화에서 한 번에 한 턴씩 답하고, 답할 수 없을 때는 이유를 분명히 알려 줍니다."
+        },
+        {
+          "title": "에이전트와 대화하기",
+          "body": "음성 모드는 앱에 포함된 자연스러운 목소리로 답하며 따로 다운로드할 필요가 없습니다. 선택한 만큼 깊이 생각하고, 생각 중일 때 알려 주며, 답이 더 필요 없으면 바로 멈춥니다. 내 목소리만 듣는 기능은 실험 단계입니다."
+        },
+        {
+          "title": "채팅에서 바로 공개 사이트로",
+          "body": "사이트가 완성되면 채팅에서 바로 GitHub Pages나 Vercel에 공개하고 링크를 공유하세요."
+        },
+        {
+          "title": "보내는 메시지에 전체 액세스 적용",
+          "body": "전체 액세스는 보내는 메시지에 적용되며 추가 승인 요청이 표시되지 않습니다.",
+          "detail": "같은 채팅에서 작업을 이어가세요. 채팅을 중지하거나 작업 공간을 닫을 때까지 개발 서버가 실행됩니다."
+        },
+        {
+          "title": "모든 에이전트에서 첨부 파일",
+          "body": "첨부 파일은 모든 에이전트에서 작동하며, 에이전트가 작업하는 동안 추가한 파일도 포함됩니다."
+        },
+        {
+          "title": "더 가볍고 더 안정적으로",
+          "body": "기록이 길어도 메모리를 훨씬 적게 쓰고 더 빨리 열립니다. 새로 설치한 Windows에서도 VCRUNTIME140.dll 누락 오류로 멈추지 않으며, 디스크가 거의 찼을 때 알려 줍니다.",
+          "detail": "Codevalanche가 더 빠르게 시작하고 응답하며, Node를 설치할 필요가 없습니다. 실행 취소, 승인, Codex 이어가기가 재시작이나 예기치 않은 종료 후에도 안정적으로 작동합니다."
+        },
+        {
+          "title": "수정 사항",
+          "body": "에이전트를 시작하지 못한 작업이 더 이상 몇 시간씩 대기열에 남지 않습니다.",
+          "detail": "설정 › Computer use가 더 이상 창 전체를 “This page couldn't load”로 바꾸지 않으며, 메뉴에서 연 대화 상자가 자신의 어두운 배경 아래에 깔리지 않습니다."
+        }
+      ]
+    },
+    "pt-BR": {
+      "headline": "Projetos com um Coordenador, modelos locais nas conversas e uma voz natural",
+      "summary": "A primeira atualização pública desde a 1.0.1, e a maior até agora. O Codevalanche passou de conversas isoladas a projetos inteiros conduzidos por um Coordenador, aprendeu a falar, levou os modelos locais para as conversas e se tornou um app muito mais leve. Aqui está todo o caminho, passo a passo.",
+      "sections": [
+        {
+          "title": "Projetos",
+          "body": "Cada projeto tem seu próprio Coordenador, que inicia agentes, acompanha o trabalho deles e informa você.",
+          "detail": "As tarefas delegadas abrem ao lado do Coordenador, e você pode escrever diretamente para um agente. Ao terminar um relatório, o projeto e seu Coordenador continuam abertos para sua próxima mensagem."
+        },
+        {
+          "title": "O acesso aprovado é mantido",
+          "body": "O Coordenador usa o acesso aprovado do projeto sem aprovações extras de comandos e mantém as pastas extras aprovadas quando é reativado. As aprovações do trabalho delegado continuam vinculadas à respectiva tarefa.",
+          "detail": "Os agentes delegados aparecem na lista de Tarefas do projeto, e as listas são atualizadas quando você reabre a barra lateral."
+        },
+        {
+          "title": "Suas IAs, todas em um só lugar",
+          "body": "As Configurações têm uma nova página, Suas IAs, onde você entra nos seus agentes, adiciona suas chaves e confere se cada conexão funciona.",
+          "detail": "Adicione mais de uma conta ou chave para o mesmo provedor, encontre qualquer conexão com a busca e os filtros, e escolha Automático para o agente usar o modelo que recomenda. Você também pode adicionar Grok Build, OpenCode, Kimi Code e outros agentes do catálogo público; o app avisa quando um agente vem de um publicador externo."
+        },
+        {
+          "title": "Escolha automática do modelo",
+          "body": "Escolha Automático e cada agente usa o modelo que recomenda, assim você não precisa escolher um toda vez.",
+          "detail": "Você ainda pode escolher um modelo específico para qualquer conversa."
+        },
+        {
+          "title": "Continue trabalhando quando um limite chega",
+          "body": "O Codevalanche mostra quanto resta dos seus planos do Claude e do Codex e quando cada limite é renovado.",
+          "detail": "Suas IAs mostra os limites de cada assinatura, e as Configurações têm um visual mais simples e leve."
+        },
+        {
+          "title": "Modelos locais nas conversas",
+          "body": "Os modelos locais respondem nas conversas, um turno por vez, e dizem claramente o motivo quando não conseguem."
+        },
+        {
+          "title": "Converse com seus agentes",
+          "body": "O modo de voz responde com uma voz natural que vem com o app, sem nada para baixar. Ele pensa o quanto você escolheu, avisa quando está pensando e para na hora quando você não precisa mais da resposta. Ouvir só a sua voz é experimental."
+        },
+        {
+          "title": "Do chat para um site no ar",
+          "body": "Quando o site estiver pronto, publique no GitHub Pages ou na Vercel direto do chat e compartilhe o link."
+        },
+        {
+          "title": "Acesso completo para sua mensagem",
+          "body": "O acesso completo vale para a mensagem que você envia, sem pedidos extras de aprovação.",
+          "detail": "Continue no mesmo chat enquanto o servidor de desenvolvimento roda, até você parar o chat ou fechar seu espaço de trabalho."
+        },
+        {
+          "title": "Anexos com todos os agentes",
+          "body": "Os anexos funcionam com todos os agentes, inclusive arquivos adicionados enquanto um agente trabalha."
+        },
+        {
+          "title": "Mais leve e mais estável",
+          "body": "O app usa muito menos memória com um histórico longo e abre mais rápido. Em um Windows recém-instalado ele não para mais com o erro de VCRUNTIME140.dll ausente, e avisa quando o disco está quase cheio.",
+          "detail": "O Codevalanche inicia e responde mais rápido, sem precisar instalar o Node. Desfazer, aprovações e a continuação com Codex funcionam com confiança, mesmo após reiniciar ou um fechamento inesperado."
+        },
+        {
+          "title": "Correções",
+          "body": "Uma tarefa cujo agente não conseguiu iniciar não fica mais na fila por horas.",
+          "detail": "Configurações › Computer use não transforma mais a janela inteira em “This page couldn't load”, e os diálogos abertos a partir de um menu não ficam mais sob o próprio fundo escurecido."
+        }
+      ]
+    },
+    "ro": {
+      "headline": "Proiecte cu un Coordonator, modele locale în conversații și o voce naturală",
+      "summary": "Prima actualizare publică de la 1.0.1 și cea mai mare de până acum. Codevalanche a crescut de la conversații separate la proiecte întregi conduse de un Coordonator, a învățat să vorbească, a adus modelele locale în conversații și a devenit o aplicație mult mai ușoară. Iată tot drumul, pas cu pas.",
+      "sections": [
+        {
+          "title": "Proiecte",
+          "body": "Fiecare proiect are Coordonatorul lui, care pornește agenți, le urmărește lucrul și îți raportează.",
+          "detail": "Sarcinile delegate se deschid lângă Coordonator și îi poți scrie direct unui agent. Încheierea unui raport păstrează proiectul și Coordonatorul deschiși pentru următorul tău mesaj."
+        },
+        {
+          "title": "Accesul aprobat se păstrează",
+          "body": "Coordonatorul folosește accesul aprobat al proiectului fără aprobări suplimentare pentru comenzi și păstrează folderele suplimentare aprobate când se reactivează. Aprobările pentru lucrul delegat rămân la sarcina respectivă.",
+          "detail": "Agenții delegați apar în lista Sarcini a proiectului, iar listele se actualizează când redeschizi bara laterală."
+        },
+        {
+          "title": "AI-urile tale, toate într-un loc",
+          "body": "În Setări e o pagină nouă, AI-urile tale, unde te conectezi la agenți, îți adaugi cheile și verifici că fiecare conexiune merge.",
+          "detail": "Poți avea mai multe conturi sau chei pentru același furnizor, găsești orice conexiune cu căutarea și filtrele, iar cu Automat agentul folosește modelul pe care îl recomandă. Poți adăuga și Grok Build, OpenCode, Kimi Code și alți agenți din catalogul public; aplicația îți spune când un agent vine de la un autor extern."
+        },
+        {
+          "title": "Alegerea automată a modelului",
+          "body": "Alegi Automat și fiecare agent folosește modelul pe care îl recomandă, ca să nu mai alegi unul de fiecare dată.",
+          "detail": "Poți în continuare să alegi un model anume pentru orice conversație."
+        },
+        {
+          "title": "Lucrul continuă când se termină limita",
+          "body": "Codevalanche îți arată cât a mai rămas din abonamentele Claude și Codex și când se resetează fiecare limită.",
+          "detail": "AI-urile tale arată limitele fiecărui abonament, iar Setările au un aspect mai simplu și mai aerisit."
+        },
+        {
+          "title": "Modele locale în conversații",
+          "body": "Modelele locale răspund în conversații, câte un mesaj pe rând, și spun limpede de ce atunci când nu pot."
+        },
+        {
+          "title": "Vorbește cu agenții",
+          "body": "Modul vocal răspunde cu o voce naturală care vine cu aplicația, fără nimic de descărcat. Gândește cât de mult ai ales, spune când se gândește și se oprește imediat când nu mai ai nevoie de răspuns. Ascultarea doar a vocii tale este experimentală."
+        },
+        {
+          "title": "Din chat, direct pe internet",
+          "body": "Când site-ul e gata, îl publici pe GitHub Pages sau Vercel direct din chat și trimiți linkul."
+        },
+        {
+          "title": "Acces complet pentru mesajul tău",
+          "body": "Accesul complet se aplică mesajului pe care îl trimiți, fără cereri suplimentare de aprobare.",
+          "detail": "Continui în aceeași conversație cu serverul pornit, până când oprești conversația sau îi închizi spațiul de lucru."
+        },
+        {
+          "title": "Atașamente cu orice agent",
+          "body": "Atașamentele merg cu orice agent, inclusiv fișierele adăugate în timp ce agentul lucrează."
+        },
+        {
+          "title": "Mai ușoară și mai stabilă",
+          "body": "Aplicația folosește mult mai puțină memorie cu un istoric lung și pornește mai repede. Pe un Windows proaspăt instalat nu se mai oprește cu eroarea VCRUNTIME140.dll lipsă și te avertizează când discul e aproape plin.",
+          "detail": "Codevalanche pornește și răspunde mai repede, fără să mai aibă nevoie de Node. Undo, aprobările și continuarea cu Codex funcționează sigur, inclusiv după repornire sau o închidere neașteptată."
+        },
+        {
+          "title": "Reparații",
+          "body": "O sarcină al cărei agent nu a putut porni nu mai rămâne în coadă ore întregi.",
+          "detail": "Setări › Computer use nu mai transformă toată fereastra în „This page couldn't load”, iar dialogurile deschise dintr-un meniu nu mai stau sub propriul fundal întunecat."
+        }
+      ]
+    },
+    "ru": {
+      "headline": "Проекты с координатором, локальные модели в разговорах и естественный голос",
+      "summary": "Первое публичное обновление после 1.0.1 и самое крупное на сегодня. Codevalanche вырос из отдельных разговоров в целые проекты под управлением координатора, научился говорить, привёл локальные модели в разговоры и стал гораздо более лёгким приложением. Вот весь путь, шаг за шагом.",
+      "sections": [
+        {
+          "title": "Проекты",
+          "body": "У каждого проекта свой координатор: он запускает агентов, следит за их работой и отчитывается перед вами.",
+          "detail": "Делегированные задачи открываются рядом с координатором, и агенту можно написать напрямую. После завершения отчёта проект и его Координатор остаются открытыми для вашего следующего сообщения."
+        },
+        {
+          "title": "Одобренный доступ сохраняется",
+          "body": "Координатор использует одобренный доступ к проекту без дополнительных разрешений на команды и сохраняет одобренные дополнительные папки после пробуждения. Разрешения для делегированной работы остаются у соответствующей задачи.",
+          "detail": "Агенты, которым делегирована работа, появляются в списке задач проекта, а списки обновляются при повторном открытии боковой панели."
+        },
+        {
+          "title": "Ваши ИИ — всё в одном месте",
+          "body": "В настройках появилась страница «Ваши ИИ»: здесь вы входите в своих агентов, добавляете ключи и проверяете, что каждое подключение работает.",
+          "detail": "Добавляйте несколько аккаунтов или ключей одного поставщика, находите любое подключение через поиск и фильтры и выбирайте «Автоматически», чтобы агент использовал рекомендуемую модель. Можно добавить и Grok Build, OpenCode, Kimi Code и других агентов из открытого каталога; приложение предупредит, если агент от стороннего издателя."
+        },
+        {
+          "title": "Автоматический выбор модели",
+          "body": "Выберите «Автоматически», и каждый агент будет использовать рекомендуемую им модель — не нужно выбирать её каждый раз.",
+          "detail": "Для любого чата по-прежнему можно выбрать конкретную модель."
+        },
+        {
+          "title": "Работа продолжается, когда кончается лимит",
+          "body": "Codevalanche показывает, сколько осталось от ваших подписок Claude и Codex и когда сбросится каждый лимит.",
+          "detail": "Раздел «Ваши ИИ» показывает лимиты каждой подписки, а настройки стали проще и легче на вид."
+        },
+        {
+          "title": "Локальные модели в разговорах",
+          "body": "Локальные модели отвечают в разговорах, по одному ходу за раз, и прямо объясняют причину, когда не могут ответить."
+        },
+        {
+          "title": "Говорите с агентами",
+          "body": "Голосовой режим отвечает естественным голосом, который входит в приложение, — ничего скачивать не нужно. Он думает так глубоко, как вы выбрали, говорит, когда думает, и сразу останавливается, когда ответ вам больше не нужен. Режим, в котором слышен только ваш голос, экспериментальный."
+        },
+        {
+          "title": "Из чата сразу в интернет",
+          "body": "Когда сайт готов, опубликуйте его на GitHub Pages или Vercel прямо из чата и поделитесь ссылкой."
+        },
+        {
+          "title": "Полный доступ для вашего сообщения",
+          "body": "Полный доступ применяется к отправляемому сообщению без дополнительных запросов разрешений.",
+          "detail": "Продолжайте работу в том же чате: сервер разработки работает, пока вы не остановите чат или не закроете его рабочую область."
+        },
+        {
+          "title": "Вложения с любым агентом",
+          "body": "Вложения работают с любым агентом, включая файлы, добавленные во время работы агента."
+        },
+        {
+          "title": "Легче и стабильнее",
+          "body": "С длинной историей приложение занимает гораздо меньше памяти и открывается быстрее. На только что установленной Windows оно больше не останавливается с ошибкой об отсутствии VCRUNTIME140.dll и предупреждает, когда диск почти заполнен.",
+          "detail": "Codevalanche быстрее запускается и отвечает, а установка Node больше не нужна. Отмена изменений, разрешения и продолжение с Codex работают надёжно даже после перезапуска или неожиданного закрытия."
+        },
+        {
+          "title": "Исправления",
+          "body": "Задача, агент которой не смог запуститься, больше не остаётся в очереди часами.",
+          "detail": "Настройки › Computer use больше не превращают всё окно в «This page couldn't load», а диалоги, открытые из меню, больше не оказываются под собственным затемнённым фоном."
+        }
+      ]
+    },
+    "tr": {
+      "headline": "Koordinatörlü projeler, konuşmalarda yerel modeller ve doğal bir ses",
+      "summary": "1.0.1'den bu yana ilk genel güncelleme ve şimdiye kadarki en büyüğü. Codevalanche tek tek konuşmalardan, bir Koordinatörün yönettiği bütün projelere büyüdü, konuşmayı öğrendi, yerel modelleri konuşmalara taşıdı ve çok daha hafif bir uygulama oldu. İşte tüm yol, adım adım.",
+      "sections": [
+        {
+          "title": "Projeler",
+          "body": "Her projenin kendi Koordinatörü var: ajanları başlatır, işlerini izler ve sana rapor verir.",
+          "detail": "Devredilen görevler Koordinatörün yanında açılır ve bir ajana doğrudan yazabilirsin. Bir rapor tamamlandığında proje ve Koordinatörü sonraki mesajınız için açık kalır."
+        },
+        {
+          "title": "Onaylanan erişim korunur",
+          "body": "Koordinatör ek komut onayları istemeden onaylanan proje erişimini kullanır ve yeniden etkinleştiğinde onaylanan ek klasörleri korur. Devredilen işlerin onayları ilgili görevde kalır.",
+          "detail": "Görev devredilen ajanlar projenin Görevler listesinde görünür ve kenar çubuğunu yeniden açtığınızda listeler yenilenir."
+        },
+        {
+          "title": "Yapay zekâlarınız, hepsi tek yerde",
+          "body": "Ayarlar'da yeni bir sayfa var, Yapay zekâlarınız: ajanlarınızda oturum açar, anahtarlarınızı ekler ve her bağlantının çalıştığını kontrol edersiniz.",
+          "detail": "Aynı sağlayıcı için birden fazla hesap veya anahtar ekleyin, arama ve filtrelerle her bağlantıyı bulun, Otomatik'i seçerek ajanın önerdiği modeli kullanmasını sağlayın. Herkese açık katalogdan Grok Build, OpenCode, Kimi Code ve başka ajanlar da ekleyebilirsiniz; bir ajan üçüncü taraf bir yayıncıdan geliyorsa uygulama size söyler."
+        },
+        {
+          "title": "Otomatik model seçimi",
+          "body": "Otomatik’i seç; her ajan önerdiği modeli kullanır, böylece her seferinde model seçmen gerekmez.",
+          "detail": "Yine de her sohbet için belirli bir model seçebilirsin."
+        },
+        {
+          "title": "Limit dolduğunda da çalışmaya devam",
+          "body": "Codevalanche, Claude ve Codex planlarınızdan ne kadar kaldığını ve her limitin ne zaman sıfırlanacağını gösterir.",
+          "detail": "Yapay zekâlarınız sayfası her aboneliğin kendi limitlerini gösterir, Ayarlar ise daha sade ve hafif bir görünüme kavuştu."
+        },
+        {
+          "title": "Konuşmalarda yerel modeller",
+          "body": "Yerel modeller konuşmalarda her seferinde bir tur yanıt verir ve yanıt veremediğinde nedenini açıkça söyler."
+        },
+        {
+          "title": "Ajanlarınla konuş",
+          "body": "Ses modu, uygulamayla gelen doğal bir sesle yanıt verir; indirilecek bir şey yoktur. Seçtiğin kadar derin düşünür, düşünürken bunu söyler ve yanıta artık ihtiyacın olmadığında hemen durur. Yalnızca senin sesini dinlemek deneyseldir."
+        },
+        {
+          "title": "Sohbetten yayındaki siteye",
+          "body": "Siteniz hazır olduğunda onu sohbetten doğrudan GitHub Pages veya Vercel'de yayınlayın ve bağlantıyı paylaşın."
+        },
+        {
+          "title": "Mesajınız için tam erişim",
+          "body": "Tam erişim, gönderdiğiniz mesaj için ek onay istenmeden uygulanır.",
+          "detail": "Sohbeti durdurana veya çalışma alanını kapatana kadar geliştirme sunucunuz çalışırken aynı sohbette işinize devam edin."
+        },
+        {
+          "title": "Her ajanla ekler",
+          "body": "Ekler her ajanla çalışır; ajan çalışırken eklenen dosyalar da buna dahildir."
+        },
+        {
+          "title": "Daha hafif ve daha kararlı",
+          "body": "Uygulama uzun bir geçmişle çok daha az bellek kullanır ve daha hızlı açılır. Yeni kurulmuş bir Windows'ta artık VCRUNTIME140.dll bulunamadı hatasıyla durmaz ve disk dolmak üzereyken seni uyarır.",
+          "detail": "Codevalanche daha hızlı açılır ve yanıt verir; Node kurulumu gerekmez. Geri alma, onaylar ve Codex ile devam etme, yeniden başlatma veya beklenmedik kapanmadan sonra da güvenilir biçimde çalışır."
+        },
+        {
+          "title": "Düzeltmeler",
+          "body": "Ajanı başlatılamayan bir görev artık saatlerce kuyrukta kalmıyor.",
+          "detail": "Ayarlar › Computer use artık tüm pencereyi “This page couldn't load” ekranına çevirmiyor ve bir menüden açılan iletişim kutuları artık kendi karartılmış arka planının altında kalmıyor."
+        }
+      ]
+    },
+    "vi": {
+      "headline": "Dự án có Điều phối viên, mô hình cục bộ trong cuộc trò chuyện và giọng nói tự nhiên",
+      "summary": "Bản cập nhật công khai đầu tiên kể từ 1.0.1, và cũng là bản lớn nhất từ trước đến nay. Codevalanche đã lớn lên từ những cuộc trò chuyện riêng lẻ thành các dự án trọn vẹn do một Điều phối viên dẫn dắt, biết nói, đưa mô hình cục bộ vào cuộc trò chuyện và trở thành một ứng dụng nhẹ hơn nhiều. Đây là toàn bộ chặng đường, từng bước một.",
+      "sections": [
+        {
+          "title": "Dự án",
+          "body": "Mỗi dự án có Điều phối viên riêng, khởi động các tác nhân, theo dõi công việc của chúng và báo cáo lại cho bạn.",
+          "detail": "Các nhiệm vụ được giao mở ngay bên cạnh Điều phối viên, và bạn có thể viết trực tiếp cho một tác nhân. Sau khi hoàn tất báo cáo, dự án và Điều phối viên vẫn mở để nhận tin nhắn tiếp theo của bạn."
+        },
+        {
+          "title": "Giữ quyền truy cập đã phê duyệt",
+          "body": "Điều phối viên dùng quyền truy cập dự án đã phê duyệt mà không yêu cầu phê duyệt thêm cho lệnh, đồng thời giữ các thư mục bổ sung đã phê duyệt khi hoạt động trở lại. Phê duyệt cho công việc được giao vẫn gắn với tác vụ đó.",
+          "detail": "Các tác nhân được giao việc xuất hiện trong danh sách Tác vụ của dự án, và các danh sách được làm mới khi bạn mở lại thanh bên."
+        },
+        {
+          "title": "AI của bạn, tất cả ở một nơi",
+          "body": "Cài đặt có trang mới, AI của bạn, nơi bạn đăng nhập vào các tác tử, thêm khóa và kiểm tra từng kết nối có hoạt động không.",
+          "detail": "Thêm nhiều tài khoản hoặc khóa cho cùng một nhà cung cấp, tìm mọi kết nối bằng ô tìm kiếm và bộ lọc, và chọn Tự động để tác tử dùng mô hình mà nó đề xuất. Bạn cũng có thể thêm Grok Build, OpenCode, Kimi Code và các tác tử khác từ danh mục công khai; ứng dụng sẽ báo khi một tác tử đến từ nhà phát hành bên thứ ba."
+        },
+        {
+          "title": "Chọn mô hình Tự động",
+          "body": "Chọn Tự động và mỗi tác nhân sẽ dùng mô hình mà nó đề xuất, nên bạn không cần chọn mỗi lần.",
+          "detail": "Bạn vẫn có thể chọn một mô hình cụ thể cho bất kỳ cuộc trò chuyện nào."
+        },
+        {
+          "title": "Vẫn làm việc khi chạm hạn mức",
+          "body": "Codevalanche cho biết gói Claude và Codex của bạn còn bao nhiêu và khi nào mỗi hạn mức được đặt lại.",
+          "detail": "AI của bạn hiển thị hạn mức riêng của từng gói đăng ký, và Cài đặt có giao diện đơn giản, nhẹ nhàng hơn."
+        },
+        {
+          "title": "Mô hình cục bộ trong cuộc trò chuyện",
+          "body": "Mô hình cục bộ trả lời trong cuộc trò chuyện, mỗi lần một lượt, và nói rõ lý do khi không thể trả lời."
+        },
+        {
+          "title": "Nói chuyện với các tác nhân",
+          "body": "Chế độ giọng nói trả lời bằng một giọng tự nhiên đi kèm ứng dụng, không cần tải gì. Nó suy nghĩ sâu như bạn đã chọn, cho biết khi đang suy nghĩ và dừng ngay khi bạn không cần câu trả lời nữa. Chỉ nghe giọng của riêng bạn vẫn đang thử nghiệm."
+        },
+        {
+          "title": "Từ khung chat đến trang web trực tuyến",
+          "body": "Khi trang web đã xong, hãy xuất bản lên GitHub Pages hoặc Vercel ngay từ khung chat và chia sẻ liên kết."
+        },
+        {
+          "title": "Toàn quyền truy cập cho tin nhắn của bạn",
+          "body": "Toàn quyền truy cập áp dụng cho tin nhắn bạn gửi mà không yêu cầu phê duyệt thêm.",
+          "detail": "Tiếp tục làm việc trong cùng cuộc trò chuyện khi máy chủ phát triển đang chạy, cho đến khi bạn dừng cuộc trò chuyện hoặc đóng không gian làm việc của nó."
+        },
+        {
+          "title": "Tệp đính kèm với mọi tác nhân",
+          "body": "Tệp đính kèm hoạt động với mọi tác nhân, kể cả các tệp được thêm khi tác nhân đang làm việc."
+        },
+        {
+          "title": "Nhẹ hơn và ổn định hơn",
+          "body": "Ứng dụng dùng ít bộ nhớ hơn nhiều với lịch sử dài và mở nhanh hơn. Trên Windows mới cài, ứng dụng không còn dừng với lỗi thiếu VCRUNTIME140.dll và sẽ cảnh báo khi ổ đĩa gần đầy.",
+          "detail": "Codevalanche khởi động và trả lời nhanh hơn, không cần cài Node. Hoàn tác, phê duyệt và tiếp tục với Codex hoạt động ổn định, kể cả sau khi khởi động lại hoặc đóng đột ngột."
+        },
+        {
+          "title": "Sửa lỗi",
+          "body": "Nhiệm vụ có tác nhân không khởi động được sẽ không còn nằm trong hàng đợi suốt nhiều giờ.",
+          "detail": "Cài đặt › Computer use không còn biến cả cửa sổ thành “This page couldn't load”, và các hộp thoại mở từ menu không còn nằm dưới chính nền mờ của chúng."
+        }
+      ]
+    },
+    "zh-Hans": {
+      "headline": "带协调者的项目、对话中的本地模型，以及自然的声音",
+      "summary": "这是自 1.0.1 以来的首次公开更新，也是迄今最大的一次。Codevalanche 从单个对话成长为由协调者带领的完整项目，学会了说话，把本地模型带进了对话，并成为一款轻快得多的应用。下面是完整的历程，一步一步讲。",
+      "sections": [
+        {
+          "title": "项目",
+          "body": "每个项目都有自己的协调者，负责启动智能体、跟进它们的工作并向你汇报。",
+          "detail": "委派的任务会在协调者旁边打开，你也可以直接给某个智能体写消息。完成报告后，项目及其协调者仍保持打开，随时接收你的下一条消息。"
+        },
+        {
+          "title": "保留已批准的访问权限",
+          "body": "协调者使用已批准的项目访问权限，无需额外审批命令，并在唤醒时保留已批准的额外文件夹。委派工作的审批仍归属于对应任务。",
+          "detail": "受委派的智能体会出现在项目的任务列表中，重新打开侧边栏时列表会刷新。"
+        },
+        {
+          "title": "你的 AI，全部集中一处",
+          "body": "设置里新增了“你的 AI”页面：在这里登录你的代理、添加密钥，并检查每个连接是否正常。",
+          "detail": "同一个提供商可以添加多个账户或密钥，用搜索和筛选快速找到任何连接，选择“自动”即可让代理使用它推荐的模型。你还可以从公共目录添加 Grok Build、OpenCode、Kimi Code 等代理；如果代理来自第三方发布者，应用会提醒你。"
+        },
+        {
+          "title": "自动选择模型",
+          "body": "选择自动后，每个智能体都会使用它推荐的模型，你不必每次都挑选。",
+          "detail": "你仍然可以为任何对话选择特定的模型。"
+        },
+        {
+          "title": "额度用完，工作照常继续",
+          "body": "Codevalanche 会显示你的 Claude 和 Codex 套餐还剩多少，以及每个额度何时重置。",
+          "detail": "“你的 AI”会显示每个订阅各自的额度，设置的外观也更简洁、更轻盈。"
+        },
+        {
+          "title": "对话中的本地模型",
+          "body": "本地模型可以在对话中回答，一次一轮；无法回答时会明确说明原因。"
+        },
+        {
+          "title": "与智能体对话",
+          "body": "语音模式使用应用自带的自然声音回答，无需下载。它按你选择的深度思考，思考时会告诉你，并在你不再需要回答时立即停止。只听你本人的声音目前仍是实验功能。"
+        },
+        {
+          "title": "从聊天到上线的网站",
+          "body": "网站做好后，直接在聊天中发布到 GitHub Pages 或 Vercel，然后分享链接。"
+        },
+        {
+          "title": "为当前消息启用完全访问",
+          "body": "完全访问应用于你发送的消息，无需额外审批。",
+          "detail": "在同一聊天中继续工作，开发服务器会持续运行，直到你停止聊天或关闭其工作区。"
+        },
+        {
+          "title": "所有智能体都支持附件",
+          "body": "附件可用于所有智能体，包括在智能体工作时添加的文件。"
+        },
+        {
+          "title": "更轻快，更稳定",
+          "body": "即使历史很长，应用也占用少得多的内存，启动更快。在新安装的 Windows 上不再因缺少 VCRUNTIME140.dll 而停止，磁盘快满时也会提醒你。",
+          "detail": "Codevalanche 启动和响应更快，也不再需要安装 Node。撤销、审批和 Codex 继续功能在重启或意外关闭后也能可靠工作。"
+        },
+        {
+          "title": "修复",
+          "body": "智能体无法启动的任务不会再在队列中滞留数小时。",
+          "detail": "“设置 › Computer use”不会再让整个窗口变成“This page couldn't load”，从菜单打开的对话框也不会再被自己的暗色背景遮住。"
+        }
+      ]
+    },
+    "zh-Hant": {
+      "headline": "有協調者的專案、對話中的本機模型，以及自然的聲音",
+      "summary": "這是自 1.0.1 以來的首次公開更新，也是至今最大的一次。Codevalanche 從單一對話成長為由協調者帶領的完整專案，學會了說話，把本機模型帶進對話，並成為一款輕快許多的應用程式。以下是完整的歷程，一步一步說明。",
+      "sections": [
+        {
+          "title": "專案",
+          "body": "每個專案都有自己的協調者，負責啟動代理、跟進它們的工作並向你回報。",
+          "detail": "委派的任務會在協調者旁邊開啟，你也可以直接寫訊息給某個代理。完成報告後，專案及其協調者仍保持開啟，隨時接收你的下一則訊息。"
+        },
+        {
+          "title": "保留已核准的存取權限",
+          "body": "協調者使用已核准的專案存取權限，無需額外核准命令，並在喚醒時保留已核准的額外資料夾。委派工作的核准仍歸屬於對應任務。",
+          "detail": "受委派的代理會出現在專案的任務清單中，重新開啟側邊欄時清單會重新整理。"
+        },
+        {
+          "title": "你的 AI，全部集中一處",
+          "body": "設定裡新增了「你的 AI」頁面：在這裡登入你的代理、新增金鑰，並檢查每個連線是否正常。",
+          "detail": "同一個供應商可以新增多個帳戶或金鑰，用搜尋和篩選快速找到任何連線，選擇「自動」即可讓代理使用它推薦的模型。你也可以從公開目錄新增 Grok Build、OpenCode、Kimi Code 等代理；如果代理來自第三方發行者，應用程式會提醒你。"
+        },
+        {
+          "title": "自動選擇模型",
+          "body": "選擇自動後，每個智慧體都會使用它推薦的模型，你不必每次都挑選。",
+          "detail": "你仍然可以為任何對話選擇特定的模型。"
+        },
+        {
+          "title": "額度用完，工作照常繼續",
+          "body": "Codevalanche 會顯示你的 Claude 和 Codex 方案還剩多少，以及每個額度何時重置。",
+          "detail": "「你的 AI」會顯示每個訂閱各自的額度，設定的外觀也更簡潔、更輕盈。"
+        },
+        {
+          "title": "對話中的本機模型",
+          "body": "本機模型可以在對話中回答，一次一輪；無法回答時會清楚說明原因。"
+        },
+        {
+          "title": "與代理對話",
+          "body": "語音模式以應用程式內建的自然聲音回答，無需下載。它依你選擇的深度思考，思考時會告訴你，並在你不再需要回答時立即停止。只聽你本人的聲音目前仍是實驗功能。"
+        },
+        {
+          "title": "從聊天到上線的網站",
+          "body": "網站做好後，直接在聊天中發布到 GitHub Pages 或 Vercel，然後分享連結。"
+        },
+        {
+          "title": "為目前訊息啟用完整存取",
+          "body": "完整存取會套用至你傳送的訊息，無需額外審批。",
+          "detail": "在同一聊天中繼續工作，開發伺服器會持續執行，直到你停止聊天或關閉其工作區。"
+        },
+        {
+          "title": "所有代理都支援附件",
+          "body": "附件可用於所有代理，包括在代理工作時加入的檔案。"
+        },
+        {
+          "title": "更輕快，更穩定",
+          "body": "即使歷史很長，應用程式也使用少得多的記憶體，開啟更快。在新安裝的 Windows 上不再因缺少 VCRUNTIME140.dll 而停止，磁碟快滿時也會提醒你。",
+          "detail": "Codevalanche 啟動和回應更快，也不再需要安裝 Node。復原、核准和 Codex 繼續功能在重新啟動或意外關閉後也能可靠運作。"
+        },
+        {
+          "title": "修正",
+          "body": "代理無法啟動的任務不會再在佇列中停留數小時。",
+          "detail": "「設定 › Computer use」不會再讓整個視窗變成「This page couldn't load」，從選單開啟的對話框也不會再被自己的暗色背景蓋住。"
+        }
+      ]
+    }
+  }
+}

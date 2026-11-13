@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#faf9f5">
+  <meta name="theme-color" content="#0a0b0c">
   <meta name="description" content="Your project, the selected provider and the active tools each have a role. Check those boundaries before you start a task.">
   <link rel="canonical" href="https://codevalanche.com/security/">
   <meta property="og:type" content="website">
@@ -21,18 +21,64 @@
   <meta name="twitter:image" content="https://codevalanche.com/assets/codevalanche-link-preview.png">
   <meta name="twitter:image:alt" content="The Codevalanche logo.">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <script>(function(){var t="light";try{var s=localStorage.getItem("codevalanche_theme");if(s==="light"||s==="dark"){t=s}else if(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches){t="dark"}}catch(e){}document.documentElement.setAttribute("data-theme",t);document.documentElement.classList.add("js")})()</script>
+  <script>(function(){document.documentElement.setAttribute("data-theme","dark");document.documentElement.classList.add("js")})()</script>
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/product-pages.css">
+  <link rel="stylesheet" href="/home.css">
   <title>Security and data boundaries | Codevalanche</title>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="u-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="u-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
+  <symbol id="u-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="u-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="u-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  <symbol id="u-dots" viewBox="0 0 24 24"><path d="M5 12h.01M12 12h.01M19 12h.01"/></symbol>
+  <symbol id="u-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2.2"/><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="8" r="2.2"/><path d="M6 7.2v9.6M18 10.2c0 4-6 3-11 5.6"/></symbol>
+  <symbol id="u-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="u-deny" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></symbol>
+  <symbol id="u-enter" viewBox="0 0 24 24"><path d="M20 5v7a3 3 0 0 1-3 3H5M9 11l-4 4 4 4"/></symbol>
+  <symbol id="u-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
+  <symbol id="u-home" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="u-side" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></symbol>
+  <symbol id="u-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17h.01"/></symbol>
+  <symbol id="u-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5"/></symbol>
+  <symbol id="u-term" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 9 3 3-3 3M13 15h4"/></symbol>
+  <symbol id="u-dl" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol>
+  <symbol id="u-disk" viewBox="0 0 24 24"><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M5.5 13 8 5h8l2.5 8M7 16.5h.01M11 16.5h6"/></symbol>
+  <symbol id="u-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v6c0 4.5 3.2 7.7 7.5 9 4.3-1.3 7.5-4.5 7.5-9V6z"/><path d="m9 12 2.2 2.2L15 10.4"/></symbol>
+  <symbol id="u-undo" viewBox="0 0 24 24"><path d="M4 9h10a5 5 0 0 1 0 10H9M8 5 4 9l4 4"/></symbol>
+  <symbol id="u-gauge" viewBox="0 0 24 24"><path d="M4 18a9 9 0 1 1 16 0M12 13l4-5"/></symbol>
+  <symbol id="u-win" viewBox="0 0 24 24"><path d="M3 5.5 10.5 4.4v7.100H3zM11.5 4.3 21 3v8.5h-9.5zM3 12.5h7.5v7.100L3 18.5zM11.5 12.5H21V21l-9.5-1.3z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="u-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+  <symbol id="u-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.100 2.100M16.3 16.3l2.100 2.100M5.6 18.4l2.100-2.100M16.3 7.7l2.100-2.100"/></symbol>
+  <symbol id="u-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="u-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.3 3 14.7 0 18M12 3c-3 3.3-3 14.7 0 18"/></symbol>
+  <symbol id="u-chat" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.800 7L4 20l1.2-4A8 8 0 1 1 20 12z"/></symbol>
+  <symbol id="u-tabs" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 9.5h18M8 5v4.5"/></symbol>
+  <symbol id="u-chevr" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+  <symbol id="u-repeat" viewBox="0 0 24 24"><path d="M4 11V9a3 3 0 0 1 3-3h11M15 3l3 3-3 3M20 13v2a3 3 0 0 1-3 3H6M9 21l-3-3 3-3"/></symbol>
+  <symbol id="u-sun" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+  <symbol id="u-lang" viewBox="0 0 24 24"><path d="M4 6h9M8.5 4v2M6 6c.5 3.5 3 6 6 7M11 6c-.5 3.5-3 6.5-7 8M13 20l4-9 4 9M14.5 17h5"/></symbol>
+  <symbol id="u-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+  <symbol id="u-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.5"/><rect x="10" y="10" width="4" height="4" rx="1"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></symbol>
+</defs></svg>
   <!-- site-header -->
   <main class="product-page shell" id="main">
     <section class="page-intro" id="hero" data-analytics-section="hero">
       <div class="page-intro-copy"><p class="kicker">Security and data boundaries</p><h1>Know what stays local. Know what you connect.</h1><p class="page-lede">Your project, the selected provider and the active tools each have a role. Check those boundaries before you start a task.</p><div class="page-actions"><a class="button button-primary" href="/docs/">Getting started</a><a class="button" href="/download/">Download for Windows</a></div></div>
-      <figure class="page-figure"><a class="page-image-link" href="/assets/shots/approval.webp"><picture><source media="(max-width: 760px)" srcset="/assets/shots/approval-detail-640.webp 640w, /assets/shots/approval-detail-960.webp 960w, /assets/shots/approval-detail.webp 1400w" sizes="100vw" width="1400" height="1256"><img src="/assets/shots/approval.webp" width="2000" height="1250" alt="An approval request in Codevalanche: the agent asks to run npm test, with Allow once and Deny buttons." fetchpriority="high" decoding="async"></picture></a><figcaption>A command approval request in the example build. Permission behavior depends on the selected runtime and mode.</figcaption></figure>
+      <figure class="page-figure"><div class="cvx cvx-fig" aria-hidden="true"><div class="stage" style="--g:255,180,107"><div class="ghost"><div><i style="width:60%"></i><i></i><i style="width:80%"></i></div><div><i style="width:50%"></i><i style="width:75%"></i></div></div>
+        <div class="fg app">
+          <div class="approve">
+            <div class="top"><svg class="ui" style="color:var(--amber)"><use href="#u-term"/></svg><b>Needs approval</b><span style="color:var(--app-dim)">Terminal command</span><span class="risk">Medium risk</span></div>
+            <code>npm test -- map</code><div class="path">C:\code\trailhead</div>
+            <div class="acts"><span class="abtn solid"><svg class="ui"><use href="#u-check"/></svg>Allow once</span><span class="abtn"><svg class="ui"><use href="#u-deny"/></svg>Deny</span></div>
+          </div>
+          
+        </div>
+        </div></div><figcaption>A command approval request in the example build. Permission behavior depends on the selected runtime and mode.</figcaption></figure>
     </section>
     <div class="page-body"><section class="page-section" id="privacy_principles" data-analytics-section="privacy_principles"><div class="page-grid"><h2>Files, inference and credentials.</h2><div class="page-copy"><dl class="page-reference"><div><dt>Repository on disk</dt><dd>The desktop workspace opens your local project. Files can be changed by agent operations; review the actual diff and keep appropriate backups or version history.</dd></div><div><dt>Cloud agents</dt><dd>Using a cloud agent can send task context and relevant project content to that provider. Its own account terms and data practices apply.</dd></div><div><dt>Local inference</dt><dd>Inference runs at the configured local runtime or server. Downloads, tools and external endpoints can still access the network.</dd></div><div><dt>Provider credentials</dt><dd>Claude Code and Codex support separate account configuration. Treat provider credentials as sensitive and verify the chosen account before working.</dd></div></dl><p>The Codevalanche website account is separate from agent authentication. Signing in on the website does not connect a provider account in the desktop app.</p></div></div></section><section class="page-section" id="details" data-analytics-section="details"><div class="page-grid"><h2>Permission, review and recovery.</h2><div class="page-copy"><h3>Check the active permission mode</h3><p>Approval behavior varies by runtime and configuration. A command request describes one operation; it is not a universal guarantee that every write waits for permission.</p><h3>Inspect changes after execution</h3><p>Read the diff and verify the behavior independently. Supported Undo operations have guards and limits; do not assume every filesystem or external action can be reversed.</p><h3>Browser and remote access</h3><p>The embedded browser is a workspace surface. Remote access is a separate capability with its own setup and qualification. Android remains a separately qualified preview, not a generally available remote-access product.</p></div></div></section><section class="page-section" id="report"><div class="page-grid"><h2>Report a security issue.</h2><div class="page-copy"><p>Found a weakness in Codevalanche? Tell us privately first. We read every report, fix real problems and thank the people who find them.</p><h3>What you can report</h3><dl class="page-reference"><div><dt>Desktop app</dt><dd>The latest released version of Codevalanche for Windows.</dd></div><div><dt>Installers and updates</dt><dd>The installers we publish and the update feed the app downloads.</dd></div><div><dt>Website and accounts</dt><dd>codevalanche.com, including the account pages.</dd></div></dl><h3>Not covered here</h3><dl class="page-reference"><div><dt>Other companies’ tools</dt><dd>Problems in Claude Code, Codex or another provider’s own tool or service. Please report those to that provider.</dd></div><div><dt>Services we use</dt><dd>Problems in GitHub, Cloudflare or other services, unless our own setup causes them.</dd></div><div><dt>Attacks on people or availability</dt><dd>Phishing, social engineering, denial of service, spam, or access to anyone else’s account or data.</dd></div><div><dt>Reports without impact</dt><dd>Scanner output without a working proof, or a missing best practice that does not put anyone at risk.</dd></div><div><dt>Known limits</dt><dd>The Windows warning shown for our installer, which is not yet code-signed.</dd></div></dl><h3>How to report</h3><p>Write to the address below. Include the app or website version, the steps to reproduce the problem and what an attacker could do with it.</p><p>Do not send passwords, tokens or private code. If you need to show data, use test data you created yourself. You can write in English or Romanian.</p><a href="mailto:security@radovar.com" data-contact-id="security">security@radovar.com</a><h3>What we promise</h3><dl class="page-reference"><div><dt>A first reply</dt><dd>We confirm that we received your report within 5 working days.</dd></div><div><dt>Updates until it is fixed</dt><dd>We tell you whether we can reproduce the problem and keep you informed until the fix is released.</dd></div><div><dt>Fix times</dt><dd>We aim to fix serious problems within 30 days and other confirmed problems within 90 days.</dd></div><div><dt>Disclosure</dt><dd>Please wait until the fix is released, or 90 days, before you publish details. We can agree on another date together. Security fixes are noted in the changelog.</dd></div></dl><h3>Good-faith research</h3><p>If you follow these rules, we will not take legal action against you. Test only on your own computer and your own accounts. Stop as soon as you reach data that is not yours, and do not keep it. Do not harm our service or other people.</p><h3>Rewards</h3><p>We do not pay money for reports at this time. With your permission, we thank you by name on this page.</p></div></div></section><section class="page-section" id="thanks"><div class="page-grid"><h2>Thank you.</h2><div class="page-copy"><p>People who reported a real problem and agreed to be named appear here.</p><p>The list starts with the first confirmed report.</p></div></div></section><section class="page-section" id="faq" data-analytics-section="faq"><div class="page-grid"><h2>Policies and security contact.</h2><div class="page-copy"><p>For website account data, cookies and the site’s privacy choices, read the privacy policy. For a suspected security issue, contact the security address with a description that excludes passwords, tokens and private repository content.</p><p><a href="/privacy.html">Privacy policy</a> · <a href="/terms.html">Terms</a></p><a href="mailto:security@radovar.com" data-contact-id="security">security@radovar.com</a></div></div></section></div>
     <nav class="page-next" aria-label="Next steps"><a href="/how-it-works/">See how it works</a><a href="/docs/">Getting started</a><a href="/download/">Download for Windows</a></nav>

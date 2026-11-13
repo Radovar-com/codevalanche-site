@@ -299,6 +299,9 @@ test("missing or mismatched acceptance snapshot cannot contribute outcomes days 
 });
 test("all outcome counters and activity fields share exactly the accepted owned account/window population; unqualified native counts stay NULL", async () => {
   const f = await fixture();
+  // A past day inside the default 30-day summary window, relative to today so the test does not expire.
+  const historicalDay = new Date(Date.now() - 10 * 86400000).toISOString().slice(0, 10);
+  const nextDay = new Date(Date.parse(historicalDay) + 86400000).toISOString().slice(0, 10);
   try {
     for (const outcome of ["success", "failed", "cancelled"]) {
       assert.equal((await f.call(f.receipt({ outcome }))).status, 200);
@@ -308,7 +311,7 @@ test("all outcome counters and activity fields share exactly the accepted owned 
       f.receipt({
         projectId: "cws_historical",
         outcome: "success",
-        occurredAt: "2026-10-01T00:00:00.000Z",
+        occurredAt: `${historicalDay}T00:00:00.000Z`,
       }),
     );
     await raw(
@@ -324,7 +327,7 @@ test("all outcome counters and activity fields share exactly the accepted owned 
     assert.equal(s.activeDays, 1);
     assert.ok(s.nativeReceiptWatermark);
     assert.ok(s.lastMeaningfulActivity);
-    s = await summary(f, a, "2026-10-01", "2026-10-02");
+    s = await summary(f, a, historicalDay, nextDay);
     assert.equal(s.nativeReceiptCount, 0);
     assert.equal(s.unconfirmedNativeReceiptCount, 1);
     assert.equal(s.activeDays, 0);
