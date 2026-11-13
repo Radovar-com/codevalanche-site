@@ -1,0 +1,113 @@
+<figure class="docs-figure">
+        <div class="dui" aria-hidden="true">
+          <div class="dui-head"><span class="dot"></span><b>Coordinator</b><span class="meta">2 working · 1 queued</span></div>
+          <div class="dui-goal"><small>Goal</small>Add a booking calendar to the clinic website, with email reminders</div>
+          <div class="dui-row"><span class="t">Database table for bookings</span><span class="docs-pill" style="--c:var(--ok)">Verified · tests passed: 6</span></div>
+          <div class="dui-row"><span class="t">Calendar page</span><span class="docs-pill" style="--c:var(--accent)">Working</span></div>
+          <div class="dui-row"><span class="t">Reminder emails</span><span class="docs-pill" style="--c:var(--warm)">Waiting on you</span></div>
+          <div class="dui-row"><span class="t">End-to-end check</span><span class="docs-pill">Queued</span></div>
+          <div class="dui-bar"><i></i></div>
+          <div class="dui-ask"><b style="color:var(--ink);font-weight:500">Reminder emails · Asks permission:</b> run <code style="font-family:var(--font-mono)">npm install nodemailer</code><div class="acts"><span>Allow</span><span>Deny</span></div></div>
+        </div>
+        <figcaption>The Coordinator panel, redrawn with example content.</figcaption>
+      </figure>
+
+      <h2 id="what-it-is">What the Coordinator is</h2>
+      <p>The Coordinator is an AI that belongs to one <a href="/docs/projects/">project</a>. In the app it is described exactly like this: <em>an AI that takes a goal, splits the work into separate conversations, follows the agents and tells you when it needs you.</em></p>
+      <p>Without it, you talk to one agent at a time. With it, you describe the result you want once and the Coordinator does the managing: it writes the plan, decides which part goes to which agent, starts them, reads their answers, sends work back when a check fails and gives you a short report at the end.</p>
+      <p>Every agent it starts is a normal Codevalanche conversation. You can open it, read everything it did, approve its requests and write to it directly. Nothing happens in a hidden place.</p>
+
+      <h2 id="create">Create a project with a Coordinator</h2>
+      <ol class="docs-steps">
+        <li><strong>Open “New project”</strong> from the left bar.</li>
+        <li><strong>Name it.</strong> Any name from 1 to 120 characters.</li>
+        <li><strong>Write the goal (optional).</strong> In <span class="ui-term">What do you want to work on?</span> describe the result, for example “an online shop with a cart and card payments”. If you write one, the Coordinator starts on it as soon as the project opens. Leave it empty to start from the project's page.</li>
+        <li><strong>Choose where it works.</strong> Under <span class="ui-term">Context</span>, pick <span class="ui-term">Add a folder</span> for code already on your PC, or <span class="ui-term">Clone a GitHub repository</span>. With no folder, the project gets a new folder of its own.</li>
+        <li><strong>Press <span class="ui-term">Create project</span>.</strong> The project opens with its Coordinator on top.</li>
+      </ol>
+      <div class="docs-callout note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg><p>The Coordinator needs at least one connected AI. If none is connected you will see <span class="ui-term">No AI is connected</span>: connect one in <a href="/docs/your-ais/">Your AIs</a> and the Coordinator and its agents start by themselves.</p></div>
+      <div class="docs-callout note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg><p>The Coordinator is marked experimental in the app. It works while this computer is on and Codevalanche is running.</p></div>
+      <p>A project you created without the Coordinator can turn it on later from <a href="/docs/projects/settings/">Project settings</a> › Coordinator.</p>
+
+      <h2 id="how-it-works">How a goal becomes finished work</h2>
+      <h3 id="plan">1. The plan</h3>
+      <p>The Coordinator reads your goal, the project's folders, its <a href="/docs/projects/settings/#memory">memory</a> and your <a href="/docs/projects/settings/#instructions">instructions</a>, then writes <span class="ui-term">The plan</span>: a list of tasks with a counter such as “2 of 4 done”.</p>
+      <h3 id="agents">2. The agents</h3>
+      <p>Each task becomes its own conversation with an agent, marked <span class="ui-term">Task from the Coordinator</span>. Agents use the model you chose in <a href="/docs/projects/settings/#models">Model for agents</a>, or the Coordinator's model if you left it on <span class="ui-term">Same as the coordinator</span>. When all places are busy, a task waits with <span class="ui-term">In the queue: it starts when a place frees up.</span></p>
+      <h3 id="checking">3. The checks</h3>
+      <p>When an agent says it is done, the Coordinator checks the work, running the project's tests when it can. A task that passes is marked <span class="ui-term">Verified</span>, often with the number of tests that passed. If the check fails, the Coordinator sends it back to the agent with a note and counts the round.</p>
+      <h3 id="report">4. The report</h3>
+      <p>When everything is finished you get a clear account, not a vague “done”: <em>“The goal is done. Here is what was checked and what was not”</em>, with a line such as “5 verified · 1 not verified”. Work the Coordinator could not verify is always labelled that way, with the reason.</p>
+
+      <h2 id="statuses">What each status means</h2>
+      <table class="docs-table">
+        <thead><tr><th>Status</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td><span class="docs-pill">Queued</span></td><td>Planned, waiting for a free place to start.</td></tr>
+          <tr><td><span class="docs-pill" style="--c:var(--accent)">Working</span></td><td>An agent is working on it now.</td></tr>
+          <tr><td><span class="docs-pill" style="--c:var(--warm)">Waiting on you</span></td><td>The agent asked a question or needs permission. It appears in the list as <span class="ui-term">Asks you</span> or <span class="ui-term">Needs OK</span>.</td></tr>
+          <tr><td><span class="docs-pill" style="--c:var(--blue)">Checking</span></td><td>The agent finished and the Coordinator is checking the result.</td></tr>
+          <tr><td><span class="docs-pill" style="--c:var(--ok)">Verified</span></td><td>The check passed.</td></tr>
+          <tr><td><span class="docs-pill">Done · not verified</span></td><td>Finished, but the Coordinator could not check it. The reason is shown.</td></tr>
+          <tr><td><span class="docs-pill" style="--c:var(--violet)">Reopened</span> / <span class="docs-pill" style="--c:var(--violet)">Re-checking</span></td><td>Sent back after a failed check, or being checked again.</td></tr>
+          <tr><td><span class="docs-pill" style="--c:var(--ok)">Accepted by you</span></td><td>You chose <span class="ui-term">Accept as is</span> for work that was not verified.</td></tr>
+          <tr><td><span class="docs-pill">Waiting for limit</span></td><td>The AI's usage limit was reached. It continues by itself when the limit resets, if that setting is on.</td></tr>
+          <tr><td><span class="docs-pill">Stopped</span> / <span class="docs-pill" style="--c:var(--warm)">Error · retrying</span></td><td>Stopped by you or by the Coordinator being turned off, or a failed run that is being retried.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="needs-you">When it needs you</h2>
+      <p>The Coordinator handles the routine work, but some decisions stay yours. Questions about missing information always need your answer, and each agent’s AI app still checks its own tool permissions. Agents still follow the <a href="/docs/agents/approvals/">approval rules</a> of their conversation, so a command or file change that needs permission shows up with <span class="ui-term">Allow</span> and <span class="ui-term">Deny</span>. Questions show up with <span class="ui-term">Reply</span>.</p>
+      <ul>
+        <li>The project's list shows how many tasks need you, for example “2 need you”. Use <span class="ui-term">Show only what needs you</span> to hide everything else.</li>
+        <li>When you come back after a while, <span class="ui-term">While you were away</span> sums up what was verified, finished, failed, stopped or restarted, and what is still waiting for you.</li>
+        <li>When a check keeps failing, the Coordinator asks: <em>“The check still fails after 3 rounds. Try another model, or stop this task?”</em> You can pick a different model with one click.</li>
+      </ul>
+      <div class="docs-callout tip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg><p>If an agent goes silent for a long time, the Coordinator nudges it, then restarts it once. Only if it is still silent after that does it stop and wait for you.</p></div>
+
+      <h2 id="talk">Talking to the Coordinator and to agents</h2>
+      <p>Write to the Coordinator in its own box (<span class="ui-term">Write to the Coordinator…</span>) to change direction, add a task or ask how things stand. When you say how you want it to work, it can save that as one of <span class="ui-term">Your rules</span>.</p>
+      <p>You can also open any agent's conversation and write to it directly. The Coordinator sees that too: the agent's conversation shows <em>“The coordinator sees this message too”</em>, and the Coordinator notes “You wrote to … directly · I'll take it into account”. A message you send to an agent through the Coordinator is marked <em>“Delivered … · the Coordinator sees it before its next decision”</em>.</p>
+      <p>Your own actions are respected. If you close, reopen, rename or delete an agent's conversation, the Coordinator records it and plans around it.</p>
+
+      <h2 id="branches">Branches and merging</h2>
+      <p>When agents work on their own git branches, the Coordinator merges each finished branch back and says so, for example “branch … was merged into main”. It never forces a merge:</p>
+      <ul>
+        <li>If the project folder has unsaved changes in git, or is on no branch, the merge waits and happens by itself once that is fixed.</li>
+        <li>If two branches conflict, nothing is merged. You see the conflicting files and choose <span class="ui-term">I'll do it</span> or <span class="ui-term">Let the coordinator</span>. In the second case an agent resolves the conflict, the result is checked again and then merged.</li>
+      </ul>
+
+      <h2 id="pause">Pause, turn off, turn back on</h2>
+      <p>While the Coordinator is paused, nothing new starts and your messages wait in a queue until you resume.</p>
+      <p>Turning the Coordinator off (project menu › <span class="ui-term">Turn off the Coordinator</span>) stops its agents. <strong>Nothing is deleted.</strong> Turn it back on, or simply send it a message, and it continues where it left off.</p>
+      <div class="docs-callout warn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20zM12 10v4M12 17h.01"/></svg><p>Archiving or removing a project also stops its Coordinator's agents. Removing a project takes it out of Codevalanche, but the files in its folder stay on your computer.</p></div>
+
+      <h2 id="settings">Settings that shape the Coordinator</h2>
+      <p>Open <a href="/docs/projects/settings/">Project settings</a> › Coordinator:</p>
+      <table class="docs-table">
+        <tbody>
+          <tr><td><strong>Coordinator model</strong></td><td>The model that splits the work and starts the conversations.</td></tr>
+          <tr><td><strong>Model for agents</strong></td><td>Used by the agents it starts from now on. Conversations you open yourself use what you choose in the composer.</td></tr>
+          <tr><td><strong>Continue on its own after the limit resets</strong></td><td>On: an agent that hits its plan's limit waits and continues by itself. Off: it stops and tells you.</td></tr>
+          <tr><td><strong>Instructions for the coordinator</strong></td><td>What you want it to achieve and how to work. It reads them with every message.</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="good-goals">Write goals that work well</h2>
+      <ul>
+        <li><strong>Describe the result, not the steps.</strong> “Visitors can book a 30-minute slot and get a reminder email the day before” is better than “make a calendar”.</li>
+        <li><strong>Say how to check it.</strong> “All tests pass and the booking page works on a phone” gives the Coordinator something to verify.</li>
+        <li><strong>Name the limits.</strong> Things not to touch, libraries to avoid, a branch to use. Put lasting rules in the instructions so you write them once.</li>
+        <li><strong>Start with the starters.</strong> A new project offers <span class="ui-term">Check the project</span>, <span class="ui-term">Make a plan</span>, <span class="ui-term">Pick up recent work</span> and <span class="ui-term">Use my tools</span> if you are not sure where to begin.</li>
+      </ul>
+
+      <h2 id="faq">Questions</h2>
+      <div class="docs-faq">
+        <details><summary>Do I have to use the Coordinator?</summary><p>No. A project works without it, as a place that keeps your conversations about one piece of work together. Turn it on when you want the work split between agents.</p></details>
+        <details><summary>Which AI does the Coordinator use?</summary><p>Any AI you connected in Your AIs. You choose the Coordinator's model and, separately, the model for its agents.</p></details>
+        <details><summary>Can the Coordinator do things I did not allow?</summary><p>No. Its agents ask for permission under the same rules as any conversation, and those requests come to you.</p></details>
+        <details><summary>What happens if the AI's usage limit runs out mid-goal?</summary><p>Affected tasks show “Waiting for limit”. With “Continue on its own after the limit resets” on, they continue when the limit resets; otherwise they stop and tell you.</p></details>
+        <details><summary>Does turning it off lose my work?</summary><p>No. Its agents stop, nothing is deleted, and it continues where it left off when you turn it back on.</p></details>
+      </div>
+
+      
