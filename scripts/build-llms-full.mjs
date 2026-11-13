@@ -34,7 +34,7 @@ export function renderLlmsFull(documents) {
   return `${sections.join('\n')}\n`;
 }
 
-export async function buildLlmsFull(destination, outputFile = path.join(destination, 'llms-full.txt')) {
+export async function buildLlmsFull(destination, outputFile = path.join(destination, 'llms-full.txt'), docsPages = []) {
   const documents = [];
   for (const page of MARKETING_PAGES) {
     for (const locale of LOCALES) {
@@ -46,6 +46,10 @@ export async function buildLlmsFull(destination, outputFile = path.join(destinat
       const parsed = parse(html);
       documents.push({ locale: locale.tag, url, title: pageTitle(parsed), html });
     }
+  }
+  for (const page of docsPages) {
+    const html = await readFile(path.join(destination, page.file), 'utf8');
+    documents.push({ locale: 'en', url: page.path, title: pageTitle(parse(html)), html });
   }
   const content = renderLlmsFull(documents);
   await writeFile(outputFile, content);

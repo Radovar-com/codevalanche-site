@@ -15,6 +15,8 @@ import { DOWNLOAD_STARTED_PAGE, LOCALES, MARKETING_PAGES, localizedMarketingPath
 import { prepareMarketingPartial } from "./marketing-partials.mjs"
 import { versionSiteAssets } from "./asset-cache.mjs"
 import { changelogTranslations, loadReleases, renderChangelog } from "./changelog.mjs"
+import { DOCS_PAGES, docsSearchIndex, renderDocsPage, checkLinks as checkDocsLinks } from "./docs-render.mjs"
+import { hubIsCurrent } from "./docs-hub.mjs"
 import { describeRelease, downloadTranslations, fillDownload, publicDownloadCount, redirectPage, selectDownloadVariant, windowsDownload } from "./download-page.mjs"
 await buildAnalytics()
 
@@ -128,7 +130,24 @@ for (const locale of englishPreviewOnly ? [] : LOCALES.filter(item => item.slug)
     await writeFile(output, html)
   }
 }
-await writeFile(path.join(destination, "sitemap.xml"), buildLocalizedSitemap())
+// Docs pages are English for now: the hub (/docs/) is translated like every
+// marketing page; its language menu leads every docs page to a translated hub.
+if (!(await hubIsCurrent())) throw new Error("src/docs/index.html is out of date: run node scripts/docs-hub.mjs")
+const docsPaths = new Set(DOCS_PAGES.map(page => page.path))
+for (const page of DOCS_PAGES) {
+  checkDocsLinks(page, docsPaths)
+  let html = renderDocsPage(page)
+    .replace("<!-- site-header -->", prepareMarketingPartial(sharedHeader, "/docs/"))
+    .replace("<!-- site-footer -->", prepareMarketingPartial(sharedFooter, "/docs/"))
+  html = ensureLanguagePicker(html, languagePicker)
+  html = rewriteFooterLanguageLinks(html, "/docs/", "en")
+  html = includeLocaleBootstrap(html)
+  const output = path.join(destination, page.file)
+  await mkdir(path.dirname(output), { recursive: true })
+  await writeFile(output, html)
+}
+await writeFile(path.join(destination, "docs", "search-index.json"), JSON.stringify(docsSearchIndex()))
+await writeFile(path.join(destination, "sitemap.xml"), buildLocalizedSitemap(DOCS_PAGES))
 for (const privateSource of ["en.json", "glossary.json", "runtime-strings.en.json"]) {
   await rm(path.join(destination, "locales", privateSource), { force: true })
 }
@@ -142,7 +161,7 @@ for (const page of ["account/index.html", "account/authorize/index.html", "accou
   if (page === "account/signed-in/index.html") html = html.replace("</body>", '<script type="module" src="/locales/bootstrap.js"></script></body>')
   await writeFile(output, html)
 }
-const llms = englishPreviewOnly ? { pages: 0 } : await buildLlmsFull(destination)
+const llms = englishPreviewOnly ? { pages: 0 } : await buildLlmsFull(destination, undefined, DOCS_PAGES)
 
 await build({ entryPoints: [path.join(source, "account/app.js")], outfile: path.join(destination, "account/app.js"), bundle: true, format: "esm", minify: true, target: ["es2022"], legalComments: "eof" })
 // Version the completed bundle, styles and public configuration so a new page
@@ -164,5 +183,5 @@ const security = await applyPostbuildSecurity(destination)
 // only publish it as a file, so it is written on request. The header CSP carries
 // only frame-ancestors/base-uri/object-src/form-action; scripts stay with the meta CSP.
 if (process.env.CODEVALANCHE_HEADERS_FILE === "1") await writeFile(path.join(destination, "_headers"), headersFile())
-const seo = englishPreviewOnly ? { publicPages: "English preview only, not" } : await validateSeoExport(destination)
+const seo = englishPreviewOnly ? { publicPages: "English preview only, not" } : await validateSeoExport(destination, DOCS_PAGES)
 console.log(`Built static site to ${destination} (${security.htmlFiles} HTML pages passed CSP; ${seo.publicPages} public routes; ${llms.pages} discovery pages)`)
