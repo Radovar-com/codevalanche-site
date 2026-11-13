@@ -4,20 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0a0b0c">
-  <meta name="description" content="A practical first task: connect an agent or local model, open an example project and inspect a narrow change from request to result.">
+  <meta name="description" content="Learn Codevalanche: install it, connect Claude Code, Codex or local models, run projects with the Coordinator, and fix problems.">
   <link rel="canonical" href="https://codevalanche.com/docs/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://codevalanche.com/docs/">
-  <meta property="og:title" content="Getting started | Codevalanche">
-  <meta property="og:description" content="A practical first task: connect an agent or local model, open an example project and inspect a narrow change from request to result.">
+  <meta property="og:title" content="Documentation | Codevalanche">
+  <meta property="og:description" content="Learn Codevalanche: install it, connect Claude Code, Codex or local models, run projects with the Coordinator, and fix problems.">
   <meta property="og:image" content="https://codevalanche.com/assets/codevalanche-link-preview.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="The Codevalanche logo.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Getting started | Codevalanche">
-  <meta name="twitter:description" content="A practical first task: connect an agent or local model, open an example project and inspect a narrow change from request to result.">
+  <meta name="twitter:title" content="Documentation | Codevalanche">
+  <meta name="twitter:description" content="Learn Codevalanche: install it, connect Claude Code, Codex or local models, run projects with the Coordinator, and fix problems.">
   <meta name="twitter:image" content="https://codevalanche.com/assets/codevalanche-link-preview.png">
   <meta name="twitter:image:alt" content="The Codevalanche logo.">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
@@ -25,67 +25,62 @@
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/product-pages.css">
   <link rel="stylesheet" href="/home.css">
-  <title>Getting started | Codevalanche</title>
+  <link rel="stylesheet" href="/docs/docs.css">
+  <title>Documentation | Codevalanche</title>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <symbol id="u-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
-  <symbol id="u-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></symbol>
-  <symbol id="u-chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
-  <symbol id="u-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
-  <symbol id="u-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
-  <symbol id="u-dots" viewBox="0 0 24 24"><path d="M5 12h.01M12 12h.01M19 12h.01"/></symbol>
-  <symbol id="u-branch" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2.2"/><circle cx="6" cy="19" r="2.2"/><circle cx="18" cy="8" r="2.2"/><path d="M6 7.2v9.6M18 10.2c0 4-6 3-11 5.6"/></symbol>
-  <symbol id="u-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
-  <symbol id="u-deny" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m5.6 5.6 12.8 12.8"/></symbol>
-  <symbol id="u-enter" viewBox="0 0 24 24"><path d="M20 5v7a3 3 0 0 1-3 3H5M9 11l-4 4 4 4"/></symbol>
-  <symbol id="u-up" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></symbol>
-  <symbol id="u-home" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></symbol>
-  <symbol id="u-side" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/></symbol>
-  <symbol id="u-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 1-1 1.7M12 17h.01"/></symbol>
-  <symbol id="u-file" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5"/></symbol>
-  <symbol id="u-term" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="m7 9 3 3-3 3M13 15h4"/></symbol>
-  <symbol id="u-dl" viewBox="0 0 24 24"><path d="M12 4v11M7 11l5 5 5-5M5 20h14"/></symbol>
-  <symbol id="u-disk" viewBox="0 0 24 24"><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M5.5 13 8 5h8l2.5 8M7 16.5h.01M11 16.5h6"/></symbol>
-  <symbol id="u-shield" viewBox="0 0 24 24"><path d="M12 3 4.5 6v6c0 4.5 3.2 7.7 7.5 9 4.3-1.3 7.5-4.5 7.5-9V6z"/><path d="m9 12 2.2 2.2L15 10.4"/></symbol>
-  <symbol id="u-undo" viewBox="0 0 24 24"><path d="M4 9h10a5 5 0 0 1 0 10H9M8 5 4 9l4 4"/></symbol>
-  <symbol id="u-gauge" viewBox="0 0 24 24"><path d="M4 18a9 9 0 1 1 16 0M12 13l4-5"/></symbol>
-  <symbol id="u-win" viewBox="0 0 24 24"><path d="M3 5.5 10.5 4.4v7.100H3zM11.5 4.3 21 3v8.5h-9.5zM3 12.5h7.5v7.100L3 18.5zM11.5 12.5H21V21l-9.5-1.3z" fill="currentColor" stroke="none"/></symbol>
-  <symbol id="u-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
-  <symbol id="u-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.100 2.100M16.3 16.3l2.100 2.100M5.6 18.4l2.100-2.100M16.3 7.7l2.100-2.100"/></symbol>
-  <symbol id="u-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
-  <symbol id="u-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.3 3 14.7 0 18M12 3c-3 3.3-3 14.7 0 18"/></symbol>
-  <symbol id="u-chat" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-11.800 7L4 20l1.2-4A8 8 0 1 1 20 12z"/></symbol>
-  <symbol id="u-tabs" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3 9.5h18M8 5v4.5"/></symbol>
-  <symbol id="u-chevr" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
-  <symbol id="u-repeat" viewBox="0 0 24 24"><path d="M4 11V9a3 3 0 0 1 3-3h11M15 3l3 3-3 3M20 13v2a3 3 0 0 1-3 3H6M9 21l-3-3 3-3"/></symbol>
-  <symbol id="u-sun" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
-  <symbol id="u-lang" viewBox="0 0 24 24"><path d="M4 6h9M8.5 4v2M6 6c.5 3.5 3 6 6 7M11 6c-.5 3.5-3 6.5-7 8M13 20l4-9 4 9M14.5 17h5"/></symbol>
-  <symbol id="u-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.5"/></symbol>
-  <symbol id="u-cpu" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.5"/><rect x="10" y="10" width="4" height="4" rx="1"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></symbol>
-</defs></svg>
   <!-- site-header -->
-  <main class="product-page shell" id="main">
-    <section class="page-intro" id="hero" data-analytics-section="hero">
-      <div class="page-intro-copy"><p class="kicker">Getting started</p><h1>Start with one small change.</h1><p class="page-lede">A practical first task: connect an agent or local model, open an example project and inspect a narrow change from request to result.</p><div class="page-actions"><a class="button button-primary" href="#workflow">Getting started</a><a class="button" href="/download/">Download for Windows</a></div></div>
-      <figure class="page-figure"><div class="cvx cvx-fig" aria-hidden="true"><div class="stage" style="--g:255,180,107"><div class="ghost"><div><i style="width:60%"></i><i></i><i style="width:80%"></i></div><div><i style="width:50%"></i><i style="width:75%"></i></div></div>
-        <div class="fg app">
-          <div class="approve">
-            <div class="top"><svg class="ui" style="color:var(--amber)"><use href="#u-term"/></svg><b>Needs approval</b><span style="color:var(--app-dim)">Terminal command</span><span class="risk">Medium risk</span></div>
-            <code>npm test -- map</code><div class="path">C:\code\trailhead</div>
-            <div class="acts"><span class="abtn solid"><svg class="ui"><use href="#u-check"/></svg>Allow once</span><span class="abtn"><svg class="ui"><use href="#u-deny"/></svg>Deny</span></div>
-          </div>
-          <div class="turn shadow"><b>Turn changes</b><span>Saved</span><span>Changed: 3</span><span class="abtn"><svg class="ui"><use href="#u-undo"/></svg><span>Undo this turn's changes</span></span></div>
-        </div>
-        </div></div><figcaption>The app, redrawn with example content.</figcaption></figure>
-    </section>
-    <div class="page-body"><section class="page-section" id="workflow" data-analytics-section="workflow"><div class="page-grid"><h2>Your first task.</h2><div class="page-copy"><ol class="page-steps"><li><h3>Install</h3><p>Open the installer from your Downloads folder. If Windows SmartScreen appears, choose “More info”, then “Run anyway”.</p><a href="/download/">Download for Windows</a></li><li><h3>Connect an agent</h3><p>Sign in to Claude Code or Codex with your own account, or choose a local model that runs on your PC.</p><p><a href="/agents/#codex">Set up Codex</a> · <a href="/agents/#claude-code">Set up Claude Code</a> · <a href="/local-ai/">Local models</a></p></li><li><h3>Open an example project</h3><p>Use a disposable project or a repository with a clean starting point. Check the selected account, model and permission mode.</p></li><li><h3>Write a narrow request</h3><p>Describe the current behavior, the change you want and how to check it. The walkthrough uses trip durations: show 90 minutes as 1 h 30 min and add tests.</p></li><li><h3>Follow the task</h3><p>Read progress, answer requests for input and inspect any permission request. Approval applies to the operation shown; keep checking the changes.</p></li><li><h3>Read the diff and test</h3><p>Inspect each changed file, run the relevant project checks and verify the requested behavior. Treat the assistant’s summary as guidance to verify.</p></li></ol></div></div></section><section class="page-section" id="details" data-analytics-section="details"><div class="page-grid"><h2>Resolve the setup state you see.</h2><div class="page-copy"><dl class="page-reference"><div><dt>External runtime missing</dt><dd>Claude Code, Gemini CLI and ZCode require an external installation. Install the appropriate runtime and check detection in the app.</dd></div><div><dt>Provider sign-in incomplete</dt><dd>Finish the provider’s authentication flow and check connection status. Website sign-in does not connect an agent account.</dd></div><div><dt>Provider limit reached</dt><dd>Read the provider’s message and account limits. Account quotas are separate; switching or handoff is an explicit decision.</dd></div><div><dt>Local server connection failed</dt><dd>Check server reachability, the loaded model and the configured endpoint. Then check memory and model compatibility.</dd></div><div><dt>Waiting for approval</dt><dd>Open the pending request and inspect its command and scope. Allow or deny it deliberately; waiting is not proof of a stalled runtime.</dd></div></dl></div></div></section><section class="page-section" id="faq" data-analytics-section="faq"><div class="page-grid"><h2>Recovery and support.</h2><div class="page-copy"><h3>Can I resume or undo any operation?</h3><p>Resume depends on the runtime and retained conversation state. Undo is available only for supported guarded operations; inspect the current files before retrying or reverting.</p><h3>What should I include in a support request?</h3><p>Describe the setup step, runtime and visible error. Remove credentials and private project content from screenshots or logs.</p><a href="mailto:info@radovar.com" data-contact-id="info">info@radovar.com</a></div></div></section></div>
-    <nav class="page-next" aria-label="Next steps"><a href="/how-it-works/">See how it works</a><a href="/download/">Download for Windows</a></nav>
-  </main>
+  <div class="docs-shell docs-shell-hub">
+    <nav class="docs-nav" aria-label="Documentation">
+      <button class="docs-search" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search the docs</span><kbd>Ctrl K</kbd></button>
+      <button class="docs-nav-toggle" type="button" aria-expanded="false"><span>All documentation</span><span aria-hidden="true">+</span></button>
+      <div>
+        <h2>Getting started</h2>
+        <ul><li><a href="/docs/install/">Install on Windows</a></li><li><a href="/docs/concepts/">Core ideas</a></li><li><a href="/docs/first-task/">Your first task</a></li></ul>
+        <h2>Your AIs</h2>
+        <ul><li><a href="/docs/your-ais/">Connect your AIs</a></li><li><a href="/docs/your-ais/claude-code/">Claude Code</a></li><li><a href="/docs/your-ais/codex/">Codex</a></li><li><a href="/docs/your-ais/gemini-cli/">Gemini CLI</a></li><li><a href="/docs/your-ais/other-agents/">ZCode, OpenCode, Grok Build, Kimi Code, Pi</a></li><li><a href="/docs/your-ais/api-keys/">API keys</a></li><li><a href="/docs/your-ais/multiple-accounts/">Several accounts</a></li><li><a href="/docs/your-ais/usage-limits/">Usage limits</a></li></ul>
+        <h2>Local models</h2>
+        <ul><li><a href="/docs/local-models/">Run models on your PC</a></li><li><a href="/docs/local-models/local-servers/">LM Studio and local servers</a></li></ul>
+        <h2>Projects</h2>
+        <ul><li><a href="/docs/projects/">Projects</a></li><li><a href="/docs/projects/coordinator/">The Coordinator</a></li><li><a href="/docs/projects/settings/">Project settings</a></li></ul>
+        <h2>Working with agents</h2>
+        <ul><li><a href="/docs/agents/conversations/">Conversations and the composer</a></li><li><a href="/docs/agents/attachments/">Attachments and annotations</a></li><li><a href="/docs/agents/approvals/">Approvals and permissions</a></li><li><a href="/docs/agents/undo/">Undo changes</a></li><li><a href="/docs/agents/steering/">Steer and queue messages</a></li><li><a href="/docs/agents/side-chats/">Side chats, forks and handoffs</a></li><li><a href="/docs/agents/voice/">Voice conversation</a></li><li><a href="/docs/agents/automations/">Automations</a></li><li><a href="/docs/agents/computer-use/">Computer use</a></li><li><a href="/docs/agents/plugins/">Plugins, MCP and skills</a></li></ul>
+        <h2>The app</h2>
+        <ul><li><a href="/docs/app/languages/">17 languages</a></li><li><a href="/docs/app/updates/">Updates</a></li><li><a href="/docs/app/account/">Your account</a></li><li><a href="/docs/app/import/">Import conversations</a></li><li><a href="/docs/app/shortcuts/">Keyboard shortcuts</a></li></ul>
+        <h2>Privacy and security</h2>
+        <ul><li><a href="/docs/privacy/">Where your code goes</a></li></ul>
+        <h2>Troubleshooting</h2>
+        <ul><li><a href="/docs/troubleshooting/">Fix a problem</a></li><li><a href="/docs/troubleshooting/install-and-updates/">Install and updates</a></li><li><a href="/docs/troubleshooting/ai-connections/">AI connections</a></li><li><a href="/docs/troubleshooting/local-models/">Local models and voice</a></li><li><a href="/docs/troubleshooting/agents/">Agents and runs</a></li><li><a href="/docs/faq/">Questions</a></li></ul>
+      </div>
+    </nav>
+    <main class="docs-article" id="main">
+      <header id="hero" data-analytics-section="hero">
+      <p class="kicker">Documentation</p>
+      <h1>Learn Codevalanche.</h1>
+      <p class="docs-lede">Install it, connect the AIs you already use, give a project one goal and let the agents work. Every page describes the app as it is today.</p>
+      </header>
+      <section data-analytics-section="workflow">
+      <h2 id="start">Pick a starting point</h2>
+      <div class="docs-cards"><a href="/docs/install/"><strong>Install on Windows</strong><span>Download, install and connect your first AI in a few minutes.</span></a><a href="/docs/your-ais/"><strong>Connect your AIs</strong><span>Claude Code, Codex, Gemini CLI, API keys and several accounts.</span></a><a href="/docs/projects/coordinator/"><strong>The Coordinator</strong><span>Give one goal; several agents do the work and it gets checked.</span></a><a href="/docs/local-models/"><strong>Local models</strong><span>Run models on your own PC, private and offline.</span></a></div>
+      </section>
+      <section data-analytics-section="details">
+      <h2 id="all">All documentation</h2>
+      <div class="docs-hub-sections"><section><h3>Getting started</h3><ul><li><a href="/docs/install/">Install on Windows</a></li><li><a href="/docs/concepts/">Core ideas</a></li><li><a href="/docs/first-task/">Your first task</a></li></ul></section><section><h3>Your AIs</h3><ul><li><a href="/docs/your-ais/">Connect your AIs</a></li><li><a href="/docs/your-ais/claude-code/">Claude Code</a></li><li><a href="/docs/your-ais/codex/">Codex</a></li><li><a href="/docs/your-ais/gemini-cli/">Gemini CLI</a></li><li><a href="/docs/your-ais/other-agents/">ZCode, OpenCode, Grok Build, Kimi Code, Pi</a></li><li><a href="/docs/your-ais/api-keys/">API keys</a></li><li><a href="/docs/your-ais/multiple-accounts/">Several accounts</a></li><li><a href="/docs/your-ais/usage-limits/">Usage limits</a></li></ul></section><section><h3>Local models</h3><ul><li><a href="/docs/local-models/">Run models on your PC</a></li><li><a href="/docs/local-models/local-servers/">LM Studio and local servers</a></li></ul></section><section><h3>Projects</h3><ul><li><a href="/docs/projects/">Projects</a></li><li><a href="/docs/projects/coordinator/">The Coordinator</a></li><li><a href="/docs/projects/settings/">Project settings</a></li></ul></section><section><h3>Working with agents</h3><ul><li><a href="/docs/agents/conversations/">Conversations and the composer</a></li><li><a href="/docs/agents/attachments/">Attachments and annotations</a></li><li><a href="/docs/agents/approvals/">Approvals and permissions</a></li><li><a href="/docs/agents/undo/">Undo changes</a></li><li><a href="/docs/agents/steering/">Steer and queue messages</a></li><li><a href="/docs/agents/side-chats/">Side chats, forks and handoffs</a></li><li><a href="/docs/agents/voice/">Voice conversation</a></li><li><a href="/docs/agents/automations/">Automations</a></li><li><a href="/docs/agents/computer-use/">Computer use</a></li><li><a href="/docs/agents/plugins/">Plugins, MCP and skills</a></li></ul></section><section><h3>The app</h3><ul><li><a href="/docs/app/languages/">17 languages</a></li><li><a href="/docs/app/updates/">Updates</a></li><li><a href="/docs/app/account/">Your account</a></li><li><a href="/docs/app/import/">Import conversations</a></li><li><a href="/docs/app/shortcuts/">Keyboard shortcuts</a></li></ul></section><section><h3>Privacy and security</h3><ul><li><a href="/docs/privacy/">Where your code goes</a></li></ul></section><section><h3>Troubleshooting</h3><ul><li><a href="/docs/troubleshooting/">Fix a problem</a></li><li><a href="/docs/troubleshooting/install-and-updates/">Install and updates</a></li><li><a href="/docs/troubleshooting/ai-connections/">AI connections</a></li><li><a href="/docs/troubleshooting/local-models/">Local models and voice</a></li><li><a href="/docs/troubleshooting/agents/">Agents and runs</a></li><li><a href="/docs/faq/">Questions</a></li></ul></section></div>
+      </section>
+      <section data-analytics-section="faq">
+      <h2 id="help">Need help?</h2>
+      <div class="docs-cards"><a href="/docs/troubleshooting/"><strong>Fix a problem</strong><span>Solutions for install, connection, local model and agent problems.</span></a><a href="/docs/faq/"><strong>Questions</strong><span>Short answers to common questions.</span></a></div>
+      <p>Write to us:</p>
+      <p><a href="mailto:info@radovar.com" data-contact-id="info">info@radovar.com</a></p>
+      </section>
+    </main>
+  </div>
+  <dialog class="docs-dialog" aria-label="Search the docs"><input type="search" placeholder="Search the docs…" aria-label="Search the docs"><ul data-empty="No matching page."></ul></dialog>
   <!-- site-footer -->
   <script src="/config.js"></script>
   <script src="/downloads.js"></script>
   <script type="module" src="/site.js"></script>
+  <script type="module" src="/docs/docs.js"></script>
 </body>
 </html>

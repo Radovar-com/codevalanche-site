@@ -234,7 +234,7 @@ function escapeXml(value) {
   return value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;');
 }
 
-export function buildLocalizedSitemap() {
+export function buildLocalizedSitemap(docsPages = []) {
   const urls = [];
   for (const page of MARKETING_PAGES) {
     for (const locale of LOCALES) {
@@ -246,6 +246,11 @@ export function buildLocalizedSitemap() {
       alternates.push(`    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(new URL(page.path, SITE_ORIGIN).href)}" />`);
       urls.push(`  <url>\n    <loc>${escapeXml(location)}</loc>\n${alternates.join('\n')}\n    <priority>${page.priority}</priority>\n  </url>`);
     }
+  }
+  // English-only docs pages: one URL each, no language alternates yet.
+  for (const page of docsPages) {
+    const location = new URL(page.path, SITE_ORIGIN).href;
+    urls.push(`  <url>\n    <loc>${escapeXml(location)}</loc>\n    <xhtml:link rel="alternate" hreflang="en" href="${escapeXml(location)}" />\n    <priority>0.6</priority>\n  </url>`);
   }
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`;
 }

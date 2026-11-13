@@ -11,6 +11,10 @@ Codevalanche is a Windows desktop app that runs Claude Code, Codex and local mod
 - `supabase/` – the database schema and functions behind Codevalanche accounts.
 - `workers/`, `cloudflare/` – the edge configuration that serves the site.
 
+## Documentation
+
+The docs at `/docs/` are written in `content/docs/` (one file per section, built from small helpers in `content/docs/kit.mjs`). The build renders every page with its navigation, search index, structured data and sitemap entry (`scripts/docs-render.mjs`). The `/docs/` home is a translated page generated from the same navigation: after changing `content/docs/`, run `node scripts/docs-hub.mjs`, then add any new hub strings to the locale catalogs. The detailed pages are English for now.
+
 ## Build and test
 
 Requires Node.js 24.

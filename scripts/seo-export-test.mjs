@@ -38,7 +38,7 @@ export function validateSitemapLocations(sitemap, canonicalUrls) {
   for (const url of canonicalUrls) requireValue(locations.includes(url), `sitemap is missing ${url}`);
 }
 
-export async function validateSeoExport(destination) {
+export async function validateSeoExport(destination, docsPages = []) {
   const canonicalUrls = new Set();
   for (const page of MARKETING_PAGES) {
     for (const locale of LOCALES) {
@@ -88,6 +88,25 @@ export async function validateSeoExport(destination) {
       const localeBootstrap = walk(document, node => node.tagName === 'script' && (attrs(node).get('src') ?? '').split('?')[0] === '/locales/bootstrap.js')[0];
       requireValue(Boolean(localeBootstrap), `${relative} has no locale runtime bootstrap`);
     }
+  }
+
+  // English-only docs pages: own canonical, title, description, social tags, schema and CSP.
+  for (const page of docsPages) {
+    const document = parse(await readFile(path.join(destination, page.file), 'utf8'));
+    const canonicalUrl = new URL(page.path, SITE_ORIGIN).href;
+    const htmlRoot = walk(document, node => node.tagName === 'html')[0];
+    requireValue(attrs(htmlRoot ?? {}).get('lang') === 'en', `${page.file} has wrong lang`);
+    const canonicalNodes = walk(document, node => node.tagName === 'link' && (attrs(node).get('rel') ?? '').split(/\s+/).includes('canonical'));
+    requireValue(canonicalNodes.length === 1 && attrs(canonicalNodes[0]).get('href') === canonicalUrl, `${page.file} has wrong canonical`);
+    requireValue(Boolean(text(walk(document, node => node.tagName === 'title')[0] ?? {}).trim()), `${page.file} has no title`);
+    requireValue(Boolean(attrs(walk(document, node => node.tagName === 'meta' && attrs(node).get('name') === 'description')[0] ?? {}).get('content')?.trim()), `${page.file} has no description`);
+    requireValue(attrs(walk(document, node => node.tagName === 'meta' && attrs(node).get('property') === 'og:url')[0] ?? {}).get('content') === canonicalUrl, `${page.file} has inconsistent og:url`);
+    const schemas = walk(document, node => node.tagName === 'script' && (attrs(node).get('type') ?? '').toLowerCase() === 'application/ld+json')
+      .map(script => JSON.parse((script.childNodes ?? []).map(child => child.value ?? '').join('')));
+    requireValue(schemas.flatMap(schema => schema['@graph'] ?? [schema]).some(item => item?.['@type'] === 'WebPage' && item.url === canonicalUrl), `${page.file} is missing its WebPage schema`);
+    const csp = walk(document, node => node.tagName === 'meta' && (attrs(node).get('http-equiv') ?? '').toLowerCase() === 'content-security-policy')[0];
+    requireValue(Boolean(attrs(csp ?? {}).get('content')?.includes("script-src 'self'")), `${page.file} has no strict CSP`);
+    canonicalUrls.add(canonicalUrl);
   }
 
   const sitemap = await readFile(path.join(destination, 'sitemap.xml'), 'utf8');
