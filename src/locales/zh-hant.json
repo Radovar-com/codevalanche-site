@@ -848,7 +848,7 @@
   "Website analytics": "網站分析",
   "Website analytics is available with your consent. Account activity has a separate signed-in choice.": "獲得你的同意後即可使用網站分析。帳戶活動需要在登入後另行選擇。",
   "Website analytics is not enabled for this release. Your preference can be saved; no optional observations are sent.": "此版本未啟用網站分析。你的偏好設定可以保存，但不會發送任何選用觀測資料。",
-  "Website analytics is unavailable. Your preference is saved, but collection needs a valid receipt.": "網站分析不可用。你的偏好設定已保存，但資料收集需要有效的同意回執。",
+  "Your preference is saved.": "你的偏好已儲存。",
   "Website and accounts": "網站與帳戶",
   "Website statistics: as described in section 8.": "網站統計：如第 8 節所述。",
   "Weekly": "每週",

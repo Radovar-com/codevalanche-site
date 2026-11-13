@@ -848,7 +848,7 @@
   "Website analytics": "ウェブサイト分析",
   "Website analytics is available with your consent. Account activity has a separate signed-in choice.": "ウェブサイト分析は同意した場合に利用できます。アカウントアクティビティには、サインイン後の別個の選択が必要です。",
   "Website analytics is not enabled for this release. Your preference can be saved; no optional observations are sent.": "このリリースではウェブサイト分析は有効になっていません。設定は保存できますが、任意の観測データは送信されません。",
-  "Website analytics is unavailable. Your preference is saved, but collection needs a valid receipt.": "ウェブサイト分析は利用できません。設定は保存されていますが、データ収集には有効な同意レシートが必要です。",
+  "Your preference is saved.": "設定を保存しました。",
   "Website and accounts": "ウェブサイトとアカウント",
   "Website statistics: as described in section 8.": "ウェブサイトの統計: セクション 8 に記載のとおり。",
   "Weekly": "週間",

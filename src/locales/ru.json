@@ -848,7 +848,7 @@
   "Website analytics": "Аналитика сайта",
   "Website analytics is available with your consent. Account activity has a separate signed-in choice.": "Аналитика сайта доступна с вашего согласия. Для аналитики активности аккаунта требуется отдельный выбор после входа.",
   "Website analytics is not enabled for this release. Your preference can be saved; no optional observations are sent.": "Аналитика сайта не включена в этом релизе. Ваш выбор можно сохранить, но необязательные наблюдения не отправляются.",
-  "Website analytics is unavailable. Your preference is saved, but collection needs a valid receipt.": "Аналитика сайта недоступна. Ваш выбор сохранен, но для сбора данных требуется действительное подтверждение согласия.",
+  "Your preference is saved.": "Ваш выбор сохранён.",
   "Website and accounts": "Сайт и аккаунты",
   "Website statistics: as described in section 8.": "Статистика сайта: как описано в разделе 8.",
   "Weekly": "Еженедельно",

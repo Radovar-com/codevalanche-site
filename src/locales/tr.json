@@ -848,7 +848,7 @@
   "Website analytics": "Web sitesi analizleri",
   "Website analytics is available with your consent. Account activity has a separate signed-in choice.": "Web sitesi analizleri izninizle kullanılabilir. Hesap etkinliği için oturum açtıktan sonra ayrıca seçim yapmanız gerekir.",
   "Website analytics is not enabled for this release. Your preference can be saved; no optional observations are sent.": "Web sitesi analizleri bu sürümde etkin değil. Tercihiniz kaydedilebilir; isteğe bağlı gözlem gönderilmez.",
-  "Website analytics is unavailable. Your preference is saved, but collection needs a valid receipt.": "Web sitesi analizleri kullanılamıyor. Tercihiniz kaydedildi, ancak veri toplamak için geçerli bir makbuz gerekir.",
+  "Your preference is saved.": "Tercihiniz kaydedildi.",
   "Website and accounts": "Web sitesi ve hesaplar",
   "Website statistics: as described in section 8.": "Web sitesi istatistikleri: 8. bölümde anlatıldığı gibi.",
   "Weekly": "Haftalık",

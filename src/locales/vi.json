@@ -848,7 +848,7 @@
   "Website analytics": "Phân tích trang web",
   "Website analytics is available with your consent. Account activity has a separate signed-in choice.": "Phân tích trang web khả dụng khi bạn đồng ý. Hoạt động tài khoản cần lựa chọn riêng sau khi đăng nhập.",
   "Website analytics is not enabled for this release. Your preference can be saved; no optional observations are sent.": "Phân tích trang web chưa được bật trong bản phát hành này. Tùy chọn của bạn vẫn được lưu; không có quan sát tùy chọn nào được gửi.",
-  "Website analytics is unavailable. Your preference is saved, but collection needs a valid receipt.": "Phân tích trang web hiện không khả dụng. Tùy chọn đã được lưu, nhưng việc thu thập cần có biên nhận hợp lệ.",
+  "Your preference is saved.": "Đã lưu lựa chọn của bạn.",
   "Website and accounts": "Trang web và tài khoản",
   "Website statistics: as described in section 8.": "Thống kê trang web: như mô tả ở mục 8.",
   "Weekly": "Hàng tuần",

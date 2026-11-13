@@ -848,7 +848,7 @@
   "Website analytics": "वेबसाइट एनालिटिक्स",
   "Website analytics is available with your consent. Account activity has a separate signed-in choice.": "वेबसाइट एनालिटिक्स आपकी सहमति से उपलब्ध है। खाते की गतिविधि के लिए साइन-इन खाते में अलग विकल्प है।",
   "Website analytics is not enabled for this release. Your preference can be saved; no optional observations are sent.": "इस रिलीज़ के लिए वेबसाइट एनालिटिक्स चालू नहीं है। आपकी पसंद सहेजी जा सकती है; कोई वैकल्पिक ऑब्ज़र्वेशन नहीं भेजे जाते।",
-  "Website analytics is unavailable. Your preference is saved, but collection needs a valid receipt.": "वेबसाइट एनालिटिक्स उपलब्ध नहीं है। आपकी पसंद सहेजी गई है, लेकिन डेटा संग्रह के लिए सहमति का वैध प्रमाण चाहिए।",
+  "Your preference is saved.": "आपकी पसंद सहेज ली गई है।",
   "Website and accounts": "वेबसाइट और खाते",
   "Website statistics: as described in section 8.": "वेबसाइट के आँकड़े: जैसा खंड 8 में वर्णित है।",
   "Weekly": "साप्ताहिक",
