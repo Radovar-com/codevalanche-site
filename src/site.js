@@ -62,7 +62,7 @@
           if (persist) { try { localStorage.setItem(THEME_KEY, theme) } catch {} }
           const themeLabel = theme === "dark" ? "Switch to light theme" : "Switch to dark theme"
           themeToggle?.setAttribute("aria-label", window.CodevalancheLocale?.translate(themeLabel) ?? themeLabel)
-          document.querySelector("meta[name='theme-color']")?.setAttribute("content", theme === "dark" ? "#12120f" : "#faf9f5")
+          document.querySelector("meta[name='theme-color']")?.setAttribute("content", "#0a0b0c")
           window.dispatchEvent(new CustomEvent("codevalanche-theme"))
         }
         themeToggle?.addEventListener("click", () => { const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark"; applyTheme(next, true) })
@@ -121,7 +121,7 @@
             octx.textAlign = rtl ? "right" : "left"
             let size = Math.floor(h / 2.6)
             octx.textBaseline = "alphabetic"
-            const fontFor = (s) => `300 ${s}px Newsreader, Georgia, serif`
+            const fontFor = (s) => `500 ${s}px Geist, "Segoe UI", system-ui, sans-serif`
             octx.font = fontFor(size)
             const widest = Math.max(...lines.map((l) => octx.measureText(l).width))
             if (widest > w - 24) { size = Math.floor(size * ((w - 24) / widest)); octx.font = fontFor(size) }
