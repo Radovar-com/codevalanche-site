@@ -1,0 +1,584 @@
+{
+  "version": "1.1.69",
+  "date": "2026-11-13",
+  "copy": {
+    "en": {
+      "headline": "Coordinator tasks start every time, and a calmer project sidebar",
+      "summary": "A quick update after 1.1.68 with the fixes that mattered most and a cleaner look for projects.",
+      "sections": [
+        {
+          "title": "Tasks start every time",
+          "body": "In a project, a task the Coordinator hands to an agent in the same folder now starts and answers, instead of ending with no answer."
+        },
+        {
+          "title": "Deleting for good",
+          "body": "Deleting a conversation now erases its data for good after you confirm. A folder Windows keeps locked no longer makes the delete fail, and a copy of a conversation keeps its own images."
+        },
+        {
+          "title": "Stop where you expect it",
+          "body": "Stop sits at the end of the message box while an agent works, in chats and in the Coordinator."
+        },
+        {
+          "title": "Clearer copies",
+          "body": "Side chat is no longer offered on a project's Coordinator. A copied conversation names its source and the time of the copy, without raw markers."
+        },
+        {
+          "title": "One frame for tabs and panels",
+          "body": "Tabs and panels share one frame, and the selected tab flows into the area below it. In the dark theme, the selected sidebar card shows its outline again."
+        },
+        {
+          "title": "A calmer project sidebar",
+          "body": "The sidebar keeps tasks in place while you work and regroups them when things are calm. You can choose a grouped or a flat list."
+        },
+        {
+          "title": "Quieter task conversations",
+          "body": "Task conversations no longer show status rows about where the agent works or where its result went. Task agent panels offer dictation only."
+        }
+      ]
+    },
+    "ar": {
+      "headline": "مهام المنسّق تبدأ في كل مرة، وشريط جانبي أهدأ للمشاريع",
+      "summary": "تحديث سريع بعد 1.1.68 يضم أهم الإصلاحات ومظهرًا أنظف للمشاريع.",
+      "sections": [
+        {
+          "title": "المهام تبدأ في كل مرة",
+          "body": "في المشروع، المهمة التي يسندها المنسّق إلى وكيل في المجلد نفسه تبدأ الآن وتجيب، بدلًا من أن تنتهي دون إجابة."
+        },
+        {
+          "title": "حذف نهائي",
+          "body": "حذف محادثة يمسح الآن بياناتها نهائيًا بعد تأكيدك. المجلد الذي يقفله Windows لم يعد يُفشل الحذف، ونسخة المحادثة تحتفظ بصورها الخاصة."
+        },
+        {
+          "title": "زر الإيقاف حيث تتوقعه",
+          "body": "أثناء عمل الوكيل، يوجد زر الإيقاف في نهاية مربع الرسالة، في المحادثات ولدى المنسّق."
+        },
+        {
+          "title": "نسخ أوضح",
+          "body": "لم تعد الدردشة الجانبية متاحة لدى منسّق المشروع. المحادثة المنسوخة تذكر مصدرها ووقت النسخ، دون علامات خام."
+        },
+        {
+          "title": "إطار واحد للعلامات واللوحات",
+          "body": "تتشارك العلامات واللوحات إطارًا واحدًا، وتتصل العلامة المحددة بالمنطقة التي تحتها. في السمة الداكنة، تُظهر البطاقة المحددة في الشريط الجانبي حدودها من جديد."
+        },
+        {
+          "title": "شريط جانبي أهدأ للمشاريع",
+          "body": "يُبقي الشريط الجانبي المهام في مكانها أثناء عملك ويعيد تجميعها عندما تهدأ الأمور. يمكنك اختيار قائمة مجمّعة أو قائمة بسيطة."
+        },
+        {
+          "title": "محادثات مهام أهدأ",
+          "body": "لم تعد محادثات المهام تعرض صفوف حالة عن مكان عمل الوكيل أو وجهة نتيجته. لوحات وكلاء المهام تقدّم الإملاء فقط."
+        }
+      ]
+    },
+    "de": {
+      "headline": "Koordinator-Aufgaben starten jedes Mal, und eine ruhigere Projektleiste",
+      "summary": "Ein schnelles Update nach 1.1.68 mit den wichtigsten Korrekturen und einem aufgeräumteren Look für Projekte.",
+      "sections": [
+        {
+          "title": "Aufgaben starten jedes Mal",
+          "body": "In einem Projekt startet eine Aufgabe, die der Koordinator einem Agenten im selben Ordner gibt, jetzt und antwortet, statt ohne Antwort zu enden."
+        },
+        {
+          "title": "Endgültig löschen",
+          "body": "Wenn du eine Unterhaltung löschst, werden ihre Daten nach deiner Bestätigung endgültig entfernt. Ein von Windows gesperrter Ordner lässt das Löschen nicht mehr scheitern, und die Kopie einer Unterhaltung behält ihre eigenen Bilder."
+        },
+        {
+          "title": "Stopp, wo du ihn erwartest",
+          "body": "Während ein Agent arbeitet, sitzt Stopp am Ende des Nachrichtenfelds, in Chats und beim Koordinator."
+        },
+        {
+          "title": "Klarere Kopien",
+          "body": "Der Seitenchat wird beim Koordinator eines Projekts nicht mehr angeboten. Eine kopierte Unterhaltung nennt ihre Quelle und den Zeitpunkt der Kopie, ohne rohe Markierungen."
+        },
+        {
+          "title": "Ein Rahmen für Tabs und Bereiche",
+          "body": "Tabs und Bereiche teilen sich einen Rahmen, und der ausgewählte Tab geht nahtlos in den Bereich darunter über. Im dunklen Design zeigt die ausgewählte Karte in der Seitenleiste wieder ihren Umriss."
+        },
+        {
+          "title": "Eine ruhigere Projektleiste",
+          "body": "Die Seitenleiste lässt Aufgaben an ihrem Platz, während du arbeitest, und ordnet sie neu, wenn es ruhig ist. Du kannst eine gruppierte oder eine einfache Liste wählen."
+        },
+        {
+          "title": "Ruhigere Aufgaben-Unterhaltungen",
+          "body": "Aufgaben-Unterhaltungen zeigen keine Statuszeilen mehr dazu, wo der Agent arbeitet oder wohin sein Ergebnis ging. Bereiche von Aufgaben-Agenten bieten nur Diktat an."
+        }
+      ]
+    },
+    "es": {
+      "headline": "Las tareas del Coordinador arrancan siempre, y una barra de proyectos más tranquila",
+      "summary": "Una actualización rápida después de 1.1.68, con las correcciones que más importaban y un aspecto más limpio para los proyectos.",
+      "sections": [
+        {
+          "title": "Las tareas arrancan siempre",
+          "body": "En un proyecto, una tarea que el Coordinador entrega a un agente en la misma carpeta ahora arranca y responde, en lugar de terminar sin respuesta."
+        },
+        {
+          "title": "Borrar para siempre",
+          "body": "Al borrar una conversación, sus datos se eliminan para siempre después de que confirmas. Una carpeta bloqueada por Windows ya no hace fallar el borrado, y la copia de una conversación conserva sus propias imágenes."
+        },
+        {
+          "title": "Detener donde lo esperas",
+          "body": "Mientras un agente trabaja, Detener está al final del cuadro de mensaje, en los chats y en el Coordinador."
+        },
+        {
+          "title": "Copias más claras",
+          "body": "El chat lateral ya no se ofrece en el Coordinador de un proyecto. Una conversación copiada indica su origen y la hora de la copia, sin marcas en bruto."
+        },
+        {
+          "title": "Un solo marco para pestañas y paneles",
+          "body": "Las pestañas y los paneles comparten un marco, y la pestaña seleccionada continúa en la zona de abajo. En el tema oscuro, la tarjeta seleccionada de la barra lateral vuelve a mostrar su contorno."
+        },
+        {
+          "title": "Una barra de proyectos más tranquila",
+          "body": "La barra lateral mantiene las tareas en su sitio mientras trabajas y las reagrupa cuando todo está en calma. Puedes elegir una lista agrupada o una lista simple."
+        },
+        {
+          "title": "Conversaciones de tareas más limpias",
+          "body": "Las conversaciones de tareas ya no muestran filas de estado sobre dónde trabaja el agente o adónde fue su resultado. Los paneles de los agentes de tareas solo ofrecen dictado."
+        }
+      ]
+    },
+    "fr": {
+      "headline": "Les tâches du Coordinateur démarrent à chaque fois, et une barre de projets plus calme",
+      "summary": "Une mise à jour rapide après 1.1.68, avec les corrections qui comptaient le plus et un aspect plus net pour les projets.",
+      "sections": [
+        {
+          "title": "Les tâches démarrent à chaque fois",
+          "body": "Dans un projet, une tâche que le Coordinateur confie à un agent dans le même dossier démarre désormais et répond, au lieu de se terminer sans réponse."
+        },
+        {
+          "title": "Suppression définitive",
+          "body": "Supprimer une conversation efface désormais ses données définitivement après votre confirmation. Un dossier verrouillé par Windows ne fait plus échouer la suppression, et la copie d'une conversation garde ses propres images."
+        },
+        {
+          "title": "Arrêter là où vous l'attendez",
+          "body": "Pendant qu'un agent travaille, Arrêter se trouve au bout de la zone de message, dans les conversations et chez le Coordinateur."
+        },
+        {
+          "title": "Des copies plus claires",
+          "body": "Le chat latéral n'est plus proposé sur le Coordinateur d'un projet. Une conversation copiée indique sa source et l'heure de la copie, sans marqueurs bruts."
+        },
+        {
+          "title": "Un seul cadre pour onglets et panneaux",
+          "body": "Les onglets et les panneaux partagent un même cadre, et l'onglet sélectionné se prolonge dans la zone en dessous. En thème sombre, la carte sélectionnée de la barre latérale affiche de nouveau son contour."
+        },
+        {
+          "title": "Une barre de projets plus calme",
+          "body": "La barre latérale garde les tâches en place pendant que vous travaillez et les regroupe quand tout est calme. Vous pouvez choisir une liste groupée ou une liste simple."
+        },
+        {
+          "title": "Des conversations de tâches plus sobres",
+          "body": "Les conversations de tâches n'affichent plus de lignes d'état sur l'endroit où l'agent travaille ou sur la destination de son résultat. Les panneaux des agents de tâches ne proposent que la dictée."
+        }
+      ]
+    },
+    "hi": {
+      "headline": "कोऑर्डिनेटर के टास्क हर बार शुरू होते हैं, और प्रोजेक्ट साइडबार अब ज़्यादा शांत",
+      "summary": "1.1.68 के बाद एक छोटा अपडेट, सबसे ज़रूरी सुधारों और प्रोजेक्ट के ज़्यादा साफ़ रूप के साथ।",
+      "sections": [
+        {
+          "title": "टास्क हर बार शुरू होते हैं",
+          "body": "किसी प्रोजेक्ट में, कोऑर्डिनेटर जो टास्क उसी फ़ोल्डर के किसी एजेंट को देता है, वह अब बिना जवाब के खत्म होने के बजाय शुरू होता है और जवाब देता है।"
+        },
+        {
+          "title": "हमेशा के लिए हटाना",
+          "body": "किसी बातचीत को हटाने पर, आपकी पुष्टि के बाद उसका डेटा अब हमेशा के लिए मिट जाता है। Windows द्वारा लॉक किया गया फ़ोल्डर अब हटाने को विफल नहीं करता, और बातचीत की कॉपी अपनी तस्वीरें खुद रखती है।"
+        },
+        {
+          "title": "रोकें वहीं जहाँ आप उम्मीद करते हैं",
+          "body": "जब एजेंट काम कर रहा हो, तो रोकें बटन मैसेज बॉक्स के अंत में रहता है, चैट में भी और कोऑर्डिनेटर में भी।"
+        },
+        {
+          "title": "ज़्यादा साफ़ कॉपियाँ",
+          "body": "प्रोजेक्ट के कोऑर्डिनेटर पर साइड चैट अब नहीं दिखाया जाता। कॉपी की गई बातचीत अपना स्रोत और कॉपी का समय बताती है, बिना कच्चे मार्करों के।"
+        },
+        {
+          "title": "टैब और पैनल के लिए एक फ़्रेम",
+          "body": "टैब और पैनल एक ही फ़्रेम साझा करते हैं, और चुना गया टैब नीचे वाले हिस्से में घुल-मिल जाता है। डार्क थीम में, साइडबार का चुना गया कार्ड फिर से अपनी रूपरेखा दिखाता है।"
+        },
+        {
+          "title": "ज़्यादा शांत प्रोजेक्ट साइडबार",
+          "body": "आप काम करते समय साइडबार टास्क को उनकी जगह पर रखता है और शांति होने पर उन्हें फिर से समूहों में रखता है। आप समूहों वाली या सीधी सूची चुन सकते हैं।"
+        },
+        {
+          "title": "ज़्यादा साफ़ टास्क बातचीत",
+          "body": "टास्क बातचीत में अब यह बताने वाली स्टेटस पंक्तियाँ नहीं दिखतीं कि एजेंट कहाँ काम करता है या उसका नतीजा कहाँ गया। टास्क एजेंट पैनल सिर्फ़ डिक्टेशन देते हैं।"
+        }
+      ]
+    },
+    "id": {
+      "headline": "Tugas Koordinator selalu berjalan, dan bilah samping proyek yang lebih tenang",
+      "summary": "Pembaruan singkat setelah 1.1.68 dengan perbaikan yang paling penting dan tampilan proyek yang lebih rapi.",
+      "sections": [
+        {
+          "title": "Tugas selalu berjalan",
+          "body": "Dalam proyek, tugas yang diberikan Koordinator kepada agen di folder yang sama kini berjalan dan menjawab, bukan berakhir tanpa jawaban."
+        },
+        {
+          "title": "Hapus untuk selamanya",
+          "body": "Menghapus percakapan kini menghapus datanya untuk selamanya setelah Anda mengonfirmasi. Folder yang dikunci Windows tidak lagi membuat penghapusan gagal, dan salinan percakapan menyimpan gambarnya sendiri."
+        },
+        {
+          "title": "Berhenti di tempat yang Anda harapkan",
+          "body": "Saat agen bekerja, Berhenti ada di ujung kotak pesan, di obrolan dan di Koordinator."
+        },
+        {
+          "title": "Salinan yang lebih jelas",
+          "body": "Obrolan samping tidak lagi ditawarkan di Koordinator proyek. Percakapan yang disalin menyebutkan sumbernya dan waktu penyalinan, tanpa penanda mentah."
+        },
+        {
+          "title": "Satu bingkai untuk tab dan panel",
+          "body": "Tab dan panel berbagi satu bingkai, dan tab yang dipilih menyatu dengan area di bawahnya. Di tema gelap, kartu yang dipilih di bilah samping kembali menampilkan garis tepinya."
+        },
+        {
+          "title": "Bilah samping proyek yang lebih tenang",
+          "body": "Bilah samping menjaga tugas tetap di tempatnya selama Anda bekerja dan mengelompokkannya ulang saat suasana tenang. Anda bisa memilih daftar berkelompok atau daftar biasa."
+        },
+        {
+          "title": "Percakapan tugas yang lebih rapi",
+          "body": "Percakapan tugas tidak lagi menampilkan baris status tentang tempat agen bekerja atau ke mana hasilnya pergi. Panel agen tugas hanya menawarkan dikte."
+        }
+      ]
+    },
+    "it": {
+      "headline": "Le attività del Coordinatore partono sempre, e una barra dei progetti più tranquilla",
+      "summary": "Un aggiornamento rapido dopo la 1.1.68, con le correzioni più importanti e un aspetto più pulito per i progetti.",
+      "sections": [
+        {
+          "title": "Le attività partono sempre",
+          "body": "In un progetto, un'attività che il Coordinatore affida a un agente nella stessa cartella ora parte e risponde, invece di finire senza risposta."
+        },
+        {
+          "title": "Eliminazione definitiva",
+          "body": "Eliminare una conversazione ora ne cancella i dati in modo definitivo dopo la tua conferma. Una cartella bloccata da Windows non fa più fallire l'eliminazione, e la copia di una conversazione mantiene le proprie immagini."
+        },
+        {
+          "title": "Interrompi dove te lo aspetti",
+          "body": "Mentre un agente lavora, Interrompi si trova alla fine della casella del messaggio, nelle chat e nel Coordinatore."
+        },
+        {
+          "title": "Copie più chiare",
+          "body": "La chat laterale non viene più proposta sul Coordinatore di un progetto. Una conversazione copiata indica la sua origine e l'ora della copia, senza marcatori grezzi."
+        },
+        {
+          "title": "Una sola cornice per schede e pannelli",
+          "body": "Schede e pannelli condividono una cornice, e la scheda selezionata prosegue nell'area sottostante. Nel tema scuro, la scheda selezionata nella barra laterale mostra di nuovo il suo contorno."
+        },
+        {
+          "title": "Una barra dei progetti più tranquilla",
+          "body": "La barra laterale tiene le attività al loro posto mentre lavori e le raggruppa di nuovo quando c'è calma. Puoi scegliere un elenco raggruppato o semplice."
+        },
+        {
+          "title": "Conversazioni delle attività più pulite",
+          "body": "Le conversazioni delle attività non mostrano più righe di stato su dove lavora l'agente o dove è finito il suo risultato. I pannelli degli agenti delle attività offrono solo la dettatura."
+        }
+      ]
+    },
+    "ja": {
+      "headline": "コーディネーターのタスクが毎回開始し、プロジェクトのサイドバーがより落ち着いた表示に",
+      "summary": "1.1.68 に続く小さなアップデートです。重要な修正と、よりすっきりしたプロジェクトの見た目をお届けします。",
+      "sections": [
+        {
+          "title": "タスクが毎回開始",
+          "body": "プロジェクトで、コーディネーターが同じフォルダーのエージェントに渡したタスクが、応答なしで終わることなく開始して応答するようになりました。"
+        },
+        {
+          "title": "完全に削除",
+          "body": "会話を削除すると、確認後にそのデータが完全に消去されるようになりました。Windows がロックしているフォルダーがあっても削除は失敗せず、会話のコピーは独自の画像を保持します。"
+        },
+        {
+          "title": "停止ボタンは期待どおりの場所に",
+          "body": "エージェントの作業中、停止ボタンはチャットでもコーディネーターでもメッセージ欄の端にあります。"
+        },
+        {
+          "title": "わかりやすいコピー",
+          "body": "プロジェクトのコーディネーターではサイドチャットが表示されなくなりました。コピーした会話には、生のマーカーなしでコピー元とコピーした時刻が表示されます。"
+        },
+        {
+          "title": "タブとパネルをひとつの枠に",
+          "body": "タブとパネルがひとつの枠を共有し、選択したタブがその下の領域へとつながります。ダークテーマでは、サイドバーで選択したカードの輪郭が再び表示されます。"
+        },
+        {
+          "title": "落ち着いたプロジェクトのサイドバー",
+          "body": "作業中はサイドバーのタスクがその場にとどまり、落ち着いたときに並べ直されます。グループ表示とフラットな一覧を選べます。"
+        },
+        {
+          "title": "すっきりしたタスクの会話",
+          "body": "タスクの会話に、エージェントの作業場所や結果の送り先を示すステータス行が表示されなくなりました。タスクエージェントのパネルでは音声入力のみを利用できます。"
+        }
+      ]
+    },
+    "ko": {
+      "headline": "코디네이터 작업이 매번 시작되고, 프로젝트 사이드바가 더 차분해졌습니다",
+      "summary": "1.1.68 이후 빠른 업데이트로, 가장 중요한 수정 사항과 더 깔끔한 프로젝트 화면을 담았습니다.",
+      "sections": [
+        {
+          "title": "작업이 매번 시작됩니다",
+          "body": "프로젝트에서 코디네이터가 같은 폴더의 에이전트에게 맡긴 작업이 이제 응답 없이 끝나지 않고 시작되어 답합니다."
+        },
+        {
+          "title": "완전히 삭제",
+          "body": "대화를 삭제하면 확인 후 그 데이터가 완전히 지워집니다. Windows가 잠근 폴더 때문에 삭제가 실패하지 않으며, 대화의 사본은 자체 이미지를 유지합니다."
+        },
+        {
+          "title": "기대한 곳에 있는 중지 버튼",
+          "body": "에이전트가 작업하는 동안 중지 버튼은 채팅과 코디네이터 모두에서 메시지 상자 끝에 있습니다."
+        },
+        {
+          "title": "더 명확한 사본",
+          "body": "프로젝트의 코디네이터에서는 더 이상 사이드 채팅을 제공하지 않습니다. 복사한 대화는 원시 표시 없이 원본과 복사한 시각을 보여 줍니다."
+        },
+        {
+          "title": "탭과 패널을 하나의 틀로",
+          "body": "탭과 패널이 하나의 틀을 공유하고, 선택한 탭이 아래 영역으로 자연스럽게 이어집니다. 어두운 테마에서 사이드바의 선택한 카드가 다시 윤곽선을 보여 줍니다."
+        },
+        {
+          "title": "더 차분한 프로젝트 사이드바",
+          "body": "작업하는 동안 사이드바는 작업을 제자리에 두고, 조용해지면 다시 묶어 정리합니다. 그룹 목록이나 단순 목록을 선택할 수 있습니다."
+        },
+        {
+          "title": "더 깔끔한 작업 대화",
+          "body": "작업 대화에 에이전트가 어디서 일하는지, 결과가 어디로 갔는지를 알리는 상태 줄이 더 이상 표시되지 않습니다. 작업 에이전트 패널은 받아쓰기만 제공합니다."
+        }
+      ]
+    },
+    "pt-BR": {
+      "headline": "As tarefas do Coordenador começam sempre, e uma barra de projetos mais tranquila",
+      "summary": "Uma atualização rápida depois da 1.1.68, com as correções que mais importavam e um visual mais limpo para os projetos.",
+      "sections": [
+        {
+          "title": "As tarefas começam sempre",
+          "body": "Em um projeto, uma tarefa que o Coordenador passa para um agente na mesma pasta agora começa e responde, em vez de terminar sem resposta."
+        },
+        {
+          "title": "Excluir de vez",
+          "body": "Excluir uma conversa agora apaga os dados dela de vez depois que você confirma. Uma pasta bloqueada pelo Windows não faz mais a exclusão falhar, e a cópia de uma conversa mantém as próprias imagens."
+        },
+        {
+          "title": "Parar onde você espera",
+          "body": "Enquanto um agente trabalha, Parar fica no fim da caixa de mensagem, nos chats e no Coordenador."
+        },
+        {
+          "title": "Cópias mais claras",
+          "body": "O chat lateral não é mais oferecido no Coordenador de um projeto. Uma conversa copiada mostra a origem e o horário da cópia, sem marcadores brutos."
+        },
+        {
+          "title": "Uma moldura para abas e painéis",
+          "body": "Abas e painéis compartilham uma moldura, e a aba selecionada continua na área abaixo dela. No tema escuro, o cartão selecionado na barra lateral volta a mostrar seu contorno."
+        },
+        {
+          "title": "Uma barra de projetos mais tranquila",
+          "body": "A barra lateral mantém as tarefas no lugar enquanto você trabalha e as reagrupa quando tudo está calmo. Você pode escolher uma lista agrupada ou simples."
+        },
+        {
+          "title": "Conversas de tarefas mais limpas",
+          "body": "As conversas de tarefas não mostram mais linhas de status sobre onde o agente trabalha ou para onde foi o resultado. Os painéis dos agentes de tarefas oferecem apenas ditado."
+        }
+      ]
+    },
+    "ro": {
+      "headline": "Sarcinile Coordonatorului pornesc de fiecare dată, iar bara proiectelor e mai liniștită",
+      "summary": "O actualizare rapidă după 1.1.68, cu reparațiile care contau cel mai mult și un aspect mai curat pentru proiecte.",
+      "sections": [
+        {
+          "title": "Sarcinile pornesc de fiecare dată",
+          "body": "Într-un proiect, o sarcină pe care Coordonatorul o dă unui agent din același folder pornește acum și răspunde, în loc să se termine fără răspuns."
+        },
+        {
+          "title": "Ștergere definitivă",
+          "body": "Ștergerea unei conversații îi șterge acum datele definitiv, după ce confirmi. Un folder blocat de Windows nu mai face ștergerea să eșueze, iar copia unei conversații își păstrează propriile imagini."
+        },
+        {
+          "title": "Stop acolo unde te aștepți",
+          "body": "Cât lucrează un agent, Stop stă la capătul casetei de mesaj, în conversații și la Coordonator."
+        },
+        {
+          "title": "Copii mai clare",
+          "body": "Chatul lateral nu mai e oferit la Coordonatorul unui proiect. O conversație copiată arată sursa și ora copierii, fără marcaje brute."
+        },
+        {
+          "title": "Un singur cadru pentru taburi și panouri",
+          "body": "Taburile și panourile împart același cadru, iar tabul selectat se continuă în zona de dedesubt. În tema întunecată, cardul selectat din bara laterală își arată din nou conturul."
+        },
+        {
+          "title": "O bară a proiectelor mai liniștită",
+          "body": "Bara laterală ține sarcinile pe loc cât lucrezi și le regrupează când lucrurile se liniștesc. Poți alege o listă grupată sau una simplă."
+        },
+        {
+          "title": "Conversații de sarcini mai curate",
+          "body": "Conversațiile sarcinilor nu mai arată rânduri de stare despre unde lucrează agentul sau unde a ajuns rezultatul. Panourile agenților de sarcini oferă doar dictare."
+        }
+      ]
+    },
+    "ru": {
+      "headline": "Задачи координатора запускаются каждый раз, а боковая панель проектов стала спокойнее",
+      "summary": "Быстрое обновление после 1.1.68: самые важные исправления и более чистый вид проектов.",
+      "sections": [
+        {
+          "title": "Задачи запускаются каждый раз",
+          "body": "В проекте задача, которую координатор передаёт агенту в той же папке, теперь запускается и отвечает, а не завершается без ответа."
+        },
+        {
+          "title": "Удаление навсегда",
+          "body": "Удаление беседы теперь стирает её данные навсегда после вашего подтверждения. Папка, заблокированная Windows, больше не мешает удалению, а копия беседы сохраняет собственные изображения."
+        },
+        {
+          "title": "«Стоп» там, где вы его ждёте",
+          "body": "Пока агент работает, кнопка «Стоп» находится в конце поля сообщения, в чатах и у координатора."
+        },
+        {
+          "title": "Понятнее копии",
+          "body": "Боковой чат больше не предлагается у координатора проекта. Скопированная беседа указывает источник и время копирования, без служебных меток."
+        },
+        {
+          "title": "Одна рамка для вкладок и панелей",
+          "body": "Вкладки и панели находятся в одной рамке, а выбранная вкладка плавно переходит в область под ней. В тёмной теме выбранная карточка на боковой панели снова показывает контур."
+        },
+        {
+          "title": "Спокойнее боковая панель проектов",
+          "body": "Боковая панель держит задачи на месте, пока вы работаете, и перегруппировывает их, когда всё затихает. Можно выбрать сгруппированный или простой список."
+        },
+        {
+          "title": "Чище беседы задач",
+          "body": "В беседах задач больше нет строк состояния о том, где работает агент и куда ушёл его результат. Панели агентов задач предлагают только диктовку."
+        }
+      ]
+    },
+    "tr": {
+      "headline": "Koordinatör görevleri her seferinde başlıyor, proje kenar çubuğu daha sakin",
+      "summary": "1.1.68'den sonra hızlı bir güncelleme: en önemli düzeltmeler ve projeler için daha temiz bir görünüm.",
+      "sections": [
+        {
+          "title": "Görevler her seferinde başlıyor",
+          "body": "Bir projede Koordinatörün aynı klasördeki bir ajana verdiği görev artık yanıtsız bitmek yerine başlıyor ve yanıt veriyor."
+        },
+        {
+          "title": "Kalıcı silme",
+          "body": "Bir sohbeti sildiğinde, onayından sonra verileri artık kalıcı olarak siliniyor. Windows'un kilitli tuttuğu bir klasör artık silmenin başarısız olmasına yol açmıyor ve bir sohbetin kopyası kendi görsellerini koruyor."
+        },
+        {
+          "title": "Durdur, beklediğin yerde",
+          "body": "Bir ajan çalışırken Durdur, sohbetlerde ve Koordinatörde mesaj kutusunun sonunda duruyor."
+        },
+        {
+          "title": "Daha anlaşılır kopyalar",
+          "body": "Yan sohbet artık bir projenin Koordinatöründe sunulmuyor. Kopyalanan bir sohbet, ham işaretler olmadan kaynağını ve kopyalanma saatini gösteriyor."
+        },
+        {
+          "title": "Sekmeler ve paneller için tek çerçeve",
+          "body": "Sekmeler ve paneller tek bir çerçeveyi paylaşıyor ve seçili sekme alttaki alana akıyor. Koyu temada kenar çubuğundaki seçili kart yeniden dış çizgisini gösteriyor."
+        },
+        {
+          "title": "Daha sakin bir proje kenar çubuğu",
+          "body": "Kenar çubuğu sen çalışırken görevleri yerinde tutuyor ve ortalık sakinleşince yeniden grupluyor. Gruplanmış ya da düz bir liste seçebilirsin."
+        },
+        {
+          "title": "Daha sade görev sohbetleri",
+          "body": "Görev sohbetleri artık ajanın nerede çalıştığı ya da sonucunun nereye gittiğiyle ilgili durum satırları göstermiyor. Görev ajanı panelleri yalnızca dikte sunuyor."
+        }
+      ]
+    },
+    "vi": {
+      "headline": "Nhiệm vụ của Điều phối viên luôn khởi động, và thanh bên dự án gọn gàng hơn",
+      "summary": "Bản cập nhật nhanh sau 1.1.68 với những bản sửa quan trọng nhất và giao diện dự án gọn gàng hơn.",
+      "sections": [
+        {
+          "title": "Nhiệm vụ luôn khởi động",
+          "body": "Trong một dự án, nhiệm vụ mà Điều phối viên giao cho một tác nhân trong cùng thư mục giờ sẽ khởi động và trả lời, thay vì kết thúc mà không có câu trả lời."
+        },
+        {
+          "title": "Xóa vĩnh viễn",
+          "body": "Xóa một cuộc trò chuyện giờ sẽ xóa vĩnh viễn dữ liệu của nó sau khi bạn xác nhận. Thư mục bị Windows khóa không còn làm việc xóa thất bại, và bản sao của cuộc trò chuyện giữ lại hình ảnh riêng."
+        },
+        {
+          "title": "Nút Dừng ở đúng chỗ bạn mong đợi",
+          "body": "Khi tác nhân đang làm việc, nút Dừng nằm ở cuối ô tin nhắn, trong các cuộc trò chuyện và ở Điều phối viên."
+        },
+        {
+          "title": "Bản sao rõ ràng hơn",
+          "body": "Trò chuyện bên không còn được đề xuất ở Điều phối viên của dự án. Cuộc trò chuyện được sao chép ghi rõ nguồn và thời điểm sao chép, không có ký hiệu thô."
+        },
+        {
+          "title": "Một khung cho thẻ và bảng",
+          "body": "Các thẻ và bảng dùng chung một khung, và thẻ được chọn liền mạch với vùng bên dưới. Ở giao diện tối, thẻ được chọn trên thanh bên lại hiển thị đường viền."
+        },
+        {
+          "title": "Thanh bên dự án yên tĩnh hơn",
+          "body": "Thanh bên giữ nguyên vị trí các nhiệm vụ khi bạn làm việc và sắp xếp lại nhóm khi mọi thứ lắng xuống. Bạn có thể chọn danh sách theo nhóm hoặc danh sách phẳng."
+        },
+        {
+          "title": "Cuộc trò chuyện nhiệm vụ gọn hơn",
+          "body": "Cuộc trò chuyện nhiệm vụ không còn hiển thị các dòng trạng thái về nơi tác nhân làm việc hay kết quả đã đi đâu. Bảng của tác nhân nhiệm vụ chỉ có tính năng đọc chính tả."
+        }
+      ]
+    },
+    "zh-Hans": {
+      "headline": "协调者的任务每次都能启动，项目侧边栏也更安静了",
+      "summary": "继 1.1.68 之后的一次快速更新，带来最重要的修复和更清爽的项目外观。",
+      "sections": [
+        {
+          "title": "任务每次都能启动",
+          "body": "在项目中，协调者交给同一文件夹中智能体的任务现在会启动并作答，而不会无回应地结束。"
+        },
+        {
+          "title": "彻底删除",
+          "body": "删除对话后，在你确认之后其数据会被彻底清除。被 Windows 锁定的文件夹不再导致删除失败，对话的副本也会保留自己的图片。"
+        },
+        {
+          "title": "停止按钮就在你想要的位置",
+          "body": "智能体工作时，停止按钮位于消息框末端，在聊天和协调者中都是如此。"
+        },
+        {
+          "title": "更清晰的副本",
+          "body": "项目的协调者不再提供侧边聊天。复制的对话会注明来源和复制时间，不再显示原始标记。"
+        },
+        {
+          "title": "标签页与面板共用一个框架",
+          "body": "标签页和面板共用一个框架，选中的标签页与下方区域连成一体。在深色主题下，侧边栏中选中的卡片重新显示轮廓。"
+        },
+        {
+          "title": "更安静的项目侧边栏",
+          "body": "你工作时，侧边栏会让任务保持原位，空闲时再重新分组。你可以选择分组列表或平铺列表。"
+        },
+        {
+          "title": "更简洁的任务对话",
+          "body": "任务对话不再显示关于智能体在哪里工作或结果去向的状态行。任务智能体面板只提供听写功能。"
+        }
+      ]
+    },
+    "zh-Hant": {
+      "headline": "協調者的任務每次都能啟動，專案側邊欄也更安靜了",
+      "summary": "繼 1.1.68 之後的一次快速更新，帶來最重要的修正和更清爽的專案外觀。",
+      "sections": [
+        {
+          "title": "任務每次都能啟動",
+          "body": "在專案中，協調者交給同一資料夾中代理的任務現在會啟動並回覆，而不會在沒有回應的情況下結束。"
+        },
+        {
+          "title": "徹底刪除",
+          "body": "刪除對話後，在你確認之後其資料會被徹底清除。被 Windows 鎖定的資料夾不再導致刪除失敗，對話的副本也會保留自己的圖片。"
+        },
+        {
+          "title": "停止按鈕就在你預期的位置",
+          "body": "代理工作時，停止按鈕位於訊息框末端，在聊天和協調者中都是如此。"
+        },
+        {
+          "title": "更清楚的副本",
+          "body": "專案的協調者不再提供側邊聊天。複製的對話會註明來源和複製時間，不再顯示原始標記。"
+        },
+        {
+          "title": "分頁與面板共用一個框架",
+          "body": "分頁和面板共用一個框架，選取的分頁與下方區域連成一體。在深色主題下，側邊欄中選取的卡片重新顯示外框。"
+        },
+        {
+          "title": "更安靜的專案側邊欄",
+          "body": "你工作時，側邊欄會讓任務保持原位，閒下來時再重新分組。你可以選擇分組清單或平面清單。"
+        },
+        {
+          "title": "更簡潔的任務對話",
+          "body": "任務對話不再顯示關於代理在哪裡工作或結果去向的狀態列。任務代理面板只提供聽寫功能。"
+        }
+      ]
+    }
+  }
+}
