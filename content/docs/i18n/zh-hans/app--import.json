@@ -1,0 +1,8 @@
+{
+  "source": "6e937c60e8b4680f",
+  "nav": "导入对话",
+  "title": "从其他 AI 应用导入对话",
+  "seoTitle": "导入 Claude Code、Codex 和 ChatGPT 的对话",
+  "description": "把你电脑上其他 AI 应用中已有的对话，或 ChatGPT 的导出文件，带入 Codevalanche，并保持同步。",
+  "body": "<p>设置中的<span class=\"ui-term\">从其他 AI 应用导入对话</span>会查找这台电脑上对话可以被导入的 AI 应用。</p>\n<h2 id=\"apps\">从这台电脑上的应用导入</h2>\n<ol class=\"docs-steps\"><li><strong>打开导入设置。</strong>Codevalanche 会列出它找到的应用。</li><li><strong>选择要导入的内容。</strong></li><li><strong>保持同步（可选）。</strong>Codevalanche 运行期间，这些应用中出现新对话后不久，它就会将其导入。</li></ol>\n<h2 id=\"chatgpt\">从 ChatGPT 导入</h2>\n<ol class=\"docs-steps\"><li><strong>在 ChatGPT 的设置中导出你的数据。</strong></li><li><strong>让 Codevalanche 指向该导出文件：</strong><code>conversations.json</code> 文件或导出的 <code>.zip</code>。</li></ol>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>继续一段导入的对话时，会保留你在本地所做的更改；必要时会在新对话中继续。</p></div>"
+}

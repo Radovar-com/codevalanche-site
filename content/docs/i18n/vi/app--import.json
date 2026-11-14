@@ -1,0 +1,8 @@
+{
+  "source": "6e937c60e8b4680f",
+  "nav": "Nhập cuộc trò chuyện",
+  "title": "Nhập cuộc trò chuyện từ các ứng dụng AI khác",
+  "seoTitle": "Nhập cuộc trò chuyện của Claude Code, Codex và ChatGPT",
+  "description": "Đưa các cuộc trò chuyện hiện có từ các ứng dụng AI khác trên máy tính, hoặc từ một bản xuất ChatGPT, vào Codevalanche và giữ chúng đồng bộ.",
+  "body": "<p><span class=\"ui-term\">Mang các cuộc trò chuyện từ các ứng dụng AI khác</span> trong Cài đặt tìm các ứng dụng AI trên máy tính này có cuộc trò chuyện có thể nhập.</p>\n<h2 id=\"apps\">Từ các ứng dụng trên máy tính này</h2>\n<ol class=\"docs-steps\"><li><strong>Mở cài đặt nhập.</strong> Codevalanche liệt kê các ứng dụng nó tìm thấy.</li><li><strong>Chọn những gì cần nhập.</strong></li><li><strong>Giữ đồng bộ (không bắt buộc).</strong> Trong khi Codevalanche chạy, nó nhập các cuộc trò chuyện mới từ những ứng dụng đó ngay sau khi chúng xuất hiện.</li></ol>\n<h2 id=\"chatgpt\">Từ ChatGPT</h2>\n<ol class=\"docs-steps\"><li><strong>Xuất dữ liệu của bạn</strong> trong cài đặt của ChatGPT.</li><li><strong>Chỉ cho Codevalanche bản xuất:</strong> tệp <code>conversations.json</code> hoặc tệp <code>.zip</code> của bản xuất.</li></ol>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>Tiếp tục một cuộc trò chuyện đã nhập sẽ giữ các thay đổi cục bộ của bạn; khi cần, nó tiếp tục trong một cuộc trò chuyện mới.</p></div>"
+}

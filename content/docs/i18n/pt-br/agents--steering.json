@@ -1,0 +1,8 @@
+{
+  "source": "23b87b5ff5602205",
+  "nav": "Direcionar e enfileirar mensagens",
+  "title": "Direcione o agente e enfileire mensagens",
+  "seoTitle": "Direcione um agente de IA em execução e enfileire mensagens",
+  "description": "Envie mensagens enquanto um agente trabalha. Elas esperam em uma fila e podem ser editadas, colocadas no começo ou enviadas para dentro do turno em andamento.",
+  "body": "<p>Você não precisa esperar um agente terminar. Escreva a próxima mensagem sempre que pensar nela.</p>\n<h2 id=\"queue\">A fila</h2>\n<ul><li>Uma mensagem enviada enquanto o agente trabalha entra na fila, abaixo da caixa de mensagem.</li><li>As mensagens na fila são executadas uma após a outra quando a execução atual termina.</li><li>Você pode editar uma mensagem na fila, movê-la para o começo para que seja a próxima, removê-la ou limpar a fila inteira.</li><li>Se uma mensagem anterior falhou, a fila espera para que nada seja executado fora de ordem.</li></ul>\n<h2 id=\"steer\">Direcione o turno em andamento</h2>\n<p>Alguns apps de IA conseguem receber uma mensagem dentro do turno que já está em andamento. Nesse caso, uma mensagem da fila pode ser enviada diretamente para mudar o rumo. Se o app não consegue confirmar que ela chegou, a mensagem fica retida e você escolhe Enviar de novo ou Descartar.</p>\n<h2 id=\"stop\">Parar</h2>\n<p><kbd class=\"docs-kbd\">Esc</kbd> na caixa de mensagem interrompe a execução. As mensagens na fila continuam na fila.</p>"
+}

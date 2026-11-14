@@ -1,0 +1,8 @@
+{
+  "source": "fb985d398940c17e",
+  "nav": "多个账户",
+  "title": "同一个 AI 的多个账户",
+  "seoTitle": "在一个应用中使用多个 Claude 或 ChatGPT 账户",
+  "description": "为同一个 AI 添加多个账户或密钥，给每个取一个你容易辨认的名字，并选择对话使用哪一个。",
+  "body": "<p>很多人不止有一个账户：工作和个人各一个 Claude 套餐、两个 ChatGPT 账户，或者几个 API 密钥。Codevalanche 会把它们并排保存。</p>\n<h2 id=\"add\">添加其他账户</h2>\n<ol class=\"docs-steps\"><li><strong>打开“你的 AI”</strong>并选择该 AI。</li><li><strong>选择<span class=\"ui-term\">添加其他账户或密钥</span>。</strong>用另一个账户登录，或者粘贴另一个密钥。</li><li><strong>给它起个名字。</strong><span class=\"ui-term\">连接名称</span>是可选的，但“工作”这样的名称能帮你辨认它。</li></ol>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>有些 AI 不支持在同一处添加第二个账户；此时应用会显示“此连接不支持在此处添加另一个账户。”</p></div>\n<h2 id=\"use\">选择使用哪个账户</h2>\n<p>模型选择器会按账户显示模型，因此你是连同模型一起选择账户的。每段对话都会保留它开始时使用的账户。</p>\n<h2 id=\"limits\">额度各自独立</h2>\n<p>每个账户都有自己的套餐和自己的额度。是否把工作转到另一个账户，始终由你决定。</p>\n<h2 id=\"remove\">移除账户</h2>\n<p>移除连接会让 Codevalanche 忘记它及其模型选择。你在提供商处的账户及其对话保持原样，你随时可以重新添加它。</p>"
+}

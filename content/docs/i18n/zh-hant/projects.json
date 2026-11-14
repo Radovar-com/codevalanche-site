@@ -1,0 +1,8 @@
+{
+  "source": "a8fec790b916ef3f",
+  "nav": "專案",
+  "title": "專案",
+  "seoTitle": "專案：資料夾與對話集中在同一處",
+  "description": "專案把一項工作的資料夾與對話放在一起。建立專案、新增資料夾、封存它，並開啟協調員。",
+  "body": "<p>專案就是一項工作：它在你電腦上使用的資料夾，以及所有與它相關的對話。專案會列在左側欄。</p>\n<h2 id=\"create\">建立專案</h2>\n<ol class=\"docs-steps\"><li><strong>從左側欄開啟「新增專案」。</strong></li><li><strong>為它命名</strong>（1 到 120 個字元），如果你願意，也可以選擇圖示。</li><li><strong>新增情境。</strong>為你電腦上已有的程式碼選擇<span class=\"ui-term\">新增資料夾</span>，或選擇<span class=\"ui-term\">複製 GitHub 儲存庫</span>。如果沒有資料夾，專案會取得一個屬於它自己的新資料夾。</li><li><strong>寫下目標（選填）。</strong>有了目標，專案一開啟，協調員就會開始處理它。</li><li><strong>按下<span class=\"ui-term\">建立專案</span>。</strong></li></ol>\n<h2 id=\"folders\">一個專案中的多個資料夾</h2>\n<p>一個專案最多可以包含 32 個資料夾，例如一個網站與它的伺服器。其中一個資料夾是<span class=\"ui-term\">主資料夾</span>。專案的所有對話與智慧體都可以在所有資料夾中工作。</p>\n<h2 id=\"starters\">開始的方式</h2>\n<p>新專案會建議幾個起點：</p>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><tbody><tr><td><span class=\"ui-term\">繼續最近的工作</span></td><td>查看最近的工作，告訴你上次做到哪裡以及接下來是什麼。</td></tr><tr><td><span class=\"ui-term\">檢查專案</span></td><td>讀取專案，告訴你它的狀態、哪裡有問題，以及該先做什麼。</td></tr><tr><td><span class=\"ui-term\">制定計畫</span></td><td>制定一份計畫，並拆分成給智慧體的步驟。</td></tr><tr><td><span class=\"ui-term\">使用我的工具</span></td><td>列出可用的工具、連線與技能，並建議如何使用它們。</td></tr></tbody></table></div>\n<h2 id=\"coordinator\">有或沒有協調員</h2>\n<p>沒有協調員時，專案是整理你的對話的整齊場所。有了它，你給一個目標，它就會把工作分給多個智慧體。請參閱<a href=\"/docs/projects/coordinator/\">協調員</a>。</p>\n<h2 id=\"archive\">封存或移除</h2>\n<ul><li><span class=\"ui-term\">封存專案</span>會把它從左側欄隱藏，並封存它的對話。你可以在「專案 › 已封存」中再次找到它，並隨時把它帶回來。不會刪除任何東西。</li><li>移除專案會把它與它的對話從 Codevalanche 中拿掉。資料夾中的檔案仍留在你的電腦上。</li><li>如果專案有協調員，封存或移除它會停止它的智慧體。</li></ul>"
+}

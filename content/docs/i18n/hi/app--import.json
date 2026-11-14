@@ -1,0 +1,8 @@
+{
+  "source": "6e937c60e8b4680f",
+  "nav": "वार्तालाप इम्पोर्ट करें",
+  "title": "अन्य AI ऐप्स से वार्तालाप इम्पोर्ट करें",
+  "seoTitle": "Claude Code, Codex और ChatGPT के वार्तालाप इम्पोर्ट करें",
+  "description": "अपने PC के दूसरे AI ऐप्स से, या ChatGPT एक्सपोर्ट से, अपने मौजूदा वार्तालाप Codevalanche में लाएँ और उन्हें सिंक में रखें।",
+  "body": "<p>सेटिंग्स में <span class=\"ui-term\">अन्य AI ऐप्स से वार्तालाप लाएं</span> इस PC पर ऐसे AI ऐप्स खोजता है जिनके वार्तालाप इम्पोर्ट किए जा सकते हैं।</p>\n<h2 id=\"apps\">इस PC के ऐप्स से</h2>\n<ol class=\"docs-steps\"><li><strong>इम्पोर्ट सेटिंग्स खोलें।</strong> Codevalanche उन ऐप्स की सूची दिखाता है जो उसे मिले।</li><li><strong>चुनें कि क्या इम्पोर्ट करना है।</strong></li><li><strong>सिंक में रखें (वैकल्पिक)।</strong> जब तक Codevalanche चल रहा है, वह उन ऐप्स के नए वार्तालाप उनके दिखने के कुछ ही देर बाद इम्पोर्ट कर लेता है।</li></ol>\n<h2 id=\"chatgpt\">ChatGPT से</h2>\n<ol class=\"docs-steps\"><li><strong>अपना डेटा एक्सपोर्ट करें</strong> ChatGPT की सेटिंग्स में।</li><li><strong>Codevalanche को एक्सपोर्ट की ओर इशारा करें:</strong> <code>conversations.json</code> फ़ाइल या एक्सपोर्ट का <code>.zip</code>।</li></ol>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>इम्पोर्ट किए वार्तालाप को जारी रखने पर आपके स्थानीय बदलाव बने रहते हैं; ज़रूरत पड़ने पर वह नए वार्तालाप में जारी रहता है।</p></div>"
+}

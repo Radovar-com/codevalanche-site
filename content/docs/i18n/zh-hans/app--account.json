@@ -1,0 +1,8 @@
+{
+  "source": "a997ebcb3d37a7e2",
+  "nav": "你的账户",
+  "title": "你的 Codevalanche 账户",
+  "seoTitle": "你的 Codevalanche 账户与访客模式",
+  "description": "Codevalanche 账户的用途，如何登录或以访客身份继续，以及它与你的 AI 账户有何不同。",
+  "body": "<p>Codevalanche 账户是你在 Codevalanche 上的个人资料。它与你的 AI 账户相互独立：在这里登录，并不会连接 Claude、ChatGPT 或任何其他 AI。</p>\n<h2 id=\"sign-in\">登录或以访客身份继续</h2>\n<ul><li>使用电子邮件或 Google 登录。登录会在你的浏览器中安全完成，随后 Codevalanche 会再次打开。</li><li>也可以以访客身份继续，不使用账户来使用应用。</li><li>会话最多可离线使用 30 天，之后应用会要求你重新登录。不会丢失任何内容。</li></ul>\n<h2 id=\"manage\">管理账户</h2>\n<p>在网站上，<a href=\"/account/\">你的账户</a>页面会显示你的个人资料和已登录的会话（并可让你结束这些会话），还可以让你删除账户。</p>\n<h2 id=\"data\">账户中保存的内容</h2>\n<p>你的电子邮件地址、显示名称、可选的简短个人简介以及登录方式。绝不包括你的提示词、对话、代码或密钥。参见<a href=\"/docs/privacy/\">你的代码去向何处</a>。</p>"
+}

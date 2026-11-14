@@ -1,0 +1,8 @@
+{
+  "source": "8d17bcdeff59bf0d",
+  "nav": "プラグイン、MCP、スキル",
+  "title": "プラグイン、MCP サーバー、スキル",
+  "seoTitle": "AI コーディングエージェントのプラグイン、MCP サーバー、スキル",
+  "description": "MCP サーバー、スキル、GitHub、Figma、Google Drive、Vercel などのコネクターでエージェントの能力を広げます。Claude Code や Codex から取り込むこともできます。",
+  "body": "<p>設定の<span class=\"ui-term\">プラグイン</span>には、エージェントが使える MCP サーバー、スキル、組み込みの機能がまとまっています。1 つの一覧がすべてのエージェントに使われます。</p>\n<h2 id=\"catalog\">カタログ</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>プラグイン</th><th>追加されるもの</th></tr></thead><tbody><tr><td>GitHub</td><td>GitHub の Issue、プルリクエスト、コード検索、Actions。</td></tr><tr><td>Figma</td><td>Figma ファイルのデザインコンテキスト、スクリーンショット、変数、アセット。</td></tr><tr><td>Google Drive と Gmail</td><td>Google のホスト型 MCP サーバー経由で、ファイルとメールの検索と読み取り。</td></tr><tr><td>Vercel</td><td>Vercel アカウントのプロジェクト、デプロイ、ログ、ドキュメント。</td></tr><tr><td>Supabase</td><td>データベースの探索。変更にはあなたの承認が必要です。</td></tr><tr><td>スキル</td><td>コードレビュー、フロントエンドデザイン、データ分析、スプレッドシート、ディープリサーチなど。</td></tr></tbody></table></div>\n<p>アカウントが必要なコネクターは、そのサービス自身のページでサインインします。</p>\n<h2 id=\"import\">Claude Code と Codex から取り込む</h2>\n<p>Claude Code や Codex ですでに MCP サーバーを設定している場合は、それらを取り込むと、すべてのエージェントが使えるようになります。取り込みは、同じページからいつでも元に戻せます。元に戻すと、Claude Code と Codex はそれぞれの一覧に戻ります。あとから Claude Code に追加したサーバーは、もう一度取り込んだあとにだけ、ここで使われます。</p>"
+}

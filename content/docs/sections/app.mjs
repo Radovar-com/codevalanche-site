@@ -27,7 +27,7 @@ ${steps([
 ])}
 ${h2('agents', 'The agents’ language')}
 ${p('The interface language changes Codevalanche’s own words. The agents answer in the language you write to them in. Dictation understands 99 languages and can detect yours automatically; see <a href="/docs/agents/voice/">Voice</a>.')}
-${note('This website is available in the same 17 languages from the language menu at the bottom of each page. The detailed docs pages are in English for now.')}`,
+${note('This website is available in the same 17 languages from the language menu at the bottom of each page, including these docs.')}`,
     },
     {
       slug: 'app/updates',

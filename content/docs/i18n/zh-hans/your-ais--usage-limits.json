@@ -1,0 +1,8 @@
+{
+  "source": "64a7656d8af022b8",
+  "nav": "使用额度",
+  "title": "使用额度",
+  "seoTitle": "查看你的 Claude Code 和 Codex 使用额度",
+  "description": "查看你的 Codex 和 Claude Code 套餐还剩多少以及何时重置，在额度不足时收到提醒，并让工作在重置后继续。",
+  "body": "<p>订阅附带额度，通常是一个 5 小时的窗口和一个每周的窗口。Codevalanche 用你自己的登录从官方应用中读取这些额度，并集中显示在一处。</p>\n<h2 id=\"where\">在哪里查看</h2>\n<p>“<span class=\"ui-term\">设置</span> › 额度”显示<em>你的 Codex 和 Claude Code 套餐还剩多少</em>：每个窗口剩余的百分比，以及何时重置（按你所在的时区）。每个数值都会注明检查的时间；旧的数值会标记为“可能已过期”。</p>\n<ul><li>Claude Code 只在工作期间报告它的额度，因此它们会在你发送第一条消息之后出现。</li><li>在“你的 AI”中登录 Codex 之后，才会显示 Codex 的额度。</li><li>其他 AI（Z.ai、Kimi、Gemini、Grok Build）不会向其他应用公开它们的额度。Codevalanche 会显示提供商公布的有关该套餐的信息，并链接到它的用量页面。</li></ul>\n<h2 id=\"warnings\">提醒</h2>\n<p>当额度不足时，你会收到类似这样的提醒：“你的 5 小时额度还剩 20%。它将于今天 17:40 重置。”即将到期的已保存 Codex 重置也会提醒你。</p>\n<h2 id=\"saved-resets\">已保存的 Codex 重置</h2>\n<p>有些 Codex 套餐包含已保存的重置。每一次都能让你的额度恢复到满额。它们会连同到期日期一起列出。由你选择何时使用；Codevalanche 绝不会替你使用。</p>\n<h2 id=\"when-reached\">达到额度上限时</h2>\n<p>达到额度上限的工作会显示<span class=\"ui-term\">等待额度</span>，并且在相应设置开启时，会在额度重置后自动继续。对于协调员的智能体，这就是<span class=\"ui-term\">额度重置后自动继续</span>，位于<a href=\"/docs/projects/settings/\">项目设置</a>中。</p>\n<div class=\"docs-callout tip\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z\"/></svg><p>你也可以立刻改用另一个账户或模型继续。这始终由你选择；Codevalanche 不会在你不知情的情况下切换账户。</p></div>"
+}

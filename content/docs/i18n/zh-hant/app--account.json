@@ -1,0 +1,8 @@
+{
+  "source": "a997ebcb3d37a7e2",
+  "nav": "你的帳號",
+  "title": "你的 Codevalanche 帳號",
+  "seoTitle": "你的 Codevalanche 帳號與訪客模式",
+  "description": "Codevalanche 帳號的用途、如何登入或以訪客身分繼續，以及它與你的 AI 帳號有何不同。",
+  "body": "<p>Codevalanche 帳號是你在 Codevalanche 的個人檔案。它與你的 AI 帳號是分開的：在這裡登入並不會連接 Claude、ChatGPT 或任何其他 AI。</p>\n<h2 id=\"sign-in\">登入或以訪客身分繼續</h2>\n<ul><li>使用電子郵件或 Google 登入。登入會在你的瀏覽器中安全地進行，然後 Codevalanche 會再次開啟。</li><li>或以訪客身分繼續，不需帳號即可使用應用程式。</li><li>工作階段最多可離線運作 30 天，之後應用程式會要求你重新登入。不會遺失任何內容。</li></ul>\n<h2 id=\"manage\">管理帳號</h2>\n<p>在網站上，<a href=\"/account/\">你的帳號</a>會顯示你的個人檔案與已登入的工作階段（並可讓你結束它們），也可以讓你刪除帳號。</p>\n<h2 id=\"data\">帳號保存的內容</h2>\n<p>你的電子郵件地址、顯示名稱、選填的簡短自我介紹與登入方式。絕不包含你的提示詞、對話、程式碼或金鑰。請參閱<a href=\"/docs/privacy/\">你的程式碼去了哪裡</a>。</p>"
+}

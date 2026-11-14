@@ -1,0 +1,8 @@
+{
+  "source": "54685c1b8511f7b0",
+  "nav": "本機模型與語音",
+  "title": "本機模型與語音的問題",
+  "seoTitle": "修復本機 AI 模型與語音聽寫的問題",
+  "description": "針對無法下載或啟動的本機模型、被佔用的連接埠、記憶體不足，以及無法運作的語音引擎或麥克風的修復方式。",
+  "body": "<h2 id=\"models\">本機模型</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的</th><th>該怎麼做</th></tr></thead><tbody><tr><td>磁碟空間不足</td><td>釋放一些空間。目前已下載的部分會保留，下載會接續。</td></tr><tr><td>下載中斷，沒有連線</td><td>重試；它會從停下來的地方接續。</td></tr><tr><td>另一個程式正在使用本機 AI 的連接埠</td><td>關閉其他 Codevalanche 視窗或開發伺服器，然後再試一次。</td></tr><tr><td>本機 AI 無法在這台電腦上啟動</td><td>重新啟動 Codevalanche；如果持續發生，請重新安裝。你的模型與下載內容不受影響。</td></tr><tr><td>記憶體需求可能超出你的機器</td><td>選擇較小的模型或檔案；應用程式會標示哪些適合。</td></tr><tr><td>這個模型還無法在這台電腦上啟動</td><td>移除它以釋放空間，或改用雲端 AI。</td></tr><tr><td>這個檔案沒有公布 SHA-256 摘要</td><td>沒有摘要時，Codevalanche 絕不會下載。請選擇另一個檔案。</td></tr></tbody></table></div>\n<h2 id=\"servers\">LM Studio 與本機伺服器</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的</th><th>該怎麼做</th></tr></thead><tbody><tr><td>本機伺服器的位址無效</td><td>在「你的 AI」下檢查它。</td></tr><tr><td>這個本機伺服器無法搭配這個 AI 應用程式使用</td><td>選擇另一個伺服器或模型。</td></tr></tbody></table></div>\n<h2 id=\"voice\">語音</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的</th><th>該怎麼做</th></tr></thead><tbody><tr><td>語音模式需要語音引擎</td><td>在「設定 › 語音」中下載語音引擎，或新增你自己的 Groq 或 OpenAI 金鑰。</td></tr><tr><td>麥克風沒有開啟</td><td>檢查 Windows 設定 › 隱私權 › 麥克風，然後再試一次。</td></tr><tr><td>沒有偵測到語音</td><td>在語音選單中檢查麥克風，然後再說一次。</td></tr><tr><td>語音對話需要 Claude Code (CV-VOICE-D03)</td><td>選擇 Claude Code 模型，然後再次開始語音模式。</td></tr><tr><td>磁碟空間不足，無法下載這個語音引擎 (CV-VOICE-E07)</td><td>在存放你的模型的磁碟機上釋放一些空間。</td></tr></tbody></table></div>"
+}

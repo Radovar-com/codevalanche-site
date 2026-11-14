@@ -1,0 +1,31 @@
+{
+  "source": "be4eeff5af399f0b",
+  "sections": {
+    "Getting started": "はじめに",
+    "Your AIs": "あなたの AI",
+    "Local models": "ローカルモデル",
+    "Projects": "プロジェクト",
+    "Working with agents": "エージェントとの作業",
+    "The app": "アプリ",
+    "Privacy and security": "プライバシーとセキュリティ",
+    "Troubleshooting": "トラブルシューティング"
+  },
+  "chrome": {
+    "Docs": "ドキュメント",
+    "Codevalanche Docs": "Codevalanche ドキュメント",
+    "Documentation": "ドキュメント",
+    "Search the docs": "ドキュメントを検索",
+    "Search the docs…": "ドキュメントを検索…",
+    "No matching page.": "一致するページがありません。",
+    "All documentation": "すべてのドキュメント",
+    "On this page": "このページの内容",
+    "Previous": "前へ",
+    "Next": "次へ",
+    "Docs home": "ドキュメントのトップ",
+    "Previous and next page": "前後のページ",
+    "{n} min read": "読了目安 {n} 分",
+    "Windows": "Windows",
+    "Skip to content": "本文へスキップ",
+    "The Codevalanche logo.": "Codevalancheのロゴ。"
+  }
+}

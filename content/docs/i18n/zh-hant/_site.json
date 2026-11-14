@@ -1,0 +1,31 @@
+{
+  "source": "be4eeff5af399f0b",
+  "sections": {
+    "Getting started": "入門指南",
+    "Your AIs": "你的 AI",
+    "Local models": "本機模型",
+    "Projects": "專案",
+    "Working with agents": "與代理協作",
+    "The app": "應用程式",
+    "Privacy and security": "隱私與安全",
+    "Troubleshooting": "疑難排解"
+  },
+  "chrome": {
+    "Docs": "文件",
+    "Codevalanche Docs": "Codevalanche 文件",
+    "Documentation": "文件",
+    "Search the docs": "搜尋文件",
+    "Search the docs…": "搜尋文件…",
+    "No matching page.": "找不到相符的頁面。",
+    "All documentation": "所有文件",
+    "On this page": "本頁內容",
+    "Previous": "上一頁",
+    "Next": "下一頁",
+    "Docs home": "文件首頁",
+    "Previous and next page": "上一頁與下一頁",
+    "{n} min read": "閱讀時間 {n} 分鐘",
+    "Windows": "Windows",
+    "Skip to content": "跳轉到內容",
+    "The Codevalanche logo.": "Codevalanche 標誌。"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "source": "be4eeff5af399f0b",
+  "sections": {
+    "Getting started": "Başlangıç",
+    "Your AIs": "Yapay zekâlarınız",
+    "Local models": "Yerel modeller",
+    "Projects": "Projeler",
+    "Working with agents": "Ajanlarla çalışmak",
+    "The app": "Uygulama",
+    "Privacy and security": "Gizlilik ve güvenlik",
+    "Troubleshooting": "Sorun giderme"
+  },
+  "chrome": {
+    "Docs": "Belgeler",
+    "Codevalanche Docs": "Codevalanche Belgeleri",
+    "Documentation": "Belgeler",
+    "Search the docs": "Belgelerde ara",
+    "Search the docs…": "Belgelerde ara…",
+    "No matching page.": "Eşleşen sayfa yok.",
+    "All documentation": "Tüm belgeler",
+    "On this page": "Bu sayfada",
+    "Previous": "Önceki",
+    "Next": "Sonraki",
+    "Docs home": "Belgeler ana sayfası",
+    "Previous and next page": "Önceki ve sonraki sayfa",
+    "{n} min read": "{n} dk okuma",
+    "Windows": "Windows",
+    "Skip to content": "İçeriğe geç",
+    "The Codevalanche logo.": "Codevalanche logosu."
+  }
+}

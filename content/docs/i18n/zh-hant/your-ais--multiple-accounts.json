@@ -1,0 +1,8 @@
+{
+  "source": "fb985d398940c17e",
+  "nav": "多個帳號",
+  "title": "同一個 AI 的多個帳號",
+  "seoTitle": "在同一個應用程式中使用多個 Claude 或 ChatGPT 帳號",
+  "description": "為同一個 AI 新增不只一個帳號或金鑰、為每個帳號取一個你認得的名稱，並選擇對話要使用哪一個。",
+  "body": "<p>很多人有不只一個帳號：一個工作用、一個個人用的 Claude 方案，兩個 ChatGPT 帳號，或多把 API 金鑰。Codevalanche 讓它們並存。</p>\n<h2 id=\"add\">新增另一個帳號</h2>\n<ol class=\"docs-steps\"><li><strong>開啟你的 AI</strong>並挑選該 AI。</li><li><strong>選擇<span class=\"ui-term\">新增其他帳號或金鑰</span>。</strong>用另一個帳號登入，或貼上另一把金鑰。</li><li><strong>為它命名。</strong><span class=\"ui-term\">連線名稱</span>是選填的，但像「工作」這樣的名稱有助於你認出它。</li></ol>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>有些 AI 不支援在同一個地方使用第二個帳號；此時應用程式會顯示「此連線在這裡不支援另一個帳號。」</p></div>\n<h2 id=\"use\">選擇由哪個帳號工作</h2>\n<p>模型選擇器會依帳號顯示模型，因此你是連同模型一起選擇帳號。每個對話都會保留它開始時使用的帳號。</p>\n<h2 id=\"limits\">額度各自獨立</h2>\n<p>每個帳號都有它自己的方案與自己的額度。把工作轉移到另一個帳號，永遠由你決定。</p>\n<h2 id=\"remove\">移除帳號</h2>\n<p>移除連線會讓 Codevalanche 忘記它與它的模型選擇。你在供應商的帳號與其聊天內容維持原樣，而且你隨時可以再次新增它。</p>"
+}

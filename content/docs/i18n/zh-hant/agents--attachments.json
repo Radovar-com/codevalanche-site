@@ -1,0 +1,8 @@
+{
+  "source": "78568eff7c8848d4",
+  "nav": "附件與註釋",
+  "title": "附件與註釋",
+  "seoTitle": "附加螢幕截圖與檔案，並為智慧體註釋你的應用程式",
+  "description": "附加螢幕截圖、PDF、文件與程式碼檔案、貼上圖片，並在執行中的應用程式上標記元素，讓智慧體確切知道要改什麼。",
+  "body": "<h2 id=\"attach\">附加檔案</h2>\n<p>使用附加按鈕或 <kbd class=\"docs-kbd\">Ctrl</kbd>+<kbd class=\"docs-kbd\">U</kbd>，把檔案拖曳到訊息輸入框，或貼上螢幕截圖。</p>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>類型</th><th>格式</th></tr></thead><tbody><tr><td>圖片</td><td>PNG, JPEG, WebP, SVG</td></tr><tr><td>文件</td><td>PDF, DOCX, TXT, Markdown</td></tr><tr><td>程式碼與資料</td><td>JSON, YAML, XML, CSV, LOG, TS, JS, PY, CSS, HTML, SQL, TOML</td></tr></tbody></table></div>\n<ul><li>較大的圖片會在傳送前壓縮。如果仍然太大，請裁切。</li><li>不支援舊版 Word 的 <code>.doc</code> 檔案；請另存為 DOCX 或 PDF。</li><li>無法直接讀取 Figma 的 <code>.fig</code> 檔案；請將畫面框匯出為 PNG、SVG 或 PDF。</li><li>如果所選模型無法讀取附加的檔案，應用程式會在傳送前告訴你。</li></ul>\n<h2 id=\"annotate\">為執行中的應用程式加註釋</h2>\n<p>當你的專案在<span class=\"ui-term\">瀏覽器</span>窗格中執行時，你可以直接指出要修改的地方，而不必用文字描述。</p>\n<ol class=\"docs-steps\"><li><strong>選擇<span class=\"ui-term\">註釋</span>。</strong>預覽會切換為註釋模式。</li><li><strong>點選要修改的元素。</strong>每個元素都會加入你的訊息中，顯示在「頁面上的標記」之下。</li><li><strong>寫下你想對這些標記元素做的事</strong>，然後傳送。</li></ol>\n<p>依預設，每個標記的元素都會連同它的圖片一起傳送。圖片會計入你的方案用量。你可以在「設定 › 瀏覽器 › 註釋螢幕截圖」中選擇「一律包含」、「每次詢問」或「一律不包含」。</p>\n<div class=\"docs-callout tip\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z\"/></svg><p><kbd class=\"docs-kbd\">Esc</kbd> 會清除已選取的元素，或關閉註記而不傳送。如果在你選取元素之後頁面有變動，請重新選取。</p></div>"
+}

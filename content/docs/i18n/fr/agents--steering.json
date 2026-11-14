@@ -1,0 +1,8 @@
+{
+  "source": "23b87b5ff5602205",
+  "nav": "Orienter et mettre des messages en file",
+  "title": "Orienter l’agent et mettre des messages en file d’attente",
+  "seoTitle": "Orienter un agent IA en cours d’exécution et mettre des suites en file",
+  "description": "Envoyez des messages de suivi pendant qu’un agent travaille. Ils attendent dans une file, peuvent être modifiés, passés en premier ou envoyés au tour en cours.",
+  "body": "<p>Inutile d’attendre qu’un agent ait terminé. Écrivez votre message suivant dès qu’il vous vient à l’esprit.</p>\n<h2 id=\"queue\">La file d’attente</h2>\n<ul><li>Un message envoyé pendant que l’agent travaille rejoint la file d’attente sous la zone de message.</li><li>Les messages en file s’exécutent l’un après l’autre quand l’exécution en cours se termine.</li><li>Vous pouvez modifier un message en file, le passer en premier pour qu’il s’exécute ensuite, le supprimer, ou vider toute la file.</li><li>Si un message précédent a échoué, la file attend pour que rien ne s’exécute dans le désordre.</li></ul>\n<h2 id=\"steer\">Orienter le tour en cours</h2>\n<p>Certaines applications d’IA peuvent recevoir un message dans le tour déjà en cours. Un message de suivi en file peut alors être envoyé directement pour changer de direction. Si l’application ne peut pas confirmer qu’il est arrivé, le message est retenu et vous choisissez Renvoyer ou Abandonner.</p>\n<h2 id=\"stop\">Arrêter</h2>\n<p><kbd class=\"docs-kbd\">Esc</kbd> dans la zone de message arrête l’exécution. Les messages en file restent en file.</p>"
+}

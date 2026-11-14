@@ -1,0 +1,8 @@
+{
+  "source": "a65eb36dfd775dd2",
+  "nav": "项目设置",
+  "title": "项目设置",
+  "seoTitle": "项目设置：协调员、文件夹、记忆与用量",
+  "description": "逐项说明每个项目设置：协调员及其模型、指令、文件夹、记忆文件、用量以及 Claude 文件夹规则。",
+  "body": "<p>打开项目的菜单并选择“设置”。窗口中有五个标签页：常规、协调员、文件夹、记忆和用量。</p>\n<h2 id=\"general\">常规</h2>\n<ul><li>项目的名称和图标。</li><li><span class=\"ui-term\">允许 Claude 读取项目文件夹中的规则</span>：让 Claude Code 读取 <code>CLAUDE.md</code> 文件以及保存在该文件夹中的命令。只对你信任的文件夹开启。</li><li><span class=\"ui-term\">归档项目</span>和移除。</li></ul>\n<h2 id=\"models\">协调员</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><tbody><tr><td><span class=\"ui-term\">项目协调员</span></td><td>开启或关闭协调员。关闭会停止它的智能体；不会删除任何内容。</td></tr><tr><td><span class=\"ui-term\">协调员模型</span></td><td>负责拆分工作并启动对话的模型。</td></tr><tr><td><span class=\"ui-term\">代理使用的模型</span></td><td>供它从现在起启动的智能体使用。默认为<span class=\"ui-term\">与协调员相同</span>。</td></tr><tr><td><span class=\"ui-term\">额度重置后自动继续</span></td><td>适用于协调员的智能体。关闭：达到套餐额度上限的智能体会停止并告诉你。</td></tr></tbody></table></div>\n<h3 id=\"instructions\">给协调员的指令</h3>\n<p>写下你希望它达成什么，以及如何工作：编码风格、不要触碰的内容、如何测试。它每条消息都会读取这些指令。指令只是为工作提供指引；并不授予权限。</p>\n<h2 id=\"folders\">文件夹</h2>\n<p>项目的文件夹，最多 32 个。项目的所有对话和智能体都可以在其中工作。<span class=\"ui-term\">设为主文件夹</span>用来选定主要的那个。</p>\n<h2 id=\"memory\">记忆</h2>\n<p>记忆文件是项目为它的智能体保留的笔记：决定、约定、学到的东西。你可以在这里添加、编辑或删除它们。协调员在制定计划时会读取它们。</p>\n<h2 id=\"usage\">用量</h2>\n<p>此项目各次运行报告的用量，按模型统计。代码更改只统计协调员的智能体所报告的行数。没有报告用量的运行会单独计数，因此总数可能比实际用量略低。</p>"
+}

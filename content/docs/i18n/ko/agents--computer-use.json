@@ -1,0 +1,8 @@
+{
+  "source": "43c5b79720c72f5e",
+  "nav": "컴퓨터 사용",
+  "title": "컴퓨터 사용",
+  "seoTitle": "컴퓨터 사용: 에이전트가 PC의 앱을 보고 사용하게 하기",
+  "description": "승인한 앱 창을 에이전트가 PC에서 보고 사용하게 하세요. 앱마다 먼저 묻고, 브라우저는 보기만, 터미널은 클릭만 할 수 있습니다.",
+  "body": "<p>컴퓨터 사용을 켜면 에이전트가 사용자가 승인한 앱 창을 보고 제어할 수 있습니다. 예를 들어 만든 앱이 정말 동작하는지 확인할 때 쓰입니다.</p>\n<h2 id=\"how\">허락을 구하는 방식</h2>\n<p>에이전트가 앱을 처음 사용하려 하면 대화에서 “에이전트가 …을(를) 사용하도록 허용할까요?”라고 묻습니다. 허용하면 작업이 끝날 때까지 그 앱을 보고, 클릭하고, 입력할 수 있습니다.</p>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>앱</th><th>에이전트가 할 수 있는 일</th></tr></thead><tbody><tr><td>대부분의 앱</td><td>에이전트가 보고, 클릭하고, 입력할 수 있습니다.</td></tr><tr><td>브라우저</td><td>보기 전용: 앱을 볼 수는 있지만 클릭하거나 입력할 수 없습니다.</td></tr><tr><td>터미널과 코드 편집기</td><td>클릭 전용: 보고 클릭할 수는 있지만 입력할 수 없습니다.</td></tr></tbody></table></div>\n<div class=\"docs-callout warn\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 3 2 20h20zM12 10v4M12 17h.01\"/></svg><p>언제든 <kbd class=\"docs-kbd\">Esc</kbd>를 눌러 멈출 수 있습니다.</p></div>\n<h2 id=\"rules\">항상 허용한 앱과 거부한 앱</h2>\n<p>설정 › 컴퓨터 사용에는 항상 허용한 앱과 거부한 앱이 나열됩니다. 규칙을 삭제하면 다음에 에이전트가 다시 묻습니다.</p>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>컴퓨터 사용은 Gemini CLI에서는 제공되지 않습니다.</p></div>"
+}

@@ -21,10 +21,17 @@ function cookieValue(cookieHeader, name) {
 export function getPreferredLocale(cookieHeader = '', pathname = '') {
   const route = resolveMarketingRoute(pathname);
   if (route && marketingPageIds.has(route.pageId)) return localeByValue(route.locale) ?? LOCALES[0];
-  const saved = localeByValue(cookieValue(cookieHeader, LANGUAGE_COOKIE));
-  if (saved) return saved;
-  const firstSegment = String(pathname).split('/').filter(Boolean)[0] ?? '';
-  return localeByValue(firstSegment) ?? LOCALES[0];
+  // A page under a language folder (such as /ro/docs/install/) is in that language.
+  const pathLocale = localeFromPath(pathname);
+  if (pathLocale) return pathLocale;
+  const cookie = cookieValue(cookieHeader, LANGUAGE_COOKIE);
+  return (cookie && localeByValue(cookie)) || LOCALES[0];
+}
+
+function localeFromPath(pathname) {
+  const firstSegment = String(pathname ?? '').split('/').filter(Boolean)[0] ?? '';
+  const locale = firstSegment ? localeByValue(firstSegment) : null;
+  return locale?.slug ? locale : null;
 }
 
 export function translateText(sourceText, catalog = {}, variables = {}) {
@@ -80,7 +87,7 @@ export function initializeLocale(document = globalThis.document, fetcher = globa
   const promise = (async () => {
     const preferred = getPreferredLocale(document.cookie, document.location?.pathname);
     const route = resolveMarketingRoute(document.location?.pathname ?? '');
-    const localizedMarketingPage = route && route.locale !== 'en' && marketingPageIds.has(route.pageId);
+    const localizedMarketingPage = Boolean((route && route.locale !== 'en' && marketingPageIds.has(route.pageId)) || localeFromPath(document.location?.pathname));
     document.documentElement.lang = preferred.tag;
     document.documentElement.dir = preferred.dir;
     if (route && marketingPageIds.has(route.pageId)) {

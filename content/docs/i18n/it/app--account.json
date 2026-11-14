@@ -1,0 +1,8 @@
+{
+  "source": "a997ebcb3d37a7e2",
+  "nav": "Il tuo account",
+  "title": "Il tuo account Codevalanche",
+  "seoTitle": "Il tuo account Codevalanche e la modalità Ospite",
+  "description": "A cosa serve l’account Codevalanche, come accedere o continuare come Ospite e in cosa si differenzia dai tuoi account IA.",
+  "body": "<p>L’account Codevalanche è il tuo profilo con Codevalanche. È separato dai tuoi account IA: accedere qui non collega Claude, ChatGPT né nessun’altra IA.</p>\n<h2 id=\"sign-in\">Accedi o continua come Ospite</h2>\n<ul><li>Accedi con l’email o con Google. L’accesso avviene in modo sicuro nel tuo browser, poi Codevalanche si riapre.</li><li>Oppure continua come Ospite e usa l’app senza un account.</li><li>La sessione funziona offline fino a 30 giorni, poi l’app ti chiede di accedere di nuovo. Non si perde nulla.</li></ul>\n<h2 id=\"manage\">Gestiscilo</h2>\n<p>Sul sito web, <a href=\"/account/\">il tuo account</a> mostra il tuo profilo e le tue sessioni attive (e ti permette di terminarle), e ti permette di eliminare l’account.</p>\n<h2 id=\"data\">Cosa contiene l’account</h2>\n<p>Il tuo indirizzo email, il nome visualizzato, una breve bio facoltativa e il metodo di accesso. Mai i tuoi prompt, le conversazioni, il codice o le chiavi. Vedi <a href=\"/docs/privacy/\">Dove va il tuo codice</a>.</p>"
+}

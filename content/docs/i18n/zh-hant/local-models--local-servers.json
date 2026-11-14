@@ -1,0 +1,8 @@
+{
+  "source": "b862c61a84c80260",
+  "nav": "LM Studio 與本機伺服器",
+  "title": "LM Studio 與其他本機伺服器",
+  "seoTitle": "使用 LM Studio 與相容 OpenAI 的本機伺服器",
+  "description": "連接你已在 LM Studio 或其他相容 OpenAI 的伺服器上執行的模型，並在 Codevalanche 的對話中使用它們。",
+  "body": "<p>如果你已經在電腦上的 LM Studio 或其他相容 OpenAI 的伺服器中執行模型，Codevalanche 可以直接使用它們。</p>\n<h2 id=\"connect\">連接本機伺服器</h2>\n<ol class=\"docs-steps\"><li><strong>啟動伺服器</strong>（在 LM Studio 或你的其他伺服器中）並載入一個模型。</li><li><strong>開啟你的 AI。</strong>Codevalanche 會在這台電腦上尋找<span class=\"ui-term\">本機伺服器</span>。使用<span class=\"ui-term\">重新整理本機伺服器</span>可再找一次。</li><li><strong>或輸入位址。</strong>在<span class=\"ui-term\">本機伺服器位址</span>中輸入伺服器的位址。</li><li><strong>在對話的模型選擇器中</strong>挑選它的模型。</li></ol>\n<h2 id=\"problems\">無法運作時</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>訊息</th><th>該怎麼做</th></tr></thead><tbody><tr><td>本機伺服器的位址無效。</td><td>在「你的 AI」下檢查位址，然後再試一次。</td></tr><tr><td>這個本機伺服器無法搭配這個 AI 應用程式使用。</td><td>選擇其他伺服器或模型。</td></tr><tr><td>無法檢查本機伺服器</td><td>請確認伺服器正在執行，然後重新整理。</td></tr></tbody></table></div>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>你啟用了但沒有啟動的伺服器，會被回報為無法使用；請啟動它後再次傳送。</p></div>\n<h2 id=\"cloud\">相容 OpenAI 的雲端 API</h2>\n<p>雲端端點則不同：它是以<span class=\"ui-term\">相容 OpenAI 的雲端 API</span>搭配你自己的金鑰新增。它必須是公開的 HTTPS 位址；這裡不接受本機與私人位址。請參閱 <a href=\"/docs/your-ais/api-keys/\">API 金鑰</a>。</p>"
+}

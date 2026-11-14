@@ -247,10 +247,12 @@ export function buildLocalizedSitemap(docsPages = []) {
       urls.push(`  <url>\n    <loc>${escapeXml(location)}</loc>\n${alternates.join('\n')}\n    <priority>${page.priority}</priority>\n  </url>`);
     }
   }
-  // English-only docs pages: one URL each, no language alternates yet.
+  // Docs pages: every language, each with its alternates.
   for (const page of docsPages) {
-    const location = new URL(page.path, SITE_ORIGIN).href;
-    urls.push(`  <url>\n    <loc>${escapeXml(location)}</loc>\n    <xhtml:link rel="alternate" hreflang="en" href="${escapeXml(location)}" />\n    <priority>0.6</priority>\n  </url>`);
+    const href = locale => new URL(`${locale.slug ? `/${locale.slug}` : ''}/docs/${page.slug}/`, SITE_ORIGIN).href;
+    const alternates = LOCALES.map(language => `    <xhtml:link rel="alternate" hreflang="${escapeXml(language.tag)}" href="${escapeXml(href(language))}" />`);
+    alternates.push(`    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(href(LOCALES[0]))}" />`);
+    for (const locale of LOCALES) urls.push(`  <url>\n    <loc>${escapeXml(href(locale))}</loc>\n${alternates.join('\n')}\n    <priority>0.6</priority>\n  </url>`);
   }
   return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${urls.join('\n')}\n</urlset>\n`;
 }

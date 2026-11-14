@@ -1,0 +1,8 @@
+{
+  "source": "a997ebcb3d37a7e2",
+  "nav": "Contul tău",
+  "title": "Contul tău Codevalanche",
+  "seoTitle": "Contul tău Codevalanche și modul Invitat",
+  "description": "La ce folosește contul Codevalanche, cum te autentifici sau continui ca Invitat și prin ce se deosebește de conturile tale AI.",
+  "body": "<p>Contul Codevalanche este profilul tău la Codevalanche. Este separat de conturile tale AI: autentificarea aici nu conectează Claude, ChatGPT sau alt AI.</p>\n<h2 id=\"sign-in\">Autentifică-te sau continuă ca Invitat</h2>\n<ul><li>Autentifică-te cu e-mailul sau cu Google. Autentificarea se face în siguranță în navigatorul tău, apoi Codevalanche se deschide din nou.</li><li>Sau continuă ca Invitat și folosește aplicația fără cont.</li><li>Sesiunea funcționează offline până la 30 de zile, apoi aplicația îți cere să te autentifici din nou. Nu se pierde nimic.</li></ul>\n<h2 id=\"manage\">Gestionează-l</h2>\n<p>Pe site, <a href=\"/account/\">contul tău</a> arată profilul, sesiunile tale autentificate (și îți permite să le încheiezi) și îți permite să ștergi contul.</p>\n<h2 id=\"data\">Ce conține contul</h2>\n<p>Adresa ta de e-mail, numele afișat, o scurtă biografie opțională și metoda de autentificare. Niciodată prompturile, conversațiile, codul sau cheile tale. Vezi <a href=\"/docs/privacy/\">Unde ajunge codul tău</a>.</p>"
+}

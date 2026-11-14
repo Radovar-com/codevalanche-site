@@ -1,0 +1,8 @@
+{
+  "source": "16528c50ad94cd81",
+  "nav": "Codex",
+  "title": "Codex",
+  "seoTitle": "在 Codevalanche 中用你的 ChatGPT 账户使用 OpenAI Codex",
+  "description": "Codex 已包含在 Codevalanche 中。用 ChatGPT 或 OpenAI API 密钥登录，选择权限模式，并查看你的套餐额度。",
+  "body": "<p>Codex 是 OpenAI 的编程智能体。它已包含在 Codevalanche 中，因此无需另外安装，并且会在空闲时自动更新。</p>\n<h2 id=\"sign-in\">登录</h2>\n<ol class=\"docs-steps\"><li><strong>打开“你的 AI”。</strong>找到 OpenAI。</li><li><strong>选择<span class=\"ui-term\">用 ChatGPT 登录</span>。</strong>在浏览器中完成官方登录。你也可以在另一台设备上使用代码登录。</li><li><strong>或者使用 API 密钥。</strong>选择 OpenAI API 密钥选项。参见 <a href=\"/docs/your-ais/api-keys/\">API 密钥</a>。</li></ol>\n<h2 id=\"permissions\">权限模式</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>模式</th><th>Codex 可以做什么</th></tr></thead><tbody><tr><td><span class=\"ui-term\">只读</span></td><td>读取项目，但不能更改任何文件。</td></tr><tr><td><span class=\"ui-term\">请求批准</span></td><td>在执行操作之前询问你。</td></tr><tr><td><span class=\"ui-term\">代我批准</span></td><td>只在检测到可能不安全的操作时才询问。</td></tr><tr><td><span class=\"ui-term\">编辑项目，从不询问</span></td><td>不经询问就更改项目中的文件并运行命令；绝不要求更多权限。</td></tr><tr><td><span class=\"ui-term\">完全访问</span></td><td>不受限制地访问互联网和你电脑上的任何文件。</td></tr></tbody></table></div>\n<p>在某些模式下，由 Codex 自己的自动审核器来决定请求；它拒绝的请求会显示为“被 Codex 的自动审核器拒绝”，并附有原因。</p>\n<h2 id=\"limits\">套餐额度与已保存的重置</h2>\n<p>Codevalanche 会显示你的 Codex 套餐还剩多少，以及何时重置。如果你的套餐有已保存的重置，它们会连同到期日期一起列出。由你决定何时使用：在 Codex 中使用 <code>/usage</code>，或者通过<span class=\"ui-term\">你的 AI</span>。Codevalanche 绝不会替你使用它们。参见<a href=\"/docs/your-ais/usage-limits/\">使用额度</a>。</p>\n<h2 id=\"updates\">更新</h2>\n<p>Codex 会在空闲时于后台更新。如果有更新在等待，应用会显示<span class=\"ui-term\">更新已暂存</span>；重启 Codevalanche 即可使用。</p>"
+}

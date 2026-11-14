@@ -1,0 +1,8 @@
+{
+  "source": "c88e1a766cb5a783",
+  "nav": "自動化",
+  "title": "自動化",
+  "seoTitle": "自動化：在你的電腦上排程執行 AI 智慧體任務",
+  "description": "排程執行智慧體任務，例如檢查相依套件或執行測試。了解執行、重試、錯過的執行與審查的運作方式。",
+  "body": "<p>自動化會依排程在專案中執行智慧體任務：每週一檢查過時的相依套件、為新檔案新增測試、摘要某個分支。</p>\n<h2 id=\"create\">建立自動化</h2>\n<ol class=\"docs-steps\"><li><strong>開啟專案的自動化。</strong></li><li><strong>為它命名並寫下指示。</strong>用你在訊息中的寫法描述任務即可。系統提供了一些範本，例如新增針對性的測試，或分小批更新相依套件。</li><li><strong>選擇模型與權限模式。</strong>兩者皆為必填。若選擇會詢問的模式，每次變更前，執行都會暫停並等待你的核准。</li><li><strong>設定排程。</strong></li></ol>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>本機自動化會在 Codevalanche 開啟且這台電腦未進入睡眠時執行。自動化只會留在建立它的專案中。</p></div>\n<h2 id=\"runs\">執行</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><tbody><tr><td>執行記錄</td><td>每次執行及其結果。提出變更的執行，會在它的對話中等待你審查。</td></tr><tr><td>重試</td><td>失敗的執行可以自動重試（「第 2 次嘗試，共 3 次」）。多次失敗後，該自動化會冷卻一段時間。</td></tr><tr><td>錯過的執行</td><td>如果電腦當時關機，錯過的執行可依你的選擇略過，或補跑一次。</td></tr><tr><td>已略過</td><td>當上一次執行仍在進行，或另一個自動化正在執行時，這次執行會被略過。</td></tr><tr><td>暫停</td><td>已暫停的自動化不會執行，其排定的重試也不會執行。</td></tr></tbody></table></div>\n<p>只有失敗或已取消的執行可以重試。等待你審查的執行，由你來決定。</p>"
+}

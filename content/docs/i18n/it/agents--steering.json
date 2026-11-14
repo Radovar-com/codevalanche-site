@@ -1,0 +1,8 @@
+{
+  "source": "23b87b5ff5602205",
+  "nav": "Guida e coda dei messaggi",
+  "title": "Guida l’agente e metti i messaggi in coda",
+  "seoTitle": "Guida un agente IA in esecuzione e metti i seguiti in coda",
+  "description": "Invia messaggi di seguito mentre un agente lavora. Restano in coda e puoi modificarli, portarli in testa o inviarli nel turno in corso.",
+  "body": "<p>Non devi aspettare che un agente finisca. Scrivi il tuo messaggio successivo quando ti viene in mente.</p>\n<h2 id=\"queue\">La coda</h2>\n<ul><li>Un messaggio inviato mentre l’agente lavora si aggiunge alla coda sotto la casella del messaggio.</li><li>I messaggi in coda vengono eseguiti uno dopo l’altro quando termina l’esecuzione corrente.</li><li>Puoi modificare un messaggio in coda, portarlo in testa perché venga eseguito subito dopo, rimuoverlo o svuotare l’intera coda.</li><li>Se un messaggio precedente è fallito, la coda aspetta così che nulla venga eseguito fuori ordine.</li></ul>\n<h2 id=\"steer\">Guida il turno in corso</h2>\n<p>Alcune app IA possono accogliere un messaggio nel turno già in corso. In quel caso un messaggio in coda può essere inviato direttamente per cambiare direzione. Se l’app non riesce a confermare che sia arrivato, il messaggio viene trattenuto e scegli tu se Inviare di nuovo o Scartare.</p>\n<h2 id=\"stop\">Stop</h2>\n<p><kbd class=\"docs-kbd\">Esc</kbd> nella casella del messaggio ferma l’esecuzione. I messaggi in coda restano in coda.</p>"
+}

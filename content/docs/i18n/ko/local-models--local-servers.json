@@ -1,0 +1,8 @@
+{
+  "source": "b862c61a84c80260",
+  "nav": "LM Studio와 로컬 서버",
+  "title": "LM Studio 및 기타 로컬 서버",
+  "seoTitle": "LM Studio와 OpenAI 호환 로컬 서버 사용하기",
+  "description": "PC의 LM Studio나 다른 OpenAI 호환 서버에서 이미 실행 중인 모델을 연결해 Codevalanche 대화에서 사용하세요.",
+  "body": "<p>컴퓨터에서 LM Studio나 다른 OpenAI 호환 서버로 이미 모델을 실행하고 있다면, Codevalanche가 그 모델을 바로 사용할 수 있습니다.</p>\n<h2 id=\"connect\">로컬 서버 연결하기</h2>\n<ol class=\"docs-steps\"><li><strong>서버를 시작하세요.</strong> LM Studio(또는 다른 서버)에서 서버를 시작하고 모델을 불러오세요.</li><li><strong>내 AI를 여세요.</strong> Codevalanche가 이 컴퓨터에서 <span class=\"ui-term\">로컬 서버</span>를 찾습니다. 다시 찾으려면 <span class=\"ui-term\">로컬 서버를 업데이트</span>를 사용하세요.</li><li><strong>또는 주소를 입력하세요.</strong> <span class=\"ui-term\">로컬 서버 주소</span>에 서버의 주소를 입력하세요.</li><li><strong>해당 서버의 모델을 선택하세요.</strong> 대화의 모델 선택기에서 고르면 됩니다.</li></ol>\n<h2 id=\"problems\">작동하지 않을 때</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>메시지</th><th>해야 할 일</th></tr></thead><tbody><tr><td>로컬 서버 주소가 올바르지 않습니다.</td><td>내 AI에서 주소를 확인한 뒤 다시 시도하세요.</td></tr><tr><td>이 로컬 서버는 이 AI 앱에서 사용할 수 없습니다.</td><td>다른 서버나 모델을 선택하세요.</td></tr><tr><td>로컬 서버를 확인하지 못했습니다</td><td>서버가 실행 중인지 확인한 뒤 새로고침하세요.</td></tr></tbody></table></div>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>사용 설정은 했지만 시작하지 않은 서버는 사용할 수 없음으로 표시됩니다. 서버를 시작한 뒤 다시 보내세요.</p></div>\n<h2 id=\"cloud\">OpenAI 호환 클라우드 API</h2>\n<p>클라우드 엔드포인트는 다릅니다. 내 키와 함께 <span class=\"ui-term\">OpenAI 호환 클라우드 API</span>로 추가합니다. 공개 HTTPS 주소여야 하며, 로컬 주소와 사설 주소는 여기서 허용되지 않습니다. <a href=\"/docs/your-ais/api-keys/\">API 키</a>를 참고하세요.</p>"
+}

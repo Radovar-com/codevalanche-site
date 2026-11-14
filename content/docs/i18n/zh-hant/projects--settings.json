@@ -1,0 +1,8 @@
+{
+  "source": "a65eb36dfd775dd2",
+  "nav": "專案設定",
+  "title": "專案設定",
+  "seoTitle": "專案設定：協調員、資料夾、記憶與用量",
+  "description": "逐一說明每項專案設定：協調員及其模型、指示、資料夾、記憶檔案、用量，以及 Claude 資料夾規則。",
+  "body": "<p>開啟專案的選單並選擇「設定」。視窗有五個索引標籤：一般、協調員、資料夾、記憶與用量。</p>\n<h2 id=\"general\">一般</h2>\n<ul><li>專案的名稱與圖示。</li><li><span class=\"ui-term\">允許 Claude 讀取專案資料夾中的規則</span>：讓 Claude Code 讀取 <code>CLAUDE.md</code> 檔案與資料夾中儲存的命令。只對你信任的資料夾開啟。</li><li><span class=\"ui-term\">封存專案</span>與移除。</li></ul>\n<h2 id=\"models\">協調員</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><tbody><tr><td><span class=\"ui-term\">專案協調員</span></td><td>開啟或關閉協調員。關閉會停止它的智慧體；不會刪除任何東西。</td></tr><tr><td><span class=\"ui-term\">協調員模型</span></td><td>負責拆分工作並啟動對話的模型。</td></tr><tr><td><span class=\"ui-term\">代理使用的模型</span></td><td>供它從現在起啟動的智慧體使用。預設為<span class=\"ui-term\">與協調員相同</span>。</td></tr><tr><td><span class=\"ui-term\">額度重設後自動繼續</span></td><td>適用於協調員的智慧體。關閉：達到方案額度上限的智慧體會停止並通知你。</td></tr></tbody></table></div>\n<h3 id=\"instructions\">給協調員的指示</h3>\n<p>寫下你希望它達成什麼，以及如何工作：程式碼風格、不要動什麼、如何測試。它每收到一則訊息都會讀取這些指示。指示是用來引導工作；並不會授予權限。</p>\n<h2 id=\"folders\">資料夾</h2>\n<p>專案的資料夾，最多 32 個。專案的所有對話與智慧體都可以在其中工作。<span class=\"ui-term\">設為主資料夾</span>用來選擇主要的資料夾。</p>\n<h2 id=\"memory\">記憶</h2>\n<p>記憶檔案是專案為它的智慧體保存的筆記：決定、慣例、學到的事。在這裡新增、編輯或刪除它們。協調員在規劃時會讀取它們。</p>\n<h2 id=\"usage\">用量</h2>\n<p>此專案各次執行所回報的用量，依模型分列。程式碼變更只計入協調員的智慧體所回報的行數。沒有回報用量的執行會另外計算，因此總計可能比實際使用量略低。</p>"
+}

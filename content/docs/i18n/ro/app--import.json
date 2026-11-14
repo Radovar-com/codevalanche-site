@@ -1,0 +1,8 @@
+{
+  "source": "6e937c60e8b4680f",
+  "nav": "Importă conversații",
+  "title": "Importă conversații din alte aplicații AI",
+  "seoTitle": "Importă conversații din Claude Code, Codex și ChatGPT",
+  "description": "Adu în Codevalanche conversațiile existente din alte aplicații AI de pe PC sau dintr-un export ChatGPT și păstrează-le sincronizate.",
+  "body": "<p><span class=\"ui-term\">Adu conversații din alte aplicații AI</span> din Setări găsește aplicațiile AI de pe acest PC ale căror conversații pot fi importate.</p>\n<h2 id=\"apps\">Din aplicațiile de pe acest PC</h2>\n<ol class=\"docs-steps\"><li><strong>Deschide setările de import.</strong> Codevalanche listează aplicațiile găsite.</li><li><strong>Alege ce imporți.</strong></li><li><strong>Păstrează sincronizarea (opțional).</strong> Cât timp rulează Codevalanche, importă conversațiile noi din acele aplicații la scurt timp după ce apar.</li></ol>\n<h2 id=\"chatgpt\">Din ChatGPT</h2>\n<ol class=\"docs-steps\"><li><strong>Exportă-ți datele</strong> din setările ChatGPT.</li><li><strong>Indică-i lui Codevalanche exportul:</strong> fișierul <code>conversations.json</code> sau arhiva <code>.zip</code> a exportului.</li></ol>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>Continuarea unei conversații importate păstrează modificările tale locale; la nevoie, continuă într-o conversație nouă.</p></div>"
+}

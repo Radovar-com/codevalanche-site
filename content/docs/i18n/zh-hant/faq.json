@@ -1,0 +1,8 @@
+{
+  "source": "e7c37545431713b8",
+  "nav": "常見問題",
+  "title": "常見問題",
+  "seoTitle": "Codevalanche 問與答",
+  "description": "Codevalanche 常見問題的解答：哪些 AI 可用、隱私、本機模型、協調員、額度、語言與 Mac 支援。",
+  "body": "<p>簡短的回答，並附上完整頁面的連結。</p>\n<h2 id=\"faq\">常見問題</h2><div class=\"docs-faq\"><details><summary>Codevalanche 是什麼？</summary><p>一款 Windows 應用程式，讓 Claude Code、Codex 與 Gemini CLI 等 AI 程式設計智慧體，或你自己電腦上的模型，以相同的核准機制、歷程記錄與復原功能處理你的程式碼。</p></details><details><summary>我可以使用哪些 AI？</summary><p>Claude Code、Codex、Gemini CLI、ZCode、OpenCode、Grok Build、Kimi Code 與 Pi，來自 Anthropic、OpenAI、Google、DeepSeek、Z.ai、xAI、Moonshot 與 Meta 的 API 金鑰，以及本機模型。請參閱<a href=\"/docs/your-ais/\">連接你的 AI</a>。</p></details><details><summary>AI 需要另外付費嗎？</summary><p>你使用自己的 AI 帳號、金鑰或本機模型。Codevalanche 不轉售 AI 存取權。</p></details><details><summary>我的程式碼會傳到 Codevalanche 嗎？</summary><p>不會。它會從你的電腦直接送到你選擇的 AI，或是在使用本機模型時留在你的電腦上。請參閱<a href=\"/docs/privacy/\">你的程式碼去了哪裡</a>。</p></details><details><summary>我可以離線工作嗎？</summary><p>可以，搭配本機模型與你電腦上的語音引擎即可。</p></details><details><summary>我可以使用多個 Claude 或 ChatGPT 帳號嗎？</summary><p>可以。請參閱<a href=\"/docs/your-ais/multiple-accounts/\">多個帳號</a>。</p></details><details><summary>協調員做什麼？</summary><p>它接收一個目標，把它拆成給多個智慧體的任務，檢查它們的工作，並且只在必要時才詢問你。請參閱<a href=\"/docs/projects/coordinator/\">協調員</a>。</p></details><details><summary>智慧體會弄壞我的專案嗎？</summary><p>智慧體在執行你沒有允許的動作之前會先詢問，而且每一輪都可以復原。請參閱<a href=\"/docs/agents/approvals/\">核准</a>與<a href=\"/docs/agents/undo/\">復原</a>。</p></details><details><summary>應用程式支援哪些語言？</summary><p>17 種。請參閱<a href=\"/docs/app/languages/\">語言</a>。</p></details><details><summary>有 Mac 版本嗎？</summary><p>還沒有。Codevalanche 在 Windows 11 上執行。</p></details></div>"
+}

@@ -10,6 +10,8 @@ test('locale runtime validates the saved preference against the supported manife
   assert.equal(moduleUnderTest.getPreferredLocale('codevalanche_language=../../account').tag, 'en');
   assert.equal(moduleUnderTest.getPreferredLocale('').tag, 'en');
   assert.equal(moduleUnderTest.getPreferredLocale('codevalanche_language=fr', '/it/privacy.html').tag, 'it');
+  assert.equal(moduleUnderTest.getPreferredLocale('codevalanche_language=fr', '/de/docs/install/').tag, 'de');
+  assert.equal(moduleUnderTest.getPreferredLocale('', '/ar/docs/install/').tag, 'ar');
   assert.equal(moduleUnderTest.getPreferredLocale('codevalanche_language=it', '/privacy.html').tag, 'en');
   assert.equal(moduleUnderTest.getPreferredLocale('codevalanche_language=it', '/account/').tag, 'it');
 });

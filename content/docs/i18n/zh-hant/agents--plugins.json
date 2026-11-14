@@ -1,0 +1,8 @@
+{
+  "source": "8d17bcdeff59bf0d",
+  "nav": "外掛程式、MCP 與技能",
+  "title": "外掛程式、MCP 伺服器與技能",
+  "seoTitle": "AI 程式設計智慧體的外掛程式、MCP 伺服器與技能",
+  "description": "透過 MCP 伺服器、技能，以及 GitHub、Figma、Google Drive、Vercel 等連接器，讓智慧體擁有更多能力，或從 Claude Code 與 Codex 匯入。",
+  "body": "<p>設定中的<span class=\"ui-term\">外掛程式</span>彙整了智慧體可使用的 MCP 伺服器、技能與內建功能。一份清單供所有智慧體共用。</p>\n<h2 id=\"catalog\">目錄</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>外掛程式</th><th>新增的功能</th></tr></thead><tbody><tr><td>GitHub</td><td>GitHub 上的議題、提取請求、程式碼搜尋與 Actions。</td></tr><tr><td>Figma</td><td>來自 Figma 檔案的設計情境、螢幕截圖、變數與素材。</td></tr><tr><td>Google Drive 與 Gmail</td><td>透過 Google 代管的 MCP 伺服器搜尋並讀取檔案與郵件。</td></tr><tr><td>Vercel</td><td>來自你的 Vercel 帳戶的專案、部署、記錄與文件。</td></tr><tr><td>Supabase</td><td>瀏覽你的資料庫。變更需要你的核准。</td></tr><tr><td>技能</td><td>程式碼審查、前端設計、資料分析、試算表、深度研究等。</td></tr></tbody></table></div>\n<p>需要帳戶的連接器，會透過該服務自己的頁面登入。</p>\n<h2 id=\"import\">從 Claude Code 與 Codex 匯入</h2>\n<p>如果你已經在 Claude Code 或 Codex 中設定了 MCP 伺服器，可以匯入它們，讓每個智慧體都能使用。你隨時都可以在同一個頁面復原匯入；之後 Claude Code 與 Codex 會回到各自的清單。你之後在 Claude Code 中新增的伺服器，要等你再次匯入後才會在這裡使用。</p>"
+}

@@ -1,0 +1,8 @@
+{
+  "source": "0834459c78c5fed1",
+  "nav": "安裝與更新",
+  "title": "安裝與更新的問題",
+  "seoTitle": "修復 Codevalanche 的安裝與更新問題",
+  "description": "針對 SmartScreen、安裝失敗、無法下載或校驗碼不符的更新，以及磁碟已滿的修復方式。",
+  "body": "<h2 id=\"install\">安裝</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的</th><th>該怎麼做</th></tr></thead><tbody><tr><td>Windows 已保護您的電腦 (SmartScreen)</td><td>選擇<span class=\"ui-term\">其他資訊</span>，然後選擇<span class=\"ui-term\">仍要執行</span>。</td></tr><tr><td>安裝程式無法啟動</td><td>確認你使用的是 Windows 11、64 位元，而且下載已完成。請從<a href=\"/download/\">下載頁面</a>重新下載。</td></tr><tr><td>磁碟機只剩下一點空間</td><td>釋放一些空間。「設定 › 儲存空間」會顯示 Codevalanche 使用了多少。</td></tr></tbody></table></div>\n<h2 id=\"updates\">更新</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的</th><th>該怎麼做</th></tr></thead><tbody><tr><td>無法連到更新來源</td><td>檢查你的連線並再試一次。沒有下載任何東西，已安裝的應用程式也沒有變動。</td></tr><tr><td>連線中斷了</td><td>重試。已驗證的部分下載已保留並會接續。</td></tr><tr><td>下載的安裝程式與校驗碼不符</td><td>它已被隔離，不會安裝。請重新下載。</td></tr><tr><td>暫存的更新需要處理</td><td>清除暫存的更新並重新下載。清除不會改動已安裝的應用程式。</td></tr><tr><td>尚未發布任何更新</td><td>你已經是最新版本。</td></tr></tbody></table></div>\n<h2 id=\"start\">啟動</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的</th><th>該怎麼做</th></tr></thead><tbody><tr><td>更新後 Codevalanche 沒有開啟</td><td>重新啟動 Windows，並從「開始」功能表開啟它。如果仍然無法開啟，請寫信給我們，說明你看到的情況（請參閱<a href=\"/docs/troubleshooting/#report\">回報問題</a>）。</td></tr></tbody></table></div>"
+}

@@ -1,0 +1,8 @@
+{
+  "source": "0834459c78c5fed1",
+  "nav": "安装与更新",
+  "title": "安装与更新问题",
+  "seoTitle": "修复 Codevalanche 安装和更新问题",
+  "description": "解决 SmartScreen、安装失败、更新无法下载或与校验和不匹配，以及磁盘已满的问题。",
+  "body": "<h2 id=\"install\">安装</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的情况</th><th>该怎么做</th></tr></thead><tbody><tr><td>Windows 已保护你的电脑（SmartScreen）</td><td>选择<span class=\"ui-term\">详细信息</span>，然后选择<span class=\"ui-term\">仍要运行</span>。</td></tr><tr><td>安装程序无法启动</td><td>确认你使用的是 64 位的 Windows 11，并且下载已经完成。请从<a href=\"/download/\">下载页面</a>重新下载。</td></tr><tr><td>驱动器上只剩很少的空间</td><td>请释放一些空间。“设置 › 存储空间”会显示 Codevalanche 占用了多少。</td></tr></tbody></table></div>\n<h2 id=\"updates\">更新</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的情况</th><th>该怎么做</th></tr></thead><tbody><tr><td>无法连接到更新源</td><td>请检查你的网络连接，然后重试。没有下载任何内容，已安装的应用保持不变。</td></tr><tr><td>连接已断开</td><td>请重试。已验证的部分下载内容已保留，并会继续下载。</td></tr><tr><td>下载的安装程序与校验和不匹配</td><td>它已被隔离，不会安装。请重新下载。</td></tr><tr><td>已暂存的更新需要处理</td><td>清除已暂存的更新，然后重新下载。清除不会改变已安装的应用。</td></tr><tr><td>尚未发布任何更新</td><td>你使用的已经是最新版本。</td></tr></tbody></table></div>\n<h2 id=\"start\">启动</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的情况</th><th>该怎么做</th></tr></thead><tbody><tr><td>更新后 Codevalanche 无法打开</td><td>重启 Windows，然后从“开始”菜单中打开它。如果仍然无法打开，请把你看到的情况写信告诉我们（参见<a href=\"/docs/troubleshooting/#report\">报告问题</a>）。</td></tr></tbody></table></div>"
+}

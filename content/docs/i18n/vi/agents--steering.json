@@ -1,0 +1,8 @@
+{
+  "source": "23b87b5ff5602205",
+  "nav": "Điều hướng và xếp hàng tin nhắn",
+  "title": "Điều hướng tác nhân và xếp hàng tin nhắn",
+  "seoTitle": "Điều hướng một tác nhân AI đang chạy và xếp hàng các tin nhắn nối tiếp",
+  "description": "Gửi tin nhắn nối tiếp trong khi tác nhân làm việc. Chúng chờ trong hàng đợi, có thể được sửa, đưa lên đầu hoặc gửi thẳng vào lượt đang chạy.",
+  "body": "<p>Bạn không cần đợi tác nhân làm xong. Hãy viết tin nhắn tiếp theo bất cứ khi nào bạn nghĩ ra.</p>\n<h2 id=\"queue\">Hàng đợi</h2>\n<ul><li>Một tin nhắn gửi trong lúc tác nhân làm việc sẽ vào hàng đợi bên dưới khung nhập tin nhắn.</li><li>Các tin nhắn trong hàng đợi chạy lần lượt khi lần chạy hiện tại kết thúc.</li><li>Bạn có thể sửa một tin nhắn trong hàng đợi, đưa nó lên đầu để chạy tiếp theo, xóa nó, hoặc xóa toàn bộ hàng đợi.</li><li>Nếu một tin nhắn trước đó thất bại, hàng đợi sẽ chờ để không có gì chạy sai thứ tự.</li></ul>\n<h2 id=\"steer\">Điều hướng lượt đang chạy</h2>\n<p>Một số ứng dụng AI có thể nhận một tin nhắn vào lượt đang chạy. Khi đó một tin nhắn nối tiếp trong hàng đợi có thể được gửi thẳng vào để đổi hướng. Nếu ứng dụng không thể xác nhận là tin nhắn đã đến, tin nhắn sẽ được giữ lại và bạn chọn Gửi lại hoặc Bỏ.</p>\n<h2 id=\"stop\">Dừng</h2>\n<p><kbd class=\"docs-kbd\">Esc</kbd> trong khung nhập tin nhắn sẽ dừng lần chạy. Các tin nhắn trong hàng đợi vẫn ở trong hàng đợi.</p>"
+}

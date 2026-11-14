@@ -1,0 +1,31 @@
+{
+  "source": "be4eeff5af399f0b",
+  "sections": {
+    "Getting started": "시작하기",
+    "Your AIs": "내 AI",
+    "Local models": "로컬 모델",
+    "Projects": "프로젝트",
+    "Working with agents": "에이전트와 함께 일하기",
+    "The app": "앱",
+    "Privacy and security": "개인정보 보호와 보안",
+    "Troubleshooting": "문제 해결"
+  },
+  "chrome": {
+    "Docs": "문서",
+    "Codevalanche Docs": "Codevalanche 문서",
+    "Documentation": "문서",
+    "Search the docs": "문서 검색",
+    "Search the docs…": "문서 검색…",
+    "No matching page.": "일치하는 페이지가 없습니다.",
+    "All documentation": "전체 문서",
+    "On this page": "이 페이지 내용",
+    "Previous": "이전",
+    "Next": "다음",
+    "Docs home": "문서 홈",
+    "Previous and next page": "이전 및 다음 페이지",
+    "{n} min read": "읽는 데 {n}분",
+    "Windows": "Windows",
+    "Skip to content": "본문으로 건너뛰기",
+    "The Codevalanche logo.": "Codevalanche 로고."
+  }
+}

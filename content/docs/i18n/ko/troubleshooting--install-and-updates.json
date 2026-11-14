@@ -1,0 +1,8 @@
+{
+  "source": "0834459c78c5fed1",
+  "nav": "설치와 업데이트",
+  "title": "설치 및 업데이트 문제",
+  "seoTitle": "Codevalanche 설치 및 업데이트 문제 해결하기",
+  "description": "SmartScreen, 설치 실패, 내려받아지지 않거나 체크섬이 맞지 않는 업데이트, 디스크 공간 부족에 대한 해결 방법입니다.",
+  "body": "<h2 id=\"install\">설치</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>표시되는 내용</th><th>해야 할 일</th></tr></thead><tbody><tr><td>Windows의 PC 보호 (SmartScreen)</td><td><span class=\"ui-term\">추가 정보</span>를 선택한 다음 <span class=\"ui-term\">실행</span>을 선택하세요.</td></tr><tr><td>설치 프로그램이 시작되지 않음</td><td>Windows 11 64비트를 사용 중인지, 내려받기가 끝났는지 확인하세요. <a href=\"/download/\">다운로드 페이지</a>에서 다시 내려받으세요.</td></tr><tr><td>드라이브에 남은 공간이 얼마 없음</td><td>공간을 확보하세요. 설정 › 저장 공간에서 Codevalanche가 사용하는 공간을 확인할 수 있습니다.</td></tr></tbody></table></div>\n<h2 id=\"updates\">업데이트</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>표시되는 내용</th><th>해야 할 일</th></tr></thead><tbody><tr><td>업데이트 피드에 연결할 수 없었습니다</td><td>연결을 확인하고 다시 시도하세요. 내려받은 것은 없으며 설치된 앱은 그대로입니다.</td></tr><tr><td>연결이 끊어졌습니다</td><td>다시 시도하세요. 확인된 부분 다운로드는 유지되었으며 이어서 받습니다.</td></tr><tr><td>내려받은 설치 프로그램이 체크섬과 일치하지 않았습니다</td><td>격리되었으며 설치되지 않습니다. 다시 내려받으세요.</td></tr><tr><td>준비된 업데이트에 확인이 필요합니다</td><td>준비된 업데이트를 지우고 다시 내려받으세요. 지워도 설치된 앱은 그대로입니다.</td></tr><tr><td>아직 게시된 업데이트가 없습니다</td><td>최신 버전을 사용 중입니다.</td></tr></tbody></table></div>\n<h2 id=\"start\">시작</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>표시되는 내용</th><th>해야 할 일</th></tr></thead><tbody><tr><td>업데이트 후 Codevalanche가 열리지 않음</td><td>Windows를 다시 시작하고 시작 메뉴에서 여세요. 그래도 열리지 않으면 표시되는 내용을 적어 문의해 주세요(<a href=\"/docs/troubleshooting/#report\">문제 보고하기</a> 참고).</td></tr></tbody></table></div>"
+}

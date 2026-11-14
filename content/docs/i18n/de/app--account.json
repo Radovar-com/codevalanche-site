@@ -1,0 +1,8 @@
+{
+  "source": "a997ebcb3d37a7e2",
+  "nav": "Dein Konto",
+  "title": "Dein Codevalanche-Konto",
+  "seoTitle": "Dein Codevalanche-Konto und der Gastmodus",
+  "description": "Wofür das Codevalanche-Konto da ist, wie du dich anmeldest oder als Gast fortfährst und worin es sich von deinen KI-Konten unterscheidet.",
+  "body": "<p>Das Codevalanche-Konto ist dein Profil bei Codevalanche. Es ist von deinen KI-Konten getrennt: Wenn du dich hier anmeldest, wird weder Claude noch ChatGPT oder eine andere KI verbunden.</p>\n<h2 id=\"sign-in\">Anmelden oder als Gast fortfahren</h2>\n<ul><li>Melde dich mit E-Mail oder Google an. Die Anmeldung läuft sicher in deinem Browser ab, danach öffnet sich Codevalanche wieder.</li><li>Oder fahre als Gast fort und nutze die App ohne Konto.</li><li>Die Sitzung funktioniert bis zu 30 Tage offline, danach bittet dich die App, dich erneut anzumelden. Es geht nichts verloren.</li></ul>\n<h2 id=\"manage\">Verwalten</h2>\n<p>Auf der Website zeigt <a href=\"/account/\">dein Konto</a> dein Profil und deine angemeldeten Sitzungen (und lässt dich sie beenden) und lässt dich das Konto löschen.</p>\n<h2 id=\"data\">Was das Konto speichert</h2>\n<p>Deine E-Mail-Adresse, deinen Anzeigenamen, eine optionale kurze Biografie und die Anmeldemethode. Niemals deine Prompts, Unterhaltungen, deinen Code oder deine Schlüssel. Siehe <a href=\"/docs/privacy/\">Wohin dein Code geht</a>.</p>"
+}

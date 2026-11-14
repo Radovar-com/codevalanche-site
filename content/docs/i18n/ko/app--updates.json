@@ -1,0 +1,8 @@
+{
+  "source": "70ac169ff82735f6",
+  "nav": "업데이트",
+  "title": "업데이트",
+  "seoTitle": "Codevalanche가 스스로 업데이트하는 방법",
+  "description": "Codevalanche가 업데이트를 찾고, 내려받고, 확인하고, 설치하는 방법과 필수 업데이트의 동작 방식, 릴리스 노트를 읽을 수 있는 곳을 설명합니다.",
+  "body": "<p>Codevalanche는 서명된 공개 업데이트 파일을 정기적으로 확인합니다. 사용자를 식별할 수 있는 정보는 전혀 보내지 않습니다.</p>\n<h2 id=\"flow\">업데이트가 도착하는 과정</h2>\n<ol class=\"docs-steps\"><li><strong><span class=\"ui-term\">업데이트 가능</span>.</strong> Codevalanche는 사용자가 내려받기를 시작할 때까지 기다립니다.</li><li><strong>내려받기.</strong> 그동안 계속 작업할 수 있습니다. 연결이 끊기면 확인이 끝난 부분은 유지되고 내려받기가 이어집니다.</li><li><strong>확인.</strong> 내려받은 설치 프로그램을 해당 릴리스에 게시된 체크섬과 대조합니다. 일치하지 않으면 격리되어 설치되지 않습니다. 체크섬이 없는 릴리스도 설치되지 않습니다.</li><li><strong><span class=\"ui-term\">설치 준비 완료</span>.</strong> Codevalanche가 종료되고, 업데이트를 자동으로 설치한 뒤 다시 열립니다.</li></ol>\n<h2 id=\"required\">필수 업데이트</h2>\n<p>더 이상 지원되지 않는 버전에는 <span class=\"ui-term\">필수 업데이트</span>가 표시됩니다. Codevalanche를 계속 사용하려면 설치하세요.</p>\n<h2 id=\"notes\">릴리스 노트</h2>\n<p>업데이트 후에 Codevalanche가 무엇이 바뀌었는지 보여 줍니다. 설정 › 정보에서 전체 릴리스 기록과 함께 같은 노트를 다시 읽을 수 있습니다. 이 사이트의 <a href=\"/changelog.html\">변경 내역</a>에도 있습니다.</p>\n<h2 id=\"agents\">AI 앱 업데이트</h2>\n<p>Codex는 사용하지 않는 동안 스스로 업데이트됩니다. Claude Code, Gemini CLI 등 다른 에이전트는 이 PC의 AI 앱에서 업데이트가 있는지 보여 주고, 가능하면 대신 설치해 줍니다. <a href=\"/docs/your-ais/\">내 AI 연결하기</a>를 참고하세요.</p>\n<h2 id=\"problems\">업데이트가 실패하면</h2>\n<p>설치된 앱은 그대로 유지됩니다. <a href=\"/docs/troubleshooting/install-and-updates/\">설치 및 업데이트 문제</a>를 참고하세요.</p>"
+}

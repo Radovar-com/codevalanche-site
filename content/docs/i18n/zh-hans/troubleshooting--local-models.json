@@ -1,0 +1,8 @@
+{
+  "source": "54685c1b8511f7b0",
+  "nav": "本地模型与语音",
+  "title": "本地模型与语音问题",
+  "seoTitle": "修复本地 AI 模型和语音听写问题",
+  "description": "解决本地模型无法下载或启动、端口被占用、内存不足，以及语音引擎或麦克风无法工作的问题。",
+  "body": "<h2 id=\"models\">本地模型</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的情况</th><th>该怎么做</th></tr></thead><tbody><tr><td>磁盘空间不足</td><td>请释放一些空间。迄今已下载的内容会保留，下载会继续。</td></tr><tr><td>下载中断，无网络连接</td><td>请重试；它会从停止的地方继续。</td></tr><tr><td>另一个程序正在使用本地 AI 的端口</td><td>关闭其他 Codevalanche 窗口或开发服务器，然后重试。</td></tr><tr><td>本地 AI 无法在这台电脑上启动</td><td>请重启 Codevalanche；如果问题持续出现，请重新安装它。你的模型和下载内容不会受到影响。</td></tr><tr><td>内存需求可能超出你的机器</td><td>请选择更小的模型或文件；应用会标出适合的内容。</td></tr><tr><td>此模型暂时无法在这台电脑上启动</td><td>请将其移除以释放空间，或者改用云端 AI。</td></tr><tr><td>此文件未发布 SHA-256 摘要</td><td>没有摘要时，Codevalanche 绝不会下载。请选择其他文件。</td></tr></tbody></table></div>\n<h2 id=\"servers\">LM Studio 与本地服务器</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的情况</th><th>该怎么做</th></tr></thead><tbody><tr><td>本地服务器的地址无效</td><td>请在“你的 AI”下检查。</td></tr><tr><td>此本地服务器无法用于这个 AI 应用</td><td>选择其他服务器或模型。</td></tr></tbody></table></div>\n<h2 id=\"voice\">语音</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的情况</th><th>该怎么做</th></tr></thead><tbody><tr><td>语音模式需要语音引擎</td><td>在“设置 › 语音”中下载一个语音引擎，或者添加你自己的 Groq 或 OpenAI 密钥。</td></tr><tr><td>麦克风无法打开</td><td>请检查 Windows 设置 › 隐私 › 麦克风，然后重试。</td></tr><tr><td>未检测到语音</td><td>请在语音菜单中检查麦克风，然后再说一次。</td></tr><tr><td>语音对话需要 Claude Code（CV-VOICE-D03）</td><td>请选择 Claude Code 模型，然后再次启动语音模式。</td></tr><tr><td>磁盘空间不足，无法下载此语音引擎（CV-VOICE-E07）</td><td>请在存放你的模型的驱动器上释放一些空间。</td></tr></tbody></table></div>"
+}

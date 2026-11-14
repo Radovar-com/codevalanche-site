@@ -1,5 +1,6 @@
 // Docs: search (Ctrl+K or /), "On this page" highlight, mobile navigation.
-// Search reads the full text of every docs page from /docs/search-index.json,
+// Search reads the full text of every docs page of this language from
+// /<language>/docs/search-index.json (English: /docs/search-index.json),
 // written by the build; until it loads, it searches the navigation.
 const nav = document.querySelector('.docs-nav')
 const dialog = document.querySelector('.docs-dialog')
@@ -16,10 +17,12 @@ const here = [...document.querySelectorAll('.docs-article h2[id]')].map(h => {
 const fold = text => text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()
 let selected = 0
 let fullIndex = null
+const language = document.documentElement.lang.toLowerCase()
+const indexUrl = language && language !== 'en' ? `/${language}/docs/search-index.json` : '/docs/search-index.json'
 async function loadIndex() {
   if (fullIndex) return
   try {
-    const response = await fetch('/docs/search-index.json', { credentials: 'same-origin' })
+    const response = await fetch(indexUrl, { credentials: 'same-origin' })
     if (response.ok) fullIndex = (await response.json()).map(item => ({ title: item.title, href: item.href, section: item.section, body: `${item.nav} ${item.text}` }))
   } catch {}
   if (fullIndex && dialog?.open) render(input.value)

@@ -1,0 +1,8 @@
+{
+  "source": "23b87b5ff5602205",
+  "nav": "Arahkan dan antrekan pesan",
+  "title": "Arahkan agen dan antrekan pesan",
+  "seoTitle": "Arahkan agen AI yang sedang berjalan dan antrekan pesan lanjutan",
+  "description": "Kirim pesan lanjutan saat agen bekerja. Pesan menunggu di antrean, bisa disunting, dipindah ke depan, atau dikirim ke giliran yang sedang berjalan.",
+  "body": "<p>Anda tidak perlu menunggu agen selesai. Tulis pesan berikutnya kapan pun terpikir.</p>\n<h2 id=\"queue\">Antrean</h2>\n<ul><li>Pesan yang dikirim saat agen bekerja masuk ke antrean di bawah kotak pesan.</li><li>Pesan dalam antrean dijalankan satu per satu saat proses saat ini selesai.</li><li>Anda bisa menyunting pesan dalam antrean, memindahkannya ke depan agar berjalan berikutnya, menghapusnya, atau mengosongkan seluruh antrean.</li><li>Jika pesan sebelumnya gagal, antrean menunggu agar tidak ada yang berjalan tidak berurutan.</li></ul>\n<h2 id=\"steer\">Arahkan giliran yang sedang berjalan</h2>\n<p>Beberapa aplikasi AI bisa menerima pesan ke dalam giliran yang sedang berjalan. Saat itu, pesan lanjutan dalam antrean bisa langsung dikirim untuk mengubah arah. Jika aplikasi tidak bisa memastikan pesan itu sampai, pesan ditahan dan Anda memilih Kirim lagi atau Buang.</p>\n<h2 id=\"stop\">Hentikan</h2>\n<p><kbd class=\"docs-kbd\">Esc</kbd> di kotak pesan menghentikan proses. Pesan dalam antrean tetap antre.</p>"
+}

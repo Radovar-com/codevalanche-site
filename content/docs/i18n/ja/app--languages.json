@@ -1,0 +1,8 @@
+{
+  "source": "9c60e0a87829c0d8",
+  "nav": "17 言語",
+  "title": "Codevalanche を 17 言語で使う",
+  "seoTitle": "Codevalanche は 17 言語に対応",
+  "description": "Codevalanche は、英語やルーマニア語から、アラビア語、ヒンディー語、日本語、中国語まで、17 言語に対応しています。表示言語は設定で変更できます。",
+  "body": "<p>アプリ全体が 17 言語に翻訳されています。右から左に書くアラビア語にも対応しています。</p>\n<h2 id=\"list\">対応言語</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><tbody><tr><td>English</td><td>العربية الفصحى（アラビア語）</td><td>Deutsch</td></tr><tr><td>Español</td><td>Français</td><td>हिन्दी（ヒンディー語）</td></tr><tr><td>Bahasa Indonesia</td><td>Italiano</td><td>日本語</td></tr><tr><td>한국어（韓国語）</td><td>Português (Brasil)</td><td>Română</td></tr><tr><td>Русский</td><td>Türkçe</td><td>Tiếng Việt</td></tr><tr><td>简体中文</td><td>繁體中文</td><td></td></tr></tbody></table></div>\n<h2 id=\"change\">言語を変更する</h2>\n<ol class=\"docs-steps\"><li><strong>設定を開きます</strong>（<kbd class=\"docs-kbd\">Ctrl</kbd>+<kbd class=\"docs-kbd\">,</kbd>）。</li><li><strong><span class=\"ui-term\">表示言語</span>を選びます。</strong>言語を選ぶか、Windows に合わせるなら<span class=\"ui-term\">システム言語</span>を選びます。Windows がアプリの対応していない言語を使っている場合は、代わりに使う言語がどれかをアプリが知らせます。</li></ol>\n<h2 id=\"agents\">エージェントの言語</h2>\n<p>表示言語で変わるのは、Codevalanche 自身の文言です。エージェントは、あなたが書いた言語で答えます。音声入力は 99 の言語を理解し、あなたの言語を自動で検出できます。<a href=\"/docs/agents/voice/\">音声</a>をご覧ください。</p>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>このウェブサイトも、各ページ下部の言語メニューから、同じ 17 言語で利用できます。このドキュメントも含まれます。</p></div>"
+}

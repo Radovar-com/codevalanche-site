@@ -15,7 +15,8 @@ import { DOWNLOAD_STARTED_PAGE, LOCALES, MARKETING_PAGES, localizedMarketingPath
 import { prepareMarketingPartial } from "./marketing-partials.mjs"
 import { versionSiteAssets } from "./asset-cache.mjs"
 import { changelogTranslations, loadReleases, renderChangelog } from "./changelog.mjs"
-import { DOCS_PAGES, docsSearchIndex, renderDocsPage, checkLinks as checkDocsLinks } from "./docs-render.mjs"
+import { DOCS_PAGES, allDocsPages, docsPagesFor, docsSearchIndex, localizeDocsLinks, pointLanguagesAtDocsPage, renderDocsPage, checkLinks as checkDocsLinks } from "./docs-render.mjs"
+import { checkLocale as checkDocsTranslation } from "./docs-i18n.mjs"
 import { hubIsCurrent } from "./docs-hub.mjs"
 import { describeRelease, downloadTranslations, fillDownload, publicDownloadCount, redirectPage, selectDownloadVariant, windowsDownload } from "./download-page.mjs"
 await buildAnalytics()
@@ -114,7 +115,7 @@ for (const locale of englishPreviewOnly ? [] : LOCALES.filter(item => item.slug)
   const catalog = { ...localeCatalog, ...changelogTranslations(releases, locale.tag), ...downloadTranslations(windowsInstaller, { ...downloadFill, tag: locale.tag, catalog: localeCatalog }) }
   for (const page of PAGES_WITH_NAVIGATION) {
     let html = renderTranslatedHtml(englishPages.get(page.file), catalog, locale.tag)
-    html = rewriteLocalizedLinks(html, locale.tag)
+    html = localizeDocsLinks(rewriteLocalizedLinks(html, locale.tag), locale)
     if (page === DOWNLOAD_STARTED_PAGE) {
       const output = path.join(destination, locale.slug, page.file)
       await mkdir(path.dirname(output), { recursive: true })
@@ -130,23 +131,47 @@ for (const locale of englishPreviewOnly ? [] : LOCALES.filter(item => item.slug)
     await writeFile(output, html)
   }
 }
-// Docs pages are English for now: the hub (/docs/) is translated like every
-// marketing page; its language menu leads every docs page to a translated hub.
+// Docs pages in every language. English is rendered with the shared header and
+// footer; each translation takes the header and footer of its own translated
+// hub (/<language>/docs/), so the site navigation is already in its language.
 if (!(await hubIsCurrent())) throw new Error("src/docs/index.html is out of date: run node scripts/docs-hub.mjs")
-const docsPaths = new Set(DOCS_PAGES.map(page => page.path))
-for (const page of DOCS_PAGES) {
-  checkDocsLinks(page, docsPaths)
-  let html = renderDocsPage(page)
-    .replace("<!-- site-header -->", prepareMarketingPartial(sharedHeader, "/docs/"))
-    .replace("<!-- site-footer -->", prepareMarketingPartial(sharedFooter, "/docs/"))
-  html = ensureLanguagePicker(html, languagePicker)
-  html = rewriteFooterLanguageLinks(html, "/docs/", "en")
-  html = includeLocaleBootstrap(html)
-  const output = path.join(destination, page.file)
-  await mkdir(path.dirname(output), { recursive: true })
-  await writeFile(output, html)
+const docsLocales = englishPreviewOnly ? [LOCALES[0]] : LOCALES
+if (!englishPreviewOnly) {
+  const problems = LOCALES.filter(locale => locale.slug).flatMap(locale => checkDocsTranslation(locale.slug))
+  if (problems.length) throw new Error(`Docs translations need attention (node scripts/docs-i18n.mjs check):\n${problems.slice(0, 20).join("\n")}`)
 }
-await writeFile(path.join(destination, "docs", "search-index.json"), JSON.stringify(docsSearchIndex()))
+const docsPaths = new Set(docsLocales.flatMap(locale => docsPagesFor(locale).map(page => page.path)))
+for (const locale of docsLocales) {
+  const pages = docsPagesFor(locale)
+  let chrome = null
+  if (locale.slug) {
+    const hub = await readFile(path.join(destination, locale.slug, "docs", "index.html"), "utf8")
+    const header = hub.match(/<header class="site-header">[\s\S]*?<\/header>/)?.[0]
+    const footer = hub.match(/<footer class="site-footer"[\s\S]*?<\/footer>/)?.[0]
+    if (!header || !footer) throw new Error(`The ${locale.slug} docs hub has no header or footer to share`)
+    chrome = { header, footer }
+  }
+  for (const page of pages) {
+    checkDocsLinks(page, docsPaths)
+    let html = renderDocsPage(page, pages)
+    if (chrome) {
+      html = html.replace("<!-- site-header -->", () => chrome.header).replace("<!-- site-footer -->", () => chrome.footer)
+      html = rewriteLocalizedLinks(html, locale.tag)
+    } else {
+      html = html
+        .replace("<!-- site-header -->", prepareMarketingPartial(sharedHeader, "/docs/"))
+        .replace("<!-- site-footer -->", prepareMarketingPartial(sharedFooter, "/docs/"))
+      html = ensureLanguagePicker(html, languagePicker)
+      html = rewriteFooterLanguageLinks(html, "/docs/", "en")
+    }
+    html = includeLocaleBootstrap(pointLanguagesAtDocsPage(html, page.slug))
+    const output = path.join(destination, page.file)
+    await mkdir(path.dirname(output), { recursive: true })
+    await writeFile(output, html)
+  }
+  await writeFile(path.join(destination, locale.slug, "docs", "search-index.json"), JSON.stringify(docsSearchIndex(pages)))
+}
+const publishedDocsPages = englishPreviewOnly ? DOCS_PAGES : allDocsPages()
 await writeFile(path.join(destination, "sitemap.xml"), buildLocalizedSitemap(DOCS_PAGES))
 for (const privateSource of ["en.json", "glossary.json", "runtime-strings.en.json"]) {
   await rm(path.join(destination, "locales", privateSource), { force: true })
@@ -161,7 +186,7 @@ for (const page of ["account/index.html", "account/authorize/index.html", "accou
   if (page === "account/signed-in/index.html") html = html.replace("</body>", '<script type="module" src="/locales/bootstrap.js"></script></body>')
   await writeFile(output, html)
 }
-const llms = englishPreviewOnly ? { pages: 0 } : await buildLlmsFull(destination, undefined, DOCS_PAGES)
+const llms = englishPreviewOnly ? { pages: 0 } : await buildLlmsFull(destination, undefined, publishedDocsPages)
 
 await build({ entryPoints: [path.join(source, "account/app.js")], outfile: path.join(destination, "account/app.js"), bundle: true, format: "esm", minify: true, target: ["es2022"], legalComments: "eof" })
 // Version the completed bundle, styles and public configuration so a new page
@@ -183,5 +208,5 @@ const security = await applyPostbuildSecurity(destination)
 // only publish it as a file, so it is written on request. The header CSP carries
 // only frame-ancestors/base-uri/object-src/form-action; scripts stay with the meta CSP.
 if (process.env.CODEVALANCHE_HEADERS_FILE === "1") await writeFile(path.join(destination, "_headers"), headersFile())
-const seo = englishPreviewOnly ? { publicPages: "English preview only, not" } : await validateSeoExport(destination, DOCS_PAGES)
+const seo = englishPreviewOnly ? { publicPages: "English preview only, not" } : await validateSeoExport(destination, publishedDocsPages)
 console.log(`Built static site to ${destination} (${security.htmlFiles} HTML pages passed CSP; ${seo.publicPages} public routes; ${llms.pages} discovery pages)`)

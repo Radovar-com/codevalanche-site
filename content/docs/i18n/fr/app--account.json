@@ -1,0 +1,8 @@
+{
+  "source": "a997ebcb3d37a7e2",
+  "nav": "Votre compte",
+  "title": "Votre compte Codevalanche",
+  "seoTitle": "Votre compte Codevalanche et le mode Invité",
+  "description": "À quoi sert le compte Codevalanche, comment vous connecter ou continuer en Invité, et en quoi il diffère de vos comptes d’IA.",
+  "body": "<p>Le compte Codevalanche est votre profil chez Codevalanche. Il est distinct de vos comptes d’IA : vous connecter ici ne connecte ni Claude, ni ChatGPT, ni aucune autre IA.</p>\n<h2 id=\"sign-in\">Se connecter ou continuer en Invité</h2>\n<ul><li>Connectez-vous avec une adresse e-mail ou Google. La connexion se fait en toute sécurité dans votre navigateur, puis Codevalanche se rouvre.</li><li>Ou continuez en Invité et utilisez l’app sans compte.</li><li>La session fonctionne hors ligne jusqu’à 30 jours, puis l’app vous demande de vous reconnecter. Rien n’est perdu.</li></ul>\n<h2 id=\"manage\">Le gérer</h2>\n<p>Sur le site web, <a href=\"/account/\">votre compte</a> affiche votre profil et vos sessions connectées (et vous permet d’y mettre fin), et vous permet de supprimer le compte.</p>\n<h2 id=\"data\">Ce que contient le compte</h2>\n<p>Votre adresse e-mail, votre nom d’affichage, une courte biographie facultative et votre méthode de connexion. Jamais vos prompts, conversations, code ou clés. Voir <a href=\"/docs/privacy/\">Où va votre code</a>.</p>"
+}
