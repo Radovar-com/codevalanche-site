@@ -1,0 +1,8 @@
+{
+  "source": "23b87b5ff5602205",
+  "nav": "Dirigir y poner mensajes en cola",
+  "title": "Dirige al agente y pon mensajes en cola",
+  "seoTitle": "Dirige a un agente de IA en ejecución y pon mensajes en cola",
+  "description": "Envía mensajes de seguimiento mientras un agente trabaja. Esperan en una cola, y puedes editarlos, pasarlos al principio o enviarlos al turno en curso.",
+  "body": "<p>No tienes que esperar a que un agente termine. Escribe tu siguiente mensaje en cuanto se te ocurra.</p>\n<h2 id=\"queue\">La cola</h2>\n<ul><li>Un mensaje enviado mientras el agente trabaja se une a la cola, debajo del cuadro de mensaje.</li><li>Los mensajes en cola se ejecutan uno tras otro cuando termina la ejecución actual.</li><li>Puedes editar un mensaje en cola, pasarlo al principio para que sea el siguiente, quitarlo o vaciar toda la cola.</li><li>Si un mensaje anterior falló, la cola espera para que nada se ejecute fuera de orden.</li></ul>\n<h2 id=\"steer\">Dirigir el turno en curso</h2>\n<p>Algunas apps de IA pueden recibir un mensaje dentro del turno que ya se está ejecutando. Entonces un mensaje en cola se puede enviar directamente para cambiar el rumbo. Si la app no puede confirmar que llegó, el mensaje se retiene y tú eliges Enviar de nuevo o Descartar.</p>\n<h2 id=\"stop\">Detener</h2>\n<p><kbd class=\"docs-kbd\">Esc</kbd> en el cuadro de mensaje detiene la ejecución. Los mensajes en cola siguen en la cola.</p>"
+}

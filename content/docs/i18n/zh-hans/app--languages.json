@@ -1,0 +1,8 @@
+{
+  "source": "9c60e0a87829c0d8",
+  "nav": "17 种语言",
+  "title": "用 17 种语言使用 Codevalanche",
+  "seoTitle": "Codevalanche 支持 17 种语言",
+  "description": "Codevalanche 支持 17 种语言，从英语、罗马尼亚语到阿拉伯语、印地语、日语和中文。可在设置中更改界面语言。",
+  "body": "<p>整个应用已翻译成 17 种语言，包括从右向左书写的阿拉伯语。</p>\n<h2 id=\"list\">支持的语言</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><tbody><tr><td>English</td><td>العربية الفصحى（阿拉伯语）</td><td>Deutsch</td></tr><tr><td>Español</td><td>Français</td><td>हिन्दी（印地语）</td></tr><tr><td>Bahasa Indonesia</td><td>Italiano</td><td>日本語（日语）</td></tr><tr><td>한국어（韩语）</td><td>Português (Brasil)</td><td>Română</td></tr><tr><td>Русский</td><td>Türkçe</td><td>Tiếng Việt</td></tr><tr><td>简体中文</td><td>繁體中文</td><td></td></tr></tbody></table></div>\n<h2 id=\"change\">更改语言</h2>\n<ol class=\"docs-steps\"><li><strong>打开设置</strong>（<kbd class=\"docs-kbd\">Ctrl</kbd>+<kbd class=\"docs-kbd\">,</kbd>）。</li><li><strong>选择<span class=\"ui-term\">界面语言</span>。</strong>选择一种语言，或选择<span class=\"ui-term\">系统语言</span>以跟随 Windows。如果 Windows 使用的语言应用未提供，应用会告诉你改用了哪一种。</li></ol>\n<h2 id=\"agents\">智能体的语言</h2>\n<p>界面语言只会改变 Codevalanche 自己的文字。智能体会用你写给它们的语言来回答。听写能听懂 99 种语言，并且可以自动检测你所说的语言；参见<a href=\"/docs/agents/voice/\">语音</a>。</p>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>本网站同样提供这 17 种语言，可通过每个页面底部的语言菜单切换，这些文档也包括在内。</p></div>"
+}

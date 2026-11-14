@@ -49,7 +49,7 @@ export async function buildLlmsFull(destination, outputFile = path.join(destinat
   }
   for (const page of docsPages) {
     const html = await readFile(path.join(destination, page.file), 'utf8');
-    documents.push({ locale: 'en', url: page.path, title: pageTitle(parse(html)), html });
+    documents.push({ locale: page.locale?.tag ?? 'en', url: page.path, title: pageTitle(parse(html)), html });
   }
   const content = renderLlmsFull(documents);
   await writeFile(outputFile, content);

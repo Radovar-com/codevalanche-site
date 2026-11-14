@@ -1,0 +1,8 @@
+{
+  "source": "6e937c60e8b4680f",
+  "nav": "Sohbetleri içe aktarma",
+  "title": "Diğer yapay zekâ uygulamalarından sohbetleri içe aktarın",
+  "seoTitle": "Claude Code, Codex ve ChatGPT sohbetlerini içe aktarın",
+  "description": "Bilgisayarınızdaki diğer yapay zekâ uygulamalarındaki veya bir ChatGPT dışa aktarımındaki mevcut sohbetlerinizi Codevalanche’a getirin ve senkronize tutun.",
+  "body": "<p>Ayarlar’daki <span class=\"ui-term\">Diğer AI uygulamalarından konuşmaları getirin</span>, bu bilgisayarda sohbetleri içe aktarılabilecek yapay zekâ uygulamalarını bulur.</p>\n<h2 id=\"apps\">Bu bilgisayardaki uygulamalardan</h2>\n<ol class=\"docs-steps\"><li><strong>İçe aktarma ayarlarını açın.</strong> Codevalanche bulduğu uygulamaları listeler.</li><li><strong>Neyi içe aktaracağınızı seçin.</strong></li><li><strong>Senkronize tutun (isteğe bağlı).</strong> Codevalanche çalışırken, bu uygulamalardaki yeni sohbetleri ortaya çıktıktan kısa süre sonra içe aktarır.</li></ol>\n<h2 id=\"chatgpt\">ChatGPT’den</h2>\n<ol class=\"docs-steps\"><li><strong>Verilerinizi dışa aktarın</strong>, ChatGPT’nin ayarlarından.</li><li><strong>Codevalanche’a dışa aktarımı gösterin:</strong> <code>conversations.json</code> dosyasını ya da dışa aktarım <code>.zip</code> dosyasını.</li></ol>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>İçe aktarılmış bir sohbete devam etmek yerel değişikliklerinizi korur; gerektiğinde yeni bir sohbette devam eder.</p></div>"
+}

@@ -1,0 +1,8 @@
+{
+  "source": "684730690a76287c",
+  "nav": "修復問題",
+  "title": "修復問題",
+  "seoTitle": "Codevalanche 疑難排解",
+  "description": "尋找安裝、更新、AI 連線、本機模型與智慧體問題的解決方法、了解錯誤代碼，並傳送有幫助的回報。",
+  "body": "<p>Codevalanche 中大多數訊息都會說明哪裡出了問題，以及下一步該怎麼做。請從問題所屬的領域開始：</p>\n<ul><li><a href=\"/docs/troubleshooting/install-and-updates/\">安裝與更新</a></li><li><a href=\"/docs/troubleshooting/ai-connections/\">AI 連線與登入</a></li><li><a href=\"/docs/troubleshooting/local-models/\">本機模型與語音</a></li><li><a href=\"/docs/troubleshooting/agents/\">智慧體與執行</a></li></ul>\n<h2 id=\"codes\">錯誤代碼</h2>\n<p>許多訊息的結尾有一個代碼，例如 <code>CV-VOICE-E07</code>。中間的部分說明問題出在哪裡：</p>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>代碼</th><th>領域</th></tr></thead><tbody><tr><td>CV-VOICE</td><td>聽寫、語音引擎與語音模式</td></tr><tr><td>CV-BROWSER</td><td>內建的瀏覽器窗格</td></tr><tr><td>CV-PR</td><td>發布到 GitHub（分支與提取請求）</td></tr><tr><td>CV-IMPORT</td><td>匯入對話</td></tr><tr><td>CV-CHAT</td><td>對話與側邊聊天</td></tr><tr><td>CV-LIMITS, CV-USAGE</td><td>使用額度</td></tr><tr><td>CV-RUN</td><td>智慧體執行</td></tr><tr><td>CV-DIAGNOSTICS</td><td>建立診斷套件</td></tr></tbody></table></div>\n<p>求助時請附上代碼。</p>\n<h2 id=\"diagnostics\">診斷</h2>\n<p>有些訊息會建議開啟「診斷」。它會顯示技術細節，並可建立一份診斷套件，讓你附在回報中。除非你傳送，否則診斷資料都會留在你的電腦上。</p>\n<h2 id=\"report\">回報問題</h2>\n<ol class=\"docs-steps\"><li><strong>開啟「設定 › <span class=\"ui-term\">傳送意見回饋</span>」。</strong>選擇類別，並描述你做了什麼、你預期什麼，以及發生了什麼。</li><li><strong>檢閱文字。</strong>任何預先填入的診斷資料，都會在你傳送前顯示在文字中。金鑰、權杖、電子郵件地址與個人資料夾路徑都會被移除。</li><li><strong>勾選同意方塊並傳送。</strong>你也可以改為複製或在本機儲存這份回報。</li></ol>\n<p>你也可以寫信給 <a href=\"mailto:info@radovar.com\" data-contact-id=\"info\">info@radovar.com</a>。請從螢幕截圖與記錄中移除金鑰與私人專案內容。</p>"
+}

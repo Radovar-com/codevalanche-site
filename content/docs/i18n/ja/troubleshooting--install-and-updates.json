@@ -1,0 +1,8 @@
+{
+  "source": "0834459c78c5fed1",
+  "nav": "インストールと更新",
+  "title": "インストールと更新の問題",
+  "seoTitle": "Codevalanche のインストールと更新の問題を直す",
+  "description": "SmartScreen、インストールの失敗、ダウンロードされない更新やチェックサムが一致しない更新、ディスクの空き容量不足の対処法です。",
+  "body": "<h2 id=\"install\">インストール</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>表示されるもの</th><th>対処</th></tr></thead><tbody><tr><td>Windows によって PC が保護されました（SmartScreen）</td><td><span class=\"ui-term\">詳細情報</span>を選び、続けて<span class=\"ui-term\">実行</span>を選びます。</td></tr><tr><td>インストーラーが起動しません</td><td>Windows 11（64 ビット）であること、ダウンロードが完了していることを確認してください。<a href=\"/download/\">ダウンロードページ</a>からもう一度ダウンロードしてください。</td></tr><tr><td>ドライブの空き容量がわずかです</td><td>容量を空けてください。設定 › ストレージで、Codevalanche が使っている容量を確認できます。</td></tr></tbody></table></div>\n<h2 id=\"updates\">更新</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>表示されるもの</th><th>対処</th></tr></thead><tbody><tr><td>更新フィードに接続できませんでした</td><td>接続を確認して、もう一度試してください。何もダウンロードされておらず、インストール済みのアプリは変わっていません。</td></tr><tr><td>接続が失われました</td><td>再試行してください。検証済みの部分的なダウンロードは保持され、再開されます。</td></tr><tr><td>ダウンロードしたインストーラーがチェックサムと一致しませんでした</td><td>隔離されたため、インストールされません。もう一度ダウンロードしてください。</td></tr><tr><td>準備済みの更新に対応が必要です</td><td>準備済みの更新をクリアして、もう一度ダウンロードしてください。クリアしても、インストール済みのアプリは変わりません。</td></tr><tr><td>公開された更新はまだありません</td><td>最新のバージョンです。</td></tr></tbody></table></div>\n<h2 id=\"start\">起動</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>表示されるもの</th><th>対処</th></tr></thead><tbody><tr><td>更新後に Codevalanche が開きません</td><td>Windows を再起動し、スタートメニューから開いてください。それでも開かない場合は、表示される内容を添えてご連絡ください（<a href=\"/docs/troubleshooting/#report\">問題を報告する</a>をご覧ください）。</td></tr></tbody></table></div>"
+}

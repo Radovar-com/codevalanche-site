@@ -1,0 +1,8 @@
+{
+  "source": "a8fec790b916ef3f",
+  "nav": "项目",
+  "title": "项目",
+  "seoTitle": "项目：文件夹和对话集中在一处",
+  "description": "项目把同一项工作的文件夹和对话放在一起。创建项目、添加文件夹、归档项目，并开启协调员。",
+  "body": "<p>项目就是一项工作：它在你电脑上使用的文件夹，以及围绕它的每一段对话。项目列在左侧栏中。</p>\n<h2 id=\"create\">创建项目</h2>\n<ol class=\"docs-steps\"><li><strong>从左侧栏打开“新建项目”。</strong></li><li><strong>给它起个名字</strong>（1 到 120 个字符），如果你愿意，还可以选择一个图标。</li><li><strong>添加上下文。</strong>选择<span class=\"ui-term\">添加文件夹</span>来使用你电脑上已有的代码，或者选择<span class=\"ui-term\">克隆 GitHub 仓库</span>。如果不选文件夹，项目会得到一个属于它自己的新文件夹。</li><li><strong>写下目标（可选）。</strong>有了目标，项目一打开，协调员就会开始处理。</li><li><strong>按<span class=\"ui-term\">创建项目</span>。</strong></li></ol>\n<h2 id=\"folders\">一个项目中的多个文件夹</h2>\n<p>一个项目最多可以包含 32 个文件夹，例如一个网站和它的服务器。其中一个文件夹是<span class=\"ui-term\">主文件夹</span>。项目的所有对话和智能体都可以在所有这些文件夹中工作。</p>\n<h2 id=\"starters\">开始的方式</h2>\n<p>新项目会提供几个起点：</p>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><tbody><tr><td><span class=\"ui-term\">继续最近的工作</span></td><td>查看最近的工作，并告诉你上次做到哪里，以及接下来是什么。</td></tr><tr><td><span class=\"ui-term\">检查项目</span></td><td>读取项目，告诉你它的状态、哪里出了问题，以及首先该做什么。</td></tr><tr><td><span class=\"ui-term\">制定计划</span></td><td>制定一份计划，并拆分成交给智能体的步骤。</td></tr><tr><td><span class=\"ui-term\">使用我的工具</span></td><td>列出可用的工具、连接和技能，并建议如何使用它们。</td></tr></tbody></table></div>\n<h2 id=\"coordinator\">使用或不使用协调员</h2>\n<p>不使用协调员时，项目就是存放你对话的整洁场所。使用它时，你只需给出一个目标，它就会把工作拆分给多个智能体。参见<a href=\"/docs/projects/coordinator/\">协调员</a>。</p>\n<h2 id=\"archive\">归档或移除</h2>\n<ul><li><span class=\"ui-term\">归档项目</span>会将项目从左侧栏中隐藏，并归档它的对话。你可以在“项目 › 已归档”中再次找到它，并随时恢复。不会删除任何内容。</li><li>移除项目会把它及其对话从 Codevalanche 中拿掉。文件夹中的文件仍保留在你的电脑上。</li><li>如果项目有协调员，归档或移除项目会停止它的智能体。</li></ul>"
+}

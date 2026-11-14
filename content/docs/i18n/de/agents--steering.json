@@ -1,0 +1,8 @@
+{
+  "source": "23b87b5ff5602205",
+  "nav": "Nachrichten lenken und einreihen",
+  "title": "Den Agenten lenken und Nachrichten einreihen",
+  "seoTitle": "Einen laufenden KI-Agenten lenken und Folgenachrichten einreihen",
+  "description": "Sende Folgenachrichten, während ein Agent arbeitet. Sie warten in einer Warteschlange und lassen sich bearbeiten, vorziehen oder in die laufende Runde senden.",
+  "body": "<p>Du musst nicht warten, bis ein Agent fertig ist. Schreibe deine nächste Nachricht, sobald sie dir einfällt.</p>\n<h2 id=\"queue\">Die Warteschlange</h2>\n<ul><li>Eine Nachricht, die du sendest, während der Agent arbeitet, kommt in die Warteschlange unter dem Nachrichtenfeld.</li><li>Eingereihte Nachrichten laufen nacheinander, wenn der aktuelle Lauf endet.</li><li>Du kannst eine eingereihte Nachricht bearbeiten, nach vorn schieben, damit sie als Nächste läuft, entfernen oder die ganze Warteschlange leeren.</li><li>Ist eine frühere Nachricht fehlgeschlagen, wartet die Warteschlange, damit nichts in falscher Reihenfolge läuft.</li></ul>\n<h2 id=\"steer\">Die laufende Runde lenken</h2>\n<p>Manche KI-Apps können eine Nachricht in die bereits laufende Runde aufnehmen. Dann kann eine eingereihte Folgenachricht direkt hineingesendet werden, um die Richtung zu ändern. Kann die App nicht bestätigen, dass sie angekommen ist, wird die Nachricht zurückgehalten, und du wählst Erneut senden oder Verwerfen.</p>\n<h2 id=\"stop\">Stopp</h2>\n<p><kbd class=\"docs-kbd\">Esc</kbd> im Nachrichtenfeld stoppt den Lauf. Eingereihte Nachrichten bleiben in der Warteschlange.</p>"
+}

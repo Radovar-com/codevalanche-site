@@ -1,0 +1,8 @@
+{
+  "source": "23b87b5ff5602205",
+  "nav": "Yönlendirme ve mesaj kuyruğu",
+  "title": "Ajanı yönlendirin ve mesajları kuyruğa alın",
+  "seoTitle": "Çalışan bir yapay zekâ ajanını yönlendirin ve takip mesajlarını kuyruğa alın",
+  "description": "Ajan çalışırken takip mesajları gönderin. Bunlar bir kuyrukta bekler; düzenlenebilir, öne alınabilir veya çalışan tura gönderilebilir.",
+  "body": "<p>Bir ajanın bitirmesini beklemeniz gerekmez. Bir sonraki mesajınızı aklınıza geldiği anda yazın.</p>\n<h2 id=\"queue\">Kuyruk</h2>\n<ul><li>Ajan çalışırken gönderilen mesaj, mesaj kutusunun altındaki kuyruğa katılır.</li><li>Kuyruktaki mesajlar, mevcut çalıştırma bitince birbiri ardına çalışır.</li><li>Kuyruktaki bir mesajı düzenleyebilir, sıradaki olarak çalışması için öne alabilir, kaldırabilir ya da tüm kuyruğu temizleyebilirsiniz.</li><li>Daha önceki bir mesaj başarısız olduysa kuyruk bekler; böylece hiçbir şey sırasız çalışmaz.</li></ul>\n<h2 id=\"steer\">Çalışan turu yönlendirme</h2>\n<p>Bazı yapay zekâ uygulamaları, zaten çalışan bir tura mesaj alabilir. O zaman kuyruktaki bir takip mesajı, yönü değiştirmek için doğrudan içeri gönderilebilir. Uygulama mesajın ulaştığını doğrulayamazsa mesaj bekletilir ve Yeniden gönder ya da Vazgeç seçeneklerinden birini seçersiniz.</p>\n<h2 id=\"stop\">Durdurma</h2>\n<p>Mesaj kutusunda <kbd class=\"docs-kbd\">Esc</kbd> çalıştırmayı durdurur. Kuyruktaki mesajlar kuyrukta kalır.</p>"
+}

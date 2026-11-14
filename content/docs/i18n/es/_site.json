@@ -1,0 +1,31 @@
+{
+  "source": "be4eeff5af399f0b",
+  "sections": {
+    "Getting started": "Primeros pasos",
+    "Your AIs": "Tus IA",
+    "Local models": "Modelos locales",
+    "Projects": "Proyectos",
+    "Working with agents": "Trabajar con agentes",
+    "The app": "La app",
+    "Privacy and security": "Privacidad y seguridad",
+    "Troubleshooting": "Solución de problemas"
+  },
+  "chrome": {
+    "Docs": "Documentación",
+    "Codevalanche Docs": "Documentación de Codevalanche",
+    "Documentation": "Documentación",
+    "Search the docs": "Buscar en la documentación",
+    "Search the docs…": "Buscar en la documentación…",
+    "No matching page.": "No hay ninguna página que coincida.",
+    "All documentation": "Toda la documentación",
+    "On this page": "En esta página",
+    "Previous": "Anterior",
+    "Next": "Siguiente",
+    "Docs home": "Inicio de la documentación",
+    "Previous and next page": "Página anterior y siguiente",
+    "{n} min read": "{n} min de lectura",
+    "Windows": "Windows",
+    "Skip to content": "Saltar al contenido",
+    "The Codevalanche logo.": "El logotipo de Codevalanche."
+  }
+}

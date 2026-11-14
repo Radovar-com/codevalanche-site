@@ -1,0 +1,8 @@
+{
+  "source": "0165418bec14f172",
+  "nav": "側邊聊天、分支與交接",
+  "title": "側邊聊天、分支與交接",
+  "seoTitle": "側邊聊天、對話分支與智慧體之間的交接",
+  "description": "在側邊聊天中快速提問、從任何一則訊息分出對話分支，或把工作交給另一個智慧體而不遺失情境。",
+  "body": "<h2 id=\"side-chat\">側邊聊天</h2>\n<p>側邊聊天會在主對話旁邊開啟（<kbd class=\"docs-kbd\">Ctrl</kbd>+<kbd class=\"docs-kbd\">5</kbd>）。它一開始是一份副本：智慧體知道副本建立之前的對話內容，而你在那裡寫的內容只會留在那裡。它處理的是同一個專案的檔案。</p>\n<ul><li><span class=\"ui-term\">讀取主對話的新內容</span>會讓側邊聊天與主對話保持同步。</li><li>你可以把側邊聊天中的回答傳回主對話。</li></ul>\n<h2 id=\"fork\">分出對話分支</h2>\n<p>在某則訊息上使用「從這裡分支」，即可從該處開始一個新的對話。新的對話會標示為「分支自 …」，讓你隨時找得到它的來源。</p>\n<h2 id=\"handoff\">交給其他智慧體</h2>\n<p><span class=\"ui-term\">交給其他智慧體</span>會把工作移交給另一個智慧體，例如其中一個額度用完時，從 Codex 換到 Claude Code。</p>\n<ol class=\"docs-steps\"><li><strong>目前的智慧體會先停止。</strong></li><li><strong>檢閱交接內容。</strong>其中會列出智慧體的更新與它動過的檔案。你可以編輯，並說明還剩下什麼要做。</li><li><strong>選擇要在哪裡繼續：</strong><span class=\"ui-term\">在此對話中繼續</span>或<span class=\"ui-term\">在新對話中繼續</span>。下一個智慧體會在同一個簽出內容中開始。</li></ol>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>交接之前，請先儲存或捨棄尚未儲存的檔案編輯，並傳送或清除你的訊息。</p></div>"
+}

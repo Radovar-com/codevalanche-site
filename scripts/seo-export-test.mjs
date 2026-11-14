@@ -90,12 +90,14 @@ export async function validateSeoExport(destination, docsPages = []) {
     }
   }
 
-  // English-only docs pages: own canonical, title, description, social tags, schema and CSP.
+  // Docs pages in every language: own canonical, title, description, social tags, schema and CSP.
   for (const page of docsPages) {
     const document = parse(await readFile(path.join(destination, page.file), 'utf8'));
     const canonicalUrl = new URL(page.path, SITE_ORIGIN).href;
     const htmlRoot = walk(document, node => node.tagName === 'html')[0];
-    requireValue(attrs(htmlRoot ?? {}).get('lang') === 'en', `${page.file} has wrong lang`);
+    requireValue(attrs(htmlRoot ?? {}).get('lang') === (page.locale?.tag ?? 'en'), `${page.file} has wrong lang`);
+    const hreflangs = walk(document, node => node.tagName === 'link' && attrs(node).has('hreflang')).map(node => attrs(node).get('hreflang'));
+    requireValue(LOCALES.every(locale => hreflangs.includes(locale.tag)) && hreflangs.includes('x-default'), `${page.file} is missing language alternates`);
     const canonicalNodes = walk(document, node => node.tagName === 'link' && (attrs(node).get('rel') ?? '').split(/\s+/).includes('canonical'));
     requireValue(canonicalNodes.length === 1 && attrs(canonicalNodes[0]).get('href') === canonicalUrl, `${page.file} has wrong canonical`);
     requireValue(Boolean(text(walk(document, node => node.tagName === 'title')[0] ?? {}).trim()), `${page.file} has no title`);

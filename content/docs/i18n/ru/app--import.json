@@ -1,0 +1,8 @@
+{
+  "source": "6e937c60e8b4680f",
+  "nav": "Импорт бесед",
+  "title": "Импорт бесед из других ИИ-приложений",
+  "seoTitle": "Импорт бесед из Claude Code, Codex и ChatGPT",
+  "description": "Перенесите свои беседы из других ИИ-приложений на ПК или из экспорта ChatGPT в Codevalanche и поддерживайте их синхронизацию.",
+  "body": "<p><span class=\"ui-term\">Переносите диалоговы из других приложений AI</span> в настройках находит на этом ПК ИИ-приложения, беседы которых можно импортировать.</p>\n<h2 id=\"apps\">Из приложений на этом ПК</h2>\n<ol class=\"docs-steps\"><li><strong>Откройте настройки импорта.</strong> Codevalanche покажет найденные приложения.</li><li><strong>Выберите, что импортировать.</strong></li><li><strong>Включите синхронизацию (по желанию).</strong> Пока Codevalanche работает, он вскоре после появления импортирует новые беседы из этих приложений.</li></ol>\n<h2 id=\"chatgpt\">Из ChatGPT</h2>\n<ol class=\"docs-steps\"><li><strong>Экспортируйте свои данные</strong> в настройках ChatGPT.</li><li><strong>Укажите Codevalanche экспорт:</strong> файл <code>conversations.json</code> или архив экспорта <code>.zip</code>.</li></ol>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>При продолжении импортированной беседы ваши локальные изменения сохраняются; при необходимости она продолжается в новой беседе.</p></div>"
+}

@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { hubIsCurrent } from './docs-hub.mjs';
-import { DOCS_PAGES, checkLinks, docsSearchIndex, renderDocsPage } from './docs-render.mjs';
+import { DOCS_PAGES, checkLinks, docsPagesFor, docsSearchIndex, renderDocsPage } from './docs-render.mjs';
+import { DOCS_LOCALES, checkLocale } from './docs-i18n.mjs';
 
 test('the committed docs hub matches the docs navigation', async () => {
   assert.equal(await hubIsCurrent(), true, 'run node scripts/docs-hub.mjs');
@@ -36,4 +37,24 @@ test('docs never claim what the site rules forbid', () => {
 
 test('the search index covers every page', () => {
   assert.equal(docsSearchIndex().length, DOCS_PAGES.length);
+});
+
+test('every language has a current, well-formed translation of every docs page', () => {
+  assert.deepEqual(DOCS_LOCALES.flatMap(locale => checkLocale(locale.slug)), []);
+});
+
+test('translated docs pages stay in their language', () => {
+  for (const locale of DOCS_LOCALES) {
+    const pages = docsPagesFor(locale);
+    const known = new Set(pages.map(page => page.path));
+    for (const page of pages) {
+      checkLinks(page, known);
+      assert.doesNotMatch(page.body, /href="\/docs\//, `${page.path} links to an English docs page`);
+    }
+    const html = renderDocsPage(pages[0], pages);
+    assert.match(html, new RegExp(`<html lang="${locale.tag}" dir="${locale.dir}">`));
+    assert.match(html, new RegExp(`<link rel="canonical" href="https://codevalanche.com/${locale.slug}/docs/${pages[0].slug}/">`));
+    assert.match(html, /hreflang="x-default" href="https:\/\/codevalanche.com\/docs\//);
+    assert.equal(docsSearchIndex(pages).length, DOCS_PAGES.length);
+  }
 });

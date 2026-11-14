@@ -1,0 +1,8 @@
+{
+  "source": "78568eff7c8848d4",
+  "nav": "附件与注释",
+  "title": "附件与注释",
+  "seoTitle": "附加截图和文件，并为智能体标注你的应用",
+  "description": "附加截图、PDF、文档和代码文件，粘贴图片，并在运行中的应用上标记元素，让智能体准确知道该改什么。",
+  "body": "<h2 id=\"attach\">附加文件</h2>\n<p>使用附件按钮或 <kbd class=\"docs-kbd\">Ctrl</kbd>+<kbd class=\"docs-kbd\">U</kbd>，将文件拖入消息框，或者粘贴截图。</p>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>类型</th><th>格式</th></tr></thead><tbody><tr><td>图片</td><td>PNG、JPEG、WebP、SVG</td></tr><tr><td>文档</td><td>PDF、DOCX、TXT、Markdown</td></tr><tr><td>代码和数据</td><td>JSON、YAML、XML、CSV、LOG、TS、JS、PY、CSS、HTML、SQL、TOML</td></tr></tbody></table></div>\n<ul><li>较大的图片会在发送前压缩。如果仍然太大，请裁剪一下。</li><li>不支持旧版 Word 的 <code>.doc</code> 文件；请另存为 DOCX 或 PDF。</li><li>无法直接读取 Figma 的 <code>.fig</code> 文件；请将画框导出为 PNG、SVG 或 PDF。</li><li>如果所选模型无法读取附加的文件，应用会在发送前告诉你。</li></ul>\n<h2 id=\"annotate\">为运行中的应用添加注释</h2>\n<p>当你的项目在<span class=\"ui-term\">浏览器</span>窗格中运行时，你可以直接指出要修改的地方，而不必用文字去描述。</p>\n<ol class=\"docs-steps\"><li><strong>选择<span class=\"ui-term\">注释</span>。</strong>预览会切换到注释模式。</li><li><strong>点击要修改的元素。</strong>每个元素都会添加到你的消息中，显示在“页面上的标记”之下。</li><li><strong>写下你希望对这些标记元素做什么</strong>，然后发送。</li></ol>\n<p>默认情况下，每个标记的元素都会连同它的图片一起发送。图片会计入你的套餐用量。在“设置 › 浏览器 › 注释截图”中，你可以选择“始终包含”、“每次询问”或“从不包含”。</p>\n<div class=\"docs-callout tip\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z\"/></svg><p><kbd class=\"docs-kbd\">Esc</kbd> 会清除已选取的元素，或者关闭备注而不发送。如果在你选取元素之后页面发生了变化，请重新选取。</p></div>"
+}

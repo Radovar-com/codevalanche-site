@@ -1,0 +1,8 @@
+{
+  "source": "a997ebcb3d37a7e2",
+  "nav": "Akun Anda",
+  "title": "Akun Codevalanche Anda",
+  "seoTitle": "Akun Codevalanche Anda dan mode Tamu",
+  "description": "Fungsi akun Codevalanche, cara masuk atau melanjutkan sebagai Tamu, dan perbedaannya dengan akun AI Anda.",
+  "body": "<p>Akun Codevalanche adalah profil Anda di Codevalanche. Akun ini terpisah dari akun AI Anda: masuk di sini tidak menghubungkan Claude, ChatGPT, atau AI lainnya.</p>\n<h2 id=\"sign-in\">Masuk atau lanjutkan sebagai Tamu</h2>\n<ul><li>Masuk dengan email atau Google. Proses masuk berlangsung dengan aman di peramban Anda, lalu Codevalanche terbuka kembali.</li><li>Atau lanjutkan sebagai Tamu dan pakai aplikasi tanpa akun.</li><li>Sesi tetap berfungsi secara offline hingga 30 hari, lalu aplikasi meminta Anda masuk lagi. Tidak ada yang hilang.</li></ul>\n<h2 id=\"manage\">Kelola akun</h2>\n<p>Di situs web, <a href=\"/account/\">akun Anda</a> menampilkan profil, sesi masuk Anda (dan memungkinkan Anda mengakhirinya), serta memungkinkan Anda menghapus akun.</p>\n<h2 id=\"data\">Isi akun</h2>\n<p>Alamat email, nama tampilan, bio singkat (opsional), dan metode masuk Anda. Tidak pernah berisi perintah, percakapan, kode, atau kunci Anda. Lihat <a href=\"/docs/privacy/\">Ke mana kode Anda pergi</a>.</p>"
+}

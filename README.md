@@ -13,7 +13,9 @@ Codevalanche is a Windows desktop app that runs Claude Code, Codex and local mod
 
 ## Documentation
 
-The docs at `/docs/` are written in `content/docs/` (one file per section, built from small helpers in `content/docs/kit.mjs`). The build renders every page with its navigation, search index, structured data and sitemap entry (`scripts/docs-render.mjs`). The `/docs/` home is a translated page generated from the same navigation: after changing `content/docs/`, run `node scripts/docs-hub.mjs`, then add any new hub strings to the locale catalogs. The detailed pages are English for now.
+The docs at `/docs/` are written in `content/docs/` (one file per section, built from small helpers in `content/docs/kit.mjs`). The build renders every page with its navigation, search index, structured data and sitemap entry (`scripts/docs-render.mjs`). The `/docs/` home is a translated page generated from the same navigation: after changing `content/docs/`, run `node scripts/docs-hub.mjs`, then add any new hub strings to the locale catalogs.
+
+Every docs page is also published in the 16 other site languages at `/<language>/docs/…`. Translations live in `content/docs/i18n/<language>/` (one JSON file per page, plus `_site.json` for section names and page words). Each file records the hash of the English it was translated from, so when an English page changes the build and `node scripts/docs-i18n.mjs check` fail until that page is translated again. `node scripts/docs-i18n.mjs extract <dir>` writes the English sources for translators; the check also makes sure each translation keeps the English HTML, links and code exactly.
 
 ## Build and test
 

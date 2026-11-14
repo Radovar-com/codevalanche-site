@@ -1,0 +1,8 @@
+{
+  "source": "684730690a76287c",
+  "nav": "解决问题",
+  "title": "解决问题",
+  "seoTitle": "Codevalanche 故障排除",
+  "description": "查找安装、更新、AI 连接、本地模型和智能体问题的解决办法，了解错误代码，并发送有帮助的报告。",
+  "body": "<p>Codevalanche 中的大多数提示都会说明出了什么问题以及下一步该怎么做。请先从问题所在的领域入手：</p>\n<ul><li><a href=\"/docs/troubleshooting/install-and-updates/\">安装与更新</a></li><li><a href=\"/docs/troubleshooting/ai-connections/\">AI 连接与登录</a></li><li><a href=\"/docs/troubleshooting/local-models/\">本地模型与语音</a></li><li><a href=\"/docs/troubleshooting/agents/\">智能体与运行</a></li></ul>\n<h2 id=\"codes\">错误代码</h2>\n<p>许多提示的末尾都有一个代码，例如 <code>CV-VOICE-E07</code>。中间的部分说明问题出在哪里：</p>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>代码</th><th>领域</th></tr></thead><tbody><tr><td>CV-VOICE</td><td>听写、语音引擎和语音模式</td></tr><tr><td>CV-BROWSER</td><td>内置的浏览器窗格</td></tr><tr><td>CV-PR</td><td>发布到 GitHub（分支和拉取请求）</td></tr><tr><td>CV-IMPORT</td><td>导入对话</td></tr><tr><td>CV-CHAT</td><td>对话和侧边聊天</td></tr><tr><td>CV-LIMITS, CV-USAGE</td><td>使用额度</td></tr><tr><td>CV-RUN</td><td>智能体运行</td></tr><tr><td>CV-DIAGNOSTICS</td><td>创建诊断包</td></tr></tbody></table></div>\n<p>求助时请附上该代码。</p>\n<h2 id=\"diagnostics\">诊断</h2>\n<p>有些提示会建议你打开“诊断”。它会显示技术细节，并可以创建一个能附在报告上的诊断包。除非你发送，否则诊断信息只保留在你的电脑上。</p>\n<h2 id=\"report\">报告问题</h2>\n<ol class=\"docs-steps\"><li><strong>打开“设置 › <span class=\"ui-term\">发送反馈</span>”。</strong>选择一个类别，并描述你做了什么、你期望什么以及实际发生了什么。</li><li><strong>检查文字。</strong>发送之前，任何预填的诊断信息都会显示在文字中。其中的密钥、令牌、电子邮件地址和个人文件夹路径都会被删除。</li><li><strong>勾选同意框并发送。</strong>你也可以改为在本地复制或保存该报告。</li></ol>\n<p>你也可以写信给 <a href=\"mailto:info@radovar.com\" data-contact-id=\"info\">info@radovar.com</a>。请从截图和日志中删除密钥以及私密的项目内容。</p>"
+}

@@ -1,0 +1,8 @@
+{
+  "source": "88ac599768d0e035",
+  "nav": "智能体与运行",
+  "title": "智能体与运行问题",
+  "seoTitle": "修复 AI 智能体运行停止、等待或失败的问题",
+  "description": "当智能体在等待、停止、达到额度上限、无法使用某个模型，或者协调员无法启动时该怎么办。",
+  "body": "<h2 id=\"common\">常见问题</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的情况</th><th>该怎么做</th></tr></thead><tbody><tr><td><span class=\"ui-term\">等待您的批准</span></td><td>打开对话并答复批准卡片。等待并不意味着智能体卡住了。</td></tr><tr><td>终端命令被拒绝。没有运行任何命令。</td><td>如果你想让它运行，请允许它，或者告诉智能体换一种办法。</td></tr><tr><td><span class=\"ui-term\">等待额度</span></td><td>已达到 AI 的额度上限。如果开启了相应设置，它会在重置后继续；或者改用其他账户或模型继续。</td></tr><tr><td>这台电脑上还没有可以运行此模型的应用</td><td>在“你的 AI”中安装或登录运行该模型的应用。</td></tr><tr><td>所选模型无法读取附加的文件</td><td>移除这些文件，或者选择其他模型。</td></tr><tr><td>权限不可用</td><td>点击消息框中的权限按钮，重新读取各个模式。</td></tr><tr><td>此对话已归档</td><td>从“已归档的对话”中恢复它，才能继续。</td></tr><tr><td><span class=\"ui-term\">未连接任何 AI</span></td><td>在“你的 AI”中连接一个 AI 后，协调员就会启动。</td></tr><tr><td>协调员没有启动</td><td>在“你的 AI”中检查是否已连接，然后重试。</td></tr><tr><td>协调员的某个智能体没有动静了</td><td>协调员会提醒它，然后重启它一次。如果它仍然没有动静，就会等你处理。</td></tr></tbody></table></div>\n<h2 id=\"stop\">停止运行</h2>\n<p>在消息框中按 <kbd class=\"docs-kbd\">Esc</kbd> 可随时停止运行。你排队的消息仍留在队列中。</p>"
+}

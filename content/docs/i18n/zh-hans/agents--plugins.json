@@ -1,0 +1,8 @@
+{
+  "source": "8d17bcdeff59bf0d",
+  "nav": "插件、MCP 与技能",
+  "title": "插件、MCP 服务器与技能",
+  "seoTitle": "AI 编程智能体的插件、MCP 服务器与技能",
+  "description": "通过 MCP 服务器、技能以及 GitHub、Figma、Google Drive、Vercel 等连接器赋予智能体更多能力，也可以从 Claude Code 和 Codex 导入。",
+  "body": "<p>设置中的<span class=\"ui-term\">插件</span>汇集了智能体可以使用的 MCP 服务器、技能和内置功能。一份列表供所有智能体使用。</p>\n<h2 id=\"catalog\">目录</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>插件</th><th>它增加的功能</th></tr></thead><tbody><tr><td>GitHub</td><td>GitHub 上的议题、拉取请求、代码搜索和 Actions。</td></tr><tr><td>Figma</td><td>来自 Figma 文件的设计上下文、截图、变量和素材。</td></tr><tr><td>Google Drive and Gmail</td><td>通过 Google 托管的 MCP 服务器搜索并读取文件和邮件。</td></tr><tr><td>Vercel</td><td>来自你的 Vercel 账户的项目、部署、日志和文档。</td></tr><tr><td>Supabase</td><td>浏览你的数据库。更改需要你的批准。</td></tr><tr><td>技能</td><td>代码审查、前端设计、数据分析、电子表格、深度研究等。</td></tr></tbody></table></div>\n<p>需要账户的连接器会通过该服务自己的页面登录。</p>\n<h2 id=\"import\">从 Claude Code 和 Codex 导入</h2>\n<p>如果你已经在 Claude Code 或 Codex 中设置了 MCP 服务器，可以将它们导入，让所有智能体都能使用。你随时可以在同一页面撤销导入；之后 Claude Code 和 Codex 会恢复使用各自的列表。你之后在 Claude Code 中添加的服务器，只有在你再次导入后才会在这里使用。</p>"
+}

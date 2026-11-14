@@ -1,0 +1,8 @@
+{
+  "source": "70ac169ff82735f6",
+  "nav": "更新",
+  "title": "更新",
+  "seoTitle": "Codevalanche 如何自我更新",
+  "description": "Codevalanche 如何查找、下载、验证并安装更新，必需的更新如何运作，以及在哪里阅读发行说明。",
+  "body": "<p>Codevalanche 会定期检查一个经过签名的公开更新文件。它不会发送任何能识别你身份的信息。</p>\n<h2 id=\"flow\">更新是如何到来的</h2>\n<ol class=\"docs-steps\"><li><strong><span class=\"ui-term\">有可用更新</span>。</strong>Codevalanche 会等你开始下载。</li><li><strong>下载。</strong>你可以继续工作。如果连接中断，已验证的部分会保留，下载会继续进行。</li><li><strong>验证。</strong>下载的安装程序会与该版本发布的校验和进行比对。如果不匹配，它会被隔离，绝不会安装。没有校验和的版本同样不会安装。</li><li><strong><span class=\"ui-term\">可以安装</span>。</strong>Codevalanche 会关闭，静默安装更新，然后重新打开。</li></ol>\n<h2 id=\"required\">必需的更新</h2>\n<p>不再受支持的版本会显示<span class=\"ui-term\">必需的更新</span>。请安装它，才能继续使用 Codevalanche。</p>\n<h2 id=\"notes\">发行说明</h2>\n<p>更新之后，Codevalanche 会显示有哪些变化。你可以在“设置 › 关于”中再次阅读同样的说明，并查看完整的发布历史。本网站上的<a href=\"/changelog.html\">更新日志</a>里也有这些内容。</p>\n<h2 id=\"agents\">AI 应用的更新</h2>\n<p>Codex 会在空闲时自行更新。对于 Claude Code、Gemini CLI 和其他智能体，“这台电脑上的 AI 应用”会显示何时有可用更新，并在可行时为你安装。参见<a href=\"/docs/your-ais/\">连接你的 AI</a>。</p>\n<h2 id=\"problems\">如果更新失败</h2>\n<p>你已安装的应用会保持原样。参见<a href=\"/docs/troubleshooting/install-and-updates/\">安装与更新问题</a>。</p>"
+}

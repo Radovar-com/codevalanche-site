@@ -1,0 +1,8 @@
+{
+  "source": "db34c088f5f8970b",
+  "nav": "撤销更改",
+  "title": "撤销智能体的更改",
+  "seoTitle": "撤销 AI 智能体对文件的更改",
+  "description": "每一轮都会记录哪些文件发生了更改。一键撤销整轮更改、重做，或者在“更改”窗格中放弃单项更改。",
+  "body": "<p>在智能体更改文件之前，Codevalanche 会保存文件原来的样子。这一轮结束后，你会得到一份更改记录，以及一条退路。</p>\n<h2 id=\"turn-changes\">本轮更改</h2>\n<p>每一轮只要更改了文件，就会显示一张<span class=\"ui-term\">本轮更改</span>卡片：智能体工作时显示<span class=\"ui-term\">本轮进行中</span>，之后显示<span class=\"ui-term\">已保存</span>以及已更改文件的数量。</p>\n<ol class=\"docs-steps\"><li><strong>选择<span class=\"ui-term\">撤销本轮的更改</span>。</strong></li><li><strong>确认。</strong>文件会恢复到智能体更改之前的样子。</li><li><strong>改变主意了？选择<span class=\"ui-term\">重做</span>。</strong></li></ol>\n<h2 id=\"unavailable\">不提供撤销的情况</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>原因</th><th>含义</th></tr></thead><tbody><tr><td>卡片上未显示的文件</td><td>该操作包含不在本轮记录之内的文件。</td></tr><tr><td>另一轮</td><td>这项更改属于另一轮。</td></tr><tr><td>记录不完整</td><td>没有保存文件完整的先前状态。</td></tr><tr><td>超大文件夹</td><td>太大而无法创建快照的文件夹会在没有撤销功能的情况下运行；应用会告知你。</td></tr></tbody></table></div>\n<p>如果应用在某一轮进行期间关闭，下次启动时会恢复这份记录（“已恢复中断的一轮”）。</p>\n<h2 id=\"git\">细粒度的更改</h2>\n<p><span class=\"ui-term\">更改</span>窗格（<kbd class=\"docs-kbd\">Ctrl</kbd>+<kbd class=\"docs-kbd\">2</kbd>）显示每个已更改的文件。你可以放弃单项更改（一个代码块），也可以放弃整个文件。放弃操作无法撤销，所以应用会先询问你。</p>\n<div class=\"docs-callout tip\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z\"/></svg><p>使用 git 的项目还有第二层保障：每一项更改在 git 中同样可见，而且协调员只会在安全时才合并各智能体的分支。</p></div>\n<h2 id=\"space\">磁盘空间</h2>\n<p>撤销快照与 AI 工具的会话保存在一起。“设置 › 存储空间”会显示它们占用了多少空间。</p>"
+}

@@ -1,0 +1,31 @@
+{
+  "source": "be4eeff5af399f0b",
+  "sections": {
+    "Getting started": "Начало работы",
+    "Your AIs": "Ваши ИИ",
+    "Local models": "Локальные модели",
+    "Projects": "Проекты",
+    "Working with agents": "Работа с агентами",
+    "The app": "Приложение",
+    "Privacy and security": "Конфиденциальность и безопасность",
+    "Troubleshooting": "Устранение неполадок"
+  },
+  "chrome": {
+    "Docs": "Документация",
+    "Codevalanche Docs": "Документация Codevalanche",
+    "Documentation": "Документация",
+    "Search the docs": "Поиск по документации",
+    "Search the docs…": "Поиск по документации…",
+    "No matching page.": "Подходящей страницы нет.",
+    "All documentation": "Вся документация",
+    "On this page": "На этой странице",
+    "Previous": "Назад",
+    "Next": "Далее",
+    "Docs home": "Главная документации",
+    "Previous and next page": "Предыдущая и следующая страница",
+    "{n} min read": "Чтение: {n} мин",
+    "Windows": "Windows",
+    "Skip to content": "Перейти к содержимому",
+    "The Codevalanche logo.": "Логотип Codevalanche."
+  }
+}

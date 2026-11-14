@@ -1,0 +1,8 @@
+{
+  "source": "6e937c60e8b4680f",
+  "nav": "Unterhaltungen importieren",
+  "title": "Unterhaltungen aus anderen KI-Apps importieren",
+  "seoTitle": "Unterhaltungen aus Claude Code, Codex und ChatGPT importieren",
+  "description": "Hole deine bestehenden Unterhaltungen aus anderen KI-Apps auf deinem PC oder aus einem ChatGPT-Export in Codevalanche und halte sie synchron.",
+  "body": "<p><span class=\"ui-term\">Unterhaltungen aus anderen AI Apps importieren</span> in den Einstellungen findet KI-Apps auf diesem PC, deren Unterhaltungen sich importieren lassen.</p>\n<h2 id=\"apps\">Aus Apps auf diesem PC</h2>\n<ol class=\"docs-steps\"><li><strong>Öffne die Importeinstellungen.</strong> Codevalanche listet die gefundenen Apps auf.</li><li><strong>Wähle, was importiert werden soll.</strong></li><li><strong>Synchron halten (optional).</strong> Solange Codevalanche läuft, importiert es neue Unterhaltungen aus diesen Apps kurz nachdem sie entstanden sind.</li></ol>\n<h2 id=\"chatgpt\">Aus ChatGPT</h2>\n<ol class=\"docs-steps\"><li><strong>Exportiere deine Daten</strong> in den Einstellungen von ChatGPT.</li><li><strong>Zeige Codevalanche den Export:</strong> die Datei <code>conversations.json</code> oder die Export-<code>.zip</code>.</li></ol>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>Wenn du eine importierte Unterhaltung fortsetzt, bleiben deine lokalen Änderungen erhalten. Bei Bedarf geht sie in einer neuen Unterhaltung weiter.</p></div>"
+}

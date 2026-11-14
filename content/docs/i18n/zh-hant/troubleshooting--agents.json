@@ -1,0 +1,8 @@
+{
+  "source": "88ac599768d0e035",
+  "nav": "智慧體與執行",
+  "title": "智慧體與執行的問題",
+  "seoTitle": "修復停止、等待或失敗的 AI 智慧體執行",
+  "description": "當智慧體等待、停止、達到額度上限、無法使用模型，或協調員沒有啟動時，該怎麼辦。",
+  "body": "<h2 id=\"common\">常見問題</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>你看到的</th><th>該怎麼做</th></tr></thead><tbody><tr><td><span class=\"ui-term\">正在等待您的批准</span></td><td>開啟對話並回應核准卡片。等待並不代表智慧體卡住了。</td></tr><tr><td>終端機命令已被拒絕。沒有執行任何命令。</td><td>如果你想讓它執行，就允許它，或告訴智慧體改用其他方式。</td></tr><tr><td><span class=\"ui-term\">等待額度</span></td><td>已達到 AI 的額度上限。如果該功能已開啟，它會在重設後繼續；或改用另一個帳號或模型繼續。</td></tr><tr><td>這台電腦上還沒有任何應用程式能執行這個模型</td><td>在「你的 AI」中安裝或登入能執行它的應用程式。</td></tr><tr><td>所選模型無法讀取附加的檔案</td><td>移除這些檔案，或選擇另一個模型。</td></tr><tr><td>權限無法使用</td><td>選取訊息輸入框中的權限按鈕，重新讀取模式。</td></tr><tr><td>這個對話已封存</td><td>從「已封存的聊天」還原它以繼續。</td></tr><tr><td><span class=\"ui-term\">尚未連接任何 AI</span></td><td>你在「你的 AI」中連接一個 AI 後，協調員就會啟動。</td></tr><tr><td>協調員沒有啟動</td><td>在「你的 AI」中確認你已連接，然後再試一次。</td></tr><tr><td>協調員的某個智慧體沒有動靜了</td><td>協調員會先提醒它，再重新啟動它一次。如果它仍然沒有動靜，就會等你處理。</td></tr></tbody></table></div>\n<h2 id=\"stop\">停止執行</h2>\n<p>在訊息輸入框中按 <kbd class=\"docs-kbd\">Esc</kbd> 隨時都能停止執行。你已排隊的訊息仍會留在佇列中。</p>"
+}

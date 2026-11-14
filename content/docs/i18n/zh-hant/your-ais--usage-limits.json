@@ -1,0 +1,8 @@
+{
+  "source": "64a7656d8af022b8",
+  "nav": "使用額度",
+  "title": "使用額度",
+  "seoTitle": "查看你的 Claude Code 與 Codex 使用額度",
+  "description": "查看你的 Codex 與 Claude Code 方案還剩多少、何時重設，在快用完時收到警告，並讓工作在重設後繼續。",
+  "body": "<p>訂閱附帶額度，通常是 5 小時的區間與每週的區間。Codevalanche 以你自己的登入身分從官方應用程式讀取它們，並集中顯示在同一個地方。</p>\n<h2 id=\"where\">在哪裡查看</h2>\n<p><span class=\"ui-term\">設定</span> › 額度會顯示<em>你的 Codex 與 Claude Code 方案還剩多少</em>：每個區間剩餘的百分比，以及依你的時區顯示的重設時間。每個數值都會註明它是何時檢查的；較舊的數值會標示為「可能已過時」。</p>\n<ul><li>Claude Code 只在工作期間回報它的額度，因此它們會在你第一則訊息之後出現。</li><li>Codex 的額度在你於「你的 AI」中登入 Codex 後才會出現。</li><li>其他 AI（Z.ai、Kimi、Gemini、Grok Build）不會與其他應用程式分享它們的額度。Codevalanche 會顯示供應商公布的方案資訊，並連結到它的用量頁面。</li></ul>\n<h2 id=\"warnings\">警告</h2>\n<p>當額度快用完時，你會收到像這樣的警告：「你的 5 小時額度只剩 20%。它會在今天 17:40 重設。」即將到期的已儲存 Codex 重設也會被通知。</p>\n<h2 id=\"saved-resets\">已儲存的 Codex 重設</h2>\n<p>有些 Codex 方案包含已儲存的重設。每一次都能讓你的額度恢復到滿額。它們會連同到期日一起列出。何時使用由你選擇；Codevalanche 絕不會替你使用它們。</p>\n<h2 id=\"when-reached\">達到額度上限時</h2>\n<p>達到額度上限的工作會顯示<span class=\"ui-term\">等待額度</span>，並且在該設定開啟時，於額度重設後自動繼續。對協調員的智慧體而言，這是<span class=\"ui-term\">額度重設後自動繼續</span>，位於<a href=\"/docs/projects/settings/\">專案設定</a>中。</p>\n<div class=\"docs-callout tip\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z\"/></svg><p>你也可以立刻改用另一個帳號或模型繼續。這永遠由你決定；Codevalanche 不會在你背後切換帳號。</p></div>"
+}

@@ -1,0 +1,8 @@
+{
+  "source": "23b87b5ff5602205",
+  "nav": "Ghidează și pune mesaje în coadă",
+  "title": "Ghidează agentul și pune mesaje în coadă",
+  "seoTitle": "Ghidează un agent AI aflat în lucru și pune mesaje de continuare în coadă",
+  "description": "Trimite mesaje de continuare cât timp un agent lucrează. Ele așteaptă în coadă, pot fi editate, mutate în față sau trimise în tura aflată în desfășurare.",
+  "body": "<p>Nu trebuie să aștepți ca un agent să termine. Scrie următorul mesaj oricând te gândești la el.</p>\n<h2 id=\"queue\">Coada</h2>\n<ul><li>Un mesaj trimis cât timp agentul lucrează intră în coada de sub câmpul de mesaj.</li><li>Mesajele din coadă rulează unul după altul, când se termină rularea curentă.</li><li>Poți edita un mesaj din coadă, îl poți muta în față ca să ruleze următorul, îl poți elimina sau poți goli toată coada.</li><li>Dacă un mesaj anterior a eșuat, coada așteaptă, ca nimic să nu ruleze în altă ordine.</li></ul>\n<h2 id=\"steer\">Ghidează tura în desfășurare</h2>\n<p>Unele aplicații AI pot primi un mesaj în tura care rulează deja. Atunci un mesaj de continuare din coadă poate fi trimis direct înăuntru, ca să schimbi direcția. Dacă aplicația nu poate confirma că a ajuns, mesajul este reținut și alegi între Trimite din nou și Renunță.</p>\n<h2 id=\"stop\">Oprește</h2>\n<p><kbd class=\"docs-kbd\">Esc</kbd> în câmpul de mesaj oprește rularea. Mesajele din coadă rămân în coadă.</p>"
+}

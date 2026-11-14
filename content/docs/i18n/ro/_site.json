@@ -1,0 +1,31 @@
+{
+  "source": "be4eeff5af399f0b",
+  "sections": {
+    "Getting started": "Primii pași",
+    "Your AIs": "AI-urile tale",
+    "Local models": "Modele locale",
+    "Projects": "Proiecte",
+    "Working with agents": "Lucrul cu agenții",
+    "The app": "Aplicația",
+    "Privacy and security": "Confidențialitate și securitate",
+    "Troubleshooting": "Depanare"
+  },
+  "chrome": {
+    "Docs": "Documentație",
+    "Codevalanche Docs": "Documentația Codevalanche",
+    "Documentation": "Documentație",
+    "Search the docs": "Caută în documentație",
+    "Search the docs…": "Caută în documentație…",
+    "No matching page.": "Nicio pagină potrivită.",
+    "All documentation": "Toată documentația",
+    "On this page": "Pe această pagină",
+    "Previous": "Anterior",
+    "Next": "Următor",
+    "Docs home": "Pagina principală a documentației",
+    "Previous and next page": "Pagina anterioară și următoarea",
+    "{n} min read": "{n} min de citit",
+    "Windows": "Windows",
+    "Skip to content": "Treci la conținut",
+    "The Codevalanche logo.": "Logoul Codevalanche."
+  }
+}

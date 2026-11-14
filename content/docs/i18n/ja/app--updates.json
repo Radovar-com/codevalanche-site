@@ -1,0 +1,8 @@
+{
+  "source": "70ac169ff82735f6",
+  "nav": "アップデート",
+  "title": "アップデート",
+  "seoTitle": "Codevalanche の自動更新のしくみ",
+  "description": "Codevalanche が更新を見つけ、ダウンロードし、検証し、インストールするしくみ、必須のアップデートの扱い、リリースノートの読み方を説明します。",
+  "body": "<p>Codevalanche は、公開されている署名付きの更新ファイルを定期的に確認します。あなたを識別できる情報は、何も送信しません。</p>\n<h2 id=\"flow\">更新が届くまで</h2>\n<ol class=\"docs-steps\"><li><strong><span class=\"ui-term\">更新可能</span>。</strong>Codevalanche は、あなたがダウンロードを始めるのを待ちます。</li><li><strong>ダウンロード。</strong>作業を続けられます。接続が切れても、検証済みの部分は保持され、ダウンロードが再開されます。</li><li><strong>検証。</strong>ダウンロードしたインストーラーを、そのリリース用に公開されているチェックサムと照合します。一致しない場合は隔離され、インストールされません。チェックサムのないリリースも、インストールされません。</li><li><strong><span class=\"ui-term\">インストールの準備ができました</span>。</strong>Codevalanche が閉じ、更新をサイレントでインストールして、再び開きます。</li></ol>\n<h2 id=\"required\">必須のアップデート</h2>\n<p>サポートが終了したバージョンには、<span class=\"ui-term\">必須のアップデート</span>と表示されます。Codevalanche を使い続けるには、インストールしてください。</p>\n<h2 id=\"notes\">リリースノート</h2>\n<p>更新後、Codevalanche は何が変わったかを表示します。設定 › 概要で、完全なリリース履歴とともに、同じノートをもう一度読めます。このサイトの<a href=\"/changelog.html\">変更履歴</a>にも載っています。</p>\n<h2 id=\"agents\">AI アプリの更新</h2>\n<p>Codex は、アイドル中に自動で更新されます。Claude Code、Gemini CLI、その他のエージェントについては、この PC の AI アプリに更新があるときが表示され、可能な場合はインストールも代行します。<a href=\"/docs/your-ais/\">AI を接続する</a>をご覧ください。</p>\n<h2 id=\"problems\">更新に失敗したとき</h2>\n<p>インストール済みのアプリは、そのまま変わりません。<a href=\"/docs/troubleshooting/install-and-updates/\">インストールと更新の問題</a>をご覧ください。</p>"
+}

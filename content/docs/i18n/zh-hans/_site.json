@@ -1,0 +1,31 @@
+{
+  "source": "be4eeff5af399f0b",
+  "sections": {
+    "Getting started": "入门指南",
+    "Your AIs": "你的 AI",
+    "Local models": "本地模型",
+    "Projects": "项目",
+    "Working with agents": "与智能体协作",
+    "The app": "应用",
+    "Privacy and security": "隐私与安全",
+    "Troubleshooting": "故障排除"
+  },
+  "chrome": {
+    "Docs": "文档",
+    "Codevalanche Docs": "Codevalanche 文档",
+    "Documentation": "文档",
+    "Search the docs": "搜索文档",
+    "Search the docs…": "搜索文档…",
+    "No matching page.": "没有匹配的页面。",
+    "All documentation": "全部文档",
+    "On this page": "本页内容",
+    "Previous": "上一页",
+    "Next": "下一页",
+    "Docs home": "文档首页",
+    "Previous and next page": "上一页和下一页",
+    "{n} min read": "阅读约需 {n} 分钟",
+    "Windows": "Windows",
+    "Skip to content": "跳转到内容",
+    "The Codevalanche logo.": "Codevalanche 标志。"
+  }
+}

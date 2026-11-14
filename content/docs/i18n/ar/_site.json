@@ -1,0 +1,31 @@
+{
+  "source": "be4eeff5af399f0b",
+  "sections": {
+    "Getting started": "البدء",
+    "Your AIs": "أنظمة الذكاء الاصطناعي لديك",
+    "Local models": "نماذج محلية",
+    "Projects": "المشاريع",
+    "Working with agents": "العمل مع الوكلاء",
+    "The app": "التطبيق",
+    "Privacy and security": "الخصوصية والأمان",
+    "Troubleshooting": "استكشاف الأخطاء وإصلاحها"
+  },
+  "chrome": {
+    "Docs": "التوثيق",
+    "Codevalanche Docs": "وثائق Codevalanche",
+    "Documentation": "الوثائق",
+    "Search the docs": "ابحث في الوثائق",
+    "Search the docs…": "ابحث في الوثائق…",
+    "No matching page.": "لا توجد صفحة مطابقة.",
+    "All documentation": "كل الوثائق",
+    "On this page": "في هذه الصفحة",
+    "Previous": "السابق",
+    "Next": "التالي",
+    "Docs home": "الصفحة الرئيسية للوثائق",
+    "Previous and next page": "الصفحة السابقة والتالية",
+    "{n} min read": "قراءة في {n} د",
+    "Windows": "Windows",
+    "Skip to content": "تخطّ إلى المحتوى",
+    "The Codevalanche logo.": "شعار Codevalanche."
+  }
+}

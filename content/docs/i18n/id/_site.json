@@ -1,0 +1,31 @@
+{
+  "source": "be4eeff5af399f0b",
+  "sections": {
+    "Getting started": "Memulai",
+    "Your AIs": "AI Anda",
+    "Local models": "Model lokal",
+    "Projects": "Proyek",
+    "Working with agents": "Bekerja dengan agen",
+    "The app": "Aplikasi",
+    "Privacy and security": "Privasi dan keamanan",
+    "Troubleshooting": "Pemecahan masalah"
+  },
+  "chrome": {
+    "Docs": "Dokumentasi",
+    "Codevalanche Docs": "Dokumentasi Codevalanche",
+    "Documentation": "Dokumentasi",
+    "Search the docs": "Cari di dokumentasi",
+    "Search the docs…": "Cari di dokumentasi…",
+    "No matching page.": "Tidak ada halaman yang cocok.",
+    "All documentation": "Semua dokumentasi",
+    "On this page": "Di halaman ini",
+    "Previous": "Sebelumnya",
+    "Next": "Berikutnya",
+    "Docs home": "Beranda dokumentasi",
+    "Previous and next page": "Halaman sebelumnya dan berikutnya",
+    "{n} min read": "{n} menit baca",
+    "Windows": "Windows",
+    "Skip to content": "Lewati ke konten",
+    "The Codevalanche logo.": "Logo Codevalanche."
+  }
+}

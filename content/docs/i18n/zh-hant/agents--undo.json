@@ -1,0 +1,8 @@
+{
+  "source": "db34c088f5f8970b",
+  "nav": "復原變更",
+  "title": "復原智慧體的變更",
+  "seoTitle": "復原 AI 智慧體的檔案變更",
+  "description": "每一輪都會記錄哪些檔案有變更。一鍵復原整輪、重做，或在「變更」窗格中捨棄單一變更。",
+  "body": "<p>在智慧體變更檔案之前，Codevalanche 會先儲存檔案原本的樣子。這一輪結束後，你會得到變更內容的記錄，以及一條回頭的路。</p>\n<h2 id=\"turn-changes\">本輪變更</h2>\n<p>每個有變更檔案的回合，都會顯示一張<span class=\"ui-term\">本輪變更</span>卡片：工作期間顯示<span class=\"ui-term\">本輪進行中</span>，之後顯示<span class=\"ui-term\">已儲存</span>及已變更的檔案數量。</p>\n<ol class=\"docs-steps\"><li><strong>選擇<span class=\"ui-term\">復原本輪的變更</span>。</strong></li><li><strong>確認。</strong>檔案會恢復成智慧體變更之前的樣子。</li><li><strong>改變心意了嗎？選擇<span class=\"ui-term\">重做</span>。</strong></li></ol>\n<h2 id=\"unavailable\">未提供復原的情況</h2>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>原因</th><th>意義</th></tr></thead><tbody><tr><td>檔案未顯示在卡片上</td><td>該操作包含不在本輪記錄中的檔案。</td></tr><tr><td>另一個回合</td><td>該變更屬於不同的回合。</td></tr><tr><td>記錄不完整</td><td>沒有擷取到檔案先前的完整狀態。</td></tr><tr><td>超大資料夾</td><td>大到無法建立快照的資料夾，會在沒有復原功能的情況下執行；應用程式會告訴你。</td></tr></tbody></table></div>\n<p>如果應用程式在某一輪進行中關閉，記錄會在下次啟動時復原（「已復原中斷的回合」）。</p>\n<h2 id=\"git\">細部變更</h2>\n<p><span class=\"ui-term\">變更</span>窗格（<kbd class=\"docs-kbd\">Ctrl</kbd>+<kbd class=\"docs-kbd\">2</kbd>）會顯示每個已變更的檔案。你可以捨棄單一變更（一個區塊）或整個檔案。捨棄後無法復原，所以應用程式會先詢問。</p>\n<div class=\"docs-callout tip\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z\"/></svg><p>使用 git 的專案還有第二道安全網：每項變更在 git 中也看得到，而協調員只會在安全時才合併智慧體的分支。</p></div>\n<h2 id=\"space\">磁碟空間</h2>\n<p>復原快照會與 AI 工具的工作階段一起保存。「設定 › 儲存空間」會顯示它們佔用多少空間。</p>"
+}

@@ -1,0 +1,8 @@
+{
+  "source": "a997ebcb3d37a7e2",
+  "nav": "Tu cuenta",
+  "title": "Tu cuenta de Codevalanche",
+  "seoTitle": "Tu cuenta de Codevalanche y el modo Invitado",
+  "description": "Para qué sirve la cuenta de Codevalanche, cómo iniciar sesión o continuar como invitado, y en qué se diferencia de tus cuentas de IA.",
+  "body": "<p>La cuenta de Codevalanche es tu perfil en Codevalanche. Es independiente de tus cuentas de IA: iniciar sesión aquí no conecta Claude, ChatGPT ni ninguna otra IA.</p>\n<h2 id=\"sign-in\">Iniciar sesión o continuar como invitado</h2>\n<ul><li>Inicia sesión con tu correo o con Google. El inicio de sesión se hace de forma segura en tu navegador y después Codevalanche se abre de nuevo.</li><li>O continúa como invitado y usa la app sin cuenta.</li><li>La sesión funciona sin conexión hasta 30 días; después la app te pide iniciar sesión de nuevo. No se pierde nada.</li></ul>\n<h2 id=\"manage\">Gestionarla</h2>\n<p>En el sitio web, <a href=\"/account/\">tu cuenta</a> muestra tu perfil y tus sesiones iniciadas (y te permite cerrarlas), y te permite eliminar la cuenta.</p>\n<h2 id=\"data\">Qué guarda la cuenta</h2>\n<p>Tu dirección de correo, tu nombre visible, una biografía corta opcional y el método de inicio de sesión. Nunca tus prompts, conversaciones, código ni claves. Consulta <a href=\"/docs/privacy/\">A dónde va tu código</a>.</p>"
+}

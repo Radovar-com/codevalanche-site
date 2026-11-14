@@ -1,0 +1,8 @@
+{
+  "source": "64a7656d8af022b8",
+  "nav": "사용 한도",
+  "title": "사용 한도",
+  "seoTitle": "Claude Code와 Codex 사용 한도 확인하기",
+  "description": "Codex와 Claude Code 요금제가 얼마나 남았고 언제 초기화되는지 확인하고, 한도가 얼마 남지 않으면 경고를 받고, 초기화 후 작업이 이어지게 하세요.",
+  "body": "<p>구독에는 보통 5시간 단위 한도와 주간 한도가 있습니다. Codevalanche는 사용자의 로그인으로 공식 앱에서 한도를 읽어 한곳에 보여 줍니다.</p>\n<h2 id=\"where\">확인할 수 있는 곳</h2>\n<p><span class=\"ui-term\">설정</span> › 한도에는 <em>Codex와 Claude Code 요금제의 남은 양</em>이 표시됩니다. 각 기간별로 남은 비율과 초기화 시각이 사용자의 시간대로 나옵니다. 각 값에는 확인한 시점이 표시되며, 오래된 값에는 “최신이 아닐 수 있음”이라고 표시됩니다.</p>\n<ul><li>Claude Code는 작업하는 동안에만 한도를 알려 주므로 첫 메시지를 보낸 뒤에 표시됩니다.</li><li>Codex 한도는 내 AI에서 Codex에 로그인하면 표시됩니다.</li><li>다른 AI(Z.ai, Kimi, Gemini, Grok Build)는 한도를 다른 앱과 공유하지 않습니다. Codevalanche는 제공업체가 요금제에 대해 게시한 내용을 보여 주고 해당 사용량 페이지로 연결합니다.</li></ul>\n<h2 id=\"warnings\">경고</h2>\n<p>한도가 얼마 남지 않으면 “5시간 한도의 20%가 남았습니다. 오늘 17:40에 초기화됩니다.” 같은 경고가 표시됩니다. 곧 만료되는 저장된 Codex 초기화도 알려 줍니다.</p>\n<h2 id=\"saved-resets\">저장된 Codex 초기화</h2>\n<p>일부 Codex 요금제에는 저장된 초기화가 포함됩니다. 각각을 사용하면 한도가 가득 찬 상태로 돌아옵니다. 만료되는 날짜와 함께 나열됩니다. 언제 사용할지는 사용자가 정하며, Codevalanche가 대신 사용하는 일은 없습니다.</p>\n<h2 id=\"when-reached\">한도에 도달하면</h2>\n<p>한도에 도달한 작업에는 <span class=\"ui-term\">한도 대기 중</span>이 표시되며, 설정이 켜져 있으면 한도가 초기화될 때 스스로 계속됩니다. 코디네이터의 에이전트에서는 <span class=\"ui-term\">한도가 초기화되면 스스로 계속하기</span>가 이에 해당하며, <a href=\"/docs/projects/settings/\">프로젝트 설정</a>에 있습니다.</p>\n<div class=\"docs-callout tip\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z\"/></svg><p>다른 계정이나 모델로 바로 계속할 수도 있습니다. 이는 언제나 사용자의 선택이며, Codevalanche는 몰래 계정을 바꾸지 않습니다.</p></div>"
+}

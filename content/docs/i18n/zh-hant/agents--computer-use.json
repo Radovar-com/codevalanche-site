@@ -1,0 +1,8 @@
+{
+  "source": "43c5b79720c72f5e",
+  "nav": "電腦操作",
+  "title": "電腦操作",
+  "seoTitle": "電腦操作：讓智慧體查看並使用你電腦上的應用程式",
+  "description": "讓智慧體查看並使用你核准的應用程式視窗。每個應用程式都會先詢問；瀏覽器僅供檢視，終端機僅可點擊。",
+  "body": "<p>透過電腦操作，智慧體可以查看並控制你核准的應用程式視窗，例如用來確認你的應用程式確實能正常運作。</p>\n<h2 id=\"how\">詢問的方式</h2>\n<p>智慧體第一次想使用某個應用程式時，會在對話中詢問：「要讓智慧體使用 …嗎？」。如果你允許，在任務結束前，它就能查看該應用程式，並在其中點擊與輸入。</p>\n<div class=\"docs-table-wrap\"><table class=\"docs-table\"><thead><tr><th>應用程式</th><th>智慧體可以做的事</th></tr></thead><tbody><tr><td>大多數應用程式</td><td>智慧體可以查看、點擊與輸入。</td></tr><tr><td>瀏覽器</td><td>僅供檢視：可以查看該應用程式，但不能在其中點擊或輸入。</td></tr><tr><td>終端機與程式碼編輯器</td><td>僅可點擊：可以查看與點擊，但不能輸入。</td></tr></tbody></table></div>\n<div class=\"docs-callout warn\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 3 2 20h20zM12 10v4M12 17h.01\"/></svg><p>隨時按 <kbd class=\"docs-kbd\">Esc</kbd> 即可停止。</p></div>\n<h2 id=\"rules\">一律允許與已拒絕的應用程式</h2>\n<p>「設定 › 電腦操作」會列出你一律允許的應用程式與你拒絕的應用程式。移除某項規則後，智慧體下次會再次詢問你。</p>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>Gemini CLI 不提供電腦操作。</p></div>"
+}

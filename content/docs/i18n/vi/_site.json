@@ -1,0 +1,31 @@
+{
+  "source": "be4eeff5af399f0b",
+  "sections": {
+    "Getting started": "Bắt đầu",
+    "Your AIs": "AI của bạn",
+    "Local models": "Các mô hình cục bộ",
+    "Projects": "Dự án",
+    "Working with agents": "Làm việc với tác nhân",
+    "The app": "Ứng dụng",
+    "Privacy and security": "Quyền riêng tư và bảo mật",
+    "Troubleshooting": "Khắc phục sự cố"
+  },
+  "chrome": {
+    "Docs": "Tài liệu",
+    "Codevalanche Docs": "Tài liệu Codevalanche",
+    "Documentation": "Tài liệu",
+    "Search the docs": "Tìm trong tài liệu",
+    "Search the docs…": "Tìm trong tài liệu…",
+    "No matching page.": "Không có trang phù hợp.",
+    "All documentation": "Toàn bộ tài liệu",
+    "On this page": "Trên trang này",
+    "Previous": "Trước",
+    "Next": "Tiếp theo",
+    "Docs home": "Trang chủ tài liệu",
+    "Previous and next page": "Trang trước và trang sau",
+    "{n} min read": "{n} phút đọc",
+    "Windows": "Windows",
+    "Skip to content": "Chuyển đến nội dung",
+    "The Codevalanche logo.": "Logo Codevalanche."
+  }
+}

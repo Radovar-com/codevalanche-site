@@ -1,0 +1,8 @@
+{
+  "source": "6e937c60e8b4680f",
+  "nav": "Importar conversas",
+  "title": "Importe conversas de outros apps de IA",
+  "seoTitle": "Importe conversas do Claude Code, do Codex e do ChatGPT",
+  "description": "Traga para o Codevalanche as conversas de outros apps de IA no seu PC, ou de uma exportação do ChatGPT, e mantenha tudo sincronizado.",
+  "body": "<p><span class=\"ui-term\">Trazer conversas de outros aplicativos AI</span> em Configurações encontra apps de IA neste PC cujas conversas podem ser importadas.</p>\n<h2 id=\"apps\">De apps neste PC</h2>\n<ol class=\"docs-steps\"><li><strong>Abra as configurações de importação.</strong> O Codevalanche lista os apps que encontrou.</li><li><strong>Escolha o que importar.</strong></li><li><strong>Manter sincronizado (opcional).</strong> Enquanto o Codevalanche está em execução, ele importa conversas novas desses apps pouco depois de elas aparecerem.</li></ol>\n<h2 id=\"chatgpt\">Do ChatGPT</h2>\n<ol class=\"docs-steps\"><li><strong>Exporte os seus dados</strong> nas configurações do ChatGPT.</li><li><strong>Aponte o Codevalanche para a exportação:</strong> o arquivo <code>conversations.json</code> ou o <code>.zip</code> da exportação.</li></ol>\n<div class=\"docs-callout note\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 8h.01M11 12h1v5h1\"/></svg><p>Continuar uma conversa importada preserva as suas alterações locais; quando necessário, ela continua em uma nova conversa.</p></div>"
+}
