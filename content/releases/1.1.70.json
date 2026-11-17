@@ -1,0 +1,652 @@
+{
+  "version": "1.1.70",
+  "date": "2026-11-17",
+  "copy": {
+    "en": {
+      "headline": "Agents work side by side, and the Coordinator gets a permission level",
+      "summary": "Each agent in a project works on its own copy, the Coordinator gets the same permission chip as agents, and Stop and restarts behave the way you expect.",
+      "sections": [
+        {
+          "title": "Agents side by side",
+          "body": "In a project, the Coordinator gives each agent its own copy of the project, so agents work at the same time without waiting on each other. Their work comes back as a merge you can undo."
+        },
+        {
+          "title": "A permission level for the Coordinator",
+          "body": "The Coordinator has the same permission chip as agents, with each AI's own level names. On a level that asks, a push asks you first. On full access it goes through."
+        },
+        {
+          "title": "Stop that stops",
+          "body": "Stop on the Coordinator or an agent no longer stays stuck on Canceling."
+        },
+        {
+          "title": "Picks up after a restart",
+          "body": "After the app restarts, interrupted work picks up by itself, and an agent you stopped stays stopped."
+        },
+        {
+          "title": "Checks that run on Windows",
+          "body": "Checks the Coordinator runs on Windows now use Git Bash, like the Coordinator itself. Checks written for cmd still run in cmd."
+        },
+        {
+          "title": "Agents get the right context",
+          "body": "Your rows in a project's MEMORY.md reach the agents, dated rows included. An agent working in a repository inside a larger project folder now starts in the right folder."
+        },
+        {
+          "title": "Clearer agent status",
+          "body": "Queued agents say what they wait for, and the agents log lists the files each turn changed."
+        },
+        {
+          "title": "A calmer, more even look",
+          "body": "One size scale across the app, so rows, tabs, titles and small text line up everywhere. In the Coordinator's conversation, agent reports fold into one line with a short summary. The web engine inside the app also has a security update."
+        }
+      ]
+    },
+    "ar": {
+      "headline": "الوكلاء يعملون جنبًا إلى جنب، وللمنسّق مستوى أذونات",
+      "summary": "يعمل كل وكيل في المشروع على نسخته الخاصة، وأصبح للمنسّق مفتاح الأذونات نفسه الذي للوكلاء، ويعمل الإيقاف وإعادة التشغيل كما تتوقع.",
+      "sections": [
+        {
+          "title": "وكلاء جنبًا إلى جنب",
+          "body": "في المشروع، يعطي المنسّق كل وكيل نسخته الخاصة من المشروع، فيعمل الوكلاء في الوقت نفسه دون أن ينتظر أحدهم الآخر. ويعود عملهم كدمج يمكنك التراجع عنه."
+        },
+        {
+          "title": "مستوى أذونات للمنسّق",
+          "body": "للمنسّق مفتاح الأذونات نفسه الذي للوكلاء، بأسماء المستويات الخاصة بكل نظام ذكاء اصطناعي. في مستوى يطلب التأكيد، يسألك الـ push أولًا. وفي الوصول الكامل يتم مباشرة."
+        },
+        {
+          "title": "إيقاف يوقف فعلًا",
+          "body": "لم يعد الإيقاف على المنسّق أو على وكيل يعلق عند «جارٍ الإلغاء»."
+        },
+        {
+          "title": "يستأنف بعد إعادة التشغيل",
+          "body": "بعد إعادة تشغيل التطبيق، يستأنف العمل المتوقف من تلقاء نفسه، ويبقى الوكيل الذي أوقفته متوقفًا."
+        },
+        {
+          "title": "فحوص تعمل على Windows",
+          "body": "الفحوص التي يشغّلها المنسّق على Windows تستخدم الآن Git Bash، مثل المنسّق نفسه. أما الفحوص المكتوبة لـ cmd فتظل تعمل في cmd."
+        },
+        {
+          "title": "الوكلاء يحصلون على السياق الصحيح",
+          "body": "تصل أسطرك في ملف MEMORY.md الخاص بالمشروع إلى الوكلاء، بما فيها الأسطر المؤرخة. والوكيل الذي يعمل في مستودع داخل مجلد مشروع أكبر يبدأ الآن في المجلد الصحيح."
+        },
+        {
+          "title": "حالة أوضح للوكلاء",
+          "body": "الوكلاء في قائمة الانتظار يقولون ما الذي ينتظرونه، وسجل الوكلاء يعرض الملفات التي غيّرتها كل جولة."
+        },
+        {
+          "title": "مظهر أهدأ وأكثر اتساقًا",
+          "body": "مقياس أحجام واحد في التطبيق كله، فتتناسق الصفوف وعلامات التبويب والعناوين والنص الصغير في كل مكان. وفي محادثة المنسّق، تُطوى تقارير الوكلاء في سطر واحد مع ملخص قصير. كما حصل محرك الويب داخل التطبيق على تحديث أمني."
+        }
+      ]
+    },
+    "de": {
+      "headline": "Agenten arbeiten parallel, und der Koordinator bekommt eine Berechtigungsstufe",
+      "summary": "Jeder Agent in einem Projekt arbeitet an seiner eigenen Kopie, der Koordinator bekommt denselben Berechtigungs-Chip wie Agenten, und Stopp und Neustarts verhalten sich so, wie du es erwartest.",
+      "sections": [
+        {
+          "title": "Agenten parallel",
+          "body": "In einem Projekt gibt der Koordinator jedem Agenten eine eigene Kopie des Projekts, sodass Agenten gleichzeitig arbeiten, ohne aufeinander zu warten. Ihre Arbeit kommt als Zusammenführung zurück, die du rückgängig machen kannst."
+        },
+        {
+          "title": "Eine Berechtigungsstufe für den Koordinator",
+          "body": "Der Koordinator hat denselben Berechtigungs-Chip wie Agenten, mit den Stufennamen der jeweiligen KI. Auf einer Stufe, die nachfragt, fragt ein Push dich zuerst. Bei vollem Zugriff geht er direkt durch."
+        },
+        {
+          "title": "Stopp, der stoppt",
+          "body": "Stopp beim Koordinator oder bei einem Agenten bleibt nicht mehr bei „Wird abgebrochen“ hängen."
+        },
+        {
+          "title": "Geht nach einem Neustart weiter",
+          "body": "Nach einem Neustart der App geht unterbrochene Arbeit von selbst weiter, und ein Agent, den du gestoppt hast, bleibt gestoppt."
+        },
+        {
+          "title": "Prüfungen, die unter Windows laufen",
+          "body": "Prüfungen, die der Koordinator unter Windows ausführt, nutzen jetzt Git Bash, wie der Koordinator selbst. Für cmd geschriebene Prüfungen laufen weiter in cmd."
+        },
+        {
+          "title": "Agenten bekommen den richtigen Kontext",
+          "body": "Deine Zeilen in der MEMORY.md eines Projekts erreichen die Agenten, auch Zeilen mit Datum. Ein Agent, der in einem Repository innerhalb eines größeren Projektordners arbeitet, startet jetzt im richtigen Ordner."
+        },
+        {
+          "title": "Klarerer Agentenstatus",
+          "body": "Agenten in der Warteschlange sagen, worauf sie warten, und das Agentenprotokoll listet die Dateien, die jede Runde geändert hat."
+        },
+        {
+          "title": "Ein ruhigeres, einheitlicheres Bild",
+          "body": "Eine Größenskala in der ganzen App, sodass Zeilen, Tabs, Titel und kleiner Text überall zueinander passen. Im Gespräch des Koordinators werden Agentenberichte zu einer Zeile mit kurzer Zusammenfassung. Die Web-Engine in der App hat außerdem ein Sicherheitsupdate."
+        }
+      ]
+    },
+    "es": {
+      "headline": "Los agentes trabajan en paralelo y el Coordinador tiene un nivel de permisos",
+      "summary": "Cada agente de un proyecto trabaja en su propia copia, el Coordinador tiene el mismo selector de permisos que los agentes, y Detener y los reinicios funcionan como esperas.",
+      "sections": [
+        {
+          "title": "Agentes en paralelo",
+          "body": "En un proyecto, el Coordinador da a cada agente su propia copia del proyecto, así los agentes trabajan a la vez sin esperarse. Su trabajo vuelve como una fusión que puedes deshacer."
+        },
+        {
+          "title": "Un nivel de permisos para el Coordinador",
+          "body": "El Coordinador tiene el mismo selector de permisos que los agentes, con los nombres de nivel de cada IA. En un nivel que pregunta, un push te pregunta primero. Con acceso completo, se hace directamente."
+        },
+        {
+          "title": "Detener que detiene",
+          "body": "Detener en el Coordinador o en un agente ya no se queda atascado en Cancelando."
+        },
+        {
+          "title": "Continúa tras un reinicio",
+          "body": "Después de reiniciar la app, el trabajo interrumpido continúa solo, y un agente que detuviste sigue detenido."
+        },
+        {
+          "title": "Comprobaciones que funcionan en Windows",
+          "body": "Las comprobaciones que el Coordinador ejecuta en Windows ahora usan Git Bash, como el propio Coordinador. Las comprobaciones escritas para cmd siguen ejecutándose en cmd."
+        },
+        {
+          "title": "Los agentes reciben el contexto correcto",
+          "body": "Tus filas en el MEMORY.md de un proyecto llegan a los agentes, también las que llevan fecha. Un agente que trabaja en un repositorio dentro de una carpeta de proyecto más grande ahora empieza en la carpeta correcta."
+        },
+        {
+          "title": "Estado de los agentes más claro",
+          "body": "Los agentes en cola dicen qué esperan, y el registro de agentes lista los archivos que cambió cada turno."
+        },
+        {
+          "title": "Un aspecto más tranquilo y uniforme",
+          "body": "Una sola escala de tamaños en toda la app: filas, pestañas, títulos y texto pequeño se alinean en todas partes. En la conversación del Coordinador, los informes de los agentes se pliegan en una línea con un breve resumen. El motor web de la app también recibe una actualización de seguridad."
+        }
+      ]
+    },
+    "fr": {
+      "headline": "Les agents travaillent en parallèle, et le Coordinateur a un niveau d'autorisations",
+      "summary": "Chaque agent d'un projet travaille sur sa propre copie, le Coordinateur a le même sélecteur d'autorisations que les agents, et Arrêter et les redémarrages se comportent comme prévu.",
+      "sections": [
+        {
+          "title": "Agents en parallèle",
+          "body": "Dans un projet, le Coordinateur donne à chaque agent sa propre copie du projet, pour que les agents travaillent en même temps sans s'attendre. Leur travail revient sous forme de fusion que vous pouvez annuler."
+        },
+        {
+          "title": "Un niveau d'autorisations pour le Coordinateur",
+          "body": "Le Coordinateur a le même sélecteur d'autorisations que les agents, avec les noms de niveaux propres à chaque IA. Sur un niveau qui demande, un push vous demande d'abord. En accès complet, il passe directement."
+        },
+        {
+          "title": "Un arrêt qui arrête",
+          "body": "Arrêter sur le Coordinateur ou sur un agent ne reste plus bloqué sur Annulation."
+        },
+        {
+          "title": "Reprend après un redémarrage",
+          "body": "Après le redémarrage de l'app, le travail interrompu reprend tout seul, et un agent que vous avez arrêté reste arrêté."
+        },
+        {
+          "title": "Des vérifications qui tournent sous Windows",
+          "body": "Les vérifications que le Coordinateur lance sous Windows utilisent désormais Git Bash, comme le Coordinateur lui-même. Les vérifications écrites pour cmd tournent toujours dans cmd."
+        },
+        {
+          "title": "Les agents reçoivent le bon contexte",
+          "body": "Vos lignes dans le MEMORY.md d'un projet parviennent aux agents, y compris les lignes datées. Un agent qui travaille dans un dépôt situé dans un dossier de projet plus grand démarre maintenant dans le bon dossier."
+        },
+        {
+          "title": "Un statut des agents plus clair",
+          "body": "Les agents en file d'attente disent ce qu'ils attendent, et le journal des agents liste les fichiers modifiés à chaque tour."
+        },
+        {
+          "title": "Un aspect plus calme et plus homogène",
+          "body": "Une seule échelle de tailles dans toute l'app : lignes, onglets, titres et petits textes s'alignent partout. Dans la conversation du Coordinateur, les rapports des agents se replient en une ligne avec un court résumé. Le moteur web intégré à l'app reçoit aussi une mise à jour de sécurité."
+        }
+      ]
+    },
+    "hi": {
+      "headline": "एजेंट साथ-साथ काम करते हैं, और कोऑर्डिनेटर को अनुमति स्तर मिला",
+      "summary": "प्रोजेक्ट का हर एजेंट अपनी अलग कॉपी पर काम करता है, कोऑर्डिनेटर को एजेंटों जैसी ही अनुमति चिप मिली है, और रोकना व रीस्टार्ट वैसे ही चलते हैं जैसी आप उम्मीद करते हैं।",
+      "sections": [
+        {
+          "title": "साथ-साथ एजेंट",
+          "body": "किसी प्रोजेक्ट में कोऑर्डिनेटर हर एजेंट को प्रोजेक्ट की अपनी कॉपी देता है, ताकि एजेंट एक-दूसरे का इंतज़ार किए बिना एक साथ काम करें। उनका काम एक ऐसे मर्ज के रूप में लौटता है जिसे आप वापस ले सकते हैं।"
+        },
+        {
+          "title": "कोऑर्डिनेटर के लिए अनुमति स्तर",
+          "body": "कोऑर्डिनेटर के पास एजेंटों जैसी ही अनुमति चिप है, हर AI के अपने स्तर-नामों के साथ। पूछने वाले स्तर पर push पहले आपसे पूछता है। पूरी पहुँच पर वह सीधे हो जाता है।"
+        },
+        {
+          "title": "सच में रुकने वाला Stop",
+          "body": "कोऑर्डिनेटर या किसी एजेंट पर Stop अब “रद्द हो रहा है” पर अटका नहीं रहता।"
+        },
+        {
+          "title": "रीस्टार्ट के बाद जारी",
+          "body": "ऐप रीस्टार्ट होने के बाद रुका हुआ काम अपने आप जारी होता है, और जिस एजेंट को आपने रोका वह रुका ही रहता है।"
+        },
+        {
+          "title": "Windows पर चलने वाली जाँचें",
+          "body": "कोऑर्डिनेटर Windows पर जो जाँचें चलाता है, वे अब कोऑर्डिनेटर की तरह ही Git Bash इस्तेमाल करती हैं। cmd के लिए लिखी जाँचें अब भी cmd में चलती हैं।"
+        },
+        {
+          "title": "एजेंटों को सही संदर्भ मिलता है",
+          "body": "प्रोजेक्ट की MEMORY.md में आपकी पंक्तियाँ, तारीख वाली पंक्तियों समेत, एजेंटों तक पहुँचती हैं। किसी बड़े प्रोजेक्ट फ़ोल्डर के अंदर की रिपॉज़िटरी में काम करने वाला एजेंट अब सही फ़ोल्डर में शुरू होता है।"
+        },
+        {
+          "title": "एजेंट की स्थिति ज़्यादा साफ़",
+          "body": "कतार में लगे एजेंट बताते हैं कि वे किसका इंतज़ार कर रहे हैं, और एजेंट लॉग हर टर्न में बदली गई फ़ाइलें दिखाता है।"
+        },
+        {
+          "title": "ज़्यादा शांत, ज़्यादा एकसार रूप",
+          "body": "पूरे ऐप में एक ही आकार पैमाना, ताकि पंक्तियाँ, टैब, शीर्षक और छोटा टेक्स्ट हर जगह मेल खाएँ। कोऑर्डिनेटर की बातचीत में एजेंटों की रिपोर्ट एक छोटे सारांश के साथ एक पंक्ति में सिमट जाती हैं। ऐप के अंदर के वेब इंजन को सुरक्षा अपडेट भी मिला है।"
+        }
+      ]
+    },
+    "id": {
+      "headline": "Agen bekerja berdampingan, dan Koordinator punya tingkat izin",
+      "summary": "Setiap agen dalam proyek bekerja di salinannya sendiri, Koordinator punya pemilih izin yang sama dengan agen, serta Hentikan dan mulai ulang berjalan seperti yang Anda harapkan.",
+      "sections": [
+        {
+          "title": "Agen berdampingan",
+          "body": "Dalam proyek, Koordinator memberi setiap agen salinan proyeknya sendiri, sehingga agen bekerja bersamaan tanpa saling menunggu. Hasil kerja mereka kembali sebagai penggabungan yang bisa Anda batalkan."
+        },
+        {
+          "title": "Tingkat izin untuk Koordinator",
+          "body": "Koordinator punya pemilih izin yang sama dengan agen, dengan nama tingkat milik masing-masing AI. Pada tingkat yang bertanya, push akan menanyakan Anda dulu. Dengan akses penuh, push langsung berjalan."
+        },
+        {
+          "title": "Hentikan yang benar-benar berhenti",
+          "body": "Hentikan pada Koordinator atau agen tidak lagi tertahan di Membatalkan."
+        },
+        {
+          "title": "Lanjut setelah mulai ulang",
+          "body": "Setelah aplikasi dimulai ulang, pekerjaan yang terputus lanjut dengan sendirinya, dan agen yang Anda hentikan tetap berhenti."
+        },
+        {
+          "title": "Pemeriksaan yang berjalan di Windows",
+          "body": "Pemeriksaan yang dijalankan Koordinator di Windows kini memakai Git Bash, sama seperti Koordinator itu sendiri. Pemeriksaan yang ditulis untuk cmd tetap berjalan di cmd."
+        },
+        {
+          "title": "Agen mendapat konteks yang tepat",
+          "body": "Baris Anda di MEMORY.md sebuah proyek sampai ke agen, termasuk baris bertanggal. Agen yang bekerja di repositori di dalam folder proyek yang lebih besar kini mulai di folder yang benar."
+        },
+        {
+          "title": "Status agen lebih jelas",
+          "body": "Agen dalam antrean menyebutkan apa yang mereka tunggu, dan log agen mencantumkan file yang diubah di setiap giliran."
+        },
+        {
+          "title": "Tampilan lebih tenang dan seragam",
+          "body": "Satu skala ukuran di seluruh aplikasi, sehingga baris, tab, judul, dan teks kecil selaras di mana-mana. Di percakapan Koordinator, laporan agen dilipat menjadi satu baris dengan ringkasan singkat. Mesin web di dalam aplikasi juga mendapat pembaruan keamanan."
+        }
+      ]
+    },
+    "it": {
+      "headline": "Gli agenti lavorano in parallelo e il Coordinatore ha un livello di autorizzazioni",
+      "summary": "Ogni agente di un progetto lavora sulla propria copia, il Coordinatore ha lo stesso selettore di autorizzazioni degli agenti, e Interrompi e i riavvii si comportano come ti aspetti.",
+      "sections": [
+        {
+          "title": "Agenti in parallelo",
+          "body": "In un progetto, il Coordinatore dà a ogni agente la propria copia del progetto, così gli agenti lavorano insieme senza aspettarsi a vicenda. Il loro lavoro torna come un'unione che puoi annullare."
+        },
+        {
+          "title": "Un livello di autorizzazioni per il Coordinatore",
+          "body": "Il Coordinatore ha lo stesso selettore di autorizzazioni degli agenti, con i nomi dei livelli di ciascuna IA. Su un livello che chiede, un push ti chiede prima conferma. Con accesso completo, procede direttamente."
+        },
+        {
+          "title": "Interrompi che interrompe",
+          "body": "Interrompi sul Coordinatore o su un agente non resta più bloccato su Annullamento."
+        },
+        {
+          "title": "Riprende dopo un riavvio",
+          "body": "Dopo il riavvio dell'app, il lavoro interrotto riprende da solo, e un agente che hai fermato resta fermo."
+        },
+        {
+          "title": "Controlli che funzionano su Windows",
+          "body": "I controlli che il Coordinatore esegue su Windows ora usano Git Bash, come il Coordinatore stesso. I controlli scritti per cmd continuano a funzionare in cmd."
+        },
+        {
+          "title": "Gli agenti ricevono il contesto giusto",
+          "body": "Le tue righe nel MEMORY.md di un progetto arrivano agli agenti, anche quelle con data. Un agente che lavora in un repository dentro una cartella di progetto più grande ora parte nella cartella giusta."
+        },
+        {
+          "title": "Stato degli agenti più chiaro",
+          "body": "Gli agenti in coda dicono cosa stanno aspettando, e il registro degli agenti elenca i file modificati a ogni turno."
+        },
+        {
+          "title": "Un aspetto più calmo e uniforme",
+          "body": "Un'unica scala di dimensioni in tutta l'app: righe, schede, titoli e testo piccolo si allineano ovunque. Nella conversazione del Coordinatore, i resoconti degli agenti si raccolgono in una riga con un breve riepilogo. Anche il motore web dell'app riceve un aggiornamento di sicurezza."
+        }
+      ]
+    },
+    "ja": {
+      "headline": "エージェントが並行して作業し、コーディネーターに権限レベルが追加",
+      "summary": "プロジェクトの各エージェントが自分専用のコピーで作業し、コーディネーターにもエージェントと同じ権限チップが付き、停止と再起動が期待どおりに動作します。",
+      "sections": [
+        {
+          "title": "並行して動くエージェント",
+          "body": "プロジェクトでは、コーディネーターが各エージェントにプロジェクトの専用コピーを渡すため、エージェントは互いを待たずに同時に作業できます。作業結果は元に戻せるマージとして戻ってきます。"
+        },
+        {
+          "title": "コーディネーターの権限レベル",
+          "body": "コーディネーターにもエージェントと同じ権限チップが付き、各 AI 独自のレベル名が使われます。確認を求めるレベルでは、push の前にまず確認します。フルアクセスではそのまま実行されます。"
+        },
+        {
+          "title": "確実に止まる停止",
+          "body": "コーディネーターやエージェントの停止が「キャンセル中」のまま止まらなくなりました。"
+        },
+        {
+          "title": "再起動後も続行",
+          "body": "アプリの再起動後、中断された作業は自動で続行し、停止したエージェントは停止したままになります。"
+        },
+        {
+          "title": "Windows で動くチェック",
+          "body": "コーディネーターが Windows で実行するチェックは、コーディネーター自身と同じく Git Bash を使うようになりました。cmd 用に書かれたチェックは引き続き cmd で実行されます。"
+        },
+        {
+          "title": "エージェントに正しいコンテキスト",
+          "body": "プロジェクトの MEMORY.md に書いたあなたの行は、日付付きの行も含めてエージェントに届きます。大きなプロジェクトフォルダー内のリポジトリで作業するエージェントは、正しいフォルダーで開始するようになりました。"
+        },
+        {
+          "title": "わかりやすいエージェントの状態",
+          "body": "待機中のエージェントは何を待っているかを表示し、エージェントのログには各ターンで変更されたファイルが一覧表示されます。"
+        },
+        {
+          "title": "より落ち着いた統一感のある見た目",
+          "body": "アプリ全体で 1 つのサイズスケールを使い、行、タブ、タイトル、小さな文字がどこでも揃います。コーディネーターの会話では、エージェントの報告が短い要約付きの 1 行にまとまります。アプリ内の Web エンジンにもセキュリティ更新が入っています。"
+        }
+      ]
+    },
+    "ko": {
+      "headline": "에이전트가 나란히 작업하고, 코디네이터에 권한 수준이 생겼습니다",
+      "summary": "프로젝트의 각 에이전트가 자신만의 사본에서 작업하고, 코디네이터에 에이전트와 같은 권한 칩이 생겼으며, 중지와 재시작이 예상대로 동작합니다.",
+      "sections": [
+        {
+          "title": "나란히 일하는 에이전트",
+          "body": "프로젝트에서 코디네이터가 각 에이전트에게 프로젝트의 자체 사본을 주므로, 에이전트들이 서로 기다리지 않고 동시에 작업합니다. 작업 결과는 되돌릴 수 있는 병합으로 돌아옵니다."
+        },
+        {
+          "title": "코디네이터의 권한 수준",
+          "body": "코디네이터에도 에이전트와 같은 권한 칩이 있으며, 각 AI 고유의 수준 이름을 씁니다. 확인을 묻는 수준에서는 push 전에 먼저 묻습니다. 전체 액세스에서는 바로 진행됩니다."
+        },
+        {
+          "title": "확실히 멈추는 중지",
+          "body": "코디네이터나 에이전트의 중지가 더 이상 '취소 중'에 멈춰 있지 않습니다."
+        },
+        {
+          "title": "재시작 후에도 이어서",
+          "body": "앱이 다시 시작되면 중단된 작업이 저절로 이어지고, 중지한 에이전트는 계속 중지된 상태로 남습니다."
+        },
+        {
+          "title": "Windows에서 실행되는 검사",
+          "body": "코디네이터가 Windows에서 실행하는 검사는 이제 코디네이터 자체처럼 Git Bash를 사용합니다. cmd용으로 작성된 검사는 계속 cmd에서 실행됩니다."
+        },
+        {
+          "title": "에이전트가 올바른 맥락을 받습니다",
+          "body": "프로젝트의 MEMORY.md에 적은 내 행이 날짜가 있는 행까지 포함해 에이전트에게 전달됩니다. 더 큰 프로젝트 폴더 안의 저장소에서 일하는 에이전트가 이제 올바른 폴더에서 시작합니다."
+        },
+        {
+          "title": "더 명확한 에이전트 상태",
+          "body": "대기 중인 에이전트는 무엇을 기다리는지 알려 주고, 에이전트 로그에는 각 턴에서 변경된 파일이 표시됩니다."
+        },
+        {
+          "title": "더 차분하고 고른 화면",
+          "body": "앱 전체에 하나의 크기 체계를 적용해 행, 탭, 제목, 작은 글자가 어디서나 맞춰집니다. 코디네이터 대화에서는 에이전트 보고가 짧은 요약과 함께 한 줄로 접힙니다. 앱 안의 웹 엔진도 보안 업데이트를 받았습니다."
+        }
+      ]
+    },
+    "pt-BR": {
+      "headline": "Os agentes trabalham em paralelo e o Coordenador ganha um nível de permissões",
+      "summary": "Cada agente de um projeto trabalha na própria cópia, o Coordenador tem o mesmo seletor de permissões dos agentes, e Parar e as reinicializações funcionam como você espera.",
+      "sections": [
+        {
+          "title": "Agentes em paralelo",
+          "body": "Em um projeto, o Coordenador dá a cada agente sua própria cópia do projeto, então os agentes trabalham ao mesmo tempo sem esperar uns pelos outros. O trabalho deles volta como uma mesclagem que você pode desfazer."
+        },
+        {
+          "title": "Um nível de permissões para o Coordenador",
+          "body": "O Coordenador tem o mesmo seletor de permissões dos agentes, com os nomes de nível de cada IA. Em um nível que pergunta, um push pergunta a você primeiro. Com acesso total, ele segue direto."
+        },
+        {
+          "title": "Parar que para",
+          "body": "Parar no Coordenador ou em um agente não fica mais preso em Cancelando."
+        },
+        {
+          "title": "Continua após reiniciar",
+          "body": "Depois que o app reinicia, o trabalho interrompido continua sozinho, e um agente que você parou continua parado."
+        },
+        {
+          "title": "Verificações que rodam no Windows",
+          "body": "As verificações que o Coordenador executa no Windows agora usam o Git Bash, como o próprio Coordenador. Verificações escritas para cmd continuam rodando no cmd."
+        },
+        {
+          "title": "Os agentes recebem o contexto certo",
+          "body": "Suas linhas no MEMORY.md de um projeto chegam aos agentes, inclusive as datadas. Um agente que trabalha em um repositório dentro de uma pasta de projeto maior agora começa na pasta certa."
+        },
+        {
+          "title": "Status dos agentes mais claro",
+          "body": "Agentes na fila dizem o que estão esperando, e o registro de agentes lista os arquivos que cada turno alterou."
+        },
+        {
+          "title": "Um visual mais calmo e uniforme",
+          "body": "Uma única escala de tamanhos em todo o app: linhas, abas, títulos e texto pequeno se alinham em todo lugar. Na conversa do Coordenador, os relatórios dos agentes viram uma linha com um breve resumo. O mecanismo web do app também recebeu uma atualização de segurança."
+        }
+      ]
+    },
+    "ro": {
+      "headline": "Agenții lucrează în paralel, iar Coordonatorul are un nivel de permisiuni",
+      "summary": "Fiecare agent dintr-un proiect lucrează pe propria copie, Coordonatorul are același selector de permisiuni ca agenții, iar Stop și repornirile se comportă cum te aștepți.",
+      "sections": [
+        {
+          "title": "Agenți în paralel",
+          "body": "Într-un proiect, Coordonatorul dă fiecărui agent propria copie a proiectului, așa că agenții lucrează în același timp, fără să se aștepte unii pe alții. Munca lor revine ca o îmbinare pe care o poți anula."
+        },
+        {
+          "title": "Un nivel de permisiuni pentru Coordonator",
+          "body": "Coordonatorul are același selector de permisiuni ca agenții, cu numele de niveluri ale fiecărui AI. Pe un nivel care întreabă, un push te întreabă mai întâi. Pe acces complet, trece direct."
+        },
+        {
+          "title": "Stop care oprește",
+          "body": "Stop pe Coordonator sau pe un agent nu mai rămâne blocat la Se anulează."
+        },
+        {
+          "title": "Continuă după repornire",
+          "body": "După ce aplicația repornește, munca întreruptă continuă singură, iar un agent pe care l-ai oprit rămâne oprit."
+        },
+        {
+          "title": "Verificări care rulează pe Windows",
+          "body": "Verificările pe care Coordonatorul le rulează pe Windows folosesc acum Git Bash, ca și Coordonatorul. Verificările scrise pentru cmd rulează în continuare în cmd."
+        },
+        {
+          "title": "Agenții primesc contextul potrivit",
+          "body": "Rândurile tale din MEMORY.md al unui proiect ajung la agenți, inclusiv cele cu dată. Un agent care lucrează într-un depozit aflat într-un folder de proiect mai mare pornește acum în folderul potrivit."
+        },
+        {
+          "title": "Stare mai clară a agenților",
+          "body": "Agenții din coadă spun ce așteaptă, iar jurnalul agenților arată fișierele schimbate la fiecare tură."
+        },
+        {
+          "title": "Un aspect mai liniștit și mai uniform",
+          "body": "O singură scară de mărimi în toată aplicația: rândurile, taburile, titlurile și textul mic se aliniază peste tot. În conversația Coordonatorului, rapoartele agenților se strâng într-un rând, cu un rezumat scurt. Motorul web din aplicație are și o actualizare de securitate."
+        }
+      ]
+    },
+    "ru": {
+      "headline": "Агенты работают параллельно, а у Координатора появился уровень разрешений",
+      "summary": "Каждый агент в проекте работает со своей копией, у Координатора тот же переключатель разрешений, что и у агентов, а Остановка и перезапуски работают так, как вы ожидаете.",
+      "sections": [
+        {
+          "title": "Агенты параллельно",
+          "body": "В проекте Координатор даёт каждому агенту собственную копию проекта, поэтому агенты работают одновременно и не ждут друг друга. Их работа возвращается в виде слияния, которое можно отменить."
+        },
+        {
+          "title": "Уровень разрешений для Координатора",
+          "body": "У Координатора тот же переключатель разрешений, что и у агентов, с названиями уровней каждого ИИ. На уровне с подтверждением push сначала спрашивает вас. При полном доступе он выполняется сразу."
+        },
+        {
+          "title": "Остановка, которая останавливает",
+          "body": "Остановка Координатора или агента больше не зависает на «Отмена»."
+        },
+        {
+          "title": "Продолжение после перезапуска",
+          "body": "После перезапуска приложения прерванная работа продолжается сама, а остановленный вами агент остаётся остановленным."
+        },
+        {
+          "title": "Проверки, которые работают в Windows",
+          "body": "Проверки, которые Координатор запускает в Windows, теперь используют Git Bash, как и сам Координатор. Проверки, написанные для cmd, по-прежнему выполняются в cmd."
+        },
+        {
+          "title": "Агенты получают нужный контекст",
+          "body": "Ваши строки в MEMORY.md проекта доходят до агентов, включая строки с датой. Агент, работающий в репозитории внутри более крупной папки проекта, теперь запускается в правильной папке."
+        },
+        {
+          "title": "Понятнее состояние агентов",
+          "body": "Агенты в очереди сообщают, чего ждут, а журнал агентов показывает файлы, изменённые на каждом ходе."
+        },
+        {
+          "title": "Спокойнее и ровнее",
+          "body": "Единая шкала размеров во всём приложении: строки, вкладки, заголовки и мелкий текст везде выровнены. В разговоре Координатора отчёты агентов сворачиваются в одну строку с кратким итогом. Веб-движок внутри приложения также получил обновление безопасности."
+        }
+      ]
+    },
+    "tr": {
+      "headline": "Ajanlar yan yana çalışıyor ve Koordinatörün bir izin düzeyi var",
+      "summary": "Projedeki her ajan kendi kopyasında çalışıyor, Koordinatör ajanlarla aynı izin seçicisine sahip, Durdur ve yeniden başlatmalar beklediğiniz gibi davranıyor.",
+      "sections": [
+        {
+          "title": "Yan yana ajanlar",
+          "body": "Bir projede Koordinatör her ajana projenin kendi kopyasını verir; böylece ajanlar birbirini beklemeden aynı anda çalışır. Çalışmaları, geri alabileceğiniz bir birleştirme olarak geri gelir."
+        },
+        {
+          "title": "Koordinatör için bir izin düzeyi",
+          "body": "Koordinatör, ajanlarla aynı izin seçicisine sahip ve her yapay zekânın kendi düzey adlarını kullanıyor. Soran bir düzeyde push önce size sorar. Tam erişimde doğrudan gerçekleşir."
+        },
+        {
+          "title": "Gerçekten duran Durdur",
+          "body": "Koordinatörde veya bir ajanda Durdur artık İptal ediliyor durumunda takılı kalmıyor."
+        },
+        {
+          "title": "Yeniden başlatmadan sonra devam",
+          "body": "Uygulama yeniden başladıktan sonra yarım kalan iş kendiliğinden devam eder, durdurduğunuz bir ajan da durmuş kalır."
+        },
+        {
+          "title": "Windows'ta çalışan denetimler",
+          "body": "Koordinatörün Windows'ta çalıştırdığı denetimler artık Koordinatörün kendisi gibi Git Bash kullanıyor. cmd için yazılmış denetimler yine cmd'de çalışır."
+        },
+        {
+          "title": "Ajanlar doğru bağlamı alıyor",
+          "body": "Bir projenin MEMORY.md dosyasındaki satırlarınız, tarihli satırlar dahil, ajanlara ulaşır. Daha büyük bir proje klasörünün içindeki bir depoda çalışan ajan artık doğru klasörde başlıyor."
+        },
+        {
+          "title": "Daha net ajan durumu",
+          "body": "Sıradaki ajanlar neyi beklediklerini söyler ve ajan günlüğü her turda değişen dosyaları listeler."
+        },
+        {
+          "title": "Daha sakin, daha tutarlı bir görünüm",
+          "body": "Uygulamanın tamamında tek boyut ölçeği: satırlar, sekmeler, başlıklar ve küçük metin her yerde hizalanır. Koordinatörün konuşmasında ajan raporları kısa bir özetle tek satıra katlanır. Uygulamanın içindeki web motoru da bir güvenlik güncellemesi aldı."
+        }
+      ]
+    },
+    "vi": {
+      "headline": "Các tác nhân làm việc song song, và Điều phối viên có mức quyền",
+      "summary": "Mỗi tác nhân trong dự án làm việc trên bản sao riêng, Điều phối viên có cùng nút chọn quyền như các tác nhân, còn Dừng và khởi động lại hoạt động đúng như bạn mong đợi.",
+      "sections": [
+        {
+          "title": "Tác nhân song song",
+          "body": "Trong một dự án, Điều phối viên cho mỗi tác nhân một bản sao riêng của dự án, nên các tác nhân làm việc cùng lúc mà không phải chờ nhau. Kết quả của chúng quay về dưới dạng một lần hợp nhất mà bạn có thể hoàn tác."
+        },
+        {
+          "title": "Mức quyền cho Điều phối viên",
+          "body": "Điều phối viên có cùng nút chọn quyền như các tác nhân, với tên mức riêng của từng AI. Ở mức có hỏi, một lần push sẽ hỏi bạn trước. Ở quyền truy cập đầy đủ, nó được thực hiện ngay."
+        },
+        {
+          "title": "Dừng là dừng",
+          "body": "Dừng trên Điều phối viên hoặc một tác nhân không còn bị kẹt ở Đang hủy."
+        },
+        {
+          "title": "Tiếp tục sau khi khởi động lại",
+          "body": "Sau khi ứng dụng khởi động lại, công việc bị gián đoạn tự tiếp tục, còn tác nhân bạn đã dừng vẫn ở trạng thái dừng."
+        },
+        {
+          "title": "Kiểm tra chạy được trên Windows",
+          "body": "Các kiểm tra mà Điều phối viên chạy trên Windows giờ dùng Git Bash, giống như chính Điều phối viên. Các kiểm tra viết cho cmd vẫn chạy trong cmd."
+        },
+        {
+          "title": "Tác nhân nhận đúng ngữ cảnh",
+          "body": "Các dòng của bạn trong MEMORY.md của dự án đến được với các tác nhân, kể cả các dòng có ngày. Tác nhân làm việc trong một kho mã nằm trong thư mục dự án lớn hơn giờ khởi động đúng thư mục."
+        },
+        {
+          "title": "Trạng thái tác nhân rõ ràng hơn",
+          "body": "Các tác nhân đang chờ cho biết chúng chờ gì, và nhật ký tác nhân liệt kê các tệp mà mỗi lượt đã thay đổi."
+        },
+        {
+          "title": "Giao diện nhẹ nhàng, đồng đều hơn",
+          "body": "Một thang kích thước trên toàn ứng dụng, để hàng, thẻ, tiêu đề và chữ nhỏ thẳng hàng ở mọi nơi. Trong cuộc trò chuyện của Điều phối viên, báo cáo của tác nhân gộp lại thành một dòng kèm tóm tắt ngắn. Công cụ web bên trong ứng dụng cũng có bản cập nhật bảo mật."
+        }
+      ]
+    },
+    "zh-Hans": {
+      "headline": "智能体并行工作，协调者也有了权限级别",
+      "summary": "项目中的每个智能体都在自己的副本上工作，协调者有了与智能体相同的权限标签，停止和重启也按预期运行。",
+      "sections": [
+        {
+          "title": "智能体并行工作",
+          "body": "在项目中，协调者为每个智能体提供一份独立的项目副本，因此智能体可以同时工作，不必互相等待。它们的工作会以可撤销的合并形式返回。"
+        },
+        {
+          "title": "协调者的权限级别",
+          "body": "协调者有了与智能体相同的权限标签，使用各个 AI 自己的级别名称。在需要询问的级别上，push 会先询问你。在完全访问下则直接执行。"
+        },
+        {
+          "title": "说停就停",
+          "body": "在协调者或智能体上点击停止，不会再卡在“正在取消”。"
+        },
+        {
+          "title": "重启后继续",
+          "body": "应用重启后，中断的工作会自行继续，而你停止的智能体会保持停止。"
+        },
+        {
+          "title": "在 Windows 上运行的检查",
+          "body": "协调者在 Windows 上运行的检查现在使用 Git Bash，与协调者本身一致。为 cmd 编写的检查仍在 cmd 中运行。"
+        },
+        {
+          "title": "智能体获得正确的上下文",
+          "body": "你在项目 MEMORY.md 中写的条目会传给智能体，包括带日期的条目。在较大项目文件夹内的仓库中工作的智能体，现在会在正确的文件夹中启动。"
+        },
+        {
+          "title": "更清晰的智能体状态",
+          "body": "排队中的智能体会说明在等待什么，智能体日志会列出每一轮更改的文件。"
+        },
+        {
+          "title": "更安静、更统一的外观",
+          "body": "整个应用采用同一套尺寸体系，行、标签页、标题和小字处处对齐。在协调者的对话中，智能体的报告会折叠成一行并附上简短摘要。应用内的网页引擎也获得了安全更新。"
+        }
+      ]
+    },
+    "zh-Hant": {
+      "headline": "代理並行工作，協調者也有了權限等級",
+      "summary": "專案中的每個代理都在自己的副本上工作，協調者有了與代理相同的權限標籤，停止和重新啟動也照預期運作。",
+      "sections": [
+        {
+          "title": "代理並行工作",
+          "body": "在專案中，協調者會給每個代理一份獨立的專案副本，因此代理可以同時工作，不必互相等待。它們的工作會以可復原的合併形式回來。"
+        },
+        {
+          "title": "協調者的權限等級",
+          "body": "協調者有了與代理相同的權限標籤，使用各個 AI 自己的等級名稱。在會詢問的等級上，push 會先詢問你。在完整存取下則直接執行。"
+        },
+        {
+          "title": "說停就停",
+          "body": "在協調者或代理上按下停止，不會再卡在「正在取消」。"
+        },
+        {
+          "title": "重新啟動後繼續",
+          "body": "應用程式重新啟動後，中斷的工作會自行繼續，而你停止的代理會保持停止。"
+        },
+        {
+          "title": "在 Windows 上執行的檢查",
+          "body": "協調者在 Windows 上執行的檢查現在使用 Git Bash，與協調者本身一致。為 cmd 撰寫的檢查仍在 cmd 中執行。"
+        },
+        {
+          "title": "代理取得正確的脈絡",
+          "body": "你在專案 MEMORY.md 中寫的列會傳給代理，包括有日期的列。在較大專案資料夾內的儲存庫中工作的代理，現在會在正確的資料夾中啟動。"
+        },
+        {
+          "title": "更清楚的代理狀態",
+          "body": "排隊中的代理會說明正在等待什麼，代理記錄會列出每一輪變更的檔案。"
+        },
+        {
+          "title": "更沉穩、更一致的外觀",
+          "body": "整個應用程式採用同一套尺寸系統，列、分頁、標題和小字處處對齊。在協調者的對話中，代理的報告會收合成一行並附上簡短摘要。應用程式內的網頁引擎也獲得了安全性更新。"
+        }
+      ]
+    }
+  }
+}
