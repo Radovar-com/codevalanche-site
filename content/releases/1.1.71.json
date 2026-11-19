@@ -1,0 +1,652 @@
+{
+  "version": "1.1.71",
+  "date": "2026-11-19",
+  "copy": {
+    "en": {
+      "headline": "Decisions in one place, and a hands-free voice that keeps up",
+      "summary": "Approve or decline from one Decisions list, talk hands-free with less waiting, follow long commands as they run, and rely on Stop, automations and local projects.",
+      "sections": [
+        {
+          "title": "Decisions in one place",
+          "body": "Decisions is now the main place to approve or decline what agents ask. Similar approvals can be handled together or one by one, and clicking a card opens the conversation at that exact request."
+        },
+        {
+          "title": "Tidier projects and lists",
+          "body": "In Projects, Tasks and Automations, the header stays in view while the list scrolls. Tasks and Decisions use the full width, and their cards are more compact."
+        },
+        {
+          "title": "A calmer Coordinator conversation",
+          "body": "When the Coordinator starts an agent and writes to it right away, you see it once. Reports open as a two-line preview, and text sizes and spacing match across the conversation."
+        },
+        {
+          "title": "A hands-free voice that keeps up",
+          "body": "In hands-free Talk, the first sound plays sooner, quiet interruptions are recognized, live words stay readable, and the app says clearly when the microphone or a permission is missing."
+        },
+        {
+          "title": "Long commands you can follow",
+          "body": "A running command shows its elapsed time and output right in the conversation."
+        },
+        {
+          "title": "Stop and automations you can rely on",
+          "body": "After Stop, a queued message is never sent into the stopped run. An automation you turned off stays off after the computer sleeps, and a message no longer stays stuck on sending."
+        },
+        {
+          "title": "Works without GitHub",
+          "body": "Local projects work without the GitHub CLI or a GitHub session, and local models start on a clean Windows install."
+        },
+        {
+          "title": "Safer and steadier",
+          "body": "Only one copy of the app runs on your profile. The terminal hides more kinds of keys, Undo history survives a damaged file, usage shows the account you switched to, a paused model download keeps Resume after a restart, and Codex stays up to date so new models from your subscription show up."
+        }
+      ]
+    },
+    "ar": {
+      "headline": "القرارات في مكان واحد، وصوت بلا استخدام اليدين يواكب الإيقاع",
+      "summary": "وافق أو ارفض من قائمة قرارات واحدة، وتحدّث بلا استخدام اليدين بانتظار أقل، وتابع الأوامر الطويلة أثناء تشغيلها، واعتمد على الإيقاف والأتمتة والمشاريع المحلية.",
+      "sections": [
+        {
+          "title": "القرارات في مكان واحد",
+          "body": "أصبحت قائمة القرارات المكان الرئيسي للموافقة على طلبات الوكلاء أو رفضها. يمكن التعامل مع الموافقات المتشابهة معًا أو واحدة تلو الأخرى، والنقر على البطاقة يفتح المحادثة عند ذلك الطلب تمامًا."
+        },
+        {
+          "title": "مشاريع وقوائم أكثر ترتيبًا",
+          "body": "في المشاريع والمهام والأتمتة يبقى العنوان ظاهرًا أثناء تمرير القائمة. وتستخدم المهام والقرارات العرض الكامل، وبطاقاتها أكثر إحكامًا."
+        },
+        {
+          "title": "محادثة أهدأ مع المنسّق",
+          "body": "عندما يبدأ المنسّق وكيلًا ويكتب إليه فورًا، تراه مرة واحدة فقط. تُفتح التقارير كمعاينة من سطرين، وتتناسق أحجام النص والمسافات في المحادثة كلها."
+        },
+        {
+          "title": "صوت بلا استخدام اليدين يواكب الإيقاع",
+          "body": "في التحدث بلا استخدام اليدين يصدر الصوت الأول أسرع، وتُلتقط المقاطعات الهادئة، وتبقى الكلمات المباشرة مقروءة، ويخبرك التطبيق بوضوح عند غياب الميكروفون أو إذن ما."
+        },
+        {
+          "title": "أوامر طويلة يمكنك متابعتها",
+          "body": "يعرض الأمر قيد التشغيل الوقت المنقضي ومخرجاته مباشرة في المحادثة."
+        },
+        {
+          "title": "إيقاف وأتمتة يمكنك الاعتماد عليهما",
+          "body": "بعد الإيقاف لا تُرسل أي رسالة من قائمة الانتظار إلى التشغيل المتوقف. والأتمتة التي أوقفتها تبقى متوقفة بعد خروج الحاسوب من السكون، ولم تعد الرسالة تعلق أثناء الإرسال."
+        },
+        {
+          "title": "يعمل بدون GitHub",
+          "body": "تعمل المشاريع المحلية بدون GitHub CLI أو جلسة GitHub، وتبدأ النماذج المحلية على Windows مثبّت حديثًا."
+        },
+        {
+          "title": "أكثر أمانًا وثباتًا",
+          "body": "تعمل نسخة واحدة فقط من التطبيق على ملفك الشخصي. يخفي الطرفية أنواعًا أكثر من المفاتيح، ويصمد سجل التراجع أمام ملف تالف، ويعرض الاستهلاك الحساب الذي انتقلت إليه، ويحتفظ تنزيل النموذج المتوقف مؤقتًا بزر الاستئناف بعد إعادة التشغيل، ويبقى Codex محدّثًا فتظهر النماذج الجديدة من اشتراكك."
+        }
+      ]
+    },
+    "de": {
+      "headline": "Entscheidungen an einem Ort und eine Freisprech-Stimme, die mithält",
+      "summary": "Genehmige oder lehne aus einer einzigen Entscheidungsliste ab, sprich freihändig mit weniger Warten, verfolge lange Befehle während sie laufen und verlass dich auf Stopp, Automatisierungen und lokale Projekte.",
+      "sections": [
+        {
+          "title": "Entscheidungen an einem Ort",
+          "body": "Die Entscheidungsliste ist jetzt der zentrale Ort, um Anfragen von Agenten zu genehmigen oder abzulehnen. Ähnliche Freigaben lassen sich gemeinsam oder einzeln erledigen, und ein Klick auf eine Karte öffnet die Unterhaltung genau bei dieser Anfrage."
+        },
+        {
+          "title": "Aufgeräumtere Projekte und Listen",
+          "body": "In Projekten, Aufgaben und Automatisierungen bleibt die Kopfzeile sichtbar, während die Liste scrollt. Aufgaben und Entscheidungen nutzen die volle Breite, und ihre Karten sind kompakter."
+        },
+        {
+          "title": "Eine ruhigere Unterhaltung mit dem Koordinator",
+          "body": "Wenn der Koordinator einen Agenten startet und ihm gleich schreibt, siehst du das nur einmal. Berichte öffnen sich als zweizeilige Vorschau, und Schriftgrößen und Abstände passen in der ganzen Unterhaltung zusammen."
+        },
+        {
+          "title": "Eine Freisprech-Stimme, die mithält",
+          "body": "Beim freihändigen Sprechen kommt der erste Ton früher, leise Unterbrechungen werden erkannt, Live-Wörter bleiben lesbar, und die App sagt klar, wenn das Mikrofon oder eine Berechtigung fehlt."
+        },
+        {
+          "title": "Lange Befehle, die du verfolgen kannst",
+          "body": "Ein laufender Befehl zeigt seine bisherige Dauer und Ausgabe direkt in der Unterhaltung."
+        },
+        {
+          "title": "Stopp und Automatisierungen, auf die du dich verlassen kannst",
+          "body": "Nach Stopp wird eine wartende Nachricht nie in den gestoppten Lauf gesendet. Eine ausgeschaltete Automatisierung bleibt nach dem Ruhezustand aus, und eine Nachricht hängt nicht mehr beim Senden fest."
+        },
+        {
+          "title": "Funktioniert ohne GitHub",
+          "body": "Lokale Projekte funktionieren ohne GitHub CLI und ohne GitHub-Sitzung, und lokale Modelle starten auf einem frisch installierten Windows."
+        },
+        {
+          "title": "Sicherer und stabiler",
+          "body": "Auf deinem Profil läuft nur eine Kopie der App. Das Terminal verbirgt mehr Arten von Schlüsseln, der Rückgängig-Verlauf übersteht eine beschädigte Datei, die Nutzung zeigt das Konto, zu dem du gewechselt hast, ein pausierter Modell-Download behält Fortsetzen nach einem Neustart, und Codex bleibt aktuell, sodass neue Modelle aus deinem Abo erscheinen."
+        }
+      ]
+    },
+    "es": {
+      "headline": "Decisiones en un solo lugar y una voz manos libres que no se queda atrás",
+      "summary": "Aprueba o rechaza desde una sola lista de decisiones, habla con manos libres esperando menos, sigue los comandos largos mientras se ejecutan y confía en Detener, las automatizaciones y los proyectos locales.",
+      "sections": [
+        {
+          "title": "Decisiones en un solo lugar",
+          "body": "La lista de decisiones es ahora el lugar principal para aprobar o rechazar lo que piden los agentes. Las aprobaciones parecidas se pueden resolver juntas o una por una, y al hacer clic en una tarjeta se abre la conversación justo en esa solicitud."
+        },
+        {
+          "title": "Proyectos y listas más ordenados",
+          "body": "En Proyectos, Tareas y Automatizaciones, el encabezado sigue visible mientras se desplaza la lista. Tareas y Decisiones usan todo el ancho y sus tarjetas son más compactas."
+        },
+        {
+          "title": "Una conversación más tranquila con el Coordinador",
+          "body": "Cuando el Coordinador inicia un agente y le escribe enseguida, lo ves una sola vez. Los informes se abren como una vista previa de dos líneas, y los tamaños de texto y los espacios coinciden en toda la conversación."
+        },
+        {
+          "title": "Una voz manos libres que no se queda atrás",
+          "body": "Al hablar con manos libres, el primer sonido llega antes, se reconocen las interrupciones suaves, las palabras en vivo siguen siendo legibles y la app avisa con claridad cuando falta el micrófono o un permiso."
+        },
+        {
+          "title": "Comandos largos que puedes seguir",
+          "body": "Un comando en ejecución muestra el tiempo transcurrido y su salida directamente en la conversación."
+        },
+        {
+          "title": "Detener y automatizaciones en las que confiar",
+          "body": "Después de Detener, un mensaje en cola nunca se envía a la ejecución detenida. Una automatización que desactivaste sigue desactivada cuando el equipo sale de la suspensión, y un mensaje ya no se queda atascado al enviarse."
+        },
+        {
+          "title": "Funciona sin GitHub",
+          "body": "Los proyectos locales funcionan sin GitHub CLI ni sesión de GitHub, y los modelos locales se inician en un Windows recién instalado."
+        },
+        {
+          "title": "Más seguro y estable",
+          "body": "En tu perfil solo se ejecuta una copia de la app. El terminal oculta más tipos de claves, el historial de Deshacer resiste un archivo dañado, el consumo muestra la cuenta a la que cambiaste, una descarga de modelo en pausa conserva Reanudar tras reiniciar y Codex se mantiene al día para que aparezcan los modelos nuevos de tu suscripción."
+        }
+      ]
+    },
+    "fr": {
+      "headline": "Les décisions au même endroit, et une voix mains libres qui suit le rythme",
+      "summary": "Approuvez ou refusez depuis une seule liste de décisions, parlez en mains libres avec moins d'attente, suivez les longues commandes pendant leur exécution et comptez sur Arrêter, les automatisations et les projets locaux.",
+      "sections": [
+        {
+          "title": "Les décisions au même endroit",
+          "body": "La liste des décisions est désormais l'endroit principal pour approuver ou refuser ce que demandent les agents. Les validations similaires se traitent ensemble ou une par une, et un clic sur une carte ouvre la conversation exactement à cette demande."
+        },
+        {
+          "title": "Projets et listes mieux rangés",
+          "body": "Dans Projets, Tâches et Automatisations, l'en-tête reste visible pendant que la liste défile. Les tâches et les décisions occupent toute la largeur, avec des cartes plus compactes."
+        },
+        {
+          "title": "Une conversation plus calme avec le Coordinateur",
+          "body": "Quand le Coordinateur lance un agent et lui écrit aussitôt, vous ne le voyez qu'une fois. Les rapports s'ouvrent en aperçu de deux lignes, et les tailles de texte et les espacements s'accordent dans toute la conversation."
+        },
+        {
+          "title": "Une voix mains libres qui suit le rythme",
+          "body": "En mode mains libres, le premier son arrive plus tôt, les interruptions discrètes sont reconnues, les mots en direct restent lisibles et l'app indique clairement quand le micro ou une autorisation manque."
+        },
+        {
+          "title": "Des commandes longues que l'on peut suivre",
+          "body": "Une commande en cours affiche sa durée écoulée et sa sortie directement dans la conversation."
+        },
+        {
+          "title": "Arrêter et automatisations fiables",
+          "body": "Après Arrêter, un message en file n'est jamais envoyé dans l'exécution arrêtée. Une automatisation désactivée reste désactivée après la mise en veille, et un message ne reste plus bloqué à l'envoi."
+        },
+        {
+          "title": "Fonctionne sans GitHub",
+          "body": "Les projets locaux fonctionnent sans GitHub CLI ni session GitHub, et les modèles locaux démarrent sur un Windows fraîchement installé."
+        },
+        {
+          "title": "Plus sûr et plus stable",
+          "body": "Une seule copie de l'app tourne sur votre profil. Le terminal masque plus de types de clés, l'historique Annuler résiste à un fichier endommagé, la consommation affiche le compte vers lequel vous êtes passé, un téléchargement de modèle en pause garde Reprendre après un redémarrage, et Codex reste à jour pour que les nouveaux modèles de votre abonnement apparaissent."
+        }
+      ]
+    },
+    "hi": {
+      "headline": "फ़ैसले एक ही जगह, और हैंड्स-फ़्री आवाज़ जो साथ चलती है",
+      "summary": "एक ही फ़ैसलों की सूची से मंज़ूर या अस्वीकार करें, कम इंतज़ार के साथ हैंड्स-फ़्री बात करें, लंबी कमांड चलते समय देखें, और स्टॉप, ऑटोमेशन और लोकल प्रोजेक्ट पर भरोसा करें।",
+      "sections": [
+        {
+          "title": "फ़ैसले एक ही जगह",
+          "body": "अब फ़ैसलों की सूची ही वह मुख्य जगह है जहाँ आप एजेंटों के अनुरोध मंज़ूर या अस्वीकार करते हैं। मिलती-जुलती मंज़ूरियाँ एक साथ या एक-एक करके निपटाई जा सकती हैं, और कार्ड पर क्लिक करने से बातचीत ठीक उसी अनुरोध पर खुलती है।"
+        },
+        {
+          "title": "ज़्यादा सुव्यवस्थित प्रोजेक्ट और सूचियाँ",
+          "body": "प्रोजेक्ट, टास्क और ऑटोमेशन में सूची स्क्रॉल होते समय हेडर दिखता रहता है। टास्क और फ़ैसले पूरी चौड़ाई लेते हैं, और उनके कार्ड ज़्यादा संक्षिप्त हैं।"
+        },
+        {
+          "title": "कोऑर्डिनेटर के साथ शांत बातचीत",
+          "body": "जब कोऑर्डिनेटर किसी एजेंट को शुरू करके तुरंत उसे लिखता है, तो आप इसे एक ही बार देखते हैं। रिपोर्ट दो पंक्तियों के प्रीव्यू के रूप में खुलती हैं, और पूरी बातचीत में टेक्स्ट के आकार और दूरी एक जैसे रहते हैं।"
+        },
+        {
+          "title": "हैंड्स-फ़्री आवाज़ जो साथ चलती है",
+          "body": "हैंड्स-फ़्री बातचीत में पहली आवाज़ जल्दी आती है, धीमे बीच में बोलना पहचाना जाता है, लाइव शब्द पढ़ने लायक रहते हैं, और माइक्रोफ़ोन या कोई अनुमति न होने पर ऐप साफ़ बताता है।"
+        },
+        {
+          "title": "लंबी कमांड जिन्हें आप देख सकते हैं",
+          "body": "चल रही कमांड बीता हुआ समय और अपना आउटपुट सीधे बातचीत में दिखाती है।"
+        },
+        {
+          "title": "भरोसेमंद स्टॉप और ऑटोमेशन",
+          "body": "स्टॉप के बाद कतार में रखा संदेश कभी रोके गए रन में नहीं भेजा जाता। आपने जो ऑटोमेशन बंद किया, वह कंप्यूटर के स्लीप से लौटने के बाद भी बंद रहता है, और संदेश अब भेजते समय अटका नहीं रहता।"
+        },
+        {
+          "title": "GitHub के बिना चलता है",
+          "body": "लोकल प्रोजेक्ट GitHub CLI या GitHub सेशन के बिना चलते हैं, और लोकल मॉडल नए इंस्टॉल किए गए Windows पर शुरू हो जाते हैं।"
+        },
+        {
+          "title": "ज़्यादा सुरक्षित और स्थिर",
+          "body": "आपकी प्रोफ़ाइल पर ऐप की सिर्फ़ एक कॉपी चलती है। टर्मिनल ज़्यादा तरह की कुंजियाँ छिपाता है, पूर्ववत का इतिहास खराब फ़ाइल के बाद भी बचा रहता है, उपयोग उसी खाते का दिखता है जिस पर आप गए, रुका हुआ मॉडल डाउनलोड रीस्टार्ट के बाद भी फिर शुरू करें रखता है, और Codex अपडेट रहता है ताकि आपकी सदस्यता के नए मॉडल दिखें।"
+        }
+      ]
+    },
+    "id": {
+      "headline": "Keputusan di satu tempat, dan suara bebas genggam yang tidak tertinggal",
+      "summary": "Setujui atau tolak dari satu daftar keputusan, bicara bebas genggam dengan lebih sedikit menunggu, ikuti perintah panjang saat berjalan, dan andalkan Berhenti, otomatisasi, serta proyek lokal.",
+      "sections": [
+        {
+          "title": "Keputusan di satu tempat",
+          "body": "Daftar keputusan kini menjadi tempat utama untuk menyetujui atau menolak permintaan agen. Persetujuan yang mirip bisa ditangani sekaligus atau satu per satu, dan mengeklik kartu membuka percakapan tepat di permintaan itu."
+        },
+        {
+          "title": "Proyek dan daftar yang lebih rapi",
+          "body": "Di Proyek, Tugas, dan Otomatisasi, judul tetap terlihat saat daftar digulir. Tugas dan Keputusan memakai lebar penuh, dan kartunya lebih ringkas."
+        },
+        {
+          "title": "Percakapan dengan Koordinator yang lebih tenang",
+          "body": "Saat Koordinator memulai agen lalu langsung menulis kepadanya, kamu hanya melihatnya sekali. Laporan terbuka sebagai pratinjau dua baris, dan ukuran teks serta jaraknya seragam di seluruh percakapan."
+        },
+        {
+          "title": "Suara bebas genggam yang tidak tertinggal",
+          "body": "Saat bicara bebas genggam, suara pertama terdengar lebih cepat, interupsi pelan dikenali, kata-kata langsung tetap terbaca, dan aplikasi memberi tahu dengan jelas bila mikrofon atau izin belum ada."
+        },
+        {
+          "title": "Perintah panjang yang bisa kamu ikuti",
+          "body": "Perintah yang sedang berjalan menampilkan waktu yang sudah berlalu dan keluarannya langsung di percakapan."
+        },
+        {
+          "title": "Berhenti dan otomatisasi yang bisa diandalkan",
+          "body": "Setelah Berhenti, pesan dalam antrean tidak pernah dikirim ke proses yang dihentikan. Otomatisasi yang kamu matikan tetap mati setelah komputer bangun dari mode tidur, dan pesan tidak lagi tertahan saat dikirim."
+        },
+        {
+          "title": "Berjalan tanpa GitHub",
+          "body": "Proyek lokal berjalan tanpa GitHub CLI atau sesi GitHub, dan model lokal bisa dimulai di Windows yang baru dipasang."
+        },
+        {
+          "title": "Lebih aman dan stabil",
+          "body": "Hanya satu salinan aplikasi yang berjalan di profilmu. Terminal menyembunyikan lebih banyak jenis kunci, riwayat Urungkan bertahan dari file yang rusak, pemakaian menampilkan akun yang baru kamu pilih, unduhan model yang dijeda tetap punya Lanjutkan setelah mulai ulang, dan Codex selalu diperbarui sehingga model baru dari langgananmu muncul."
+        }
+      ]
+    },
+    "it": {
+      "headline": "Decisioni in un unico posto e una voce a mani libere che tiene il passo",
+      "summary": "Approva o rifiuta da un'unica lista di decisioni, parla a mani libere aspettando meno, segui i comandi lunghi mentre girano e affidati a Stop, automazioni e progetti locali.",
+      "sections": [
+        {
+          "title": "Decisioni in un unico posto",
+          "body": "La lista delle decisioni è ora il luogo principale per approvare o rifiutare ciò che chiedono gli agenti. Le approvazioni simili si gestiscono insieme o una alla volta, e un clic su una scheda apre la conversazione proprio su quella richiesta."
+        },
+        {
+          "title": "Progetti ed elenchi più ordinati",
+          "body": "In Progetti, Attività e Automazioni l'intestazione resta visibile mentre l'elenco scorre. Attività e Decisioni usano tutta la larghezza e le loro schede sono più compatte."
+        },
+        {
+          "title": "Una conversazione più calma con il Coordinatore",
+          "body": "Quando il Coordinatore avvia un agente e gli scrive subito, lo vedi una volta sola. I report si aprono come anteprima di due righe e dimensioni del testo e spaziature sono uniformi in tutta la conversazione."
+        },
+        {
+          "title": "Una voce a mani libere che tiene il passo",
+          "body": "Nella conversazione a mani libere il primo suono arriva prima, le interruzioni sommesse vengono riconosciute, le parole in diretta restano leggibili e l'app dice chiaramente quando mancano il microfono o un permesso."
+        },
+        {
+          "title": "Comandi lunghi che puoi seguire",
+          "body": "Un comando in esecuzione mostra il tempo trascorso e l'output direttamente nella conversazione."
+        },
+        {
+          "title": "Stop e automazioni su cui contare",
+          "body": "Dopo Stop, un messaggio in coda non viene mai inviato nell'esecuzione fermata. Un'automazione disattivata resta disattivata dopo la sospensione del computer, e un messaggio non resta più bloccato in invio."
+        },
+        {
+          "title": "Funziona senza GitHub",
+          "body": "I progetti locali funzionano senza GitHub CLI né sessione GitHub, e i modelli locali si avviano su un Windows appena installato."
+        },
+        {
+          "title": "Più sicuro e più stabile",
+          "body": "Sul tuo profilo gira una sola copia dell'app. Il terminale nasconde più tipi di chiavi, la cronologia Annulla resiste a un file danneggiato, il consumo mostra l'account su cui sei passato, un download di modello in pausa mantiene Riprendi dopo il riavvio e Codex resta aggiornato, così compaiono i nuovi modelli del tuo abbonamento."
+        }
+      ]
+    },
+    "ja": {
+      "headline": "判断を一か所に、そして遅れないハンズフリー音声",
+      "summary": "一つの判断リストで承認や却下ができ、待ち時間の少ないハンズフリーで話せ、長いコマンドを実行中に追え、停止・自動化・ローカルプロジェクトを安心して使えます。",
+      "sections": [
+        {
+          "title": "判断を一か所に",
+          "body": "判断リストが、エージェントの依頼を承認・却下するメインの場所になりました。似た承認はまとめても一つずつでも処理でき、カードをクリックするとその依頼の位置で会話が開きます。"
+        },
+        {
+          "title": "整理されたプロジェクトとリスト",
+          "body": "プロジェクト、タスク、自動化では、リストをスクロールしてもヘッダーが表示されたままです。タスクと判断は全幅を使い、カードもよりコンパクトになりました。"
+        },
+        {
+          "title": "落ち着いたコーディネーターとの会話",
+          "body": "コーディネーターがエージェントを起動してすぐに話しかけた場合、表示は一度だけです。レポートは2行のプレビューで開き、文字サイズや余白も会話全体でそろいます。"
+        },
+        {
+          "title": "遅れないハンズフリー音声",
+          "body": "ハンズフリーで話すとき、最初の音が早く鳴り、静かな割り込みも認識され、リアルタイムの文字が読みやすいままで、マイクや権限が足りないときははっきり知らせます。"
+        },
+        {
+          "title": "追いかけられる長いコマンド",
+          "body": "実行中のコマンドは、経過時間と出力を会話の中にそのまま表示します。"
+        },
+        {
+          "title": "頼れる停止と自動化",
+          "body": "停止したあと、キューのメッセージが止めた実行に送られることはありません。オフにした自動化はスリープ復帰後もオフのままで、メッセージが送信中のまま止まることもなくなりました。"
+        },
+        {
+          "title": "GitHubなしで動作",
+          "body": "ローカルプロジェクトは GitHub CLI や GitHub のセッションがなくても動き、ローカルモデルはクリーンインストールした Windows でも起動します。"
+        },
+        {
+          "title": "より安全に、より安定して",
+          "body": "プロファイルで動くアプリは一つだけです。ターミナルはより多くの種類のキーを隠し、元に戻す履歴は壊れたファイルにも耐え、使用量は切り替え先のアカウントを表示し、一時停止したモデルのダウンロードは再起動後も再開を保ち、Codex は常に最新なのでサブスクリプションの新しいモデルが表示されます。"
+        }
+      ]
+    },
+    "ko": {
+      "headline": "한곳에 모인 결정, 그리고 속도를 따라오는 핸즈프리 음성",
+      "summary": "하나의 결정 목록에서 승인하거나 거절하고, 덜 기다리며 핸즈프리로 대화하고, 긴 명령을 실행 중에 따라가며, 중지와 자동화, 로컬 프로젝트를 믿고 쓸 수 있습니다.",
+      "sections": [
+        {
+          "title": "한곳에 모인 결정",
+          "body": "이제 결정 목록이 에이전트의 요청을 승인하거나 거절하는 주요 장소입니다. 비슷한 승인은 한꺼번에 또는 하나씩 처리할 수 있고, 카드를 클릭하면 바로 그 요청 위치에서 대화가 열립니다."
+        },
+        {
+          "title": "더 깔끔해진 프로젝트와 목록",
+          "body": "프로젝트, 작업, 자동화에서 목록을 스크롤해도 헤더가 계속 보입니다. 작업과 결정은 전체 너비를 사용하고 카드도 더 간결해졌습니다."
+        },
+        {
+          "title": "더 차분해진 코디네이터 대화",
+          "body": "코디네이터가 에이전트를 시작하고 바로 메시지를 보내면 한 번만 표시됩니다. 보고서는 두 줄 미리보기로 열리고, 글자 크기와 간격이 대화 전체에서 맞춰집니다."
+        },
+        {
+          "title": "속도를 따라오는 핸즈프리 음성",
+          "body": "핸즈프리로 말할 때 첫 소리가 더 빨리 나오고, 조용한 끼어들기도 인식되며, 실시간 단어가 계속 읽기 쉽게 표시되고, 마이크나 권한이 없으면 앱이 분명하게 알려 줍니다."
+        },
+        {
+          "title": "따라갈 수 있는 긴 명령",
+          "body": "실행 중인 명령은 경과 시간과 출력을 대화 안에 바로 보여 줍니다."
+        },
+        {
+          "title": "믿을 수 있는 중지와 자동화",
+          "body": "중지한 뒤에는 대기 중인 메시지가 멈춘 실행으로 보내지지 않습니다. 끈 자동화는 컴퓨터가 절전에서 깨어난 뒤에도 꺼진 상태로 유지되고, 메시지가 전송 중에 멈춰 있지 않습니다."
+        },
+        {
+          "title": "GitHub 없이 작동",
+          "body": "로컬 프로젝트는 GitHub CLI나 GitHub 세션 없이도 작동하고, 로컬 모델은 새로 설치한 Windows에서도 시작됩니다."
+        },
+        {
+          "title": "더 안전하고 안정적으로",
+          "body": "프로필에서는 앱이 하나만 실행됩니다. 터미널은 더 많은 종류의 키를 가리고, 실행 취소 기록은 손상된 파일에도 유지되며, 사용량은 전환한 계정을 보여 주고, 일시 중지한 모델 다운로드는 다시 시작해도 재개 버튼을 유지하며, Codex가 최신 상태로 유지되어 구독의 새 모델이 표시됩니다."
+        }
+      ]
+    },
+    "pt-BR": {
+      "headline": "Decisões em um só lugar e uma voz mãos-livres que acompanha o ritmo",
+      "summary": "Aprove ou recuse em uma única lista de decisões, fale com as mãos livres esperando menos, acompanhe comandos longos enquanto rodam e conte com Parar, automações e projetos locais.",
+      "sections": [
+        {
+          "title": "Decisões em um só lugar",
+          "body": "A lista de decisões agora é o lugar principal para aprovar ou recusar o que os agentes pedem. Aprovações parecidas podem ser resolvidas juntas ou uma a uma, e clicar em um cartão abre a conversa exatamente naquele pedido."
+        },
+        {
+          "title": "Projetos e listas mais organizados",
+          "body": "Em Projetos, Tarefas e Automações, o cabeçalho continua visível enquanto a lista rola. Tarefas e Decisões usam toda a largura, com cartões mais compactos."
+        },
+        {
+          "title": "Uma conversa mais tranquila com o Coordenador",
+          "body": "Quando o Coordenador inicia um agente e escreve para ele em seguida, você vê isso uma vez só. Os relatórios abrem como uma prévia de duas linhas, e tamanhos de texto e espaçamentos combinam em toda a conversa."
+        },
+        {
+          "title": "Uma voz mãos-livres que acompanha o ritmo",
+          "body": "Ao falar com as mãos livres, o primeiro som chega antes, interrupções discretas são reconhecidas, as palavras ao vivo continuam legíveis e o app avisa com clareza quando falta o microfone ou uma permissão."
+        },
+        {
+          "title": "Comandos longos que você pode acompanhar",
+          "body": "Um comando em execução mostra o tempo decorrido e a saída direto na conversa."
+        },
+        {
+          "title": "Parar e automações em que dá para confiar",
+          "body": "Depois de Parar, uma mensagem na fila nunca é enviada para a execução interrompida. Uma automação que você desligou continua desligada depois que o computador sai da suspensão, e uma mensagem não fica mais presa no envio."
+        },
+        {
+          "title": "Funciona sem GitHub",
+          "body": "Projetos locais funcionam sem a GitHub CLI e sem sessão do GitHub, e modelos locais iniciam em um Windows recém-instalado."
+        },
+        {
+          "title": "Mais seguro e estável",
+          "body": "Só uma cópia do app roda no seu perfil. O terminal oculta mais tipos de chaves, o histórico de Desfazer resiste a um arquivo danificado, o consumo mostra a conta para a qual você mudou, um download de modelo pausado mantém Retomar após reiniciar e o Codex fica atualizado para que os novos modelos da sua assinatura apareçam."
+        }
+      ]
+    },
+    "ro": {
+      "headline": "Decizii într-un singur loc și o voce hands-free care ține pasul",
+      "summary": "Aprobi sau respingi dintr-o singură listă de decizii, vorbești hands-free cu mai puțină așteptare, urmărești comenzile lungi în timp ce rulează și te poți baza pe Stop, automatizări și proiecte locale.",
+      "sections": [
+        {
+          "title": "Decizii într-un singur loc",
+          "body": "Lista de decizii este acum locul principal unde aprobi sau respingi ce cer agenții. Aprobările asemănătoare se pot rezolva împreună sau pe rând, iar un click pe card deschide conversația exact la cererea respectivă."
+        },
+        {
+          "title": "Proiecte și liste mai ordonate",
+          "body": "În Proiecte, Taskuri și Automatizări, antetul rămâne vizibil cât timp derulezi lista. Taskurile și deciziile folosesc toată lățimea, iar cardurile lor sunt mai compacte."
+        },
+        {
+          "title": "O conversație mai liniștită cu Coordonatorul",
+          "body": "Când Coordonatorul pornește un agent și îi scrie imediat, vezi asta o singură dată. Rapoartele se deschid ca previzualizare de două rânduri, iar mărimile textului și spațiile se potrivesc în toată conversația."
+        },
+        {
+          "title": "O voce hands-free care ține pasul",
+          "body": "În modul Talk hands-free, primul sunet se aude mai repede, întreruperile discrete sunt recunoscute, cuvintele live rămân lizibile, iar aplicația spune clar când lipsește microfonul sau o permisiune."
+        },
+        {
+          "title": "Comenzi lungi pe care le poți urmări",
+          "body": "O comandă în curs își arată timpul scurs și rezultatul direct în conversație."
+        },
+        {
+          "title": "Stop și automatizări pe care te poți baza",
+          "body": "După Stop, un mesaj din coadă nu mai este trimis niciodată în rularea oprită. O automatizare pe care ai oprit-o rămâne oprită după ce calculatorul iese din repaus, iar un mesaj nu mai rămâne blocat la trimitere."
+        },
+        {
+          "title": "Funcționează fără GitHub",
+          "body": "Proiectele locale funcționează fără GitHub CLI și fără sesiune GitHub, iar modelele locale pornesc pe un Windows proaspăt instalat."
+        },
+        {
+          "title": "Mai sigur și mai stabil",
+          "body": "Pe profilul tău rulează o singură copie a aplicației. Terminalul ascunde mai multe tipuri de chei, istoricul Undo rezistă unui fișier deteriorat, consumul arată contul pe care ai trecut, o descărcare de model pusă pe pauză își păstrează Reia după repornire, iar Codex rămâne la zi, așa că apar modelele noi din abonamentul tău."
+        }
+      ]
+    },
+    "ru": {
+      "headline": "Решения в одном месте и голос без рук, который не отстаёт",
+      "summary": "Одобряйте или отклоняйте в одном списке решений, говорите без рук с меньшим ожиданием, следите за долгими командами во время их работы и полагайтесь на Стоп, автоматизации и локальные проекты.",
+      "sections": [
+        {
+          "title": "Решения в одном месте",
+          "body": "Список решений теперь главное место, где вы одобряете или отклоняете запросы агентов. Похожие одобрения можно обработать вместе или по одному, а щелчок по карточке открывает разговор прямо на этом запросе."
+        },
+        {
+          "title": "Аккуратнее проекты и списки",
+          "body": "В разделах Проекты, Задачи и Автоматизации заголовок остаётся на виду, пока список прокручивается. Задачи и Решения занимают всю ширину, а их карточки стали компактнее."
+        },
+        {
+          "title": "Спокойнее разговор с Координатором",
+          "body": "Когда Координатор запускает агента и сразу пишет ему, вы видите это один раз. Отчёты открываются как превью в две строки, а размеры текста и отступы согласованы во всём разговоре."
+        },
+        {
+          "title": "Голос без рук, который не отстаёт",
+          "body": "В режиме без рук первый звук раздаётся раньше, тихие перебивания распознаются, слова в реальном времени остаются читаемыми, а приложение ясно сообщает, если нет микрофона или разрешения."
+        },
+        {
+          "title": "Долгие команды, за которыми можно следить",
+          "body": "Выполняемая команда показывает прошедшее время и вывод прямо в разговоре."
+        },
+        {
+          "title": "Стоп и автоматизации, на которые можно положиться",
+          "body": "После Стоп сообщение из очереди никогда не уходит в остановленный запуск. Выключенная автоматизация остаётся выключенной после выхода компьютера из сна, а сообщение больше не зависает при отправке."
+        },
+        {
+          "title": "Работает без GitHub",
+          "body": "Локальные проекты работают без GitHub CLI и без сеанса GitHub, а локальные модели запускаются на только что установленной Windows."
+        },
+        {
+          "title": "Надёжнее и стабильнее",
+          "body": "В вашем профиле работает только одна копия приложения. Терминал скрывает больше видов ключей, история отмены переживает повреждённый файл, расход показывает аккаунт, на который вы переключились, приостановленная загрузка модели сохраняет кнопку Продолжить после перезапуска, а Codex обновляется сам, поэтому появляются новые модели из вашей подписки."
+        }
+      ]
+    },
+    "tr": {
+      "headline": "Kararlar tek yerde ve tempoya ayak uyduran eller serbest ses",
+      "summary": "Tek bir karar listesinden onaylayın ya da reddedin, daha az bekleyerek eller serbest konuşun, uzun komutları çalışırken izleyin ve Durdur'a, otomasyonlara ve yerel projelere güvenin.",
+      "sections": [
+        {
+          "title": "Kararlar tek yerde",
+          "body": "Karar listesi artık ajanların isteklerini onaylayıp reddettiğiniz ana yer. Benzer onaylar birlikte ya da tek tek ele alınabilir; bir karta tıklamak konuşmayı tam o istekte açar."
+        },
+        {
+          "title": "Daha düzenli projeler ve listeler",
+          "body": "Projeler, Görevler ve Otomasyonlar'da liste kayarken başlık görünür kalır. Görevler ve Kararlar tüm genişliği kullanır, kartları da daha derli topludur."
+        },
+        {
+          "title": "Koordinatörle daha sakin bir konuşma",
+          "body": "Koordinatör bir ajanı başlatıp hemen ona yazdığında bunu yalnızca bir kez görürsünüz. Raporlar iki satırlık önizleme olarak açılır; yazı boyutları ve boşluklar tüm konuşmada uyumludur."
+        },
+        {
+          "title": "Tempoya ayak uyduran eller serbest ses",
+          "body": "Eller serbest konuşmada ilk ses daha erken gelir, sessiz araya girmeler tanınır, canlı sözcükler okunaklı kalır ve mikrofon ya da bir izin eksik olduğunda uygulama bunu açıkça söyler."
+        },
+        {
+          "title": "İzleyebileceğiniz uzun komutlar",
+          "body": "Çalışan bir komut geçen süreyi ve çıktısını doğrudan konuşmada gösterir."
+        },
+        {
+          "title": "Güvenebileceğiniz Durdur ve otomasyonlar",
+          "body": "Durdur'dan sonra kuyruktaki bir mesaj asla durdurulan çalışmaya gönderilmez. Kapattığınız bir otomasyon bilgisayar uykudan çıktıktan sonra da kapalı kalır ve mesajlar artık gönderiliyor durumunda takılı kalmaz."
+        },
+        {
+          "title": "GitHub olmadan çalışır",
+          "body": "Yerel projeler GitHub CLI ya da GitHub oturumu olmadan çalışır ve yerel modeller yeni kurulmuş bir Windows'ta başlar."
+        },
+        {
+          "title": "Daha güvenli ve daha istikrarlı",
+          "body": "Profilinizde uygulamanın yalnızca bir kopyası çalışır. Terminal daha fazla anahtar türünü gizler, Geri Al geçmişi bozuk bir dosyaya dayanır, kullanım geçtiğiniz hesabı gösterir, duraklatılmış bir model indirmesi yeniden başlatmadan sonra Sürdür seçeneğini korur ve Codex güncel kalır, böylece aboneliğinizdeki yeni modeller görünür."
+        }
+      ]
+    },
+    "vi": {
+      "headline": "Quyết định ở một nơi, và giọng nói rảnh tay theo kịp nhịp",
+      "summary": "Phê duyệt hoặc từ chối từ một danh sách quyết định, nói chuyện rảnh tay mà ít phải chờ, theo dõi lệnh dài khi đang chạy, và yên tâm với Dừng, tự động hóa và dự án cục bộ.",
+      "sections": [
+        {
+          "title": "Quyết định ở một nơi",
+          "body": "Danh sách quyết định giờ là nơi chính để phê duyệt hoặc từ chối yêu cầu của agent. Các phê duyệt giống nhau có thể xử lý cùng lúc hoặc từng cái một, và bấm vào thẻ sẽ mở cuộc trò chuyện đúng tại yêu cầu đó."
+        },
+        {
+          "title": "Dự án và danh sách gọn gàng hơn",
+          "body": "Trong Dự án, Công việc và Tự động hóa, phần đầu vẫn hiển thị khi danh sách cuộn. Công việc và Quyết định dùng toàn bộ chiều rộng, và thẻ gọn hơn."
+        },
+        {
+          "title": "Cuộc trò chuyện với Điều phối viên nhẹ nhàng hơn",
+          "body": "Khi Điều phối viên khởi động một agent và nhắn ngay cho nó, bạn chỉ thấy một lần. Báo cáo mở dưới dạng xem trước hai dòng, và cỡ chữ cùng khoảng cách đồng nhất trong cả cuộc trò chuyện."
+        },
+        {
+          "title": "Giọng nói rảnh tay theo kịp nhịp",
+          "body": "Khi nói rảnh tay, âm thanh đầu tiên phát sớm hơn, các lần ngắt lời nhỏ được nhận ra, chữ trực tiếp vẫn dễ đọc, và ứng dụng báo rõ khi thiếu micrô hoặc quyền."
+        },
+        {
+          "title": "Lệnh dài bạn có thể theo dõi",
+          "body": "Lệnh đang chạy hiển thị thời gian đã trôi qua và kết quả ngay trong cuộc trò chuyện."
+        },
+        {
+          "title": "Dừng và tự động hóa đáng tin cậy",
+          "body": "Sau khi Dừng, tin nhắn trong hàng đợi không bao giờ được gửi vào lượt chạy đã dừng. Tự động hóa bạn đã tắt vẫn tắt sau khi máy thức dậy từ chế độ ngủ, và tin nhắn không còn bị kẹt ở trạng thái đang gửi."
+        },
+        {
+          "title": "Chạy không cần GitHub",
+          "body": "Dự án cục bộ chạy không cần GitHub CLI hay phiên GitHub, và mô hình cục bộ khởi động được trên Windows mới cài."
+        },
+        {
+          "title": "An toàn và ổn định hơn",
+          "body": "Chỉ một bản sao ứng dụng chạy trên hồ sơ của bạn. Terminal che thêm nhiều loại khóa, lịch sử Hoàn tác vẫn còn khi tệp bị hỏng, mức sử dụng hiển thị tài khoản bạn vừa chuyển sang, bản tải mô hình đang tạm dừng vẫn giữ nút Tiếp tục sau khi khởi động lại, và Codex luôn được cập nhật để các mô hình mới trong gói của bạn xuất hiện."
+        }
+      ]
+    },
+    "zh-Hans": {
+      "headline": "决策集中一处，免提语音跟得上节奏",
+      "summary": "在同一个决策列表里批准或拒绝，免提对话等待更少，长命令运行时也能跟进，停止、自动化和本地项目都更可靠。",
+      "sections": [
+        {
+          "title": "决策集中一处",
+          "body": "决策列表现在是批准或拒绝智能体请求的主要位置。相似的批准可以一起处理，也可以逐个处理；点击卡片会直接打开对话中的那条请求。"
+        },
+        {
+          "title": "更整洁的项目和列表",
+          "body": "在项目、任务和自动化中，列表滚动时标题始终可见。任务和决策占满整个宽度，卡片也更紧凑。"
+        },
+        {
+          "title": "与协调者的对话更清爽",
+          "body": "协调者启动一个智能体并立即给它发消息时，你只会看到一次。报告以两行预览打开，整个对话中的文字大小和间距保持一致。"
+        },
+        {
+          "title": "跟得上节奏的免提语音",
+          "body": "免提对话时，第一声更快响起，轻声打断也能被识别，实时文字保持清晰可读；缺少麦克风或权限时，应用会明确告诉你。"
+        },
+        {
+          "title": "可以跟进的长命令",
+          "body": "正在运行的命令会直接在对话中显示已用时间和输出。"
+        },
+        {
+          "title": "可靠的停止和自动化",
+          "body": "停止之后，排队中的消息绝不会发送到已停止的运行中。你关闭的自动化在电脑从睡眠中唤醒后仍保持关闭，消息也不会再卡在发送中。"
+        },
+        {
+          "title": "无需 GitHub 也能用",
+          "body": "本地项目无需 GitHub CLI 或 GitHub 会话即可使用，本地模型在全新安装的 Windows 上也能启动。"
+        },
+        {
+          "title": "更安全、更稳定",
+          "body": "你的配置文件上只运行一个应用副本。终端能隐藏更多类型的密钥，撤销历史在文件损坏时也能保留，用量显示你切换后的账户，暂停的模型下载在重启后仍保留继续按钮，Codex 也会保持最新，让你订阅中的新模型出现。"
+        }
+      ]
+    },
+    "zh-Hant": {
+      "headline": "決策集中一處，免持語音跟得上節奏",
+      "summary": "在同一個決策清單裡核准或拒絕，免持對話等待更少，長指令執行時也能追蹤，停止、自動化和本機專案都更可靠。",
+      "sections": [
+        {
+          "title": "決策集中一處",
+          "body": "決策清單現在是核准或拒絕代理請求的主要位置。相似的核准可以一起處理，也可以逐一處理；點擊卡片會直接打開對話中的那則請求。"
+        },
+        {
+          "title": "更整齊的專案和清單",
+          "body": "在專案、任務和自動化中，清單捲動時標題始終可見。任務和決策佔滿整個寬度，卡片也更精簡。"
+        },
+        {
+          "title": "與協調者的對話更清爽",
+          "body": "協調者啟動一個代理並立即傳訊息給它時，你只會看到一次。報告以兩行預覽開啟，整個對話中的文字大小和間距保持一致。"
+        },
+        {
+          "title": "跟得上節奏的免持語音",
+          "body": "免持對話時，第一聲更快響起，輕聲插話也能被辨識，即時文字保持清楚易讀；缺少麥克風或權限時，應用程式會明確告訴你。"
+        },
+        {
+          "title": "可以追蹤的長指令",
+          "body": "執行中的指令會直接在對話中顯示已用時間和輸出。"
+        },
+        {
+          "title": "可靠的停止和自動化",
+          "body": "停止之後，佇列中的訊息絕不會送進已停止的執行中。你關閉的自動化在電腦從睡眠喚醒後仍保持關閉，訊息也不會再卡在傳送中。"
+        },
+        {
+          "title": "不需要 GitHub 也能用",
+          "body": "本機專案不需要 GitHub CLI 或 GitHub 工作階段即可使用，本機模型在全新安裝的 Windows 上也能啟動。"
+        },
+        {
+          "title": "更安全、更穩定",
+          "body": "你的設定檔上只執行一個應用程式副本。終端機能隱藏更多類型的金鑰，復原記錄在檔案損壞時也能保留，用量顯示你切換後的帳戶，暫停的模型下載在重新啟動後仍保留繼續按鈕，Codex 也會保持最新，讓你訂閱中的新模型出現。"
+        }
+      ]
+    }
+  }
+}
