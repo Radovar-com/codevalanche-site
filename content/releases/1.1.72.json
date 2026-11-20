@@ -1,0 +1,516 @@
+{
+  "version": "1.1.72",
+  "date": "2026-11-20",
+  "copy": {
+    "en": {
+      "headline": "A message goes out once, and Stop then a new message just works",
+      "summary": "Your messages are sent once and survive a restart, the agent works in the folder you chose, the terminal and Preview need fewer clicks, and the app is lighter.",
+      "sections": [
+        {
+          "title": "Each message, once",
+          "body": "A message is sent only once, even if you press Enter twice. After Stop, your next message in the same conversation gets its answer."
+        },
+        {
+          "title": "Back where you left off",
+          "body": "If the app closes while a message is starting, it picks up after the restart with one message and one answer, without duplicates."
+        },
+        {
+          "title": "The right folder, in plain sight",
+          "body": "The agent works in the folder you chose and shows which folder it is."
+        },
+        {
+          "title": "Terminal and Preview with fewer clicks",
+          "body": "The terminal takes the keyboard on the first click, and Ctrl+F searches inside it. Preview finds your project's page by itself."
+        },
+        {
+          "title": "No duplicate pull requests",
+          "body": "Pressing Create PR again shows the pull request that is already open."
+        },
+        {
+          "title": "Lighter on your PC",
+          "body": "The app is lighter and writes less to disk. Its history stays under 200 MB and remains complete after a restart."
+        }
+      ]
+    },
+    "ar": {
+      "headline": "تُرسل الرسالة مرة واحدة، وبعد الإيقاف تعمل الرسالة التالية",
+      "summary": "تُرسل الرسائل مرة واحدة وتصمد بعد إعادة التشغيل، ويعمل الوكيل في المجلد الذي اخترته، ويحتاج الطرفية والمعاينة إلى نقرات أقل، وأصبح التطبيق أخف.",
+      "sections": [
+        {
+          "title": "كل رسالة مرة واحدة",
+          "body": "تُرسل الرسالة مرة واحدة فقط حتى لو ضغطت Enter مرتين. وبعد الإيقاف تتلقى رسالتك التالية في المحادثة نفسها ردها."
+        },
+        {
+          "title": "تابع من حيث توقفت",
+          "body": "إذا أُغلق التطبيق أثناء بدء رسالة، فإنه يتابع بعد إعادة التشغيل برسالة واحدة ورد واحد، دون تكرار."
+        },
+        {
+          "title": "المجلد الصحيح أمام عينيك",
+          "body": "يعمل الوكيل في المجلد الذي اخترته ويعرض أي مجلد هو."
+        },
+        {
+          "title": "الطرفية والمعاينة بنقرات أقل",
+          "body": "تأخذ الطرفية لوحة المفاتيح من النقرة الأولى، ويبحث Ctrl+F داخلها. وتجد المعاينة صفحة مشروعك بنفسها."
+        },
+        {
+          "title": "لا طلبات سحب مكررة",
+          "body": "عند الضغط على Create PR مرة أخرى ترى طلب السحب المفتوح بالفعل."
+        },
+        {
+          "title": "أخف على حاسوبك",
+          "body": "أصبح التطبيق أخف ويكتب أقل على القرص. ويبقى سجله أقل من 200 ميغابايت ويظل كاملًا بعد إعادة التشغيل."
+        }
+      ]
+    },
+    "de": {
+      "headline": "Eine Nachricht geht nur einmal raus, und nach Stopp klappt die nächste",
+      "summary": "Nachrichten werden nur einmal gesendet und überstehen einen Neustart, der Agent arbeitet im gewählten Ordner, Terminal und Vorschau brauchen weniger Klicks, und die App ist schlanker.",
+      "sections": [
+        {
+          "title": "Jede Nachricht nur einmal",
+          "body": "Eine Nachricht wird nur einmal gesendet, auch wenn du zweimal Enter drückst. Nach Stopp bekommt deine nächste Nachricht im selben Gespräch ihre Antwort."
+        },
+        {
+          "title": "Weiter, wo du aufgehört hast",
+          "body": "Schließt sich die App, während eine Nachricht startet, macht sie nach dem Neustart mit einer Nachricht und einer Antwort weiter, ohne Doppelungen."
+        },
+        {
+          "title": "Der richtige Ordner, gut sichtbar",
+          "body": "Der Agent arbeitet in dem Ordner, den du gewählt hast, und zeigt an, welcher es ist."
+        },
+        {
+          "title": "Terminal und Vorschau mit weniger Klicks",
+          "body": "Das Terminal übernimmt die Tastatur beim ersten Klick, und Strg+F sucht darin. Die Vorschau findet die Seite deines Projekts von selbst."
+        },
+        {
+          "title": "Keine doppelten Pull Requests",
+          "body": "Drückst du erneut auf Create PR, siehst du den Pull Request, der schon offen ist."
+        },
+        {
+          "title": "Leichter für deinen PC",
+          "body": "Die App ist schlanker und schreibt weniger auf die Festplatte. Ihr Verlauf bleibt unter 200 MB und ist nach einem Neustart vollständig."
+        }
+      ]
+    },
+    "es": {
+      "headline": "Cada mensaje sale una sola vez, y tras Detener el siguiente funciona",
+      "summary": "Los mensajes se envían una sola vez y sobreviven a un reinicio, el agente trabaja en la carpeta que elegiste, la terminal y la vista previa piden menos clics y la app es más ligera.",
+      "sections": [
+        {
+          "title": "Cada mensaje, una vez",
+          "body": "Un mensaje se envía una sola vez, aunque pulses Enter dos veces. Después de Detener, tu siguiente mensaje en la misma conversación recibe respuesta."
+        },
+        {
+          "title": "Sigue donde lo dejaste",
+          "body": "Si la app se cierra justo cuando empieza un mensaje, tras el reinicio continúa con un mensaje y una respuesta, sin duplicados."
+        },
+        {
+          "title": "La carpeta correcta, a la vista",
+          "body": "El agente trabaja en la carpeta que elegiste y muestra cuál es."
+        },
+        {
+          "title": "Terminal y vista previa con menos clics",
+          "body": "La terminal toma el teclado con el primer clic y Ctrl+F busca dentro de ella. La vista previa encuentra sola la página de tu proyecto."
+        },
+        {
+          "title": "Sin pull requests duplicados",
+          "body": "Si vuelves a pulsar Create PR, ves el pull request que ya está abierto."
+        },
+        {
+          "title": "Más ligera para tu PC",
+          "body": "La app es más ligera y escribe menos en el disco. Su historial se mantiene por debajo de 200 MB y sigue completo tras un reinicio."
+        }
+      ]
+    },
+    "fr": {
+      "headline": "Un message part une seule fois, et après Stop le suivant fonctionne",
+      "summary": "Les messages partent une seule fois et survivent à un redémarrage, l'agent travaille dans le dossier choisi, le terminal et l'aperçu demandent moins de clics, et l'application est plus légère.",
+      "sections": [
+        {
+          "title": "Chaque message, une seule fois",
+          "body": "Un message n'est envoyé qu'une fois, même si vous appuyez deux fois sur Entrée. Après Stop, votre message suivant dans la même conversation obtient sa réponse."
+        },
+        {
+          "title": "Reprendre là où vous en étiez",
+          "body": "Si l'application se ferme pendant qu'un message démarre, elle reprend après le redémarrage avec un message et une réponse, sans doublon."
+        },
+        {
+          "title": "Le bon dossier, bien visible",
+          "body": "L'agent travaille dans le dossier que vous avez choisi et indique lequel."
+        },
+        {
+          "title": "Terminal et aperçu en moins de clics",
+          "body": "Le terminal prend le clavier dès le premier clic, et Ctrl+F y lance une recherche. L'aperçu trouve tout seul la page de votre projet."
+        },
+        {
+          "title": "Plus de pull requests en double",
+          "body": "Si vous appuyez de nouveau sur Create PR, vous voyez la pull request déjà ouverte."
+        },
+        {
+          "title": "Plus léger pour votre PC",
+          "body": "L'application est plus légère et écrit moins sur le disque. Son historique reste sous 200 Mo et reste complet après un redémarrage."
+        }
+      ]
+    },
+    "hi": {
+      "headline": "संदेश एक ही बार जाता है, और Stop के बाद अगला संदेश चलता है",
+      "summary": "संदेश एक ही बार भेजे जाते हैं और रीस्टार्ट के बाद भी बने रहते हैं, एजेंट आपके चुने फ़ोल्डर में काम करता है, टर्मिनल और प्रीव्यू में कम क्लिक लगते हैं, और ऐप हल्का हो गया है।",
+      "sections": [
+        {
+          "title": "हर संदेश, एक बार",
+          "body": "Enter दो बार दबाने पर भी संदेश केवल एक बार भेजा जाता है। Stop के बाद उसी बातचीत में आपके अगले संदेश को जवाब मिलता है।"
+        },
+        {
+          "title": "जहाँ छोड़ा था, वहीं से",
+          "body": "अगर संदेश शुरू होते समय ऐप बंद हो जाए, तो रीस्टार्ट के बाद वह एक संदेश और एक जवाब के साथ, बिना दोहराव के, आगे बढ़ता है।"
+        },
+        {
+          "title": "सही फ़ोल्डर, सामने",
+          "body": "एजेंट आपके चुने फ़ोल्डर में काम करता है और दिखाता है कि वह कौन सा फ़ोल्डर है।"
+        },
+        {
+          "title": "कम क्लिक में टर्मिनल और प्रीव्यू",
+          "body": "टर्मिनल पहले क्लिक पर ही कीबोर्ड ले लेता है, और Ctrl+F उसके अंदर खोजता है। प्रीव्यू आपके प्रोजेक्ट का पेज खुद ढूँढ लेता है।"
+        },
+        {
+          "title": "दोहरे pull request नहीं",
+          "body": "Create PR फिर से दबाने पर पहले से खुला pull request दिखता है।"
+        },
+        {
+          "title": "आपके PC पर हल्का",
+          "body": "ऐप हल्का है और डिस्क पर कम लिखता है। इसका इतिहास 200 MB से कम रहता है और रीस्टार्ट के बाद पूरा रहता है।"
+        }
+      ]
+    },
+    "id": {
+      "headline": "Pesan terkirim sekali saja, dan setelah Stop pesan berikutnya berjalan",
+      "summary": "Pesan dikirim sekali saja dan tetap aman setelah mulai ulang, agen bekerja di folder pilihan Anda, terminal dan pratinjau butuh lebih sedikit klik, dan aplikasinya lebih ringan.",
+      "sections": [
+        {
+          "title": "Setiap pesan, sekali",
+          "body": "Pesan hanya dikirim sekali, meski Anda menekan Enter dua kali. Setelah Stop, pesan berikutnya di percakapan yang sama mendapat jawaban."
+        },
+        {
+          "title": "Lanjut dari tempat terakhir",
+          "body": "Jika aplikasi tertutup saat sebuah pesan mulai dikirim, setelah mulai ulang aplikasi melanjutkan dengan satu pesan dan satu jawaban, tanpa duplikat."
+        },
+        {
+          "title": "Folder yang tepat, terlihat jelas",
+          "body": "Agen bekerja di folder yang Anda pilih dan menunjukkan folder mana itu."
+        },
+        {
+          "title": "Terminal dan pratinjau dengan lebih sedikit klik",
+          "body": "Terminal mengambil keyboard pada klik pertama, dan Ctrl+F mencari di dalamnya. Pratinjau menemukan sendiri halaman proyek Anda."
+        },
+        {
+          "title": "Tanpa pull request ganda",
+          "body": "Jika Anda menekan Create PR lagi, Anda melihat pull request yang sudah terbuka."
+        },
+        {
+          "title": "Lebih ringan di PC Anda",
+          "body": "Aplikasi lebih ringan dan lebih sedikit menulis ke disk. Riwayatnya tetap di bawah 200 MB dan tetap lengkap setelah mulai ulang."
+        }
+      ]
+    },
+    "it": {
+      "headline": "Un messaggio parte una sola volta, e dopo Stop il successivo funziona",
+      "summary": "I messaggi partono una sola volta e superano un riavvio, l'agente lavora nella cartella che hai scelto, terminale e anteprima richiedono meno clic e l'app è più leggera.",
+      "sections": [
+        {
+          "title": "Ogni messaggio, una volta",
+          "body": "Un messaggio viene inviato una sola volta, anche se premi Invio due volte. Dopo Stop, il messaggio successivo nella stessa conversazione riceve risposta."
+        },
+        {
+          "title": "Riprendi da dove eri",
+          "body": "Se l'app si chiude mentre un messaggio sta partendo, dopo il riavvio continua con un messaggio e una risposta, senza duplicati."
+        },
+        {
+          "title": "La cartella giusta, in vista",
+          "body": "L'agente lavora nella cartella che hai scelto e mostra qual è."
+        },
+        {
+          "title": "Terminale e anteprima con meno clic",
+          "body": "Il terminale prende la tastiera al primo clic e Ctrl+F cerca al suo interno. L'anteprima trova da sola la pagina del tuo progetto."
+        },
+        {
+          "title": "Niente pull request doppie",
+          "body": "Se premi di nuovo Create PR, vedi la pull request già aperta."
+        },
+        {
+          "title": "Più leggera per il tuo PC",
+          "body": "L'app è più leggera e scrive meno sul disco. La cronologia resta sotto i 200 MB ed è completa dopo un riavvio."
+        }
+      ]
+    },
+    "ja": {
+      "headline": "メッセージは一度だけ送信、停止のあとも次のメッセージがそのまま動く",
+      "summary": "メッセージは一度だけ送信され再起動後も残ります。エージェントは選んだフォルダーで作業し、ターミナルとプレビューはクリックが減り、アプリも軽くなりました。",
+      "sections": [
+        {
+          "title": "メッセージは一度だけ",
+          "body": "Enter を2回押しても、メッセージは一度だけ送信されます。停止したあと、同じ会話の次のメッセージにも返答が届きます。"
+        },
+        {
+          "title": "中断したところから再開",
+          "body": "メッセージの開始中にアプリが閉じても、再起動後は重複なしで、1つのメッセージと1つの返答として続きます。"
+        },
+        {
+          "title": "正しいフォルダーがひと目でわかる",
+          "body": "エージェントは選んだフォルダーで作業し、どのフォルダーかを表示します。"
+        },
+        {
+          "title": "ターミナルとプレビューがより少ないクリックで",
+          "body": "ターミナルは最初のクリックでキーボード入力を受け付け、Ctrl+F でその中を検索できます。プレビューはプロジェクトのページを自分で見つけます。"
+        },
+        {
+          "title": "プルリクエストの重複なし",
+          "body": "もう一度 Create PR を押すと、すでに開いているプルリクエストが表示されます。"
+        },
+        {
+          "title": "PC にやさしく軽量に",
+          "body": "アプリは軽くなり、ディスクへの書き込みも減りました。履歴は 200 MB 未満に保たれ、再起動後も欠けません。"
+        }
+      ]
+    },
+    "ko": {
+      "headline": "메시지는 한 번만 전송되고, 중지 후 다음 메시지도 바로 작동합니다",
+      "summary": "메시지는 한 번만 전송되고 재시작 후에도 남으며, 에이전트는 선택한 폴더에서 작업하고, 터미널과 미리 보기는 클릭이 줄었으며, 앱이 더 가벼워졌습니다.",
+      "sections": [
+        {
+          "title": "메시지는 한 번만",
+          "body": "Enter를 두 번 눌러도 메시지는 한 번만 전송됩니다. 중지한 뒤 같은 대화의 다음 메시지도 답을 받습니다."
+        },
+        {
+          "title": "멈춘 곳에서 이어서",
+          "body": "메시지가 시작되는 중에 앱이 닫혀도, 재시작 후 중복 없이 메시지 하나와 답 하나로 이어집니다."
+        },
+        {
+          "title": "올바른 폴더를 한눈에",
+          "body": "에이전트는 선택한 폴더에서 작업하고 어떤 폴더인지 보여 줍니다."
+        },
+        {
+          "title": "더 적은 클릭으로 터미널과 미리 보기",
+          "body": "터미널은 첫 클릭에 키보드를 받고, Ctrl+F로 터미널 안을 검색합니다. 미리 보기는 프로젝트 페이지를 스스로 찾습니다."
+        },
+        {
+          "title": "중복 풀 리퀘스트 없음",
+          "body": "Create PR을 다시 누르면 이미 열려 있는 풀 리퀘스트가 표시됩니다."
+        },
+        {
+          "title": "PC에 더 가볍게",
+          "body": "앱이 더 가벼워지고 디스크에 덜 씁니다. 기록은 200MB 미만으로 유지되며 재시작 후에도 완전합니다."
+        }
+      ]
+    },
+    "pt-BR": {
+      "headline": "Cada mensagem sai uma vez só, e depois de Parar a próxima funciona",
+      "summary": "As mensagens são enviadas uma vez só e resistem a um reinício, o agente trabalha na pasta que você escolheu, o terminal e a pré-visualização pedem menos cliques e o app ficou mais leve.",
+      "sections": [
+        {
+          "title": "Cada mensagem, uma vez",
+          "body": "Uma mensagem é enviada uma vez só, mesmo se você apertar Enter duas vezes. Depois de Parar, sua próxima mensagem na mesma conversa recebe resposta."
+        },
+        {
+          "title": "Continue de onde parou",
+          "body": "Se o app fechar enquanto uma mensagem está começando, depois do reinício ele continua com uma mensagem e uma resposta, sem duplicatas."
+        },
+        {
+          "title": "A pasta certa, à vista",
+          "body": "O agente trabalha na pasta que você escolheu e mostra qual é."
+        },
+        {
+          "title": "Terminal e pré-visualização com menos cliques",
+          "body": "O terminal assume o teclado no primeiro clique, e Ctrl+F pesquisa dentro dele. A pré-visualização encontra sozinha a página do seu projeto."
+        },
+        {
+          "title": "Sem pull requests duplicados",
+          "body": "Se você apertar Create PR de novo, verá o pull request que já está aberto."
+        },
+        {
+          "title": "Mais leve no seu PC",
+          "body": "O app está mais leve e grava menos no disco. O histórico fica abaixo de 200 MB e continua completo depois de um reinício."
+        }
+      ]
+    },
+    "ro": {
+      "headline": "Un mesaj pleacă o singură dată, iar după Stop următorul mesaj merge",
+      "summary": "Mesajele se trimit o singură dată și rezistă unei reporniri, agentul lucrează în folderul ales de tine, terminalul și Previzualizarea cer mai puține clicuri, iar aplicația e mai ușoară.",
+      "sections": [
+        {
+          "title": "Fiecare mesaj, o singură dată",
+          "body": "Un mesaj se trimite o singură dată, chiar dacă apeși Enter de două ori. După Stop, următorul mesaj din aceeași conversație primește răspuns."
+        },
+        {
+          "title": "Continui de unde ai rămas",
+          "body": "Dacă aplicația se închide chiar când pornește un mesaj, după repornire continuă cu un singur mesaj și un singur răspuns, fără dubluri."
+        },
+        {
+          "title": "Folderul potrivit, la vedere",
+          "body": "Agentul lucrează în folderul pe care l-ai ales și îți arată care este."
+        },
+        {
+          "title": "Terminal și Previzualizare cu mai puține clicuri",
+          "body": "Terminalul preia tastatura de la primul clic, iar Ctrl+F caută în el. Previzualizarea găsește singură pagina proiectului tău."
+        },
+        {
+          "title": "Fără pull requesturi dublate",
+          "body": "Dacă apeși din nou Create PR, vezi pull requestul care e deja deschis."
+        },
+        {
+          "title": "Mai ușoară pentru PC-ul tău",
+          "body": "Aplicația e mai ușoară și scrie mai puțin pe disc. Istoricul rămâne sub 200 MB și e complet după repornire."
+        }
+      ]
+    },
+    "ru": {
+      "headline": "Сообщение уходит один раз, а после «Стоп» следующее работает",
+      "summary": "Сообщения отправляются один раз и переживают перезапуск, агент работает в выбранной вами папке, терминал и предпросмотр требуют меньше кликов, а приложение стало легче.",
+      "sections": [
+        {
+          "title": "Каждое сообщение — один раз",
+          "body": "Сообщение отправляется только один раз, даже если нажать Enter дважды. После «Стоп» следующее сообщение в том же разговоре получает ответ."
+        },
+        {
+          "title": "Продолжение с того же места",
+          "body": "Если приложение закроется, когда сообщение только отправляется, после перезапуска оно продолжит с одним сообщением и одним ответом, без дублей."
+        },
+        {
+          "title": "Нужная папка на виду",
+          "body": "Агент работает в выбранной вами папке и показывает, в какой именно."
+        },
+        {
+          "title": "Терминал и предпросмотр за меньшее число кликов",
+          "body": "Терминал получает клавиатуру с первого клика, а Ctrl+F ищет прямо в нём. Предпросмотр сам находит страницу вашего проекта."
+        },
+        {
+          "title": "Без повторных pull request",
+          "body": "Если снова нажать Create PR, вы увидите уже открытый pull request."
+        },
+        {
+          "title": "Легче для вашего ПК",
+          "body": "Приложение стало легче и меньше пишет на диск. Его история остаётся меньше 200 МБ и сохраняется полностью после перезапуска."
+        }
+      ]
+    },
+    "tr": {
+      "headline": "Bir mesaj yalnızca bir kez gider, Durdur'dan sonra yenisi çalışır",
+      "summary": "Mesajlar bir kez gönderilir ve yeniden başlatmaya dayanır, ajan seçtiğin klasörde çalışır, terminal ve önizleme daha az tıklama ister, uygulama da daha hafif.",
+      "sections": [
+        {
+          "title": "Her mesaj bir kez",
+          "body": "Enter'a iki kez bassan bile bir mesaj yalnızca bir kez gönderilir. Durdur'dan sonra aynı konuşmadaki bir sonraki mesajın yanıt alır."
+        },
+        {
+          "title": "Kaldığın yerden devam",
+          "body": "Bir mesaj başlarken uygulama kapanırsa, yeniden başlatmadan sonra tek mesaj ve tek yanıtla, kopya olmadan devam eder."
+        },
+        {
+          "title": "Doğru klasör, göz önünde",
+          "body": "Ajan seçtiğin klasörde çalışır ve hangi klasör olduğunu gösterir."
+        },
+        {
+          "title": "Daha az tıklamayla terminal ve önizleme",
+          "body": "Terminal klavyeyi ilk tıklamada alır ve Ctrl+F onun içinde arar. Önizleme projenin sayfasını kendisi bulur."
+        },
+        {
+          "title": "Çift pull request yok",
+          "body": "Create PR'ye yeniden bastığında zaten açık olan pull request'i görürsün."
+        },
+        {
+          "title": "Bilgisayarın için daha hafif",
+          "body": "Uygulama daha hafif ve diske daha az yazar. Geçmişi 200 MB'ın altında kalır ve yeniden başlatmadan sonra eksiksizdir."
+        }
+      ]
+    },
+    "vi": {
+      "headline": "Tin nhắn chỉ gửi một lần, và sau khi Dừng tin tiếp theo vẫn chạy",
+      "summary": "Tin nhắn chỉ gửi một lần và vẫn còn sau khi khởi động lại, tác tử làm việc trong thư mục bạn chọn, terminal và bản xem trước cần ít lần nhấp hơn, và ứng dụng nhẹ hơn.",
+      "sections": [
+        {
+          "title": "Mỗi tin nhắn, một lần",
+          "body": "Tin nhắn chỉ được gửi một lần, kể cả khi bạn nhấn Enter hai lần. Sau khi Dừng, tin nhắn tiếp theo trong cùng cuộc trò chuyện sẽ nhận được câu trả lời."
+        },
+        {
+          "title": "Tiếp tục từ chỗ cũ",
+          "body": "Nếu ứng dụng đóng lại đúng lúc một tin nhắn bắt đầu, sau khi khởi động lại nó tiếp tục với một tin nhắn và một câu trả lời, không bị trùng."
+        },
+        {
+          "title": "Đúng thư mục, dễ thấy",
+          "body": "Tác tử làm việc trong thư mục bạn đã chọn và cho biết đó là thư mục nào."
+        },
+        {
+          "title": "Terminal và xem trước với ít lần nhấp hơn",
+          "body": "Terminal nhận bàn phím ngay lần nhấp đầu tiên, và Ctrl+F tìm kiếm bên trong nó. Bản xem trước tự tìm trang của dự án bạn."
+        },
+        {
+          "title": "Không còn pull request trùng",
+          "body": "Khi nhấn Create PR lần nữa, bạn thấy pull request đã mở sẵn."
+        },
+        {
+          "title": "Nhẹ hơn cho máy của bạn",
+          "body": "Ứng dụng nhẹ hơn và ghi ít hơn vào ổ đĩa. Lịch sử luôn dưới 200 MB và vẫn đầy đủ sau khi khởi động lại."
+        }
+      ]
+    },
+    "zh-Hans": {
+      "headline": "消息只发送一次，停止后下一条消息照常工作",
+      "summary": "消息只发送一次，重启后也不会丢失；智能体在你选择的文件夹中工作；终端和预览需要的点击更少；应用也更轻了。",
+      "sections": [
+        {
+          "title": "每条消息只发一次",
+          "body": "即使按两次 Enter，消息也只发送一次。停止之后，同一对话中的下一条消息照样会得到回复。"
+        },
+        {
+          "title": "从中断处继续",
+          "body": "如果应用在消息刚开始发送时关闭，重启后会以一条消息和一个回复继续，不会重复。"
+        },
+        {
+          "title": "正确的文件夹，一目了然",
+          "body": "智能体在你选择的文件夹中工作，并显示是哪个文件夹。"
+        },
+        {
+          "title": "终端和预览，点击更少",
+          "body": "终端第一次点击就能接收键盘输入，按 Ctrl+F 可在终端内搜索。预览会自己找到你项目的页面。"
+        },
+        {
+          "title": "不再重复创建拉取请求",
+          "body": "再次点击 Create PR 时，会显示已经打开的拉取请求。"
+        },
+        {
+          "title": "对电脑更轻",
+          "body": "应用更轻，写入磁盘更少。历史记录保持在 200 MB 以下，重启后依然完整。"
+        }
+      ]
+    },
+    "zh-Hant": {
+      "headline": "訊息只送出一次，停止後下一則訊息照常運作",
+      "summary": "訊息只送出一次，重新啟動後也不會遺失；代理程式在你選擇的資料夾中工作；終端機和預覽需要的點擊更少；應用程式也更輕了。",
+      "sections": [
+        {
+          "title": "每則訊息只送一次",
+          "body": "即使按兩次 Enter，訊息也只會送出一次。停止之後，同一對話中的下一則訊息照樣會得到回覆。"
+        },
+        {
+          "title": "從中斷處繼續",
+          "body": "如果應用程式在訊息剛開始送出時關閉，重新啟動後會以一則訊息和一個回覆繼續，不會重複。"
+        },
+        {
+          "title": "正確的資料夾，一目了然",
+          "body": "代理程式在你選擇的資料夾中工作，並顯示是哪個資料夾。"
+        },
+        {
+          "title": "終端機和預覽，點擊更少",
+          "body": "終端機第一次點擊就能接收鍵盤輸入，按 Ctrl+F 可在終端機內搜尋。預覽會自己找到你專案的頁面。"
+        },
+        {
+          "title": "不再重複建立提取要求",
+          "body": "再次點擊 Create PR 時，會顯示已經開啟的提取要求。"
+        },
+        {
+          "title": "對電腦更輕",
+          "body": "應用程式更輕，寫入磁碟更少。歷史紀錄保持在 200 MB 以下，重新啟動後依然完整。"
+        }
+      ]
+    }
+  }
+}
