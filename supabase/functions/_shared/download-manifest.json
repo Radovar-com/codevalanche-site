@@ -7,15 +7,15 @@
       "siteId": "codevalanche",
       "platform": "windows",
       "architecture": "x64",
-      "releaseId": "1.1.71",
+      "releaseId": "1.1.72",
       "artifactId": "windows-x64-setup",
       "qualified": true,
-      "targetUrl": "https://github.com/Radovar-com/codevalanche-desktop-releases/releases/download/v1.1.71/Codevalanche-Desktop-Setup-1.1.71-stable-e533718bb6ae.exe",
+      "targetUrl": "https://github.com/Radovar-com/codevalanche-desktop-releases/releases/download/v1.1.72/Codevalanche-Desktop-Setup-1.1.72-stable-4b7b2cea861f.exe",
       "display": {
-        "version": "1.1.71",
-        "fileName": "Codevalanche-Desktop-Setup-1.1.71-stable-e533718bb6ae.exe",
-        "sizeBytes": 357733546,
-        "sha256": "3bc00419d07175ca6e3e7fc261e431a6cae21826c10e8f910557e28c038596dc"
+        "version": "1.1.72",
+        "fileName": "Codevalanche-Desktop-Setup-1.1.72-stable-4b7b2cea861f.exe",
+        "sizeBytes": 358408967,
+        "sha256": "64007c6623ee19c3c67e4a231060dfc138756bf204afbd9c2eb0f67af7d17dc0"
       }
     }
   ]
