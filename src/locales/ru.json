@@ -164,7 +164,7 @@
   "Cannot scan? Enter the key manually": "Не удаётся отсканировать? Введите ключ вручную",
   "Change email": "Изменить email",
   "Changed: 3": "Изменено: 3",
-  "Changelog": "Список изменений",
+  "Changelog": "Что нового",
   "Changelog | Codevalanche": "Список изменений | Codevalanche",
   "ChatGPT subscription": "Подписка ChatGPT",
   "Check that the server is running and the configured address and port match it. Verify access from the machine running Codevalanche.": "Убедитесь, что сервер работает, а заданные адрес и порт ему соответствуют. Проверьте доступ с компьютера, на котором работает Codevalanche.",

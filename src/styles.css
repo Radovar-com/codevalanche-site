@@ -710,3 +710,11 @@ h3 { font-weight: 500; letter-spacing: -.02em; }
 .cl-detail { color: var(--ink-lead); }
 .cl-rail-list, .cl-rail-empty { border-left-color: var(--line); }
 @media (max-width: 1180px) { .changelog-layout { border-inline: 0; padding-inline: 0; } }
+
+/* Header: each link stays on one line; below 1100px the menu button carries the links. */
+.desktop-nav a { white-space: nowrap; }
+@media (max-width: 1100px) {
+  .desktop-nav { display: none; }
+  .mobile-nav { display: block; }
+  .nav-actions { margin-left: auto; }
+}
