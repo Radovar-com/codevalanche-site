@@ -1,0 +1,516 @@
+{
+  "version": "1.1.73",
+  "date": "2026-11-22",
+  "copy": {
+    "en": {
+      "headline": "A new look, Commit & PR in one click, and Antigravity as an agent",
+      "summary": "The app has a new look with four themes, projects show what is waiting for you, a pull request takes one click, and Antigravity joins your agents.",
+      "sections": [
+        {
+          "title": "A new look",
+          "body": "A navigation rail you can keep narrow or wide, cleaner tabs and side panels in their own frames. Projects get covers, and there are four themes: Codevalanche, Obsidian, Titanium and Bronze, each in light and dark."
+        },
+        {
+          "title": "See what is waiting for you",
+          "body": "The Projects board shows which projects have a question or an approval for you. Cards take labels, can be snoozed or marked To review, and a conversation can be saved as Markdown."
+        },
+        {
+          "title": "Commit & PR in one click",
+          "body": "Commit your changes and open a pull request from the conversation. The bar shows the pull request and its checks live, and you can review, approve, merge and comment on changed lines from the PR panel."
+        },
+        {
+          "title": "Antigravity as an agent",
+          "body": "Sign in with Google and give tasks to Antigravity like any other agent. Its limits show under Limits left."
+        },
+        {
+          "title": "Hand work over",
+          "body": "Pass a conversation from one agent to another, and open a project, a conversation or a file in VS Code, Cursor or Windsurf."
+        },
+        {
+          "title": "Picks up where it stopped",
+          "body": "After you reopen the app, Continue resumes the run in the same conversation. The terminal, its output and your browser sign-ins survive a restart, and approval cards name the command or the file."
+        }
+      ]
+    },
+    "ar": {
+      "headline": "مظهر جديد، وCommit & PR بنقرة واحدة، وAntigravity كوكيل",
+      "summary": "للتطبيق مظهر جديد بأربعة مظاهر، والمشاريع تعرض ما ينتظرك، وطلب الدمج يتم بنقرة واحدة، وينضم Antigravity إلى وكلائك.",
+      "sections": [
+        {
+          "title": "مظهر جديد",
+          "body": "شريط تنقل يمكنك إبقاؤه ضيقًا أو عريضًا، وعلامات تبويب أنظف، ولوحات جانبية في إطاراتها الخاصة. للمشاريع أغلفة، وهناك أربعة مظاهر: Codevalanche وObsidian وTitanium وBronze، لكل منها فاتح وداكن."
+        },
+        {
+          "title": "اعرف ما ينتظرك",
+          "body": "تعرض لوحة المشاريع أي المشاريع لديها سؤال أو موافقة لك. يمكن وضع تسميات على البطاقات أو تأجيلها أو تعليمها للمراجعة، ويمكن حفظ المحادثة بصيغة Markdown."
+        },
+        {
+          "title": "Commit & PR بنقرة واحدة",
+          "body": "احفظ تغييراتك وافتح طلب دمج من المحادثة نفسها. يعرض الشريط طلب الدمج وفحوصاته مباشرة، ومن لوحة PR يمكنك المراجعة والموافقة والدمج والتعليق على الأسطر المتغيرة."
+        },
+        {
+          "title": "Antigravity كوكيل",
+          "body": "سجّل الدخول باستخدام Google وأعطِ Antigravity مهام مثل أي وكيل آخر. تظهر حدوده ضمن الحدود المتبقية."
+        },
+        {
+          "title": "سلّم العمل",
+          "body": "انقل محادثة من وكيل إلى آخر، وافتح مشروعًا أو محادثة أو ملفًا في VS Code أو Cursor أو Windsurf."
+        },
+        {
+          "title": "يكمل من حيث توقف",
+          "body": "بعد إعادة فتح التطبيق، يستأنف زر المتابعة العمل في المحادثة نفسها. تبقى الطرفية ومخرجاتها وتسجيلات الدخول في المتصفح بعد إعادة التشغيل، وتذكر بطاقات الموافقة الأمر أو الملف."
+        }
+      ]
+    },
+    "de": {
+      "headline": "Neuer Look, Commit & PR mit einem Klick und Antigravity als Agent",
+      "summary": "Die App hat einen neuen Look mit vier Designs, Projekte zeigen, was auf dich wartet, ein Pull Request braucht einen Klick, und Antigravity kommt zu deinen Agenten.",
+      "sections": [
+        {
+          "title": "Ein neuer Look",
+          "body": "Eine Navigationsleiste, schmal oder breit, aufgeräumte Tabs und Seitenbereiche in eigenen Rahmen. Projekte bekommen Cover, und es gibt vier Designs: Codevalanche, Obsidian, Titanium und Bronze, jeweils hell und dunkel."
+        },
+        {
+          "title": "Sieh, was auf dich wartet",
+          "body": "Die Projektübersicht zeigt, welche Projekte eine Frage oder Freigabe für dich haben. Karten bekommen Labels, lassen sich zurückstellen oder als Zu prüfen markieren, und ein Gespräch lässt sich als Markdown speichern."
+        },
+        {
+          "title": "Commit & PR mit einem Klick",
+          "body": "Committe deine Änderungen und öffne einen Pull Request direkt im Gespräch. Die Leiste zeigt den Pull Request und seine Checks live, und im PR-Bereich kannst du prüfen, freigeben, mergen und geänderte Zeilen kommentieren."
+        },
+        {
+          "title": "Antigravity als Agent",
+          "body": "Melde dich mit Google an und gib Antigravity Aufgaben wie jedem anderen Agenten. Seine Limits stehen unter Verbleibende Limits."
+        },
+        {
+          "title": "Arbeit übergeben",
+          "body": "Gib ein Gespräch von einem Agenten an einen anderen weiter und öffne ein Projekt, ein Gespräch oder eine Datei in VS Code, Cursor oder Windsurf."
+        },
+        {
+          "title": "Macht dort weiter, wo es aufgehört hat",
+          "body": "Nach dem erneuten Öffnen setzt Fortsetzen den Lauf im selben Gespräch fort. Terminal, Ausgabe und Browser-Anmeldungen überstehen einen Neustart, und Freigabekarten nennen den Befehl oder die Datei."
+        }
+      ]
+    },
+    "es": {
+      "headline": "Nuevo aspecto, Commit & PR en un clic y Antigravity como agente",
+      "summary": "La aplicación estrena aspecto con cuatro temas, los proyectos muestran lo que te espera, un pull request se hace en un clic y Antigravity se une a tus agentes.",
+      "sections": [
+        {
+          "title": "Un aspecto nuevo",
+          "body": "Una barra de navegación estrecha o ancha, pestañas más limpias y paneles laterales en sus propios marcos. Los proyectos tienen portada y hay cuatro temas: Codevalanche, Obsidian, Titanium y Bronze, cada uno claro y oscuro."
+        },
+        {
+          "title": "Mira lo que te espera",
+          "body": "El tablero de Proyectos muestra qué proyectos tienen una pregunta o una aprobación para ti. Las tarjetas llevan etiquetas, se pueden posponer o marcar Para revisar, y una conversación se puede guardar como Markdown."
+        },
+        {
+          "title": "Commit & PR en un clic",
+          "body": "Haz commit de tus cambios y abre un pull request desde la conversación. La barra muestra el pull request y sus comprobaciones en vivo, y desde el panel PR puedes revisar, aprobar, fusionar y comentar líneas cambiadas."
+        },
+        {
+          "title": "Antigravity como agente",
+          "body": "Inicia sesión con Google y dale tareas a Antigravity como a cualquier otro agente. Sus límites aparecen en Límites restantes."
+        },
+        {
+          "title": "Pasa el trabajo a otro",
+          "body": "Pasa una conversación de un agente a otro y abre un proyecto, una conversación o un archivo en VS Code, Cursor o Windsurf."
+        },
+        {
+          "title": "Sigue donde se quedó",
+          "body": "Al volver a abrir la aplicación, Continuar retoma el trabajo en la misma conversación. El terminal, su salida y tus sesiones del navegador sobreviven a un reinicio, y las tarjetas de aprobación nombran el comando o el archivo."
+        }
+      ]
+    },
+    "fr": {
+      "headline": "Nouveau look, Commit & PR en un clic et Antigravity comme agent",
+      "summary": "L'application change de look avec quatre thèmes, les projets montrent ce qui vous attend, une pull request se fait en un clic et Antigravity rejoint vos agents.",
+      "sections": [
+        {
+          "title": "Un nouveau look",
+          "body": "Une barre de navigation étroite ou large, des onglets plus nets et des panneaux latéraux dans leurs propres cadres. Les projets ont une couverture et il y a quatre thèmes : Codevalanche, Obsidian, Titanium et Bronze, chacun clair et sombre."
+        },
+        {
+          "title": "Voyez ce qui vous attend",
+          "body": "Le tableau Projets montre quels projets ont une question ou une approbation pour vous. Les cartes prennent des étiquettes, peuvent être reportées ou marquées À revoir, et une conversation peut être enregistrée en Markdown."
+        },
+        {
+          "title": "Commit & PR en un clic",
+          "body": "Validez vos modifications et ouvrez une pull request depuis la conversation. La barre montre la pull request et ses vérifications en direct, et le panneau PR permet de relire, approuver, fusionner et commenter les lignes modifiées."
+        },
+        {
+          "title": "Antigravity comme agent",
+          "body": "Connectez-vous avec Google et confiez des tâches à Antigravity comme à tout autre agent. Ses limites s'affichent sous Limites restantes."
+        },
+        {
+          "title": "Passer le relais",
+          "body": "Passez une conversation d'un agent à un autre, et ouvrez un projet, une conversation ou un fichier dans VS Code, Cursor ou Windsurf."
+        },
+        {
+          "title": "Reprend là où il s'est arrêté",
+          "body": "Quand vous rouvrez l'application, Continuer reprend le travail dans la même conversation. Le terminal, sa sortie et vos connexions du navigateur survivent à un redémarrage, et les cartes d'approbation nomment la commande ou le fichier."
+        }
+      ]
+    },
+    "hi": {
+      "headline": "नया रूप, एक क्लिक में Commit & PR और एजेंट के रूप में Antigravity",
+      "summary": "ऐप का रूप नया है और चार थीम हैं, प्रोजेक्ट दिखाते हैं कि क्या आपका इंतज़ार कर रहा है, pull request एक क्लिक में बनता है और Antigravity आपके एजेंटों में शामिल है।",
+      "sections": [
+        {
+          "title": "नया रूप",
+          "body": "संकरा या चौड़ा रखा जा सकने वाला नेविगेशन बार, साफ़ टैब और अपने-अपने फ़्रेम में साइड पैनल। प्रोजेक्ट को कवर मिलते हैं और चार थीम हैं: Codevalanche, Obsidian, Titanium और Bronze, हर एक लाइट और डार्क में।"
+        },
+        {
+          "title": "देखें क्या आपका इंतज़ार कर रहा है",
+          "body": "प्रोजेक्ट बोर्ड दिखाता है कि किन प्रोजेक्ट में आपके लिए कोई सवाल या अनुमति है। कार्ड पर लेबल लगते हैं, उन्हें टाला जा सकता है या समीक्षा के लिए चिह्नित किया जा सकता है, और बातचीत को Markdown के रूप में सहेजा जा सकता है।"
+        },
+        {
+          "title": "एक क्लिक में Commit & PR",
+          "body": "बातचीत से ही अपने बदलाव commit करें और pull request खोलें। बार pull request और उसकी जाँचें लाइव दिखाता है, और PR पैनल से आप समीक्षा, मंज़ूरी, merge और बदली हुई पंक्तियों पर टिप्पणी कर सकते हैं।"
+        },
+        {
+          "title": "एजेंट के रूप में Antigravity",
+          "body": "Google से साइन इन करें और Antigravity को किसी भी दूसरे एजेंट की तरह काम दें। उसकी सीमाएँ बची हुई सीमाएँ में दिखती हैं।"
+        },
+        {
+          "title": "काम आगे सौंपें",
+          "body": "एक बातचीत एक एजेंट से दूसरे को सौंपें, और किसी प्रोजेक्ट, बातचीत या फ़ाइल को VS Code, Cursor या Windsurf में खोलें।"
+        },
+        {
+          "title": "जहाँ रुका था, वहीं से",
+          "body": "ऐप दोबारा खोलने पर जारी रखें उसी बातचीत में काम आगे बढ़ाता है। टर्मिनल, उसका आउटपुट और ब्राउज़र के साइन-इन रीस्टार्ट के बाद भी रहते हैं, और अनुमति कार्ड कमांड या फ़ाइल का नाम बताते हैं।"
+        }
+      ]
+    },
+    "id": {
+      "headline": "Tampilan baru, Commit & PR sekali klik, dan Antigravity sebagai agen",
+      "summary": "Aplikasi punya tampilan baru dengan empat tema, proyek menunjukkan apa yang menunggumu, pull request cukup sekali klik, dan Antigravity bergabung dengan agen-agenmu.",
+      "sections": [
+        {
+          "title": "Tampilan baru",
+          "body": "Bilah navigasi yang bisa sempit atau lebar, tab yang lebih rapi, dan panel samping dalam bingkai sendiri. Proyek punya sampul, dan ada empat tema: Codevalanche, Obsidian, Titanium, dan Bronze, masing-masing terang dan gelap."
+        },
+        {
+          "title": "Lihat apa yang menunggumu",
+          "body": "Papan Proyek menunjukkan proyek mana yang punya pertanyaan atau persetujuan untukmu. Kartu bisa diberi label, ditunda, atau ditandai Untuk ditinjau, dan percakapan bisa disimpan sebagai Markdown."
+        },
+        {
+          "title": "Commit & PR sekali klik",
+          "body": "Commit perubahanmu dan buka pull request dari percakapan. Bilah menampilkan pull request dan pemeriksaannya secara langsung, dan dari panel PR kamu bisa meninjau, menyetujui, menggabungkan, dan mengomentari baris yang berubah."
+        },
+        {
+          "title": "Antigravity sebagai agen",
+          "body": "Masuk dengan Google dan beri tugas ke Antigravity seperti agen lain. Batasnya muncul di Sisa batas."
+        },
+        {
+          "title": "Serahkan pekerjaan",
+          "body": "Alihkan percakapan dari satu agen ke agen lain, dan buka proyek, percakapan, atau file di VS Code, Cursor, atau Windsurf."
+        },
+        {
+          "title": "Lanjut dari titik berhenti",
+          "body": "Setelah aplikasi dibuka lagi, Lanjutkan meneruskan pekerjaan di percakapan yang sama. Terminal, keluarannya, dan login browser tetap ada setelah restart, dan kartu persetujuan menyebut perintah atau file-nya."
+        }
+      ]
+    },
+    "it": {
+      "headline": "Nuovo aspetto, Commit & PR con un clic e Antigravity come agente",
+      "summary": "L'app ha un aspetto nuovo con quattro temi, i progetti mostrano cosa ti aspetta, una pull request richiede un clic e Antigravity si unisce ai tuoi agenti.",
+      "sections": [
+        {
+          "title": "Un aspetto nuovo",
+          "body": "Una barra di navigazione stretta o larga, schede più pulite e pannelli laterali nelle loro cornici. I progetti hanno una copertina e ci sono quattro temi: Codevalanche, Obsidian, Titanium e Bronze, ciascuno chiaro e scuro."
+        },
+        {
+          "title": "Vedi cosa ti aspetta",
+          "body": "La bacheca Progetti mostra quali progetti hanno una domanda o un'approvazione per te. Le schede hanno etichette, si possono rimandare o segnare Da rivedere, e una conversazione si può salvare in Markdown."
+        },
+        {
+          "title": "Commit & PR con un clic",
+          "body": "Fai il commit delle modifiche e apri una pull request dalla conversazione. La barra mostra la pull request e i suoi controlli in tempo reale, e dal pannello PR puoi rivedere, approvare, unire e commentare le righe modificate."
+        },
+        {
+          "title": "Antigravity come agente",
+          "body": "Accedi con Google e dai compiti ad Antigravity come a qualsiasi altro agente. I suoi limiti compaiono in Limiti rimasti."
+        },
+        {
+          "title": "Passa il lavoro",
+          "body": "Passa una conversazione da un agente all'altro e apri un progetto, una conversazione o un file in VS Code, Cursor o Windsurf."
+        },
+        {
+          "title": "Riprende da dove si era fermato",
+          "body": "Quando riapri l'app, Continua riprende il lavoro nella stessa conversazione. Il terminale, il suo output e gli accessi del browser restano dopo un riavvio, e le schede di approvazione indicano il comando o il file."
+        }
+      ]
+    },
+    "ja": {
+      "headline": "新しい見た目、ワンクリックの Commit & PR、エージェントとしての Antigravity",
+      "summary": "アプリが4つのテーマで新しい見た目になり、プロジェクトにはあなたを待っているものが表示され、プルリクエストはワンクリックで作れ、Antigravity がエージェントに加わります。",
+      "sections": [
+        {
+          "title": "新しい見た目",
+          "body": "細くも広くもできるナビゲーションレール、すっきりしたタブ、専用の枠に収まるサイドパネル。プロジェクトにカバーが付き、テーマは Codevalanche、Obsidian、Titanium、Bronze の4つで、それぞれライトとダークがあります。"
+        },
+        {
+          "title": "あなたを待っているものが見える",
+          "body": "プロジェクトボードに、あなたへの質問や承認があるプロジェクトが表示されます。カードにはラベルを付けたり、スヌーズしたり、「要レビュー」にしたりでき、会話は Markdown で保存できます。"
+        },
+        {
+          "title": "ワンクリックで Commit & PR",
+          "body": "会話から変更をコミットしてプルリクエストを開けます。バーにはプルリクエストとチェックの状況がリアルタイムで表示され、PR パネルからレビュー、承認、マージ、変更行へのコメントができます。"
+        },
+        {
+          "title": "エージェントとしての Antigravity",
+          "body": "Google でサインインすれば、ほかのエージェントと同じように Antigravity にタスクを任せられます。利用枠は「残りの利用枠」に表示されます。"
+        },
+        {
+          "title": "作業を引き継ぐ",
+          "body": "会話をあるエージェントから別のエージェントへ引き継ぎ、プロジェクト、会話、ファイルを VS Code、Cursor、Windsurf で開けます。"
+        },
+        {
+          "title": "止まったところから再開",
+          "body": "アプリを開き直すと、「続ける」で同じ会話のまま作業を再開します。ターミナルとその出力、ブラウザのサインインは再起動後も残り、承認カードにはコマンドやファイルの名前が表示されます。"
+        }
+      ]
+    },
+    "ko": {
+      "headline": "새로운 모습, 클릭 한 번의 Commit & PR, 에이전트가 된 Antigravity",
+      "summary": "앱이 네 가지 테마와 함께 새로운 모습이 되었고, 프로젝트는 나를 기다리는 일을 보여 주며, 풀 리퀘스트는 클릭 한 번이면 되고, Antigravity가 에이전트로 합류합니다.",
+      "sections": [
+        {
+          "title": "새로운 모습",
+          "body": "좁게 또는 넓게 쓸 수 있는 내비게이션 레일, 깔끔해진 탭, 자체 프레임의 사이드 패널. 프로젝트에 커버가 생겼고 Codevalanche, Obsidian, Titanium, Bronze 네 가지 테마가 각각 라이트와 다크로 제공됩니다."
+        },
+        {
+          "title": "나를 기다리는 일 보기",
+          "body": "프로젝트 보드에서 나에게 질문이나 승인이 있는 프로젝트를 볼 수 있습니다. 카드에 라벨을 붙이거나 미루거나 검토 필요로 표시할 수 있고, 대화는 Markdown으로 저장할 수 있습니다."
+        },
+        {
+          "title": "클릭 한 번으로 Commit & PR",
+          "body": "대화에서 바로 변경 사항을 커밋하고 풀 리퀘스트를 엽니다. 바에 풀 리퀘스트와 검사 상태가 실시간으로 표시되고, PR 패널에서 검토, 승인, 병합, 변경된 줄에 댓글 달기를 할 수 있습니다."
+        },
+        {
+          "title": "에이전트가 된 Antigravity",
+          "body": "Google로 로그인하고 다른 에이전트처럼 Antigravity에 작업을 맡기세요. 한도는 남은 한도에 표시됩니다."
+        },
+        {
+          "title": "작업 넘기기",
+          "body": "대화를 한 에이전트에서 다른 에이전트로 넘기고, 프로젝트나 대화, 파일을 VS Code, Cursor, Windsurf에서 엽니다."
+        },
+        {
+          "title": "멈춘 곳에서 이어서",
+          "body": "앱을 다시 열면 계속하기가 같은 대화에서 작업을 이어 갑니다. 터미널과 출력, 브라우저 로그인은 다시 시작한 뒤에도 남아 있고, 승인 카드에는 명령이나 파일 이름이 표시됩니다."
+        }
+      ]
+    },
+    "pt-BR": {
+      "headline": "Visual novo, Commit & PR em um clique e Antigravity como agente",
+      "summary": "O app ganhou um visual novo com quatro temas, os projetos mostram o que está esperando por você, um pull request leva um clique e o Antigravity entra para os seus agentes.",
+      "sections": [
+        {
+          "title": "Um visual novo",
+          "body": "Uma barra de navegação estreita ou larga, abas mais limpas e painéis laterais em quadros próprios. Os projetos ganham capa e há quatro temas: Codevalanche, Obsidian, Titanium e Bronze, cada um claro e escuro."
+        },
+        {
+          "title": "Veja o que está esperando por você",
+          "body": "O quadro de Projetos mostra quais projetos têm uma pergunta ou aprovação para você. Os cartões recebem etiquetas, podem ser adiados ou marcados Para revisar, e uma conversa pode ser salva em Markdown."
+        },
+        {
+          "title": "Commit & PR em um clique",
+          "body": "Faça commit das alterações e abra um pull request pela conversa. A barra mostra o pull request e as verificações ao vivo, e no painel de PR você revisa, aprova, faz merge e comenta linhas alteradas."
+        },
+        {
+          "title": "Antigravity como agente",
+          "body": "Entre com o Google e dê tarefas ao Antigravity como a qualquer outro agente. Os limites dele aparecem em Limites restantes."
+        },
+        {
+          "title": "Passe o trabalho adiante",
+          "body": "Passe uma conversa de um agente para outro e abra um projeto, uma conversa ou um arquivo no VS Code, Cursor ou Windsurf."
+        },
+        {
+          "title": "Continua de onde parou",
+          "body": "Ao reabrir o app, Continuar retoma o trabalho na mesma conversa. O terminal, a saída dele e os logins do navegador sobrevivem a uma reinicialização, e os cartões de aprovação dizem qual comando ou arquivo está em jogo."
+        }
+      ]
+    },
+    "ro": {
+      "headline": "Aspect nou, Commit & PR dintr-un clic și Antigravity ca agent",
+      "summary": "Aplicația are un aspect nou cu patru teme, proiectele arată ce te așteaptă, un pull request se face dintr-un clic, iar Antigravity se alătură agenților tăi.",
+      "sections": [
+        {
+          "title": "Un aspect nou",
+          "body": "O bară de navigare pe care o ții îngustă sau lată, file mai curate și panouri laterale în cadre proprii. Proiectele primesc coperți și există patru teme: Codevalanche, Obsidian, Titanium și Bronze, fiecare în luminos și întunecat."
+        },
+        {
+          "title": "Vezi ce te așteaptă",
+          "body": "Tabloul Proiecte arată ce proiecte au o întrebare sau o aprobare pentru tine. Cardurile primesc etichete, pot fi amânate sau marcate De revizuit, iar o conversație se poate salva ca Markdown."
+        },
+        {
+          "title": "Commit & PR dintr-un clic",
+          "body": "Salvezi modificările și deschizi un pull request direct din conversație. Bara arată pull requestul și verificările lui pe loc, iar din panoul PR poți revizui, aproba, uni și comenta pe liniile modificate."
+        },
+        {
+          "title": "Antigravity ca agent",
+          "body": "Te conectezi cu Google și îi dai sarcini lui Antigravity ca oricărui alt agent. Limitele lui apar la Limite rămase."
+        },
+        {
+          "title": "Predai lucrul mai departe",
+          "body": "Treci o conversație de la un agent la altul și deschizi un proiect, o conversație sau un fișier în VS Code, Cursor sau Windsurf."
+        },
+        {
+          "title": "Continuă de unde a rămas",
+          "body": "După ce redeschizi aplicația, Continuă reia lucrul în aceeași conversație. Terminalul, ce a afișat și conectările din browser rămân după repornire, iar cardurile de aprobare spun ce comandă sau ce fișier e în joc."
+        }
+      ]
+    },
+    "ru": {
+      "headline": "Новый облик, Commit & PR в один клик и Antigravity как агент",
+      "summary": "У приложения новый облик с четырьмя темами, проекты показывают, что ждёт вас, pull request делается в один клик, а Antigravity присоединяется к вашим агентам.",
+      "sections": [
+        {
+          "title": "Новый облик",
+          "body": "Панель навигации, узкая или широкая, аккуратные вкладки и боковые панели в отдельных рамках. У проектов появились обложки и четыре темы: Codevalanche, Obsidian, Titanium и Bronze, каждая в светлом и тёмном виде."
+        },
+        {
+          "title": "Видно, что ждёт вас",
+          "body": "Доска проектов показывает, где для вас есть вопрос или подтверждение. Карточкам можно ставить метки, откладывать их или отмечать «На проверку», а разговор можно сохранить в Markdown."
+        },
+        {
+          "title": "Commit & PR в один клик",
+          "body": "Зафиксируйте изменения и откройте pull request прямо из разговора. Панель показывает pull request и его проверки в реальном времени, а в панели PR можно проверить, одобрить, слить и прокомментировать изменённые строки."
+        },
+        {
+          "title": "Antigravity как агент",
+          "body": "Войдите через Google и давайте Antigravity задачи, как любому другому агенту. Его лимиты видны в разделе «Оставшиеся лимиты»."
+        },
+        {
+          "title": "Передайте работу",
+          "body": "Передайте разговор от одного агента другому и откройте проект, разговор или файл в VS Code, Cursor или Windsurf."
+        },
+        {
+          "title": "Продолжает с того же места",
+          "body": "После повторного открытия приложения кнопка «Продолжить» возобновляет работу в том же разговоре. Терминал, его вывод и входы в браузере сохраняются после перезапуска, а карточки подтверждения называют команду или файл."
+        }
+      ]
+    },
+    "tr": {
+      "headline": "Yeni görünüm, tek tıkla Commit & PR ve ajan olarak Antigravity",
+      "summary": "Uygulama dört temayla yeni bir görünüme kavuştu, projeler seni neyin beklediğini gösteriyor, pull request tek tıkla açılıyor ve Antigravity ajanlarına katılıyor.",
+      "sections": [
+        {
+          "title": "Yeni bir görünüm",
+          "body": "Dar ya da geniş tutabileceğin bir gezinme çubuğu, daha sade sekmeler ve kendi çerçevelerinde yan paneller. Projelerin kapağı var ve her biri açık ve koyu olan dört tema var: Codevalanche, Obsidian, Titanium ve Bronze."
+        },
+        {
+          "title": "Seni neyin beklediğini gör",
+          "body": "Projeler panosu hangi projelerde senin için bir soru ya da onay olduğunu gösterir. Kartlara etiket eklenir, ertelenebilir ya da İncelenecek olarak işaretlenebilir; bir sohbet Markdown olarak kaydedilebilir."
+        },
+        {
+          "title": "Tek tıkla Commit & PR",
+          "body": "Değişikliklerini commit et ve sohbetten bir pull request aç. Çubuk pull request'i ve kontrollerini canlı gösterir; PR panelinden inceleyebilir, onaylayabilir, birleştirebilir ve değişen satırlara yorum yapabilirsin."
+        },
+        {
+          "title": "Ajan olarak Antigravity",
+          "body": "Google ile giriş yap ve Antigravity'ye diğer ajanlar gibi görev ver. Limitleri Kalan limitler altında görünür."
+        },
+        {
+          "title": "İşi devret",
+          "body": "Bir sohbeti bir ajandan diğerine devret; bir projeyi, sohbeti ya da dosyayı VS Code, Cursor veya Windsurf'te aç."
+        },
+        {
+          "title": "Kaldığı yerden devam eder",
+          "body": "Uygulamayı yeniden açtığında Devam et, işi aynı sohbette sürdürür. Terminal, çıktısı ve tarayıcı oturumların yeniden başlatmadan sonra korunur; onay kartları komutu ya da dosyayı belirtir."
+        }
+      ]
+    },
+    "vi": {
+      "headline": "Diện mạo mới, Commit & PR một chạm và Antigravity làm tác tử",
+      "summary": "Ứng dụng có diện mạo mới với bốn giao diện, dự án cho thấy việc gì đang chờ bạn, pull request chỉ cần một chạm và Antigravity gia nhập các tác tử của bạn.",
+      "sections": [
+        {
+          "title": "Diện mạo mới",
+          "body": "Thanh điều hướng thu hẹp hoặc mở rộng, tab gọn gàng hơn và các bảng bên trong khung riêng. Dự án có ảnh bìa, và có bốn giao diện: Codevalanche, Obsidian, Titanium và Bronze, mỗi giao diện có sáng và tối."
+        },
+        {
+          "title": "Xem việc gì đang chờ bạn",
+          "body": "Bảng Dự án cho thấy dự án nào có câu hỏi hoặc yêu cầu phê duyệt dành cho bạn. Thẻ có thể gắn nhãn, tạm hoãn hoặc đánh dấu Cần xem lại, và cuộc trò chuyện có thể lưu thành Markdown."
+        },
+        {
+          "title": "Commit & PR một chạm",
+          "body": "Commit thay đổi và mở pull request ngay trong cuộc trò chuyện. Thanh hiển thị pull request và các bước kiểm tra theo thời gian thực, và từ bảng PR bạn có thể xem xét, phê duyệt, hợp nhất và bình luận trên các dòng đã đổi."
+        },
+        {
+          "title": "Antigravity làm tác tử",
+          "body": "Đăng nhập bằng Google và giao việc cho Antigravity như mọi tác tử khác. Hạn mức của nó hiển thị ở Hạn mức còn lại."
+        },
+        {
+          "title": "Chuyển giao công việc",
+          "body": "Chuyển một cuộc trò chuyện từ tác tử này sang tác tử khác, và mở dự án, cuộc trò chuyện hoặc tệp trong VS Code, Cursor hoặc Windsurf."
+        },
+        {
+          "title": "Tiếp tục từ chỗ đã dừng",
+          "body": "Khi mở lại ứng dụng, Tiếp tục sẽ làm tiếp trong cùng cuộc trò chuyện. Terminal, đầu ra của nó và các lần đăng nhập trình duyệt vẫn còn sau khi khởi động lại, và thẻ phê duyệt nêu rõ lệnh hoặc tệp."
+        }
+      ]
+    },
+    "zh-Hans": {
+      "headline": "全新外观、一键 Commit & PR，以及作为代理的 Antigravity",
+      "summary": "应用换上了带四款主题的新外观，项目会显示等你处理的事项，拉取请求一键即可创建，Antigravity 也加入了你的代理。",
+      "sections": [
+        {
+          "title": "全新外观",
+          "body": "可窄可宽的导航栏、更清爽的标签页，以及各自独立框架的侧边面板。项目有了封面，并提供四款主题：Codevalanche、Obsidian、Titanium 和 Bronze，每款都有浅色和深色。"
+        },
+        {
+          "title": "看到等你处理的事项",
+          "body": "项目看板会显示哪些项目有问题或批准等你处理。卡片可以加标签、稍后提醒或标记为待审阅，对话可以保存为 Markdown。"
+        },
+        {
+          "title": "一键 Commit & PR",
+          "body": "直接在对话中提交更改并打开拉取请求。栏中实时显示拉取请求及其检查结果，在 PR 面板中可以审阅、批准、合并，并对改动的行发表评论。"
+        },
+        {
+          "title": "作为代理的 Antigravity",
+          "body": "使用 Google 登录后，就能像其他代理一样给 Antigravity 分配任务。它的额度显示在“剩余额度”中。"
+        },
+        {
+          "title": "交接工作",
+          "body": "把对话从一个代理交给另一个代理，并在 VS Code、Cursor 或 Windsurf 中打开项目、对话或文件。"
+        },
+        {
+          "title": "从中断处继续",
+          "body": "重新打开应用后，“继续”会在同一个对话中接着工作。终端及其输出、浏览器登录在重启后都会保留，批准卡片会写明涉及的命令或文件。"
+        }
+      ]
+    },
+    "zh-Hant": {
+      "headline": "全新外觀、一鍵 Commit & PR，以及成為代理的 Antigravity",
+      "summary": "應用程式換上了有四款主題的新外觀，專案會顯示等你處理的事項，提取要求一鍵即可建立，Antigravity 也加入了你的代理。",
+      "sections": [
+        {
+          "title": "全新外觀",
+          "body": "可窄可寬的導覽列、更清爽的分頁，以及各自獨立框架的側邊面板。專案有了封面，並提供四款主題：Codevalanche、Obsidian、Titanium 和 Bronze，每款都有淺色和深色。"
+        },
+        {
+          "title": "看到等你處理的事項",
+          "body": "專案看板會顯示哪些專案有問題或核准等你處理。卡片可以加標籤、稍後提醒或標記為待審閱，對話可以儲存為 Markdown。"
+        },
+        {
+          "title": "一鍵 Commit & PR",
+          "body": "直接在對話中提交變更並開啟提取要求。列中即時顯示提取要求及其檢查結果，在 PR 面板中可以審閱、核准、合併，並對變更的行留言。"
+        },
+        {
+          "title": "成為代理的 Antigravity",
+          "body": "使用 Google 登入後，就能像其他代理一樣交派任務給 Antigravity。它的額度顯示在「剩餘額度」中。"
+        },
+        {
+          "title": "交接工作",
+          "body": "把對話從一個代理交給另一個代理，並在 VS Code、Cursor 或 Windsurf 中開啟專案、對話或檔案。"
+        },
+        {
+          "title": "從中斷處繼續",
+          "body": "重新開啟應用程式後，「繼續」會在同一個對話中接著工作。終端機及其輸出、瀏覽器登入在重新啟動後都會保留，核准卡片會寫明涉及的指令或檔案。"
+        }
+      ]
+    }
+  }
+}

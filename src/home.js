@@ -14,7 +14,7 @@
   } else { $$('.row').forEach(function(r){r.classList.add('in')}) }
 
   // approvals
-  function wire(card, onAllow){ $$('button',card).forEach(function(b){b.addEventListener('click',function(){
+  function wire(card, onAllow){ if(!card) return; $$('button',card).forEach(function(b){b.addEventListener('click',function(){
     var deny=b.id==='deny'||b.getAttribute('data-allow')==='deny';
     var t=$('b',card), r=$('.risk',card); t.textContent=deny?'Denied':'Allowed once'; r.textContent=deny?'The agent was told':'Running now'; r.style.color=deny?'#ff8f8f':'var(--ok)';
     card.style.borderColor=deny?'rgba(255,143,143,.5)':'rgba(87,217,163,.55)'; $$('button',card).forEach(function(x){x.disabled=true;x.style.opacity=.45;x.style.pointerEvents='none'});
@@ -27,6 +27,16 @@
 
   // local models toggles
   $$('[data-lm]').forEach(function(row){var b=$('button',row), st=$('.state span',row); b.addEventListener('click',function(){var on=row.classList.toggle('run'); st.textContent=on?'Running':'Ready'; b.textContent=on?'Stop':'Start'; b.classList.toggle('solid',!on)})});
+
+  // theme picker: real captures of the four themes, light and dark
+  $$('[data-themes]').forEach(function(box){
+    function show(){var key=box.getAttribute('data-theme-name')+'-'+box.getAttribute('data-theme-mode');
+      $$('[data-theme-shot]',box).forEach(function(img){img.classList.toggle('on',img.getAttribute('data-theme-shot')===key)});
+      $$('[data-pick-theme]',box).forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-pick-theme')===box.getAttribute('data-theme-name')))});
+      $$('[data-pick-mode]',box).forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-pick-mode')===box.getAttribute('data-theme-mode')))})}
+    $$('[data-pick-theme]',box).forEach(function(b){b.addEventListener('click',function(){box.setAttribute('data-theme-name',b.getAttribute('data-pick-theme'));show()})});
+    $$('[data-pick-mode]',box).forEach(function(b){b.addEventListener('click',function(){box.setAttribute('data-theme-mode',b.getAttribute('data-pick-mode'));show()})});
+    show()});
 
   // final orbit
   (function(){var o=$('#orbit'), tpl=$('#chips'); if(!o||!tpl) return; var ns='http://www.w3.org/2000/svg', svg=document.createElementNS(ns,'svg'); svg.setAttribute('viewBox','0 0 100 100'); svg.setAttribute('preserveAspectRatio','none'); o.appendChild(svg);
@@ -41,14 +51,14 @@
   function show(n,delay){setTimeout(function(){parts.forEach(function(el){if(el.dataset.h==n){el.style.visibility='';el.classList.add('pop')}})},delay)}
   show(0,500);show(1,1150);show(2,1550);show(3,1950);show(4,2900);
   var steps1=['Reading src/format.ts','Editing src/format.ts','Adding 3 tests','Running the tests'], steps3=['Reading the trip model','Editing PackingList.tsx','Checking the layout'], k=0;
-  setInterval(function(){k++; var a=$('#st1'),b=$('#st3'); a.textContent=steps1[k%steps1.length]; b.textContent=steps3[k%steps3.length]},2600);
+  if($('#st1')) setInterval(function(){k++; var a=$('#st1'),b=$('#st3'); a.textContent=steps1[k%steps1.length]; b.textContent=steps3[k%steps3.length]},2600);
 
   // hero tilt
   var wrap=$('#winwrap'), win=$('#win');
   if(matchMedia('(hover:hover)').matches){ wrap.addEventListener('pointermove',function(e){var r=wrap.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5; win.style.transform='rotateX('+(-y*2.2)+'deg) rotateY('+(x*2.6)+'deg)'}); wrap.addEventListener('pointerleave',function(){win.style.transform=''}) }
 
   // typing
-  (function(){var el=$('#typed'), send=$('#send1'), full=el.textContent, i=full.length; function type(){ if(i<=full.length){el.textContent=full.slice(0,i); send.classList.toggle('ready',i>0); i++; setTimeout(type, 26+Math.random()*40)} else {setTimeout(function(){i=0; el.textContent=''; send.classList.remove('ready'); setTimeout(type,900)},3600)} } setTimeout(function(){i=0;el.textContent='';send.classList.remove('ready');type()},1800)})();
+  (function(){var el=$('#typed'), send=$('#send1'); if(!el||!send) return; var full=el.textContent, i=full.length; function type(){ if(i<=full.length){el.textContent=full.slice(0,i); send.classList.toggle('ready',i>0); i++; setTimeout(type, 26+Math.random()*40)} else {setTimeout(function(){i=0; el.textContent=''; send.classList.remove('ready'); setTimeout(type,900)},3600)} } setTimeout(function(){i=0;el.textContent='';send.classList.remove('ready');type()},1800)})();
 
   // team statuses
   (function(){var cards=$$('#team .task'), seq=[['Reading','Editing','Testing','Done'],['Reading','Editing','Testing','Done'],['Reading','Editing','Checking','Done']], t=0;
