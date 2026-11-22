@@ -347,3 +347,29 @@
 .cvx .hero .hero-availability{line-height:inherit}
 .cvx .release-status-card{position:relative;margin:14px 0 0;padding:0;border:0;border-radius:0;background:none;max-width:none;font-size:inherit}
 .cvx .release-status-card a{margin-top:0}
+
+/* 1.1.73: real captures of the app instead of drawn mockups */
+.cvx .win.win-shot{border-radius:14px;border-bottom:1px solid rgba(255,255,255,.14);background:#000}
+.cvx .win-shot img,.cvx .shot-real{display:block;width:100%;height:auto}
+.cvx .fg.fg-shot{max-width:560px}
+.cvx .fg-shot .shot-real{border-radius:12px;border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 80px -30px rgba(0,0,0,.85)}
+.cvx .newgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.cvx .nt{margin:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:22px;background:#0e1011;overflow:hidden}
+.cvx .nt-wide{grid-column:1/-1}
+.cvx .nt-shot{position:relative;padding:22px 22px 0;background:radial-gradient(60% 80% at 50% 110%,rgba(110,231,208,.16),transparent 70%)}
+.cvx .nt-shot .shot-real{border-radius:10px 10px 0 0;border:1px solid rgba(255,255,255,.12);border-bottom:0}
+.cvx .nt figcaption{padding:18px 22px 22px}
+.cvx .nt figcaption b{display:block;font-size:16px;font-weight:600;color:var(--ink)}
+.cvx .nt figcaption p{margin:6px 0 0;color:var(--ink-muted);font-size:14px;line-height:1.5}
+.cvx .nt-themes .shot-real{display:none}
+.cvx .nt-themes .shot-real.on{display:block}
+.cvx .theme-pick{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.cvx .theme-pick .seg{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line);border-radius:999px;background:var(--paper-raised)}
+.cvx .theme-pick button{min-height:32px;padding:4px 14px;border:0;border-radius:999px;background:transparent;color:var(--ink-muted);font:inherit;font-size:13px;cursor:pointer}
+.cvx .theme-pick button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+@media (max-width:900px){.cvx .newgrid{grid-template-columns:1fr}.cvx .nt-shot{padding:14px 14px 0}.cvx .nt figcaption{padding:14px 16px 18px}}
+.cvx .nt-themes .nt-shot{display:flex;justify-content:center}
+.cvx .nt-themes .nt-shot .shot-real.on{max-width:900px}
+.cvx .nt-limits .nt-shot{padding-bottom:22px}
+.cvx .nt-limits .nt-shot .shot-real{border-radius:10px;border-bottom:1px solid rgba(255,255,255,.12)}
+.cvx .fg.fg-shot:has(img[src*="app-team"]){max-width:320px}
