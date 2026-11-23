@@ -1,6 +1,6 @@
 import {resolveMarketingRoute} from './locales/manifest.js';
 
-const PAGES = new Set(['home', 'how_it_works', 'agents', 'multiple_accounts', 'local_ai', 'docs', 'download', 'security', 'changelog', 'privacy', 'terms']);
+const PAGES = new Set(['download_thanks', 'home', 'how_it_works', 'agents', 'multiple_accounts', 'local_ai', 'docs', 'download', 'security', 'changelog', 'privacy', 'terms']);
 const LOCALES = new Set(['en', 'ar', 'de', 'es', 'fr', 'hi', 'id', 'it', 'ja', 'ko', 'pt-BR', 'ro', 'ru', 'tr', 'vi', 'zh-Hans', 'zh-Hant']);
 const SEARCH = /(^|\.)(google\.[a-z.]+|bing\.com|duckduckgo\.com|yahoo\.com|yandex\.[a-z]+|baidu\.com|ecosia\.org|search\.brave\.com|startpage\.com|qwant\.com)$/;
 const SOCIAL = /(^|\.)(x\.com|t\.co|twitter\.com|linkedin\.com|lnkd\.in|facebook\.com|instagram\.com|reddit\.com|news\.ycombinator\.com|youtube\.com|tiktok\.com|threads\.net|bsky\.app|mastodon\.social|discord\.com|t\.me|whatsapp\.com)$/;
@@ -22,6 +22,8 @@ export function referrerSource(referrer, origin) {
 
 function pageIdFor(pathname) {
   if (pathname.startsWith('/account')) return 'account';
+  // The thank-you page after a Download click (any language) is counted apart from the download page.
+  if (/^\/(?:[a-z-]+\/)?download\/started\/?$/.test(pathname)) return 'download_thanks';
   const id = resolveMarketingRoute(pathname)?.pageId;
   return PAGES.has(id) ? id : 'other';
 }

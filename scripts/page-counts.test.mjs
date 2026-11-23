@@ -69,3 +69,14 @@ test('unknown pages and languages fall back to fixed values', () => {
   countPage({window: h.window});
   assert.deepEqual(h.calls[1].body, {p_site: 'codevalanche', p_page: 'other', p_metric: 'visit', p_source: 'direct', p_locale: 'en'});
 });
+
+test('the thank-you page after a Download click has its own page id in every language', () => {
+  for (const path of ['/download/started/', '/ro/download/started/', '/zh-hans/download/started/']) {
+    const h = host({path, referrer: 'https://codevalanche.com/download/'});
+    countPage({window: h.window});
+    assert.equal(h.calls[0].body.p_page, 'download_thanks');
+  }
+  const h = host({path: '/ro/download/', referrer: ''});
+  countPage({window: h.window});
+  assert.equal(h.calls[0].body.p_page, 'download');
+});
