@@ -1,0 +1,516 @@
+{
+  "version": "1.1.74",
+  "date": "2026-11-23",
+  "copy": {
+    "en": {
+      "headline": "Antigravity on Google's terms, Commit & PR in Activity, and steadier agents",
+      "summary": "Antigravity follows Google's terms for personal accounts, Commit & PR is a row in Activity, and a round of fixes makes everyday work smoother.",
+      "sections": [
+        {
+          "title": "Antigravity on Google's terms",
+          "body": "Antigravity now follows Google's terms for personal accounts: it gets only what you type, runs Gemini models only and gets no tools from the app. The Coordinator, Missions, automations and handoffs no longer use it, and its limits stay in Antigravity."
+        },
+        {
+          "title": "Commit & PR in Activity",
+          "body": "Commit & PR moved from the conversation header into the Activity panel, as a row next to Changes, Branch and Push."
+        },
+        {
+          "title": "Messages go out once",
+          "body": "A message the app could not confirm checks itself and is sent again once, never twice. An answer no longer shows twice when it finishes, and your sent message no longer jumps."
+        },
+        {
+          "title": "Coordinator agents you can follow",
+          "body": "Agents started by the Coordinator show their text and a Stop button while they work, and stay working until their turn really ends. The Coordinator prepares their copies in parallel, keeps the effort you chose, and its messages stay in each agent's chat."
+        },
+        {
+          "title": "Projects stay apart",
+          "body": "A new project on the same folder no longer reads or writes another project's memory. Deleting a project is no longer refused because of another project's work, and deleting the project you were in no longer leaves a black window at the next start."
+        },
+        {
+          "title": "Smaller fixes",
+          "body": "Activity shows the folder's changes and Git status again instead of \"not available\", and closing the app no longer hangs after cleanup."
+        }
+      ]
+    },
+    "ar": {
+      "headline": "Antigravity وفق شروط Google، وCommit & PR في النشاط، ووكلاء أكثر ثباتًا",
+      "summary": "يتبع Antigravity شروط Google للحسابات الشخصية، وأصبح Commit & PR صفًا في النشاط، ومجموعة من الإصلاحات تجعل العمل اليومي أكثر سلاسة.",
+      "sections": [
+        {
+          "title": "Antigravity وفق شروط Google",
+          "body": "يتبع Antigravity الآن شروط Google للحسابات الشخصية: يتلقى ما تكتبه فقط، ويشغّل نماذج Gemini فقط، ولا يحصل على أدوات من التطبيق. لم يعد المنسق والمهام والأتمتة والتسليمات تستخدمه، وتبقى حدوده داخل Antigravity."
+        },
+        {
+          "title": "Commit & PR في النشاط",
+          "body": "انتقل Commit & PR من رأس المحادثة إلى لوحة النشاط، كصف بجانب التغييرات والفرع وPush."
+        },
+        {
+          "title": "الرسائل تُرسل مرة واحدة",
+          "body": "الرسالة التي لم يستطع التطبيق تأكيدها تتحقق من نفسها وتُرسل مرة أخرى مرة واحدة، لا مرتين أبدًا. لم يعد الرد يظهر مرتين عند انتهائه، ولم تعد رسالتك المرسلة تقفز."
+        },
+        {
+          "title": "وكلاء المنسق أمام عينيك",
+          "body": "يعرض الوكلاء الذين يبدأهم المنسق نصهم وزر إيقاف أثناء عملهم، ويبقون «قيد العمل» حتى ينتهي دورهم فعلًا. يجهّز المنسق نسخهم بالتوازي، ويحافظ على الجهد الذي اخترته، وتبقى رسائله في محادثة كل وكيل."
+        },
+        {
+          "title": "المشاريع تبقى منفصلة",
+          "body": "لم يعد مشروع جديد على المجلد نفسه يقرأ ذاكرة مشروع آخر أو يكتب فيها. لم يعد حذف مشروع يُرفض بسبب عمل مشروع آخر، ولم يعد حذف المشروع الذي كنت فيه يترك نافذة سوداء عند التشغيل التالي."
+        },
+        {
+          "title": "إصلاحات أصغر",
+          "body": "يعرض النشاط مجددًا تغييرات المجلد وحالة Git بدلًا من «غير متاح»، ولم يعد إغلاق التطبيق يتوقف بعد التنظيف."
+        }
+      ]
+    },
+    "de": {
+      "headline": "Antigravity nach Googles Bedingungen, Commit & PR in Aktivität und stabilere Agenten",
+      "summary": "Antigravity folgt Googles Bedingungen für private Konten, Commit & PR ist eine Zeile in Aktivität, und eine Reihe von Korrekturen macht die tägliche Arbeit ruhiger.",
+      "sections": [
+        {
+          "title": "Antigravity nach Googles Bedingungen",
+          "body": "Antigravity folgt jetzt Googles Bedingungen für private Konten: Es bekommt nur, was du eingibst, nutzt nur Gemini-Modelle und erhält keine Werkzeuge aus der App. Coordinator, Missionen, Automationen und Übergaben nutzen es nicht mehr, und seine Limits bleiben in Antigravity."
+        },
+        {
+          "title": "Commit & PR in Aktivität",
+          "body": "Commit & PR ist aus dem Gesprächskopf in das Aktivitätsfeld umgezogen, als Zeile neben Änderungen, Branch und Push."
+        },
+        {
+          "title": "Nachrichten gehen einmal raus",
+          "body": "Eine Nachricht, die die App nicht bestätigen konnte, prüft sich selbst und wird einmal erneut gesendet, nie zweimal. Eine Antwort erscheint am Ende nicht mehr doppelt, und deine gesendete Nachricht springt nicht mehr."
+        },
+        {
+          "title": "Coordinator-Agenten, die du verfolgen kannst",
+          "body": "Vom Coordinator gestartete Agenten zeigen ihren Text und eine Stopp-Schaltfläche, während sie arbeiten, und bleiben „aktiv“, bis ihr Zug wirklich endet. Der Coordinator bereitet ihre Kopien parallel vor, behält den gewählten Aufwand bei, und seine Nachrichten bleiben im Chat jedes Agenten."
+        },
+        {
+          "title": "Projekte bleiben getrennt",
+          "body": "Ein neues Projekt im selben Ordner liest oder schreibt nicht mehr das Gedächtnis eines anderen Projekts. Das Löschen eines Projekts wird nicht mehr wegen der Arbeit eines anderen Projekts verweigert, und das Löschen des aktuellen Projekts hinterlässt beim nächsten Start kein schwarzes Fenster mehr."
+        },
+        {
+          "title": "Kleinere Korrekturen",
+          "body": "Aktivität zeigt wieder die Änderungen des Ordners und den Git-Status statt „nicht verfügbar“, und das Schließen der App hängt nach dem Aufräumen nicht mehr."
+        }
+      ]
+    },
+    "es": {
+      "headline": "Antigravity según los términos de Google, Commit & PR en Actividad y agentes más estables",
+      "summary": "Antigravity sigue los términos de Google para cuentas personales, Commit & PR es una fila en Actividad y una serie de correcciones hace el trabajo diario más fluido.",
+      "sections": [
+        {
+          "title": "Antigravity según los términos de Google",
+          "body": "Antigravity ahora sigue los términos de Google para cuentas personales: recibe solo lo que escribes, usa solo modelos Gemini y no recibe herramientas de la app. El Coordinador, las Misiones, las automatizaciones y los traspasos ya no lo usan, y sus límites se quedan en Antigravity."
+        },
+        {
+          "title": "Commit & PR en Actividad",
+          "body": "Commit & PR pasó de la cabecera de la conversación al panel Actividad, como una fila junto a Cambios, Rama y Push."
+        },
+        {
+          "title": "Los mensajes salen una vez",
+          "body": "Un mensaje que la app no pudo confirmar se comprueba solo y se envía de nuevo una vez, nunca dos. Una respuesta ya no aparece dos veces al terminar y tu mensaje enviado ya no salta."
+        },
+        {
+          "title": "Agentes del Coordinador que puedes seguir",
+          "body": "Los agentes iniciados por el Coordinador muestran su texto y un botón Detener mientras trabajan, y siguen «trabajando» hasta que su turno termina de verdad. El Coordinador prepara sus copias en paralelo, mantiene el esfuerzo que elegiste y sus mensajes quedan en el chat de cada agente."
+        },
+        {
+          "title": "Los proyectos quedan separados",
+          "body": "Un proyecto nuevo en la misma carpeta ya no lee ni escribe la memoria de otro proyecto. Eliminar un proyecto ya no se rechaza por el trabajo de otro proyecto, y eliminar el proyecto en el que estabas ya no deja una ventana negra al siguiente inicio."
+        },
+        {
+          "title": "Correcciones menores",
+          "body": "Actividad vuelve a mostrar los cambios de la carpeta y el estado de Git en lugar de «no disponible», y cerrar la app ya no se queda colgado tras la limpieza."
+        }
+      ]
+    },
+    "fr": {
+      "headline": "Antigravity selon les conditions de Google, Commit & PR dans Activité et des agents plus stables",
+      "summary": "Antigravity suit les conditions de Google pour les comptes personnels, Commit & PR devient une ligne dans Activité, et une série de corrections rend le travail quotidien plus fluide.",
+      "sections": [
+        {
+          "title": "Antigravity selon les conditions de Google",
+          "body": "Antigravity suit désormais les conditions de Google pour les comptes personnels : il ne reçoit que ce que vous tapez, n'utilise que des modèles Gemini et ne reçoit aucun outil de l'app. Le Coordinateur, les Missions, les automatisations et les transferts ne l'utilisent plus, et ses limites restent dans Antigravity."
+        },
+        {
+          "title": "Commit & PR dans Activité",
+          "body": "Commit & PR passe de l'en-tête de la conversation au panneau Activité, sous forme de ligne à côté de Modifications, Branche et Push."
+        },
+        {
+          "title": "Les messages partent une seule fois",
+          "body": "Un message que l'app n'a pas pu confirmer se vérifie seul et est renvoyé une fois, jamais deux. Une réponse ne s'affiche plus en double à la fin, et votre message envoyé ne saute plus."
+        },
+        {
+          "title": "Des agents du Coordinateur que vous pouvez suivre",
+          "body": "Les agents lancés par le Coordinateur affichent leur texte et un bouton Arrêter pendant qu'ils travaillent, et restent « en cours » jusqu'à la vraie fin de leur tour. Le Coordinateur prépare leurs copies en parallèle, garde l'effort choisi, et ses messages restent dans le chat de chaque agent."
+        },
+        {
+          "title": "Les projets restent séparés",
+          "body": "Un nouveau projet sur le même dossier ne lit ni n'écrit plus la mémoire d'un autre projet. La suppression d'un projet n'est plus refusée à cause du travail d'un autre projet, et supprimer le projet où vous étiez ne laisse plus de fenêtre noire au démarrage suivant."
+        },
+        {
+          "title": "Petites corrections",
+          "body": "Activité affiche de nouveau les modifications du dossier et l'état Git au lieu de « indisponible », et la fermeture de l'app ne bloque plus après le nettoyage."
+        }
+      ]
+    },
+    "hi": {
+      "headline": "Google की शर्तों पर Antigravity, गतिविधि में Commit & PR और ज़्यादा स्थिर एजेंट",
+      "summary": "Antigravity निजी खातों के लिए Google की शर्तों का पालन करता है, Commit & PR गतिविधि में एक पंक्ति है, और कई सुधार रोज़ के काम को आसान बनाते हैं।",
+      "sections": [
+        {
+          "title": "Google की शर्तों पर Antigravity",
+          "body": "Antigravity अब निजी खातों के लिए Google की शर्तों का पालन करता है: उसे सिर्फ़ वही मिलता है जो आप लिखते हैं, वह सिर्फ़ Gemini मॉडल चलाता है और उसे ऐप से कोई टूल नहीं मिलता। कोऑर्डिनेटर, मिशन, ऑटोमेशन और हैंडऑफ़ अब उसका उपयोग नहीं करते, और उसकी सीमाएँ Antigravity में ही रहती हैं।"
+        },
+        {
+          "title": "गतिविधि में Commit & PR",
+          "body": "Commit & PR बातचीत के हेडर से हटकर गतिविधि पैनल में आ गया है, बदलाव, ब्रांच और Push के पास एक पंक्ति के रूप में।"
+        },
+        {
+          "title": "संदेश एक ही बार जाते हैं",
+          "body": "जिस संदेश की ऐप पुष्टि नहीं कर सका, वह ख़ुद जाँचता है और एक बार फिर भेजा जाता है, कभी दो बार नहीं। जवाब ख़त्म होने पर अब दो बार नहीं दिखता, और आपका भेजा संदेश अब नहीं उछलता।"
+        },
+        {
+          "title": "कोऑर्डिनेटर के एजेंट जिन्हें आप देख सकते हैं",
+          "body": "कोऑर्डिनेटर के शुरू किए एजेंट काम करते समय अपना टेक्स्ट और रोकें बटन दिखाते हैं, और तब तक \"काम पर\" रहते हैं जब तक उनकी बारी सच में ख़त्म न हो। कोऑर्डिनेटर उनकी कॉपियाँ साथ-साथ तैयार करता है, आपका चुना प्रयास बनाए रखता है, और उसके संदेश हर एजेंट की चैट में रहते हैं।"
+        },
+        {
+          "title": "प्रोजेक्ट अलग रहते हैं",
+          "body": "उसी फ़ोल्डर पर नया प्रोजेक्ट अब किसी दूसरे प्रोजेक्ट की मेमोरी नहीं पढ़ता या लिखता। किसी दूसरे प्रोजेक्ट के काम की वजह से अब प्रोजेक्ट हटाना मना नहीं होता, और जिस प्रोजेक्ट में आप थे उसे हटाने पर अगली शुरुआत में काली विंडो नहीं रहती।"
+        },
+        {
+          "title": "छोटे सुधार",
+          "body": "गतिविधि फिर से \"उपलब्ध नहीं\" की जगह फ़ोल्डर के बदलाव और Git स्थिति दिखाती है, और सफ़ाई के बाद ऐप बंद करना अब अटकता नहीं।"
+        }
+      ]
+    },
+    "id": {
+      "headline": "Antigravity sesuai ketentuan Google, Commit & PR di Aktivitas, dan agen yang lebih stabil",
+      "summary": "Antigravity mengikuti ketentuan Google untuk akun pribadi, Commit & PR menjadi baris di Aktivitas, dan serangkaian perbaikan membuat kerja harian lebih lancar.",
+      "sections": [
+        {
+          "title": "Antigravity sesuai ketentuan Google",
+          "body": "Antigravity kini mengikuti ketentuan Google untuk akun pribadi: hanya menerima apa yang kamu ketik, hanya menjalankan model Gemini, dan tidak mendapat alat dari aplikasi. Koordinator, Misi, otomatisasi, dan serah terima tidak lagi memakainya, dan batasnya tetap di Antigravity."
+        },
+        {
+          "title": "Commit & PR di Aktivitas",
+          "body": "Commit & PR pindah dari kepala percakapan ke panel Aktivitas, sebagai baris di samping Perubahan, Branch, dan Push."
+        },
+        {
+          "title": "Pesan terkirim sekali",
+          "body": "Pesan yang tidak bisa dikonfirmasi aplikasi memeriksa dirinya sendiri dan dikirim ulang sekali, tidak pernah dua kali. Jawaban tidak lagi muncul dua kali saat selesai, dan pesan yang kamu kirim tidak lagi melompat."
+        },
+        {
+          "title": "Agen Koordinator yang bisa kamu ikuti",
+          "body": "Agen yang dimulai Koordinator menampilkan teksnya dan tombol Hentikan saat bekerja, dan tetap \"bekerja\" sampai gilirannya benar-benar selesai. Koordinator menyiapkan salinan mereka secara paralel, mempertahankan upaya yang kamu pilih, dan pesannya tetap ada di chat setiap agen."
+        },
+        {
+          "title": "Proyek tetap terpisah",
+          "body": "Proyek baru di folder yang sama tidak lagi membaca atau menulis memori proyek lain. Menghapus proyek tidak lagi ditolak karena pekerjaan proyek lain, dan menghapus proyek yang sedang kamu buka tidak lagi meninggalkan jendela hitam saat mulai berikutnya."
+        },
+        {
+          "title": "Perbaikan kecil",
+          "body": "Aktivitas kembali menampilkan perubahan folder dan status Git, bukan \"tidak tersedia\", dan menutup aplikasi tidak lagi macet setelah pembersihan."
+        }
+      ]
+    },
+    "it": {
+      "headline": "Antigravity secondo i termini di Google, Commit & PR in Attività e agenti più stabili",
+      "summary": "Antigravity segue i termini di Google per gli account personali, Commit & PR è una riga in Attività e una serie di correzioni rende il lavoro quotidiano più scorrevole.",
+      "sections": [
+        {
+          "title": "Antigravity secondo i termini di Google",
+          "body": "Antigravity ora segue i termini di Google per gli account personali: riceve solo ciò che scrivi, usa solo modelli Gemini e non riceve strumenti dall'app. Il Coordinatore, le Missioni, le automazioni e i passaggi di consegne non lo usano più, e i suoi limiti restano in Antigravity."
+        },
+        {
+          "title": "Commit & PR in Attività",
+          "body": "Commit & PR si è spostato dall'intestazione della conversazione al pannello Attività, come riga accanto a Modifiche, Branch e Push."
+        },
+        {
+          "title": "I messaggi partono una volta sola",
+          "body": "Un messaggio che l'app non ha potuto confermare si verifica da solo e viene inviato di nuovo una volta, mai due. Una risposta non compare più due volte alla fine e il messaggio inviato non salta più."
+        },
+        {
+          "title": "Agenti del Coordinatore che puoi seguire",
+          "body": "Gli agenti avviati dal Coordinatore mostrano il loro testo e un pulsante Ferma mentre lavorano, e restano «al lavoro» finché il loro turno non finisce davvero. Il Coordinatore prepara le loro copie in parallelo, mantiene lo sforzo che hai scelto e i suoi messaggi restano nella chat di ogni agente."
+        },
+        {
+          "title": "I progetti restano separati",
+          "body": "Un nuovo progetto sulla stessa cartella non legge né scrive più la memoria di un altro progetto. L'eliminazione di un progetto non viene più rifiutata per il lavoro di un altro progetto, ed eliminare il progetto in cui eri non lascia più una finestra nera all'avvio successivo."
+        },
+        {
+          "title": "Correzioni minori",
+          "body": "Attività mostra di nuovo le modifiche della cartella e lo stato Git invece di «non disponibile», e la chiusura dell'app non si blocca più dopo la pulizia."
+        }
+      ]
+    },
+    "ja": {
+      "headline": "Google の規約に沿った Antigravity、アクティビティの Commit & PR、より安定したエージェント",
+      "summary": "Antigravity は個人アカウント向けの Google の規約に沿い、Commit & PR はアクティビティの1行になり、一連の修正で日々の作業がよりスムーズになりました。",
+      "sections": [
+        {
+          "title": "Google の規約に沿った Antigravity",
+          "body": "Antigravity は個人アカウント向けの Google の規約に沿うようになりました。受け取るのはあなたが入力した内容だけで、Gemini モデルのみを使い、アプリからツールは渡されません。コーディネーター、ミッション、オートメーション、引き継ぎでは使われなくなり、利用上限は Antigravity 内に表示されます。"
+        },
+        {
+          "title": "アクティビティの Commit & PR",
+          "body": "Commit & PR は会話のヘッダーからアクティビティパネルに移り、変更、ブランチ、Push と並ぶ1行になりました。"
+        },
+        {
+          "title": "メッセージは一度だけ送信",
+          "body": "アプリが確認できなかったメッセージは自分で確認し、もう一度だけ送信されます。二重に送られることはありません。回答が終わるときに二重表示されることも、送信したメッセージが跳ねることもなくなりました。"
+        },
+        {
+          "title": "様子が見えるコーディネーターのエージェント",
+          "body": "コーディネーターが開始したエージェントは、作業中にテキストと停止ボタンを表示し、ターンが本当に終わるまで「作業中」のままです。コーディネーターはコピーを並行して準備し、選んだエフォートを保ち、そのメッセージは各エージェントのチャットに残ります。"
+        },
+        {
+          "title": "プロジェクトは混ざらない",
+          "body": "同じフォルダーの新しいプロジェクトが、別のプロジェクトのメモリーを読み書きすることはなくなりました。別のプロジェクトの作業が原因でプロジェクトの削除が拒否されることも、開いていたプロジェクトを削除した後の起動で黒いウィンドウが残ることもなくなりました。"
+        },
+        {
+          "title": "細かな修正",
+          "body": "アクティビティに「利用できません」ではなく、フォルダーの変更と Git の状態が再び表示されます。後片付けの後にアプリの終了が止まることもなくなりました。"
+        }
+      ]
+    },
+    "ko": {
+      "headline": "Google 약관을 따르는 Antigravity, 활동 패널의 Commit & PR, 더 안정적인 에이전트",
+      "summary": "Antigravity는 개인 계정용 Google 약관을 따르고, Commit & PR은 활동 패널의 한 줄이 되었으며, 여러 수정으로 매일의 작업이 더 매끄러워졌습니다.",
+      "sections": [
+        {
+          "title": "Google 약관을 따르는 Antigravity",
+          "body": "이제 Antigravity는 개인 계정용 Google 약관을 따릅니다. 내가 입력한 내용만 받고, Gemini 모델만 실행하며, 앱의 도구는 받지 않습니다. 코디네이터, 미션, 자동화, 인계에서는 더 이상 사용되지 않으며 한도는 Antigravity 안에 남습니다."
+        },
+        {
+          "title": "활동 패널의 Commit & PR",
+          "body": "Commit & PR이 대화 헤더에서 활동 패널로 옮겨져 변경 사항, 브랜치, Push 옆의 한 줄이 되었습니다."
+        },
+        {
+          "title": "메시지는 한 번만 전송",
+          "body": "앱이 확인하지 못한 메시지는 스스로 확인한 뒤 한 번만 다시 보내며, 두 번 보내지 않습니다. 답변이 끝날 때 두 번 표시되지 않고, 보낸 메시지가 튀지도 않습니다."
+        },
+        {
+          "title": "지켜볼 수 있는 코디네이터 에이전트",
+          "body": "코디네이터가 시작한 에이전트는 작업하는 동안 텍스트와 중지 버튼을 보여 주고, 차례가 실제로 끝날 때까지 \"작업 중\"으로 남습니다. 코디네이터는 사본을 병렬로 준비하고, 선택한 노력 수준을 유지하며, 메시지는 각 에이전트의 채팅에 남습니다."
+        },
+        {
+          "title": "프로젝트는 서로 섞이지 않음",
+          "body": "같은 폴더의 새 프로젝트가 더 이상 다른 프로젝트의 메모리를 읽거나 쓰지 않습니다. 다른 프로젝트의 작업 때문에 프로젝트 삭제가 거부되지 않으며, 열려 있던 프로젝트를 삭제해도 다음 시작 때 검은 창이 남지 않습니다."
+        },
+        {
+          "title": "작은 수정",
+          "body": "활동 패널이 \"사용할 수 없음\" 대신 다시 폴더의 변경 사항과 Git 상태를 보여 주며, 정리 후 앱 종료가 멈추지 않습니다."
+        }
+      ]
+    },
+    "pt-BR": {
+      "headline": "Antigravity nos termos do Google, Commit & PR em Atividade e agentes mais estáveis",
+      "summary": "O Antigravity segue os termos do Google para contas pessoais, Commit & PR é uma linha em Atividade e uma série de correções deixa o trabalho diário mais tranquilo.",
+      "sections": [
+        {
+          "title": "Antigravity nos termos do Google",
+          "body": "O Antigravity agora segue os termos do Google para contas pessoais: recebe só o que você digita, usa só modelos Gemini e não recebe ferramentas do app. O Coordenador, as Missões, as automações e as transferências não o usam mais, e os limites dele ficam no Antigravity."
+        },
+        {
+          "title": "Commit & PR em Atividade",
+          "body": "Commit & PR saiu do cabeçalho da conversa e foi para o painel Atividade, como uma linha ao lado de Alterações, Branch e Push."
+        },
+        {
+          "title": "Mensagens saem uma vez só",
+          "body": "Uma mensagem que o app não conseguiu confirmar se verifica sozinha e é enviada de novo uma vez, nunca duas. Uma resposta não aparece mais duas vezes ao terminar, e sua mensagem enviada não pula mais."
+        },
+        {
+          "title": "Agentes do Coordenador que você acompanha",
+          "body": "Os agentes iniciados pelo Coordenador mostram o texto e um botão Parar enquanto trabalham, e ficam “trabalhando” até a vez deles realmente terminar. O Coordenador prepara as cópias deles em paralelo, mantém o esforço que você escolheu e as mensagens dele ficam no chat de cada agente."
+        },
+        {
+          "title": "Projetos ficam separados",
+          "body": "Um projeto novo na mesma pasta não lê nem grava mais a memória de outro projeto. Excluir um projeto não é mais recusado por causa do trabalho de outro projeto, e excluir o projeto em que você estava não deixa mais uma janela preta na próxima abertura."
+        },
+        {
+          "title": "Correções menores",
+          "body": "Atividade volta a mostrar as alterações da pasta e o status do Git em vez de “indisponível”, e fechar o app não trava mais depois da limpeza."
+        }
+      ]
+    },
+    "ro": {
+      "headline": "Antigravity după regulile Google, Commit & PR în Activitate și agenți mai stabili",
+      "summary": "Antigravity respectă regulile Google pentru conturile personale, Commit & PR e un rând în Activitate, iar o serie de reparații face lucrul de zi cu zi mai lin.",
+      "sections": [
+        {
+          "title": "Antigravity după regulile Google",
+          "body": "Antigravity respectă acum regulile Google pentru conturile personale: primește doar ce scrii tu, rulează doar modele Gemini și nu primește unelte din aplicație. Coordonatorul, Misiunile, automatizările și predările nu îl mai folosesc, iar limitele lui rămân în Antigravity."
+        },
+        {
+          "title": "Commit & PR în Activitate",
+          "body": "Commit & PR s-a mutat din capul conversației în panoul Activitate, ca un rând lângă Modificări, Ramură și Push."
+        },
+        {
+          "title": "Mesajele pleacă o singură dată",
+          "body": "Un mesaj pe care aplicația nu l-a putut confirma se verifică singur și se trimite din nou o dată, niciodată de două ori. Un răspuns nu mai apare de două ori când se termină, iar mesajul trimis nu mai sare."
+        },
+        {
+          "title": "Agenții Coordonatorului se văd la lucru",
+          "body": "Agenții porniți de Coordonator își arată textul și un buton Oprește cât lucrează și rămân „la lucru” până se termină cu adevărat tura lor. Coordonatorul le pregătește copiile în paralel, păstrează efortul ales de tine, iar mesajele lui rămân în conversația fiecărui agent."
+        },
+        {
+          "title": "Proiectele rămân separate",
+          "body": "Un proiect nou pe același folder nu mai citește și nu mai scrie memoria altui proiect. Ștergerea unui proiect nu mai e refuzată din cauza lucrului din alt proiect, iar ștergerea proiectului în care erai nu mai lasă o fereastră neagră la următoarea pornire."
+        },
+        {
+          "title": "Reparații mai mici",
+          "body": "Activitatea arată din nou modificările folderului și starea Git în loc de „indisponibil”, iar închiderea aplicației nu se mai blochează după curățenie."
+        }
+      ]
+    },
+    "ru": {
+      "headline": "Antigravity по условиям Google, Commit & PR в «Активности» и более стабильные агенты",
+      "summary": "Antigravity следует условиям Google для личных аккаунтов, Commit & PR стал строкой в «Активности», а набор исправлений делает ежедневную работу ровнее.",
+      "sections": [
+        {
+          "title": "Antigravity по условиям Google",
+          "body": "Antigravity теперь следует условиям Google для личных аккаунтов: получает только то, что вы вводите, работает только с моделями Gemini и не получает инструменты из приложения. Координатор, Миссии, автоматизации и передачи больше его не используют, а его лимиты остаются в Antigravity."
+        },
+        {
+          "title": "Commit & PR в «Активности»",
+          "body": "Commit & PR переехал из заголовка разговора в панель «Активность» — строкой рядом с «Изменениями», веткой и Push."
+        },
+        {
+          "title": "Сообщения уходят один раз",
+          "body": "Сообщение, которое приложение не смогло подтвердить, проверяет себя и отправляется повторно один раз, никогда дважды. Ответ больше не показывается дважды по завершении, а отправленное сообщение больше не прыгает."
+        },
+        {
+          "title": "Агенты Координатора на виду",
+          "body": "Агенты, запущенные Координатором, показывают свой текст и кнопку «Стоп», пока работают, и остаются «в работе», пока их ход действительно не закончится. Координатор готовит их копии параллельно, сохраняет выбранное вами усилие, а его сообщения остаются в чате каждого агента."
+        },
+        {
+          "title": "Проекты не смешиваются",
+          "body": "Новый проект в той же папке больше не читает и не пишет память другого проекта. Удаление проекта больше не отклоняется из-за работы другого проекта, а удаление проекта, в котором вы находились, больше не оставляет чёрное окно при следующем запуске."
+        },
+        {
+          "title": "Мелкие исправления",
+          "body": "«Активность» снова показывает изменения папки и состояние Git вместо «недоступно», а закрытие приложения больше не зависает после очистки."
+        }
+      ]
+    },
+    "tr": {
+      "headline": "Google koşullarıyla Antigravity, Etkinlik'te Commit & PR ve daha kararlı ajanlar",
+      "summary": "Antigravity kişisel hesaplar için Google koşullarına uyuyor, Commit & PR Etkinlik'te bir satır oldu ve bir dizi düzeltme günlük işi daha akıcı hâle getiriyor.",
+      "sections": [
+        {
+          "title": "Google koşullarıyla Antigravity",
+          "body": "Antigravity artık kişisel hesaplar için Google koşullarına uyuyor: yalnızca senin yazdığını alır, yalnızca Gemini modellerini çalıştırır ve uygulamadan araç almaz. Koordinatör, Görevler, otomasyonlar ve devirler artık onu kullanmaz; limitleri Antigravity'de kalır."
+        },
+        {
+          "title": "Etkinlik'te Commit & PR",
+          "body": "Commit & PR, sohbet başlığından Etkinlik paneline taşındı; Değişiklikler, Dal ve Push'un yanında bir satır olarak."
+        },
+        {
+          "title": "Mesajlar bir kez gider",
+          "body": "Uygulamanın doğrulayamadığı bir mesaj kendini kontrol eder ve bir kez yeniden gönderilir, asla iki kez değil. Bir yanıt bittiğinde artık iki kez görünmez ve gönderdiğin mesaj artık zıplamaz."
+        },
+        {
+          "title": "İzleyebileceğin Koordinatör ajanları",
+          "body": "Koordinatör'ün başlattığı ajanlar çalışırken metinlerini ve bir Durdur düğmesini gösterir, sıraları gerçekten bitene kadar \"çalışıyor\" kalır. Koordinatör kopyalarını paralel hazırlar, seçtiğin çabayı korur ve mesajları her ajanın sohbetinde kalır."
+        },
+        {
+          "title": "Projeler ayrı kalır",
+          "body": "Aynı klasördeki yeni bir proje artık başka bir projenin belleğini okumaz veya yazmaz. Bir projeyi silmek artık başka bir projenin işi yüzünden reddedilmez ve içinde olduğun projeyi silmek bir sonraki açılışta siyah pencere bırakmaz."
+        },
+        {
+          "title": "Küçük düzeltmeler",
+          "body": "Etkinlik, \"kullanılamıyor\" yerine klasörün değişikliklerini ve Git durumunu yeniden gösteriyor; uygulamayı kapatmak temizlikten sonra artık takılmıyor."
+        }
+      ]
+    },
+    "vi": {
+      "headline": "Antigravity theo điều khoản của Google, Commit & PR trong Hoạt động và các agent ổn định hơn",
+      "summary": "Antigravity tuân theo điều khoản của Google cho tài khoản cá nhân, Commit & PR thành một hàng trong Hoạt động, và loạt bản sửa lỗi giúp công việc hằng ngày trơn tru hơn.",
+      "sections": [
+        {
+          "title": "Antigravity theo điều khoản của Google",
+          "body": "Antigravity giờ tuân theo điều khoản của Google cho tài khoản cá nhân: chỉ nhận những gì bạn gõ, chỉ chạy mô hình Gemini và không nhận công cụ nào từ ứng dụng. Điều phối viên, Nhiệm vụ, tự động hóa và chuyển giao không còn dùng nó, và giới hạn của nó nằm trong Antigravity."
+        },
+        {
+          "title": "Commit & PR trong Hoạt động",
+          "body": "Commit & PR đã chuyển từ đầu cuộc trò chuyện vào bảng Hoạt động, thành một hàng cạnh Thay đổi, Nhánh và Push."
+        },
+        {
+          "title": "Tin nhắn chỉ gửi một lần",
+          "body": "Tin nhắn mà ứng dụng không xác nhận được sẽ tự kiểm tra và được gửi lại một lần, không bao giờ hai lần. Câu trả lời không còn hiện hai lần khi kết thúc, và tin nhắn bạn đã gửi không còn nhảy."
+        },
+        {
+          "title": "Agent của Điều phối viên dễ theo dõi",
+          "body": "Các agent do Điều phối viên khởi chạy hiển thị văn bản và nút Dừng khi đang làm việc, và giữ trạng thái \"đang làm\" cho đến khi lượt của chúng thật sự kết thúc. Điều phối viên chuẩn bị bản sao của chúng song song, giữ mức nỗ lực bạn chọn, và tin nhắn của nó nằm lại trong cuộc trò chuyện của từng agent."
+        },
+        {
+          "title": "Các dự án tách biệt",
+          "body": "Dự án mới trên cùng thư mục không còn đọc hay ghi bộ nhớ của dự án khác. Xóa một dự án không còn bị từ chối vì công việc của dự án khác, và xóa dự án bạn đang mở không còn để lại cửa sổ đen ở lần khởi động sau."
+        },
+        {
+          "title": "Sửa lỗi nhỏ",
+          "body": "Hoạt động lại hiển thị thay đổi của thư mục và trạng thái Git thay vì \"không khả dụng\", và đóng ứng dụng không còn bị treo sau khi dọn dẹp."
+        }
+      ]
+    },
+    "zh-Hans": {
+      "headline": "遵循 Google 条款的 Antigravity、活动面板中的 Commit & PR，以及更稳定的代理",
+      "summary": "Antigravity 遵循 Google 针对个人账号的条款，Commit & PR 成为活动面板中的一行，一系列修复让日常工作更顺畅。",
+      "sections": [
+        {
+          "title": "遵循 Google 条款的 Antigravity",
+          "body": "Antigravity 现在遵循 Google 针对个人账号的条款：只接收你输入的内容，只运行 Gemini 模型，不从应用获取任何工具。协调员、任务、自动化和交接不再使用它，它的限额保留在 Antigravity 中。"
+        },
+        {
+          "title": "活动面板中的 Commit & PR",
+          "body": "Commit & PR 从对话标题移到了活动面板，作为与更改、分支和 Push 并列的一行。"
+        },
+        {
+          "title": "消息只发送一次",
+          "body": "应用无法确认的消息会自行检查并重新发送一次，绝不会发送两次。回答结束时不再显示两次，你发送的消息也不再跳动。"
+        },
+        {
+          "title": "可跟进的协调员代理",
+          "body": "协调员启动的代理在工作时显示其文本和停止按钮，并保持\"工作中\"直到其回合真正结束。协调员并行准备它们的副本，保留你选择的推理强度，其消息保留在每个代理的聊天中。"
+        },
+        {
+          "title": "项目互不干扰",
+          "body": "同一文件夹上的新项目不再读取或写入其他项目的记忆。删除项目不再因其他项目的工作而被拒绝，删除你所在的项目后，下次启动也不再留下黑色窗口。"
+        },
+        {
+          "title": "小修复",
+          "body": "活动面板再次显示文件夹的更改和 Git 状态，而不是\"不可用\"；清理后关闭应用也不再卡住。"
+        }
+      ]
+    },
+    "zh-Hant": {
+      "headline": "遵循 Google 條款的 Antigravity、活動面板中的 Commit & PR，以及更穩定的代理",
+      "summary": "Antigravity 遵循 Google 針對個人帳號的條款，Commit & PR 成為活動面板中的一列，一系列修正讓日常工作更順暢。",
+      "sections": [
+        {
+          "title": "遵循 Google 條款的 Antigravity",
+          "body": "Antigravity 現在遵循 Google 針對個人帳號的條款：只接收你輸入的內容，只執行 Gemini 模型，不從應用程式取得任何工具。協調員、任務、自動化和交接不再使用它，它的限額保留在 Antigravity 中。"
+        },
+        {
+          "title": "活動面板中的 Commit & PR",
+          "body": "Commit & PR 從對話標題移到了活動面板，成為與變更、分支和 Push 並列的一列。"
+        },
+        {
+          "title": "訊息只傳送一次",
+          "body": "應用程式無法確認的訊息會自行檢查並重新傳送一次，絕不會傳送兩次。回答結束時不再顯示兩次，你傳送的訊息也不再跳動。"
+        },
+        {
+          "title": "可追蹤的協調員代理",
+          "body": "協調員啟動的代理在工作時顯示其文字和停止按鈕，並保持「工作中」直到其回合真正結束。協調員平行準備它們的副本，保留你選擇的推理強度，其訊息保留在每個代理的聊天中。"
+        },
+        {
+          "title": "專案互不干擾",
+          "body": "同一資料夾上的新專案不再讀取或寫入其他專案的記憶。刪除專案不再因其他專案的工作而被拒絕，刪除你所在的專案後，下次啟動也不再留下黑色視窗。"
+        },
+        {
+          "title": "小修正",
+          "body": "活動面板再次顯示資料夾的變更和 Git 狀態，而不是「無法使用」；清理後關閉應用程式也不再卡住。"
+        }
+      ]
+    }
+  }
+}
