@@ -313,7 +313,7 @@
   "Download Codevalanche for Windows 11. Your coding agents and local models in one app, in early access.": "Windows 11 के लिए Codevalanche डाउनलोड करें। आपके कोडिंग एजेंट और लोकल मॉडल एक ही ऐप में, अर्ली एक्सेस में।",
   "Download Codevalanche.": "Codevalanche डाउनलोड करें।",
   "Download for Windows": "Windows के लिए डाउनलोड करें",
-  "Download page counts": "डाउनलोड पेज की गिनती",
+  "Page and download counts": "पेज और डाउनलोड की गिनती",
   "Download started": "डाउनलोड शुरू हो गया",
   "Download, install and connect your first AI in a few minutes.": "कुछ ही मिनटों में डाउनलोड करें, इंस्टॉल करें और अपना पहला AI जोड़ें।",
   "Downloaded {count} times.": "{count} बार डाउनलोड किया गया।",
@@ -443,7 +443,7 @@
   "Language: English. The app ships in 17 languages.": "भाषा: अंग्रेज़ी। ऐप 17 भाषाओं में उपलब्ध है।",
   "Large models can exceed available memory or run too slowly for the task. Choose a model your machine can support; there is no universal memory requirement or speed guarantee.": "बड़े मॉडल उपलब्ध मेमोरी से अधिक माँग सकते हैं या काम के लिए बहुत धीमे हो सकते हैं। मशीन द्वारा समर्थित मॉडल चुनें; मेमोरी की कोई सार्वभौमिक ज़रूरत या गति की गारंटी नहीं है।",
   "Last updated: October 20, 2026": "आखिरी अपडेट: 20 अक्टूबर 2026",
-  "Last updated: October 21, 2026": "आखिरी अपडेट: 21 अक्टूबर 2026",
+  "Last updated: November 23, 2026": "आखिरी अपडेट: 23 नवंबर 2026",
   "Latest": "नवीनतम",
   "Learn Codevalanche: install it, connect Claude Code, Codex or local models, run projects with the Coordinator, and fix problems.": "Codevalanche सीखें: इसे इंस्टॉल करें, Claude Code, Codex या लोकल मॉडल जोड़ें, Coordinator के साथ प्रोजेक्ट चलाएँ और समस्याएँ ठीक करें।",
   "Learn Codevalanche.": "Codevalanche सीखें।",
@@ -988,5 +988,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "We count visits to every page of the website the same way. For each day we keep only a number per page, per site language and per kind of source: opened directly, from another page of this site, from a search engine, a social network, GitHub, an AI assistant or another website. The address you came from is never sent or stored, and a reload is not counted again.": "हम वेबसाइट के हर पेज पर आने वालों की गिनती इसी तरह करते हैं। हर दिन के लिए हम हर पेज, साइट की हर भाषा और स्रोत के हर प्रकार के लिए केवल एक संख्या रखते हैं: सीधे खोला गया, इसी साइट के किसी दूसरे पेज से, किसी सर्च इंजन, सोशल नेटवर्क, GitHub, AI असिस्टेंट या किसी दूसरी वेबसाइट से। आप जिस पते से आए, वह कभी भेजा या सहेजा नहीं जाता, और पेज दोबारा लोड करने को फिर से नहीं गिना जाता।"
 }

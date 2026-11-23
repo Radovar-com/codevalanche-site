@@ -313,7 +313,7 @@
   "Download Codevalanche for Windows 11. Your coding agents and local models in one app, in early access.": "نزّل Codevalanche لنظام Windows 11. وكلاء البرمجة والنماذج المحلية في تطبيق واحد، في الوصول المبكر.",
   "Download Codevalanche.": "نزّل Codevalanche.",
   "Download for Windows": "التنزيل لنظام Windows",
-  "Download page counts": "عدد مرات زيارة صفحات التنزيل",
+  "Page and download counts": "عدد زيارات الصفحات والتنزيلات",
   "Download started": "بدأ التنزيل",
   "Download, install and connect your first AI in a few minutes.": "نزّل التطبيق وثبّته واربط أول أداة ذكاء اصطناعي في دقائق.",
   "Downloaded {count} times.": "نُزّل {count} مرة.",
@@ -443,7 +443,7 @@
   "Language: English. The app ships in 17 languages.": "اللغة: الإنجليزية. يتوفر التطبيق بـ17 لغة.",
   "Large models can exceed available memory or run too slowly for the task. Choose a model your machine can support; there is no universal memory requirement or speed guarantee.": "قد تتجاوز النماذج الكبيرة الذاكرة المتاحة أو تعمل ببطء شديد للمهمة. اختر نموذجًا يدعمه جهازك؛ فلا متطلبات ذاكرة موحدة ولا ضمان للسرعة.",
   "Last updated: October 20, 2026": "آخر تحديث: 20 أكتوبر 2026",
-  "Last updated: October 21, 2026": "آخر تحديث: 21 أكتوبر 2026",
+  "Last updated: November 23, 2026": "آخر تحديث: 23 نوفمبر 2026",
   "Latest": "الأحدث",
   "Learn Codevalanche: install it, connect Claude Code, Codex or local models, run projects with the Coordinator, and fix problems.": "تعلّم Codevalanche: ثبّته، واربط Claude Code أو Codex أو النماذج المحلية، وأدِر المشاريع مع المنسّق، وحلّ المشكلات.",
   "Learn Codevalanche.": "تعلّم Codevalanche.",
@@ -988,5 +988,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "We count visits to every page of the website the same way. For each day we keep only a number per page, per site language and per kind of source: opened directly, from another page of this site, from a search engine, a social network, GitHub, an AI assistant or another website. The address you came from is never sent or stored, and a reload is not counted again.": "نحسب زيارات كل صفحة من صفحات الموقع بالطريقة نفسها. لكل يوم نحتفظ فقط برقم لكل صفحة ولكل لغة من لغات الموقع ولكل نوع من المصادر: فُتحت مباشرة، أو من صفحة أخرى في هذا الموقع، أو من محرك بحث، أو شبكة اجتماعية، أو GitHub، أو مساعد ذكاء اصطناعي، أو موقع آخر. لا يُرسل العنوان الذي جئت منه ولا يُخزَّن أبدًا، ولا تُحتسب إعادة تحميل الصفحة مرة أخرى."
 }

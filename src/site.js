@@ -198,5 +198,8 @@
   window.addEventListener('scroll', () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(update) }, { passive: true })
 })()
 
+// Cookieless daily page counts (no identifier, no consent needed); never blocks the page.
+void import('./page-counts.js').then(({countPage}) => countPage()).catch(() => {});
+
 // Optional telemetry cannot delay control initialization or fail its module graph.
 void import('./account-funnel.js').catch(() => { /* Browsing remains usable without analytics. */ });

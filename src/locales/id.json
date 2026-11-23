@@ -313,7 +313,7 @@
   "Download Codevalanche for Windows 11. Your coding agents and local models in one app, in early access.": "Unduh Codevalanche untuk Windows 11. Agen pemrograman dan model lokal Anda dalam satu aplikasi, dalam akses awal.",
   "Download Codevalanche.": "Unduh Codevalanche.",
   "Download for Windows": "Unduh untuk Windows",
-  "Download page counts": "Hitungan halaman unduhan",
+  "Page and download counts": "Penghitungan halaman dan unduhan",
   "Download started": "Unduhan dimulai",
   "Download, install and connect your first AI in a few minutes.": "Unduh, pasang, dan hubungkan AI pertama Anda dalam beberapa menit.",
   "Downloaded {count} times.": "Diunduh {count} kali.",
@@ -443,7 +443,7 @@
   "Language: English. The app ships in 17 languages.": "Bahasa: Inggris. Aplikasi tersedia dalam 17 bahasa.",
   "Large models can exceed available memory or run too slowly for the task. Choose a model your machine can support; there is no universal memory requirement or speed guarantee.": "Model besar dapat melebihi memori yang tersedia atau terlalu lambat untuk tugas. Pilih model yang dapat ditangani mesin Anda; tidak ada persyaratan memori universal atau jaminan kecepatan.",
   "Last updated: October 20, 2026": "Terakhir diperbarui: 20 Oktober 2026",
-  "Last updated: October 21, 2026": "Terakhir diperbarui: 21 Oktober 2026",
+  "Last updated: November 23, 2026": "Terakhir diperbarui: 23 November 2026",
   "Latest": "Terbaru",
   "Learn Codevalanche: install it, connect Claude Code, Codex or local models, run projects with the Coordinator, and fix problems.": "Pelajari Codevalanche: pasang, hubungkan Claude Code, Codex, atau model lokal, jalankan proyek dengan Koordinator, dan atasi masalah.",
   "Learn Codevalanche.": "Pelajari Codevalanche.",
@@ -988,5 +988,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "We count visits to every page of the website the same way. For each day we keep only a number per page, per site language and per kind of source: opened directly, from another page of this site, from a search engine, a social network, GitHub, an AI assistant or another website. The address you came from is never sent or stored, and a reload is not counted again.": "Kami menghitung kunjungan ke setiap halaman situs dengan cara yang sama. Untuk setiap hari kami hanya menyimpan satu angka per halaman, per bahasa situs, dan per jenis sumber: dibuka langsung, dari halaman lain di situs ini, dari mesin pencari, jejaring sosial, GitHub, asisten AI, atau situs lain. Alamat asal Anda tidak pernah dikirim atau disimpan, dan memuat ulang halaman tidak dihitung lagi."
 }
