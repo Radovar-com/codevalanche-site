@@ -313,7 +313,7 @@
   "Download Codevalanche for Windows 11. Your coding agents and local models in one app, in early access.": "Tải Codevalanche cho Windows 11. Các tác nhân lập trình và mô hình cục bộ của bạn trong một ứng dụng, ở giai đoạn truy cập sớm.",
   "Download Codevalanche.": "Tải Codevalanche.",
   "Download for Windows": "Tải cho Windows",
-  "Download page counts": "Đếm lượt trang tải xuống",
+  "Page and download counts": "Đếm lượt xem trang và lượt tải xuống",
   "Download started": "Đã bắt đầu tải xuống",
   "Download, install and connect your first AI in a few minutes.": "Tải xuống, cài đặt và kết nối AI đầu tiên chỉ trong vài phút.",
   "Downloaded {count} times.": "Đã được tải {count} lần.",
@@ -443,7 +443,7 @@
   "Language: English. The app ships in 17 languages.": "Ngôn ngữ: Tiếng Anh. Ứng dụng hỗ trợ 17 ngôn ngữ.",
   "Large models can exceed available memory or run too slowly for the task. Choose a model your machine can support; there is no universal memory requirement or speed guarantee.": "Mô hình lớn có thể vượt bộ nhớ sẵn có hoặc chạy quá chậm cho tác vụ. Chọn mô hình máy có thể hỗ trợ; không có yêu cầu bộ nhớ chung hay bảo đảm tốc độ.",
   "Last updated: October 20, 2026": "Cập nhật lần cuối: ngày 20 tháng 10 năm 2026",
-  "Last updated: October 21, 2026": "Cập nhật lần cuối: ngày 21 tháng 10 năm 2026",
+  "Last updated: November 23, 2026": "Cập nhật lần cuối: ngày 23 tháng 11 năm 2026",
   "Latest": "Mới nhất",
   "Learn Codevalanche: install it, connect Claude Code, Codex or local models, run projects with the Coordinator, and fix problems.": "Tìm hiểu Codevalanche: cài đặt, kết nối Claude Code, Codex hoặc mô hình cục bộ, chạy dự án với Điều phối viên và khắc phục sự cố.",
   "Learn Codevalanche.": "Tìm hiểu Codevalanche.",
@@ -988,5 +988,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "We count visits to every page of the website the same way. For each day we keep only a number per page, per site language and per kind of source: opened directly, from another page of this site, from a search engine, a social network, GitHub, an AI assistant or another website. The address you came from is never sent or stored, and a reload is not counted again.": "Chúng tôi đếm lượt truy cập vào mọi trang của trang web theo cùng cách đó. Mỗi ngày chúng tôi chỉ giữ một con số cho mỗi trang, mỗi ngôn ngữ của trang web và mỗi loại nguồn: mở trực tiếp, từ một trang khác của trang web này, từ công cụ tìm kiếm, mạng xã hội, GitHub, trợ lý AI hoặc một trang web khác. Địa chỉ bạn đến từ đó không bao giờ được gửi hay lưu lại, và việc tải lại trang không được đếm thêm lần nữa."
 }

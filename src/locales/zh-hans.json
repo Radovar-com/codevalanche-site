@@ -313,7 +313,7 @@
   "Download Codevalanche for Windows 11. Your coding agents and local models in one app, in early access.": "下载适用于 Windows 11 的 Codevalanche。你的编程智能体和本地模型集于一个应用，现已开放抢先体验。",
   "Download Codevalanche.": "下载 Codevalanche。",
   "Download for Windows": "下载 Windows 版",
-  "Download page counts": "下载页面计数",
+  "Page and download counts": "页面和下载计数",
   "Download started": "下载已开始",
   "Download, install and connect your first AI in a few minutes.": "几分钟内即可下载、安装并连接第一个 AI。",
   "Downloaded {count} times.": "已下载 {count} 次。",
@@ -443,7 +443,7 @@
   "Language: English. The app ships in 17 languages.": "语言：英语。应用支持17种语言。",
   "Large models can exceed available memory or run too slowly for the task. Choose a model your machine can support; there is no universal memory requirement or speed guarantee.": "大型模型可能超出可用内存，或运行过慢而不适合任务。请选择设备能够支持的模型；没有通用的内存要求或速度保证。",
   "Last updated: October 20, 2026": "最后更新：2026 年 10 月 20 日",
-  "Last updated: October 21, 2026": "最后更新：2026 年 10 月 21 日",
+  "Last updated: November 23, 2026": "最后更新：2026 年 11 月 23 日",
   "Latest": "最新",
   "Learn Codevalanche: install it, connect Claude Code, Codex or local models, run projects with the Coordinator, and fix problems.": "了解 Codevalanche：安装、连接 Claude Code、Codex 或本地模型，用协调器推进项目，并解决问题。",
   "Learn Codevalanche.": "了解 Codevalanche。",
@@ -988,5 +988,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "We count visits to every page of the website the same way. For each day we keep only a number per page, per site language and per kind of source: opened directly, from another page of this site, from a search engine, a social network, GitHub, an AI assistant or another website. The address you came from is never sent or stored, and a reload is not counted again.": "我们以同样的方式统计网站每个页面的访问。每天我们只按页面、网站语言和来源类型保存一个数字：直接打开、来自本网站的其他页面、搜索引擎、社交网络、GitHub、AI 助手或其他网站。您来自哪个地址永远不会被发送或保存，刷新页面也不会被再次计数。"
 }

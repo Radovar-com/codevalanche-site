@@ -313,7 +313,7 @@
   "Download Codevalanche for Windows 11. Your coding agents and local models in one app, in early access.": "Descarcă Codevalanche pentru Windows 11. Agenții tăi de programare și modelele locale într-o singură aplicație, în acces timpuriu.",
   "Download Codevalanche.": "Descarcă Codevalanche.",
   "Download for Windows": "Descarcă pentru Windows",
-  "Download page counts": "Numărătoarea paginilor de descărcare",
+  "Page and download counts": "Numărătoarea paginilor și a descărcărilor",
   "Download started": "Descărcarea a început",
   "Download, install and connect your first AI in a few minutes.": "Descarcă, instalează și conectează primul AI în câteva minute.",
   "Downloaded {count} times.": "Descărcat de {count} ori.",
@@ -443,7 +443,7 @@
   "Language: English. The app ships in 17 languages.": "Limbă: engleză. Aplicația este disponibilă în 17 limbi.",
   "Large models can exceed available memory or run too slowly for the task. Choose a model your machine can support; there is no universal memory requirement or speed guarantee.": "Modelele mari pot depăși memoria disponibilă sau pot rula prea lent pentru sarcină. Alege un model pe care calculatorul tău îl poate susține; nu există o cerință universală de memorie sau o garanție de viteză.",
   "Last updated: October 20, 2026": "Ultima actualizare: 20 octombrie 2026",
-  "Last updated: October 21, 2026": "Ultima actualizare: 21 octombrie 2026",
+  "Last updated: November 23, 2026": "Ultima actualizare: 23 noiembrie 2026",
   "Latest": "Cea mai nouă",
   "Learn Codevalanche: install it, connect Claude Code, Codex or local models, run projects with the Coordinator, and fix problems.": "Învață Codevalanche: instalează-l, conectează Claude Code, Codex sau modele locale, lucrează pe proiecte cu Coordonatorul și rezolvă probleme.",
   "Learn Codevalanche.": "Învață Codevalanche.",
@@ -988,5 +988,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "We count visits to every page of the website the same way. For each day we keep only a number per page, per site language and per kind of source: opened directly, from another page of this site, from a search engine, a social network, GitHub, an AI assistant or another website. The address you came from is never sent or stored, and a reload is not counted again.": "Numărăm la fel vizitele pe fiecare pagină a site-ului. Pentru fiecare zi păstrăm doar un număr pe pagină, pe limba site-ului și pe tipul de proveniență: deschisă direct, dintr-o altă pagină a acestui site, dintr-un motor de căutare, o rețea socială, GitHub, un asistent AI sau alt site. Adresa de pe care ai venit nu este niciodată trimisă sau păstrată, iar o reîncărcare a paginii nu se mai numără o dată."
 }

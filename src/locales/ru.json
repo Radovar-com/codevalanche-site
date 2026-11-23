@@ -313,7 +313,7 @@
   "Download Codevalanche for Windows 11. Your coding agents and local models in one app, in early access.": "Скачайте Codevalanche для Windows 11. Ваши агенты для кода и локальные модели в одном приложении, в раннем доступе.",
   "Download Codevalanche.": "Скачайте Codevalanche.",
   "Download for Windows": "Скачать для Windows",
-  "Download page counts": "Подсчёт страниц загрузки",
+  "Page and download counts": "Подсчёт страниц и загрузок",
   "Download started": "Загрузка началась",
   "Download, install and connect your first AI in a few minutes.": "Скачайте, установите и подключите первый ИИ за несколько минут.",
   "Downloaded {count} times.": "Скачано {count} раз.",
@@ -443,7 +443,7 @@
   "Language: English. The app ships in 17 languages.": "Язык: английский. Приложение доступно на 17 языках.",
   "Large models can exceed available memory or run too slowly for the task. Choose a model your machine can support; there is no universal memory requirement or speed guarantee.": "Большие модели могут превышать доступную память или работать слишком медленно для задачи. Выберите модель по возможностям компьютера; универсальных требований к памяти и гарантии скорости нет.",
   "Last updated: October 20, 2026": "Последнее обновление: 20 октября 2026 г.",
-  "Last updated: October 21, 2026": "Последнее обновление: 21 октября 2026 г.",
+  "Last updated: November 23, 2026": "Последнее обновление: 23 ноября 2026 г.",
   "Latest": "Последняя",
   "Learn Codevalanche: install it, connect Claude Code, Codex or local models, run projects with the Coordinator, and fix problems.": "Изучите Codevalanche: установка, подключение Claude Code, Codex или локальных моделей, проекты с Координатором и решение проблем.",
   "Learn Codevalanche.": "Изучите Codevalanche.",
@@ -988,5 +988,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "We count visits to every page of the website the same way. For each day we keep only a number per page, per site language and per kind of source: opened directly, from another page of this site, from a search engine, a social network, GitHub, an AI assistant or another website. The address you came from is never sent or stored, and a reload is not counted again.": "Посещения всех страниц сайта мы считаем так же. За каждый день мы храним только число для каждой страницы, языка сайта и типа источника: открыта напрямую, с другой страницы этого сайта, из поисковой системы, социальной сети, GitHub, ИИ-ассистента или с другого сайта. Адрес, с которого вы пришли, никогда не отправляется и не сохраняется, а перезагрузка страницы повторно не считается."
 }

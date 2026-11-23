@@ -313,7 +313,7 @@
   "Download Codevalanche for Windows 11. Your coding agents and local models in one app, in early access.": "Windows 11용 Codevalanche를 다운로드하세요. 코딩 에이전트와 로컬 모델을 하나의 앱에서, 얼리 액세스로 만나보세요.",
   "Download Codevalanche.": "Codevalanche 다운로드",
   "Download for Windows": "Windows용 다운로드",
-  "Download page counts": "다운로드 페이지 집계",
+  "Page and download counts": "페이지 및 다운로드 집계",
   "Download started": "다운로드가 시작되었습니다",
   "Download, install and connect your first AI in a few minutes.": "몇 분 만에 다운로드하고 설치한 뒤 첫 AI를 연결하세요.",
   "Downloaded {count} times.": "{count}회 다운로드되었습니다.",
@@ -443,7 +443,7 @@
   "Language: English. The app ships in 17 languages.": "언어: 영어. 앱은 17개 언어로 제공됩니다.",
   "Large models can exceed available memory or run too slowly for the task. Choose a model your machine can support; there is no universal memory requirement or speed guarantee.": "큰 모델은 사용 가능한 메모리를 초과하거나 작업에 쓰기에는 너무 느릴 수 있습니다. 컴퓨터에서 지원할 수 있는 모델을 선택하세요. 모든 모델에 공통으로 적용되는 메모리 요구 사항이나 속도 보장은 없습니다.",
   "Last updated: October 20, 2026": "최종 업데이트: 2026년 10월 20일",
-  "Last updated: October 21, 2026": "최종 업데이트: 2026년 10월 21일",
+  "Last updated: November 23, 2026": "최종 업데이트: 2026년 11월 23일",
   "Latest": "최신",
   "Learn Codevalanche: install it, connect Claude Code, Codex or local models, run projects with the Coordinator, and fix problems.": "Codevalanche 배우기: 설치하고, Claude Code·Codex·로컬 모델을 연결하고, 코디네이터로 프로젝트를 진행하고, 문제를 해결하세요.",
   "Learn Codevalanche.": "Codevalanche 배우기.",
@@ -988,5 +988,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "We count visits to every page of the website the same way. For each day we keep only a number per page, per site language and per kind of source: opened directly, from another page of this site, from a search engine, a social network, GitHub, an AI assistant or another website. The address you came from is never sent or stored, and a reload is not counted again.": "웹사이트의 모든 페이지 방문도 같은 방식으로 집계합니다. 하루마다 페이지, 사이트 언어, 유입 경로 유형(직접 열기, 이 사이트의 다른 페이지, 검색 엔진, 소셜 네트워크, GitHub, AI 어시스턴트 또는 다른 웹사이트)별로 숫자 하나만 보관합니다. 어디에서 왔는지 알려 주는 주소는 절대 전송되거나 저장되지 않으며, 새로 고침은 다시 집계되지 않습니다."
 }

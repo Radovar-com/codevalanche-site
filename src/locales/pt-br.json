@@ -313,7 +313,7 @@
   "Download Codevalanche for Windows 11. Your coding agents and local models in one app, in early access.": "Baixe o Codevalanche para Windows 11. Seus agentes de código e modelos locais em um só app, em acesso antecipado.",
   "Download Codevalanche.": "Baixe o Codevalanche.",
   "Download for Windows": "Baixar para Windows",
-  "Download page counts": "Contagem das páginas de download",
+  "Page and download counts": "Contagem de páginas e downloads",
   "Download started": "Download iniciado",
   "Download, install and connect your first AI in a few minutes.": "Baixe, instale e conecte sua primeira IA em poucos minutos.",
   "Downloaded {count} times.": "Baixado {count} vezes.",
@@ -443,7 +443,7 @@
   "Language: English. The app ships in 17 languages.": "Idioma: inglês. O aplicativo é oferecido em 17 idiomas.",
   "Large models can exceed available memory or run too slowly for the task. Choose a model your machine can support; there is no universal memory requirement or speed guarantee.": "Modelos grandes podem exceder a memória disponível ou ser lentos demais para a tarefa. Escolha um modelo que sua máquina consiga executar; não há requisito universal de memória nem garantia de velocidade.",
   "Last updated: October 20, 2026": "Última atualização: 20 de outubro de 2026",
-  "Last updated: October 21, 2026": "Última atualização: 21 de outubro de 2026",
+  "Last updated: November 23, 2026": "Última atualização: 23 de novembro de 2026",
   "Latest": "Mais recente",
   "Learn Codevalanche: install it, connect Claude Code, Codex or local models, run projects with the Coordinator, and fix problems.": "Aprenda o Codevalanche: instale, conecte Claude Code, Codex ou modelos locais, conduza projetos com o Coordenador e resolva problemas.",
   "Learn Codevalanche.": "Aprenda o Codevalanche.",
@@ -988,5 +988,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "We count visits to every page of the website the same way. For each day we keep only a number per page, per site language and per kind of source: opened directly, from another page of this site, from a search engine, a social network, GitHub, an AI assistant or another website. The address you came from is never sent or stored, and a reload is not counted again.": "Contamos as visitas a todas as páginas do site da mesma forma. Para cada dia guardamos apenas um número por página, por idioma do site e por tipo de origem: aberta diretamente, a partir de outra página deste site, de um buscador, de uma rede social, do GitHub, de um assistente de IA ou de outro site. O endereço de onde você veio nunca é enviado nem armazenado, e recarregar a página não é contado de novo."
 }
