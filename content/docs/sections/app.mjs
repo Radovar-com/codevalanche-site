@@ -161,18 +161,18 @@ ${h2('local', 'What stays on your computer')}
 ${list([
   'Conversations and run history, preferences, Computer use rules, voice transcripts and the app log (passwords and tokens masked).',
   'API keys, connector sign-ins and your account session, encrypted and tied to your Windows account.',
-  'The AI apps (Claude Code, Codex and others) keep their own data in their own folders.',
+  'The AI apps (Claude Code, Codex and others) keep their own data in their own folders. Codevalanche reads which Claude Code and Codex account is signed in from those files, to show it to you; that stays on your computer.',
 ])}
 ${p('Settings › Storage shows what Codevalanche keeps and how much space it uses.')}
 ${h2('codevalanche', 'What Codevalanche receives')}
 ${list([
   'Your account details if you create an account.',
   'Feedback, only when you send it. Keys, tokens, email addresses and personal folder paths are removed from the text first.',
-  'Four anonymous usage signals, only if you turn on usage statistics. They are off by default.',
+  'Four anonymous usage signals and error reports without any ID, only if you turn on usage statistics. They are off by default.',
 ])}
 ${p('Codevalanche never receives your prompts, conversations, files, code, API keys or screenshots.')}
 ${h2('downloads', 'What the app downloads')}
-${p('A public, signed update file; AI tools, local models, engines and voices when you ask for them. Those servers see your IP address, as with any download.')}
+${p('A public, signed update file and model list; AI tools, local models, engines and voices when you ask for them. Those servers see your IP address, as with any download.')}
 ${p('Full details are in the <a href="/privacy.html">privacy policy</a>. For how the app is protected, see <a href="/security/">Security</a>.')}`,
     },
   ],
