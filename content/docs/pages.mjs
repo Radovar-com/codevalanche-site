@@ -6,7 +6,9 @@ import { localModels, projects } from './sections/local-projects.mjs';
 import agents from './sections/agents.mjs';
 import { app, privacy } from './sections/app.mjs';
 import help from './sections/help.mjs';
+import { trust } from './sections/trust.mjs';
 
 export const DOCS_VERSION = '1.1.69';
 export const DOCS_UPDATED = '2026-11-14';
-export const DOCS_SECTIONS = [start, ais, localModels, projects, agents, app, privacy, help];
+const privacyAndTrust = { ...privacy, pages: [...privacy.pages, ...trust] };
+export const DOCS_SECTIONS = [start, ais, localModels, projects, agents, app, privacyAndTrust, help];
