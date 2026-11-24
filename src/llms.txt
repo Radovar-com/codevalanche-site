@@ -9,7 +9,7 @@ The English site is available at `/`. Localized versions are generated for the l
 - The published app (1.1.74) sends no usage statistics and no error reports. If a later version adds them, they will be off by default.
 - Prompts, conversations, files and code go from the user's PC to the AI provider the user picked. They do not pass through Codevalanche's servers.
 - The app contains no third-party analytics or tracking code.
-- Without an account, the app itself downloads public files from GitHub (updates and the signed model list, with no account and no installation ID) and looks up local models on huggingface.co. It also keeps AI apps installed from it up to date, on by default.
+- Without an account, the app itself downloads public files from GitHub (updates and the signed model list, with no account and no installation ID). When you open local models, it also looks them up on huggingface.co. It also keeps AI apps installed from it up to date, on by default.
 - The app reads which Claude Code or Codex account is signed in only to show it. That information stays on the user's PC.
 - Security reports: security@radovar.com (policy at /security/#report).
 

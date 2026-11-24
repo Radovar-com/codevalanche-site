@@ -17,7 +17,7 @@ ${list([
   'The published app sends no usage statistics and no error reports.',
   'Your prompts, conversations, files and code do not pass through Codevalanche’s servers. They go from your PC to the AI provider you pick.',
   'There is no third-party analytics or tracking code in the app.',
-  'Without an account, the app itself downloads public files (updates and the model list) and looks up local models on huggingface.co.',
+  'Without an account, the app itself downloads public files (updates and the model list). If you open local models, it also looks them up on huggingface.co.',
 ])}
 ${h2('always', 'Public files the app downloads')}
 ${p('These requests are plain downloads. They carry no account, no cookie and no installation ID. The server sees your IP address, as with any download.')}
@@ -26,7 +26,7 @@ ${table([
   ['Model list', `Same place, ${ADDR('github.com')}`, 'When the app shows the list of models, at most once every 6 hours.', 'Nothing about you. The list is signed; the app rejects a list with a wrong signature.'],
   ['Agent compatibility list', `Same place, ${ADDR('github.com')}`, 'Together with the model list, at most once every 6 hours.', 'Nothing about you.'],
 ], ['What', 'Address', 'When', 'What is sent'])}
-${p(`On the first start and when you open Settings › Local AI, the app also contacts ${ADDR('huggingface.co')} to look up local models.`)}
+${p(`When you pick a local model on the start screen or open Settings › Local AI, the app also contacts ${ADDR('huggingface.co')} to look up local models.`)}
 ${h2('switch', 'Usage statistics and error reports')}
 ${p('The published app (1.1.74) has no switch for usage statistics or error reports, and sends neither. If a later version adds them, they will be off until you turn them on in Settings, and this page will say exactly what is sent.')}
 ${h2('you', 'Only when you do it')}
@@ -87,7 +87,7 @@ ${steps([
   ['Open the Network tab.', 'Under Processes with Network Activity, tick Codevalanche.exe and codevalanche-agent-process-host.exe.'],
   ['Read the addresses under Network Activity and TCP Connections.', 'Compare them with <a href="/docs/privacy/network/">the list of addresses</a>.'],
 ])}
-${p('With no account, you should see GitHub addresses (github.com or githubusercontent.com) for the public files, and huggingface.co on the first start or when you open Settings › Local AI. Once you use an AI, its own provider appears too, for example Anthropic or OpenAI. The AI apps run as their own processes, for example claude.exe and codex.exe, and talk to their own companies.')}
+${p('With no account, you should see GitHub addresses (github.com or githubusercontent.com) for the public files. huggingface.co appears too once you open local models (start screen or Settings › Local AI). Once you use an AI, its own provider appears too, for example Anthropic or OpenAI. The AI apps run as their own processes, for example claude.exe and codex.exe, and talk to their own companies.')}
 ${h2('trackers', '3. Search for tracking code')}
 ${steps([
   ['Find where Codevalanche is installed.', 'Usually %LOCALAPPDATA%\\Programs\\Codevalanche. You can also right-click its shortcut and choose Open file location.'],
