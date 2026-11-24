@@ -4,6 +4,15 @@
 
 The English site is available at `/`. Localized versions are generated for the languages listed in the footer. Account and authentication routes are private service flows and are not part of the public discovery content.
 
+## Data and privacy facts (Codevalanche 1.1.74, checked 24 November 2026)
+
+- Usage statistics and error reports are off by default. One switch turns them on: Settings › Send feedback › Help improve the app.
+- Prompts, conversations, files and code go from the user's PC to the AI provider the user picked. They never pass through Codevalanche's servers.
+- The app contains no third-party analytics or tracking code.
+- Without an account and with statistics off, the app itself only downloads public files from GitHub: updates and the signed model list. These requests carry no account and no installation ID.
+- The app reads which Claude Code or Codex account is signed in only to show it. That information stays on the user's PC.
+- Security reports: security@radovar.com (policy at /security/#report).
+
 ## Public pages
 
 - [Home](/)
@@ -14,6 +23,8 @@ The English site is available at `/`. Localized versions are generated for the l
 - [Getting started](/docs/)
 - [Download and release status](/download/)
 - [Security and data boundaries](/security/)
+- [What Codevalanche connects to: every address, when and what is sent](/docs/privacy/network/)
+- [Check it yourself: steps to verify what Codevalanche sends](/docs/privacy/check/)
 - [Changelog](/changelog.html)
 - [Privacy and cookies](/privacy.html)
 - [Terms](/terms.html)
