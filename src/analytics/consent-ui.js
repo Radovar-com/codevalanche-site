@@ -15,7 +15,7 @@ export function mountConsentUI({manager,document:doc=globalThis.document,mount=d
  const overlay=doc.createElement('div');overlay.className='cmp-overlay';overlay.hidden=true;
  const dialog=doc.createElement('section');dialog.className='cmp-card';dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-label','Cookie preferences');
  const heading=doc.createElement('h2');heading.textContent='Cookie preferences';
- const info=doc.createElement('p');info.textContent='Essential storage is required. Your choice lasts 180 days. Website analytics uses an anonymous ID for 30 days and sessions lasting up to 24 hours with a 30 minute idle limit.';
+ const info=doc.createElement('p');info.textContent='Essential storage is required. Your choice lasts 180 days. Website analytics uses a random ID for 30 days and sessions lasting up to 24 hours with a 30 minute idle limit.';
  const label=doc.createElement('label'),website=doc.createElement('input');website.type='checkbox';label.append(website,' Website analytics');
  const accountLabel=doc.createElement('label'),account=doc.createElement('input');account.type='checkbox';account.disabled=true;accountLabel.append(account,' Account analytics');
  const explanation=doc.createElement('p');explanation.textContent='Manage optional account activity separately in your signed-in account.';
