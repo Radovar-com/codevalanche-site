@@ -7,7 +7,7 @@
           <div class="dui-row"><span class="t">Reminder emails</span><span class="docs-pill" style="--c:var(--warm)">Waiting on you</span></div>
           <div class="dui-row"><span class="t">End-to-end check</span><span class="docs-pill">Queued</span></div>
           <div class="dui-bar"><i></i></div>
-          <div class="dui-ask"><b style="color:var(--ink);font-weight:500">Reminder emails · Asks permission:</b> run <code style="font-family:var(--font-mono)">npm install nodemailer</code><div class="acts"><span>Allow</span><span>Deny</span></div></div>
+          <div class="dui-ask"><b style="color:var(--ink);font-weight:500">Reminder emails · Asks you:</b> which address should the emails come from?<div class="acts"><span>Reply</span></div></div>
         </div>
         <figcaption>The Coordinator panel, redrawn with example content.</figcaption>
       </figure>
@@ -15,7 +15,7 @@
       <h2 id="what-it-is">What the Coordinator is</h2>
       <p>The Coordinator is an AI that belongs to one <a href="/docs/projects/">project</a>. In the app it is described exactly like this: <em>an AI that takes a goal, splits the work into separate conversations, follows the agents and tells you when it needs you.</em></p>
       <p>Without it, you talk to one agent at a time. With it, you describe the result you want once and the Coordinator does the managing: it writes the plan, decides which part goes to which agent, starts them, reads their answers, sends work back when a check fails and gives you a short report at the end.</p>
-      <p>Every agent it starts is a normal Codevalanche conversation. You can open it, read everything it did, approve its requests and write to it directly. Nothing happens in a hidden place.</p>
+      <p>Every agent it starts is a normal Codevalanche conversation. You can open it, read everything it did, answer its questions and write to it directly. Nothing happens in a hidden place.</p>
 
       <h2 id="create">Create a project with a Coordinator</h2>
       <ol class="docs-steps">
@@ -57,7 +57,7 @@
       </table>
 
       <h2 id="needs-you">When it needs you</h2>
-      <p>The Coordinator handles the routine work, but some decisions stay yours. Questions about missing information always need your answer, and each agent’s AI app still checks its own tool permissions. Agents still follow the <a href="/docs/agents/approvals/">approval rules</a> of their conversation, so a command or file change that needs permission shows up with <span class="ui-term">Allow</span> and <span class="ui-term">Deny</span>. Questions show up with <span class="ui-term">Reply</span>.</p>
+      <p>The Coordinator handles the routine work, but some decisions stay yours. Questions about missing information always need your answer, and show up with <span class="ui-term">Reply</span>. Approvals are different: by default the Coordinator and its agents run in <span class="ui-term">Autonomous</span> mode, so they change files and run commands without asking (Bypass permissions in Claude Code, Full access in Codex). To review commands and file changes with <span class="ui-term">Allow</span> and <span class="ui-term">Deny</span>, choose <span class="ui-term">Controlled</span> in <a href="/docs/projects/settings/">Project settings</a> › <span class="ui-term">Action approvals</span>. See <a href="/docs/agents/approvals/">Approvals and permissions</a>.</p>
       <ul>
         <li>The project's list shows how many tasks need you, for example “2 need you”. Use <span class="ui-term">Show only what needs you</span> to hide everything else.</li>
         <li>When you come back after a while, <span class="ui-term">While you were away</span> sums up what was verified, finished, failed, stopped or restarted, and what is still waiting for you.</li>
@@ -105,7 +105,7 @@
       <div class="docs-faq">
         <details><summary>Do I have to use the Coordinator?</summary><p>No. A project works without it, as a place that keeps your conversations about one piece of work together. Turn it on when you want the work split between agents.</p></details>
         <details><summary>Which AI does the Coordinator use?</summary><p>Any AI you connected in Your AIs. You choose the Coordinator's model and, separately, the model for its agents.</p></details>
-        <details><summary>Can the Coordinator do things I did not allow?</summary><p>No. Its agents ask for permission under the same rules as any conversation, and those requests come to you.</p></details>
+        <details><summary>Do the Coordinator’s agents ask before they change files?</summary><p>Not by default. They run in Autonomous mode and change files and run commands without asking. Choose Controlled in Project settings › Action approvals if you want to approve each action, and use the Coordinator only on folders you are ready to let it change.</p></details>
         <details><summary>What happens if the AI's usage limit runs out mid-goal?</summary><p>Affected tasks show “Waiting for limit”. With “Continue on its own after the limit resets” on, they continue when the limit resets; otherwise they stop and tell you.</p></details>
         <details><summary>Does turning it off lose my work?</summary><p>No. Its agents stop, nothing is deleted, and it continues where it left off when you turn it back on.</p></details>
       </div>

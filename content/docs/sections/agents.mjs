@@ -102,7 +102,7 @@ ${p(`With <a href="/docs/agents/computer-use/">Computer use</a>, the first time 
 ${h2('never', 'Things that always wait for you')}
 ${p('Approvals, permission requests, destructive actions, sign-ins, payments and messages sent outside are never continued for you, even by features that keep work going on their own.')}
 ${h2('coordinator', 'With the Coordinator')}
-${p('The Coordinator’s agents follow the same rules. Their requests come to you with Allow and Deny. See <a href="/docs/projects/coordinator/#needs-you">When it needs you</a>.')}`,
+${p(`By default the Coordinator and its agents run in ${ui('Autonomous')} mode: they change files and run commands without asking (Bypass permissions in Claude Code, Full access in Codex). To get approval cards, choose ${ui('Controlled')} in <a href="/docs/projects/settings/">Project settings</a> › ${ui('Action approvals')}. See <a href="/docs/projects/coordinator/#needs-you">When it needs you</a>.`)}`,
     },
     {
       slug: 'agents/undo',
