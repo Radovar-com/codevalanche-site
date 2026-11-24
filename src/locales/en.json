@@ -868,7 +868,7 @@
   "Versions": "Versions",
   "vi": "vi",
   "Voice conversation": "Voice conversation",
-  "Voice dictation: runs on your computer by default. Only if you choose so, the audio clip goes to Groq or OpenAI with your key.": "Voice dictation: runs on your computer by default. Only if you choose so, the audio clip goes to Groq or OpenAI with your key.",
+  "Voice dictation: runs on your computer by default. The audio clip goes to Groq or OpenAI, with your own key, if you choose the cloud, or when no speech engine is installed on your computer and you have added a Groq or OpenAI key (Settings › Voice lets you turn this off).": "Voice dictation: runs on your computer by default. The audio clip goes to Groq or OpenAI, with your own key, if you choose the cloud, or when no speech engine is installed on your computer and you have added a Groq or OpenAI key (Settings › Voice lets you turn this off).",
   "Waiting for you": "Waiting for you",
   "We aim to fix serious problems within 30 days and other confirmed problems within 90 days.": "We aim to fix serious problems within 30 days and other confirmed problems within 90 days.",
   "We confirm that we received your report within 5 working days.": "We confirm that we received your report within 5 working days.",

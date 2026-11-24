@@ -868,7 +868,7 @@
   "Versions": "Versões",
   "vi": "vi",
   "Voice conversation": "Conversa por voz",
-  "Voice dictation: runs on your computer by default. Only if you choose so, the audio clip goes to Groq or OpenAI with your key.": "Ditado por voz: roda no seu computador por padrão. Somente se você escolher, o trecho de áudio vai para o Groq ou a OpenAI com a sua chave.",
+  "Voice dictation: runs on your computer by default. The audio clip goes to Groq or OpenAI, with your own key, if you choose the cloud, or when no speech engine is installed on your computer and you have added a Groq or OpenAI key (Settings › Voice lets you turn this off).": "Ditado por voz: funciona por padrão no seu computador. O clipe de áudio vai para a Groq ou a OpenAI, com a sua própria chave, se você escolher a nuvem, ou quando não há nenhum mecanismo de fala instalado no seu computador e você adicionou uma chave da Groq ou da OpenAI (você pode desativar isso em Configurações › Voz).",
   "Waiting for you": "Esperando por você",
   "We aim to fix serious problems within 30 days and other confirmed problems within 90 days.": "Buscamos corrigir problemas graves em até 30 dias e outros problemas confirmados em até 90 dias.",
   "We confirm that we received your report within 5 working days.": "Confirmamos o recebimento do seu relato em até 5 dias úteis.",
