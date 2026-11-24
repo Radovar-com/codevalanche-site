@@ -60,6 +60,7 @@ ${list([
   'The built-in browser and preview: only the pages you open.',
   'Videos in a chat: if a message contains a link to YouTube, Vimeo or a similar site, the player loads from that site.',
   'Images and charts in answers: an answer can show images hosted on other websites, which load automatically. Interactive charts may load code from jsDelivr, cdnjs or unpkg and fonts from Google Fonts.',
+  'Link icons in answers: for a link in an answer, the app requests the small site icon directly from that website, not through another service.',
 ])}
 ${h2('never', 'What the app does not contain')}
 ${list([
