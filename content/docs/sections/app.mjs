@@ -168,7 +168,7 @@ ${h2('codevalanche', 'What Codevalanche receives')}
 ${list([
   'Your account details if you create an account.',
   'Feedback, only when you send it. Keys, tokens, email addresses and personal folder paths are removed from the text first.',
-  'Four usage signals with a random installation ID, and error reports with no ID, only if you turn on usage statistics. They are off by default.',
+  'Four usage signals with a random installation ID, and error reports with no ID, only if you turn on usage statistics. The current version has no such switch and sends neither.',
 ])}
 ${p('Codevalanche never receives your prompts, conversations, files, code, API keys or screenshots.')}
 ${h2('downloads', 'What the app downloads')}
