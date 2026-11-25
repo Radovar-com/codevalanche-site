@@ -531,6 +531,8 @@ test('scoped v1 classified operator enables only the two canonical operations an
   await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({apiVersion:2,ok:true,requestId:body.requestId,data:{operator:true,parentMfaRequired:true}})});
  });
  await f.load();await untilIO(f.page,()=>window.__accountApi!=null);
+ // The account API can be ready before both function requests reach the route; wait for them in real time.
+ for(const deadline=Date.now()+5000;observed.length<2&&Date.now()<deadline;)await new Promise(resolve=>setTimeout(resolve,10));
  assert.deepEqual(observed,['get-account','operator.oauth.details']);
  assert.equal(f.calls.some(c=>c.path.includes('/factors')),false,'enrollment requires the human action');
  assert.equal(await f.page.locator('#authenticator-section').isVisible(),true);
