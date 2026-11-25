@@ -997,5 +997,6 @@
   "1.1.75": "1.1.75",
   "23 Nov 2026": "23 نوفمبر 2026",
   "Last updated: November 25, 2026": "آخر تحديث: 25 نوفمبر 2026",
-  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "لا يحتوي الإصدار الحالي من تطبيق سطح المكتب (1.1.75) على مفتاح إحصاءات الاستخدام، لذا لا يرسل إشارات استخدام ولا تقارير أخطاء ولا تقارير تشغيل."
+  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "لا يحتوي الإصدار الحالي من تطبيق سطح المكتب (1.1.75) على مفتاح إحصاءات الاستخدام، لذا لا يرسل إشارات استخدام ولا تقارير أخطاء ولا تقارير تشغيل.",
+  "The desktop app already contains the part that sends phone notifications. If you pair a phone, a notification goes through Expo’s push service (exp.host) and then Apple or Google to your phone. It carries a short generic text such as “Run finished”, the conversation ID and the approval ID, not file paths or commands. Without a paired phone, no notification is sent.": "يتضمن تطبيق سطح المكتب بالفعل الجزء الذي يرسل الإشعارات إلى الهاتف. إذا قمت بإقران هاتف، يمر الإشعار عبر خدمة الإشعارات من Expo (exp.host) ثم عبر Apple أو Google إلى هاتفك. يحمل نصًا عامًا قصيرًا مثل «انتهى التشغيل» ومعرّف المحادثة ومعرّف الموافقة، وليس مسارات ملفات أو أوامر. من دون هاتف مقترن، لا يُرسل أي إشعار."
 }

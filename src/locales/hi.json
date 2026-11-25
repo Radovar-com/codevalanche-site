@@ -997,5 +997,6 @@
   "1.1.75": "1.1.75",
   "23 Nov 2026": "23 नव॰ 2026",
   "Last updated: November 25, 2026": "आखिरी अपडेट: 25 नवंबर 2026",
-  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "डेस्कटॉप ऐप के मौजूदा संस्करण (1.1.75) में उपयोग आँकड़ों का स्विच नहीं है, इसलिए यह उपयोग संकेत, त्रुटि रिपोर्ट या स्टार्ट-अप रिपोर्ट नहीं भेजता।"
+  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "डेस्कटॉप ऐप के मौजूदा संस्करण (1.1.75) में उपयोग आँकड़ों का स्विच नहीं है, इसलिए यह उपयोग संकेत, त्रुटि रिपोर्ट या स्टार्ट-अप रिपोर्ट नहीं भेजता।",
+  "The desktop app already contains the part that sends phone notifications. If you pair a phone, a notification goes through Expo’s push service (exp.host) and then Apple or Google to your phone. It carries a short generic text such as “Run finished”, the conversation ID and the approval ID, not file paths or commands. Without a paired phone, no notification is sent.": "डेस्कटॉप ऐप में फ़ोन पर सूचनाएँ भेजने वाला हिस्सा पहले से है। अगर आप कोई फ़ोन जोड़ते हैं, तो सूचना Expo की पुश सेवा (exp.host) से और फिर Apple या Google से होकर आपके फ़ोन तक जाती है। इसमें \"रन पूरा हुआ\" जैसा छोटा सामान्य टेक्स्ट, बातचीत की ID और मंज़ूरी की ID होती है, फ़ाइल पाथ या कमांड नहीं। जुड़े फ़ोन के बिना कोई सूचना नहीं भेजी जाती।"
 }

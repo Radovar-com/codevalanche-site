@@ -997,5 +997,6 @@
   "1.1.75": "1.1.75",
   "23 Nov 2026": "23 de nov. de 2026",
   "Last updated: November 25, 2026": "Última atualização: 25 de novembro de 2026",
-  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "A versão atual do app desktop (1.1.75) não tem o botão de estatísticas de uso, por isso não envia sinais de uso, relatórios de erro nem relatórios de inicialização."
+  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "A versão atual do app desktop (1.1.75) não tem o botão de estatísticas de uso, por isso não envia sinais de uso, relatórios de erro nem relatórios de inicialização.",
+  "The desktop app already contains the part that sends phone notifications. If you pair a phone, a notification goes through Expo’s push service (exp.host) and then Apple or Google to your phone. It carries a short generic text such as “Run finished”, the conversation ID and the approval ID, not file paths or commands. Without a paired phone, no notification is sent.": "O app para desktop já contém a parte que envia notificações ao celular. Se você parear um celular, uma notificação passa pelo serviço de notificações da Expo (exp.host) e depois pela Apple ou pelo Google até o seu celular. Ela leva um texto curto e genérico como “Execução concluída”, o ID da conversa e o ID da aprovação, não caminhos de arquivos nem comandos. Sem um celular pareado, nenhuma notificação é enviada."
 }

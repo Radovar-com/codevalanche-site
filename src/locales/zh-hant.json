@@ -997,5 +997,6 @@
   "1.1.75": "1.1.75",
   "23 Nov 2026": "2026年11月23日",
   "Last updated: November 25, 2026": "最後更新：2026 年 11 月 25 日",
-  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "目前版本的桌面應用程式（1.1.75）沒有使用統計開關，因此不傳送使用訊號、錯誤報告或啟動報告。"
+  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "目前版本的桌面應用程式（1.1.75）沒有使用統計開關，因此不傳送使用訊號、錯誤報告或啟動報告。",
+  "The desktop app already contains the part that sends phone notifications. If you pair a phone, a notification goes through Expo’s push service (exp.host) and then Apple or Google to your phone. It carries a short generic text such as “Run finished”, the conversation ID and the approval ID, not file paths or commands. Without a paired phone, no notification is sent.": "桌面應用程式已經包含向手機傳送通知的部分。如果你配對了手機，通知會經過 Expo 的推播服務（exp.host），再經由 Apple 或 Google 送達你的手機。通知包含一段簡短的通用文字（例如「執行已完成」）、對話 ID 和核准 ID，不包含檔案路徑或指令。沒有配對的手機時，不會傳送通知。"
 }

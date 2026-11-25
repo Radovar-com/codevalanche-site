@@ -997,5 +997,6 @@
   "1.1.75": "1.1.75",
   "23 Nov 2026": "2026年11月23日",
   "Last updated: November 25, 2026": "最終更新日：2026年11月25日",
-  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "現在のデスクトップアプリ（1.1.75）には利用統計のスイッチがないため、利用シグナル、エラーレポート、起動レポートは一切送信されません。"
+  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "現在のデスクトップアプリ（1.1.75）には利用統計のスイッチがないため、利用シグナル、エラーレポート、起動レポートは一切送信されません。",
+  "The desktop app already contains the part that sends phone notifications. If you pair a phone, a notification goes through Expo’s push service (exp.host) and then Apple or Google to your phone. It carries a short generic text such as “Run finished”, the conversation ID and the approval ID, not file paths or commands. Without a paired phone, no notification is sent.": "デスクトップアプリには、スマートフォンに通知を送る部分がすでに含まれています。スマートフォンをペアリングすると、通知は Expo のプッシュサービス（exp.host）を経由し、さらに Apple または Google を経てスマートフォンに届きます。通知に含まれるのは「実行が完了しました」のような短い定型文、会話 ID、承認 ID で、ファイルのパスやコマンドは含まれません。ペアリングしたスマートフォンがなければ、通知は送信されません。"
 }

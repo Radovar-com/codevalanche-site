@@ -997,5 +997,6 @@
   "1.1.75": "1.1.75",
   "23 Nov 2026": "23 Kas 2026",
   "Last updated: November 25, 2026": "Son güncelleme: 25 Kasım 2026",
-  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "Masaüstü uygulamasının mevcut sürümünde (1.1.75) kullanım istatistikleri anahtarı yoktur; bu nedenle kullanım sinyalleri, hata raporları veya başlatma raporları göndermez."
+  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "Masaüstü uygulamasının mevcut sürümünde (1.1.75) kullanım istatistikleri anahtarı yoktur; bu nedenle kullanım sinyalleri, hata raporları veya başlatma raporları göndermez.",
+  "The desktop app already contains the part that sends phone notifications. If you pair a phone, a notification goes through Expo’s push service (exp.host) and then Apple or Google to your phone. It carries a short generic text such as “Run finished”, the conversation ID and the approval ID, not file paths or commands. Without a paired phone, no notification is sent.": "Masaüstü uygulaması telefona bildirim gönderen bölümü zaten içerir. Bir telefon eşlerseniz bildirim Expo'nun bildirim hizmetinden (exp.host), ardından Apple veya Google üzerinden telefonunuza gider. \"Çalışma bitti\" gibi kısa, genel bir metin, sohbet kimliği ve onay kimliği taşır; dosya yolu veya komut taşımaz. Eşlenmiş telefon yoksa hiçbir bildirim gönderilmez."
 }
