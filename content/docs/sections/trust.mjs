@@ -1,5 +1,5 @@
 // Trust pages: every address the app talks to, and how to check our claims.
-// Facts come from the app's code (read 24 Nov 2026 for the 1.1.74 line).
+// Facts come from the app's code (read 24 Nov 2026 for the 1.1.75 line).
 // Write only what can be checked; no promise the code does not keep.
 import { h2, p, list, steps, table, ui, note, faq } from '../kit.mjs';
 
@@ -12,7 +12,7 @@ export const network = {
   seoTitle: 'The internet connections Codevalanche makes',
   description: 'The addresses the Codevalanche desktop app contacts: when, why and what is sent. The published app sends no usage statistics or error reports.',
   body: `
-${p('This page lists the addresses the Codevalanche desktop app contacts, as found in the app’s code on 24 November 2026, for version 1.1.74.')}
+${p('This page lists the addresses the Codevalanche desktop app contacts, as found in the app’s code on 24 November 2026, for version 1.1.75.')}
 ${list([
   'The published app sends no usage statistics and no error reports.',
   'Your prompts, conversations, files and code do not pass through Codevalanche’s servers. They go from your PC to the AI provider you pick.',
@@ -28,7 +28,7 @@ ${table([
 ], ['What', 'Address', 'When', 'What is sent'])}
 ${p(`When you pick a local model on the start screen or open Settings › Local AI, the app also contacts ${ADDR('huggingface.co')} to look up local models.`)}
 ${h2('switch', 'Usage statistics and error reports')}
-${p('The published app (1.1.74) has no switch for usage statistics or error reports, and sends neither. If a later version adds them, they will be off until you turn them on in Settings, and this page will say exactly what is sent.')}
+${p('The published app (1.1.75) has no switch for usage statistics or error reports, and sends neither. If a later version adds them, they will be off until you turn them on in Settings, and this page will say exactly what is sent.')}
 ${h2('you', 'Only when you do it')}
 ${table([
   ['Codevalanche account', 'Our accounts service and codevalanche.com', 'Only if you sign in.', 'Your email address and sign-in. The app works without an account.'],
@@ -39,7 +39,7 @@ ${p('Your messages and the files an agent reads go from your PC straight to the 
 ${table([
   ['Claude Code and Codex', 'Anthropic and OpenAI, through their own official apps', 'When you use them.', 'Whatever those apps send, under their own terms. Codevalanche runs them unchanged.'],
   ['Your own API keys', `${ADDR('api.anthropic.com')}, ${ADDR('api.openai.com')}, ${ADDR('api.deepseek.com')}, ${ADDR('api.groq.com')}, ${ADDR('api.x.ai')}, ${ADDR('api.moonshot.ai')}, ${ADDR('api.z.ai')}, ${ADDR('auth.kimi.com')}`, 'Only for a provider whose key you added.', 'Your messages and the context of the task, to that provider only.'],
-  ['Voice dictation in the cloud', `${ADDR('api.groq.com')}, ${ADDR('api.openai.com')}`, 'Only if you added a Groq or OpenAI key, and you chose the cloud, or the local voice model is not available.', 'The recorded audio, with your key, to your provider.'],
+  ['Voice dictation in the cloud', `${ADDR('api.groq.com')}, ${ADDR('api.openai.com')}`, 'Only if you added a Groq or OpenAI key, chose cloud voice and accepted the notice that names the provider.', 'The recorded audio, with your key, to your provider.'],
   ['Chatting with a local model', 'No address', 'While you use it.', 'The model runs on your PC, so your messages stay there. Downloading a model is listed below.'],
 ], ['What', 'Address', 'When', 'What is sent'])}
 ${h2('downloads', 'Downloads')}
@@ -80,7 +80,7 @@ export const check = {
   body: `
 ${p('You do not have to take our word for it. These checks use tools that come with Windows. They take about ten minutes.')}
 ${h2('switch', '1. No statistics are sent')}
-${p('The published app (1.1.74) has no statistics switch and sends no usage statistics or error reports. If a later version adds the switch, it will be off on a new installation.')}
+${p('The published app (1.1.75) has no statistics switch and sends no usage statistics or error reports. If a later version adds the switch, it will be off on a new installation.')}
 ${h2('connections', '2. Watch the connections')}
 ${steps([
   ['Start Codevalanche and do not sign in.', ''],
@@ -112,7 +112,7 @@ ${list([
 ])}
 ${faq([
   ['Found something that does not match?', 'Write to <a href="mailto:security@radovar.com">security@radovar.com</a>. See <a href="/security/#report">Report a security issue</a>.'],
-  ['Which version does this describe?', 'Codevalanche 1.1.74, checked on 24 November 2026. When a release changes what the app sends, this page changes with it.'],
+  ['Which version does this describe?', 'Codevalanche 1.1.75, checked on 24 November 2026. When a release changes what the app sends, this page changes with it.'],
 ])}`,
 };
 
