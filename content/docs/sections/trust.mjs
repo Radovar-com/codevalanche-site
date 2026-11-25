@@ -40,6 +40,7 @@ ${table([
   ['Claude Code and Codex', 'Anthropic and OpenAI, through their own official apps', 'When you use them.', 'Whatever those apps send, under their own terms. Codevalanche runs them unchanged.'],
   ['Your own API keys', `${ADDR('api.anthropic.com')}, ${ADDR('api.openai.com')}, ${ADDR('api.deepseek.com')}, ${ADDR('api.groq.com')}, ${ADDR('api.x.ai')}, ${ADDR('api.moonshot.ai')}, ${ADDR('api.z.ai')}, ${ADDR('auth.kimi.com')}`, 'Only for a provider whose key you added.', 'Your messages and the context of the task, to that provider only.'],
   ['Voice dictation in the cloud', `${ADDR('api.groq.com')}, ${ADDR('api.openai.com')}`, 'Only if you added a Groq or OpenAI key, chose cloud voice and accepted the notice that names the provider.', 'The recorded audio, with your key, to your provider.'],
+  ['Phone notifications', ADDR('exp.host'), 'Only if you paired a phone.', 'A short generic text, the conversation ID and the approval ID, through Expo, then Apple or Google.'],
   ['Chatting with a local model', 'No address', 'While you use it.', 'The model runs on your PC, so your messages stay there. Downloading a model is listed below.'],
 ], ['What', 'Address', 'When', 'What is sent'])}
 ${h2('downloads', 'Downloads')}

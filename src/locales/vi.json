@@ -997,5 +997,6 @@
   "1.1.75": "1.1.75",
   "23 Nov 2026": "23 thg 11, 2026",
   "Last updated: November 25, 2026": "Cập nhật lần cuối: ngày 25 tháng 11 năm 2026",
-  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "Phiên bản hiện tại của ứng dụng trên máy tính (1.1.75) không có công tắc thống kê sử dụng, nên không gửi tín hiệu sử dụng, báo cáo lỗi hay báo cáo khởi động."
+  "The current version of the desktop app (1.1.75) has no usage statistics switch, so it sends no usage signals, error reports or start-up reports.": "Phiên bản hiện tại của ứng dụng trên máy tính (1.1.75) không có công tắc thống kê sử dụng, nên không gửi tín hiệu sử dụng, báo cáo lỗi hay báo cáo khởi động.",
+  "The desktop app already contains the part that sends phone notifications. If you pair a phone, a notification goes through Expo’s push service (exp.host) and then Apple or Google to your phone. It carries a short generic text such as “Run finished”, the conversation ID and the approval ID, not file paths or commands. Without a paired phone, no notification is sent.": "Ứng dụng máy tính đã có sẵn phần gửi thông báo tới điện thoại. Nếu bạn ghép nối một điện thoại, thông báo đi qua dịch vụ thông báo đẩy của Expo (exp.host) rồi qua Apple hoặc Google tới điện thoại của bạn. Thông báo chứa một đoạn văn bản chung ngắn như \"Đã chạy xong\", mã cuộc trò chuyện và mã phê duyệt, không chứa đường dẫn tệp hay lệnh. Nếu không có điện thoại được ghép nối, sẽ không có thông báo nào được gửi."
 }
