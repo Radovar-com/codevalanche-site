@@ -193,7 +193,7 @@ ${table([
   [ui('Groq (cloud, faster)'), 'Uses your own Groq key.'],
   [ui('OpenAI (cloud)'), 'Uses your own OpenAI key. Only while an OpenAI model is selected.'],
 ], ['Option', 'What it means'])}
-${p(`${ui('If this computer can’t, use my cloud key instead')} sends speech to Groq, then OpenAI, only when no speech engine is installed here.`)}
+${p(`${ui('If this computer can’t, use my cloud key instead')} is off until you turn it on. Then, when no speech engine is installed here, speech goes to the cloud provider you accepted. The app asks you once before the first time and names who receives it.`)}
 <h3 id="engines">Speech engines on your PC</h3>
 ${table([
   [ui('Balanced'), 'The best speed-to-accuracy trade-off. Start here.'],

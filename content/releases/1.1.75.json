@@ -1,0 +1,516 @@
+{
+  "version": "1.1.75",
+  "date": "2026-11-25",
+  "copy": {
+    "en": {
+      "headline": "One window for new work, voice that asks first, and a fuller Delete chat",
+      "summary": "New project and New task share one window, voice asks before it goes to a cloud provider, Delete chat clears more of what a chat leaves behind, and many fixes make messages and agents steadier.",
+      "sections": [
+        {
+          "title": "One window for new work",
+          "body": "New project and New task open the same window everywhere, and the task starts in the folder you chose."
+        },
+        {
+          "title": "Voice asks first",
+          "body": "Voice no longer uses your cloud key unless you turn it on. Before your voice goes to a cloud provider, the app asks you once and says who receives it, and only the provider you accepted receives it."
+        },
+        {
+          "title": "Delete chat clears more",
+          "body": "Delete chat now also removes the chat's words from the search index, the agent's history and the window's form suggestions, and the session files Claude Code and Codex saved for it on this computer, also for chats deleted before. If the app is closed right after, this finishes a few minutes after the next start. Remove project also clears its chats from the agent's history and the AI tools' session files."
+        },
+        {
+          "title": "A favorite model per account",
+          "body": "A favorite model can name its account, and the model button shows which account it uses when you have two."
+        },
+        {
+          "title": "Messages and agents",
+          "body": "A message sent right after a turn or with a double click goes out once. Queued messages are delivered after a restart, and an agent's question cut by a restart is answered instead of asked again. Agents started by the Coordinator get the task it wrote and reply in its language, and an agent you stopped stays stopped until you ask it to continue."
+        },
+        {
+          "title": "Smaller fixes",
+          "body": "Claude Code's own statistics are off when it runs on a local model or another provider's key. Provider icons are the companies' official logos, menus and search work over an open board, Ctrl+K works on the start screen, and turning the microphone off in voice mode releases it."
+        }
+      ]
+    },
+    "ar": {
+      "headline": "نافذة واحدة للعمل الجديد، وصوت يسأل أولًا، وحذف محادثة أشمل",
+      "summary": "يتشارك مشروع جديد ومهمة جديدة نافذة واحدة، ويسأل الصوت قبل أن يذهب إلى مزوّد سحابي، ويمسح حذف المحادثة المزيد مما تتركه المحادثة، وتجعل إصلاحات كثيرة الرسائل والوكلاء أكثر ثباتًا.",
+      "sections": [
+        {
+          "title": "نافذة واحدة للعمل الجديد",
+          "body": "يفتح مشروع جديد ومهمة جديدة النافذة نفسها في كل مكان، وتبدأ المهمة في المجلد الذي اخترته."
+        },
+        {
+          "title": "الصوت يسأل أولًا",
+          "body": "لم يعد الصوت يستخدم مفتاحك السحابي إلا إذا فعّلته. قبل أن يذهب صوتك إلى مزوّد سحابي، يسألك التطبيق مرة واحدة ويخبرك بمن يستلمه، ولا يستلمه إلا المزوّد الذي وافقت عليه."
+        },
+        {
+          "title": "حذف المحادثة يمسح أكثر",
+          "body": "يزيل حذف المحادثة الآن أيضًا كلمات المحادثة من فهرس البحث وسجل الوكيل واقتراحات النماذج في النافذة، وملفات الجلسات التي حفظها Claude Code وCodex لها على هذا الكمبيوتر، بما في ذلك المحادثات المحذوفة سابقًا. إذا أُغلق التطبيق مباشرة بعد ذلك، يكتمل هذا بعد دقائق من التشغيل التالي. كما يمسح إزالة المشروع محادثاته من سجل الوكيل وملفات جلسات أدوات الذكاء الاصطناعي."
+        },
+        {
+          "title": "نموذج مفضّل لكل حساب",
+          "body": "يمكن أن يحدد النموذج المفضّل حسابه، ويُظهر زر النموذج الحساب الذي يستخدمه عندما يكون لديك حسابان."
+        },
+        {
+          "title": "الرسائل والوكلاء",
+          "body": "الرسالة المرسلة مباشرة بعد دور أو بنقرة مزدوجة تُرسل مرة واحدة. تُسلَّم الرسائل في الطابور بعد إعادة التشغيل، ويُجاب عن سؤال الوكيل الذي قطعته إعادة التشغيل بدل طرحه من جديد. يتلقى الوكلاء الذين يبدؤهم المنسّق المهمة التي كتبها ويردّون بلغتها، ويبقى الوكيل الذي أوقفته متوقفًا حتى تطلب منه المتابعة."
+        },
+        {
+          "title": "إصلاحات أصغر",
+          "body": "تكون إحصاءات Claude Code الخاصة متوقفة عندما يعمل على نموذج محلي أو بمفتاح مزوّد آخر. أيقونات المزوّدين هي الشعارات الرسمية للشركات، وتعمل القوائم والبحث فوق لوحة مفتوحة، ويعمل Ctrl+K في شاشة البداية، وإيقاف الميكروفون في وضع الصوت يحرّره."
+        }
+      ]
+    },
+    "de": {
+      "headline": "Ein Fenster für neue Arbeit, Sprache, die zuerst fragt, und ein gründlicheres Chat löschen",
+      "summary": "Neues Projekt und Neue Aufgabe teilen sich ein Fenster, die Sprache fragt, bevor sie an einen Cloud-Anbieter geht, Chat löschen räumt mehr von dem auf, was ein Chat hinterlässt, und viele Korrekturen machen Nachrichten und Agenten stabiler.",
+      "sections": [
+        {
+          "title": "Ein Fenster für neue Arbeit",
+          "body": "Neues Projekt und Neue Aufgabe öffnen überall dasselbe Fenster, und die Aufgabe startet in dem Ordner, den du gewählt hast."
+        },
+        {
+          "title": "Sprache fragt zuerst",
+          "body": "Die Sprache nutzt deinen Cloud-Schlüssel nur noch, wenn du das einschaltest. Bevor deine Stimme an einen Cloud-Anbieter geht, fragt die App dich einmal und sagt, wer sie erhält, und nur der Anbieter, den du akzeptiert hast, erhält sie."
+        },
+        {
+          "title": "Chat löschen räumt mehr auf",
+          "body": "Chat löschen entfernt jetzt auch die Worte des Chats aus dem Suchindex, dem Verlauf des Agenten und den Formularvorschlägen des Fensters sowie die Sitzungsdateien, die Claude Code und Codex dafür auf diesem Computer gespeichert haben, auch für früher gelöschte Chats. Wird die App direkt danach geschlossen, wird das einige Minuten nach dem nächsten Start abgeschlossen. Projekt entfernen löscht seine Chats ebenfalls aus dem Verlauf des Agenten und den Sitzungsdateien der KI-Tools."
+        },
+        {
+          "title": "Ein Lieblingsmodell pro Konto",
+          "body": "Ein Lieblingsmodell kann sein Konto nennen, und die Modellschaltfläche zeigt, welches Konto sie nutzt, wenn du zwei hast."
+        },
+        {
+          "title": "Nachrichten und Agenten",
+          "body": "Eine Nachricht, die direkt nach einem Zug oder per Doppelklick gesendet wird, geht einmal raus. Nachrichten in der Warteschlange werden nach einem Neustart zugestellt, und eine Frage des Agenten, die ein Neustart unterbrochen hat, wird beantwortet statt erneut gestellt. Vom Coordinator gestartete Agenten erhalten die Aufgabe, die er geschrieben hat, und antworten in ihrer Sprache, und ein Agent, den du gestoppt hast, bleibt gestoppt, bis du ihn fortfahren lässt."
+        },
+        {
+          "title": "Kleinere Korrekturen",
+          "body": "Die eigenen Statistiken von Claude Code sind aus, wenn es mit einem lokalen Modell oder dem Schlüssel eines anderen Anbieters läuft. Anbietersymbole sind die offiziellen Logos der Unternehmen, Menüs und Suche funktionieren über einer geöffneten Übersicht, Strg+K funktioniert auf dem Startbildschirm, und das Ausschalten des Mikrofons im Sprachmodus gibt es frei."
+        }
+      ]
+    },
+    "es": {
+      "headline": "Una sola ventana para el trabajo nuevo, una voz que pregunta primero y un Eliminar chat más completo",
+      "summary": "Nuevo proyecto y Nueva tarea comparten una ventana, la voz pregunta antes de ir a un proveedor en la nube, Eliminar chat limpia más de lo que deja un chat y muchas correcciones hacen más estables los mensajes y los agentes.",
+      "sections": [
+        {
+          "title": "Una sola ventana para el trabajo nuevo",
+          "body": "Nuevo proyecto y Nueva tarea abren la misma ventana en todas partes, y la tarea empieza en la carpeta que elegiste."
+        },
+        {
+          "title": "La voz pregunta primero",
+          "body": "La voz ya no usa tu clave en la nube a menos que la actives. Antes de que tu voz vaya a un proveedor en la nube, la app te pregunta una vez y te dice quién la recibe, y solo la recibe el proveedor que aceptaste."
+        },
+        {
+          "title": "Eliminar chat limpia más",
+          "body": "Eliminar chat ahora también quita las palabras del chat del índice de búsqueda, del historial del agente y de las sugerencias de formulario de la ventana, y los archivos de sesión que Claude Code y Codex guardaron para él en este equipo, también de chats eliminados antes. Si la app se cierra justo después, esto termina unos minutos después del siguiente inicio. Quitar proyecto también borra sus chats del historial del agente y de los archivos de sesión de las herramientas de IA."
+        },
+        {
+          "title": "Un modelo favorito por cuenta",
+          "body": "Un modelo favorito puede indicar su cuenta, y el botón del modelo muestra qué cuenta usa cuando tienes dos."
+        },
+        {
+          "title": "Mensajes y agentes",
+          "body": "Un mensaje enviado justo después de un turno o con doble clic sale una sola vez. Los mensajes en cola se entregan después de un reinicio, y una pregunta del agente cortada por un reinicio se responde en lugar de volver a hacerse. Los agentes que inicia el Coordinador reciben la tarea que él escribió y responden en su idioma, y un agente que detuviste sigue detenido hasta que le pidas continuar."
+        },
+        {
+          "title": "Correcciones menores",
+          "body": "Las estadísticas propias de Claude Code se desactivan cuando funciona con un modelo local o con la clave de otro proveedor. Los iconos de proveedores son los logotipos oficiales de las empresas, los menús y la búsqueda funcionan sobre un tablero abierto, Ctrl+K funciona en la pantalla de inicio y apagar el micrófono en el modo de voz lo libera."
+        }
+      ]
+    },
+    "fr": {
+      "headline": "Une seule fenêtre pour le nouveau travail, une voix qui demande d’abord et un Supprimer la discussion plus complet",
+      "summary": "Nouveau projet et Nouvelle tâche partagent une fenêtre, la voix demande avant d’aller vers un fournisseur cloud, Supprimer la discussion efface davantage de ce qu’une discussion laisse derrière elle, et de nombreux correctifs rendent les messages et les agents plus stables.",
+      "sections": [
+        {
+          "title": "Une seule fenêtre pour le nouveau travail",
+          "body": "Nouveau projet et Nouvelle tâche ouvrent partout la même fenêtre, et la tâche démarre dans le dossier que vous avez choisi."
+        },
+        {
+          "title": "La voix demande d’abord",
+          "body": "La voix n’utilise plus votre clé cloud sauf si vous l’activez. Avant que votre voix aille vers un fournisseur cloud, l’application vous demande une fois et indique qui la reçoit, et seul le fournisseur que vous avez accepté la reçoit."
+        },
+        {
+          "title": "Supprimer la discussion efface davantage",
+          "body": "Supprimer la discussion retire désormais aussi les mots de la discussion de l’index de recherche, de l’historique de l’agent et des suggestions de formulaire de la fenêtre, ainsi que les fichiers de session que Claude Code et Codex ont enregistrés pour elle sur cet ordinateur, y compris pour les discussions supprimées avant. Si l’application est fermée juste après, cela se termine quelques minutes après le prochain démarrage. Retirer le projet efface aussi ses discussions de l’historique de l’agent et des fichiers de session des outils d’IA."
+        },
+        {
+          "title": "Un modèle favori par compte",
+          "body": "Un modèle favori peut indiquer son compte, et le bouton du modèle montre quel compte il utilise quand vous en avez deux."
+        },
+        {
+          "title": "Messages et agents",
+          "body": "Un message envoyé juste après un tour ou d’un double clic part une seule fois. Les messages en file d’attente sont remis après un redémarrage, et une question de l’agent coupée par un redémarrage reçoit une réponse au lieu d’être reposée. Les agents lancés par le Coordinateur reçoivent la tâche qu’il a écrite et répondent dans sa langue, et un agent que vous avez arrêté reste arrêté jusqu’à ce que vous lui demandiez de continuer."
+        },
+        {
+          "title": "Petits correctifs",
+          "body": "Les statistiques propres de Claude Code sont désactivées quand il fonctionne avec un modèle local ou la clé d’un autre fournisseur. Les icônes des fournisseurs sont les logos officiels des entreprises, les menus et la recherche fonctionnent au-dessus d’un tableau ouvert, Ctrl+K fonctionne sur l’écran d’accueil et couper le micro en mode vocal le libère."
+        }
+      ]
+    },
+    "hi": {
+      "headline": "नए काम के लिए एक विंडो, पहले पूछने वाली आवाज़ और ज़्यादा पूरा चैट हटाना",
+      "summary": "नया प्रोजेक्ट और नया टास्क एक ही विंडो इस्तेमाल करते हैं, आवाज़ क्लाउड प्रदाता तक जाने से पहले पूछती है, चैट हटाएँ किसी चैट के छोड़े निशान ज़्यादा साफ़ करता है, और कई सुधार संदेशों और एजेंटों को ज़्यादा स्थिर बनाते हैं।",
+      "sections": [
+        {
+          "title": "नए काम के लिए एक विंडो",
+          "body": "नया प्रोजेक्ट और नया टास्क हर जगह एक ही विंडो खोलते हैं, और टास्क आपके चुने फ़ोल्डर में शुरू होता है।"
+        },
+        {
+          "title": "आवाज़ पहले पूछती है",
+          "body": "आवाज़ अब आपकी क्लाउड कुंजी तभी इस्तेमाल करती है जब आप इसे चालू करें। आपकी आवाज़ किसी क्लाउड प्रदाता तक जाने से पहले ऐप एक बार पूछता है और बताता है कि उसे कौन पाएगा, और सिर्फ़ आपका स्वीकार किया प्रदाता ही उसे पाता है।"
+        },
+        {
+          "title": "चैट हटाएँ ज़्यादा साफ़ करता है",
+          "body": "चैट हटाएँ अब चैट के शब्दों को सर्च इंडेक्स, एजेंट के इतिहास और विंडो के फ़ॉर्म सुझावों से भी हटाता है, और Claude Code व Codex ने इस कंप्यूटर पर उसके लिए जो सेशन फ़ाइलें सहेजी थीं उन्हें भी, पहले हटाए गए चैट के लिए भी। अगर ऐप तुरंत बाद बंद हो जाए, तो यह अगली बार खुलने के कुछ मिनट बाद पूरा होता है। प्रोजेक्ट हटाएँ भी उसके चैट एजेंट के इतिहास और AI टूल की सेशन फ़ाइलों से साफ़ करता है।"
+        },
+        {
+          "title": "हर खाते के लिए पसंदीदा मॉडल",
+          "body": "पसंदीदा मॉडल अपना खाता बता सकता है, और जब आपके दो खाते हों तो मॉडल बटन दिखाता है कि वह कौन-सा खाता इस्तेमाल करता है।"
+        },
+        {
+          "title": "संदेश और एजेंट",
+          "body": "किसी बारी के ठीक बाद या डबल क्लिक से भेजा गया संदेश एक बार जाता है। कतार के संदेश रीस्टार्ट के बाद पहुँचाए जाते हैं, और रीस्टार्ट से कटे एजेंट के सवाल का जवाब दिया जाता है, उसे दोबारा नहीं पूछा जाता। कोऑर्डिनेटर के शुरू किए एजेंट उसका लिखा टास्क पाते हैं और उसी की भाषा में जवाब देते हैं, और आपका रोका एजेंट तब तक रुका रहता है जब तक आप उसे जारी रखने को न कहें।"
+        },
+        {
+          "title": "छोटे सुधार",
+          "body": "जब Claude Code किसी लोकल मॉडल या दूसरे प्रदाता की कुंजी पर चलता है, तो उसके अपने आँकड़े बंद रहते हैं। प्रदाता आइकन कंपनियों के आधिकारिक लोगो हैं, मेन्यू और सर्च खुले बोर्ड के ऊपर काम करते हैं, Ctrl+K शुरुआती स्क्रीन पर काम करता है, और वॉइस मोड में माइक्रोफ़ोन बंद करने से वह छूट जाता है।"
+        }
+      ]
+    },
+    "id": {
+      "headline": "Satu jendela untuk pekerjaan baru, suara yang bertanya dulu, dan Hapus chat yang lebih menyeluruh",
+      "summary": "Proyek baru dan Tugas baru memakai satu jendela, suara bertanya sebelum dikirim ke penyedia cloud, Hapus chat membersihkan lebih banyak sisa sebuah chat, dan banyak perbaikan membuat pesan serta agen lebih stabil.",
+      "sections": [
+        {
+          "title": "Satu jendela untuk pekerjaan baru",
+          "body": "Proyek baru dan Tugas baru membuka jendela yang sama di mana saja, dan tugas dimulai di folder yang Anda pilih."
+        },
+        {
+          "title": "Suara bertanya dulu",
+          "body": "Suara tidak lagi memakai kunci cloud Anda kecuali Anda menyalakannya. Sebelum suara Anda dikirim ke penyedia cloud, aplikasi bertanya sekali dan menyebutkan siapa yang menerimanya, dan hanya penyedia yang Anda setujui yang menerimanya."
+        },
+        {
+          "title": "Hapus chat membersihkan lebih banyak",
+          "body": "Hapus chat kini juga menghapus kata-kata chat dari indeks pencarian, riwayat agen, dan saran formulir jendela, serta file sesi yang disimpan Claude Code dan Codex untuk chat itu di komputer ini, termasuk untuk chat yang dihapus sebelumnya. Jika aplikasi ditutup tepat setelahnya, proses ini selesai beberapa menit setelah aplikasi dibuka lagi. Hapus proyek juga membersihkan chat-nya dari riwayat agen dan file sesi alat AI."
+        },
+        {
+          "title": "Model favorit per akun",
+          "body": "Model favorit dapat menyebutkan akunnya, dan tombol model menunjukkan akun mana yang dipakai saat Anda punya dua."
+        },
+        {
+          "title": "Pesan dan agen",
+          "body": "Pesan yang dikirim tepat setelah giliran atau dengan klik ganda terkirim sekali. Pesan dalam antrean dikirim setelah restart, dan pertanyaan agen yang terpotong oleh restart dijawab, bukan ditanyakan lagi. Agen yang dimulai oleh Koordinator menerima tugas yang ditulisnya dan menjawab dalam bahasa tugas itu, dan agen yang Anda hentikan tetap berhenti sampai Anda memintanya melanjutkan."
+        },
+        {
+          "title": "Perbaikan kecil",
+          "body": "Statistik bawaan Claude Code dimatikan saat berjalan dengan model lokal atau kunci penyedia lain. Ikon penyedia adalah logo resmi perusahaan, menu dan pencarian berfungsi di atas papan yang terbuka, Ctrl+K berfungsi di layar awal, dan mematikan mikrofon dalam mode suara melepaskannya."
+        }
+      ]
+    },
+    "it": {
+      "headline": "Una sola finestra per il nuovo lavoro, una voce che chiede prima e un Elimina chat più completo",
+      "summary": "Nuovo progetto e Nuova attività condividono una finestra, la voce chiede prima di andare a un fornitore cloud, Elimina chat ripulisce di più ciò che una chat lascia dietro di sé e molte correzioni rendono messaggi e agenti più stabili.",
+      "sections": [
+        {
+          "title": "Una sola finestra per il nuovo lavoro",
+          "body": "Nuovo progetto e Nuova attività aprono ovunque la stessa finestra, e l’attività parte nella cartella che hai scelto."
+        },
+        {
+          "title": "La voce chiede prima",
+          "body": "La voce non usa più la tua chiave cloud a meno che tu non la attivi. Prima che la tua voce vada a un fornitore cloud, l’app ti chiede una volta e dice chi la riceve, e la riceve solo il fornitore che hai accettato."
+        },
+        {
+          "title": "Elimina chat ripulisce di più",
+          "body": "Elimina chat ora rimuove anche le parole della chat dall’indice di ricerca, dalla cronologia dell’agente e dai suggerimenti dei moduli della finestra, e i file di sessione che Claude Code e Codex hanno salvato per essa su questo computer, anche per le chat eliminate prima. Se l’app viene chiusa subito dopo, l’operazione termina qualche minuto dopo l’avvio successivo. Rimuovi progetto cancella anche le sue chat dalla cronologia dell’agente e dai file di sessione degli strumenti di IA."
+        },
+        {
+          "title": "Un modello preferito per account",
+          "body": "Un modello preferito può indicare il suo account, e il pulsante del modello mostra quale account usa quando ne hai due."
+        },
+        {
+          "title": "Messaggi e agenti",
+          "body": "Un messaggio inviato subito dopo un turno o con un doppio clic parte una sola volta. I messaggi in coda vengono consegnati dopo un riavvio, e una domanda dell’agente interrotta da un riavvio riceve risposta invece di essere riproposta. Gli agenti avviati dal Coordinatore ricevono l’attività che ha scritto e rispondono nella sua lingua, e un agente che hai fermato resta fermo finché non gli chiedi di continuare."
+        },
+        {
+          "title": "Correzioni minori",
+          "body": "Le statistiche proprie di Claude Code sono disattivate quando funziona con un modello locale o con la chiave di un altro fornitore. Le icone dei fornitori sono i loghi ufficiali delle aziende, menu e ricerca funzionano sopra una bacheca aperta, Ctrl+K funziona nella schermata iniziale e spegnere il microfono in modalità vocale lo rilascia."
+        }
+      ]
+    },
+    "ja": {
+      "headline": "新しい作業は 1 つのウィンドウで、音声はまず確認、チャットの削除はより徹底的に",
+      "summary": "新しいプロジェクトと新しいタスクが同じウィンドウを使い、音声はクラウドのプロバイダーに送る前に確認し、チャットの削除はチャットが残すものをより多く消し、多くの修正でメッセージとエージェントがより安定しました。",
+      "sections": [
+        {
+          "title": "新しい作業は 1 つのウィンドウで",
+          "body": "新しいプロジェクトと新しいタスクはどこからでも同じウィンドウを開き、タスクは選んだフォルダーで始まります。"
+        },
+        {
+          "title": "音声はまず確認",
+          "body": "音声は、オンにしない限りクラウドのキーを使いません。音声をクラウドのプロバイダーに送る前に、アプリが一度だけ確認して受け取る相手を示し、受け取るのは承認したプロバイダーだけです。"
+        },
+        {
+          "title": "チャットの削除がより徹底的に",
+          "body": "チャットの削除は、チャットの言葉を検索インデックス、エージェントの履歴、ウィンドウのフォーム候補からも消し、Claude Code と Codex がこのコンピューターに保存したそのチャットのセッションファイルも削除します。以前に削除したチャットも対象です。直後にアプリを閉じた場合は、次の起動から数分後に完了します。プロジェクトの削除も、そのチャットをエージェントの履歴と AI ツールのセッションファイルから消します。"
+        },
+        {
+          "title": "アカウントごとのお気に入りモデル",
+          "body": "お気に入りのモデルにアカウントを指定でき、アカウントが 2 つあるときはモデルボタンに使用中のアカウントが表示されます。"
+        },
+        {
+          "title": "メッセージとエージェント",
+          "body": "ターンの直後やダブルクリックで送ったメッセージは 1 回だけ送られます。キューのメッセージは再起動後に届き、再起動で途切れたエージェントの質問は聞き直されずに回答されます。コーディネーターが起動したエージェントは、コーディネーターが書いたタスクを受け取り、その言語で返答します。停止したエージェントは、続けるよう頼むまで止まったままです。"
+        },
+        {
+          "title": "小さな修正",
+          "body": "Claude Code がローカルモデルや別のプロバイダーのキーで動くときは、Claude Code 自身の統計はオフになります。プロバイダーのアイコンは各社の公式ロゴになり、開いたボードの上でもメニューと検索が使え、スタート画面で Ctrl+K が使え、音声モードでマイクをオフにすると解放されます。"
+        }
+      ]
+    },
+    "ko": {
+      "headline": "새 작업은 하나의 창에서, 먼저 묻는 음성, 더 철저한 채팅 삭제",
+      "summary": "새 프로젝트와 새 작업이 같은 창을 쓰고, 음성은 클라우드 제공업체로 가기 전에 묻고, 채팅 삭제는 채팅이 남긴 것을 더 많이 지우며, 많은 수정으로 메시지와 에이전트가 더 안정적입니다.",
+      "sections": [
+        {
+          "title": "새 작업은 하나의 창에서",
+          "body": "새 프로젝트와 새 작업은 어디서나 같은 창을 열고, 작업은 선택한 폴더에서 시작합니다."
+        },
+        {
+          "title": "음성은 먼저 묻습니다",
+          "body": "음성은 사용자가 켜지 않는 한 클라우드 키를 쓰지 않습니다. 음성이 클라우드 제공업체로 가기 전에 앱이 한 번 묻고 누가 받는지 알려 주며, 수락한 제공업체만 받습니다."
+        },
+        {
+          "title": "채팅 삭제가 더 많이 지웁니다",
+          "body": "채팅 삭제는 이제 채팅의 내용을 검색 색인, 에이전트 기록, 창의 양식 제안에서도 지우고, Claude Code와 Codex가 이 컴퓨터에 그 채팅을 위해 저장한 세션 파일도 지웁니다. 이전에 삭제한 채팅도 포함됩니다. 직후에 앱을 닫으면 다음 시작 후 몇 분 안에 마무리됩니다. 프로젝트 제거도 그 채팅을 에이전트 기록과 AI 도구의 세션 파일에서 지웁니다."
+        },
+        {
+          "title": "계정별 즐겨찾는 모델",
+          "body": "즐겨찾는 모델에 계정을 지정할 수 있고, 계정이 두 개이면 모델 버튼에 사용하는 계정이 표시됩니다."
+        },
+        {
+          "title": "메시지와 에이전트",
+          "body": "턴 직후나 더블클릭으로 보낸 메시지는 한 번만 전송됩니다. 대기열의 메시지는 재시작 후 전달되고, 재시작으로 끊긴 에이전트의 질문은 다시 묻지 않고 답을 받습니다. 코디네이터가 시작한 에이전트는 코디네이터가 쓴 작업을 받아 그 언어로 답하고, 멈춘 에이전트는 계속하라고 할 때까지 멈춰 있습니다."
+        },
+        {
+          "title": "작은 수정",
+          "body": "Claude Code가 로컬 모델이나 다른 제공업체의 키로 실행될 때는 Claude Code 자체 통계가 꺼집니다. 제공업체 아이콘은 각 회사의 공식 로고이고, 열린 보드 위에서도 메뉴와 검색이 작동하며, 시작 화면에서 Ctrl+K가 작동하고, 음성 모드에서 마이크를 끄면 마이크가 해제됩니다."
+        }
+      ]
+    },
+    "pt-BR": {
+      "headline": "Uma só janela para trabalho novo, voz que pergunta primeiro e um Excluir chat mais completo",
+      "summary": "Novo projeto e Nova tarefa compartilham uma janela, a voz pergunta antes de ir para um provedor em nuvem, Excluir chat limpa mais do que um chat deixa para trás e muitas correções deixam mensagens e agentes mais estáveis.",
+      "sections": [
+        {
+          "title": "Uma só janela para trabalho novo",
+          "body": "Novo projeto e Nova tarefa abrem a mesma janela em todo lugar, e a tarefa começa na pasta que você escolheu."
+        },
+        {
+          "title": "A voz pergunta primeiro",
+          "body": "A voz não usa mais sua chave de nuvem a menos que você a ative. Antes que sua voz vá para um provedor em nuvem, o app pergunta uma vez e diz quem a recebe, e só o provedor que você aceitou a recebe."
+        },
+        {
+          "title": "Excluir chat limpa mais",
+          "body": "Excluir chat agora também remove as palavras do chat do índice de busca, do histórico do agente e das sugestões de formulário da janela, e os arquivos de sessão que o Claude Code e o Codex salvaram para ele neste computador, inclusive de chats excluídos antes. Se o app for fechado logo depois, isso termina alguns minutos após a próxima inicialização. Remover projeto também limpa seus chats do histórico do agente e dos arquivos de sessão das ferramentas de IA."
+        },
+        {
+          "title": "Um modelo favorito por conta",
+          "body": "Um modelo favorito pode indicar sua conta, e o botão do modelo mostra qual conta ele usa quando você tem duas."
+        },
+        {
+          "title": "Mensagens e agentes",
+          "body": "Uma mensagem enviada logo após um turno ou com clique duplo sai uma vez. Mensagens na fila são entregues após reiniciar, e uma pergunta do agente cortada por um reinício é respondida em vez de feita de novo. Agentes iniciados pelo Coordenador recebem a tarefa que ele escreveu e respondem no idioma dela, e um agente que você parou continua parado até você pedir que continue."
+        },
+        {
+          "title": "Correções menores",
+          "body": "As estatísticas próprias do Claude Code ficam desligadas quando ele roda com um modelo local ou a chave de outro provedor. Os ícones dos provedores são os logotipos oficiais das empresas, menus e busca funcionam sobre um quadro aberto, Ctrl+K funciona na tela inicial e desligar o microfone no modo de voz o libera."
+        }
+      ]
+    },
+    "ro": {
+      "headline": "O singură fereastră pentru lucru nou, vocea care întreabă întâi și o ștergere de chat mai completă",
+      "summary": "Proiect nou și Sarcină nouă folosesc aceeași fereastră, vocea întreabă înainte să ajungă la un furnizor cloud, Șterge chatul curăță mai mult din ce lasă un chat în urmă, iar multe corecturi fac mesajele și agenții mai stabili.",
+      "sections": [
+        {
+          "title": "O singură fereastră pentru lucru nou",
+          "body": "Proiect nou și Sarcină nouă deschid aceeași fereastră peste tot, iar sarcina pornește în folderul ales de tine."
+        },
+        {
+          "title": "Vocea întreabă întâi",
+          "body": "Vocea nu mai folosește cheia ta cloud decât dacă o pornești tu. Înainte ca vocea ta să ajungă la un furnizor cloud, aplicația te întreabă o dată și îți spune cine o primește, iar doar furnizorul acceptat de tine o primește."
+        },
+        {
+          "title": "Șterge chatul curăță mai mult",
+          "body": "Șterge chatul elimină acum și cuvintele chatului din indexul de căutare, din istoricul agentului și din sugestiile de formular ale ferestrei, plus fișierele de sesiune salvate pentru el de Claude Code și Codex pe acest computer, inclusiv pentru chaturile șterse înainte. Dacă aplicația e închisă imediat după, curățarea se termină la câteva minute după următoarea pornire. Elimină proiectul șterge și chaturile lui din istoricul agentului și din fișierele de sesiune ale uneltelor AI."
+        },
+        {
+          "title": "Un model favorit pe fiecare cont",
+          "body": "Un model favorit poate avea contul lui, iar butonul de model arată ce cont folosește când ai două."
+        },
+        {
+          "title": "Mesaje și agenți",
+          "body": "Un mesaj trimis imediat după o tură sau cu dublu clic pleacă o singură dată. Mesajele din coadă sunt livrate după o repornire, iar o întrebare a agentului întreruptă de o repornire primește răspuns în loc să fie pusă din nou. Agenții porniți de Coordonator primesc sarcina scrisă de el și răspund în limba ei, iar un agent oprit de tine rămâne oprit până îi ceri să continue."
+        },
+        {
+          "title": "Corecturi mai mici",
+          "body": "Statisticile proprii ale Claude Code sunt oprite când rulează pe un model local sau pe cheia altui furnizor. Iconițele furnizorilor sunt siglele oficiale ale companiilor, meniurile și căutarea merg peste un panou deschis, Ctrl+K merge pe ecranul de start, iar oprirea microfonului în modul vocal îl eliberează."
+        }
+      ]
+    },
+    "ru": {
+      "headline": "Одно окно для новой работы, голос, который сначала спрашивает, и более полное удаление чата",
+      "summary": "Новый проект и Новая задача открывают одно окно, голос спрашивает, прежде чем уйти облачному провайдеру, Удалить чат стирает больше следов чата, а многие исправления делают сообщения и агентов стабильнее.",
+      "sections": [
+        {
+          "title": "Одно окно для новой работы",
+          "body": "Новый проект и Новая задача везде открывают одно и то же окно, и задача начинается в выбранной вами папке."
+        },
+        {
+          "title": "Голос сначала спрашивает",
+          "body": "Голос больше не использует ваш облачный ключ, пока вы это не включите. Прежде чем ваш голос уйдёт облачному провайдеру, приложение один раз спрашивает и говорит, кто его получит, и получает его только принятый вами провайдер."
+        },
+        {
+          "title": "Удалить чат стирает больше",
+          "body": "Удалить чат теперь также убирает слова чата из поискового индекса, истории агента и подсказок форм окна, а также файлы сессий, которые Claude Code и Codex сохранили для него на этом компьютере, в том числе для чатов, удалённых раньше. Если приложение закрыть сразу после этого, очистка завершится через несколько минут после следующего запуска. Удалить проект также стирает его чаты из истории агента и файлов сессий ИИ-инструментов."
+        },
+        {
+          "title": "Любимая модель для каждого аккаунта",
+          "body": "У любимой модели можно указать аккаунт, а кнопка модели показывает, какой аккаунт она использует, если у вас их два."
+        },
+        {
+          "title": "Сообщения и агенты",
+          "body": "Сообщение, отправленное сразу после хода или двойным щелчком, уходит один раз. Сообщения в очереди доставляются после перезапуска, а вопрос агента, прерванный перезапуском, получает ответ, а не задаётся снова. Агенты, запущенные Координатором, получают написанную им задачу и отвечают на её языке, а остановленный вами агент остаётся остановленным, пока вы не попросите продолжить."
+        },
+        {
+          "title": "Небольшие исправления",
+          "body": "Собственная статистика Claude Code отключена, когда он работает на локальной модели или с ключом другого провайдера. Значки провайдеров — официальные логотипы компаний, меню и поиск работают поверх открытой доски, Ctrl+K работает на стартовом экране, а выключение микрофона в голосовом режиме освобождает его."
+        }
+      ]
+    },
+    "tr": {
+      "headline": "Yeni işler için tek pencere, önce soran ses ve daha kapsamlı Sohbeti sil",
+      "summary": "Yeni proje ve Yeni görev aynı pencereyi kullanır, ses bir bulut sağlayıcısına gitmeden önce sorar, Sohbeti sil bir sohbetin geride bıraktıklarının daha fazlasını temizler ve birçok düzeltme mesajları ve ajanları daha kararlı hâle getirir.",
+      "sections": [
+        {
+          "title": "Yeni işler için tek pencere",
+          "body": "Yeni proje ve Yeni görev her yerde aynı pencereyi açar ve görev seçtiğiniz klasörde başlar."
+        },
+        {
+          "title": "Ses önce sorar",
+          "body": "Ses artık siz açmadıkça bulut anahtarınızı kullanmaz. Sesiniz bir bulut sağlayıcısına gitmeden önce uygulama size bir kez sorar ve onu kimin alacağını söyler; yalnızca kabul ettiğiniz sağlayıcı alır."
+        },
+        {
+          "title": "Sohbeti sil daha fazlasını temizler",
+          "body": "Sohbeti sil artık sohbetin sözcüklerini arama dizininden, ajanın geçmişinden ve pencerenin form önerilerinden, ayrıca Claude Code ve Codex'in bu bilgisayarda onun için kaydettiği oturum dosyalarından da kaldırır; daha önce silinen sohbetler de buna dahildir. Uygulama hemen ardından kapatılırsa bu işlem bir sonraki açılıştan birkaç dakika sonra tamamlanır. Projeyi kaldır da sohbetlerini ajanın geçmişinden ve yapay zekâ araçlarının oturum dosyalarından temizler."
+        },
+        {
+          "title": "Hesap başına favori model",
+          "body": "Favori bir model kendi hesabını belirtebilir ve iki hesabınız olduğunda model düğmesi hangi hesabı kullandığını gösterir."
+        },
+        {
+          "title": "Mesajlar ve ajanlar",
+          "body": "Bir turun hemen ardından ya da çift tıklamayla gönderilen mesaj bir kez gider. Kuyruktaki mesajlar yeniden başlatmadan sonra iletilir ve yeniden başlatmanın yarıda kestiği bir ajan sorusu yeniden sorulmak yerine yanıtlanır. Koordinatörün başlattığı ajanlar onun yazdığı görevi alır ve görevin dilinde yanıt verir; durdurduğunuz bir ajan siz devam etmesini isteyene kadar durur."
+        },
+        {
+          "title": "Küçük düzeltmeler",
+          "body": "Claude Code yerel bir modelle ya da başka bir sağlayıcının anahtarıyla çalıştığında kendi istatistikleri kapalıdır. Sağlayıcı simgeleri şirketlerin resmî logolarıdır, menüler ve arama açık bir panonun üzerinde çalışır, Ctrl+K başlangıç ekranında çalışır ve ses modunda mikrofonu kapatmak onu serbest bırakır."
+        }
+      ]
+    },
+    "vi": {
+      "headline": "Một cửa sổ cho việc mới, giọng nói hỏi trước và Xóa cuộc trò chuyện đầy đủ hơn",
+      "summary": "Dự án mới và Tác vụ mới dùng chung một cửa sổ, giọng nói hỏi trước khi gửi tới nhà cung cấp đám mây, Xóa cuộc trò chuyện dọn sạch hơn những gì cuộc trò chuyện để lại, và nhiều bản sửa giúp tin nhắn và tác tử ổn định hơn.",
+      "sections": [
+        {
+          "title": "Một cửa sổ cho việc mới",
+          "body": "Dự án mới và Tác vụ mới mở cùng một cửa sổ ở mọi nơi, và tác vụ bắt đầu trong thư mục bạn đã chọn."
+        },
+        {
+          "title": "Giọng nói hỏi trước",
+          "body": "Giọng nói không còn dùng khóa đám mây của bạn trừ khi bạn bật nó. Trước khi giọng nói của bạn đến một nhà cung cấp đám mây, ứng dụng hỏi bạn một lần và cho biết ai nhận nó, và chỉ nhà cung cấp bạn đã chấp nhận mới nhận được."
+        },
+        {
+          "title": "Xóa cuộc trò chuyện dọn nhiều hơn",
+          "body": "Xóa cuộc trò chuyện giờ cũng gỡ nội dung của cuộc trò chuyện khỏi chỉ mục tìm kiếm, lịch sử của tác tử và gợi ý biểu mẫu của cửa sổ, cùng các tệp phiên mà Claude Code và Codex đã lưu cho nó trên máy này, kể cả cho các cuộc trò chuyện đã xóa trước đó. Nếu ứng dụng bị đóng ngay sau đó, việc này hoàn tất vài phút sau lần khởi động tiếp theo. Gỡ dự án cũng xóa các cuộc trò chuyện của nó khỏi lịch sử của tác tử và tệp phiên của các công cụ AI."
+        },
+        {
+          "title": "Mô hình yêu thích theo từng tài khoản",
+          "body": "Mô hình yêu thích có thể ghi rõ tài khoản của nó, và nút mô hình cho biết tài khoản đang dùng khi bạn có hai tài khoản."
+        },
+        {
+          "title": "Tin nhắn và tác tử",
+          "body": "Tin nhắn gửi ngay sau một lượt hoặc bằng nhấp đúp chỉ đi một lần. Tin nhắn trong hàng đợi được gửi sau khi khởi động lại, và câu hỏi của tác tử bị cắt do khởi động lại sẽ được trả lời thay vì hỏi lại. Tác tử do Điều phối viên khởi chạy nhận tác vụ mà nó viết và trả lời bằng ngôn ngữ của tác vụ, và tác tử bạn đã dừng sẽ vẫn dừng cho đến khi bạn yêu cầu tiếp tục."
+        },
+        {
+          "title": "Các bản sửa nhỏ",
+          "body": "Thống kê riêng của Claude Code tắt khi nó chạy với mô hình cục bộ hoặc khóa của nhà cung cấp khác. Biểu tượng nhà cung cấp là logo chính thức của các công ty, menu và tìm kiếm hoạt động trên bảng đang mở, Ctrl+K hoạt động ở màn hình bắt đầu, và tắt micrô trong chế độ giọng nói sẽ giải phóng nó."
+        }
+      ]
+    },
+    "zh-Hans": {
+      "headline": "新工作只用一个窗口，语音先询问，删除聊天更彻底",
+      "summary": "新建项目和新建任务共用一个窗口，语音在发送给云服务提供商前会先询问，删除聊天会清除更多聊天留下的内容，大量修复让消息和代理更稳定。",
+      "sections": [
+        {
+          "title": "新工作只用一个窗口",
+          "body": "新建项目和新建任务在各处打开同一个窗口，任务从你选择的文件夹开始。"
+        },
+        {
+          "title": "语音先询问",
+          "body": "除非你开启，语音不再使用你的云端密钥。在你的语音发送给云服务提供商之前，应用会询问你一次并说明谁会收到，只有你接受的提供商才会收到。"
+        },
+        {
+          "title": "删除聊天清除更多",
+          "body": "删除聊天现在还会从搜索索引、代理历史和窗口的表单建议中移除聊天内容，并删除 Claude Code 和 Codex 在这台电脑上为它保存的会话文件，以前删除的聊天也包括在内。如果之后立即关闭应用，会在下次启动后几分钟内完成。移除项目也会从代理历史和 AI 工具的会话文件中清除它的聊天。"
+        },
+        {
+          "title": "每个账户的收藏模型",
+          "body": "收藏的模型可以指定账户，有两个账户时，模型按钮会显示它使用的是哪个账户。"
+        },
+        {
+          "title": "消息和代理",
+          "body": "在一轮结束后立即发送或双击发送的消息只会发出一次。队列中的消息在重启后会送达，被重启打断的代理问题会得到回答，而不是重新提问。协调者启动的代理会收到它写的任务并用该任务的语言回复，你停止的代理会保持停止，直到你让它继续。"
+        },
+        {
+          "title": "较小的修复",
+          "body": "Claude Code 使用本地模型或其他提供商的密钥运行时，它自己的统计会关闭。提供商图标为各公司的官方标志，菜单和搜索可在打开的看板上使用，Ctrl+K 可在开始界面使用，在语音模式中关闭麦克风会释放它。"
+        }
+      ]
+    },
+    "zh-Hant": {
+      "headline": "新工作只用一個視窗，語音先詢問，刪除聊天更徹底",
+      "summary": "新增專案和新增任務共用一個視窗，語音在傳送給雲端供應商前會先詢問，刪除聊天會清除更多聊天留下的內容，大量修正讓訊息和代理更穩定。",
+      "sections": [
+        {
+          "title": "新工作只用一個視窗",
+          "body": "新增專案和新增任務在各處開啟同一個視窗，任務從你選擇的資料夾開始。"
+        },
+        {
+          "title": "語音先詢問",
+          "body": "除非你開啟，語音不再使用你的雲端金鑰。在你的語音傳送給雲端供應商之前，應用程式會詢問你一次並說明誰會收到，只有你接受的供應商才會收到。"
+        },
+        {
+          "title": "刪除聊天清除更多",
+          "body": "刪除聊天現在也會從搜尋索引、代理歷程和視窗的表單建議中移除聊天內容，並刪除 Claude Code 和 Codex 在這台電腦上為它儲存的工作階段檔案，以前刪除的聊天也包括在內。如果之後立即關閉應用程式，會在下次啟動後幾分鐘內完成。移除專案也會從代理歷程和 AI 工具的工作階段檔案中清除它的聊天。"
+        },
+        {
+          "title": "每個帳戶的最愛模型",
+          "body": "最愛的模型可以指定帳戶，有兩個帳戶時，模型按鈕會顯示它使用的是哪個帳戶。"
+        },
+        {
+          "title": "訊息和代理",
+          "body": "在一輪結束後立即傳送或按兩下傳送的訊息只會送出一次。佇列中的訊息在重新啟動後會送達，被重新啟動打斷的代理問題會得到回答，而不是重新提問。協調者啟動的代理會收到它寫的任務並以該任務的語言回覆，你停止的代理會保持停止，直到你讓它繼續。"
+        },
+        {
+          "title": "較小的修正",
+          "body": "Claude Code 使用本機模型或其他供應商的金鑰執行時，它自己的統計會關閉。供應商圖示為各公司的官方標誌，選單和搜尋可在開啟的看板上使用，Ctrl+K 可在開始畫面使用，在語音模式中關閉麥克風會釋放它。"
+        }
+      ]
+    }
+  }
+}

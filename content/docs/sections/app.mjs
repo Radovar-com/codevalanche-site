@@ -153,7 +153,7 @@ ${h2('flows', 'Where each thing goes')}
 ${table([
   ['Your messages, the files the agent reads, tool results', 'To the AI provider you chose (for example Anthropic, OpenAI, Google), under its terms.'],
   ['The same, with a local model', 'Nowhere. They stay on your computer.'],
-  ['Voice dictation', 'Turned into text on your computer by default. To Groq or OpenAI with your own key if you choose the cloud, or when no speech engine is installed here and you added one of those keys.'],
+  ['Voice dictation', 'Turned into text on your computer by default. To Groq or OpenAI with your own key only after you choose cloud voice and accept the notice that names the provider.'],
   ['Computer use screenshots', 'To the model you picked, only while you use the feature.'],
   ['Connectors (GitHub, Figma, Google, Vercel…)', 'Only what the features you use need.'],
 ], ['What', 'Where it goes'])}
