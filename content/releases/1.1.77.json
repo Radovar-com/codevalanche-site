@@ -4,7 +4,7 @@
   "copy": {
     "en": {
       "headline": "Stop that holds, drafts saved as you type, and clear messages when the connection drops",
-      "summary": "When you press Stop, the agent stays stopped. Unsent text is saved as you type, the app tells you plainly when the internet drops or your sign-in expires, and it opens faster.",
+      "summary": "When you press Stop, the agent stays stopped. Unsent text is saved on your computer as you type, and the app tells you plainly when the internet drops or you need to sign in again.",
       "sections": [
         {
           "title": "Stop holds",
@@ -16,7 +16,7 @@
         },
         {
           "title": "Drafts saved as you type",
-          "body": "Text you have not sent yet is saved about a quarter of a second after you type it."
+          "body": "Text you have not sent yet is saved on your computer for each project, about a quarter of a second after you stop typing, so it is still there after the app restarts."
         },
         {
           "title": "A clear message when the internet drops",
@@ -24,17 +24,13 @@
         },
         {
           "title": "Sign in again when needed",
-          "body": "When your sign-in expires, the app asks you to sign in again instead of showing an error."
-        },
-        {
-          "title": "A faster start",
-          "body": "The app opens faster: in about 4 seconds on our test computer."
+          "body": "A message waiting while you are signed out says why and offers Sign in."
         }
       ]
     },
     "ro": {
       "headline": "Oprirea ține, ciornele se salvează pe măsură ce scrii și mesaje clare când pică conexiunea",
-      "summary": "Când apeși Oprește, agentul rămâne oprit. Textul netrimis se salvează pe măsură ce scrii, aplicația îți spune clar când pică internetul sau expiră conectarea și pornește mai repede.",
+      "summary": "Când apeși Oprește, agentul rămâne oprit. Textul netrimis se salvează pe computerul tău pe măsură ce scrii, iar aplicația îți spune clar când pică internetul sau trebuie să te conectezi din nou.",
       "sections": [
         {
           "title": "Oprirea ține",
@@ -46,7 +42,7 @@
         },
         {
           "title": "Ciorna se salvează pe măsură ce scrii",
-          "body": "Textul pe care nu l-ai trimis încă se salvează la aproximativ un sfert de secundă după ce îl scrii."
+          "body": "Textul pe care nu l-ai trimis încă se salvează pe computerul tău, pentru fiecare proiect, la aproximativ un sfert de secundă după ce te oprești din scris, așa că îl regăsești și după ce aplicația repornește."
         },
         {
           "title": "Mesaj clar când pică internetul",
@@ -54,17 +50,13 @@
         },
         {
           "title": "Te conectezi din nou când e nevoie",
-          "body": "Când expiră conectarea, aplicația îți cere să te conectezi din nou în loc să arate o eroare."
-        },
-        {
-          "title": "Pornire mai rapidă",
-          "body": "Aplicația se deschide mai repede: în aproximativ 4 secunde pe computerul nostru de test."
+          "body": "Un mesaj care așteaptă cât timp nu ești conectat îți spune de ce și îți oferă Conectare."
         }
       ]
     },
     "de": {
       "headline": "Stopp, der hält, Entwürfe, die beim Tippen gespeichert werden, und klare Hinweise bei Verbindungsabbruch",
-      "summary": "Wenn du Stopp drückst, bleibt der Agent gestoppt. Nicht gesendeter Text wird beim Tippen gespeichert, die App sagt klar, wenn das Internet weg ist oder die Anmeldung abläuft, und sie startet schneller.",
+      "summary": "Wenn du Stopp drückst, bleibt der Agent gestoppt. Nicht gesendeter Text wird beim Tippen auf deinem Computer gespeichert, und die App sagt klar, wenn das Internet weg ist oder du dich neu anmelden musst.",
       "sections": [
         {
           "title": "Stopp hält",
@@ -76,7 +68,7 @@
         },
         {
           "title": "Entwürfe werden beim Tippen gespeichert",
-          "body": "Noch nicht gesendeter Text wird etwa eine Viertelsekunde nach dem Tippen gespeichert."
+          "body": "Noch nicht gesendeter Text wird auf deinem Computer pro Projekt gespeichert, etwa eine Viertelsekunde nachdem du aufhörst zu tippen, und ist auch nach einem Neustart der App noch da."
         },
         {
           "title": "Klarer Hinweis, wenn das Internet weg ist",
@@ -84,17 +76,13 @@
         },
         {
           "title": "Neu anmelden, wenn nötig",
-          "body": "Wenn deine Anmeldung abläuft, bittet dich die App, dich neu anzumelden, statt einen Fehler zu zeigen."
-        },
-        {
-          "title": "Schnellerer Start",
-          "body": "Die App öffnet sich schneller: auf unserem Testcomputer in etwa 4 Sekunden."
+          "body": "Eine Nachricht, die wartet, während du abgemeldet bist, sagt dir, warum, und bietet Anmelden an."
         }
       ]
     },
     "es": {
       "headline": "Detener que se mantiene, borradores guardados al escribir y avisos claros cuando se cae la conexión",
-      "summary": "Cuando pulsas Detener, el agente sigue detenido. El texto sin enviar se guarda mientras escribes, la app avisa claramente si se cae internet o caduca tu sesión, y se abre más rápido.",
+      "summary": "Cuando pulsas Detener, el agente sigue detenido. El texto sin enviar se guarda en tu ordenador mientras escribes, y la app avisa claramente si se cae internet o tienes que volver a iniciar sesión.",
       "sections": [
         {
           "title": "Detener se mantiene",
@@ -106,7 +94,7 @@
         },
         {
           "title": "Borradores guardados al escribir",
-          "body": "El texto que aún no has enviado se guarda aproximadamente un cuarto de segundo después de escribirlo."
+          "body": "El texto que aún no has enviado se guarda en tu ordenador para cada proyecto, aproximadamente un cuarto de segundo después de que dejes de escribir, así que sigue ahí cuando la app se reinicia."
         },
         {
           "title": "Aviso claro cuando se cae internet",
@@ -114,17 +102,13 @@
         },
         {
           "title": "Vuelve a iniciar sesión cuando haga falta",
-          "body": "Cuando tu sesión caduca, la app te pide que vuelvas a iniciar sesión en lugar de mostrar un error."
-        },
-        {
-          "title": "Arranque más rápido",
-          "body": "La app se abre más rápido: en unos 4 segundos en nuestro ordenador de pruebas."
+          "body": "Un mensaje que espera mientras no has iniciado sesión explica por qué y ofrece Iniciar sesión."
         }
       ]
     },
     "fr": {
       "headline": "Un arrêt qui tient, des brouillons enregistrés pendant la saisie et des messages clairs en cas de coupure",
-      "summary": "Quand vous appuyez sur Arrêter, l’agent reste arrêté. Le texte non envoyé est enregistré pendant la saisie, l’app signale clairement une coupure d’internet ou une connexion expirée, et elle s’ouvre plus vite.",
+      "summary": "Quand vous appuyez sur Arrêter, l’agent reste arrêté. Le texte non envoyé est enregistré sur votre ordinateur pendant la saisie, et l’app signale clairement une coupure d’internet ou une reconnexion nécessaire.",
       "sections": [
         {
           "title": "L’arrêt tient",
@@ -136,7 +120,7 @@
         },
         {
           "title": "Brouillons enregistrés pendant la saisie",
-          "body": "Le texte que vous n’avez pas encore envoyé est enregistré environ un quart de seconde après la saisie."
+          "body": "Le texte que vous n’avez pas encore envoyé est enregistré sur votre ordinateur pour chaque projet, environ un quart de seconde après la fin de la saisie, et il est toujours là après le redémarrage de l’app."
         },
         {
           "title": "Un message clair quand internet tombe",
@@ -144,17 +128,13 @@
         },
         {
           "title": "Se reconnecter quand il le faut",
-          "body": "Quand votre connexion expire, l’app vous demande de vous reconnecter au lieu d’afficher une erreur."
-        },
-        {
-          "title": "Un démarrage plus rapide",
-          "body": "L’app s’ouvre plus vite : en environ 4 secondes sur notre ordinateur de test."
+          "body": "Un message en attente pendant que vous êtes déconnecté explique pourquoi et propose Se connecter."
         }
       ]
     },
     "it": {
       "headline": "Uno Stop che tiene, bozze salvate mentre scrivi e messaggi chiari quando cade la connessione",
-      "summary": "Quando premi Ferma, l’agente resta fermo. Il testo non inviato viene salvato mentre scrivi, l’app ti dice chiaramente quando cade internet o scade l’accesso, e si apre più in fretta.",
+      "summary": "Quando premi Ferma, l’agente resta fermo. Il testo non inviato viene salvato sul tuo computer mentre scrivi, e l’app ti dice chiaramente quando cade internet o devi accedere di nuovo.",
       "sections": [
         {
           "title": "Ferma tiene",
@@ -166,7 +146,7 @@
         },
         {
           "title": "Bozze salvate mentre scrivi",
-          "body": "Il testo che non hai ancora inviato viene salvato circa un quarto di secondo dopo averlo scritto."
+          "body": "Il testo che non hai ancora inviato viene salvato sul tuo computer per ogni progetto, circa un quarto di secondo dopo che smetti di scrivere, quindi lo ritrovi anche dopo il riavvio dell’app."
         },
         {
           "title": "Un messaggio chiaro quando cade internet",
@@ -174,17 +154,13 @@
         },
         {
           "title": "Accedi di nuovo quando serve",
-          "body": "Quando l’accesso scade, l’app ti chiede di accedere di nuovo invece di mostrare un errore."
-        },
-        {
-          "title": "Avvio più rapido",
-          "body": "L’app si apre più in fretta: in circa 4 secondi sul nostro computer di prova."
+          "body": "Un messaggio in attesa mentre sei disconnesso spiega il motivo e offre Accedi."
         }
       ]
     },
     "pt-BR": {
       "headline": "Parar que se mantém, rascunhos salvos enquanto você digita e avisos claros quando a conexão cai",
-      "summary": "Quando você toca em Parar, o agente continua parado. O texto não enviado é salvo enquanto você digita, o app avisa claramente quando a internet cai ou o login expira, e ele abre mais rápido.",
+      "summary": "Quando você toca em Parar, o agente continua parado. O texto não enviado é salvo no seu computador enquanto você digita, e o app avisa claramente quando a internet cai ou você precisa entrar de novo.",
       "sections": [
         {
           "title": "Parar se mantém",
@@ -196,7 +172,7 @@
         },
         {
           "title": "Rascunhos salvos enquanto você digita",
-          "body": "O texto que você ainda não enviou é salvo cerca de um quarto de segundo depois de digitado."
+          "body": "O texto que você ainda não enviou é salvo no seu computador para cada projeto, cerca de um quarto de segundo depois que você para de digitar, então ele continua lá depois que o app reinicia."
         },
         {
           "title": "Aviso claro quando a internet cai",
@@ -204,17 +180,13 @@
         },
         {
           "title": "Entre de novo quando precisar",
-          "body": "Quando o seu login expira, o app pede que você entre de novo em vez de mostrar um erro."
-        },
-        {
-          "title": "Início mais rápido",
-          "body": "O app abre mais rápido: em cerca de 4 segundos no nosso computador de teste."
+          "body": "Uma mensagem que espera enquanto você está desconectado explica o motivo e oferece Entrar."
         }
       ]
     },
     "id": {
       "headline": "Hentikan yang benar-benar berhenti, draf tersimpan saat mengetik, dan pesan jelas saat koneksi putus",
-      "summary": "Saat Anda menekan Hentikan, agen tetap berhenti. Teks yang belum dikirim tersimpan saat Anda mengetik, aplikasi memberi tahu dengan jelas saat internet putus atau sesi masuk berakhir, dan aplikasi terbuka lebih cepat.",
+      "summary": "Saat Anda menekan Hentikan, agen tetap berhenti. Teks yang belum dikirim tersimpan di komputer Anda saat Anda mengetik, dan aplikasi memberi tahu dengan jelas saat internet putus atau Anda perlu masuk lagi.",
       "sections": [
         {
           "title": "Hentikan tetap berlaku",
@@ -226,7 +198,7 @@
         },
         {
           "title": "Draf tersimpan saat mengetik",
-          "body": "Teks yang belum Anda kirim tersimpan sekitar seperempat detik setelah Anda mengetiknya."
+          "body": "Teks yang belum Anda kirim disimpan di komputer Anda untuk setiap proyek, sekitar seperempat detik setelah Anda berhenti mengetik, sehingga tetap ada setelah aplikasi dimulai ulang."
         },
         {
           "title": "Pesan jelas saat internet putus",
@@ -234,17 +206,13 @@
         },
         {
           "title": "Masuk lagi bila perlu",
-          "body": "Saat sesi masuk Anda berakhir, aplikasi meminta Anda masuk lagi alih-alih menampilkan galat."
-        },
-        {
-          "title": "Mulai lebih cepat",
-          "body": "Aplikasi terbuka lebih cepat: sekitar 4 detik di komputer uji kami."
+          "body": "Pesan yang menunggu saat Anda belum masuk menjelaskan alasannya dan menawarkan Masuk."
         }
       ]
     },
     "tr": {
       "headline": "Kalıcı Durdur, yazarken kaydedilen taslaklar ve bağlantı kopunca açık mesajlar",
-      "summary": "Durdur’a bastığında ajan durmuş olarak kalır. Gönderilmemiş metin sen yazarken kaydedilir, uygulama internet kesildiğinde veya oturumun sona erdiğinde bunu açıkça söyler ve daha hızlı açılır.",
+      "summary": "Durdur’a bastığında ajan durmuş olarak kalır. Gönderilmemiş metin sen yazarken bilgisayarına kaydedilir ve uygulama internet kesildiğinde ya da yeniden oturum açman gerektiğinde bunu açıkça söyler.",
       "sections": [
         {
           "title": "Durdur kalıcı",
@@ -256,7 +224,7 @@
         },
         {
           "title": "Yazarken kaydedilen taslaklar",
-          "body": "Henüz göndermediğin metin, yazdıktan yaklaşık çeyrek saniye sonra kaydedilir."
+          "body": "Henüz göndermediğin metin, yazmayı bıraktıktan yaklaşık çeyrek saniye sonra bilgisayarında her proje için kaydedilir; uygulama yeniden başladıktan sonra da yerinde durur."
         },
         {
           "title": "İnternet kesilince açık bir mesaj",
@@ -264,17 +232,13 @@
         },
         {
           "title": "Gerektiğinde yeniden oturum aç",
-          "body": "Oturumunun süresi dolduğunda uygulama hata göstermek yerine yeniden oturum açmanı ister."
-        },
-        {
-          "title": "Daha hızlı açılış",
-          "body": "Uygulama daha hızlı açılır: test bilgisayarımızda yaklaşık 4 saniyede."
+          "body": "Oturumun kapalıyken bekleyen bir mesaj nedenini söyler ve Oturum aç seçeneği sunar."
         }
       ]
     },
     "ru": {
       "headline": "Остановка, которая держится, черновики сохраняются при вводе и понятные сообщения при обрыве связи",
-      "summary": "Когда вы нажимаете «Остановить», агент остаётся остановленным. Неотправленный текст сохраняется по мере ввода, приложение ясно сообщает, когда пропал интернет или истёк вход, и открывается быстрее.",
+      "summary": "Когда вы нажимаете «Остановить», агент остаётся остановленным. Неотправленный текст сохраняется на вашем компьютере по мере ввода, а приложение ясно сообщает, когда пропал интернет или нужно войти снова.",
       "sections": [
         {
           "title": "Остановка держится",
@@ -286,7 +250,7 @@
         },
         {
           "title": "Черновики сохраняются при вводе",
-          "body": "Текст, который вы ещё не отправили, сохраняется примерно через четверть секунды после ввода."
+          "body": "Текст, который вы ещё не отправили, сохраняется на вашем компьютере для каждого проекта примерно через четверть секунды после того, как вы перестали печатать, и остаётся на месте после перезапуска приложения."
         },
         {
           "title": "Понятное сообщение, когда пропадает интернет",
@@ -294,17 +258,13 @@
         },
         {
           "title": "Повторный вход, когда нужно",
-          "body": "Когда срок входа истекает, приложение просит вас войти снова, а не показывает ошибку."
-        },
-        {
-          "title": "Более быстрый запуск",
-          "body": "Приложение открывается быстрее: примерно за 4 секунды на нашем тестовом компьютере."
+          "body": "Сообщение, которое ждёт, пока вы не вошли, объясняет причину и предлагает «Войти»."
         }
       ]
     },
     "ar": {
       "headline": "إيقاف يثبت، ومسودات تُحفظ أثناء الكتابة، ورسائل واضحة عند انقطاع الاتصال",
-      "summary": "عندما تضغط إيقاف، يبقى الوكيل متوقفًا. يُحفظ النص غير المرسل أثناء كتابتك، ويخبرك التطبيق بوضوح عند انقطاع الإنترنت أو انتهاء تسجيل الدخول، ويفتح بسرعة أكبر.",
+      "summary": "عندما تضغط إيقاف، يبقى الوكيل متوقفًا. يُحفظ النص غير المرسل على حاسوبك أثناء كتابتك، ويخبرك التطبيق بوضوح عند انقطاع الإنترنت أو عندما تحتاج إلى تسجيل الدخول من جديد.",
       "sections": [
         {
           "title": "الإيقاف يثبت",
@@ -316,7 +276,7 @@
         },
         {
           "title": "مسودات تُحفظ أثناء الكتابة",
-          "body": "يُحفظ النص الذي لم ترسله بعد بعد نحو ربع ثانية من كتابته."
+          "body": "يُحفظ النص الذي لم ترسله بعد على حاسوبك لكل مشروع، بعد نحو ربع ثانية من توقفك عن الكتابة، فيبقى موجودًا بعد إعادة تشغيل التطبيق."
         },
         {
           "title": "رسالة واضحة عند انقطاع الإنترنت",
@@ -324,17 +284,13 @@
         },
         {
           "title": "سجّل الدخول من جديد عند الحاجة",
-          "body": "عندما تنتهي صلاحية تسجيل دخولك، يطلب منك التطبيق تسجيل الدخول من جديد بدل عرض خطأ."
-        },
-        {
-          "title": "تشغيل أسرع",
-          "body": "يفتح التطبيق بسرعة أكبر: في نحو 4 ثوانٍ على حاسوب الاختبار لدينا."
+          "body": "الرسالة التي تنتظر أثناء خروجك من الحساب توضّح السبب وتعرض تسجيل الدخول."
         }
       ]
     },
     "hi": {
       "headline": "टिकने वाला रोकें, लिखते समय सहेजे जाने वाले ड्राफ़्ट और कनेक्शन टूटने पर साफ़ संदेश",
-      "summary": "जब आप रोकें दबाते हैं, तो एजेंट रुका ही रहता है। बिना भेजा टेक्स्ट लिखते समय सहेजा जाता है, इंटरनेट जाने या साइन-इन खत्म होने पर ऐप साफ़ बताता है, और यह तेज़ी से खुलता है।",
+      "summary": "जब आप रोकें दबाते हैं, तो एजेंट रुका ही रहता है। बिना भेजा टेक्स्ट लिखते समय आपके कंप्यूटर पर सहेजा जाता है, और इंटरनेट जाने या फिर से साइन इन करने की ज़रूरत होने पर ऐप साफ़ बताता है।",
       "sections": [
         {
           "title": "रोकें टिकता है",
@@ -346,7 +302,7 @@
         },
         {
           "title": "लिखते समय सहेजे जाने वाले ड्राफ़्ट",
-          "body": "जो टेक्स्ट आपने अभी नहीं भेजा है, वह लिखने के लगभग चौथाई सेकंड बाद सहेजा जाता है।"
+          "body": "जो टेक्स्ट आपने अभी नहीं भेजा है, वह लिखना रुकने के लगभग चौथाई सेकंड बाद आपके कंप्यूटर पर हर प्रोजेक्ट के लिए सहेजा जाता है, इसलिए ऐप दोबारा शुरू होने के बाद भी वहीं रहता है।"
         },
         {
           "title": "इंटरनेट जाने पर साफ़ संदेश",
@@ -354,17 +310,13 @@
         },
         {
           "title": "ज़रूरत पड़ने पर फिर से साइन इन करें",
-          "body": "जब आपका साइन-इन खत्म हो जाता है, तो ऐप त्रुटि दिखाने के बजाय आपसे फिर से साइन इन करने को कहता है।"
-        },
-        {
-          "title": "तेज़ शुरुआत",
-          "body": "ऐप तेज़ी से खुलता है: हमारे टेस्ट कंप्यूटर पर लगभग 4 सेकंड में।"
+          "body": "जब आप साइन आउट हों, तब इंतज़ार कर रहा संदेश कारण बताता है और साइन इन का विकल्प देता है।"
         }
       ]
     },
     "ja": {
       "headline": "確実に止まる停止、入力中に保存される下書き、接続が切れたときの分かりやすいメッセージ",
-      "summary": "停止を押すとエージェントは止まったままです。未送信のテキストは入力しながら保存され、インターネットが切れたりサインインが切れたりするとアプリがはっきり知らせ、起動も速くなりました。",
+      "summary": "停止を押すとエージェントは止まったままです。未送信のテキストは入力しながら PC に保存され、インターネットが切れたときや再サインインが必要なときはアプリがはっきり知らせます。",
       "sections": [
         {
           "title": "停止が保たれる",
@@ -376,7 +328,7 @@
         },
         {
           "title": "入力中に保存される下書き",
-          "body": "まだ送信していないテキストは、入力してから約 0.25 秒で保存されます。"
+          "body": "まだ送信していないテキストは、入力を止めてから約 0.25 秒でプロジェクトごとに PC に保存されるため、アプリを再起動しても残ります。"
         },
         {
           "title": "インターネットが切れたときの分かりやすいメッセージ",
@@ -384,17 +336,13 @@
         },
         {
           "title": "必要なときに再サインイン",
-          "body": "サインインの期限が切れると、エラーを表示する代わりに再サインインを求めます。"
-        },
-        {
-          "title": "より速い起動",
-          "body": "アプリの起動が速くなりました。テスト用 PC では約 4 秒です。"
+          "body": "サインアウト中に待機しているメッセージは、その理由を示し、サインインを案内します。"
         }
       ]
     },
     "ko": {
       "headline": "확실히 유지되는 중지, 입력하는 동안 저장되는 초안, 연결이 끊길 때 분명한 메시지",
-      "summary": "중지를 누르면 에이전트가 계속 중지된 상태로 남습니다. 보내지 않은 텍스트는 입력하는 동안 저장되고, 인터넷이 끊기거나 로그인이 만료되면 앱이 분명히 알려 주며, 더 빨리 열립니다.",
+      "summary": "중지를 누르면 에이전트가 계속 중지된 상태로 남습니다. 보내지 않은 텍스트는 입력하는 동안 컴퓨터에 저장되고, 인터넷이 끊기거나 다시 로그인해야 할 때 앱이 분명히 알려 줍니다.",
       "sections": [
         {
           "title": "중지가 유지됩니다",
@@ -406,7 +354,7 @@
         },
         {
           "title": "입력하는 동안 저장되는 초안",
-          "body": "아직 보내지 않은 텍스트는 입력하고 약 0.25초 뒤에 저장됩니다."
+          "body": "아직 보내지 않은 텍스트는 입력을 멈추고 약 0.25초 뒤 프로젝트별로 컴퓨터에 저장되므로, 앱을 다시 시작해도 그대로 남아 있습니다."
         },
         {
           "title": "인터넷이 끊길 때 분명한 메시지",
@@ -414,17 +362,13 @@
         },
         {
           "title": "필요할 때 다시 로그인",
-          "body": "로그인이 만료되면 앱이 오류를 보여 주는 대신 다시 로그인하라고 요청합니다."
-        },
-        {
-          "title": "더 빠른 시작",
-          "body": "앱이 더 빨리 열립니다. 테스트 컴퓨터에서 약 4초입니다."
+          "body": "로그아웃된 동안 대기 중인 메시지는 이유를 알려 주고 로그인을 제안합니다."
         }
       ]
     },
     "vi": {
       "headline": "Dừng thì dừng hẳn, bản nháp được lưu khi gõ và thông báo rõ ràng khi mất kết nối",
-      "summary": "Khi bạn nhấn Dừng, tác tử vẫn ở trạng thái dừng. Văn bản chưa gửi được lưu khi bạn gõ, ứng dụng báo rõ khi mất internet hoặc phiên đăng nhập hết hạn, và ứng dụng mở nhanh hơn.",
+      "summary": "Khi bạn nhấn Dừng, tác tử vẫn ở trạng thái dừng. Văn bản chưa gửi được lưu trên máy tính của bạn khi bạn gõ, và ứng dụng báo rõ khi mất internet hoặc khi bạn cần đăng nhập lại.",
       "sections": [
         {
           "title": "Dừng là dừng hẳn",
@@ -436,7 +380,7 @@
         },
         {
           "title": "Bản nháp được lưu khi gõ",
-          "body": "Văn bản bạn chưa gửi được lưu khoảng một phần tư giây sau khi bạn gõ."
+          "body": "Văn bản bạn chưa gửi được lưu trên máy tính của bạn theo từng dự án, khoảng một phần tư giây sau khi bạn ngừng gõ, nên vẫn còn đó sau khi ứng dụng khởi động lại."
         },
         {
           "title": "Thông báo rõ ràng khi mất internet",
@@ -444,17 +388,13 @@
         },
         {
           "title": "Đăng nhập lại khi cần",
-          "body": "Khi phiên đăng nhập hết hạn, ứng dụng yêu cầu bạn đăng nhập lại thay vì hiện lỗi."
-        },
-        {
-          "title": "Khởi động nhanh hơn",
-          "body": "Ứng dụng mở nhanh hơn: khoảng 4 giây trên máy tính thử nghiệm của chúng tôi."
+          "body": "Tin nhắn đang chờ khi bạn chưa đăng nhập sẽ cho biết lý do và đề nghị Đăng nhập."
         }
       ]
     },
     "zh-Hans": {
       "headline": "停止后不再自行恢复，输入时保存草稿，断网时给出清楚提示",
-      "summary": "按下停止后，智能体会保持停止。未发送的文字会在输入时保存，断网或登录过期时应用会清楚地告诉你，启动也更快了。",
+      "summary": "按下停止后，智能体会保持停止。未发送的文字会在输入时保存在你的电脑上，断网或需要重新登录时，应用会清楚地告诉你。",
       "sections": [
         {
           "title": "停止会保持",
@@ -466,7 +406,7 @@
         },
         {
           "title": "输入时保存草稿",
-          "body": "尚未发送的文字会在输入后约四分之一秒内保存。"
+          "body": "尚未发送的文字会在你停止输入约四分之一秒后，按项目保存在你的电脑上，因此应用重启后仍然在。"
         },
         {
           "title": "断网时给出清楚提示",
@@ -474,17 +414,13 @@
         },
         {
           "title": "需要时重新登录",
-          "body": "登录过期时，应用会请你重新登录，而不是显示错误。"
-        },
-        {
-          "title": "启动更快",
-          "body": "应用打开得更快：在我们的测试电脑上约 4 秒。"
+          "body": "在你未登录时等待中的消息会说明原因，并提供登录选项。"
         }
       ]
     },
     "zh-Hant": {
       "headline": "停止後不再自行恢復、輸入時儲存草稿、斷線時給出清楚提示",
-      "summary": "按下停止後，智慧代理會保持停止。未傳送的文字會在輸入時儲存，斷網或登入過期時應用程式會清楚告訴你，啟動也更快了。",
+      "summary": "按下停止後，智慧代理會保持停止。未傳送的文字會在輸入時儲存在你的電腦上，斷網或需要重新登入時，應用程式會清楚告訴你。",
       "sections": [
         {
           "title": "停止會保持",
@@ -496,7 +432,7 @@
         },
         {
           "title": "輸入時儲存草稿",
-          "body": "尚未傳送的文字會在輸入後約四分之一秒內儲存。"
+          "body": "尚未傳送的文字會在你停止輸入約四分之一秒後，依專案儲存在你的電腦上，因此應用程式重新啟動後仍然在。"
         },
         {
           "title": "斷網時給出清楚提示",
@@ -504,11 +440,7 @@
         },
         {
           "title": "需要時重新登入",
-          "body": "登入過期時，應用程式會請你重新登入，而不是顯示錯誤。"
-        },
-        {
-          "title": "啟動更快",
-          "body": "應用程式開啟得更快：在我們的測試電腦上約 4 秒。"
+          "body": "在你未登入時等待中的訊息會說明原因，並提供登入選項。"
         }
       ]
     }

@@ -8,7 +8,7 @@ import { app, privacy } from './sections/app.mjs';
 import help from './sections/help.mjs';
 import { trust } from './sections/trust.mjs';
 
-export const DOCS_VERSION = '1.1.76';
+export const DOCS_VERSION = '1.1.77';
 export const DOCS_UPDATED = '2026-11-24';
 const privacyAndTrust = { ...privacy, pages: [...privacy.pages, ...trust] };
 export const DOCS_SECTIONS = [start, ais, localModels, projects, agents, app, privacyAndTrust, help];

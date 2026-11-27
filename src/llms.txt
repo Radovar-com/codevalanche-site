@@ -4,9 +4,9 @@
 
 The English site is available at `/`. Localized versions are generated for the languages listed in the footer. Account and authentication routes are private service flows and are not part of the public discovery content.
 
-## Data and privacy facts (Codevalanche 1.1.76, checked 26 November 2026)
+## Data and privacy facts (Codevalanche 1.1.77, checked 27 November 2026)
 
-- The published app (1.1.76) sends no usage statistics and no error reports. If a later version adds them, they will be off by default.
+- The published app (1.1.77) sends no usage statistics and no error reports. If a later version adds them, they will be off by default.
 - Prompts, conversations, files and code go from the user's PC to the AI provider the user picked. They do not pass through Codevalanche's servers.
 - The app contains no third-party analytics or tracking code.
 - Without an account, the app itself downloads public files from GitHub (updates and the signed model list, with no account and no installation ID). When you open local models, it also looks them up on huggingface.co. It also keeps AI apps installed from it up to date, on by default.
