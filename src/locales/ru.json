@@ -247,7 +247,6 @@
   "Complete each connection": "Завершите каждое подключение",
   "Complete the verification challenge to continue. Try again if it expired.": "Пройдите проверку, чтобы продолжить. Если срок ее действия истек, попробуйте еще раз.",
   "Computer use": "Управление компьютером",
-  "Computer Use (beta, off until you turn it on and approve it): screenshots and the window layout of the app being controlled go to the model you picked.": "Computer Use (бета, отключено, пока вы не включите и не подтвердите): снимки экрана и расположение окон управляемого приложения передаются выбранной вами модели.",
   "Computer Use you can see and stop": "Управление компьютером, которое видно и можно остановить",
   "Computer Use you can see and stop, one look across the app, and a model menu that remembers": "Управление компьютером, которое видно и можно остановить, единый вид и меню моделей, которое помнит",
   "Computer Use you can see and stop, one look across the app, and Ctrl+K, Undo and Ctrl+Enter.": "Управление компьютером, которое видно и можно остановить, единый вид во всём приложении и Ctrl+K, Отменить и Ctrl+Enter.",
@@ -1000,5 +999,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Computer Use (beta, off until you turn it on in Settings): screenshots and the window layout of the app being controlled go to the model you picked. Outside Full access, the app asks you before an agent uses an app you have no rule for, and you can allow it once or always. In Full access it does not ask.": "Computer Use (бета, отключено, пока вы не включите его в Настройках): снимки экрана и расположение окон управляемого приложения передаются выбранной вами модели. Вне полного доступа приложение спрашивает вас, прежде чем агент использует приложение, для которого у вас нет правила; можно разрешить один раз или всегда. В полном доступе оно не спрашивает."
 }

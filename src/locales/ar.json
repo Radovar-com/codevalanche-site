@@ -247,7 +247,6 @@
   "Complete each connection": "أكمل كل اتصال",
   "Complete the verification challenge to continue. Try again if it expired.": "أكمل اختبار التحقق للمتابعة. حاول مجددًا إذا انتهت صلاحيته.",
   "Computer use": "استخدام الحاسوب",
-  "Computer Use (beta, off until you turn it on and approve it): screenshots and the window layout of the app being controlled go to the model you picked.": "Computer Use (تجريبي، متوقف حتى تشغّله وتوافق عليه): تذهب لقطات الشاشة وتخطيط نوافذ التطبيق الذي يجري التحكم فيه إلى النموذج الذي اخترته.",
   "Computer Use you can see and stop": "استخدام الكمبيوتر الذي تراه وتوقفه",
   "Computer Use you can see and stop, one look across the app, and a model menu that remembers": "استخدام الكمبيوتر الذي تراه وتوقفه، ومظهر واحد في التطبيق كله، وقائمة نماذج تتذكر",
   "Computer Use you can see and stop, one look across the app, and Ctrl+K, Undo and Ctrl+Enter.": "استخدام الكمبيوتر الذي تراه وتوقفه، ومظهر واحد في التطبيق كله، وCtrl+K والتراجع وCtrl+Enter.",
@@ -1000,5 +999,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Computer Use (beta, off until you turn it on in Settings): screenshots and the window layout of the app being controlled go to the model you picked. Outside Full access, the app asks you before an agent uses an app you have no rule for, and you can allow it once or always. In Full access it does not ask.": "Computer Use (تجريبي، متوقف حتى تشغّله في الإعدادات): تذهب لقطات الشاشة وتخطيط نوافذ التطبيق الذي يجري التحكم فيه إلى النموذج الذي اخترته. خارج الوصول الكامل، يسألك التطبيق قبل أن يستخدم وكيل تطبيقًا ليست لديك قاعدة له، ويمكنك السماح مرة واحدة أو دائمًا. في الوصول الكامل لا يسأل."
 }

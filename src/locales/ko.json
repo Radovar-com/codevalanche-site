@@ -247,7 +247,6 @@
   "Complete each connection": "각 연결 설정 완료",
   "Complete the verification challenge to continue. Try again if it expired.": "계속하려면 인증 절차를 완료하세요. 만료되었다면 다시 시도하세요.",
   "Computer use": "컴퓨터 사용",
-  "Computer Use (beta, off until you turn it on and approve it): screenshots and the window layout of the app being controlled go to the model you picked.": "Computer Use(베타, 회원이 켜고 승인하기 전까지 꺼져 있음): 제어되는 앱의 스크린샷과 창 배치가 회원이 고른 모델로 전달됩니다.",
   "Computer Use you can see and stop": "보이고 멈출 수 있는 컴퓨터 사용",
   "Computer Use you can see and stop, one look across the app, and a model menu that remembers": "보이고 멈출 수 있는 컴퓨터 사용, 하나된 모습, 선택한 모델을 기억하는 모델 메뉴",
   "Computer Use you can see and stop, one look across the app, and Ctrl+K, Undo and Ctrl+Enter.": "보이고 멈출 수 있는 컴퓨터 사용, 앱 전체의 하나된 모습, 그리고 Ctrl+K, 실행 취소, Ctrl+Enter.",
@@ -1000,5 +999,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Computer Use (beta, off until you turn it on in Settings): screenshots and the window layout of the app being controlled go to the model you picked. Outside Full access, the app asks you before an agent uses an app you have no rule for, and you can allow it once or always. In Full access it does not ask.": "Computer Use(베타, 회원이 설정에서 켜기 전까지 꺼져 있음): 제어되는 앱의 스크린샷과 창 배치가 회원이 고른 모델로 전달됩니다. 전체 액세스가 아닐 때는 규칙이 없는 앱을 에이전트가 사용하기 전에 앱이 묻고, 한 번 또는 항상 허용할 수 있습니다. 전체 액세스에서는 묻지 않습니다."
 }

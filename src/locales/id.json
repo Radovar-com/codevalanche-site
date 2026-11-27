@@ -247,7 +247,6 @@
   "Complete each connection": "Selesaikan setiap koneksi",
   "Complete the verification challenge to continue. Try again if it expired.": "Selesaikan tantangan verifikasi untuk melanjutkan. Coba lagi jika tantangan kedaluwarsa.",
   "Computer use": "Penggunaan komputer",
-  "Computer Use (beta, off until you turn it on and approve it): screenshots and the window layout of the app being controlled go to the model you picked.": "Computer Use (beta, nonaktif sampai Anda mengaktifkan dan menyetujuinya): tangkapan layar dan tata letak jendela aplikasi yang dikendalikan dikirim ke model yang Anda pilih.",
   "Computer Use you can see and stop": "Penggunaan komputer yang terlihat dan bisa dihentikan",
   "Computer Use you can see and stop, one look across the app, and a model menu that remembers": "Penggunaan komputer yang terlihat dan bisa dihentikan, satu tampilan di seluruh aplikasi, dan menu model yang mengingat",
   "Computer Use you can see and stop, one look across the app, and Ctrl+K, Undo and Ctrl+Enter.": "Penggunaan komputer yang terlihat dan bisa dihentikan, satu tampilan di seluruh aplikasi, serta Ctrl+K, Urungkan, dan Ctrl+Enter.",
@@ -1000,5 +999,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Computer Use (beta, off until you turn it on in Settings): screenshots and the window layout of the app being controlled go to the model you picked. Outside Full access, the app asks you before an agent uses an app you have no rule for, and you can allow it once or always. In Full access it does not ask.": "Computer Use (beta, nonaktif sampai Anda mengaktifkannya di Pengaturan): tangkapan layar dan tata letak jendela aplikasi yang dikendalikan dikirim ke model yang Anda pilih. Di luar Akses penuh, aplikasi bertanya sebelum agen memakai aplikasi yang belum Anda beri aturan, dan Anda dapat mengizinkannya sekali atau selalu. Dalam Akses penuh, aplikasi tidak bertanya."
 }

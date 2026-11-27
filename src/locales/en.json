@@ -247,7 +247,7 @@
   "Complete each connection": "Complete each connection",
   "Complete the verification challenge to continue. Try again if it expired.": "Complete the verification challenge to continue. Try again if it expired.",
   "Computer use": "Computer use",
-  "Computer Use (beta, off until you turn it on and approve it): screenshots and the window layout of the app being controlled go to the model you picked.": "Computer Use (beta, off until you turn it on and approve it): screenshots and the window layout of the app being controlled go to the model you picked.",
+  "Computer Use (beta, off until you turn it on in Settings): screenshots and the window layout of the app being controlled go to the model you picked. Outside Full access, the app asks you before an agent uses an app you have no rule for, and you can allow it once or always. In Full access it does not ask.": "Computer Use (beta, off until you turn it on in Settings): screenshots and the window layout of the app being controlled go to the model you picked. Outside Full access, the app asks you before an agent uses an app you have no rule for, and you can allow it once or always. In Full access it does not ask.",
   "Computer Use you can see and stop": "Computer Use you can see and stop",
   "Computer Use you can see and stop, one look across the app, and a model menu that remembers": "Computer Use you can see and stop, one look across the app, and a model menu that remembers",
   "Computer Use you can see and stop, one look across the app, and Ctrl+K, Undo and Ctrl+Enter.": "Computer Use you can see and stop, one look across the app, and Ctrl+K, Undo and Ctrl+Enter.",

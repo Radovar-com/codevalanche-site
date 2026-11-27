@@ -247,7 +247,6 @@
   "Complete each connection": "हर कनेक्शन पूरा करें",
   "Complete the verification challenge to continue. Try again if it expired.": "जारी रखने के लिए सत्यापन चुनौती पूरी करें। इसकी अवधि समाप्त हो गई हो, तो फिर कोशिश करें।",
   "Computer use": "कंप्यूटर का उपयोग",
-  "Computer Use (beta, off until you turn it on and approve it): screenshots and the window layout of the app being controlled go to the model you picked.": "Computer Use (बीटा, जब तक आप इसे चालू और मंज़ूर नहीं करते तब तक बंद): नियंत्रित किए जा रहे ऐप के स्क्रीनशॉट और विंडो लेआउट आपके चुने हुए मॉडल को जाते हैं।",
   "Computer Use you can see and stop": "कंप्यूटर का उपयोग जिसे आप देख और रोक सकते हैं",
   "Computer Use you can see and stop, one look across the app, and a model menu that remembers": "कंप्यूटर का उपयोग जिसे आप देख और रोक सकते हैं, पूरे ऐप में एक जैसा रूप, और याद रखने वाला मॉडल मेन्यू",
   "Computer Use you can see and stop, one look across the app, and Ctrl+K, Undo and Ctrl+Enter.": "कंप्यूटर का उपयोग जिसे आप देख और रोक सकते हैं, पूरे ऐप में एक जैसा रूप, और Ctrl+K, पूर्ववत करें और Ctrl+Enter।",
@@ -1000,5 +999,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Computer Use (beta, off until you turn it on in Settings): screenshots and the window layout of the app being controlled go to the model you picked. Outside Full access, the app asks you before an agent uses an app you have no rule for, and you can allow it once or always. In Full access it does not ask.": "Computer Use (बीटा, जब तक आप इसे सेटिंग्स में चालू नहीं करते तब तक बंद): नियंत्रित किए जा रहे ऐप के स्क्रीनशॉट और विंडो लेआउट आपके चुने हुए मॉडल को जाते हैं। पूरी पहुँच के बाहर, कोई एजेंट ऐसा ऐप इस्तेमाल करे जिसके लिए आपका कोई नियम नहीं है, उससे पहले ऐप आपसे पूछता है, और आप एक बार या हमेशा के लिए अनुमति दे सकते हैं। पूरी पहुँच में यह नहीं पूछता।"
 }
