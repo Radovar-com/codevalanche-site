@@ -1,5 +1,6 @@
 import { downloadLinks, qualifiedAssets } from '../supabase/functions/_shared/downloadManifest.js';
 import { anchor, formatDate } from './changelog.mjs';
+import { ANY_INSTALLER, isInstallerFileName } from './installer-name.mjs';
 
 // The download page shows the Windows installer only when the reviewed manifest
 // names a qualified one with its version, file name, size and SHA-256. The buttons
@@ -21,6 +22,7 @@ export function windowsDownload(manifest) {
   const display = asset?.display;
   if (!/^\d+\.\d+\.\d+$/.test(display?.version ?? '')) throw new Error('The Windows download needs display.version');
   if (display.fileName !== decodeURIComponent(new URL(asset.targetUrl).pathname.split('/').pop())) throw new Error('display.fileName must be the installer file the download goes to');
+  if (new URL(asset.targetUrl).origin === 'https://github.com' && !isInstallerFileName(display.version, display.fileName)) throw new Error(`display.fileName ${display.fileName} is not the installer name for ${display.version}`);
   if (!Number.isInteger(display.sizeBytes) || display.sizeBytes <= 0) throw new Error('The Windows download needs display.sizeBytes');
   if (!/^[0-9a-f]{64}$/.test(display.sha256 ?? '')) throw new Error('The Windows download needs a lowercase display.sha256');
   return {
@@ -126,7 +128,7 @@ export async function publicDownloadCount(manifest, { fetch = globalThis.fetch, 
     if (!Array.isArray(releases)) return null;
     return releases.filter(release => !release.draft && !release.prerelease)
       .flatMap(release => release.assets ?? [])
-      .filter(asset => /^Codevalanche-Desktop-Setup-.+-stable-.+\.exe$/.test(asset.name ?? '') && Number.isInteger(asset.download_count))
+      .filter(asset => ANY_INSTALLER.test(asset.name ?? '') && Number.isInteger(asset.download_count))
       .reduce((total, asset) => total + asset.download_count, 0);
   } catch {
     return null;

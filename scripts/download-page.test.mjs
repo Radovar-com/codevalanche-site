@@ -72,9 +72,10 @@ test('the public count adds only stable Windows installers from published releas
   const fetch = async url => { requested = url; return { ok: true, json: async () => [
     { draft: false, prerelease: false, assets: [{ name: 'Codevalanche-Desktop-Setup-1.0.1-stable-abc.exe', download_count: 600 }, { name: 'codevalanche-desktop-update-feed-stable.json', download_count: 9000 }] },
     { draft: false, prerelease: false, assets: [{ name: 'Codevalanche-Desktop-Setup-1.0.0-stable-def.exe', download_count: 40 }] },
+    { draft: false, prerelease: false, assets: [{ name: 'Codevalanche-Setup-1.1.77.exe', download_count: 5 }] },
     { draft: false, prerelease: true, assets: [{ name: 'Codevalanche-Desktop-Setup-0.2.1-dev-abc.exe', download_count: 77 }] },
   ] }; };
-  assert.equal(await publicDownloadCount(github, { fetch }), 640);
+  assert.equal(await publicDownloadCount(github, { fetch }), 645);
   assert.equal(requested, 'https://api.github.com/repos/example/releases-repo/releases?per_page=100');
   assert.equal(await publicDownloadCount(github, { fetch: async () => ({ ok: false }) }), null);
   assert.equal(await publicDownloadCount(github, { fetch: async () => { throw new Error('offline'); } }), null);
