@@ -2,529 +2,702 @@
   "schema": "codevalanche.desktop.whats-new@1",
   "notes": [
     {
-      "version": "1.1.75",
+      "version": "1.1.76",
       "copy": {
         "en": {
-          "headline": "One window for new work, voice that asks first, and a fuller Delete chat",
-          "summary": "New project and New task share one window, voice asks before it goes to a cloud provider, Delete chat clears more of what a chat leaves behind, and many fixes make messages and agents steadier.",
+          "headline": "Computer Use you can see and stop, one look across the app, and a model menu that remembers",
+          "summary": "While an agent uses your PC, the screen edges light up and Esc stops it. Colours, icons and banners share one look, Ctrl+K, Undo and Ctrl+Enter save clicks, and a new task keeps the model you chose.",
           "sections": [
             {
-              "title": "One window for new work",
-              "body": "New project and New task open the same window everywhere, and the task starts in the folder you chose."
+              "title": "Computer Use you can see and stop",
+              "body": "While an agent uses your computer, the screen edges glow and a bar at the top says so, with one Stop button that also answers to Esc. Agents can work in browsers, terminals, editors and File Explorer, and access stays open between your messages until you stop it.",
+              "detail": "With Full access the agent no longer asks app by app. Windows Settings, Windows Security and password managers stay blocked for agents."
             },
             {
-              "title": "Voice asks first",
-              "body": "Voice no longer uses your cloud key unless you turn it on. Before your voice goes to a cloud provider, the app asks you once and says who receives it, and only the provider you accepted receives it."
+              "title": "One look across the app",
+              "body": "Colours, icons, banners, status labels and empty screens come from one shared set, so every screen reads the same in light and dark. Warnings, errors and success have clearer colours, and status icons are filled so they stand out."
             },
             {
-              "title": "Delete chat clears more",
-              "body": "Delete chat now also removes the chat's words from the search index, the agent's history and the window's form suggestions, and the session files Claude Code and Codex saved for it on this computer, also for chats deleted before. If the app is closed right after, this finishes a few minutes after the next start.",
-              "detail": "Remove project also clears its chats from the agent's history and the AI tools' session files."
+              "title": "Fewer clicks",
+              "body": "Ctrl+K opens one place for commands, Ctrl+Enter approves the request in front of you once, and many actions offer Undo right after you take them."
             },
             {
-              "title": "A favorite model per account",
-              "body": "A favorite model can name its account, and the model button shows which account it uses when you have two."
+              "title": "The model menu remembers",
+              "body": "The model menu has a new layout, with model families in tabs and Fast as its own label. A new task opens with the model you chose, on its tab."
             },
             {
-              "title": "Messages and agents",
-              "body": "A message sent right after a turn or with a double click goes out once. Queued messages are delivered after a restart, and an agent's question cut by a restart is answered instead of asked again. Agents started by the Coordinator get the task it wrote and reply in its language, and an agent you stopped stays stopped until you ask it to continue."
+              "title": "Back where you were",
+              "body": "When you close and reopen a chat, it opens where you were reading.",
+              "detail": "Words you typed but did not send are kept only while the app is open."
             },
             {
               "title": "Smaller fixes",
-              "body": "Claude Code's own statistics are off when it runs on a local model or another provider's key. Provider icons are the companies' official logos, menus and search work over an open board, Ctrl+K works on the start screen, and turning the microphone off in voice mode releases it."
-            }
-          ]
-        },
-        "ar": {
-          "headline": "نافذة واحدة للعمل الجديد، وصوت يسأل أولًا، وحذف محادثة أشمل",
-          "summary": "يتشارك مشروع جديد ومهمة جديدة نافذة واحدة، ويسأل الصوت قبل أن يذهب إلى مزوّد سحابي، ويمسح حذف المحادثة المزيد مما تتركه المحادثة، وتجعل إصلاحات كثيرة الرسائل والوكلاء أكثر ثباتًا.",
-          "sections": [
-            {
-              "title": "نافذة واحدة للعمل الجديد",
-              "body": "يفتح مشروع جديد ومهمة جديدة النافذة نفسها في كل مكان، وتبدأ المهمة في المجلد الذي اخترته."
+              "body": "Agent questions use real radio buttons and checkboxes, buttons on approval cards line up, attachments sit in two tidy rows with their warnings above the message box, and voice shows one calm status while it works.",
+              "detail": "Six colour themes have new names: Terracotta, Cobalt, Indigo, Slate, Ruby and Onyx. View usage opens your usage page, and the What's new window can show newer notes from codevalanche.com."
             },
             {
-              "title": "الصوت يسأل أولًا",
-              "body": "لم يعد الصوت يستخدم مفتاحك السحابي إلا إذا فعّلته. قبل أن يذهب صوتك إلى مزوّد سحابي، يسألك التطبيق مرة واحدة ويخبرك بمن يستلمه، ولا يستلمه إلا المزوّد الذي وافقت عليه."
+              "title": "A quieter start",
+              "body": "When a project takes a moment to open, you see the Codevalanche logo and Loading instead of a retry message."
             },
             {
-              "title": "حذف المحادثة يمسح أكثر",
-              "body": "يزيل حذف المحادثة الآن أيضًا كلمات المحادثة من فهرس البحث وسجل الوكيل واقتراحات النماذج في النافذة، وملفات الجلسات التي حفظها Claude Code وCodex لها على هذا الكمبيوتر، بما في ذلك المحادثات المحذوفة سابقًا. إذا أُغلق التطبيق مباشرة بعد ذلك، يكتمل هذا بعد دقائق من التشغيل التالي. كما يمسح إزالة المشروع محادثاته من سجل الوكيل وملفات جلسات أدوات الذكاء الاصطناعي."
-            },
-            {
-              "title": "نموذج مفضّل لكل حساب",
-              "body": "يمكن أن يحدد النموذج المفضّل حسابه، ويُظهر زر النموذج الحساب الذي يستخدمه عندما يكون لديك حسابان."
-            },
-            {
-              "title": "الرسائل والوكلاء",
-              "body": "الرسالة المرسلة مباشرة بعد دور أو بنقرة مزدوجة تُرسل مرة واحدة. تُسلَّم الرسائل في الطابور بعد إعادة التشغيل، ويُجاب عن سؤال الوكيل الذي قطعته إعادة التشغيل بدل طرحه من جديد. يتلقى الوكلاء الذين يبدؤهم المنسّق المهمة التي كتبها ويردّون بلغتها، ويبقى الوكيل الذي أوقفته متوقفًا حتى تطلب منه المتابعة."
-            },
-            {
-              "title": "إصلاحات أصغر",
-              "body": "تكون إحصاءات Claude Code الخاصة متوقفة عندما يعمل على نموذج محلي أو بمفتاح مزوّد آخر. أيقونات المزوّدين هي الشعارات الرسمية للشركات، وتعمل القوائم والبحث فوق لوحة مفتوحة، ويعمل Ctrl+K في شاشة البداية، وإيقاف الميكروفون في وضع الصوت يحرّره."
-            }
-          ]
-        },
-        "de": {
-          "headline": "Ein Fenster für neue Arbeit, Sprache, die zuerst fragt, und ein gründlicheres Chat löschen",
-          "summary": "Neues Projekt und Neue Aufgabe teilen sich ein Fenster, die Sprache fragt, bevor sie an einen Cloud-Anbieter geht, Chat löschen räumt mehr von dem auf, was ein Chat hinterlässt, und viele Korrekturen machen Nachrichten und Agenten stabiler.",
-          "sections": [
-            {
-              "title": "Ein Fenster für neue Arbeit",
-              "body": "Neues Projekt und Neue Aufgabe öffnen überall dasselbe Fenster, und die Aufgabe startet in dem Ordner, den du gewählt hast."
-            },
-            {
-              "title": "Sprache fragt zuerst",
-              "body": "Die Sprache nutzt deinen Cloud-Schlüssel nur noch, wenn du das einschaltest. Bevor deine Stimme an einen Cloud-Anbieter geht, fragt die App dich einmal und sagt, wer sie erhält, und nur der Anbieter, den du akzeptiert hast, erhält sie."
-            },
-            {
-              "title": "Chat löschen räumt mehr auf",
-              "body": "Chat löschen entfernt jetzt auch die Worte des Chats aus dem Suchindex, dem Verlauf des Agenten und den Formularvorschlägen des Fensters sowie die Sitzungsdateien, die Claude Code und Codex dafür auf diesem Computer gespeichert haben, auch für früher gelöschte Chats. Wird die App direkt danach geschlossen, wird das einige Minuten nach dem nächsten Start abgeschlossen.",
-              "detail": "Projekt entfernen löscht seine Chats ebenfalls aus dem Verlauf des Agenten und den Sitzungsdateien der KI-Tools."
-            },
-            {
-              "title": "Ein Lieblingsmodell pro Konto",
-              "body": "Ein Lieblingsmodell kann sein Konto nennen, und die Modellschaltfläche zeigt, welches Konto sie nutzt, wenn du zwei hast."
-            },
-            {
-              "title": "Nachrichten und Agenten",
-              "body": "Eine Nachricht, die direkt nach einem Zug oder per Doppelklick gesendet wird, geht einmal raus. Nachrichten in der Warteschlange werden nach einem Neustart zugestellt, und eine Frage des Agenten, die ein Neustart unterbrochen hat, wird beantwortet statt erneut gestellt.",
-              "detail": "Vom Coordinator gestartete Agenten erhalten die Aufgabe, die er geschrieben hat, und antworten in ihrer Sprache, und ein Agent, den du gestoppt hast, bleibt gestoppt, bis du ihn fortfahren lässt."
-            },
-            {
-              "title": "Kleinere Korrekturen",
-              "body": "Die eigenen Statistiken von Claude Code sind aus, wenn es mit einem lokalen Modell oder dem Schlüssel eines anderen Anbieters läuft. Anbietersymbole sind die offiziellen Logos der Unternehmen, Menüs und Suche funktionieren über einer geöffneten Übersicht, Strg+K funktioniert auf dem Startbildschirm, und das Ausschalten des Mikrofons im Sprachmodus gibt es frei."
-            }
-          ]
-        },
-        "es": {
-          "headline": "Una sola ventana para el trabajo nuevo, una voz que pregunta primero y un Eliminar chat más completo",
-          "summary": "Nuevo proyecto y Nueva tarea comparten una ventana, la voz pregunta antes de ir a un proveedor en la nube, Eliminar chat limpia más de lo que deja un chat y muchas correcciones hacen más estables los mensajes y los agentes.",
-          "sections": [
-            {
-              "title": "Una sola ventana para el trabajo nuevo",
-              "body": "Nuevo proyecto y Nueva tarea abren la misma ventana en todas partes, y la tarea empieza en la carpeta que elegiste."
-            },
-            {
-              "title": "La voz pregunta primero",
-              "body": "La voz ya no usa tu clave en la nube a menos que la actives. Antes de que tu voz vaya a un proveedor en la nube, la app te pregunta una vez y te dice quién la recibe, y solo la recibe el proveedor que aceptaste."
-            },
-            {
-              "title": "Eliminar chat limpia más",
-              "body": "Eliminar chat ahora también quita las palabras del chat del índice de búsqueda, del historial del agente y de las sugerencias de formulario de la ventana, y los archivos de sesión que Claude Code y Codex guardaron para él en este equipo, también de chats eliminados antes. Si la app se cierra justo después, esto termina unos minutos después del siguiente inicio.",
-              "detail": "Quitar proyecto también borra sus chats del historial del agente y de los archivos de sesión de las herramientas de IA."
-            },
-            {
-              "title": "Un modelo favorito por cuenta",
-              "body": "Un modelo favorito puede indicar su cuenta, y el botón del modelo muestra qué cuenta usa cuando tienes dos."
-            },
-            {
-              "title": "Mensajes y agentes",
-              "body": "Un mensaje enviado justo después de un turno o con doble clic sale una sola vez. Los mensajes en cola se entregan después de un reinicio, y una pregunta del agente cortada por un reinicio se responde en lugar de volver a hacerse. Los agentes que inicia el Coordinador reciben la tarea que él escribió y responden en su idioma, y un agente que detuviste sigue detenido hasta que le pidas continuar."
-            },
-            {
-              "title": "Correcciones menores",
-              "body": "Las estadísticas propias de Claude Code se desactivan cuando funciona con un modelo local o con la clave de otro proveedor. Los iconos de proveedores son los logotipos oficiales de las empresas, los menús y la búsqueda funcionan sobre un tablero abierto, Ctrl+K funciona en la pantalla de inicio y apagar el micrófono en el modo de voz lo libera."
-            }
-          ]
-        },
-        "fr": {
-          "headline": "Une seule fenêtre pour le nouveau travail, une voix qui demande d’abord et un Supprimer la discussion plus complet",
-          "summary": "Nouveau projet et Nouvelle tâche partagent une fenêtre, la voix demande avant d’aller vers le cloud, Supprimer la discussion efface davantage, et de nombreux correctifs stabilisent messages et agents.",
-          "sections": [
-            {
-              "title": "Une seule fenêtre pour le nouveau travail",
-              "body": "Nouveau projet et Nouvelle tâche ouvrent partout la même fenêtre, et la tâche démarre dans le dossier que vous avez choisi."
-            },
-            {
-              "title": "La voix demande d’abord",
-              "body": "La voix n’utilise plus votre clé cloud sauf si vous l’activez. Avant que votre voix aille vers un fournisseur cloud, l’application vous demande une fois et indique qui la reçoit, et seul le fournisseur que vous avez accepté la reçoit."
-            },
-            {
-              "title": "Supprimer la discussion efface davantage",
-              "body": "Supprimer la discussion retire désormais aussi les mots de la discussion de l’index de recherche, de l’historique de l’agent et des suggestions de formulaire de la fenêtre, ainsi que les fichiers de session que Claude Code et Codex ont enregistrés pour elle sur cet ordinateur, y compris pour les discussions supprimées avant.",
-              "detail": "Si l’application est fermée juste après, cela se termine quelques minutes après le prochain démarrage. Retirer le projet efface aussi ses discussions de l’historique de l’agent et des fichiers de session des outils d’IA."
-            },
-            {
-              "title": "Un modèle favori par compte",
-              "body": "Un modèle favori peut indiquer son compte, et le bouton du modèle montre quel compte il utilise quand vous en avez deux."
-            },
-            {
-              "title": "Messages et agents",
-              "body": "Un message envoyé juste après un tour ou d’un double clic part une seule fois. Les messages en file d’attente sont remis après un redémarrage, et une question de l’agent coupée par un redémarrage reçoit une réponse au lieu d’être reposée.",
-              "detail": "Les agents lancés par le Coordinateur reçoivent la tâche qu’il a écrite et répondent dans sa langue, et un agent que vous avez arrêté reste arrêté jusqu’à ce que vous lui demandiez de continuer."
-            },
-            {
-              "title": "Petits correctifs",
-              "body": "Les statistiques propres de Claude Code sont désactivées quand il fonctionne avec un modèle local ou la clé d’un autre fournisseur. Les icônes des fournisseurs sont les logos officiels des entreprises, les menus et la recherche fonctionnent au-dessus d’un tableau ouvert, Ctrl+K fonctionne sur l’écran d’accueil et couper le micro en mode vocal le libère."
-            }
-          ]
-        },
-        "hi": {
-          "headline": "नए काम के लिए एक विंडो, पहले पूछने वाली आवाज़ और ज़्यादा पूरा चैट हटाना",
-          "summary": "नया प्रोजेक्ट और नया टास्क एक ही विंडो इस्तेमाल करते हैं, आवाज़ क्लाउड प्रदाता तक जाने से पहले पूछती है, चैट हटाएँ किसी चैट के छोड़े निशान ज़्यादा साफ़ करता है, और कई सुधार संदेशों और एजेंटों को ज़्यादा स्थिर बनाते हैं।",
-          "sections": [
-            {
-              "title": "नए काम के लिए एक विंडो",
-              "body": "नया प्रोजेक्ट और नया टास्क हर जगह एक ही विंडो खोलते हैं, और टास्क आपके चुने फ़ोल्डर में शुरू होता है।"
-            },
-            {
-              "title": "आवाज़ पहले पूछती है",
-              "body": "आवाज़ अब आपकी क्लाउड कुंजी तभी इस्तेमाल करती है जब आप इसे चालू करें। आपकी आवाज़ किसी क्लाउड प्रदाता तक जाने से पहले ऐप एक बार पूछता है और बताता है कि उसे कौन पाएगा, और सिर्फ़ आपका स्वीकार किया प्रदाता ही उसे पाता है।"
-            },
-            {
-              "title": "चैट हटाएँ ज़्यादा साफ़ करता है",
-              "body": "चैट हटाएँ अब चैट के शब्दों को सर्च इंडेक्स, एजेंट के इतिहास और विंडो के फ़ॉर्म सुझावों से भी हटाता है, और Claude Code व Codex ने इस कंप्यूटर पर उसके लिए जो सेशन फ़ाइलें सहेजी थीं उन्हें भी, पहले हटाए गए चैट के लिए भी। अगर ऐप तुरंत बाद बंद हो जाए, तो यह अगली बार खुलने के कुछ मिनट बाद पूरा होता है। प्रोजेक्ट हटाएँ भी उसके चैट एजेंट के इतिहास और AI टूल की सेशन फ़ाइलों से साफ़ करता है।"
-            },
-            {
-              "title": "हर खाते के लिए पसंदीदा मॉडल",
-              "body": "पसंदीदा मॉडल अपना खाता बता सकता है, और जब आपके दो खाते हों तो मॉडल बटन दिखाता है कि वह कौन-सा खाता इस्तेमाल करता है।"
-            },
-            {
-              "title": "संदेश और एजेंट",
-              "body": "किसी बारी के ठीक बाद या डबल क्लिक से भेजा गया संदेश एक बार जाता है। कतार के संदेश रीस्टार्ट के बाद पहुँचाए जाते हैं, और रीस्टार्ट से कटे एजेंट के सवाल का जवाब दिया जाता है, उसे दोबारा नहीं पूछा जाता। कोऑर्डिनेटर के शुरू किए एजेंट उसका लिखा टास्क पाते हैं और उसी की भाषा में जवाब देते हैं, और आपका रोका एजेंट तब तक रुका रहता है जब तक आप उसे जारी रखने को न कहें।"
-            },
-            {
-              "title": "छोटे सुधार",
-              "body": "जब Claude Code किसी लोकल मॉडल या दूसरे प्रदाता की कुंजी पर चलता है, तो उसके अपने आँकड़े बंद रहते हैं। प्रदाता आइकन कंपनियों के आधिकारिक लोगो हैं, मेन्यू और सर्च खुले बोर्ड के ऊपर काम करते हैं, Ctrl+K शुरुआती स्क्रीन पर काम करता है, और वॉइस मोड में माइक्रोफ़ोन बंद करने से वह छूट जाता है।"
-            }
-          ]
-        },
-        "id": {
-          "headline": "Satu jendela untuk pekerjaan baru, suara yang bertanya dulu, dan Hapus chat yang lebih menyeluruh",
-          "summary": "Proyek baru dan Tugas baru memakai satu jendela, suara bertanya sebelum dikirim ke penyedia cloud, Hapus chat membersihkan lebih banyak sisa sebuah chat, dan banyak perbaikan membuat pesan serta agen lebih stabil.",
-          "sections": [
-            {
-              "title": "Satu jendela untuk pekerjaan baru",
-              "body": "Proyek baru dan Tugas baru membuka jendela yang sama di mana saja, dan tugas dimulai di folder yang Anda pilih."
-            },
-            {
-              "title": "Suara bertanya dulu",
-              "body": "Suara tidak lagi memakai kunci cloud Anda kecuali Anda menyalakannya. Sebelum suara Anda dikirim ke penyedia cloud, aplikasi bertanya sekali dan menyebutkan siapa yang menerimanya, dan hanya penyedia yang Anda setujui yang menerimanya."
-            },
-            {
-              "title": "Hapus chat membersihkan lebih banyak",
-              "body": "Hapus chat kini juga menghapus kata-kata chat dari indeks pencarian, riwayat agen, dan saran formulir jendela, serta file sesi yang disimpan Claude Code dan Codex untuk chat itu di komputer ini, termasuk untuk chat yang dihapus sebelumnya. Jika aplikasi ditutup tepat setelahnya, proses ini selesai beberapa menit setelah aplikasi dibuka lagi.",
-              "detail": "Hapus proyek juga membersihkan chat-nya dari riwayat agen dan file sesi alat AI."
-            },
-            {
-              "title": "Model favorit per akun",
-              "body": "Model favorit dapat menyebutkan akunnya, dan tombol model menunjukkan akun mana yang dipakai saat Anda punya dua."
-            },
-            {
-              "title": "Pesan dan agen",
-              "body": "Pesan yang dikirim tepat setelah giliran atau dengan klik ganda terkirim sekali. Pesan dalam antrean dikirim setelah restart, dan pertanyaan agen yang terpotong oleh restart dijawab, bukan ditanyakan lagi. Agen yang dimulai oleh Koordinator menerima tugas yang ditulisnya dan menjawab dalam bahasa tugas itu, dan agen yang Anda hentikan tetap berhenti sampai Anda memintanya melanjutkan."
-            },
-            {
-              "title": "Perbaikan kecil",
-              "body": "Statistik bawaan Claude Code dimatikan saat berjalan dengan model lokal atau kunci penyedia lain. Ikon penyedia adalah logo resmi perusahaan, menu dan pencarian berfungsi di atas papan yang terbuka, Ctrl+K berfungsi di layar awal, dan mematikan mikrofon dalam mode suara melepaskannya."
-            }
-          ]
-        },
-        "it": {
-          "headline": "Una sola finestra per il nuovo lavoro, una voce che chiede prima e un Elimina chat più completo",
-          "summary": "Nuovo progetto e Nuova attività condividono una finestra, la voce chiede prima di andare a un fornitore cloud, Elimina chat ripulisce di più ciò che una chat lascia dietro di sé e molte correzioni rendono messaggi e agenti più stabili.",
-          "sections": [
-            {
-              "title": "Una sola finestra per il nuovo lavoro",
-              "body": "Nuovo progetto e Nuova attività aprono ovunque la stessa finestra, e l’attività parte nella cartella che hai scelto."
-            },
-            {
-              "title": "La voce chiede prima",
-              "body": "La voce non usa più la tua chiave cloud a meno che tu non la attivi. Prima che la tua voce vada a un fornitore cloud, l’app ti chiede una volta e dice chi la riceve, e la riceve solo il fornitore che hai accettato."
-            },
-            {
-              "title": "Elimina chat ripulisce di più",
-              "body": "Elimina chat ora rimuove anche le parole della chat dall’indice di ricerca, dalla cronologia dell’agente e dai suggerimenti dei moduli della finestra, e i file di sessione che Claude Code e Codex hanno salvato per essa su questo computer, anche per le chat eliminate prima. Se l’app viene chiusa subito dopo, l’operazione termina qualche minuto dopo l’avvio successivo.",
-              "detail": "Rimuovi progetto cancella anche le sue chat dalla cronologia dell’agente e dai file di sessione degli strumenti di IA."
-            },
-            {
-              "title": "Un modello preferito per account",
-              "body": "Un modello preferito può indicare il suo account, e il pulsante del modello mostra quale account usa quando ne hai due."
-            },
-            {
-              "title": "Messaggi e agenti",
-              "body": "Un messaggio inviato subito dopo un turno o con un doppio clic parte una sola volta. I messaggi in coda vengono consegnati dopo un riavvio, e una domanda dell’agente interrotta da un riavvio riceve risposta invece di essere riproposta.",
-              "detail": "Gli agenti avviati dal Coordinatore ricevono l’attività che ha scritto e rispondono nella sua lingua, e un agente che hai fermato resta fermo finché non gli chiedi di continuare."
-            },
-            {
-              "title": "Correzioni minori",
-              "body": "Le statistiche proprie di Claude Code sono disattivate quando funziona con un modello locale o con la chiave di un altro fornitore. Le icone dei fornitori sono i loghi ufficiali delle aziende, menu e ricerca funzionano sopra una bacheca aperta, Ctrl+K funziona nella schermata iniziale e spegnere il microfono in modalità vocale lo rilascia."
-            }
-          ]
-        },
-        "ja": {
-          "headline": "新しい作業は 1 つのウィンドウで、音声はまず確認、チャットの削除はより徹底的に",
-          "summary": "新しいプロジェクトと新しいタスクが同じウィンドウを使い、音声はクラウドのプロバイダーに送る前に確認し、チャットの削除はチャットが残すものをより多く消し、多くの修正でメッセージとエージェントがより安定しました。",
-          "sections": [
-            {
-              "title": "新しい作業は 1 つのウィンドウで",
-              "body": "新しいプロジェクトと新しいタスクはどこからでも同じウィンドウを開き、タスクは選んだフォルダーで始まります。"
-            },
-            {
-              "title": "音声はまず確認",
-              "body": "音声は、オンにしない限りクラウドのキーを使いません。音声をクラウドのプロバイダーに送る前に、アプリが一度だけ確認して受け取る相手を示し、受け取るのは承認したプロバイダーだけです。"
-            },
-            {
-              "title": "チャットの削除がより徹底的に",
-              "body": "チャットの削除は、チャットの言葉を検索インデックス、エージェントの履歴、ウィンドウのフォーム候補からも消し、Claude Code と Codex がこのコンピューターに保存したそのチャットのセッションファイルも削除します。以前に削除したチャットも対象です。直後にアプリを閉じた場合は、次の起動から数分後に完了します。プロジェクトの削除も、そのチャットをエージェントの履歴と AI ツールのセッションファイルから消します。"
-            },
-            {
-              "title": "アカウントごとのお気に入りモデル",
-              "body": "お気に入りのモデルにアカウントを指定でき、アカウントが 2 つあるときはモデルボタンに使用中のアカウントが表示されます。"
-            },
-            {
-              "title": "メッセージとエージェント",
-              "body": "ターンの直後やダブルクリックで送ったメッセージは 1 回だけ送られます。キューのメッセージは再起動後に届き、再起動で途切れたエージェントの質問は聞き直されずに回答されます。コーディネーターが起動したエージェントは、コーディネーターが書いたタスクを受け取り、その言語で返答します。停止したエージェントは、続けるよう頼むまで止まったままです。"
-            },
-            {
-              "title": "小さな修正",
-              "body": "Claude Code がローカルモデルや別のプロバイダーのキーで動くときは、Claude Code 自身の統計はオフになります。プロバイダーのアイコンは各社の公式ロゴになり、開いたボードの上でもメニューと検索が使え、スタート画面で Ctrl+K が使え、音声モードでマイクをオフにすると解放されます。"
-            }
-          ]
-        },
-        "ko": {
-          "headline": "새 작업은 하나의 창에서, 먼저 묻는 음성, 더 철저한 채팅 삭제",
-          "summary": "새 프로젝트와 새 작업이 같은 창을 쓰고, 음성은 클라우드 제공업체로 가기 전에 묻고, 채팅 삭제는 채팅이 남긴 것을 더 많이 지우며, 많은 수정으로 메시지와 에이전트가 더 안정적입니다.",
-          "sections": [
-            {
-              "title": "새 작업은 하나의 창에서",
-              "body": "새 프로젝트와 새 작업은 어디서나 같은 창을 열고, 작업은 선택한 폴더에서 시작합니다."
-            },
-            {
-              "title": "음성은 먼저 묻습니다",
-              "body": "음성은 사용자가 켜지 않는 한 클라우드 키를 쓰지 않습니다. 음성이 클라우드 제공업체로 가기 전에 앱이 한 번 묻고 누가 받는지 알려 주며, 수락한 제공업체만 받습니다."
-            },
-            {
-              "title": "채팅 삭제가 더 많이 지웁니다",
-              "body": "채팅 삭제는 이제 채팅의 내용을 검색 색인, 에이전트 기록, 창의 양식 제안에서도 지우고, Claude Code와 Codex가 이 컴퓨터에 그 채팅을 위해 저장한 세션 파일도 지웁니다. 이전에 삭제한 채팅도 포함됩니다. 직후에 앱을 닫으면 다음 시작 후 몇 분 안에 마무리됩니다. 프로젝트 제거도 그 채팅을 에이전트 기록과 AI 도구의 세션 파일에서 지웁니다."
-            },
-            {
-              "title": "계정별 즐겨찾는 모델",
-              "body": "즐겨찾는 모델에 계정을 지정할 수 있고, 계정이 두 개이면 모델 버튼에 사용하는 계정이 표시됩니다."
-            },
-            {
-              "title": "메시지와 에이전트",
-              "body": "턴 직후나 더블클릭으로 보낸 메시지는 한 번만 전송됩니다. 대기열의 메시지는 재시작 후 전달되고, 재시작으로 끊긴 에이전트의 질문은 다시 묻지 않고 답을 받습니다. 코디네이터가 시작한 에이전트는 코디네이터가 쓴 작업을 받아 그 언어로 답하고, 멈춘 에이전트는 계속하라고 할 때까지 멈춰 있습니다."
-            },
-            {
-              "title": "작은 수정",
-              "body": "Claude Code가 로컬 모델이나 다른 제공업체의 키로 실행될 때는 Claude Code 자체 통계가 꺼집니다. 제공업체 아이콘은 각 회사의 공식 로고이고, 열린 보드 위에서도 메뉴와 검색이 작동하며, 시작 화면에서 Ctrl+K가 작동하고, 음성 모드에서 마이크를 끄면 마이크가 해제됩니다."
-            }
-          ]
-        },
-        "pt-BR": {
-          "headline": "Uma só janela para trabalho novo, voz que pergunta primeiro e um Excluir chat mais completo",
-          "summary": "Novo projeto e Nova tarefa compartilham uma janela, a voz pergunta antes de ir para um provedor em nuvem, Excluir chat limpa mais do que um chat deixa para trás e muitas correções deixam mensagens e agentes mais estáveis.",
-          "sections": [
-            {
-              "title": "Uma só janela para trabalho novo",
-              "body": "Novo projeto e Nova tarefa abrem a mesma janela em todo lugar, e a tarefa começa na pasta que você escolheu."
-            },
-            {
-              "title": "A voz pergunta primeiro",
-              "body": "A voz não usa mais sua chave de nuvem a menos que você a ative. Antes que sua voz vá para um provedor em nuvem, o app pergunta uma vez e diz quem a recebe, e só o provedor que você aceitou a recebe."
-            },
-            {
-              "title": "Excluir chat limpa mais",
-              "body": "Excluir chat agora também remove as palavras do chat do índice de busca, do histórico do agente e das sugestões de formulário da janela, e os arquivos de sessão que o Claude Code e o Codex salvaram para ele neste computador, inclusive de chats excluídos antes. Se o app for fechado logo depois, isso termina alguns minutos após a próxima inicialização.",
-              "detail": "Remover projeto também limpa seus chats do histórico do agente e dos arquivos de sessão das ferramentas de IA."
-            },
-            {
-              "title": "Um modelo favorito por conta",
-              "body": "Um modelo favorito pode indicar sua conta, e o botão do modelo mostra qual conta ele usa quando você tem duas."
-            },
-            {
-              "title": "Mensagens e agentes",
-              "body": "Uma mensagem enviada logo após um turno ou com clique duplo sai uma vez. Mensagens na fila são entregues após reiniciar, e uma pergunta do agente cortada por um reinício é respondida em vez de feita de novo. Agentes iniciados pelo Coordenador recebem a tarefa que ele escreveu e respondem no idioma dela, e um agente que você parou continua parado até você pedir que continue."
-            },
-            {
-              "title": "Correções menores",
-              "body": "As estatísticas próprias do Claude Code ficam desligadas quando ele roda com um modelo local ou a chave de outro provedor. Os ícones dos provedores são os logotipos oficiais das empresas, menus e busca funcionam sobre um quadro aberto, Ctrl+K funciona na tela inicial e desligar o microfone no modo de voz o libera."
+              "title": "Names in dictation",
+              "body": "Dictation recognises project names and file names from your code more often."
             }
           ]
         },
         "ro": {
-          "headline": "O singură fereastră pentru lucru nou, vocea care întreabă întâi și o ștergere de chat mai completă",
-          "summary": "Proiect nou și Sarcină nouă folosesc aceeași fereastră, vocea întreabă înainte să ajungă la un furnizor cloud, Șterge chatul curăță mai mult din ce lasă un chat în urmă, iar multe corecturi fac mesajele și agenții mai stabili.",
+          "headline": "Controlul computerului pe care îl vezi și îl oprești, același aspect peste tot și un meniu de modele care ține minte",
+          "summary": "Cât un agent îți folosește PC-ul, marginile ecranului se luminează și Esc îl oprește. Culorile, iconițele și bannerele arată la fel, Ctrl+K, Anulează și Ctrl+Enter scutesc clicuri, iar o sarcină nouă păstrează modelul ales.",
           "sections": [
             {
-              "title": "O singură fereastră pentru lucru nou",
-              "body": "Proiect nou și Sarcină nouă deschid aceeași fereastră peste tot, iar sarcina pornește în folderul ales de tine."
+              "title": "Controlul computerului pe care îl vezi și îl oprești",
+              "body": "Cât un agent îți folosește computerul, marginile ecranului se luminează și o bară sus spune asta, cu un singur buton Oprește care răspunde și la Esc. Agenții pot lucra în browsere, terminale, editoare și File Explorer, iar accesul rămâne deschis între mesajele tale până îl oprești.",
+              "detail": "Cu Acces complet, agentul nu mai cere voie pentru fiecare aplicație. Setările Windows, Securitatea Windows și managerii de parole rămân blocați pentru agenți."
             },
             {
-              "title": "Vocea întreabă întâi",
-              "body": "Vocea nu mai folosește cheia ta cloud decât dacă o pornești tu. Înainte ca vocea ta să ajungă la un furnizor cloud, aplicația te întreabă o dată și îți spune cine o primește, iar doar furnizorul acceptat de tine o primește."
+              "title": "Același aspect peste tot",
+              "body": "Culorile, iconițele, bannerele, etichetele de stare și ecranele goale vin dintr-un singur set comun, așa că fiecare ecran se citește la fel în temă deschisă și închisă. Avertismentele, erorile și reușitele au culori mai clare, iar iconițele de stare sunt pline, ca să se vadă."
             },
             {
-              "title": "Șterge chatul curăță mai mult",
-              "body": "Șterge chatul elimină acum și cuvintele chatului din indexul de căutare, din istoricul agentului și din sugestiile de formular ale ferestrei, plus fișierele de sesiune salvate pentru el de Claude Code și Codex pe acest computer, inclusiv pentru chaturile șterse înainte. Dacă aplicația e închisă imediat după, curățarea se termină la câteva minute după următoarea pornire.",
-              "detail": "Elimină proiectul șterge și chaturile lui din istoricul agentului și din fișierele de sesiune ale uneltelor AI."
+              "title": "Mai puține clicuri",
+              "body": "Ctrl+K deschide un singur loc pentru comenzi, Ctrl+Enter aprobă o dată cererea din fața ta, iar multe acțiuni oferă Anulează imediat după ce le faci."
             },
             {
-              "title": "Un model favorit pe fiecare cont",
-              "body": "Un model favorit poate avea contul lui, iar butonul de model arată ce cont folosește când ai două."
+              "title": "Meniul de modele ține minte",
+              "body": "Meniul de modele are o așezare nouă, cu familiile de modele în taburi și Rapid ca etichetă separată. O sarcină nouă pornește cu modelul ales de tine, pe tabul lui."
             },
             {
-              "title": "Mesaje și agenți",
-              "body": "Un mesaj trimis imediat după o tură sau cu dublu clic pleacă o singură dată. Mesajele din coadă sunt livrate după o repornire, iar o întrebare a agentului întreruptă de o repornire primește răspuns în loc să fie pusă din nou. Agenții porniți de Coordonator primesc sarcina scrisă de el și răspund în limba ei, iar un agent oprit de tine rămâne oprit până îi ceri să continue."
+              "title": "Înapoi unde erai",
+              "body": "Când închizi și redeschizi un chat, se deschide unde citeai.",
+              "detail": "Cuvintele scrise dar netrimise sunt păstrate doar cât aplicația e deschisă."
             },
             {
               "title": "Corecturi mai mici",
-              "body": "Statisticile proprii ale Claude Code sunt oprite când rulează pe un model local sau pe cheia altui furnizor. Iconițele furnizorilor sunt siglele oficiale ale companiilor, meniurile și căutarea merg peste un panou deschis, Ctrl+K merge pe ecranul de start, iar oprirea microfonului în modul vocal îl eliberează."
+              "body": "Întrebările agenților folosesc butoane radio și casete de bifat reale, butoanele de pe cardurile de aprobare sunt aliniate, atașamentele stau în două rânduri ordonate cu avertismentele deasupra casetei de mesaj, iar vocea arată o singură stare calmă cât lucrează.",
+              "detail": "Șase teme de culoare au nume noi: Terracotta, Cobalt, Indigo, Slate, Ruby și Onyx. Vezi utilizarea deschide pagina ta de utilizare, iar fereastra Ce e nou poate arăta note mai noi de pe codevalanche.com."
+            },
+            {
+              "title": "O pornire mai liniștită",
+              "body": "Când un proiect se deschide mai greu, vezi logo-ul Codevalanche și Se încarcă, în locul unui mesaj de reîncercare."
+            },
+            {
+              "title": "Nume la dictare",
+              "body": "Dictarea recunoaște mai des numele de proiecte și numele de fișiere din codul tău."
             }
           ]
         },
-        "ru": {
-          "headline": "Одно окно для новой работы, голос, который сначала спрашивает, и более полное удаление чата",
-          "summary": "Новый проект и Новая задача открывают одно окно, голос спрашивает, прежде чем уйти облачному провайдеру, Удалить чат стирает больше следов чата, а многие исправления делают сообщения и агентов стабильнее.",
+        "de": {
+          "headline": "Computersteuerung, die du siehst und stoppst, ein einheitlicher Look und ein Modellmenü, das sich erinnert",
+          "summary": "Während ein Agent deinen PC nutzt, leuchten die Bildschirmränder und Esc stoppt ihn. Farben, Symbole und Banner sehen einheitlich aus, Strg+K, Rückgängig und Strg+Enter sparen Klicks, und eine neue Aufgabe behält dein Modell.",
           "sections": [
             {
-              "title": "Одно окно для новой работы",
-              "body": "Новый проект и Новая задача везде открывают одно и то же окно, и задача начинается в выбранной вами папке."
+              "title": "Computersteuerung, die du siehst und stoppst",
+              "body": "Während ein Agent deinen Computer nutzt, leuchten die Bildschirmränder und eine Leiste oben zeigt es an, mit einer Stopp-Schaltfläche, die auch auf Esc reagiert. Agenten können in Browsern, Terminals, Editoren und im Datei-Explorer arbeiten, und der Zugriff bleibt zwischen deinen Nachrichten offen, bis du ihn stoppst.",
+              "detail": "Mit Vollzugriff fragt der Agent nicht mehr für jede App einzeln. Windows-Einstellungen, Windows-Sicherheit und Passwortmanager bleiben für Agenten gesperrt."
             },
             {
-              "title": "Голос сначала спрашивает",
-              "body": "Голос больше не использует ваш облачный ключ, пока вы это не включите. Прежде чем ваш голос уйдёт облачному провайдеру, приложение один раз спрашивает и говорит, кто его получит, и получает его только принятый вами провайдер."
+              "title": "Ein einheitlicher Look",
+              "body": "Farben, Symbole, Banner, Statusanzeigen und leere Bildschirme kommen aus einem gemeinsamen Satz, sodass jeder Bildschirm hell und dunkel gleich wirkt. Warnungen, Fehler und Erfolge haben klarere Farben, und Statussymbole sind gefüllt, damit sie auffallen."
             },
             {
-              "title": "Удалить чат стирает больше",
-              "body": "Удалить чат теперь также убирает слова чата из поискового индекса, истории агента и подсказок форм окна, а также файлы сессий, которые Claude Code и Codex сохранили для него на этом компьютере, в том числе для чатов, удалённых раньше. Если приложение закрыть сразу после этого, очистка завершится через несколько минут после следующего запуска.",
-              "detail": "Удалить проект также стирает его чаты из истории агента и файлов сессий ИИ-инструментов."
+              "title": "Weniger Klicks",
+              "body": "Strg+K öffnet einen Ort für Befehle, Strg+Enter genehmigt die Anfrage vor dir einmal, und viele Aktionen bieten direkt danach Rückgängig an."
             },
             {
-              "title": "Любимая модель для каждого аккаунта",
-              "body": "У любимой модели можно указать аккаунт, а кнопка модели показывает, какой аккаунт она использует, если у вас их два."
+              "title": "Das Modellmenü erinnert sich",
+              "body": "Das Modellmenü hat ein neues Layout, mit Modellfamilien in Tabs und Schnell als eigener Kennzeichnung. Eine neue Aufgabe startet mit dem Modell, das du gewählt hast, auf seinem Tab."
             },
             {
-              "title": "Сообщения и агенты",
-              "body": "Сообщение, отправленное сразу после хода или двойным щелчком, уходит один раз. Сообщения в очереди доставляются после перезапуска, а вопрос агента, прерванный перезапуском, получает ответ, а не задаётся снова. Агенты, запущенные Координатором, получают написанную им задачу и отвечают на её языке, а остановленный вами агент остаётся остановленным, пока вы не попросите продолжить."
+              "title": "Zurück, wo du warst",
+              "body": "Wenn du einen Chat schließt und wieder öffnest, öffnet er sich dort, wo du gelesen hast.",
+              "detail": "Getippte, aber nicht gesendete Wörter bleiben nur erhalten, solange die App geöffnet ist."
             },
             {
-              "title": "Небольшие исправления",
-              "body": "Собственная статистика Claude Code отключена, когда он работает на локальной модели или с ключом другого провайдера. Значки провайдеров — официальные логотипы компаний, меню и поиск работают поверх открытой доски, Ctrl+K работает на стартовом экране, а выключение микрофона в голосовом режиме освобождает его."
+              "title": "Kleinere Korrekturen",
+              "body": "Fragen von Agenten nutzen echte Optionsfelder und Kontrollkästchen, Schaltflächen auf Genehmigungskarten sind ausgerichtet, Anhänge stehen in zwei ordentlichen Reihen mit Warnungen über dem Nachrichtenfeld, und die Sprache zeigt einen ruhigen Status, während sie arbeitet.",
+              "detail": "Sechs Farbthemen haben neue Namen: Terracotta, Cobalt, Indigo, Slate, Ruby und Onyx. Nutzung anzeigen öffnet deine Nutzungsseite, und das Fenster Neuigkeiten kann neuere Hinweise von codevalanche.com zeigen."
+            },
+            {
+              "title": "Ein ruhigerer Start",
+              "body": "Wenn ein Projekt etwas braucht, um sich zu öffnen, siehst du das Codevalanche-Logo und Wird geladen statt einer Meldung über einen neuen Versuch."
+            },
+            {
+              "title": "Namen beim Diktieren",
+              "body": "Das Diktieren erkennt Projektnamen und Dateinamen aus deinem Code öfter."
+            }
+          ]
+        },
+        "es": {
+          "headline": "Uso del equipo que ves y detienes, un mismo aspecto en toda la app y un menú de modelos que recuerda",
+          "summary": "Mientras un agente usa tu PC, los bordes de la pantalla se iluminan y Esc lo detiene. Colores, iconos y avisos comparten un aspecto, Ctrl+K, Deshacer y Ctrl+Enter ahorran clics, y una tarea nueva mantiene el modelo elegido.",
+          "sections": [
+            {
+              "title": "Uso del equipo que ves y detienes",
+              "body": "Mientras un agente usa tu equipo, los bordes de la pantalla brillan y una barra arriba lo indica, con un solo botón Detener que también responde a Esc. Los agentes pueden trabajar en navegadores, terminales, editores y el Explorador de archivos, y el acceso sigue abierto entre tus mensajes hasta que lo detengas.",
+              "detail": "Con Acceso total, el agente ya no pregunta app por app. Configuración de Windows, Seguridad de Windows y los gestores de contraseñas siguen bloqueados para los agentes."
+            },
+            {
+              "title": "Un mismo aspecto en toda la app",
+              "body": "Colores, iconos, avisos, etiquetas de estado y pantallas vacías salen de un único conjunto compartido, así cada pantalla se lee igual en claro y oscuro. Advertencias, errores y éxitos tienen colores más claros, y los iconos de estado son rellenos para que destaquen."
+            },
+            {
+              "title": "Menos clics",
+              "body": "Ctrl+K abre un solo lugar para los comandos, Ctrl+Enter aprueba una vez la solicitud que tienes delante, y muchas acciones ofrecen Deshacer justo después de hacerlas."
+            },
+            {
+              "title": "El menú de modelos recuerda",
+              "body": "El menú de modelos tiene un diseño nuevo, con las familias de modelos en pestañas y Rápido como etiqueta propia. Una tarea nueva se abre con el modelo que elegiste, en su pestaña."
+            },
+            {
+              "title": "Donde lo dejaste",
+              "body": "Cuando cierras y vuelves a abrir un chat, se abre donde estabas leyendo.",
+              "detail": "Las palabras escritas y no enviadas se guardan solo mientras la app está abierta."
+            },
+            {
+              "title": "Correcciones menores",
+              "body": "Las preguntas de los agentes usan botones de opción y casillas reales, los botones de las tarjetas de aprobación se alinean, los adjuntos quedan en dos filas ordenadas con sus avisos sobre el cuadro de mensaje, y la voz muestra un solo estado tranquilo mientras trabaja.",
+              "detail": "Seis temas de color tienen nombres nuevos: Terracotta, Cobalt, Indigo, Slate, Ruby y Onyx. Ver uso abre tu página de uso, y la ventana Novedades puede mostrar notas más recientes de codevalanche.com."
+            },
+            {
+              "title": "Un inicio más tranquilo",
+              "body": "Cuando un proyecto tarda un momento en abrirse, ves el logo de Codevalanche y Cargando en lugar de un mensaje de reintento."
+            },
+            {
+              "title": "Nombres en el dictado",
+              "body": "El dictado reconoce más a menudo los nombres de proyectos y de archivos de tu código."
+            }
+          ]
+        },
+        "fr": {
+          "headline": "Une utilisation de l’ordinateur visible et arrêtable, un même style partout et un menu de modèles qui se souvient",
+          "summary": "Quand un agent utilise votre PC, les bords de l’écran s’allument et Échap l’arrête. Couleurs, icônes et bannières partagent un style, Ctrl+K, Annuler et Ctrl+Entrée font gagner des clics, et une nouvelle tâche garde votre modèle.",
+          "sections": [
+            {
+              "title": "Une utilisation de l’ordinateur visible et arrêtable",
+              "body": "Quand un agent utilise votre ordinateur, les bords de l’écran s’illuminent et une barre en haut l’indique, avec un seul bouton Arrêter qui répond aussi à Échap. Les agents peuvent travailler dans les navigateurs, terminaux, éditeurs et l’Explorateur de fichiers, et l’accès reste ouvert entre vos messages jusqu’à ce que vous l’arrêtiez.",
+              "detail": "En Accès complet, l’agent ne demande plus application par application. Les Paramètres Windows, la Sécurité Windows et les gestionnaires de mots de passe restent bloqués pour les agents."
+            },
+            {
+              "title": "Un même style partout",
+              "body": "Couleurs, icônes, bannières, étiquettes d’état et écrans vides viennent d’un seul ensemble partagé, chaque écran se lit donc de la même façon en clair et en sombre. Avertissements, erreurs et réussites ont des couleurs plus nettes, et les icônes d’état sont pleines pour mieux ressortir."
+            },
+            {
+              "title": "Moins de clics",
+              "body": "Ctrl+K ouvre un seul endroit pour les commandes, Ctrl+Entrée approuve une fois la demande affichée, et de nombreuses actions proposent Annuler juste après."
+            },
+            {
+              "title": "Le menu des modèles se souvient",
+              "body": "Le menu des modèles a une nouvelle disposition, avec les familles de modèles en onglets et Rapide comme étiquette à part. Une nouvelle tâche s’ouvre avec le modèle choisi, sur son onglet."
+            },
+            {
+              "title": "Là où vous en étiez",
+              "body": "Quand vous fermez puis rouvrez une discussion, elle s’ouvre là où vous lisiez.",
+              "detail": "Les mots tapés mais non envoyés ne sont gardés que tant que l’application est ouverte."
+            },
+            {
+              "title": "Petits correctifs",
+              "body": "Les questions des agents utilisent de vrais boutons radio et cases à cocher, les boutons des cartes d’approbation sont alignés, les pièces jointes tiennent sur deux rangées nettes avec leurs avertissements au-dessus de la zone de message, et la voix affiche un seul état calme pendant qu’elle travaille.",
+              "detail": "Six thèmes de couleur ont de nouveaux noms : Terracotta, Cobalt, Indigo, Slate, Ruby et Onyx. Voir l’utilisation ouvre votre page d’utilisation, et la fenêtre Nouveautés peut afficher des notes plus récentes depuis codevalanche.com."
+            },
+            {
+              "title": "Un démarrage plus calme",
+              "body": "Quand un projet met un moment à s’ouvrir, vous voyez le logo Codevalanche et Chargement au lieu d’un message de nouvelle tentative."
+            },
+            {
+              "title": "Les noms dans la dictée",
+              "body": "La dictée reconnaît plus souvent les noms de projets et de fichiers de votre code."
+            }
+          ]
+        },
+        "it": {
+          "headline": "Uso del computer che vedi e fermi, un unico aspetto in tutta l’app e un menu dei modelli che ricorda",
+          "summary": "Mentre un agente usa il tuo PC, i bordi dello schermo si illuminano ed Esc lo ferma. Colori, icone e banner hanno un unico aspetto, Ctrl+K, Annulla e Ctrl+Invio fanno risparmiare clic, e un nuovo task mantiene il modello scelto.",
+          "sections": [
+            {
+              "title": "Uso del computer che vedi e fermi",
+              "body": "Mentre un agente usa il tuo computer, i bordi dello schermo si illuminano e una barra in alto lo segnala, con un solo pulsante Ferma che risponde anche a Esc. Gli agenti possono lavorare in browser, terminali, editor ed Esplora file, e l’accesso resta aperto tra i tuoi messaggi finché non lo fermi.",
+              "detail": "Con Accesso completo l’agente non chiede più app per app. Impostazioni di Windows, Sicurezza di Windows e i gestori di password restano bloccati per gli agenti."
+            },
+            {
+              "title": "Un unico aspetto in tutta l’app",
+              "body": "Colori, icone, banner, etichette di stato e schermate vuote vengono da un unico set condiviso, così ogni schermata si legge allo stesso modo in chiaro e in scuro. Avvisi, errori e successi hanno colori più netti, e le icone di stato sono piene per farsi notare."
+            },
+            {
+              "title": "Meno clic",
+              "body": "Ctrl+K apre un unico posto per i comandi, Ctrl+Invio approva una volta la richiesta che hai davanti, e molte azioni offrono Annulla subito dopo."
+            },
+            {
+              "title": "Il menu dei modelli ricorda",
+              "body": "Il menu dei modelli ha una nuova disposizione, con le famiglie di modelli in schede e Veloce come etichetta a sé. Un nuovo task si apre con il modello che hai scelto, nella sua scheda."
+            },
+            {
+              "title": "Dove eri rimasto",
+              "body": "Quando chiudi e riapri una chat, si apre dove stavi leggendo.",
+              "detail": "Le parole scritte ma non inviate restano solo finché l’app è aperta."
+            },
+            {
+              "title": "Correzioni minori",
+              "body": "Le domande degli agenti usano veri pulsanti di opzione e caselle di controllo, i pulsanti delle schede di approvazione sono allineati, gli allegati stanno in due file ordinate con gli avvisi sopra la casella del messaggio, e la voce mostra un solo stato tranquillo mentre lavora.",
+              "detail": "Sei temi di colore hanno nuovi nomi: Terracotta, Cobalt, Indigo, Slate, Ruby e Onyx. Visualizza utilizzo apre la tua pagina di utilizzo, e la finestra Novità può mostrare note più recenti da codevalanche.com."
+            },
+            {
+              "title": "Un avvio più tranquillo",
+              "body": "Quando un progetto impiega un momento ad aprirsi, vedi il logo di Codevalanche e Caricamento invece di un messaggio di nuovo tentativo."
+            },
+            {
+              "title": "Nomi nella dettatura",
+              "body": "La dettatura riconosce più spesso i nomi dei progetti e dei file del tuo codice."
+            }
+          ]
+        },
+        "pt-BR": {
+          "headline": "Uso do computador que você vê e para, um só visual no app todo e um menu de modelos que lembra",
+          "summary": "Enquanto um agente usa seu PC, as bordas da tela se acendem e Esc o para. Cores, ícones e avisos têm um só visual, Ctrl+K, Desfazer e Ctrl+Enter poupam cliques, e uma nova tarefa mantém o modelo que você escolheu.",
+          "sections": [
+            {
+              "title": "Uso do computador que você vê e para",
+              "body": "Enquanto um agente usa seu computador, as bordas da tela brilham e uma barra no topo avisa, com um único botão Parar que também responde ao Esc. Os agentes podem trabalhar em navegadores, terminais, editores e no Explorador de Arquivos, e o acesso fica aberto entre suas mensagens até você parar.",
+              "detail": "Com Acesso total, o agente não pede mais app por app. Configurações do Windows, Segurança do Windows e gerenciadores de senhas continuam bloqueados para agentes."
+            },
+            {
+              "title": "Um só visual no app todo",
+              "body": "Cores, ícones, avisos, etiquetas de status e telas vazias vêm de um único conjunto compartilhado, então cada tela se lê igual no claro e no escuro. Alertas, erros e sucessos têm cores mais nítidas, e os ícones de status são preenchidos para se destacar."
+            },
+            {
+              "title": "Menos cliques",
+              "body": "Ctrl+K abre um só lugar para comandos, Ctrl+Enter aprova uma vez a solicitação à sua frente, e muitas ações oferecem Desfazer logo depois."
+            },
+            {
+              "title": "O menu de modelos lembra",
+              "body": "O menu de modelos tem um novo layout, com as famílias de modelos em abas e Rápido como rótulo próprio. Uma nova tarefa abre com o modelo que você escolheu, na aba dele."
+            },
+            {
+              "title": "De volta onde você estava",
+              "body": "Quando você fecha e reabre um chat, ele abre onde você estava lendo.",
+              "detail": "Palavras digitadas e não enviadas ficam guardadas só enquanto o app está aberto."
+            },
+            {
+              "title": "Correções menores",
+              "body": "Perguntas dos agentes usam botões de opção e caixas de seleção reais, os botões dos cartões de aprovação ficam alinhados, os anexos ficam em duas fileiras organizadas com os avisos acima da caixa de mensagem, e a voz mostra um só status calmo enquanto trabalha.",
+              "detail": "Seis temas de cor têm nomes novos: Terracotta, Cobalt, Indigo, Slate, Ruby e Onyx. Ver uso abre sua página de uso, e a janela Novidades pode mostrar notas mais recentes de codevalanche.com."
+            },
+            {
+              "title": "Um início mais tranquilo",
+              "body": "Quando um projeto demora um pouco para abrir, você vê o logo do Codevalanche e Carregando em vez de uma mensagem de nova tentativa."
+            },
+            {
+              "title": "Nomes no ditado",
+              "body": "O ditado reconhece com mais frequência os nomes de projetos e de arquivos do seu código."
+            }
+          ]
+        },
+        "id": {
+          "headline": "Penggunaan komputer yang terlihat dan bisa dihentikan, satu tampilan di seluruh aplikasi, dan menu model yang mengingat",
+          "summary": "Saat agen memakai PC Anda, tepi layar menyala dan Esc menghentikannya. Warna, ikon, dan banner berbagi satu tampilan, Ctrl+K, Urungkan, dan Ctrl+Enter menghemat klik, dan tugas baru tetap memakai model pilihan Anda.",
+          "sections": [
+            {
+              "title": "Penggunaan komputer yang terlihat dan bisa dihentikan",
+              "body": "Saat agen memakai komputer Anda, tepi layar menyala dan bilah di atas memberi tahu, dengan satu tombol Hentikan yang juga merespons Esc. Agen dapat bekerja di browser, terminal, editor, dan File Explorer, dan akses tetap terbuka di antara pesan Anda sampai Anda menghentikannya.",
+              "detail": "Dengan Akses penuh, agen tidak lagi bertanya per aplikasi. Pengaturan Windows, Keamanan Windows, dan pengelola kata sandi tetap diblokir untuk agen."
+            },
+            {
+              "title": "Satu tampilan di seluruh aplikasi",
+              "body": "Warna, ikon, banner, label status, dan layar kosong berasal dari satu set bersama, sehingga setiap layar terbaca sama dalam tema terang dan gelap. Peringatan, galat, dan keberhasilan punya warna yang lebih jelas, dan ikon status terisi agar menonjol."
+            },
+            {
+              "title": "Lebih sedikit klik",
+              "body": "Ctrl+K membuka satu tempat untuk perintah, Ctrl+Enter menyetujui permintaan di depan Anda sekali, dan banyak tindakan menawarkan Urungkan tepat setelahnya."
+            },
+            {
+              "title": "Menu model mengingat",
+              "body": "Menu model punya tata letak baru, dengan keluarga model dalam tab dan Cepat sebagai label tersendiri. Tugas baru dibuka dengan model pilihan Anda, di tabnya."
+            },
+            {
+              "title": "Kembali ke tempat Anda tadi",
+              "body": "Saat Anda menutup dan membuka lagi sebuah chat, chat terbuka di tempat Anda membaca.",
+              "detail": "Kata yang diketik tetapi belum dikirim hanya disimpan selama aplikasi terbuka."
+            },
+            {
+              "title": "Perbaikan kecil",
+              "body": "Pertanyaan agen memakai tombol radio dan kotak centang sungguhan, tombol pada kartu persetujuan sejajar, lampiran tersusun dalam dua baris rapi dengan peringatannya di atas kotak pesan, dan suara menampilkan satu status tenang saat bekerja.",
+              "detail": "Enam tema warna punya nama baru: Terracotta, Cobalt, Indigo, Slate, Ruby, dan Onyx. Lihat penggunaan membuka halaman penggunaan Anda, dan jendela Yang baru dapat menampilkan catatan lebih baru dari codevalanche.com."
+            },
+            {
+              "title": "Awal yang lebih tenang",
+              "body": "Saat proyek perlu waktu untuk terbuka, Anda melihat logo Codevalanche dan Memuat, bukan pesan coba lagi."
+            },
+            {
+              "title": "Nama saat dikte",
+              "body": "Dikte lebih sering mengenali nama proyek dan nama file dari kode Anda."
             }
           ]
         },
         "tr": {
-          "headline": "Yeni işler için tek pencere, önce soran ses ve daha kapsamlı Sohbeti sil",
-          "summary": "Yeni proje ve Yeni görev aynı pencereyi kullanır, ses bir bulut sağlayıcısına gitmeden önce sorar, Sohbeti sil bir sohbetin geride bıraktıklarının daha fazlasını temizler ve birçok düzeltme mesajları ve ajanları daha kararlı hâle getirir.",
+          "headline": "Görebildiğin ve durdurabildiğin bilgisayar kullanımı, tek görünüm ve seçtiğin modeli hatırlayan menü",
+          "summary": "Bir ajan bilgisayarını kullanırken ekran kenarları yanar ve Esc onu durdurur. Renkler, simgeler ve bannerlar tek görünümde, Ctrl+K, Geri al ve Ctrl+Enter tık kazandırır ve yeni görev seçtiğin modeli korur.",
           "sections": [
             {
-              "title": "Yeni işler için tek pencere",
-              "body": "Yeni proje ve Yeni görev her yerde aynı pencereyi açar ve görev seçtiğiniz klasörde başlar."
+              "title": "Görebildiğin ve durdurabildiğin bilgisayar kullanımı",
+              "body": "Bir ajan bilgisayarını kullanırken ekran kenarları parlar ve üstte bir çubuk bunu söyler; tek bir Durdur düğmesi Esc tuşuna da yanıt verir. Ajanlar tarayıcılarda, terminallerde, düzenleyicilerde ve Dosya Gezgini'nde çalışabilir; erişim sen durdurana kadar mesajların arasında açık kalır.",
+              "detail": "Tam erişimde ajan artık her uygulama için ayrı sormaz. Windows Ayarları, Windows Güvenliği ve parola yöneticileri ajanlara kapalı kalır."
             },
             {
-              "title": "Ses önce sorar",
-              "body": "Ses artık siz açmadıkça bulut anahtarınızı kullanmaz. Sesiniz bir bulut sağlayıcısına gitmeden önce uygulama size bir kez sorar ve onu kimin alacağını söyler; yalnızca kabul ettiğiniz sağlayıcı alır."
+              "title": "Uygulama genelinde tek görünüm",
+              "body": "Renkler, simgeler, bannerlar, durum etiketleri ve boş ekranlar tek bir ortak setten gelir; böylece her ekran açık ve koyu temada aynı okunur. Uyarılar, hatalar ve başarılar daha net renklere sahiptir, durum simgeleri öne çıksın diye dolgulu."
             },
             {
-              "title": "Sohbeti sil daha fazlasını temizler",
-              "body": "Sohbeti sil artık sohbetin sözcüklerini arama dizininden, ajanın geçmişinden ve pencerenin form önerilerinden, ayrıca Claude Code ve Codex'in bu bilgisayarda onun için kaydettiği oturum dosyalarından da kaldırır; daha önce silinen sohbetler de buna dahildir. Uygulama hemen ardından kapatılırsa bu işlem bir sonraki açılıştan birkaç dakika sonra tamamlanır.",
-              "detail": "Projeyi kaldır da sohbetlerini ajanın geçmişinden ve yapay zekâ araçlarının oturum dosyalarından temizler."
+              "title": "Daha az tık",
+              "body": "Ctrl+K komutlar için tek bir yer açar, Ctrl+Enter önündeki isteği bir kez onaylar ve birçok işlem hemen ardından Geri al sunar."
             },
             {
-              "title": "Hesap başına favori model",
-              "body": "Favori bir model kendi hesabını belirtebilir ve iki hesabınız olduğunda model düğmesi hangi hesabı kullandığını gösterir."
+              "title": "Model menüsü hatırlar",
+              "body": "Model menüsünün yeni bir düzeni var: model aileleri sekmelerde, Hızlı ayrı bir etiket. Yeni görev seçtiğin modelle, onun sekmesinde açılır."
             },
             {
-              "title": "Mesajlar ve ajanlar",
-              "body": "Bir turun hemen ardından ya da çift tıklamayla gönderilen mesaj bir kez gider. Kuyruktaki mesajlar yeniden başlatmadan sonra iletilir ve yeniden başlatmanın yarıda kestiği bir ajan sorusu yeniden sorulmak yerine yanıtlanır. Koordinatörün başlattığı ajanlar onun yazdığı görevi alır ve görevin dilinde yanıt verir; durdurduğunuz bir ajan siz devam etmesini isteyene kadar durur."
+              "title": "Kaldığın yerde",
+              "body": "Bir sohbeti kapatıp yeniden açtığında, okuduğun yerde açılır.",
+              "detail": "Yazıp göndermediğin sözcükler yalnızca uygulama açıkken tutulur."
             },
             {
               "title": "Küçük düzeltmeler",
-              "body": "Claude Code yerel bir modelle ya da başka bir sağlayıcının anahtarıyla çalıştığında kendi istatistikleri kapalıdır. Sağlayıcı simgeleri şirketlerin resmî logolarıdır, menüler ve arama açık bir panonun üzerinde çalışır, Ctrl+K başlangıç ekranında çalışır ve ses modunda mikrofonu kapatmak onu serbest bırakır."
+              "body": "Ajan soruları gerçek seçenek düğmeleri ve onay kutuları kullanır, onay kartlarındaki düğmeler hizalıdır, ekler uyarılarıyla birlikte mesaj kutusunun üstünde iki düzenli satırda durur ve ses çalışırken tek bir sakin durum gösterir.",
+              "detail": "Altı renk temasının adı değişti: Terracotta, Cobalt, Indigo, Slate, Ruby ve Onyx. Kullanımı görüntüle kullanım sayfanı açar ve Yenilikler penceresi codevalanche.com'dan daha yeni notlar gösterebilir."
+            },
+            {
+              "title": "Daha sakin bir açılış",
+              "body": "Bir projenin açılması biraz sürdüğünde, yeniden deneme mesajı yerine Codevalanche logosunu ve Yükleniyor yazısını görürsün."
+            },
+            {
+              "title": "Dikte ederken adlar",
+              "body": "Dikte, kodundaki proje adlarını ve dosya adlarını daha sık tanır."
+            }
+          ]
+        },
+        "ru": {
+          "headline": "Управление компьютером, которое видно и можно остановить, единый вид и меню моделей, которое помнит",
+          "summary": "Пока агент работает на вашем ПК, края экрана светятся, а Esc его останавливает. Цвета, значки и баннеры выглядят единообразно, Ctrl+K, Отменить и Ctrl+Enter экономят клики, а новая задача сохраняет выбранную модель.",
+          "sections": [
+            {
+              "title": "Управление компьютером, которое видно и можно остановить",
+              "body": "Пока агент использует ваш компьютер, края экрана светятся, а панель сверху сообщает об этом; на ней одна кнопка Остановить, которая срабатывает и по Esc. Агенты могут работать в браузерах, терминалах, редакторах и Проводнике, а доступ остаётся открытым между вашими сообщениями, пока вы его не остановите.",
+              "detail": "С полным доступом агент больше не спрашивает про каждое приложение. Параметры Windows, Безопасность Windows и менеджеры паролей остаются закрытыми для агентов."
+            },
+            {
+              "title": "Единый вид во всём приложении",
+              "body": "Цвета, значки, баннеры, метки состояния и пустые экраны берутся из одного общего набора, поэтому каждый экран читается одинаково в светлой и тёмной теме. Предупреждения, ошибки и успехи стали заметнее по цвету, а значки состояния залиты, чтобы выделяться."
+            },
+            {
+              "title": "Меньше кликов",
+              "body": "Ctrl+K открывает единое место для команд, Ctrl+Enter один раз одобряет запрос перед вами, а многие действия сразу после выполнения предлагают Отменить."
+            },
+            {
+              "title": "Меню моделей помнит",
+              "body": "У меню моделей новая раскладка: семейства моделей во вкладках, а Быстро — отдельной меткой. Новая задача открывается с выбранной вами моделью, на её вкладке."
+            },
+            {
+              "title": "Там, где вы остановились",
+              "body": "Когда вы закрываете и снова открываете чат, он открывается там, где вы читали.",
+              "detail": "Набранный, но не отправленный текст хранится, только пока приложение открыто."
+            },
+            {
+              "title": "Мелкие исправления",
+              "body": "Вопросы агентов используют настоящие переключатели и флажки, кнопки на карточках одобрения выровнены, вложения стоят в два аккуратных ряда, а их предупреждения — над полем сообщения, и голос во время работы показывает одно спокойное состояние.",
+              "detail": "У шести цветовых тем новые названия: Terracotta, Cobalt, Indigo, Slate, Ruby и Onyx. Посмотреть использование открывает вашу страницу использования, а окно «Что нового» может показать более свежие заметки с codevalanche.com."
+            },
+            {
+              "title": "Более спокойный запуск",
+              "body": "Когда проект открывается не сразу, вы видите логотип Codevalanche и Загрузка вместо сообщения о повторной попытке."
+            },
+            {
+              "title": "Имена при диктовке",
+              "body": "Диктовка чаще распознаёт названия проектов и имена файлов из вашего кода."
+            }
+          ]
+        },
+        "ar": {
+          "headline": "استخدام الكمبيوتر الذي تراه وتوقفه، ومظهر واحد في التطبيق كله، وقائمة نماذج تتذكر",
+          "summary": "بينما يستخدم وكيل جهازك، تضيء حواف الشاشة ويوقفه Esc. تتشارك الألوان والأيقونات واللافتات مظهرًا واحدًا، وتوفّر Ctrl+K والتراجع وCtrl+Enter النقرات، وتحتفظ المهمة الجديدة بالنموذج الذي اخترته.",
+          "sections": [
+            {
+              "title": "استخدام الكمبيوتر الذي تراه وتوقفه",
+              "body": "بينما يستخدم وكيل جهازك، تتوهج حواف الشاشة ويُظهر شريط في الأعلى ذلك، مع زر إيقاف واحد يستجيب أيضًا لمفتاح Esc. يمكن للوكلاء العمل في المتصفحات والطرفيات والمحررات ومستكشف الملفات، ويبقى الوصول مفتوحًا بين رسائلك حتى توقفه.",
+              "detail": "مع الوصول الكامل لم يعد الوكيل يسأل عن كل تطبيق على حدة. تبقى إعدادات Windows وأمان Windows ومديرو كلمات المرور محظورة على الوكلاء."
+            },
+            {
+              "title": "مظهر واحد في التطبيق كله",
+              "body": "تأتي الألوان والأيقونات واللافتات وتسميات الحالة والشاشات الفارغة من مجموعة مشتركة واحدة، فتُقرأ كل شاشة بالطريقة نفسها في الوضعين الفاتح والداكن. صارت ألوان التحذيرات والأخطاء والنجاح أوضح، وأيقونات الحالة مملوءة لتبرز."
+            },
+            {
+              "title": "نقرات أقل",
+              "body": "يفتح Ctrl+K مكانًا واحدًا للأوامر، ويوافق Ctrl+Enter مرة واحدة على الطلب الذي أمامك، وتعرض إجراءات كثيرة خيار التراجع مباشرة بعد تنفيذها."
+            },
+            {
+              "title": "قائمة النماذج تتذكر",
+              "body": "لقائمة النماذج تخطيط جديد، فعائلات النماذج في علامات تبويب وخيار سريع في تسمية مستقلة. تبدأ المهمة الجديدة بالنموذج الذي اخترته، في علامة تبويبه."
+            },
+            {
+              "title": "حيث توقفت",
+              "body": "عندما تغلق محادثة وتعيد فتحها، تُفتح حيث كنت تقرأ.",
+              "detail": "الكلمات التي كتبتها ولم ترسلها تُحفظ فقط ما دام التطبيق مفتوحًا."
+            },
+            {
+              "title": "إصلاحات أصغر",
+              "body": "تستخدم أسئلة الوكلاء أزرار اختيار ومربعات تحديد حقيقية، وتصطف الأزرار على بطاقات الموافقة، وتستقر المرفقات في صفين مرتبين مع تحذيراتها فوق مربع الرسالة، ويعرض الصوت حالة هادئة واحدة أثناء عمله.",
+              "detail": "لستة سمات ألوان أسماء جديدة: Terracotta وCobalt وIndigo وSlate وRuby وOnyx. يفتح عرض الاستخدام صفحة استخدامك، ويمكن لنافذة «ما الجديد» أن تعرض ملاحظات أحدث من codevalanche.com."
+            },
+            {
+              "title": "بداية أهدأ",
+              "body": "عندما يستغرق مشروع لحظة ليُفتح، ترى شعار Codevalanche وعبارة جارٍ التحميل بدل رسالة إعادة المحاولة."
+            },
+            {
+              "title": "الأسماء في الإملاء",
+              "body": "يتعرّف الإملاء بشكل أكثر على أسماء المشاريع وأسماء الملفات من شيفرتك."
+            }
+          ]
+        },
+        "hi": {
+          "headline": "कंप्यूटर का उपयोग जिसे आप देख और रोक सकते हैं, पूरे ऐप में एक जैसा रूप, और याद रखने वाला मॉडल मेन्यू",
+          "summary": "जब कोई एजेंट आपका PC इस्तेमाल करता है, स्क्रीन के किनारे चमकते हैं और Esc उसे रोकता है। रंग, आइकन और बैनर एक जैसे दिखते हैं, Ctrl+K, पूर्ववत करें और Ctrl+Enter क्लिक बचाते हैं, और नया टास्क आपका चुना मॉडल रखता है।",
+          "sections": [
+            {
+              "title": "कंप्यूटर का उपयोग जिसे आप देख और रोक सकते हैं",
+              "body": "जब कोई एजेंट आपका कंप्यूटर इस्तेमाल करता है, स्क्रीन के किनारे चमकते हैं और ऊपर एक बार यह बताती है, जिसमें एक ही रोकें बटन है जो Esc से भी चलता है। एजेंट ब्राउज़र, टर्मिनल, एडिटर और File Explorer में काम कर सकते हैं, और पहुँच आपके संदेशों के बीच तब तक खुली रहती है जब तक आप उसे रोकते नहीं।",
+              "detail": "पूरी पहुँच में एजेंट अब हर ऐप के लिए अलग से नहीं पूछता। Windows सेटिंग्स, Windows सुरक्षा और पासवर्ड मैनेजर एजेंटों के लिए बंद रहते हैं।"
+            },
+            {
+              "title": "पूरे ऐप में एक जैसा रूप",
+              "body": "रंग, आइकन, बैनर, स्थिति लेबल और खाली स्क्रीन एक ही साझा सेट से आते हैं, इसलिए हर स्क्रीन लाइट और डार्क में एक जैसी पढ़ी जाती है। चेतावनी, त्रुटि और सफलता के रंग अधिक स्पष्ट हैं, और स्थिति आइकन भरे हुए हैं ताकि दिखें।"
+            },
+            {
+              "title": "कम क्लिक",
+              "body": "Ctrl+K कमांड के लिए एक जगह खोलता है, Ctrl+Enter सामने वाले अनुरोध को एक बार स्वीकार करता है, और कई कार्रवाइयाँ करने के तुरंत बाद पूर्ववत करें देती हैं।"
+            },
+            {
+              "title": "मॉडल मेन्यू याद रखता है",
+              "body": "मॉडल मेन्यू का नया लेआउट है, जिसमें मॉडल परिवार टैब में हैं और तेज़ एक अलग लेबल है। नया टास्क आपके चुने मॉडल के साथ, उसके टैब पर खुलता है।"
+            },
+            {
+              "title": "जहाँ आप थे, वहीं",
+              "body": "जब आप किसी चैट को बंद करके फिर खोलते हैं, तो वह वहीं खुलती है जहाँ आप पढ़ रहे थे।",
+              "detail": "लिखे गए पर न भेजे गए शब्द केवल तब तक रखे जाते हैं जब तक ऐप खुला है।"
+            },
+            {
+              "title": "छोटे सुधार",
+              "body": "एजेंट के सवाल असली रेडियो बटन और चेकबॉक्स इस्तेमाल करते हैं, स्वीकृति कार्ड के बटन एक सीध में हैं, अटैचमेंट दो साफ़ पंक्तियों में हैं और उनकी चेतावनियाँ संदेश बॉक्स के ऊपर, और आवाज़ काम करते समय एक शांत स्थिति दिखाती है।",
+              "detail": "छह रंग थीम के नए नाम हैं: Terracotta, Cobalt, Indigo, Slate, Ruby और Onyx। उपयोग देखें आपका उपयोग पेज खोलता है, और \"नया क्या है\" विंडो codevalanche.com से नए नोट्स दिखा सकती है।"
+            },
+            {
+              "title": "शांत शुरुआत",
+              "body": "जब किसी प्रोजेक्ट को खुलने में थोड़ा समय लगता है, तो आपको दोबारा कोशिश वाले संदेश के बजाय Codevalanche लोगो और लोड हो रहा है दिखता है।"
+            },
+            {
+              "title": "डिक्टेशन में नाम",
+              "body": "डिक्टेशन आपके कोड के प्रोजेक्ट नाम और फ़ाइल नाम अब अधिक बार पहचानता है।"
+            }
+          ]
+        },
+        "ja": {
+          "headline": "見えて止められるコンピューター操作、統一された見た目、選んだモデルを覚えるモデルメニュー",
+          "summary": "エージェントが PC を使う間は画面の縁が光り、Esc で止められます。色・アイコン・バナーの見た目がそろい、Ctrl+K・元に戻す・Ctrl+Enter でクリックが減り、新しいタスクは選んだモデルのまま始まります。",
+          "sections": [
+            {
+              "title": "見えて止められるコンピューター操作",
+              "body": "エージェントがコンピューターを使っている間は画面の縁が光り、上部のバーがそれを知らせます。停止ボタンは 1 つで、Esc でも止まります。エージェントはブラウザー、ターミナル、エディター、エクスプローラーで作業でき、停止するまでメッセージの間もアクセスは開いたままです。",
+              "detail": "フルアクセスでは、エージェントはアプリごとに確認しなくなります。Windows の設定、Windows セキュリティ、パスワードマネージャーはエージェントに対してブロックされたままです。"
+            },
+            {
+              "title": "アプリ全体で統一された見た目",
+              "body": "色、アイコン、バナー、状態ラベル、空の画面が 1 つの共通セットから作られ、ライトでもダークでもどの画面も同じように読めます。警告・エラー・成功の色がはっきりし、状態アイコンは塗りつぶしで目立ちます。"
+            },
+            {
+              "title": "クリックを少なく",
+              "body": "Ctrl+K でコマンドを 1 か所にまとめて開き、Ctrl+Enter で目の前のリクエストを 1 回承認でき、多くの操作の直後に「元に戻す」が表示されます。"
+            },
+            {
+              "title": "モデルメニューが覚えている",
+              "body": "モデルメニューが新しいレイアウトになり、モデルファミリーはタブに、高速は独立したラベルになりました。新しいタスクは選んだモデルで、そのタブから始まります。"
+            },
+            {
+              "title": "読んでいた場所から",
+              "body": "チャットを閉じて開き直すと、読んでいた場所から開きます。",
+              "detail": "入力して送信していない文字は、アプリを開いている間だけ保持されます。"
+            },
+            {
+              "title": "細かな修正",
+              "body": "エージェントの質問では本物のラジオボタンとチェックボックスを使い、承認カードのボタンがそろい、添付は 2 列に整って警告はメッセージ欄の上に出ます。音声は処理中に落ち着いた状態表示を 1 つだけ出します。",
+              "detail": "6 つのカラーテーマの名前が変わりました: Terracotta、Cobalt、Indigo、Slate、Ruby、Onyx。「使用量を見る」で使用量ページが開き、「新機能」ウィンドウは codevalanche.com からより新しいメモを表示できます。"
+            },
+            {
+              "title": "落ち着いた起動",
+              "body": "プロジェクトを開くのに少し時間がかかるときは、再試行のメッセージではなく Codevalanche のロゴと「読み込み中」が表示されます。"
+            },
+            {
+              "title": "音声入力での名前",
+              "body": "音声入力が、コードのプロジェクト名やファイル名をより多く認識するようになりました。"
+            }
+          ]
+        },
+        "ko": {
+          "headline": "보이고 멈출 수 있는 컴퓨터 사용, 하나된 모습, 선택한 모델을 기억하는 모델 메뉴",
+          "summary": "에이전트가 PC를 사용하는 동안 화면 가장자리가 빛나고 Esc로 멈출 수 있습니다. 색상, 아이콘, 배너가 하나의 모습을 갖고, Ctrl+K, 실행 취소, Ctrl+Enter로 클릭이 줄며, 새 작업은 선택한 모델을 유지합니다.",
+          "sections": [
+            {
+              "title": "보이고 멈출 수 있는 컴퓨터 사용",
+              "body": "에이전트가 컴퓨터를 사용하는 동안 화면 가장자리가 빛나고 상단 막대가 이를 알려 주며, Esc에도 반응하는 중지 버튼 하나가 있습니다. 에이전트는 브라우저, 터미널, 편집기, 파일 탐색기에서 작업할 수 있고, 사용자가 중지할 때까지 메시지 사이에도 접근이 열려 있습니다.",
+              "detail": "전체 액세스에서는 에이전트가 더 이상 앱마다 묻지 않습니다. Windows 설정, Windows 보안, 비밀번호 관리자는 에이전트에게 계속 차단됩니다."
+            },
+            {
+              "title": "앱 전체의 하나된 모습",
+              "body": "색상, 아이콘, 배너, 상태 라벨, 빈 화면이 하나의 공유 세트에서 나와 모든 화면이 라이트와 다크에서 똑같이 읽힙니다. 경고, 오류, 성공 색상이 더 분명해졌고, 상태 아이콘은 눈에 띄도록 채워져 있습니다."
+            },
+            {
+              "title": "더 적은 클릭",
+              "body": "Ctrl+K는 명령을 한곳에서 열고, Ctrl+Enter는 눈앞의 요청을 한 번 승인하며, 많은 작업이 실행 직후 실행 취소를 제공합니다."
+            },
+            {
+              "title": "모델 메뉴가 기억합니다",
+              "body": "모델 메뉴가 새 레이아웃으로 바뀌어 모델 계열은 탭에, 빠름은 별도 라벨로 표시됩니다. 새 작업은 선택한 모델로 해당 탭에서 열립니다."
+            },
+            {
+              "title": "읽던 자리 그대로",
+              "body": "채팅을 닫았다가 다시 열면 읽던 자리에서 열립니다.",
+              "detail": "입력했지만 보내지 않은 글은 앱이 열려 있는 동안에만 유지됩니다."
+            },
+            {
+              "title": "작은 수정",
+              "body": "에이전트 질문에 실제 라디오 버튼과 체크박스를 쓰고, 승인 카드의 버튼이 정렬되며, 첨부 파일은 두 줄로 깔끔하게 놓이고 경고는 메시지 상자 위에 나옵니다. 음성은 작동하는 동안 차분한 상태 하나만 보여 줍니다.",
+              "detail": "여섯 가지 색상 테마의 이름이 바뀌었습니다: Terracotta, Cobalt, Indigo, Slate, Ruby, Onyx. 사용량 보기는 사용량 페이지를 열고, '새로운 기능' 창은 codevalanche.com의 최신 노트를 보여 줄 수 있습니다."
+            },
+            {
+              "title": "더 차분한 시작",
+              "body": "프로젝트가 열리는 데 시간이 조금 걸리면 재시도 메시지 대신 Codevalanche 로고와 로드 중이 표시됩니다."
+            },
+            {
+              "title": "받아쓰기의 이름",
+              "body": "받아쓰기가 코드의 프로젝트 이름과 파일 이름을 더 자주 인식합니다."
             }
           ]
         },
         "vi": {
-          "headline": "Một cửa sổ cho việc mới, giọng nói hỏi trước và Xóa cuộc trò chuyện đầy đủ hơn",
-          "summary": "Dự án mới và Tác vụ mới dùng chung một cửa sổ, giọng nói hỏi trước khi gửi tới nhà cung cấp đám mây, Xóa cuộc trò chuyện dọn sạch hơn những gì cuộc trò chuyện để lại, và nhiều bản sửa giúp tin nhắn và tác tử ổn định hơn.",
+          "headline": "Sử dụng máy tính mà bạn thấy và dừng được, một diện mạo thống nhất và menu mô hình biết ghi nhớ",
+          "summary": "Khi một tác tử dùng PC của bạn, viền màn hình sáng lên và Esc sẽ dừng nó. Màu sắc, biểu tượng và biểu ngữ dùng chung một diện mạo, Ctrl+K, Hoàn tác và Ctrl+Enter bớt cú nhấp, và tác vụ mới giữ mô hình bạn chọn.",
           "sections": [
             {
-              "title": "Một cửa sổ cho việc mới",
-              "body": "Dự án mới và Tác vụ mới mở cùng một cửa sổ ở mọi nơi, và tác vụ bắt đầu trong thư mục bạn đã chọn."
+              "title": "Sử dụng máy tính mà bạn thấy và dừng được",
+              "body": "Khi một tác tử dùng máy tính của bạn, viền màn hình phát sáng và một thanh ở trên cùng cho biết điều đó, với một nút Dừng duy nhất cũng phản hồi phím Esc. Tác tử có thể làm việc trong trình duyệt, terminal, trình soạn thảo và File Explorer, và quyền truy cập vẫn mở giữa các tin nhắn cho đến khi bạn dừng.",
+              "detail": "Với Toàn quyền truy cập, tác tử không còn hỏi từng ứng dụng. Cài đặt Windows, Bảo mật Windows và trình quản lý mật khẩu vẫn bị chặn với tác tử."
             },
             {
-              "title": "Giọng nói hỏi trước",
-              "body": "Giọng nói không còn dùng khóa đám mây của bạn trừ khi bạn bật nó. Trước khi giọng nói của bạn đến một nhà cung cấp đám mây, ứng dụng hỏi bạn một lần và cho biết ai nhận nó, và chỉ nhà cung cấp bạn đã chấp nhận mới nhận được."
+              "title": "Một diện mạo cho cả ứng dụng",
+              "body": "Màu sắc, biểu tượng, biểu ngữ, nhãn trạng thái và màn hình trống đến từ một bộ dùng chung, nên mọi màn hình đọc giống nhau ở chế độ sáng và tối. Cảnh báo, lỗi và thành công có màu rõ hơn, và biểu tượng trạng thái được tô đầy để nổi bật."
             },
             {
-              "title": "Xóa cuộc trò chuyện dọn nhiều hơn",
-              "body": "Xóa cuộc trò chuyện giờ cũng gỡ nội dung của cuộc trò chuyện khỏi chỉ mục tìm kiếm, lịch sử của tác tử và gợi ý biểu mẫu của cửa sổ, cùng các tệp phiên mà Claude Code và Codex đã lưu cho nó trên máy này, kể cả cho các cuộc trò chuyện đã xóa trước đó. Nếu ứng dụng bị đóng ngay sau đó, việc này hoàn tất vài phút sau lần khởi động tiếp theo.",
-              "detail": "Gỡ dự án cũng xóa các cuộc trò chuyện của nó khỏi lịch sử của tác tử và tệp phiên của các công cụ AI."
+              "title": "Ít cú nhấp hơn",
+              "body": "Ctrl+K mở một nơi duy nhất cho các lệnh, Ctrl+Enter phê duyệt một lần yêu cầu trước mặt bạn, và nhiều thao tác có Hoàn tác ngay sau khi thực hiện."
             },
             {
-              "title": "Mô hình yêu thích theo từng tài khoản",
-              "body": "Mô hình yêu thích có thể ghi rõ tài khoản của nó, và nút mô hình cho biết tài khoản đang dùng khi bạn có hai tài khoản."
+              "title": "Menu mô hình biết ghi nhớ",
+              "body": "Menu mô hình có bố cục mới, với các họ mô hình trong thẻ và Nhanh là nhãn riêng. Tác vụ mới mở với mô hình bạn đã chọn, trên thẻ của nó."
             },
             {
-              "title": "Tin nhắn và tác tử",
-              "body": "Tin nhắn gửi ngay sau một lượt hoặc bằng nhấp đúp chỉ đi một lần. Tin nhắn trong hàng đợi được gửi sau khi khởi động lại, và câu hỏi của tác tử bị cắt do khởi động lại sẽ được trả lời thay vì hỏi lại. Tác tử do Điều phối viên khởi chạy nhận tác vụ mà nó viết và trả lời bằng ngôn ngữ của tác vụ, và tác tử bạn đã dừng sẽ vẫn dừng cho đến khi bạn yêu cầu tiếp tục."
+              "title": "Quay lại chỗ bạn đang đọc",
+              "body": "Khi bạn đóng rồi mở lại một cuộc trò chuyện, nó mở ở chỗ bạn đang đọc.",
+              "detail": "Những chữ đã gõ nhưng chưa gửi chỉ được giữ khi ứng dụng còn mở."
             },
             {
-              "title": "Các bản sửa nhỏ",
-              "body": "Thống kê riêng của Claude Code tắt khi nó chạy với mô hình cục bộ hoặc khóa của nhà cung cấp khác. Biểu tượng nhà cung cấp là logo chính thức của các công ty, menu và tìm kiếm hoạt động trên bảng đang mở, Ctrl+K hoạt động ở màn hình bắt đầu, và tắt micrô trong chế độ giọng nói sẽ giải phóng nó."
+              "title": "Sửa lỗi nhỏ",
+              "body": "Câu hỏi của tác tử dùng nút chọn và hộp kiểm thật, các nút trên thẻ phê duyệt thẳng hàng, tệp đính kèm nằm gọn trên hai hàng với cảnh báo phía trên ô tin nhắn, và giọng nói chỉ hiện một trạng thái nhẹ nhàng khi đang làm việc.",
+              "detail": "Sáu chủ đề màu có tên mới: Terracotta, Cobalt, Indigo, Slate, Ruby và Onyx. Xem mức sử dụng mở trang mức sử dụng của bạn, và cửa sổ Có gì mới có thể hiện ghi chú mới hơn từ codevalanche.com."
+            },
+            {
+              "title": "Khởi động nhẹ nhàng hơn",
+              "body": "Khi một dự án cần chút thời gian để mở, bạn thấy logo Codevalanche và Đang tải thay vì thông báo thử lại."
+            },
+            {
+              "title": "Tên khi đọc chính tả",
+              "body": "Tính năng đọc chính tả nhận ra tên dự án và tên tệp trong mã của bạn thường xuyên hơn."
             }
           ]
         },
         "zh-Hans": {
-          "headline": "新工作只用一个窗口，语音先询问，删除聊天更彻底",
-          "summary": "新建项目和新建任务共用一个窗口，语音在发送给云服务提供商前会先询问，删除聊天会清除更多聊天留下的内容，大量修复让消息和代理更稳定。",
+          "headline": "看得见、停得下的操控电脑，统一的外观，以及记得你所选模型的模型菜单",
+          "summary": "智能体使用你的电脑时，屏幕边缘会亮起，按 Esc 即可停止。颜色、图标和横幅外观统一，Ctrl+K、撤销和 Ctrl+Enter 省去点击，新任务会保留你选的模型。",
           "sections": [
             {
-              "title": "新工作只用一个窗口",
-              "body": "新建项目和新建任务在各处打开同一个窗口，任务从你选择的文件夹开始。"
+              "title": "看得见、停得下的操控电脑",
+              "body": "智能体使用你的电脑时，屏幕边缘会发光，顶部的横条会提示这一点，上面只有一个停止按钮，按 Esc 也可以。智能体可以在浏览器、终端、编辑器和文件资源管理器中工作，在你停止之前，访问在消息之间保持开启。",
+              "detail": "在完全访问下，智能体不再逐个应用询问。Windows 设置、Windows 安全中心和密码管理器对智能体保持屏蔽。"
             },
             {
-              "title": "语音先询问",
-              "body": "除非你开启，语音不再使用你的云端密钥。在你的语音发送给云服务提供商之前，应用会询问你一次并说明谁会收到，只有你接受的提供商才会收到。"
+              "title": "全应用统一的外观",
+              "body": "颜色、图标、横幅、状态标签和空白页面都来自同一套共享组件，因此每个页面在浅色和深色下读起来都一样。警告、错误和成功的颜色更清晰，状态图标采用填充样式，更醒目。"
             },
             {
-              "title": "删除聊天清除更多",
-              "body": "删除聊天现在还会从搜索索引、代理历史和窗口的表单建议中移除聊天内容，并删除 Claude Code 和 Codex 在这台电脑上为它保存的会话文件，以前删除的聊天也包括在内。如果之后立即关闭应用，会在下次启动后几分钟内完成。移除项目也会从代理历史和 AI 工具的会话文件中清除它的聊天。"
+              "title": "更少点击",
+              "body": "Ctrl+K 打开统一的命令入口，Ctrl+Enter 对眼前的请求批准一次，许多操作在完成后会立即提供撤销。"
             },
             {
-              "title": "每个账户的收藏模型",
-              "body": "收藏的模型可以指定账户，有两个账户时，模型按钮会显示它使用的是哪个账户。"
+              "title": "模型菜单记得你的选择",
+              "body": "模型菜单采用新布局，模型系列放在标签页中，快速成为单独的标签。新任务会以你选的模型、在它的标签页上打开。"
             },
             {
-              "title": "消息和代理",
-              "body": "在一轮结束后立即发送或双击发送的消息只会发出一次。队列中的消息在重启后会送达，被重启打断的代理问题会得到回答，而不是重新提问。协调者启动的代理会收到它写的任务并用该任务的语言回复，你停止的代理会保持停止，直到你让它继续。"
+              "title": "回到你读到的地方",
+              "body": "关闭并重新打开对话时，它会停在你读到的位置。",
+              "detail": "输入但未发送的文字只在应用打开期间保留。"
             },
             {
               "title": "较小的修复",
-              "body": "Claude Code 使用本地模型或其他提供商的密钥运行时，它自己的统计会关闭。提供商图标为各公司的官方标志，菜单和搜索可在打开的看板上使用，Ctrl+K 可在开始界面使用，在语音模式中关闭麦克风会释放它。"
+              "body": "智能体的提问使用真正的单选按钮和复选框，批准卡片上的按钮对齐，附件整齐排成两行，提示显示在消息框上方，语音在工作时只显示一个平静的状态。",
+              "detail": "六个颜色主题有了新名称：Terracotta、Cobalt、Indigo、Slate、Ruby 和 Onyx。查看用量会打开你的用量页面，“新功能”窗口可以显示来自 codevalanche.com 的更新说明。"
+            },
+            {
+              "title": "更安静的启动",
+              "body": "项目需要一点时间打开时，你会看到 Codevalanche 标志和“正在加载”，而不是重试提示。"
+            },
+            {
+              "title": "听写中的名称",
+              "body": "听写能更常识别你代码中的项目名称和文件名。"
             }
           ]
         },
         "zh-Hant": {
-          "headline": "新工作只用一個視窗，語音先詢問，刪除聊天更徹底",
-          "summary": "新增專案和新增任務共用一個視窗，語音在傳送給雲端供應商前會先詢問，刪除聊天會清除更多聊天留下的內容，大量修正讓訊息和代理更穩定。",
+          "headline": "看得見、停得下的電腦操作，一致的外觀，以及記得你所選模型的模型選單",
+          "summary": "智慧代理使用你的電腦時，螢幕邊緣會亮起，按 Esc 即可停止。顏色、圖示和橫幅外觀一致，Ctrl+K、復原和 Ctrl+Enter 省去點擊，新任務會保留你選的模型。",
           "sections": [
             {
-              "title": "新工作只用一個視窗",
-              "body": "新增專案和新增任務在各處開啟同一個視窗，任務從你選擇的資料夾開始。"
+              "title": "看得見、停得下的電腦操作",
+              "body": "智慧代理使用你的電腦時，螢幕邊緣會發光，頂端的橫條會提示這一點，上面只有一個停止按鈕，按 Esc 也可以。智慧代理可以在瀏覽器、終端機、編輯器和檔案總管中工作，在你停止之前，存取權在訊息之間保持開啟。",
+              "detail": "在完整存取下，智慧代理不再逐個應用程式詢問。Windows 設定、Windows 安全性和密碼管理員對智慧代理維持封鎖。"
             },
             {
-              "title": "語音先詢問",
-              "body": "除非你開啟，語音不再使用你的雲端金鑰。在你的語音傳送給雲端供應商之前，應用程式會詢問你一次並說明誰會收到，只有你接受的供應商才會收到。"
+              "title": "全應用程式一致的外觀",
+              "body": "顏色、圖示、橫幅、狀態標籤和空白畫面都來自同一套共用元件，因此每個畫面在淺色和深色下讀起來都一樣。警告、錯誤和成功的顏色更清楚，狀態圖示採用填滿樣式，更醒目。"
             },
             {
-              "title": "刪除聊天清除更多",
-              "body": "刪除聊天現在也會從搜尋索引、代理歷程和視窗的表單建議中移除聊天內容，並刪除 Claude Code 和 Codex 在這台電腦上為它儲存的工作階段檔案，以前刪除的聊天也包括在內。如果之後立即關閉應用程式，會在下次啟動後幾分鐘內完成。移除專案也會從代理歷程和 AI 工具的工作階段檔案中清除它的聊天。"
+              "title": "更少點擊",
+              "body": "Ctrl+K 開啟統一的指令入口，Ctrl+Enter 對眼前的要求核准一次，許多操作在完成後會立即提供復原。"
             },
             {
-              "title": "每個帳戶的最愛模型",
-              "body": "最愛的模型可以指定帳戶，有兩個帳戶時，模型按鈕會顯示它使用的是哪個帳戶。"
+              "title": "模型選單記得你的選擇",
+              "body": "模型選單採用新版面，模型系列放在分頁中，快速成為獨立的標籤。新任務會以你選的模型、在它的分頁上開啟。"
             },
             {
-              "title": "訊息和代理",
-              "body": "在一輪結束後立即傳送或按兩下傳送的訊息只會送出一次。佇列中的訊息在重新啟動後會送達，被重新啟動打斷的代理問題會得到回答，而不是重新提問。協調者啟動的代理會收到它寫的任務並以該任務的語言回覆，你停止的代理會保持停止，直到你讓它繼續。"
+              "title": "回到你讀到的地方",
+              "body": "關閉並重新開啟對話時，它會停在你讀到的位置。",
+              "detail": "輸入但未傳送的文字只在應用程式開啟期間保留。"
             },
             {
               "title": "較小的修正",
-              "body": "Claude Code 使用本機模型或其他供應商的金鑰執行時，它自己的統計會關閉。供應商圖示為各公司的官方標誌，選單和搜尋可在開啟的看板上使用，Ctrl+K 可在開始畫面使用，在語音模式中關閉麥克風會釋放它。"
+              "body": "智慧代理的提問使用真正的選項按鈕和核取方塊，核准卡片上的按鈕對齊，附件整齊排成兩列，提示顯示在訊息框上方，語音在運作時只顯示一個平靜的狀態。",
+              "detail": "六個顏色主題有了新名稱：Terracotta、Cobalt、Indigo、Slate、Ruby 和 Onyx。查看用量會開啟你的用量頁面，「新功能」視窗可以顯示來自 codevalanche.com 的較新說明。"
+            },
+            {
+              "title": "更安靜的啟動",
+              "body": "專案需要一點時間開啟時，你會看到 Codevalanche 標誌和「正在載入」，而不是重試提示。"
+            },
+            {
+              "title": "聽寫中的名稱",
+              "body": "聽寫能更常辨識你程式碼中的專案名稱和檔案名稱。"
             }
           ]
         }

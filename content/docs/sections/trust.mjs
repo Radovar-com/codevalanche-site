@@ -1,5 +1,5 @@
 // Trust pages: every address the app talks to, and how to check our claims.
-// Facts come from the app's code (read 24 Nov 2026 for the 1.1.75 line).
+// Facts come from the app's code (read 24 Nov 2026 for the 1.1.76 line).
 // Write only what can be checked; no promise the code does not keep.
 import { h2, p, list, steps, table, ui, note, faq } from '../kit.mjs';
 
@@ -12,12 +12,13 @@ export const network = {
   seoTitle: 'The internet connections Codevalanche makes',
   description: 'The addresses the Codevalanche desktop app contacts: when, why and what is sent. The published app sends no usage statistics or error reports.',
   body: `
-${p('This page lists the addresses the Codevalanche desktop app contacts, as found in the app’s code on 24 November 2026, for version 1.1.75.')}
+${p('This page lists the addresses the Codevalanche desktop app contacts, as found in the app’s code on 26 November 2026, for version 1.1.76.')}
 ${list([
   'The published app sends no usage statistics and no error reports.',
   'Your prompts, conversations, files and code do not pass through Codevalanche’s servers. They go from your PC to the AI provider you pick.',
   'There is no third-party analytics or tracking code in the app.',
   'Without an account, the app itself downloads public files (updates and the model list). If you open local models, it also looks them up on huggingface.co.',
+  "When the What's new window is shown, the app also downloads public notes from codevalanche.com.",
 ])}
 ${h2('always', 'Public files the app downloads')}
 ${p('These requests are plain downloads. They carry no account, no cookie and no installation ID. The server sees your IP address, as with any download.')}
@@ -25,10 +26,11 @@ ${table([
   ['Update check', `Codevalanche’s public release files on ${ADDR('github.com')}`, 'When the app starts, then every 30 minutes while it is open. It cannot be turned off, so you always hear about security fixes.', 'Nothing about you. Every installer is checked against its published checksum before it is installed.'],
   ['Model list', `Same place, ${ADDR('github.com')}`, 'When the app shows the list of models, at most once every 6 hours.', 'Nothing about you. The list is signed; the app rejects a list with a wrong signature.'],
   ['Agent compatibility list', `Same place, ${ADDR('github.com')}`, 'Together with the model list, at most once every 6 hours.', 'Nothing about you.'],
+  ["What's new notes", ADDR('codevalanche.com'), "When the What's new window is shown: when you open it, or once by itself after an update.", "Nothing about you. A public file."],
 ], ['What', 'Address', 'When', 'What is sent'])}
 ${p(`When you pick a local model on the start screen or open Settings › Local AI, the app also contacts ${ADDR('huggingface.co')} to look up local models.`)}
 ${h2('switch', 'Usage statistics and error reports')}
-${p('The published app (1.1.75) has no switch for usage statistics or error reports, and sends neither. If a later version adds them, they will be off until you turn them on in Settings, and this page will say exactly what is sent.')}
+${p('The published app (1.1.76) has no switch for usage statistics or error reports, and sends neither. If a later version adds them, they will be off until you turn them on in Settings, and this page will say exactly what is sent.')}
 ${h2('you', 'Only when you do it')}
 ${table([
   ['Codevalanche account', 'Our accounts service and codevalanche.com', 'Only if you sign in.', 'Your email address and sign-in. The app works without an account.'],
@@ -81,7 +83,7 @@ export const check = {
   body: `
 ${p('You do not have to take our word for it. These checks use tools that come with Windows. They take about ten minutes.')}
 ${h2('switch', '1. No statistics are sent')}
-${p('The published app (1.1.75) has no statistics switch and sends no usage statistics or error reports. If a later version adds the switch, it will be off on a new installation.')}
+${p('The published app (1.1.76) has no statistics switch and sends no usage statistics or error reports. If a later version adds the switch, it will be off on a new installation.')}
 ${h2('connections', '2. Watch the connections')}
 ${steps([
   ['Start Codevalanche and do not sign in.', ''],
@@ -90,6 +92,7 @@ ${steps([
   ['Read the addresses under Network Activity and TCP Connections.', 'Compare them with <a href="/docs/privacy/network/">the list of addresses</a>.'],
 ])}
 ${p('With no account, you should see GitHub addresses (github.com or githubusercontent.com) for the public files. huggingface.co appears too once you open local models (start screen or Settings › Local AI). Once you use an AI, its own provider appears too, for example Anthropic or OpenAI. The AI apps run as their own processes, for example claude.exe and codex.exe, and talk to their own companies.')}
+${p("When the What's new window is shown, codevalanche.com appears too.")}
 ${h2('trackers', '3. Search for tracking code')}
 ${steps([
   ['Find where Codevalanche is installed.', 'Usually %LOCALAPPDATA%\\Programs\\Codevalanche. You can also right-click its shortcut and choose Open file location.'],
@@ -113,7 +116,7 @@ ${list([
 ])}
 ${faq([
   ['Found something that does not match?', 'Write to <a href="mailto:security@radovar.com">security@radovar.com</a>. See <a href="/security/#report">Report a security issue</a>.'],
-  ['Which version does this describe?', 'Codevalanche 1.1.75, checked on 24 November 2026. When a release changes what the app sends, this page changes with it.'],
+  ['Which version does this describe?', 'Codevalanche 1.1.76, checked on 26 November 2026. When a release changes what the app sends, this page changes with it.'],
 ])}`,
 };
 
