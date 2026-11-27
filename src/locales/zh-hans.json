@@ -247,7 +247,6 @@
   "Complete each connection": "完成每项连接",
   "Complete the verification challenge to continue. Try again if it expired.": "完成验证挑战以继续。如果挑战已过期，请重试。",
   "Computer use": "操控电脑",
-  "Computer Use (beta, off until you turn it on and approve it): screenshots and the window layout of the app being controlled go to the model you picked.": "Computer Use（测试版，在您开启并批准之前保持关闭）：被控制应用的屏幕截图和窗口布局会发送给您选择的模型。",
   "Computer Use you can see and stop": "看得见、停得下的操控电脑",
   "Computer Use you can see and stop, one look across the app, and a model menu that remembers": "看得见、停得下的操控电脑，统一的外观，以及记得你所选模型的模型菜单",
   "Computer Use you can see and stop, one look across the app, and Ctrl+K, Undo and Ctrl+Enter.": "看得见、停得下的操控电脑，全应用统一的外观，以及 Ctrl+K、撤销和 Ctrl+Enter。",
@@ -1000,5 +999,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Computer Use (beta, off until you turn it on in Settings): screenshots and the window layout of the app being controlled go to the model you picked. Outside Full access, the app asks you before an agent uses an app you have no rule for, and you can allow it once or always. In Full access it does not ask.": "Computer Use（测试版，在您于设置中开启之前保持关闭）：被控制应用的屏幕截图和窗口布局会发送给您选择的模型。在完全访问之外，智能体使用您尚未设定规则的应用前，应用会先询问您，您可以允许一次或始终允许。在完全访问下不会询问。"
 }

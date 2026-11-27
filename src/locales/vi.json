@@ -247,7 +247,6 @@
   "Complete each connection": "Hoàn tất từng kết nối",
   "Complete the verification challenge to continue. Try again if it expired.": "Hoàn thành thử thách xác minh để tiếp tục. Hãy thử lại nếu thử thách đã hết hạn.",
   "Computer use": "Điều khiển máy tính",
-  "Computer Use (beta, off until you turn it on and approve it): screenshots and the window layout of the app being controlled go to the model you picked.": "Computer Use (beta, tắt cho đến khi bạn bật và phê duyệt): ảnh chụp màn hình và bố cục cửa sổ của ứng dụng đang được điều khiển sẽ được gửi đến mô hình bạn đã chọn.",
   "Computer Use you can see and stop": "Sử dụng máy tính mà bạn thấy và dừng được",
   "Computer Use you can see and stop, one look across the app, and a model menu that remembers": "Sử dụng máy tính mà bạn thấy và dừng được, một diện mạo thống nhất và menu mô hình biết ghi nhớ",
   "Computer Use you can see and stop, one look across the app, and Ctrl+K, Undo and Ctrl+Enter.": "Sử dụng máy tính mà bạn thấy và dừng được, một diện mạo cho cả ứng dụng, cùng Ctrl+K, Hoàn tác và Ctrl+Enter.",
@@ -1000,5 +999,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Computer Use (beta, off until you turn it on in Settings): screenshots and the window layout of the app being controlled go to the model you picked. Outside Full access, the app asks you before an agent uses an app you have no rule for, and you can allow it once or always. In Full access it does not ask.": "Computer Use (beta, tắt cho đến khi bạn bật trong Cài đặt): ảnh chụp màn hình và bố cục cửa sổ của ứng dụng đang được điều khiển sẽ được gửi đến mô hình bạn đã chọn. Ngoài chế độ Toàn quyền truy cập, ứng dụng hỏi bạn trước khi tác tử dùng một ứng dụng mà bạn chưa đặt quy tắc, và bạn có thể cho phép một lần hoặc luôn luôn. Ở Toàn quyền truy cập, ứng dụng không hỏi."
 }

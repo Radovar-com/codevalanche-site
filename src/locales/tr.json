@@ -247,7 +247,6 @@
   "Complete each connection": "Her bağlantıyı tamamlayın",
   "Complete the verification challenge to continue. Try again if it expired.": "Devam etmek için doğrulama adımını tamamlayın. Süresi dolduysa tekrar deneyin.",
   "Computer use": "Bilgisayar kullanımı",
-  "Computer Use (beta, off until you turn it on and approve it): screenshots and the window layout of the app being controlled go to the model you picked.": "Computer Use (beta, siz açıp onaylayana kadar kapalı): kontrol edilen uygulamanın ekran görüntüleri ve pencere düzeni seçtiğiniz modele gider.",
   "Computer Use you can see and stop": "Görebildiğin ve durdurabildiğin bilgisayar kullanımı",
   "Computer Use you can see and stop, one look across the app, and a model menu that remembers": "Görebildiğin ve durdurabildiğin bilgisayar kullanımı, tek görünüm ve seçtiğin modeli hatırlayan menü",
   "Computer Use you can see and stop, one look across the app, and Ctrl+K, Undo and Ctrl+Enter.": "Görebildiğin ve durdurabildiğin bilgisayar kullanımı, uygulama genelinde tek görünüm ve Ctrl+K, Geri al ve Ctrl+Enter.",
@@ -1000,5 +999,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Computer Use (beta, off until you turn it on in Settings): screenshots and the window layout of the app being controlled go to the model you picked. Outside Full access, the app asks you before an agent uses an app you have no rule for, and you can allow it once or always. In Full access it does not ask.": "Computer Use (beta, Ayarlar'da açana kadar kapalı): kontrol edilen uygulamanın ekran görüntüleri ve pencere düzeni seçtiğiniz modele gider. Tam erişim dışında, bir ajan kural koymadığınız bir uygulamayı kullanmadan önce uygulama size sorar; bir kez ya da her zaman izin verebilirsiniz. Tam erişimde sormaz."
 }

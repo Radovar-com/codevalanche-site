@@ -247,7 +247,6 @@
   "Complete each connection": "Finalizează fiecare conexiune",
   "Complete the verification challenge to continue. Try again if it expired.": "Completează verificarea pentru a continua. Dacă a expirat, încearcă din nou.",
   "Computer use": "Controlul computerului",
-  "Computer Use (beta, off until you turn it on and approve it): screenshots and the window layout of the app being controlled go to the model you picked.": "Computer Use (beta, dezactivat până îl activezi și îl aprobi): capturile de ecran și structura ferestrelor aplicației controlate ajung la modelul ales de tine.",
   "Computer Use you can see and stop": "Controlul computerului pe care îl vezi și îl oprești",
   "Computer Use you can see and stop, one look across the app, and a model menu that remembers": "Controlul computerului pe care îl vezi și îl oprești, același aspect peste tot și un meniu de modele care ține minte",
   "Computer Use you can see and stop, one look across the app, and Ctrl+K, Undo and Ctrl+Enter.": "Controlul computerului pe care îl vezi și îl oprești, același aspect peste tot și Ctrl+K, Anulează și Ctrl+Enter.",
@@ -1000,5 +999,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Computer Use (beta, off until you turn it on in Settings): screenshots and the window layout of the app being controlled go to the model you picked. Outside Full access, the app asks you before an agent uses an app you have no rule for, and you can allow it once or always. In Full access it does not ask.": "Computer Use (beta, dezactivat până îl activezi în Setări): capturile de ecran și structura ferestrelor aplicației controlate ajung la modelul ales de tine. În afara modului Acces complet, aplicația te întreabă înainte ca un agent să folosească o aplicație pentru care nu ai o regulă, iar tu poți permite o dată sau mereu. În Acces complet nu întreabă."
 }

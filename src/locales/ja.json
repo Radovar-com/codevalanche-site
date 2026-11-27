@@ -247,7 +247,6 @@
   "Complete each connection": "各接続の設定を完了する",
   "Complete the verification challenge to continue. Try again if it expired.": "確認チャレンジを完了して続行してください。期限切れの場合は、もう一度お試しください。",
   "Computer use": "コンピューター操作",
-  "Computer Use (beta, off until you turn it on and approve it): screenshots and the window layout of the app being controlled go to the model you picked.": "Computer Use(ベータ版。お客様がオンにして承認するまでオフ): 操作対象アプリのスクリーンショットとウィンドウのレイアウトが、お客様が選んだモデルに送られます。",
   "Computer Use you can see and stop": "見えて止められるコンピューター操作",
   "Computer Use you can see and stop, one look across the app, and a model menu that remembers": "見えて止められるコンピューター操作、統一された見た目、選んだモデルを覚えるモデルメニュー",
   "Computer Use you can see and stop, one look across the app, and Ctrl+K, Undo and Ctrl+Enter.": "見えて止められるコンピューター操作、アプリ全体で統一された見た目、そして Ctrl+K・元に戻す・Ctrl+Enter。",
@@ -1000,5 +999,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Computer Use (beta, off until you turn it on in Settings): screenshots and the window layout of the app being controlled go to the model you picked. Outside Full access, the app asks you before an agent uses an app you have no rule for, and you can allow it once or always. In Full access it does not ask.": "Computer Use(ベータ版。お客様が設定でオンにするまでオフ): 操作対象アプリのスクリーンショットとウィンドウのレイアウトが、お客様が選んだモデルに送られます。フルアクセス以外では、ルールのないアプリをエージェントが使う前にアプリが確認し、1 回だけまたは常に許可できます。フルアクセスでは確認しません。"
 }

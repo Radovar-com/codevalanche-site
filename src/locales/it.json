@@ -247,7 +247,6 @@
   "Complete each connection": "Completa ogni connessione",
   "Complete the verification challenge to continue. Try again if it expired.": "Completa la verifica per continuare. Se è scaduta, riprova.",
   "Computer use": "Uso del computer",
-  "Computer Use (beta, off until you turn it on and approve it): screenshots and the window layout of the app being controlled go to the model you picked.": "Computer Use (beta, disattivato finché non lo attivi e lo approvi): gli screenshot e la disposizione delle finestre dell’app controllata vanno al modello che hai scelto.",
   "Computer Use you can see and stop": "Uso del computer che vedi e fermi",
   "Computer Use you can see and stop, one look across the app, and a model menu that remembers": "Uso del computer che vedi e fermi, un unico aspetto in tutta l’app e un menu dei modelli che ricorda",
   "Computer Use you can see and stop, one look across the app, and Ctrl+K, Undo and Ctrl+Enter.": "Uso del computer che vedi e fermi, un unico aspetto in tutta l’app e Ctrl+K, Annulla e Ctrl+Invio.",
@@ -1000,5 +999,6 @@
   "한국어": "한국어",
   "日本語": "日本語",
   "简体中文": "简体中文",
-  "繁體中文": "繁體中文"
+  "繁體中文": "繁體中文",
+  "Computer Use (beta, off until you turn it on in Settings): screenshots and the window layout of the app being controlled go to the model you picked. Outside Full access, the app asks you before an agent uses an app you have no rule for, and you can allow it once or always. In Full access it does not ask.": "Computer Use (beta, disattivato finché non lo attivi nelle Impostazioni): gli screenshot e la disposizione delle finestre dell’app controllata vanno al modello che hai scelto. Fuori da Accesso completo, l’app ti chiede prima che un agente usi un’app per cui non hai una regola, e puoi consentirlo una volta o sempre. In Accesso completo non chiede."
 }
